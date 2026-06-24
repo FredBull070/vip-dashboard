@@ -339,7 +339,7 @@
         <div class="field"><label>CUSTOM kanaal</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div>
       </div>
       <div class="grid2" style="margin-top:14px;">
-        <div class="field"><label>VIP join-link (voor {VIP_LINK})</label><input type="text" id="vip_link" placeholder="https://discord.gg/jouw-vip-invite"></div>
+        <div class="field"><label>VIP-link voor {VIP_LINK}: invite-link, kanaal-link of kanaal-ID</label><input type="text" id="vip_link" placeholder="https://discord.gg/... of kanaal-link / kanaal-ID"></div>
         <div class="field"><label>VIP-upgrade kanaal: kanaal-LINK of kanaal-ID (voor {VIP_CHANNEL})</label><input type="text" id="vip_channel" placeholder="https://discord.com/channels/... of kanaal-ID"></div>
       </div>
       <div class="actions"><button class="btn-secondary" onclick="saveAll()">Bewaar instellingen</button><span id="saveState"></span></div>
@@ -372,7 +372,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-24-v27";
+var EMBEDDED_VERSION = "2026-06-24-v28";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 24-06-2026**
 
 :soccer: Sport of the day: Football
@@ -477,7 +477,8 @@ function catLabel(cat){ return {LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHO
 function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; if(h.includes('HIGH'))return'HIGH'; if(h.includes('MID'))return'MID'; return'LOW'; }
 
 function applyTokens(t){
-  t=(t||'').split('{VIP_LINK}').join(vipLink()||'(stel je VIP-link in)');
+  var _vl=vipLink(); var _vlo=(!_vl)?'(stel je VIP-link in)':(/^https?:/i.test(_vl)?_vl:(/^[0-9]+$/.test(_vl)?'<#'+_vl+'>':_vl));
+  t=(t||'').split('{VIP_LINK}').join(_vlo);
   var ch=document.getElementById('vip_channel'); var v=ch?ch.value.trim():'';
   var out;
   if(!v) out='#vip-upgrade';
