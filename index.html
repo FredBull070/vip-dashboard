@@ -372,20 +372,20 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-24-v26";
+var EMBEDDED_VERSION = "2026-06-24-v27";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 24-06-2026**
 
 :soccer: Sport of the day: Football
 
 :small_orange_diamond: Scotland x Brazil: **Brazil to win @ 1.33 - 1.40**
 :small_orange_diamond: Morocco x Haiti: **Morocco to win @ 1.18 - 1.25**
-:small_orange_diamond: Czechia x Mexico: **Mexico to win @ 1.55 - 1.70***
+:small_orange_diamond: Czechia x Mexico: **Mexico or draw @ 1.20 - 1.28***
 
-:moneybag: Total odds: **±2.43 - 2.98***
+:moneybag: Total odds: **±1.88 - 2.24***
 Odds may vary depending on the bookmaker or the time of placement.
 
 :mortar_board:**Justification:**
-Brazil have far more individual quality than Scotland and should control the game and create the better chances. Morocco are organised and a level above a limited Haiti side. Mexico have the depth, home crowd and momentum to see off Czechia. Three favourites expected to win.
+Brazil have far more individual quality than Scotland and should control the game and create the better chances. Morocco are organised and a level above a limited Haiti side. Mexico have the depth, home crowd and momentum and should at the very least avoid defeat against Czechia. Two strong favourites plus a Mexico side that is hard to beat at home.
 
 :fire: This is today's free LOW pick, exactly as shared in VIP. Members also get the MID, HIGH and lucky shot lists across their private channels.
 :trophy: Unlock the full daily slate plus bankroll plan in VIP: {VIP_LINK}
@@ -395,13 +395,13 @@ Brazil have far more individual quality than Scotland and should control the gam
 
 :small_orange_diamond: Scotland x Brazil: **Brazil to win @ 1.33 - 1.40**
 :small_orange_diamond: Morocco x Haiti: **Morocco to win @ 1.18 - 1.25**
-:small_orange_diamond: Czechia x Mexico: **Mexico to win @ 1.55 - 1.70***
+:small_orange_diamond: Czechia x Mexico: **Mexico or draw @ 1.20 - 1.28***
 
-:moneybag: Total odds: **±2.43 - 2.98***
+:moneybag: Total odds: **±1.88 - 2.24***
 Odds may vary depending on the bookmaker or the time of placement.
 
 :mortar_board:**Justification:**
-Brazil have far more individual quality than Scotland and should control the game and create the better chances. Morocco are organised and a level above a limited Haiti side. Mexico have the depth, home crowd and momentum to see off Czechia. Three favourites expected to win.
+Brazil have far more individual quality than Scotland and should control the game and create the better chances. Morocco are organised and a level above a limited Haiti side. Mexico have the depth, home crowd and momentum and should at the very least avoid defeat against Czechia. Two strong favourites plus a Mexico side that is hard to beat at home.
 
 :bank: **Bankroll:** risk range 1-2% of bankroll. Doubler (>= 1.85), your core lowest-variance play.
 ===NEXT MESSAGE===
@@ -447,7 +447,7 @@ An all out combo: Brazil, Mexico and Morocco all running up big winning margins 
 
 :bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.`;
 
-var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 2.43, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 33, "result": "pending"}];
+var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 1.88, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 33, "result": "pending"}];
 
 var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
 var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
