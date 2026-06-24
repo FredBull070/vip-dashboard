@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betting Advisory</title>
+<style>
+
+  :root{
+    --bg:#000000; --surface:#121216; --surface2:#1a1a20; --text:#f3f3f5; --muted:#8b8b95;
+    --line:rgba(255,255,255,.11); --line2:rgba(255,255,255,.065);
+    --accent:#ff7a1a; --accent2:#ffa04d; --green:#30d158; --red:#ff453a; --amber:#f5b829;
+    --sh:0 18px 44px rgba(0,0,0,.45); --sh2:0 28px 70px rgba(0,0,0,.6);
+    --r:18px; --r2:14px; --r3:11px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;min-height:100vh;}
+  .neon-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(72% 52% at 50% -10%,rgba(255,138,61,.11),transparent 60%),radial-gradient(46% 42% at 90% 94%,rgba(255,122,26,.06),transparent 60%),radial-gradient(42% 42% at 4% 102%,rgba(255,160,77,.045),transparent 60%),#050505;}
+  .neon-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(125% 115% at 50% 38%,transparent 50%,rgba(0,0,0,.6));}
+  .neon-bg::before{content:"";position:absolute;inset:0;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .neon-bg svg{position:absolute;inset:-6% -4%;width:108%;height:115%;opacity:.4;filter:blur(.4px);}
+
+  .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:13px;height:52px;padding:0 16px;
+    background:rgba(8,8,11,.72);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);
+    border-bottom:1px solid var(--line2);}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;
+    border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--text);cursor:pointer;font-size:15px;transition:.15s;}
+  .icon-btn:hover{background:rgba(255,255,255,.08);}
+  .menu-btn{display:none;}
+  .crumbs{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;}
+  .crumb-muted{color:var(--muted);} .crumb-sep{color:var(--muted);opacity:.55;}
+  .crumb-cur{color:var(--text);}
+  .brand-mark{margin-left:auto;width:27px;height:27px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#ff7a1a,#ffa04d);color:#fff;font-size:14px;font-weight:800;box-shadow:0 0 18px rgba(255,122,26,.55);}
+
+  .shell{display:flex;align-items:flex-start;}
+  .sidebar{width:236px;flex:0 0 236px;position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column;
+    background:rgba(10,10,14,.5);border-right:1px solid var(--line2);padding:16px 12px;backdrop-filter:blur(8px);}
+  .side-scroll{flex:1;overflow:auto;}
+  .side-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700;padding:4px 12px 10px;}
+  .nav-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:none;background:transparent;color:var(--muted);
+    font-weight:600;font-size:13.5px;padding:9px 12px;border-radius:10px;cursor:pointer;margin-bottom:2px;letter-spacing:-0.01em;transition:.13s;}
+  .nav-item:hover{background:rgba(255,255,255,.05);color:var(--text);}
+  .nav-item.active{background:rgba(255,122,26,.15);color:#fff;}
+  .nav-item.active .nav-ico{color:var(--accent);}
+  .nav-ico{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);flex:0 0 auto;}
+  .nav-ico svg{width:17px;height:17px;display:block;}
+  .nav-sep{height:1px;background:var(--line2);margin:10px 12px;}
+  .side-user{display:flex;align-items:center;gap:10px;padding:11px 10px 2px;border-top:1px solid var(--line2);margin-top:8px;}
+  .avatar{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#ff7a1a,#ffa04d);color:#fff;font-weight:700;
+    font-size:13px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .su-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
+  .su-mail{font-size:11px;color:var(--muted);line-height:1.2;margin-top:1px;}
+  .side-backdrop{display:none;}
+
+  .main{flex:1;min-width:0;}
+  .main .app{max-width:1000px;margin:0 auto;padding:30px 28px 80px;}
+  .page-head{margin:0 0 22px;}
+  .page-title{font-size:28px;font-weight:700;letter-spacing:-0.03em;margin:0;}
+  .page-sub{font-size:14px;color:var(--muted);margin:6px 0 0;line-height:1.5;}
+
+  .banner{margin:0 0 20px;padding:12px 15px;border-radius:var(--r2);font-size:13.5px;border:1px solid var(--line2);
+    background:var(--surface);color:var(--muted);}
+  .banner.ok{border-color:rgba(48,209,88,.3);background:rgba(48,209,88,.08);color:#7be29a;}
+  .banner.warn{border-color:rgba(245,184,41,.3);background:rgba(245,184,41,.08);color:#f0c662;}
+  .banner.err{border-color:rgba(255,69,58,.3);background:rgba(255,69,58,.09);color:#ff9a92;}
+
+  .card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r);padding:22px 24px;margin-bottom:18px;box-shadow:var(--sh);}
+  .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;}
+  .section-title{font-size:17px;font-weight:600;letter-spacing:-0.02em;margin:0;}
+  .section-sub{font-size:13px;color:var(--muted);margin:2px 0 14px;line-height:1.5;}
+  .muted-sm{font-size:12px;color:var(--muted);}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:500;}
+  input[type=text],input[type=password],textarea,select{width:100%;background:rgba(255,255,255,.035);border:1px solid var(--line);
+    color:var(--text);border-radius:var(--r3);padding:11px 13px;font-size:14px;font-family:inherit;transition:.15s;}
+  input::placeholder,textarea::placeholder{color:rgba(255,255,255,.32);}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(255,122,26,.18);background:rgba(255,255,255,.06);}
+  select option{background:#16161b;color:var(--text);}
+  textarea{min-height:150px;resize:vertical;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px;}
+  .btn,.btn-accent{cursor:pointer;border:none;border-radius:var(--r3);padding:10px 18px;font-size:14px;font-weight:600;color:#fff;
+    background:linear-gradient(180deg,#ff9a4d,#ff7a1a);transition:.15s;letter-spacing:-0.01em;box-shadow:0 6px 18px rgba(255,122,26,.32);}
+  .btn:hover,.btn-accent:hover{filter:brightness(1.08);}
+  .btn-secondary{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);border-radius:var(--r3);
+    padding:10px 16px;font-size:14px;font-weight:600;transition:.15s;}
+  .btn-secondary:hover{background:rgba(255,255,255,.09);}
+  .btn-ghost,.btn-gray{cursor:pointer;border:none;background:transparent;color:var(--accent);border-radius:var(--r3);
+    padding:10px 14px;font-size:14px;font-weight:600;transition:.15s;}
+  .btn-ghost:hover{background:rgba(255,122,26,.13);}
+  .btn-gray{color:var(--muted);} .btn-gray:hover{background:rgba(255,255,255,.07);color:var(--text);}
+  button.mini{padding:6px 12px;font-size:12px;border-radius:8px;}
+  .btn-yellow{background:rgba(255,255,255,.045);color:var(--text);border:1px solid var(--line);box-shadow:none;}
+  .btn-yellow:hover{background:rgba(255,255,255,.09);}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .field input{margin-bottom:0;} .field .actions{margin-top:8px;}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:4px;}
+  .stat{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r2);padding:16px 18px;}
+  .stat .v{font-size:25px;font-weight:600;letter-spacing:-0.02em;}
+  .stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-weight:600;}
+  .tablewrap{overflow:auto;margin-top:8px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line2);}
+  th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
+  .badge{padding:3px 10px;border-radius:980px;font-size:11px;font-weight:700;}
+  .b-w{background:rgba(48,209,88,.16);color:var(--green);} .b-v{background:rgba(255,69,58,.16);color:var(--red);}
+  .b-p{background:rgba(245,184,41,.16);color:var(--amber);}
+  .pos{color:var(--green);} .neg{color:var(--red);}
+  .pill{display:inline-block;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:980px;padding:2px 11px;font-size:12px;color:var(--muted);font-weight:600;margin-left:6px;}
+  .chan{font-size:10px;font-weight:700;padding:3px 9px;border-radius:980px;background:rgba(255,122,26,.16);color:#ffb27a;text-transform:uppercase;letter-spacing:.04em;}
+  #cards .card,#shareList .card,#archiveView .card{box-shadow:none;border:1px solid var(--line2);border-left:3px solid var(--accent);
+    border-radius:var(--r2);padding:14px 16px;margin-bottom:12px;background:rgba(255,255,255,.02);}
+  #cards .meta,#shareList .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
+  #cards .meta span,#shareList .meta span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600;}
+  .disc{white-space:pre-wrap;font-size:14px;line-height:1.55;} .disc strong{font-weight:600;color:#fff;}
+  details.disclosure{padding:0;}
+  details.disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  details.disclosure>summary::-webkit-details-marker{display:none;}
+  details.disclosure>summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:.2s;opacity:.6;}
+  details.disclosure[open]>summary::after{transform:rotate(45deg);}
+  .check{display:flex;align-items:center;gap:8px;margin:0;font-size:13.5px;color:var(--text);font-weight:500;}
+  .check input{width:auto;}
+  #log{background:#000;border:1px solid var(--line2);color:#d8d8d8;border-radius:var(--r2);padding:14px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;max-height:220px;overflow:auto;white-space:pre-wrap;}
+  #log .ok{color:#5fd17e;} #log .err{color:#ff7b86;} #log .info{color:#ffcf6a;}
+  #saveState,#customState,#bkSave{color:var(--green);font-weight:600;font-size:12.5px;}
+  #gate{position:fixed;inset:0;background:radial-gradient(60% 50% at 50% 28%,rgba(255,122,26,.14),transparent 60%),#000;
+    display:flex;align-items:center;justify-content:center;z-index:9999;}
+  #gate .gate-box{background:rgba(18,18,22,.92);border:1px solid var(--line);border-radius:20px;padding:34px 30px;width:340px;max-width:90%;
+    box-shadow:var(--sh2);text-align:center;backdrop-filter:blur(20px);}
+  #gate h2{margin:0 0 18px;font-size:20px;font-weight:600;}
+  #gate input{margin-bottom:10px;text-align:center;}
+  #gate .btn{width:100%;margin-top:4px;}
+  #g_err{color:var(--red);font-size:12.5px;margin-top:10px;min-height:14px;}
+  .sportbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;}
+  .sport-btn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);font-weight:600;font-size:13px;padding:7px 16px;border-radius:980px;cursor:pointer;transition:.15s;}
+  .sport-btn:hover{background:rgba(255,255,255,.07);color:var(--text);}
+  .sport-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .share-group{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:16px 0 8px;}
+  .share-group:first-child{margin-top:4px;}
+  .lg-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+  .lg-w{background:rgba(48,209,88,.18);color:#30d158;}
+  .lg-v{background:rgba(255,69,58,.18);color:#ff453a;}
+  .lg-p{background:rgba(255,255,255,.08);color:var(--muted);}
+  .lg-auto{font-size:11px;color:var(--muted);margin-left:6px;}
+  .legs-tr td{background:rgba(255,255,255,.02);}
+  .legs-wrap{padding:2px 2px 8px;}
+  .legs-head{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:2px 0 6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .leg-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line2);}
+  .leg-txt{font-size:13px;line-height:1.3;}
+  .leg-btns{display:flex;gap:6px;flex:0 0 auto;}
+  .leg-b{min-width:30px;height:28px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;font-size:13px;}
+  .leg-b.on-w{background:#30d158;color:#06210f;border-color:#30d158;}
+  .leg-b.on-v{background:#ff453a;color:#2a0707;border-color:#ff453a;}
+
+  @media(max-width:820px){
+    .menu-btn{display:inline-flex;}
+    .sidebar{position:fixed;top:52px;left:0;height:calc(100vh - 52px);z-index:85;transform:translateX(-100%);transition:transform .25s ease;width:266px;flex-basis:266px;background:rgba(10,10,14,.97);backdrop-filter:blur(22px);}
+    .sidebar.open{transform:translateX(0);}
+    .side-backdrop{position:fixed;inset:52px 0 0;background:rgba(0,0,0,.55);z-index:80;}
+    .side-backdrop.show{display:block;}
+    .main .app{padding:20px 16px 64px;max-width:100%;}
+    .page-title{font-size:23px;}
+    .card{padding:18px;border-radius:14px;}
+    .card-head{flex-wrap:wrap;} .card-head .btn{width:100%;}
+    #cards .meta,#shareList .meta{flex-wrap:wrap;}
+    .actions .btn,.actions .btn-secondary{flex:1 1 auto;text-align:center;}
+    input[type=text],input[type=password],textarea,select{font-size:16px;}
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    th,td{padding:9px 8px;font-size:12.5px;}
+  }
+  @media(max-width:480px){ .page-title{font-size:21px;} .main .app{padding:16px 13px 56px;} }
+
+</style>
+</head>
+<body>
+<div class="neon-bg" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none">
+<path d="M-100 300 C320 210 560 360 900 285 C1180 220 1380 350 1620 280" stroke="#ff9a4d" stroke-opacity="0.06" stroke-width="1.2"/>
+<path d="M-100 470 C300 390 580 540 920 460 C1200 395 1400 520 1620 450" stroke="#ff8a3d" stroke-opacity="0.05" stroke-width="1.2"/>
+<path d="M-100 650 C320 580 560 720 900 630 C1180 560 1420 680 1620 610" stroke="#ff9a4d" stroke-opacity="0.045" stroke-width="1.2"/>
+</svg></div>
+<div id="gate">
+  <div class="gate-box">
+    <h2>VIP login</h2>
+    <input type="text" id="g_user" placeholder="Gebruikersnaam" autocomplete="off">
+    <input type="password" id="g_pass" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn" onclick="doLogin()">Inloggen</button>
+    <div id="g_err"></div>
+    <p class="muted-sm" style="margin:14px 0 0;">Beveiliging op clientniveau. Deel het wachtwoord alleen met VIP-leden.</p>
+  </div>
+</div>
+
+<header class="topbar">
+  <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+  <div class="crumbs"><span class="crumb-muted">Platform</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Vandaag</span></div>
+  <div class="brand-mark">&#10022;</div>
+</header>
+
+<div class="shell">
+  <div class="side-backdrop" id="sideBackdrop" onclick="closeSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="side-scroll">
+      <div class="side-label">Platform</div>
+      <nav>
+      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Vandaag</button>
+      <button class="nav-item" data-page="mybets" onclick="showPage('mybets')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span> Mijn bets</button>
+      <button class="nav-item" data-page="results" onclick="showPage('results')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span> Resultaten</button>
+      <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> VIP delen</button>
+      <button class="nav-item" data-page="bankroll" onclick="showPage('bankroll')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14" r="1.2"/></svg></span> Bankroll</button>
+      <div class="nav-sep"></div>
+      <button class="nav-item" data-page="edit" onclick="showPage('edit')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> Lijsten</button>
+      <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Eigen bericht</button>
+      <button class="nav-item" data-page="archive" onclick="showPage('archive')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg></span> Archief</button>
+      <button class="nav-item" data-page="channels" onclick="showPage('channels')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span> Kanalen</button>
+      <button class="nav-item" data-page="log" onclick="showPage('log')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18l2-1 2 1 2-1 2 1 2-1 2 1V3l-2 1-2-1-2 1-2-1-2 1Z"/><path d="M9 8h6M9 12h6"/></svg></span> Logboek</button>
+      </nav>
+    </div>
+    <div class="side-user">
+      <div class="avatar">NV</div>
+      <div class="side-user-meta"><div class="su-name">NoCopyrightVault</div><div class="su-mail">VIP dashboard</div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="app">
+      <div class="page-head">
+        <h1 class="page-title" id="pageTitle">Vandaag</h1>
+        <p class="page-sub" id="pageSub">Vandaag&rsquo;s lijsten, klaar om te versturen naar je kanalen.</p>
+      </div>
+      <div id="status" class="banner">Laden...</div>
+      <div class="page" id="page-today">
+    <section class="card">
+      <div class="card-head">
+        <h2 class="section-title">Vandaag <span class="pill" id="count">0 berichten</span></h2>
+        <button class="btn" onclick="sendAll()" id="sendAllBtn">Verstuur alles</button>
+      </div>
+      <p class="section-sub">Elk bericht gaat automatisch naar zijn eigen kanaal. Versturen vraagt eerst bevestiging.</p>
+      <div id="sportFilter" class="sportbar"></div>
+      <div id="cards"></div>
+    </section>
+    </div>
+<div class="page" id="page-mybets" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Mijn bets</h2>
+      <p class="section-sub">Vul de werkelijk geplaatste odd in en zet het resultaat. Werkt direct door in resultaten en bankroll.</p>
+      <div id="sportFilterBets" class="sportbar"></div>
+      <div class="tablewrap"><table id="betEditor"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Geplaatste odd</th><th>Resultaat</th></tr></thead><tbody></tbody></table></div>
+      <div class="actions"><button class="btn-ghost" onclick="resetBetEdits()">Reset aanpassingen</button></div>
+    </section>
+    </div>
+<div class="page" id="page-results" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Resultaten</h2>
+      <div id="statsRow" class="metrics"></div>
+      <div id="sportFilterResults" class="sportbar"></div>
+      <div class="tablewrap"><table id="resultsTable"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Odds</th><th>Resultaat</th><th>P/L</th></tr></thead><tbody></tbody></table></div>
+      <p class="section-sub" id="noResults" style="display:none;">Nog geen resultaten geladen.</p>
+    </section>
+    </div>
+<div class="page" id="page-vip" style="display:none">
+    <section class="card">
+      <h2 class="section-title">VIP results delen</h2>
+      <p class="section-sub">Afgeronde lijsten als publieke result-kaart voor je VIP-kanaal.</p>
+      <div class="actions">
+        <button class="btn" onclick="shareAllNew()">Deel nieuwe resultaten</button>
+        <label class="check"><input type="checkbox" id="autoShare" onchange="saveAll()"> Automatisch delen zodra ik W/V zet</label>
+      </div>
+      <div id="sportFilterShare" class="sportbar"></div>
+      <div id="shareList" style="margin-top:14px;"></div>
+    </section>
+    </div>
+<div class="page" id="page-bankroll" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Bankroll instellingen</h2>
+      <div class="grid2" style="margin-top:14px;">
+        <div class="field"><label>Start bankroll (EUR)</label><input type="text" id="bk_start" value="1000"></div>
+        <div class="field"><label>Huidige bankroll (EUR), leeg = auto</label><input type="text" id="bk_current" placeholder="auto"></div>
+        <div class="field"><label>Max risico per dag (% bankroll)</label><input type="text" id="bk_maxday" value="6"></div>
+      </div>
+      <p class="section-sub" style="margin-top:16px;">Risk range per bet-type (% van bankroll per lijst), min en max.</p>
+      <div class="grid2">
+        <div class="field"><label>LOW range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LOW_min" value="1"><input type="text" id="bk_LOW_max" value="2"></div></div>
+        <div class="field"><label>MID range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_MID_min" value="0.5"><input type="text" id="bk_MID_max" value="1"></div></div>
+        <div class="field"><label>HIGH range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_HIGH_min" value="0.25"><input type="text" id="bk_HIGH_max" value="0.5"></div></div>
+        <div class="field"><label>LUCKY SHOT range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LUCKY_min" value="0.05"><input type="text" id="bk_LUCKY_max" value="0.1"></div></div>
+      </div>
+      <div class="actions"><button class="btn-secondary" onclick="saveBankroll()">Bewaar &amp; herbereken</button><span id="bkSave"></span></div>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Aanbevolen inzet</h2>
+      <div class="tablewrap"><table id="stakeTable"><thead><tr><th>Bet-type</th><th>Risk range %</th><th>Inzet (EUR)</th><th>Gem. odd</th><th>Mogelijke winst (EUR)</th></tr></thead><tbody></tbody></table></div>
+      <p class="section-sub" id="dayExposure" style="margin-top:12px;"></p>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Bankroll monitor</h2>
+      <div id="bkStats" class="metrics"></div>
+    </section>
+    </div>
+<div class="page" id="page-edit" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Lijsten bewerken</h2>
+      <p class="section-sub">Bewerk vrij. Scheid elk bericht met een regel <code>===NEXT MESSAGE===</code>.</p>
+      <textarea id="raw" spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn-secondary" onclick="parseMessages()">Vernieuw preview</button>
+        <button class="btn-secondary" onclick="loadToday()">Laad lijsten van vandaag</button>
+        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Importeer uit bestand</button>
+        <input type="file" id="fileInput" accept=".txt,.js" style="display:none" onchange="importFile(this)">
+        <button class="btn-ghost" onclick="resetDefault()">Herstel standaard</button>
+      </div>
+    </section>
+    </div>
+<div class="page" id="page-custom" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Eigen bericht</h2>
+      <p class="section-sub">Vrije tekst naar je CUSTOM-kanaal. {VIP_LINK} en {VIP_CHANNEL} worden automatisch vervangen.</p>
+      <textarea id="custom_msg" spellcheck="false" placeholder="Typ hier je bericht..."></textarea>
+      <div class="actions"><button class="btn" onclick="sendCustom()">Verstuur naar CUSTOM</button><span id="customState"></span></div>
+    </section>
+    </div>
+<div class="page" id="page-archive" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Archief</h2>
+      <div class="actions" style="margin-top:0;"><label class="muted-sm" style="margin:0;">Kies een dag:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
+      <div id="archiveView" style="margin-top:14px;"></div>
+    </section>
+    </div>
+<div class="page" id="page-channels" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Kanalen &amp; instellingen</h2>
+      <p class="section-sub">Webhooks per kanaal en je VIP-link/kanaal. Alles wordt lokaal in je browser bewaard.</p>
+      <div class="grid2">
+        <div class="field"><label>LOW ODD kanaal</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div></div>
+        <div class="field"><label>MID ODD kanaal</label><input type="text" id="hook_MID" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('MID')">Test</button></div></div>
+        <div class="field"><label>HIGH ODD kanaal</label><input type="text" id="hook_HIGH" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('HIGH')">Test</button></div></div>
+        <div class="field"><label>LUCKY SHOT kanaal</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
+        <div class="field"><label>VIP RESULTS kanaal</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
+        <div class="field"><label>FREE BET kanaal</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
+        <div class="field"><label>CUSTOM kanaal</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div>
+      </div>
+      <div class="grid2" style="margin-top:14px;">
+        <div class="field"><label>VIP join-link (voor {VIP_LINK})</label><input type="text" id="vip_link" placeholder="https://discord.gg/jouw-vip-invite"></div>
+        <div class="field"><label>VIP-upgrade kanaal: kanaal-LINK of kanaal-ID (voor {VIP_CHANNEL})</label><input type="text" id="vip_channel" placeholder="https://discord.com/channels/... of kanaal-ID"></div>
+      </div>
+      <div class="actions"><button class="btn-secondary" onclick="saveAll()">Bewaar instellingen</button><span id="saveState"></span></div>
+      <p class="section-sub" style="margin-top:18px;">Instellingen overzetten naar een ander apparaat (bv. je telefoon): klik Exporteren, kopieer de code, en plak die op je telefoon onder Importeren.</p>
+      <textarea id="cfg_code" spellcheck="false" placeholder="Instellingen-code verschijnt hier bij Exporteren / plak hier je code om te Importeren" style="min-height:70px;"></textarea>
+      <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Exporteer instellingen</button><button class="btn-secondary" onclick="importSettings()">Importeer instellingen</button><span id="cfgState"></span></div>
+    </section>
+    </div>
+<div class="page" id="page-log" style="display:none">
+    <section class="card"><h2 class="section-title">Logboek</h2><div id="log">Klaar.</div></section>
+    </div>
+    </div>
+  </main>
+</div>
+<script>
+
+
+/* ===== INLOG-GATE (clientniveau, licht) ===== */
+var AUTH = { user:"f9505a739a8fb8e851942c3f973d4bbb2d4c4743a6b633090abf2f2be035d572", pass:"7b8f86505468585b1697c7ab4ad0940db3a8dd79fc037e2b0468961cc328fb2d" };
+async function sha(s){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+async function doLogin(){
+  try{
+    const u=await sha((document.getElementById('g_user').value||'').trim());
+    const p=await sha(document.getElementById('g_pass').value||'');
+    if(u===AUTH.user && p===AUTH.pass){ sessionStorage.setItem('ba_auth','1'); document.getElementById('gate').style.display='none'; }
+    else document.getElementById('g_err').textContent='Onjuiste inloggegevens.';
+  }catch(e){ document.getElementById('g_err').textContent='Inloggen vereist https (secure context).'; }
+}
+if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gate'); if(_g) _g.style.display='none'; }
+
+var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
+var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
+var EMBEDDED_VERSION = "2026-06-23-v25";
+var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 23-06-2026**
+
+:soccer: Sport of the day: Football
+
+:dart: Colombia x DR Congo: **Colombia to win @ 1.53**
+
+:brain: Colombia are a clear level above DR Congo and dictate games with their pace and pressing. They created the better chances in their opener and should control this one from the front foot.
+
+:fire: Just ONE free low-odds pick. Today's VIP members received the full slate (LOW, MID, HIGH and lucky shots) across their private channels.
+:trophy: Unlock the full daily slate plus bankroll plan in VIP: {VIP_LINK}
+:warning: 18+ | play responsibly
+===NEXT MESSAGE===
+**:crown: LOW ODD BET: 23-06-2026**
+
+:small_orange_diamond: Portugal x Uzbekistan: **Portugal to win @ 1.14 - 1.20**
+:small_orange_diamond: England x Ghana: **England to win @ 1.18 - 1.25**
+:small_orange_diamond: Colombia x DR Congo: **Colombia to win @ 1.53 - 1.60**
+
+:moneybag: Total odds: **±2.06 - 2.40**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+All three are clear favourites against weaker opponents. Portugal and England both scored freely in their openers, and Colombia control matches with their pace and pressing. Expect three comfortable wins.
+
+:bank: **Bankroll:** risk range 1-2% of bankroll. Doubler (>= 1.85), your core lowest-variance play.
+===NEXT MESSAGE===
+**:crown: MID ODD BET: 23-06-2026**
+
+:small_orange_diamond: Portugal x Uzbekistan: **Cristiano Ronaldo anytime scorer @ 1.40 - 1.45**
+:small_orange_diamond: England x Ghana: **Harry Kane anytime scorer @ 1.36 - 1.45***
+:small_orange_diamond: Colombia x DR Congo: **Luis Diaz anytime scorer @ 1.60 - 1.75***
+
+:moneybag: Total odds: **±3.05 - 3.68***
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Ronaldo is on penalties and leads the line; Kane is England's focal point and scored twice last time out; Diaz is Colombia's main creator and finisher. All three teams should dominate and pour forward, giving their stars clear chances to score.
+
+:bank: **Bankroll:** risk range 0.5-1% of bankroll. Past doubler odds, more variance.
+===NEXT MESSAGE===
+**:crown: HIGH ODD BET: 23-06-2026**
+
+:small_orange_diamond: England x Ghana: **England -1.5 @ 1.40 - 1.50***
+:small_orange_diamond: Colombia x DR Congo: **Colombia -1.5 @ 1.65 - 1.80***
+:small_orange_diamond: Portugal x Uzbekistan: **Portugal -2.5 @ 2.20 - 2.45***
+
+:moneybag: Total odds: **±5.08 - 6.62***
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+England, Colombia and Portugal each face overmatched opponents and have the attacking quality to win by a clear margin. Two or three goals is well within reach for all three.
+
+:bank: **Bankroll:** risk range 0.25-0.5% of bankroll. Well beyond a doubler, high variance.
+===NEXT MESSAGE===
+**:crown: LUCKY SHOT BET: 23-06-2026**
+
+:small_orange_diamond: England x Ghana: **Correct score 3-0 England @ 7.00 - 8.00***
+:small_orange_diamond: Colombia x DR Congo: **Correct score 2-0 Colombia @ 6.00 - 7.00***
+:small_orange_diamond: Portugal x Uzbekistan: **Correct score 2-0 Portugal @ 5.50 - 6.50***
+
+:moneybag: Total odds: **±231 - 364***
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+If the favourites turn their dominance into clean, comfortable wins, these exact scorelines are realistic. A fun long shot.
+
+:bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.`;
+
+var EMBEDDED_RESULTS = [{"date": "2026-06-23", "sport": "Football", "list": "LOW", "odds": 2.06, "result": "pending"}, {"date": "2026-06-23", "sport": "Football", "list": "MID", "odds": 3.05, "result": "pending"}, {"date": "2026-06-23", "sport": "Football", "list": "HIGH", "odds": 5.08, "result": "pending"}, {"date": "2026-06-23", "sport": "Football", "list": "LUCKY SHOT", "odds": 231, "result": "pending"}];
+
+var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
+var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
+window.RESULTS  = (Array.isArray(window.RESULTS) && window.RESULTS.length)? window.RESULTS : EMBEDDED_RESULTS;
+window.SETTINGS = window.SETTINGS || {stake:1, currency:'u'};
+
+const DEFAULT_WEBHOOK = "";
+const DEFAULT_VERSION = DAILY_VERSION;
+const DEFAULT_MESSAGES = DAILY_MESSAGES;
+
+const EMOJI = {
+  ':crown:':'\u{1F451}',':small_orange_diamond:':'\u{1F536}',':moneybag:':'\u{1F4B0}',':mortar_board:':'\u{1F393}',
+  ':white_check_mark:':'✅',':tennis:':'\u{1F3BE}',':soccer:':'⚽',':gift:':'\u{1F381}',':dart:':'\u{1F3AF}',':brain:':'\u{1F9E0}',':bank:':'\u{1F3E6}',':trophy:':'\u{1F3C6}',
+  ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️'
+};
+
+let messages = [];
+
+function setStatus(msg, cls){ const el=document.getElementById('status'); if(!el) return; el.className=cls||''; el.innerHTML=msg; }
+function log(msg, cls){ const el=document.getElementById('log'); if(!el) return; const t=new Date().toLocaleTimeString('nl-NL'); el.innerHTML += '\n<span class="'+(cls||'')+'">['+t+'] '+msg+'</span>'; el.scrollTop=el.scrollHeight; }
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(k).join(EMOJI[k]); } return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
+
+const CHANNELS = ['LOW','MID','HIGH','LUCKY'];
+function getHook(cat){ const el=document.getElementById('hook_'+cat); return el?el.value.trim():''; }
+function catLabel(cat){ return {LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM'}[cat]||cat; }
+function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; if(h.includes('HIGH'))return'HIGH'; if(h.includes('MID'))return'MID'; return'LOW'; }
+
+function applyTokens(t){
+  t=(t||'').split('{VIP_LINK}').join(vipLink()||'(stel je VIP-link in)');
+  var ch=document.getElementById('vip_channel'); var v=ch?ch.value.trim():'';
+  var out;
+  if(!v) out='#vip-upgrade';
+  else if(/^https?:/i.test(v)) out=v;            // geplakte kanaal-link -> klikbaar
+  else if(/^[0-9]+$/.test(v)) out='<#'+v+'>';    // kanaal-ID -> klikbare #mention
+  else out=v;                                    // anders: laat staan zoals getypt
+  t=t.split('{VIP_CHANNEL}').join(out);
+  return t;
+}
+function parseMessages(){
+  const raw=document.getElementById('raw').value;
+  messages=raw.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s);
+  document.getElementById('count').textContent=messages.length+' berichten';
+  const cards=document.getElementById('cards'); cards.innerHTML='';
+  if(!messages.length){ cards.innerHTML='<p class="small">Geen lijsten in het tekstvak. Klik "Laad lijsten van vandaag" of "Herstel standaardlijsten".</p>'; saveAll(true); return; }
+  messages.forEach((m,i)=>{
+    const cat=detectCategory(m); const div=document.createElement('div'); div.className='card';
+    div.innerHTML='<div class="meta"><span>Bericht '+(i+1)+' / '+messages.length+' &nbsp; <span class="chan">naar '+catLabel(cat)+' kanaal</span></span>'+
+      '<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="sendOne('+i+')">Verstuur dit</button></div>'+
+      '<div class="disc">'+renderDiscord(applyTokens(m))+'</div>';
+    cards.appendChild(div);
+  });
+  saveAll(true);
+}
+
+async function postToDiscord(content, hook){
+  if(!hook){ throw new Error('geen webhook ingevuld voor dit kanaal'); }
+  const res=await fetch(hook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
+  if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
+}
+async function testHook(cat){ try{ log('Testbericht naar '+catLabel(cat)+'-kanaal...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' kanaal werkt.', getHook(cat)); log('OK - test verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); try{ log('Bericht '+(i+1)+' naar '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - bericht '+(i+1)+' verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function sendAll(){
+  if(!messages.length){ log('Geen berichten geladen.', 'err'); return; }
+  if(!confirm('Alle '+messages.length+' berichten versturen naar hun eigen kanaal?')){ log('Geannuleerd.', 'info'); return; }
+  const btn=document.getElementById('sendAllBtn'); btn.disabled=true;
+  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('Verstuurd '+(i+1)+' / '+messages.length+' naar '+catLabel(cat), 'ok'); }catch(e){ log('MISLUKT '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
+  log('Klaar met versturen.', 'info'); btn.disabled=false;
+}
+
+async function sendCustom(){
+  const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
+  localStorage.setItem('ba_custom_msg', ta.value);
+  if(!t){ log('Custom bericht is leeg.', 'err'); return; }
+  if(!confirm('Dit bericht naar je CUSTOM-kanaal sturen?')) return;
+  try{ log('Custom bericht versturen...', 'info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - custom bericht verstuurd.', 'ok'); const e=document.getElementById('customState'); e.textContent='verstuurd'; setTimeout(()=>e.textContent='',1500); }
+  catch(e){ log('MISLUKT custom: '+e.message, 'err'); }
+}
+function saveAll(silent){
+  CHANNELS.forEach(c=>localStorage.setItem('ba_hook_'+c, getHook(c)));
+  localStorage.setItem('ba_hook_RESULTS', getHook('RESULTS'));
+  localStorage.setItem('ba_hook_FREE', getHook('FREE'));
+  localStorage.setItem('ba_hook_CUSTOM', getHook('CUSTOM'));
+  var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
+  localStorage.setItem('ba_vip_link', vipLink());
+  var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
+  const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
+  localStorage.setItem('ba_messages', document.getElementById('raw').value);
+  if(!silent){ const e=document.getElementById('saveState'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
+}
+function resetDefault(){ if(!confirm('Standaardlijsten terugzetten?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
+
+let BET_EDITS={}; try{ BET_EDITS=JSON.parse(localStorage.getItem('ba_betedits')||'{}'); }catch(e){ BET_EDITS={}; }
+function betId(r){ return r.date+'|'+r.sport+'|'+r.list; }
+function eff(r){ const e=BET_EDITS[betId(r)]||{}; const odds=(e.odds!=null&&e.odds!==''&&!isNaN(parseFloat(e.odds)))?parseFloat(e.odds):r.odds; const result=e.result||r.result||'pending'; return {odds,result}; }
+function updateBet(id, field, val){
+  BET_EDITS[id]=BET_EDITS[id]||{};
+  if(field==='odds') BET_EDITS[id].odds=val.replace(',','.'); else BET_EDITS[id].result=val;
+  localStorage.setItem('ba_betedits', JSON.stringify(BET_EDITS));
+  renderResults(); renderBankroll(); renderShare();
+  const auto=document.getElementById('autoShare');
+  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id);
+}
+function resetBetEdits(){ if(!confirm('Alle handmatige odds/resultaten terugzetten?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
+function renderBetEditor(){
+  const data=window.RESULTS||[]; const tb=document.querySelector('#betEditor tbody'); if(!tb) return; tb.innerHTML='';
+  data.forEach(r=>{
+    const id=betId(r); const e=eff(r);
+    const opt=v=>'<option value="'+v+'"'+(e.result.toUpperCase()===v?' selected':'')+'>';
+    tb.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td>'+
+      '<td><input type="text" style="width:90px;padding:6px 8px;" value="'+e.odds.toFixed(2)+'" onchange="updateBet(\''+id+'\',\'odds\',this.value)"></td>'+
+      '<td><select style="width:140px;padding:6px 8px;" onchange="updateBet(\''+id+'\',\'result\',this.value)">'+opt('PENDING')+'Open</option>'+opt('W')+'Gewonnen</option>'+opt('V')+'Verloren</option>'+'</select></td></tr>';
+  });
+}
+
+let SHARED={}; try{ SHARED=JSON.parse(localStorage.getItem('ba_shared')||'{}'); }catch(e){ SHARED={}; }
+function vipLink(){ const el=document.getElementById('vip_link'); return el?el.value.trim():''; }
+function dmy(iso){ const p=(iso||'').split('-'); return p.length===3? p[2]+'-'+p[1]+'-'+p[0] : iso; }
+function tierLabelFromList(list){ return {LOW:'LOW ODD',MID:'MID ODD',HIGH:'HIGH ODD',LUCKY:'LUCKY SHOT'}[mapList(list)]; }
+function runningRecord(){ let w=0,l=0,u=0; (window.RESULTS||[]).forEach(r=>{ const e=eff(r); const res=e.result.toUpperCase(); if(res==='W'){ w++; u+=e.odds-1; } else if(res==='V'){ l++; u-=1; } }); return {w,l,u}; }
+function findMessageFor(r){ const wantTennis=(r.sport||'').toLowerCase().includes('tennis'); const cat=mapList(r.list); return messages.find(m=>{ const isTennis=/\(tennis\)/i.test(m.split('\n')[0]); return detectCategory(m)===cat && isTennis===wantTennis; }); }
+function selectionLines(m){ if(!m) return []; return m.split('\n').filter(x=>x.trim().startsWith(':small_orange_diamond:')); }
+function buildResultCard(r){
+  const e=eff(r); const res=e.result.toUpperCase(); const rec=runningRecord(); const recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
+  const tier=tierLabelFromList(r.list); const legs=selectionLines(findMessageFor(r)); const link=vipLink(); const cta=link?link:'(zet je VIP-link in de kanaal-instellingen)';
+  if(res==='W'){
+    return ':trophy: **WINNER | '+tier+' | '+dmy(r.date)+' | '+r.sport+'**\n'+(legs.length?legs.join('\n')+'\n':'')+
+      ':moneybag: Landed @ **'+e.odds.toFixed(2)+'** (+'+(e.odds-1).toFixed(2)+'u)\n'+
+      ':chart_with_upwards_trend: Record: **'+rec.w+'W-'+rec.l+'L, '+recU+'**\n'+
+      ':fire: Tomorrow\'s full slate drops first in VIP: '+cta+'\n:warning: 18+ | play responsibly';
+  }
+  return ':x: **No luck | '+tier+' | '+dmy(r.date)+' | '+r.sport+'**\n'+(legs.length?legs.join('\n')+'\n':':small_orange_diamond: acca @ '+e.odds.toFixed(2)+'\n')+
+    ':chart_with_upwards_trend: Still **'+recU+'** overall, every result shown\n'+
+    ':bulb: Full picks + bankroll plan in VIP: '+cta+'\n:warning: 18+ | play responsibly';
+}
+function renderShare(){
+  const wrap=document.getElementById('shareList'); if(!wrap) return;
+  const settled=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; });
+  if(!settled.length){ wrap.innerHTML='<p class="small">Nog geen afgeronde lijsten. Zet eerst een resultaat op W of V in "Mijn bets".</p>'; return; }
+  wrap.innerHTML='';
+  settled.forEach(r=>{ const id=betId(r); const done=!!SHARED[id]; const div=document.createElement('div'); div.className='card';
+    div.innerHTML='<div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">gedeeld</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" style="padding:5px 12px;font-size:12px;" onclick="shareOne(\''+id+'\')">'+(done?'Opnieuw delen':'Deel naar VIP')+'</button></div>'+
+      '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div>';
+    wrap.appendChild(div); });
+}
+async function shareOne(id){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; try{ log('Resultaat delen naar VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - resultaat gedeeld in VIP.', 'ok'); renderShare(); }catch(e){ log('MISLUKT VIP-deel: '+e.message, 'err'); } }
+async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('Geen nieuwe afgeronde resultaten om te delen.', 'info'); return; } if(!confirm(s.length+' nieuwe resultaten naar het VIP-kanaal sturen?')) return; for(const r of s){ await shareOne(betId(r)); await new Promise(x=>setTimeout(x,1200)); } log('Klaar met delen.', 'info'); }
+
+function renderResults(){
+  const data=window.RESULTS||[]; const stake=(window.SETTINGS&&window.SETTINGS.stake)||1; const cur=(window.SETTINGS&&window.SETTINGS.currency)||'u';
+  const tbody=document.querySelector('#resultsTable tbody'); const noRes=document.getElementById('noResults'); const statsRow=document.getElementById('statsRow');
+  tbody.innerHTML='';
+  if(!data.length){ noRes.style.display='block'; statsRow.innerHTML=''; renderShare(); return; }
+  noRes.style.display='none';
+  let settled=0,wins=0,staked=0,ret=0;
+  [...data].reverse().forEach(r=>{
+    const e=eff(r); const res=e.result.toUpperCase(); const odds=e.odds; let badge,plTxt='',plCls='';
+    if(res==='W'){ const pl=(odds*stake)-stake; plTxt='+'+pl.toFixed(2)+cur; plCls='pos'; badge='<span class="badge b-w">GEWONNEN</span>'; }
+    else if(res==='V'){ plTxt=(-stake).toFixed(2)+cur; plCls='neg'; badge='<span class="badge b-v">VERLOREN</span>'; }
+    else { badge='<span class="badge b-p">OPEN</span>'; plTxt='.'; }
+    tbody.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td><td>'+Number(odds).toFixed(2)+'</td><td>'+badge+'</td><td class="'+plCls+'">'+plTxt+'</td></tr>';
+    if(res==='W'||res==='V'){ settled++; staked+=stake; if(res==='W'){ wins++; ret+=odds*stake; } }
+  });
+  const pl=ret-staked, strike=settled?Math.round(wins/settled*100):0, roi=staked?(pl/staked*100):0, plC=pl>=0?'pos':'neg';
+  statsRow.innerHTML='<div class="stat"><div class="v">'+settled+'</div><div class="l">Afgerond</div></div>'+
+    '<div class="stat"><div class="v">'+wins+'-'+(settled-wins)+'</div><div class="l">W - V</div></div>'+
+    '<div class="stat"><div class="v">'+strike+'%</div><div class="l">Strike rate</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(pl>=0?'+':'')+pl.toFixed(2)+cur+'</div><div class="l">Winst/Verlies</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(roi>=0?'+':'')+roi.toFixed(0)+'%</div><div class="l">ROI</div></div>';
+  renderShare();
+}
+
+function showTab(name){
+  document.getElementById('tab-bets').style.display=name==='bets'?'block':'none';
+  document.getElementById('tab-bank').style.display=name==='bank'?'block':'none';
+  document.getElementById('tb-bets').classList.toggle('active', name==='bets');
+  document.getElementById('tb-bank').classList.toggle('active', name==='bank');
+  if(name==='bank') renderBankroll();
+}
+
+const BK_TIERS=['LOW','MID','HIGH','LUCKY'];
+const BK_DEF={LOW:[1,2],MID:[0.5,1],HIGH:[0.25,0.5],LUCKY:[0.05,0.1]};
+const BK_KEYS=['bk_start','bk_current','bk_maxday'].concat(BK_TIERS.flatMap(t=>['bk_'+t+'_min','bk_'+t+'_max']));
+function mapList(list){ const u=(list||'').toUpperCase(); if(u.includes('LUCKY'))return'LUCKY'; if(u.includes('HIGH'))return'HIGH'; if(u.includes('MID'))return'MID'; return'LOW'; }
+function num(id,def){ const el=document.getElementById(id); if(!el) return def; const v=parseFloat((el.value||'').replace(',','.')); return isNaN(v)?def:v; }
+function pctRange(t){ return [num('bk_'+t+'_min',BK_DEF[t][0]), num('bk_'+t+'_max',BK_DEF[t][1])]; }
+function pctMid(t){ const r=pctRange(t); return (r[0]+r[1])/2; }
+function saveBankroll(){ BK_KEYS.forEach(k=>{ const el=document.getElementById(k); if(el) localStorage.setItem('ba_'+k, el.value); }); renderBankroll(); const e=document.getElementById('bkSave'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
+function computeRealised(start){ const data=window.RESULTS||[]; let staked=0,ret=0,settled=0,wins=0; data.forEach(r=>{ const e=eff(r); const res=e.result.toUpperCase(); if(res!=='W'&&res!=='V') return; const stake=start*pctMid(mapList(r.list))/100; staked+=stake; settled++; if(res==='W'){ wins++; ret+=e.odds*stake; } }); return {staked,pl:ret-staked,settled,wins}; }
+function avgOdd(t){ const xs=(window.RESULTS||[]).filter(r=>mapList(r.list)===t).map(r=>eff(r).odds); return xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0; }
+function renderBankroll(){
+  const start=num('bk_start',1000); const real=computeRealised(start);
+  const ci=(document.getElementById('bk_current').value||'').trim(); const current=ci?num('bk_current',start):(start+real.pl);
+  const tb=document.querySelector('#stakeTable tbody'); tb.innerHTML=''; const labels={LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHOT'};
+  BK_TIERS.forEach(t=>{ const r=pctRange(t); const sMin=current*r[0]/100,sMax=current*r[1]/100,ao=avgOdd(t); const wMin=ao?sMin*(ao-1):0,wMax=ao?sMax*(ao-1):0;
+    tb.innerHTML+='<tr><td>'+labels[t]+'</td><td>'+r[0]+' - '+r[1]+'%</td><td>EUR '+sMin.toFixed(2)+' - '+sMax.toFixed(2)+'</td><td>'+(ao?ao.toFixed(2):'.')+'</td><td class="pos">'+(ao?'+EUR '+wMin.toFixed(2)+' - '+wMax.toFixed(2):'.')+'</td></tr>'; });
+  const pend=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u!=='W'&&u!=='V'; });
+  let dayMin=0,dayMax=0; pend.forEach(r=>{ const rr=pctRange(mapList(r.list)); dayMin+=current*rr[0]/100; dayMax+=current*rr[1]/100; });
+  const pMin=current?dayMin/current*100:0,pMax=current?dayMax/current*100:0,maxday=num('bk_maxday',6),warn=pMax>maxday;
+  document.getElementById('dayExposure').innerHTML='Openstaande lijsten vandaag: <b>'+pend.length+'</b>, totale inzet <b>EUR '+dayMin.toFixed(2)+' - '+dayMax.toFixed(2)+'</b> (<span class="'+(warn?'neg':'pos')+'">'+pMin.toFixed(1)+'% - '+pMax.toFixed(1)+'%</span> van bankroll, limiet '+maxday.toFixed(0)+'%). '+(warn?'<span class="neg">Bovengrens boven je daglimiet, blijf richting de onderkant.</span>':'Binnen je daglimiet.');
+  const roi=real.staked?real.pl/real.staked*100:0,plC=real.pl>=0?'pos':'neg';
+  document.getElementById('bkStats').innerHTML='<div class="stat"><div class="v">EUR '+start.toFixed(0)+'</div><div class="l">Start bankroll</div></div>'+
+    '<div class="stat"><div class="v '+(current>=start?'pos':'neg')+'">EUR '+current.toFixed(2)+'</div><div class="l">Huidige bankroll</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(real.pl>=0?'+':'')+'EUR '+real.pl.toFixed(2)+'</div><div class="l">Gerealiseerde P/L</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(roi>=0?'+':'')+roi.toFixed(0)+'%</div><div class="l">ROI (midden range)</div></div>'+
+    '<div class="stat"><div class="v">'+real.wins+'/'+real.settled+'</div><div class="l">Gewonnen/afgerond</div></div>';
+}
+
+function dateFromMessages(text){ const m=(text||'').match(/(\d{2}-\d{2}-\d{4})/); return m?m[1]:null; }
+function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archive')||'{}'); }catch(e){ return {}; } }
+function archiveDay(text){ const d=dateFromMessages(text); if(!d) return; const map=loadArchiveMap(); map[d]=text; localStorage.setItem('ba_archive', JSON.stringify(map)); }
+function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(nog geen archief)</option>'; viewArchive(); }
+function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">Geen lijsten voor deze dag.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
+function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Lijsten van vandaag geladen.', 'ok'); setStatus('Lijsten van vandaag opnieuw geladen ('+messages.length+' lijsten, '+DAILY_VERSION+').','ok'); }
+function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lijsten geimporteerd uit '+f.name+'.', 'ok'); setStatus('Lijsten geimporteerd uit '+f.name+' ('+messages.length+' lijsten).','ok'); }; reader.readAsText(f); input.value=''; }
+
+(function(){
+  try{
+    CHANNELS.forEach(c=>{ const saved=localStorage.getItem('ba_hook_'+c); document.getElementById('hook_'+c).value = saved!==null? saved : ''; });
+    const rHook=localStorage.getItem('ba_hook_RESULTS'); if(rHook!==null) document.getElementById('hook_RESULTS').value=rHook;
+    const fHook=localStorage.getItem('ba_hook_FREE'); if(fHook!==null) document.getElementById('hook_FREE').value=fHook;
+    const cHook=localStorage.getItem('ba_hook_CUSTOM'); if(cHook!==null) document.getElementById('hook_CUSTOM').value=cHook;
+    const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
+    const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
+    const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
+    if(localStorage.getItem('ba_autoshare')==='1') document.getElementById('autoShare').checked=true;
+
+    const storedVer=localStorage.getItem('ba_msg_version');
+    let raw=localStorage.getItem('ba_messages');
+    let source='browsergeheugen';
+    if(storedVer!==DAILY_VERSION || !raw || !raw.trim()){
+      raw=DAILY_MESSAGES; localStorage.setItem('ba_messages',raw); localStorage.setItem('ba_msg_version',DAILY_VERSION); source='nieuwe lijsten ('+DAILY_VERSION+')';
+    }
+    document.getElementById('raw').value=raw; archiveDay(raw);
+    BK_KEYS.forEach(k=>{ const v=localStorage.getItem('ba_'+k); if(v!==null){ const el=document.getElementById(k); if(el) el.value=v; } });
+
+    parseMessages(); renderBetEditor(); renderResults(); renderBankroll(); renderShare(); renderArchiveSelect();
+
+    if(messages.length){ setStatus('<b>'+messages.length+' lijsten geladen</b> ('+source+'). Datum: '+(dateFromMessages(raw)||'onbekend')+'. Alles werkt.', 'ok'); }
+    else { setStatus('Geen lijsten beschikbaar. Klik "Laad lijsten van vandaag" of importeer een bestand.', 'warn'); }
+    log('Dashboard geladen.', 'info');
+  }catch(err){
+    setStatus('Er ging iets mis bij het laden: '+err.message+'. Probeer de pagina te herladen (Ctrl+F5).', 'err');
+    try{ log('INIT-FOUT: '+err.message, 'err'); }catch(e){}
+  }
+})();
+
+
+
+var PAGE_META={
+  today:["Vandaag","Vandaag's lijsten, klaar om te versturen naar je kanalen."],
+  mybets:["Mijn bets","Vul de geplaatste odd in en markeer winst/verlies per selectie."],
+  results:["Resultaten","Overzicht van je afgeronde lijsten en P/L."],
+  vip:["VIP delen","Deel resultaten als wervende kaart naar je VIP-kanaal."],
+  bankroll:["Bankroll","Risk management en aanbevolen inzetten per bet-type."],
+  edit:["Lijsten","Bewerk de berichten van vandaag."],
+  custom:["Eigen bericht","Vrije tekst naar je CUSTOM-kanaal."],
+  archive:["Archief","Bekijk eerdere dagen terug."],
+  channels:["Kanalen","Webhooks en instellingen, lokaal in je browser bewaard."],
+  log:["Logboek","Activiteit en foutmeldingen."]
+};
+function toggleSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(!s)return; var o=s.classList.toggle('open'); if(b)b.classList.toggle('show',o); }
+function closeSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(s)s.classList.remove('open'); if(b)b.classList.remove('show'); }
+function showPage(id){
+  var ps=document.querySelectorAll('.page'); for(var i=0;i<ps.length;i++) ps[i].style.display='none';
+  var el=document.getElementById('page-'+id); if(el) el.style.display='block';
+  var ns=document.querySelectorAll('.nav-item'); for(var j=0;j<ns.length;j++) ns[j].classList.toggle('active', ns[j].getAttribute('data-page')===id);
+  var meta=PAGE_META[id]||[id,""];
+  var t=document.getElementById('pageTitle'); if(t)t.textContent=meta[0];
+  var su=document.getElementById('pageSub'); if(su)su.textContent=meta[1];
+  var cc=document.getElementById('crumbCurrent'); if(cc)cc.textContent=meta[0];
+  closeSidebar();
+  if(id==='bankroll' && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+
+function detectSport(t){
+  t=t||''; var head=(t.split('\n')[0]||''); var m=t.match(/Sport of the day:\s*([^\n]+)/i); var sd=m?m[1].trim():'';
+  if(/\(tennis\)/i.test(head)||/tennis/i.test(sd)) return 'Tennis';
+  if(/\(basket|basketbal/i.test(head)||/basket/i.test(sd)) return 'Basketbal';
+  if(/\(nfl\)/i.test(head)||/nfl/i.test(sd)) return 'NFL';
+  if(/\(nhl\)/i.test(head)||/nhl|hockey/i.test(sd)) return 'NHL';
+  if(sd) return sd.charAt(0).toUpperCase()+sd.slice(1);
+  return 'Football';
+}
+var _curSport='all';
+function filterSport(s){
+  _curSport=s;
+  var cards=document.querySelectorAll('#cards > .card');
+  for(var i=0;i<cards.length;i++){ var sp=cards[i].getAttribute('data-sport'); cards[i].style.display=(s==='all'||sp===s)?'':'none'; }
+  var b=document.querySelectorAll('#sportFilter .sport-btn');
+  for(var j=0;j<b.length;j++) b[j].classList.toggle('active', b[j].getAttribute('data-sp')===s);
+}
+function tagAndFilterSports(){
+  var cards=document.querySelectorAll('#cards > .card'); var sports=[];
+  for(var i=0;i<cards.length;i++){ var sp=(typeof messages!=='undefined'&&messages[i])?detectSport(messages[i]):'Football'; cards[i].setAttribute('data-sport',sp); if(sports.indexOf(sp)<0) sports.push(sp); }
+  var fb=document.getElementById('sportFilter'); if(!fb) return;
+  if(!cards.length){ fb.innerHTML=''; return; }
+  var html='<button class="sport-btn" data-sp="all">Alle</button>';
+  for(var k=0;k<sports.length;k++){ html+='<button class="sport-btn" data-sp="'+sports[k]+'">'+sports[k]+'</button>'; }
+  fb.innerHTML=html;
+  if(sports.indexOf(_curSport)<0) _curSport='all';
+  filterSport(_curSport);
+}
+(function(){ var fb=document.getElementById('sportFilter'); if(fb) fb.addEventListener('click', function(e){ var b=e.target.closest('.sport-btn'); if(b) filterSport(b.getAttribute('data-sp')); }); })();
+if(typeof parseMessages==='function'){ var _origParse=parseMessages; parseMessages=function(){ _origParse(); tagAndFilterSports(); }; }
+tagAndFilterSports();
+
+
+var _sportSel={bets:'all',results:'all',share:'all'};
+function _sportsList(){ var s=[]; (window.RESULTS||[]).forEach(function(r){ if(r.sport&&s.indexOf(r.sport)<0)s.push(r.sport); }); return s; }
+function _renderSportBar(barId,key){
+  var bar=document.getElementById(barId); if(!bar) return;
+  var sports=_sportsList(); if(sports.length<1){ bar.innerHTML=''; return; }
+  if(sports.indexOf(_sportSel[key])<0) _sportSel[key]='all';
+  var cur=_sportSel[key];
+  var html='<button class="sport-btn'+(cur==='all'?' active':'')+'" data-key="'+key+'" data-sp="all">Alle</button>';
+  for(var i=0;i<sports.length;i++){ html+='<button class="sport-btn'+(cur===sports[i]?' active':'')+'" data-key="'+key+'" data-sp="'+sports[i]+'">'+sports[i]+'</button>'; }
+  bar.innerHTML=html;
+}
+function _filterRows(sel,key){ var rows=document.querySelectorAll(sel); var cur=_sportSel[key]; for(var i=0;i<rows.length;i++){ var c=rows[i].children[1]; var sp=c?c.textContent.trim():''; rows[i].style.display=(cur==='all'||sp===cur)?'':'none'; } }
+function _filterShare(){ var cards=document.querySelectorAll('#shareList > .card'); var cur=_sportSel.share; var sports=_sportsList(); for(var i=0;i<cards.length;i++){ var m=cards[i].querySelector('.meta span'); var txt=m?m.textContent:''; var sp=''; for(var k=0;k<sports.length;k++){ if(txt.indexOf(sports[k])>=0){sp=sports[k];break;} } cards[i].style.display=(cur==='all'||sp===cur)?'':'none'; } }
+function refreshBetsFilter(){ _renderSportBar('sportFilterBets','bets'); _filterRows('#betEditor tbody tr','bets'); }
+function refreshResultsFilter(){ _renderSportBar('sportFilterResults','results'); _filterRows('#resultsTable tbody tr','results'); }
+function refreshShareFilter(){ _renderSportBar('sportFilterShare','share'); _filterShare(); }
+document.addEventListener('click', function(e){ var b=e.target.closest?e.target.closest('.sport-btn'):null; if(!b) return; var key=b.getAttribute('data-key'); if(!key) return; _sportSel[key]=b.getAttribute('data-sp'); if(key==='bets')refreshBetsFilter(); else if(key==='results')refreshResultsFilter(); else if(key==='share')refreshShareFilter(); });
+if(typeof renderBetEditor==='function'){ var _rbe=renderBetEditor; renderBetEditor=function(){ _rbe(); refreshBetsFilter(); }; }
+if(typeof renderResults==='function'){ var _rr=renderResults; renderResults=function(){ _rr(); refreshResultsFilter(); }; }
+if(typeof renderShare==='function'){ var _rs=renderShare; renderShare=function(){ _rs(); refreshShareFilter(); }; }
+refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
+
+
+function exportSettings(){
+  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
+  var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+  var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
+  try{ navigator.clipboard.writeText(code); }catch(e){}
+  var st=document.getElementById('cfgState'); if(st){ st.textContent='gekopieerd'; setTimeout(function(){st.textContent='';},2000); }
+  log('Instellingen geexporteerd (gekopieerd naar klembord).', 'ok');
+}
+function importSettings(){
+  var ta=document.getElementById('cfg_code'); var code=ta?(ta.value||'').trim():'';
+  if(!code){ log('Plak eerst een instellingen-code.', 'err'); return; }
+  try{
+    var o=JSON.parse(decodeURIComponent(escape(atob(code))));
+    Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
+    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
+    var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
+    var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
+    if(typeof BK_KEYS!=='undefined') BK_KEYS.forEach(function(k){ var v=localStorage.getItem('ba_'+k); var el=document.getElementById(k); if(el&&v!==null) el.value=v; });
+    if(typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
+    var st=document.getElementById('cfgState'); if(st){ st.textContent='geimporteerd'; setTimeout(function(){st.textContent='';},2000); }
+    log('Instellingen geimporteerd en toegepast.', 'ok');
+  }catch(e){ log('Ongeldige instellingen-code.', 'err'); }
+}
+
+
+function vipChannelOut(){ var ch=document.getElementById('vip_channel'); var v=ch?ch.value.trim():''; if(!v) return ''; if(/^https?:/i.test(v)) return v; if(/^[0-9]+$/.test(v)) return '<#'+v+'>'; return v; }
+function buildResultCard(r){
+  var e=eff(r); var res=e.result.toUpperCase(); var rec=runningRecord(); var recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
+  var tier=tierLabelFromList(r.list); var legs=selectionLines(findMessageFor(r));
+  var ch=vipChannelOut(); var link=vipLink(); var cta=ch||link||'(stel je VIP-link of kanaal in onder Kanalen)';
+  if(res==='W'){
+    return ':trophy: **WINNER | '+tier+' | '+dmy(r.date)+' | '+r.sport+'** :white_check_mark:\n'+
+      (legs.length?legs.join('\n')+'\n':'')+
+      ':moneybag: Landed @ **'+e.odds.toFixed(2)+'** (+'+(e.odds-1).toFixed(2)+'u)\n'+
+      ':chart_with_upwards_trend: Verified record: **'+rec.w+'W-'+rec.l+'L, '+recU+'**\n'+
+      ':fire: This one dropped in VIP before kickoff. Get the next full slate first: '+cta+'\n'+
+      ':warning: 18+ | play responsibly';
+  }
+  return ':x: **Settled | '+tier+' | '+dmy(r.date)+' | '+r.sport+'**\n'+
+    (legs.length?legs.join('\n')+'\n':'')+
+    ':chart_with_upwards_trend: We post **every** result, win or lose. Running: **'+recU+'** over '+(rec.w+rec.l)+' settled bets.\n'+
+    ':bulb: Off days happen. The winners more than cover them, and VIP gets the safe daily LOW bankers plus full bankroll staking. Join: '+cta+'\n'+
+    ':warning: 18+ | play responsibly';
+}
+function renderShare(){
+  var wrap=document.getElementById('shareList'); if(!wrap) return;
+  var data=window.RESULTS||[]; var wins=[],losses=[];
+  data.forEach(function(r){ var u=eff(r).result.toUpperCase(); if(u==='W')wins.push(r); else if(u==='V')losses.push(r); });
+  if(!wins.length && !losses.length){ wrap.innerHTML='<p class="section-sub">Nog geen afgeronde lijsten. Zet eerst in "Mijn bets" een resultaat op Gewonnen of Verloren; daarna kies je hier per stuk wat je deelt.</p>'; if(typeof refreshShareFilter==='function') refreshShareFilter(); return; }
+  function cardHtml(r){ var id=betId(r); var done=!!SHARED[id];
+    return '<div class="card" data-id="'+id+'"><div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">gedeeld</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" data-share="'+id+'">'+(done?'Opnieuw delen':'Deel naar VIP')+'</button></div>'+
+      '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div></div>'; }
+  var html='';
+  if(wins.length){ html+='<div class="share-group">Gewonnen ('+wins.length+')</div>'; for(var i=0;i<wins.length;i++) html+=cardHtml(wins[i]); }
+  if(losses.length){ html+='<div class="share-group">Verloren ('+losses.length+')</div>'; for(var j=0;j<losses.length;j++) html+=cardHtml(losses[j]); }
+  wrap.innerHTML=html;
+  if(typeof refreshShareFilter==='function') refreshShareFilter();
+}
+document.addEventListener('click', function(e){ var b=e.target.closest?e.target.closest('[data-share]'):null; if(b){ shareOne(b.getAttribute('data-share')); } });
+renderShare();
+
+
+/* ---- v22: per-leg grading with auto-rollup ---- */
+LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:{}; try{ LEG_RESULTS=JSON.parse(localStorage.getItem("ba_legresults")||"{}"); }catch(e){ LEG_RESULTS=LEG_RESULTS||{}; }
+function legRollup(r){
+  var LR=(typeof LEG_RESULTS!=='undefined'&&LEG_RESULTS)?LEG_RESULTS:{};
+  var legs=selectionLines(findMessageFor(r)); var n=legs.length; if(!n) return null;
+  var id=betId(r); var anyV=false, allW=true;
+  for(var i=0;i<n;i++){ var v=(LR[id+'|'+i]||'').toUpperCase(); if(v==='V'){anyV=true;} if(v!=='W'){allW=false;} }
+  if(anyV) return 'V';
+  if(allW) return 'W';
+  return null;
+}
+if(typeof eff==='function'){
+  var _origEff=eff;
+  eff=function(r){
+    var base=_origEff(r);
+    var id=betId(r);
+    var manual=(BET_EDITS[id]&&BET_EDITS[id].result)?String(BET_EDITS[id].result).toUpperCase():'';
+    if(manual==='W'||manual==='V') return base;
+    var roll=legRollup(r);
+    if(roll) return {odds:base.odds, result:roll};
+    return base;
+  };
+}
+function legText(L){ return L.replace(/:small_orange_diamond:/g,'').replace(/\*\*/g,'').trim(); }
+function renderBetEditor(){
+  var data=window.RESULTS||[]; var tb=document.querySelector('#betEditor tbody'); if(!tb) return; tb.innerHTML='';
+  data.forEach(function(r){
+    var id=betId(r); var e=eff(r); var resU=e.result.toUpperCase();
+    var manual=(BET_EDITS[id]&&BET_EDITS[id].result)?String(BET_EDITS[id].result).toUpperCase():'';
+    var roll=legRollup(r);
+    var badge = resU==='W'?'<span class="lg-badge lg-w">Gewonnen</span>': resU==='V'?'<span class="lg-badge lg-v">Verloren</span>':'<span class="lg-badge lg-p">Open</span>';
+    var autoNote = (roll && manual!=='W' && manual!=='V')? '<span class="lg-auto">auto via selecties</span>':'';
+    function opt(v,lbl){ return '<option value="'+v+'"'+(resU===v?' selected':'')+'>'+lbl+'</option>'; }
+    tb.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td>'+
+      '<td><input type="text" style="width:90px;padding:6px 8px;" data-bet-odds="'+id+'" value="'+e.odds.toFixed(2)+'"></td>'+
+      '<td><select style="width:150px;padding:6px 8px;" data-bet-res="'+id+'">'+opt('PENDING','Auto (selecties)')+opt('W','Gewonnen')+opt('V','Verloren')+'</select> '+autoNote+'</td></tr>';
+    var legs=selectionLines(findMessageFor(r));
+    if(legs.length){
+      var cells='';
+      for(var i=0;i<legs.length;i++){
+        var lv=(LEG_RESULTS[id+'|'+i]||'').toUpperCase();
+        cells+='<div class="leg-row"><span class="leg-txt">'+legText(legs[i])+'</span>'+
+          '<span class="leg-btns">'+
+          '<button class="leg-b '+(lv==='W'?'on-w':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="W" title="Selectie gewonnen">&#10003;</button>'+
+          '<button class="leg-b '+(lv==='V'?'on-v':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="V" title="Selectie verloren">&#10007;</button>'+
+          '</span></div>';
+      }
+      tb.innerHTML+='<tr class="legs-tr"><td colspan="5"><div class="legs-wrap"><div class="legs-head">Selecties &middot; markeer per wedstrijd '+badge+' '+(legs.length>1?'<span class="lg-auto">1 fout = hele bet verloren</span>':'')+'</div>'+cells+'</div></td></tr>';
+    }
+  });
+  if(typeof refreshBetsFilter==='function') refreshBetsFilter();
+}
+/* leg-aware sport filter: legs row follows its parent bet row */
+function refreshBetsFilter(){
+  _renderSportBar('sportFilterBets','bets');
+  var cur=_sportSel.bets; var rows=document.querySelectorAll('#betEditor tbody tr'); var lastShown=true;
+  for(var i=0;i<rows.length;i++){ var tr=rows[i];
+    if(tr.classList.contains('legs-tr')){ tr.style.display=lastShown?'':'none'; continue; }
+    var c=tr.children[1]; var sp=c?c.textContent.trim():''; var show=(cur==='all'||sp===cur); lastShown=show; tr.style.display=show?'':'none';
+  }
+}
+function maybeAutoShare(id){
+  var r=(window.RESULTS||[]).find(function(x){return betId(x)===id;}); if(!r) return;
+  var rr=eff(r).result.toUpperCase(); var auto=document.getElementById('autoShare');
+  if((rr==='W'||rr==='V') && auto && auto.checked && !SHARED[id]) shareOne(id);
+}
+function updateLeg(id, idx, val){
+  var k=id+'|'+idx; var cur=(LEG_RESULTS[k]||'').toUpperCase();
+  if(cur===val){ delete LEG_RESULTS[k]; } else { LEG_RESULTS[k]=val; }
+  localStorage.setItem('ba_legresults', JSON.stringify(LEG_RESULTS));
+  renderBetEditor(); renderResults(); renderBankroll(); renderShare();
+  maybeAutoShare(id);
+}
+if(typeof updateBet==='function'){ var _origUpdateBet=updateBet; updateBet=function(id,f,v){ _origUpdateBet(id,f,v); renderBetEditor(); }; }
+/* delegation: leg buttons + bet editor inputs */
+document.addEventListener('click', function(e){ var b=e.target.closest?e.target.closest('[data-leg]'):null; if(!b) return; updateLeg(b.getAttribute('data-leg'), parseInt(b.getAttribute('data-idx'),10), b.getAttribute('data-val')); });
+(function(){ var be=document.getElementById('betEditor'); if(!be) return; be.addEventListener('change', function(e){ var t=e.target; if(t.getAttribute&&t.getAttribute('data-bet-odds')!=null){ updateBet(t.getAttribute('data-bet-odds'),'odds',t.value); } else if(t.getAttribute&&t.getAttribute('data-bet-res')!=null){ updateBet(t.getAttribute('data-bet-res'),'result',t.value); } }); })();
+renderBetEditor(); renderResults(); renderBankroll(); renderShare();
+
+showPage('today');
+
+</script>
+</body>
+</html>
