@@ -172,6 +172,18 @@
   }
   @media(max-width:480px){ .page-title{font-size:21px;} .main .app{padding:16px 13px 56px;} }
 
+
+  .modal-overlay{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
+  .modal-overlay.show{display:flex;}
+  .modal-box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 24px 20px;width:390px;max-width:90%;box-shadow:var(--sh2);text-align:center;}
+  .modal-box h3{margin:0 0 8px;font-size:18px;font-weight:600;letter-spacing:-.02em;}
+  .modal-box p{margin:0 0 18px;font-size:13.5px;color:var(--muted);line-height:1.5;}
+  .modal-actions{display:flex;gap:10px;}
+  .modal-actions button{flex:1;}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(16px);z-index:9999;background:var(--surface2);border:1px solid var(--line);color:var(--text);padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--sh2);opacity:0;pointer-events:none;transition:.25s;display:flex;align-items:center;gap:9px;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .toast .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:0 0 auto;}
+  .toast.err .dot{background:var(--red);}
 </style>
 </head>
 <body>
@@ -190,6 +202,18 @@
     <p class="muted-sm" style="margin:14px 0 0;">Beveiliging op clientniveau. Deel het wachtwoord alleen met VIP-leden.</p>
   </div>
 </div>
+
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3 id="confirmTitle">Weet je het zeker?</h3>
+    <p id="confirmMsg"></p>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="confirmNo">Annuleren</button>
+      <button class="btn" id="confirmYes">Verzenden</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
 
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
@@ -372,7 +396,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-24-v29";
+var EMBEDDED_VERSION = "2026-06-24-v30";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 24-06-2026**
 
 :soccer: Sport of the day: Football
@@ -510,21 +534,43 @@ async function postToDiscord(content, hook){
   if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
 }
 async function testHook(cat){ try{ log('Testbericht naar '+catLabel(cat)+'-kanaal...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' kanaal werkt.', getHook(cat)); log('OK - test verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT ('+catLabel(cat)+'): '+e.message, 'err'); } }
-async function sendOne(i){ const cat=detectCategory(messages[i]); try{ log('Bericht '+(i+1)+' naar '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - bericht '+(i+1)+' verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } }
+function askConfirm(msg, opts){
+  return new Promise(function(resolve){
+    var ov=document.getElementById('confirmModal');
+    document.getElementById('confirmMsg').textContent=msg;
+    document.getElementById('confirmTitle').textContent=(opts&&opts.title)||'Weet je het zeker?';
+    var yes=document.getElementById('confirmYes'), no=document.getElementById('confirmNo');
+    yes.textContent=(opts&&opts.yes)||'Verzenden';
+    function done(v){ ov.classList.remove('show'); yes.onclick=null; no.onclick=null; ov.onclick=null; resolve(v); }
+    yes.onclick=function(){done(true);};
+    no.onclick=function(){done(false);};
+    ov.onclick=function(e){ if(e.target===ov) done(false); };
+    ov.classList.add('show');
+  });
+}
+var _toastT;
+function showToast(msg, ok){
+  var t=document.getElementById('toast'); if(!t) return;
+  document.getElementById('toastMsg').textContent=msg;
+  t.classList.toggle('err', ok===false);
+  t.classList.add('show');
+  clearTimeout(_toastT); _toastT=setTimeout(function(){ t.classList.remove('show'); }, 2400);
+}
+async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Bericht '+(i+1)+' versturen naar het '+catLabel(cat)+'-kanaal?')){ log('Geannuleerd.', 'info'); return; } try{ log('Bericht '+(i+1)+' naar '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - bericht '+(i+1)+' verstuurd naar '+catLabel(cat)+'.', 'ok'); showToast('Verzonden naar '+catLabel(cat)); }catch(e){ log('MISLUKT bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Mislukt: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('Geen berichten geladen.', 'err'); return; }
-  if(!confirm('Alle '+messages.length+' berichten versturen naar hun eigen kanaal?')){ log('Geannuleerd.', 'info'); return; }
+  if(!await askConfirm('Alle '+messages.length+' berichten versturen, elk naar zijn eigen kanaal?')){ log('Geannuleerd.', 'info'); return; }
   const btn=document.getElementById('sendAllBtn'); btn.disabled=true;
   for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('Verstuurd '+(i+1)+' / '+messages.length+' naar '+catLabel(cat), 'ok'); }catch(e){ log('MISLUKT '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
-  log('Klaar met versturen.', 'info'); btn.disabled=false;
+  log('Klaar met versturen.', 'info'); btn.disabled=false; showToast('Alle berichten verzonden');
 }
 
 async function sendCustom(){
   const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
   localStorage.setItem('ba_custom_msg', ta.value);
   if(!t){ log('Custom bericht is leeg.', 'err'); return; }
-  if(!confirm('Dit bericht naar je CUSTOM-kanaal sturen?')) return;
-  try{ log('Custom bericht versturen...', 'info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - custom bericht verstuurd.', 'ok'); const e=document.getElementById('customState'); e.textContent='verstuurd'; setTimeout(()=>e.textContent='',1500); }
+  if(!await askConfirm('Dit bericht naar je CUSTOM-kanaal sturen?')) return;
+  try{ log('Custom bericht versturen...', 'info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - custom bericht verstuurd.', 'ok'); showToast('Verzonden naar CUSTOM'); const e=document.getElementById('customState'); e.textContent='verstuurd'; setTimeout(()=>e.textContent='',1500); }
   catch(e){ log('MISLUKT custom: '+e.message, 'err'); }
 }
 function saveAll(silent){
@@ -550,7 +596,7 @@ function updateBet(id, field, val){
   localStorage.setItem('ba_betedits', JSON.stringify(BET_EDITS));
   renderResults(); renderBankroll(); renderShare();
   const auto=document.getElementById('autoShare');
-  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id);
+  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, true);
 }
 function resetBetEdits(){ if(!confirm('Alle handmatige odds/resultaten terugzetten?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
 function renderBetEditor(){
@@ -595,8 +641,8 @@ function renderShare(){
       '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div>';
     wrap.appendChild(div); });
 }
-async function shareOne(id){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; try{ log('Resultaat delen naar VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - resultaat gedeeld in VIP.', 'ok'); renderShare(); }catch(e){ log('MISLUKT VIP-deel: '+e.message, 'err'); } }
-async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('Geen nieuwe afgeronde resultaten om te delen.', 'info'); return; } if(!confirm(s.length+' nieuwe resultaten naar het VIP-kanaal sturen?')) return; for(const r of s){ await shareOne(betId(r)); await new Promise(x=>setTimeout(x,1200)); } log('Klaar met delen.', 'info'); }
+async function shareOne(id, skipConfirm, silentToast){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; if(!skipConfirm && !await askConfirm('Dit resultaat naar je VIP-kanaal delen?')){ log('Geannuleerd.', 'info'); return; } try{ log('Resultaat delen naar VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - resultaat gedeeld in VIP.', 'ok'); renderShare(); if(!silentToast) showToast('Gedeeld in VIP'); }catch(e){ log('MISLUKT VIP-deel: '+e.message, 'err'); showToast('Mislukt: '+e.message, false); } }
+async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('Geen nieuwe afgeronde resultaten om te delen.', 'info'); return; } if(!await askConfirm(s.length+' nieuwe resultaten naar je VIP-kanaal delen?')) return; for(const r of s){ await shareOne(betId(r), true, true); await new Promise(x=>setTimeout(x,1200)); } log('Klaar met delen.', 'info'); showToast(s.length+' resultaten gedeeld in VIP'); }
 
 function renderResults(){
   const data=window.RESULTS||[]; const stake=(window.SETTINGS&&window.SETTINGS.stake)||1; const cur=(window.SETTINGS&&window.SETTINGS.currency)||'u';
@@ -911,7 +957,7 @@ function refreshBetsFilter(){
 function maybeAutoShare(id){
   var r=(window.RESULTS||[]).find(function(x){return betId(x)===id;}); if(!r) return;
   var rr=eff(r).result.toUpperCase(); var auto=document.getElementById('autoShare');
-  if((rr==='W'||rr==='V') && auto && auto.checked && !SHARED[id]) shareOne(id);
+  if((rr==='W'||rr==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, true);
 }
 function updateLeg(id, idx, val){
   var k=id+'|'+idx; var cur=(LEG_RESULTS[k]||'').toUpperCase();
