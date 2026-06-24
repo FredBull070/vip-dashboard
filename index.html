@@ -413,7 +413,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-24-v32";
+var EMBEDDED_VERSION = "2026-06-24-v33";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 24-06-2026**
 
 :soccer: Sport of the day: Football
@@ -476,21 +476,21 @@ Brazil at full flow can pile up goals against a passive Scotland, so a three goa
 **:crown: LUCKY SHOT BET: 24-06-2026**
 
 :small_orange_diamond: Scotland x Brazil: **Brazil -2.5 (Asian handicap) @ 2.30 - 2.70***
-:small_orange_diamond: Scotland x Brazil: **Vinicius Junior anytime scorer @ 2.00 - 2.40***
 :small_orange_diamond: Czechia x Mexico: **Mexico -1.5 (Asian handicap) @ 1.95 - 2.25***
 :small_orange_diamond: Morocco x Haiti: **Over 3.5 goals @ 2.20 - 2.60***
 :small_orange_diamond: South Africa x South Korea: **South Korea -1.5 (Asian handicap) @ 2.40 - 2.80***
 :small_orange_diamond: Bosnia and Herzegovina x Qatar: **Bosnia -2.5 (Asian handicap) @ 3.10 - 3.70***
+:small_orange_diamond: Switzerland x Canada: **Both teams to score @ 1.70 - 1.95***
 
-:moneybag: Total odds: **±147 - 393***
+:moneybag: Total odds: **±125 - 319***
 Odds may vary depending on the bookmaker or the time of placement.
 
 :mortar_board:**Justification:**
-A high risk multi across the day's clearest mismatches, mixing handicaps, a player prop and a goals market. Brazil have the firepower to beat Scotland by three or more and Vinicius is their most likely scorer. Mexico and South Korea are a level above Czechia and South Africa and should win with room to spare. Morocco against a weak Haiti points to a high scoring game, and Bosnia should overrun a Qatar side that has already conceded heavily. Everything must land, but every leg leans on a strong favourite.
+A high risk multi across six different games, one leg each so it combines cleanly, mixing Asian handicaps, a goals line and both teams to score. Brazil, Mexico, South Korea and Bosnia are all a clear level above their opponents and should win with room to spare. Morocco against a weak Haiti points to a high scoring game, and Switzerland v Canada is a meaningful decider that should see goals at both ends. Everything must land, but every leg leans on a strong read.
 
 :bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.`;
 
-var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 1.88, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 147, "result": "pending"}];
+var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 1.88, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 125, "result": "pending"}];
 
 var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
 var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
