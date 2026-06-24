@@ -184,6 +184,9 @@
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .toast .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:0 0 auto;}
   .toast.err .dot{background:var(--red);}
+
+  .chprog{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:14px;}
+  .chprog-bar{height:100%;background:linear-gradient(90deg,#ff7a1a,#ffa04d);border-radius:999px;transition:width .4s;}
 </style>
 </head>
 <body>
@@ -232,6 +235,7 @@
       <button class="nav-item" data-page="results" onclick="showPage('results')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span> Resultaten</button>
       <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> VIP delen</button>
       <button class="nav-item" data-page="bankroll" onclick="showPage('bankroll')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14" r="1.2"/></svg></span> Bankroll</button>
+      <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <div class="nav-sep"></div>
       <button class="nav-item" data-page="edit" onclick="showPage('edit')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> Lijsten</button>
       <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Eigen bericht</button>
@@ -320,6 +324,19 @@
       <div id="bkStats" class="metrics"></div>
     </section>
     </div>
+<div class="page" id="page-challenge" style="display:none">
+    <section class="card">
+      <h2 class="section-title">$10 to $1.000 Challenge</h2>
+      <p class="section-sub">Elke dag de zekerste bet met odd x2 of meer. Win = pot verdubbelt en een dag verder. Verlies = challenge gefaald (de inzet gaat all-in). 18+, speel verantwoord.</p>
+      <div id="challengeStats" class="metrics"></div>
+      <div id="challengeProg"></div>
+    </section>
+    <div id="challengeView"></div>
+    <section class="card">
+      <h2 class="section-title">Verdubbel-schema</h2>
+      <div class="tablewrap"><table id="challengeSchedule"><thead><tr><th>Dag</th><th>Inzet</th><th>Doel bij winst</th></tr></thead><tbody></tbody></table></div>
+    </section>
+    </div>
 <div class="page" id="page-edit" style="display:none">
     <section class="card">
       <h2 class="section-title">Lijsten bewerken</h2>
@@ -360,7 +377,7 @@
         <div class="field"><label>LUCKY SHOT kanaal</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS kanaal</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET kanaal</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM kanaal</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div>
+        <div class="field"><label>CUSTOM kanaal</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE kanaal ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div>
       </div>
       <div class="grid2" style="margin-top:14px;">
         <div class="field"><label>VIP-link voor {VIP_LINK}: invite-link, kanaal-link of kanaal-ID</label><input type="text" id="vip_link" placeholder="https://discord.gg/... of kanaal-link / kanaal-ID"></div>
@@ -396,7 +413,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-24-v30";
+var EMBEDDED_VERSION = "2026-06-24-v32";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 24-06-2026**
 
 :soccer: Sport of the day: Football
@@ -458,20 +475,22 @@ Brazil at full flow can pile up goals against a passive Scotland, so a three goa
 ===NEXT MESSAGE===
 **:crown: LUCKY SHOT BET: 24-06-2026**
 
-:small_orange_diamond: Scotland x Brazil: **Brazil -2.5 @ 2.30 - 2.70***
-:small_orange_diamond: Czechia x Mexico: **Mexico -2.5 @ 3.00 - 3.50***
-:small_orange_diamond: Morocco x Haiti: **Morocco -2.5 @ 2.50 - 3.00***
-:small_orange_diamond: Bosnia and Herzegovina x Qatar: **Bosnia -1.5 @ 1.90 - 2.20***
+:small_orange_diamond: Scotland x Brazil: **Brazil -2.5 (Asian handicap) @ 2.30 - 2.70***
+:small_orange_diamond: Scotland x Brazil: **Vinicius Junior anytime scorer @ 2.00 - 2.40***
+:small_orange_diamond: Czechia x Mexico: **Mexico -1.5 (Asian handicap) @ 1.95 - 2.25***
+:small_orange_diamond: Morocco x Haiti: **Over 3.5 goals @ 2.20 - 2.60***
+:small_orange_diamond: South Africa x South Korea: **South Korea -1.5 (Asian handicap) @ 2.40 - 2.80***
+:small_orange_diamond: Bosnia and Herzegovina x Qatar: **Bosnia -2.5 (Asian handicap) @ 3.10 - 3.70***
 
-:moneybag: Total odds: **±33 - 62***
+:moneybag: Total odds: **±147 - 393***
 Odds may vary depending on the bookmaker or the time of placement.
 
 :mortar_board:**Justification:**
-An all out combo: Brazil, Mexico and Morocco all running up big winning margins against weaker sides, plus Bosnia brushing aside a Qatar team that has already shipped goals heavily. High risk, high reward, fun money only.
+A high risk multi across the day's clearest mismatches, mixing handicaps, a player prop and a goals market. Brazil have the firepower to beat Scotland by three or more and Vinicius is their most likely scorer. Mexico and South Korea are a level above Czechia and South Africa and should win with room to spare. Morocco against a weak Haiti points to a high scoring game, and Bosnia should overrun a Qatar side that has already conceded heavily. Everything must land, but every leg leans on a strong favourite.
 
 :bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.`;
 
-var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 1.88, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 33, "result": "pending"}];
+var EMBEDDED_RESULTS = [{"date": "2026-06-24", "sport": "Football", "list": "LOW", "odds": 1.88, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "MID", "odds": 3.15, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "HIGH", "odds": 6.84, "result": "pending"}, {"date": "2026-06-24", "sport": "Football", "list": "LUCKY SHOT", "odds": 147, "result": "pending"}];
 
 var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
 var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
@@ -578,6 +597,7 @@ function saveAll(silent){
   localStorage.setItem('ba_hook_RESULTS', getHook('RESULTS'));
   localStorage.setItem('ba_hook_FREE', getHook('FREE'));
   localStorage.setItem('ba_hook_CUSTOM', getHook('CUSTOM'));
+  localStorage.setItem('ba_hook_CHALLENGE', getHook('CHALLENGE'));
   var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
   localStorage.setItem('ba_vip_link', vipLink());
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
@@ -718,6 +738,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const rHook=localStorage.getItem('ba_hook_RESULTS'); if(rHook!==null) document.getElementById('hook_RESULTS').value=rHook;
     const fHook=localStorage.getItem('ba_hook_FREE'); if(fHook!==null) document.getElementById('hook_FREE').value=fHook;
     const cHook=localStorage.getItem('ba_hook_CUSTOM'); if(cHook!==null) document.getElementById('hook_CUSTOM').value=cHook;
+    const chHook=localStorage.getItem('ba_hook_CHALLENGE'); if(chHook!==null && document.getElementById('hook_CHALLENGE')) document.getElementById('hook_CHALLENGE').value=chHook;
     const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
@@ -751,6 +772,7 @@ var PAGE_META={
   results:["Resultaten","Overzicht van je afgeronde lijsten en P/L."],
   vip:["VIP delen","Deel resultaten als wervende kaart naar je VIP-kanaal."],
   bankroll:["Bankroll","Risk management en aanbevolen inzetten per bet-type."],
+  challenge:["Challenges","$10 to $1.000: de zekerste x2-bet van de dag, met dag-tracker."],
   edit:["Lijsten","Bewerk de berichten van vandaag."],
   custom:["Eigen bericht","Vrije tekst naar je CUSTOM-kanaal."],
   archive:["Archief","Bekijk eerdere dagen terug."],
@@ -769,6 +791,7 @@ function showPage(id){
   var cc=document.getElementById('crumbCurrent'); if(cc)cc.textContent=meta[0];
   closeSidebar();
   if(id==='bankroll' && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
+  if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   try{ window.scrollTo(0,0); }catch(e){}
 }
 
@@ -829,7 +852,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
 function exportSettings(){
-  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -843,7 +866,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
     var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
@@ -971,6 +994,88 @@ if(typeof updateBet==='function'){ var _origUpdateBet=updateBet; updateBet=funct
 document.addEventListener('click', function(e){ var b=e.target.closest?e.target.closest('[data-leg]'):null; if(!b) return; updateLeg(b.getAttribute('data-leg'), parseInt(b.getAttribute('data-idx'),10), b.getAttribute('data-val')); });
 (function(){ var be=document.getElementById('betEditor'); if(!be) return; be.addEventListener('change', function(e){ var t=e.target; if(t.getAttribute&&t.getAttribute('data-bet-odds')!=null){ updateBet(t.getAttribute('data-bet-odds'),'odds',t.value); } else if(t.getAttribute&&t.getAttribute('data-bet-res')!=null){ updateBet(t.getAttribute('data-bet-res'),'result',t.value); } }); })();
 renderBetEditor(); renderResults(); renderBankroll(); renderShare();
+
+
+/* ---- $10 to $1K Challenge ---- */
+var EMBEDDED_CHALLENGE = {
+  date: "2026-06-24",
+  legs: ["Scotland x Brazil: Brazil to win @ 1.33 - 1.40", "Czechia x Mexico: Mexico to win @ 1.55 - 1.70"],
+  oddLow: 2.06, oddHigh: 2.38,
+  justification: "Brazil are far stronger than Scotland and should win comfortably, while Mexico have home support and more quality than Czechia. Two clear favourites in separate games for a safe x2."
+};
+var CH;
+try{ CH=JSON.parse(localStorage.getItem('ba_challenge')||'null'); }catch(e){ CH=null; }
+if(!CH || typeof CH!=='object'){ CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] }; }
+function saveCH(){ localStorage.setItem('ba_challenge', JSON.stringify(CH)); }
+function fmtUSD(n){ return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function buildChallengeMessage(){
+  var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
+  var lines=(ec.legs||[]).map(function(L){ var p=L.split(': '); if(p.length>=2){ return ':small_orange_diamond: '+p[0]+': **'+p.slice(1).join(': ')+'**'; } return ':small_orange_diamond: '+L; }).join('\n');
+  return ':dart: **$10 TO $1K CHALLENGE - DAG '+CH.day+'/8**\n\n'+
+    ':moneybag: Inzet vandaag: **'+fmtUSD(CH.pot)+'**  |  Doel bij winst: **'+fmtUSD(payout)+'**\n\n'+
+    lines+'\n\n'+
+    ':moneybag: Total odds: **± '+(ec.oddLow||2)+' - '+(ec.oddHigh||ec.oddLow||2)+'**\n'+
+    'Odds may vary depending on the bookmaker or the time of placement.\n\n'+
+    ':mortar_board:**Justification:**\n'+(ec.justification||'')+'\n\n'+
+    ':warning: 18+ | play responsibly';
+}
+function challengeHistoryHtml(){
+  if(!CH.history.length) return '';
+  var rows=CH.history.map(function(x){ return '<tr><td>Dag '+x.day+'</td><td>'+x.date+'</td><td>'+x.odd+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Gewonnen</span>':'<span class="badge b-v">Verloren</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td></tr>'; }).join('');
+  return '<section class="card"><h2 class="section-title">Historie</h2><div class="tablewrap"><table><thead><tr><th>Dag</th><th>Datum</th><th>Odd</th><th>Resultaat</th><th>Pot</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+}
+function renderChallenge(){
+  var st=document.getElementById('challengeStats'); if(!st) return;
+  var pct=Math.min(100, Math.round(CH.pot/CH.target*100));
+  st.innerHTML='<div class="stat"><div class="v">Dag '+CH.day+' / 8</div><div class="l">Challenge dag</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.pot)+'</div><div class="l">Huidige pot</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.target)+'</div><div class="l">Doel</div></div>'+
+    '<div class="stat"><div class="v">'+pct+'%</div><div class="l">Voortgang</div></div>';
+  var pr=document.getElementById('challengeProg'); if(pr) pr.innerHTML='<div class="chprog"><div class="chprog-bar" style="width:'+pct+'%"></div></div>';
+  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=8; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Dag '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
+  var v=document.getElementById('challengeView'); if(!v) return;
+  if(CH.status==='failed'){
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Dag '+CH.day+'. De pot is verloren (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="challengeRestart()">Start nieuwe challenge ($10, Dag 1)</button></div></section>'+challengeHistoryHtml();
+    return;
+  }
+  if(CH.status==='won' || CH.pot>=CH.target){
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge gehaald! Eindpot: '+fmtUSD(CH.pot)+'. Gefeliciteerd.</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="challengeRestart()">Start nieuwe challenge</button></div></section>'+challengeHistoryHtml();
+    return;
+  }
+  var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
+  v.innerHTML='<section class="card">'+
+    '<div class="card-head"><h2 class="section-title">Challenge bet - Dag '+CH.day+'</h2><span class="pill">inzet '+fmtUSD(CH.pot)+'</span></div>'+
+    '<p class="section-sub">Doel bij winst: <strong style="color:var(--text)">'+fmtUSD(payout)+'</strong> bij odd x'+(ec.oddLow||2)+' of meer. Mijn zekerste keuze van vandaag.</p>'+
+    '<div class="disc">'+renderDiscord(buildChallengeMessage())+'</div>'+
+    '<div class="actions">'+
+      '<button class="btn" onclick="sendChallenge()">Verstuur naar Challenge-kanaal</button>'+
+      '<button class="btn-secondary" onclick="challengeWin()">Gewonnen</button>'+
+      '<button class="btn-secondary" onclick="challengeLoss()">Verloren</button>'+
+    '</div></section>'+challengeHistoryHtml();
+}
+function challengeWin(){
+  var ec=EMBEDDED_CHALLENGE; var odd=ec.oddLow||2; var after=Math.round(CH.pot*odd*100)/100;
+  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+odd, result:'W', potAfter:after});
+  CH.pot=after;
+  if(CH.pot>=CH.target){ CH.status='won'; } else { CH.day=CH.day+1; }
+  saveCH(); renderChallenge(); showToast('Gewonnen! Pot nu '+fmtUSD(CH.pot));
+}
+function challengeLoss(){
+  var ec=EMBEDDED_CHALLENGE;
+  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+(ec.oddLow||2), result:'V', potAfter:0});
+  CH.status='failed'; saveCH(); renderChallenge(); showToast('Challenge gefaald', false);
+}
+function challengeRestart(){
+  if(!confirm('Nieuwe challenge starten? De huidige historie wordt gewist.')) return;
+  CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] };
+  saveCH(); renderChallenge(); showToast('Nieuwe challenge gestart');
+}
+async function sendChallenge(){
+  if(!await askConfirm('Challenge bet van Dag '+CH.day+' naar je Challenge-kanaal sturen?')){ log('Geannuleerd.','info'); return; }
+  try{ log('Challenge bet versturen...','info'); await postToDiscord(applyTokens(buildChallengeMessage()), getHook('CHALLENGE')); log('OK - challenge verstuurd.','ok'); showToast('Verzonden naar Challenge'); }
+  catch(e){ log('MISLUKT challenge: '+e.message,'err'); showToast('Mislukt: '+e.message, false); }
+}
+if(document.getElementById('challengeStats')) renderChallenge();
 
 showPage('today');
 
