@@ -97,6 +97,11 @@
     background:var(--surface);color:var(--muted);}
   .banner.ok{border-color:rgba(48,209,88,.28);background:rgba(48,209,88,.08);color:#8fe3a9;display:inline-flex;align-items:center;gap:9px;padding:7px 14px;font-size:13px;}
   .st-dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 8px rgba(48,209,88,.55);display:inline-block;flex:0 0 auto;}
+  .top-status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#8fe3a9;background:rgba(48,209,88,.08);border:1px solid rgba(48,209,88,.25);padding:5px 12px;border-radius:999px;white-space:nowrap;}
+  .top-status:empty{display:none;}
+  .top-status.warn{color:#f0c662;background:rgba(245,184,41,.08);border-color:rgba(245,184,41,.28);}
+  .top-status.err{color:#ff9a92;background:rgba(255,69,58,.09);border-color:rgba(255,69,58,.3);}
+  @media(max-width:680px){ .top-status{display:none;} }
   .banner.warn{border-color:rgba(245,184,41,.3);background:rgba(245,184,41,.08);color:#f0c662;}
   .banner.err{border-color:rgba(255,69,58,.3);background:rgba(255,69,58,.09);color:#ff9a92;}
 
@@ -326,7 +331,8 @@
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
   <div class="crumbs"><span class="crumb-muted">BetLife365</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
-  <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:auto;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
+  <div class="top-status" id="topStatus" style="margin-left:auto;"></div>
+  <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:14px;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
   <span class="logo-badge" style="margin-left:13px;"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
 </header>
 <div id="notifPanel" class="notif-panel" style="display:none;"></div>
@@ -367,7 +373,6 @@
         <p class="page-sub" id="pageSub">Today's lists, grouped and ready to send to your channels.</p>
       </div>
       <div class="subbar" id="subbar" style="display:none;"></div>
-      <div id="status" class="banner">Loading...</div>
       <div class="page" id="page-today">
   <div id="today-bets">
 
@@ -687,7 +692,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v71";
+var EMBEDDED_VERSION = "2026-06-25-v72";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -754,7 +759,7 @@ const EMOJI = {
 
 let messages = [];
 
-function setStatus(msg, cls){ const el=document.getElementById('status'); if(!el) return; el.className=cls||''; el.innerHTML=msg; }
+function setStatus(msg, cls){ var el=document.getElementById('topStatus'); if(!el) return; el.className='top-status '+(cls||''); el.innerHTML=msg; }
 function log(msg, cls){ const el=document.getElementById('log'); if(!el) return; const t=new Date().toLocaleTimeString('nl-NL'); el.innerHTML += '\n<span class="'+(cls||'')+'">['+t+'] '+msg+'</span>'; el.scrollTop=el.scrollHeight; }
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(k).join(EMOJI[k]); } s=s.replace(/&lt;#\d+&gt;/g,'<span class="chan">#vip-upgrade</span>'); return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
