@@ -525,7 +525,7 @@
       <h2 class="section-title" style="margin-bottom:12px;">Import / Export</h2>
       <p class="section-sub" style="margin-top:18px;">Move settings to another device (e.g. your phone): click Export, copy the code, and paste it on your phone under Import.</p>
       <textarea id="cfg_code" spellcheck="false" placeholder="Settings code appears here on Export / paste your code here to Import" style="min-height:70px;"></textarea>
-      <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Export settings</button><button class="btn-secondary" onclick="importSettings()">Import settings</button><span id="cfgState"></span></div>
+      <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Export settings</button><button class="btn-secondary" onclick="importSettings()">Import settings</button><span id="cfgState"></span></div><p class="section-sub" style="margin-top:16px;">Full backup includes <b>everything</b> (track record, graded results, archive, challenge, webhooks and settings). Keep the code somewhere safe, or paste it into your Notion backup page. Restore it on any device to get all your data back.</p><div class="actions"><button class="btn" onclick="exportFull()">Full backup (all data)</button><button class="btn-secondary" onclick="importFull()">Restore full backup</button></div>
       </div>
     </section>
     </div>
@@ -567,7 +567,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v41";
+var EMBEDDED_VERSION = "2026-06-25-v42";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1559,6 +1559,25 @@ async function sendPerf(){
   if(!await askConfirm('Send the '+TR_PERIOD+' performance snapshot to your Track Record channel?')){ log('Cancelled.','info'); return; }
   try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('TRACK')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
   catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
+
+
+/* ---- Full backup / restore ---- */
+function exportFull(){
+  var o={}; for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k && k.indexOf('ba_')===0) o[k]=localStorage.getItem(k); }
+  var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+  var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
+  try{ navigator.clipboard.writeText(code); }catch(e){}
+  log('Full backup created and copied to clipboard ('+code.length+' chars).','ok');
+  if(typeof showToast==='function') showToast('Full backup copied');
+}
+function importFull(){
+  var ta=document.getElementById('cfg_code'); var code=ta?(ta.value||'').trim():'';
+  if(!code){ if(typeof showToast==='function') showToast('Paste a backup code first', false); return; }
+  if(!confirm('Restore this backup? It overwrites the data currently in this browser.')) return;
+  try{ var o=JSON.parse(decodeURIComponent(escape(atob(code)))); Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
+    if(typeof showToast==='function') showToast('Backup restored, reloading...'); setTimeout(function(){ try{ location.reload(); }catch(e){} },1200);
+  }catch(e){ if(typeof showToast==='function') showToast('Invalid backup code', false); }
 }
 
 showPage('today');
