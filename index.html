@@ -586,23 +586,34 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v57";
-var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
-
+var EMBEDDED_VERSION = "2026-06-25-v58";
+var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY | 25-06-2026**
 :soccer: Sport of the day: Football
 
-:small_orange_diamond: Tunisia x Netherlands: **Netherlands to win @ 1.07***
-:small_orange_diamond: Curacao x Ivory Coast: **Ivory Coast to win @ 1.14***
-:small_orange_diamond: Ecuador x Germany: **Germany to win @ 1.65 - 1.80***
+Today's free pick, straight from the VIP slate. Exactly what we are on and why:
 
-:moneybag: Total odds: **±2.01 - 2.20***
+**:small_orange_diamond: Tunisia x Netherlands**
+Netherlands to win (match result) @ 1.07*
+↳ Netherlands win the match in normal time.
+
+**:small_orange_diamond: Curacao x Ivory Coast**
+Ivory Coast to win (match result) @ 1.14*
+↳ Ivory Coast win the match in normal time.
+
+**:small_orange_diamond: Ecuador x Germany**
+Germany to win (match result) @ 1.65 - 1.80*
+↳ Germany win the match in normal time.
+
+**:moneybag: Total odds: ±2.01 - 2.20***
 Odds may vary depending on the bookmaker or the time of placement.
 
-:mortar_board:**Justification:**
-The Netherlands and Ivory Coast are heavy favourites against weak opponents (Tunisia and the tournament's smallest nation Curacao) and should win. Germany are already through and may rotate, but Ecuador have failed to score in two games and lost their main creator, so Germany should still have enough. Two near certainties plus a strong favourite.
+**:mortar_board: Strategy Breakdown:**
+The Netherlands and Ivory Coast are heavy favourites against weak opponents and should win. Germany are already through and may rotate, but a toothless Ecuador have failed to score in two games, so Germany should still have enough.
 
-:fire: This is today's free LOW pick, exactly as shared in VIP. Members also get the MID, HIGH and lucky shot lists across their private channels.
-:trophy: Unlock the full daily slate plus bankroll plan in VIP: <#1087875037903724656>
+━━━━━━━━━━━━
+:green_circle: This is only our **Safe Builder**, the lowest risk play. VIP members also got the Value Builder, the Jackpot Builder, the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
+:chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
+:rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly
 ===NEXT MESSAGE===
 **🟢 #1 Safe Builder Parley: 25-06-2026**
@@ -846,7 +857,7 @@ function updateBet(id, field, val){
   localStorage.setItem('ba_betedits', JSON.stringify(BET_EDITS));
   renderResults(); renderBankroll(); renderShare();
   const auto=document.getElementById('autoShare');
-  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, true);
+  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, false);
 }
 function resetBetEdits(){ if(!confirm('Reset all manual odds/results?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
 function renderBetEditor(){
@@ -971,6 +982,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const chHook=localStorage.getItem('ba_hook_CHALLENGE'); if(chHook!==null && document.getElementById('hook_CHALLENGE')) document.getElementById('hook_CHALLENGE').value=chHook;
     const caHook=localStorage.getItem('ba_hook_CARDS'); if(caHook!==null && document.getElementById('hook_CARDS')) document.getElementById('hook_CARDS').value=caHook;
     const trHook=localStorage.getItem('ba_hook_TRACK'); if(trHook!==null && document.getElementById('hook_TRACK')) document.getElementById('hook_TRACK').value=trHook;
+    const edHook=localStorage.getItem('ba_hook_EDU'); if(edHook!==null && document.getElementById('hook_EDU')) document.getElementById('hook_EDU').value=edHook;
     const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
@@ -1084,6 +1096,7 @@ function showPage(id){
   if((id==='journal'||id==='bankroll') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
+  try{ if(id) localStorage.setItem('ba_page', id); }catch(e){}
   try{ window.scrollTo(0,0); }catch(e){}
 }
 
@@ -1190,27 +1203,32 @@ function buildResultCard(r){
     ':bulb: Off days happen. The winners more than cover them, and VIP gets the safe daily LOW bankers plus full bankroll staking. Join: '+cta+'\n'+
     ':warning: 18+ | play responsibly';
 }
-function trRecord(){ var w=0,l=0,u=0; var src=[]; try{ if(typeof TR!=='undefined'&&TR) src=TR; }catch(e){} src.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W'){w++;u+=trPL(e);} else if(r==='L'){l++;u+=trPL(e);} }); return {w:w,l:l,u:u}; }
+function trRecord(){ var w=0,l=0,u=0,st=0; var src=[]; try{ if(typeof TR!=='undefined'&&TR) src=TR; }catch(e){} src.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W'||r==='L'){ st+=parseFloat(e.stake)||0; u+=trPL(e); if(r==='W')w++; else l++; } }); var roi=st?(u/st*100):0; return {w:w,l:l,u:u,st:st,roi:roi}; }
 function buildTrackCard(e){
   var res=(e.result||'').toUpperCase(); var o=parseFloat(e.odds)||0; var st=parseFloat(e.stake)||0; var pl=trPL(e);
-  var rec=trRecord(); var recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
+  var rec=trRecord(); var recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u'; var recR=(rec.roi>=0?'+':'')+rec.roi.toFixed(1)+'%';
+  var recLine=':bar_chart: Verified record: **'+rec.w+'W-'+rec.l+'L · '+recU+' · '+recR+' ROI**';
   var ch=(typeof vipChannelOut==='function')?vipChannelOut():''; var link=(typeof vipLink==='function')?vipLink():''; var cta=ch||link||'(set your VIP link under Settings)';
-  var head='**:small_orange_diamond: '+(e.match||'')+'**\n'+(e.selection||'')+(o?' @ '+o.toFixed(2):'')+'\n';
+  var line='━━━━━━━━━━━━';
+  var head='🏟️ '+(e.match||'')+'\n:dart: **'+(e.selection||'')+'**'+(o?' @ '+o.toFixed(2):'')+'\n';
   if(res==='W'){
-    return ':trophy: **WINNER | '+(e.sport||'')+' | '+(e.date||'')+'** :white_check_mark:\n'+head+
-      ':moneybag: '+st+'u landed at **'+o.toFixed(2)+'** for **+'+pl.toFixed(2)+'u**\n'+
-      ':chart_with_upwards_trend: Verified record: **'+rec.w+'W-'+rec.l+'L, '+recU+'**\n'+
-      ':fire: This dropped in VIP before kickoff. Get the next full slate first: '+cta+'\n'+
+    return ':green_circle::white_check_mark: **WINNER** | BetLife365\n'+(e.sport||'')+'  ·  '+(e.date||'')+'\n\n'+head+
+      ':moneybag: '+st+'u → **+'+pl.toFixed(2)+'u** profit\n\n'+
+      line+'\n'+recLine+'\n'+
+      ':green_circle: Every pick logged here, winners and losers. Fully transparent, no cherry picking.\n'+
+      ':fire: This landed in VIP before kickoff, with the exact stake.\n'+
+      ':rocket: Tired of watching the wins from outside? Get every pick first in VIP: '+cta+'\n'+
       ':warning: 18+ | play responsibly';
   }
   if(res==='V'){
-    return '⚪ **VOID | '+(e.sport||'')+' | '+(e.date||'')+'**\n'+head+
-      ':chart_with_upwards_trend: Stake returned. Running: **'+recU+'**\n'+
+    return '⚪ **VOID** | BetLife365\n'+(e.sport||'')+'  ·  '+(e.date||'')+'\n\n'+head+
+      ':moneybag: Stake returned.\n\n'+line+'\n'+recLine+'\n'+
       ':bulb: Full picks and bankroll plan in VIP: '+cta+'\n:warning: 18+ | play responsibly';
   }
-  return ':x: **Settled | '+(e.sport||'')+' | '+(e.date||'')+'**\n'+head+
-    ':chart_with_upwards_trend: We post **every** result, win or lose. Running: **'+recU+'** over '+(rec.w+rec.l)+' settled bets.\n'+
-    ':bulb: Off days happen, the winners more than cover them. VIP gets the full daily slate plus bankroll staking: '+cta+'\n'+
+  return ':red_circle: **Settled** | BetLife365\n'+(e.sport||'')+'  ·  '+(e.date||'')+'\n\n'+head+
+    'No luck this time.\n\n'+line+'\n'+recLine+'\n'+
+    ':green_circle: We post **every** result, win or lose. That is what real transparency looks like.\n'+
+    ':bulb: The winners more than cover the misses. VIP gets every pick before kickoff plus the full bankroll plan: '+cta+'\n'+
     ':warning: 18+ | play responsibly';
 }
 async function shareTrackOne(id, skipConfirm, silentToast){
@@ -1304,7 +1322,7 @@ function refreshBetsFilter(){
 function maybeAutoShare(id){
   var r=(window.RESULTS||[]).find(function(x){return betId(x)===id;}); if(!r) return;
   var rr=eff(r).result.toUpperCase(); var auto=document.getElementById('autoShare');
-  if((rr==='W'||rr==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, true);
+  if((rr==='W'||rr==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, false);
 }
 function updateLeg(id, idx, val){
   var k=id+'|'+idx; var cur=(LEG_RESULTS[k]||'').toUpperCase();
@@ -1588,7 +1606,7 @@ function trPL(e){ var o=parseFloat(e.odds)||0, s=parseFloat(e.stake)||0; var r=(
 function trNum(x){ return Math.round((x||0)*100)/100; }
 function trUnit(x){ x=trNum(x); return (x>=0?'+':'')+x.toFixed(2)+'u'; }
 function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); }
-function setTrResult(id, val){ setTrField(id,'result',val); }
+function setTrResult(id, val){ setTrField(id,'result',val); var auto=document.getElementById('autoShare'); var u=(val||'').toUpperCase(); if(auto && auto.checked && (u==='W'||u==='L'||u==='V') && !SHARED['tr'+id]){ if(typeof shareTrackOne==='function') shareTrackOne(id, false, false); } }
 function delTrack(id){ TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); }
 function renderTrack(filter){
   filter=filter||CUR_SUB.trackrecord||'all';
@@ -2606,7 +2624,7 @@ async function sendEdu(i){
   if(await askConfirm('Sent. Remove this post from the dashboard so you do not send it again?')){ removeEduTitle(eduTitle(p.body)); renderEdu(CUR_SUB['education']); showToast('Post removed from dashboard'); }
 }
 
-showPage('today');
+showPage((function(){ try{ var p=localStorage.getItem('ba_page'); return p||'today'; }catch(e){ return 'today'; } })());
 try{ renderEdu(); }catch(e){}
 </script>
 </body>
