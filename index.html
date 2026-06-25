@@ -520,6 +520,7 @@
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
         <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div><div class="field"><label>EDUCATION channel</label><input type="text" id="hook_EDU" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('EDU')">Test</button></div></div>
       </div>
+      <div class="actions" style="margin-top:8px;"><button class="btn" onclick="saveAll()">Save channels</button></div>
       </div>
       <div id="set-vip" style="display:none">
       <h2 class="section-title" style="margin-bottom:12px;">VIP &amp; links</h2>
@@ -575,7 +576,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v48";
+var EMBEDDED_VERSION = "2026-06-25-v49";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -796,7 +797,7 @@ function saveAll(silent){
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
   const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
   localStorage.setItem('ba_messages', document.getElementById('raw').value);
-  if(!silent){ const e=document.getElementById('saveState'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
+  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } if(typeof showToast==='function') showToast('Settings saved'); }
 }
 function resetDefault(){ if(!confirm('Reset to the default lists?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
 
@@ -1828,28 +1829,36 @@ A downswing is not a problem with your system. It is a normal feature of a proba
 📈 Hold the line through variance and the edge always pays in the end.`.split('===EDU===').map(function(s){ s=s.trim(); var nl=s.indexOf('\n'); var head=s.slice(0,nl).trim().replace(/@/g,''); var body=s.slice(nl+1).trim(); return {cat:head, body:body}; });
 
 function eduTitle(b){ var f=(b.split('\n')[0]||'').replace(/\*\*/g,''); var i=f.indexOf('| '); return i>-1? f.slice(i+2): f; }
+function getEduRemoved(){ try{ return JSON.parse(localStorage.getItem('ba_edu_removed')||'[]'); }catch(e){ return []; } }
+function eduIsRemoved(b){ return getEduRemoved().indexOf(eduTitle(b))>-1; }
+function setEduRemoved(arr){ localStorage.setItem('ba_edu_removed', JSON.stringify(arr)); }
+function removeEduTitle(ti){ var r=getEduRemoved(); if(r.indexOf(ti)===-1){ r.push(ti); setEduRemoved(r); } }
+function removeEdu(i){ var p=EDU[i]; if(!p) return; removeEduTitle(eduTitle(p.body)); renderEdu(CUR_SUB['education']); if(typeof showToast==='function') showToast('Removed from dashboard'); }
+function restoreEdu(){ localStorage.removeItem('ba_edu_removed'); renderEdu(CUR_SUB['education']); if(typeof showToast==='function') showToast('Removed posts restored'); }
 function renderEdu(sub){
   var box=document.getElementById('eduList'); if(!box) return;
   var cat=sub||CUR_SUB['education']||'mindset';
-  var hk=getHook('EDU');
+  var hk=getHook('EDU'); var removed=getEduRemoved();
   var html='';
   if(!hk){ html+='<section class="card" style="margin-bottom:14px;"><p class="section-sub" style="margin:0;">Tip: add your <b>EDUCATION</b> webhook in Settings &gt; Channels so you can send these straight to your education channel.</p></section>'; }
+  if(removed.length){ html+='<div class="actions" style="margin:0 0 12px;"><button class="btn-secondary mini" onclick="restoreEdu()">Restore removed posts ('+removed.length+')</button></div>'; }
   var n=0;
-  for(var i=0;i<EDU.length;i++){ if(EDU[i].cat!==cat) continue; n++;
+  for(var i=0;i<EDU.length;i++){ if(EDU[i].cat!==cat) continue; var ti=eduTitle(EDU[i].body); if(removed.indexOf(ti)>-1) continue; n++;
     html+='<section class="card" style="margin-bottom:14px;">'
-      + '<div class="actions" style="justify-content:space-between;margin:0 0 10px;"><span class="muted-sm" style="margin:0;font-weight:600;">'+eduTitle(EDU[i].body)+'</span></div>'
+      + '<div class="actions" style="justify-content:space-between;margin:0 0 10px;"><span class="muted-sm" style="margin:0;font-weight:600;">'+ti+'</span></div>'
       + '<div class="disc">'+renderDiscord(applyTokens(EDU[i].body))+'</div>'
-      + '<div class="actions"><button class="btn" onclick="sendEdu('+i+')">Send to Education channel</button></div>'
+      + '<div class="actions"><button class="btn" onclick="sendEdu('+i+')">Send to Education channel</button><button class="btn-ghost mini" onclick="removeEdu('+i+')">Remove</button></div>'
       + '</section>';
   }
-  if(!n) html+='<section class="card"><p class="section-sub" style="margin:0;">No posts in this category yet.</p></section>';
+  if(!n) html+='<section class="card"><p class="section-sub" style="margin:0;">No posts left in this category. Use Restore removed posts if you want them back.</p></section>';
   box.innerHTML=html;
 }
 async function sendEdu(i){
   var p=EDU[i]; if(!p) return;
   if(!await askConfirm('Send this education post to your Education channel?')){ log('Cancelled.','info'); return; }
   try{ log('Sending education post...','info'); await postToDiscord(applyTokens(p.body), getHook('EDU')); log('OK - education post sent.','ok'); showToast('Education post sent'); }
-  catch(e){ log('FAILED education: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+  catch(e){ log('FAILED education: '+e.message,'err'); showToast('Failed: '+e.message,false); return; }
+  if(await askConfirm('Sent. Remove this post from the dashboard so you do not send it again?')){ removeEduTitle(eduTitle(p.body)); renderEdu(CUR_SUB['education']); showToast('Post removed from dashboard'); }
 }
 
 showPage('today');
