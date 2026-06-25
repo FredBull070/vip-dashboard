@@ -32,6 +32,17 @@
   .crumbs{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;}
   .crumb-muted{color:var(--muted);} .crumb-sep{color:var(--muted);opacity:.55;}
   .crumb-cur{color:var(--text);}
+  .notif-btn{position:relative;font-size:17px;line-height:1;}
+  .notif-badge{position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:#ff7a1a;color:#15150f;font-size:10px;font-weight:800;line-height:16px;text-align:center;}
+  .notif-panel{position:fixed;top:56px;right:14px;width:382px;max-width:calc(100vw - 24px);max-height:80vh;overflow-y:auto;background:#15151a;border:1px solid rgba(255,255,255,.1);border-radius:14px;box-shadow:0 18px 54px rgba(0,0,0,.6);z-index:140;padding:12px;}
+  .notif-head-row{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 12px;}
+  .notif-head-row b{font-size:14.5px;}
+  .notif-empty{color:var(--muted);font-size:13px;padding:20px;text-align:center;}
+  .notif-item{border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:11px;margin-bottom:10px;background:rgba(255,255,255,.025);}
+  .notif-item .nt-title{font-weight:700;font-size:13.5px;}
+  .notif-item .nt-sub{color:var(--muted);font-size:11.5px;margin-bottom:9px;}
+  .notif-item .nt-prev{max-height:160px;overflow-y:auto;border-radius:8px;margin:0 0 9px;font-size:12px;background:rgba(0,0,0,.25);padding:8px 10px;}
+  .notif-item .nt-actions{display:flex;gap:7px;flex-wrap:wrap;}
   .brand-mark{margin-left:auto;width:27px;height:27px;border-radius:8px;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(135deg,#ff7a1a,#ffa04d);color:#fff;font-size:14px;font-weight:800;box-shadow:0 0 18px rgba(255,122,26,.55);}
 
@@ -289,8 +300,10 @@
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
   <div class="crumbs"><span class="crumb-muted">BetLife365</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
-  <span class="logo-badge"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
+  <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:auto;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
+  <span class="logo-badge" style="margin-left:13px;"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
 </header>
+<div id="notifPanel" class="notif-panel" style="display:none;"></div>
 
 <div class="shell">
   <div class="side-backdrop" id="sideBackdrop" onclick="closeSidebar()"></div>
@@ -586,7 +599,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v58";
+var EMBEDDED_VERSION = "2026-06-25-v59";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY | 25-06-2026**
 :soccer: Sport of the day: Football
 
@@ -813,7 +826,7 @@ function showToast(msg, ok){
   t.classList.add('show');
   clearTimeout(_toastT); _toastT=setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
-async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Send message '+(i+1)+' to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Message '+(i+1)+' to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - message '+(i+1)+' sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent to '+catLabel(cat)); }catch(e){ log('FAILED bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Send message '+(i+1)+' to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Message '+(i+1)+' to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - message '+(i+1)+' sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent to '+catLabel(cat)); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('No messages loaded.', 'err'); return; }
   if(!await askConfirm('Alle '+messages.length+' messages, each to its own channel?')){ log('Cancelled.', 'info'); return; }
@@ -1097,6 +1110,7 @@ function showPage(id){
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
   try{ if(id) localStorage.setItem('ba_page', id); }catch(e){}
+  try{ renderNotifs(); }catch(e){}
   try{ window.scrollTo(0,0); }catch(e){}
 }
 
@@ -1234,7 +1248,7 @@ function buildTrackCard(e){
 async function shareTrackOne(id, skipConfirm, silentToast){
   var e=null; try{ e=(TR||[]).find(function(x){return x.id===id;}); }catch(err){} if(!e) return;
   if(!skipConfirm && !await askConfirm('Share this result to your VIP results channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sharing result...','info'); await postToDiscord(buildTrackCard(e), getHook('RESULTS')); SHARED['tr'+id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - result shared.','ok'); renderShare(); if(!silentToast) showToast('Shared to VIP'); }
+  try{ log('Sharing result...','info'); await postToDiscord(buildTrackCard(e), getHook('RESULTS')); SHARED['tr'+id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - result shared.','ok'); renderShare(); try{ renderNotifs(); }catch(_e){} if(!silentToast) showToast('Shared to VIP'); }
   catch(err){ log('FAILED share: '+err.message,'err'); showToast('Failed: '+err.message,false); }
 }
 function renderShare(){
@@ -1440,13 +1454,13 @@ function challengeRestart(){
 }
 async function sendChallengePlan(){
   if(!await askConfirm('Send the Day '+CH.day+' planned challenge bet to your Challenge channel (VIP members)?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending challenge plan...','info'); await postToDiscord(applyTokens(buildChallengePlan()), getHook('CHALLENGE')); log('OK - challenge plan sent.','ok'); showToast('Sent to Challenge'); }
+  try{ log('Sending challenge plan...','info'); await postToDiscord(applyTokens(buildChallengePlan()), getHook('CHALLENGE')); log('OK - challenge plan sent.','ok'); try{ markSent('chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day); }catch(_e){} showToast('Sent to Challenge'); }
   catch(e){ log('FAILED challenge: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 async function sendChallengeResult(){
   if(!CH.history.length){ showToast('No settled day to share yet', false); return; }
   if(!await askConfirm('Share the latest challenge result to your VIP results channel (for conversion)?')){ log('Cancelled.','info'); return; }
-  try{ log('Sharing challenge result...','info'); await postToDiscord(applyTokens(buildChallengeResult()), getHook('RESULTS')); log('OK - challenge result shared.','ok'); showToast('Shared to VIP results'); }
+  try{ log('Sharing challenge result...','info'); await postToDiscord(applyTokens(buildChallengeResult()), getHook('RESULTS')); log('OK - challenge result shared.','ok'); try{ var _l=CH.history[CH.history.length-1]; if(_l) markSent('chres|'+_l.day+'|'+_l.result); }catch(_e){} showToast('Shared to VIP results'); }
   catch(e){ log('FAILED challenge result: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 async function sendChallenge(){ return sendChallengePlan(); }
@@ -1567,7 +1581,7 @@ function getParsedCards(){ return parseCards(getCardsText()); }
 function getSelectedCards(){ var all=getParsedCards(); var sel=[]; var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++){ if(chks[i].checked){ var k=parseInt(chks[i].getAttribute('data-cidx'),10); if(all[k]) sel.push(all[k]); } } return sel; }
 function selectAllCards(on){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++) chks[i].checked=!!on; updateCardSelCount(); }
 function updateCardSelCount(){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); var n=0; for(var i=0;i<chks.length;i++) if(chks[i].checked) n++; var el=document.getElementById('cardSelCount'); if(el) el.textContent=n+' of '+chks.length+' selected'; }
-async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages)':''))){ log('Cancelled.','info'); return; } for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); } log('Cards sent.','ok'); showToast('Sent to Daily Cards'); }
+async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages)':''))){ log('Cancelled.','info'); return; } for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); } log('Cards sent.','ok'); showToast('Sent to Daily Cards'); return true; }
 async function shareSelected(){ var sel=getSelectedCards(); if(!sel.length){ showToast('Select at least one pick', false); return; } await sendCardChunks(buildCardsChunks(sel), sel.length+' selected pick'+(sel.length>1?'s':'')); }
 async function shareCategory(risk){ var cs=getParsedCards().filter(function(c){return c.risk===risk;}); if(!cs.length){ showToast('No '+risk+' picks', false); return; } await sendCardChunks(buildCardsChunks(cs), 'all '+risk+' picks'); }
 async function shareCard(i){ var c=getParsedCards()[i]; if(!c) return; await sendCardChunks(buildCardsChunks([c]), 'this pick'); }
@@ -1595,7 +1609,7 @@ function applyCardFilters(){ var groups={}; var cards=document.querySelectorAll(
 function cardsFilter(sub){ _cardRisk=(sub==='all'||!sub)?'all':sub; applyCardFilters(); }
 function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#cardsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyCardFilters(); }
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=EMBEDDED_CARDS_TEXT; renderCards(); }
-async function sendCards(){ var cards=getParsedCards(); await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); }
+async function sendCards(){ var cards=getParsedCards(); var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markSent('cards|'+DAILY_VERSION); }catch(_e){} } }
 (function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 
 
@@ -1605,7 +1619,7 @@ function saveTR(){ localStorage.setItem('ba_trackrecord', JSON.stringify(TR)); }
 function trPL(e){ var o=parseFloat(e.odds)||0, s=parseFloat(e.stake)||0; var r=(e.result||'P').toUpperCase(); if(r==='W') return s*(o-1); if(r==='L') return -s; return 0; }
 function trNum(x){ return Math.round((x||0)*100)/100; }
 function trUnit(x){ x=trNum(x); return (x>=0?'+':'')+x.toFixed(2)+'u'; }
-function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); }
+function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); try{ renderNotifs(); }catch(_e){} }
 function setTrResult(id, val){ setTrField(id,'result',val); var auto=document.getElementById('autoShare'); var u=(val||'').toUpperCase(); if(auto && auto.checked && (u==='W'||u==='L'||u==='V') && !SHARED['tr'+id]){ if(typeof shareTrackOne==='function') shareTrackOne(id, false, false); } }
 function delTrack(id){ TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); }
 function renderTrack(filter){
@@ -1736,7 +1750,7 @@ function renderTrackShare(){ var t=document.getElementById('tr_lessons'); if(t &
 function setPerfPeriod(p){ TR_PERIOD=p; var bar=document.getElementById('perfPeriods'); if(bar){ var bs=bar.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-pp')===p); } renderTrackShare(); }
 async function sendPerf(){
   if(!await askConfirm('Send the '+TR_PERIOD+' performance report to your VIP results channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('RESULTS')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
+  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('RESULTS')); log('OK - performance sent.','ok'); try{ markSent('perf|'+_weekStr()); }catch(_e){} showToast('Performance sent'); }
   catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 
@@ -2623,6 +2637,69 @@ async function sendEdu(i){
   catch(e){ log('FAILED education: '+e.message,'err'); showToast('Failed: '+e.message,false); return; }
   if(await askConfirm('Sent. Remove this post from the dashboard so you do not send it again?')){ removeEduTitle(eduTitle(p.body)); renderEdu(CUR_SUB['education']); showToast('Post removed from dashboard'); }
 }
+
+/* ---- Notification center ---- */
+var NSENT={}; try{ NSENT=JSON.parse(localStorage.getItem('ba_notif_sent')||'{}'); }catch(e){ NSENT={}; }
+function nSave(){ try{ localStorage.setItem('ba_notif_sent', JSON.stringify(NSENT)); }catch(e){} }
+function nIsSent(k){ return !!NSENT[k]; }
+function markSent(k){ if(!k) return; NSENT[k]=Date.now(); nSave(); try{ renderNotifs(); }catch(e){} }
+function _todayStr(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+function _weekStr(){ var d=new Date(); var t=new Date(d.getFullYear(),d.getMonth(),d.getDate()); var day=(t.getDay()+6)%7; t.setDate(t.getDate()-day+3); var firstThu=new Date(t.getFullYear(),0,4); var wk=1+Math.round(((t-firstThu)/86400000-3+((firstThu.getDay()+6)%7))/7); return t.getFullYear()+'-W'+('0'+wk).slice(-2); }
+function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); }
+var NITEMS=[];
+function buildNotifs(){
+  var items=[];
+  try{ (messages||[]).forEach(function(m,i){ var k='msg|'+DAILY_VERSION+'|'+i; if(nIsSent(k))return; var cat=detectCategory(m); items.push({key:k,kind:'msg',idx:i,cat:cat,text:m,title:_cleanTitle(m)||catLabel(cat),sub:'to '+catLabel(cat)+' channel'}); }); }catch(e){}
+  try{ var cards=(typeof getParsedCards==='function')?getParsedCards():[]; if(cards.length){ var ck='cards|'+DAILY_VERSION; if(!nIsSent(ck)) items.push({key:ck,kind:'cards',title:'Daily Betting Cards ('+cards.length+' picks)',sub:'to Daily Cards channel'}); } }catch(e){}
+  try{ if(typeof CH!=='undefined'&&CH&&CH.status==='active'){ var cbk='chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day; if(!nIsSent(cbk)) items.push({key:cbk,kind:'chbet',title:'Challenge Day '+CH.day+' bet',sub:'to Challenge channel (VIP)',text:(typeof buildChallengePlan==='function'?buildChallengePlan():'')}); } }catch(e){}
+  try{ if(typeof CH!=='undefined'&&CH&&CH.history&&CH.history.length){ var last=CH.history[CH.history.length-1]; var crk='chres|'+last.day+'|'+last.result; if(!nIsSent(crk)) items.push({key:crk,kind:'chres',title:'Challenge Day '+last.day+' result',sub:'to VIP results channel',text:(typeof buildChallengeResult==='function'?buildChallengeResult():'')}); } }catch(e){}
+  try{ var settled=(typeof TR!=='undefined'&&TR)?TR.filter(function(e){var r=(e.result||'').toUpperCase(); return (r==='W'||r==='L'||r==='V') && !(typeof SHARED!=='undefined'&&SHARED['tr'+e.id]);}):[]; if(settled.length) items.push({key:'results|'+_todayStr(),kind:'results',title:settled.length+' result'+(settled.length>1?'s':'')+' ready to share',sub:'to VIP results channel'}); }catch(e){}
+  try{ var pk='perf|'+_weekStr(); if(!nIsSent(pk)) items.push({key:pk,kind:'perf',title:'Weekly performance report',sub:'reminder, to VIP results channel',text:(typeof buildPerfMessage==='function'?buildPerfMessage('weekly'):'')}); }catch(e){}
+  try{ var dow=new Date().getDay(); if(dow===1||dow===4){ var ek='edu|'+_todayStr(); if(!nIsSent(ek)) items.push({key:ek,kind:'edu',title:'Education post due (2x per week)',sub:'reminder, pick a post to share'}); } }catch(e){}
+  NITEMS=items; return items;
+}
+function renderNotifs(){
+  var items=buildNotifs();
+  var badge=document.getElementById('notifBadge'); if(badge){ if(items.length){ badge.style.display=''; badge.textContent=items.length; } else badge.style.display='none'; }
+  var p=document.getElementById('notifPanel'); if(!p) return;
+  var html='<div class="notif-head-row"><b>Ready to share</b><button class="btn-ghost mini" onclick="closeNotifs()">Close</button></div>';
+  if(!items.length){ html+='<div class="notif-empty">Nothing waiting. You are all caught up.</div>'; }
+  else { items.forEach(function(it){
+    html+='<div class="notif-item"><div class="nt-title">'+esc(it.title)+'</div><div class="nt-sub">'+esc(it.sub)+'</div>';
+    if(it.text){ html+='<div class="nt-prev disc">'+renderDiscord(applyTokens(it.text))+'</div>'; }
+    html+='<div class="nt-actions">';
+    if(it.kind!=='edu') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+    html+='<button class="btn-secondary mini" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
+    html+='<button class="btn-ghost mini" onclick="notifDismiss(\''+it.key+'\')">Dismiss</button>';
+    html+='</div></div>';
+  }); }
+  p.innerHTML=html;
+}
+function _nFind(k){ for(var i=0;i<NITEMS.length;i++) if(NITEMS[i].key===k) return NITEMS[i]; return null; }
+async function notifSend(key){
+  var it=_nFind(key); if(!it){ buildNotifs(); it=_nFind(key); } if(!it) return;
+  if(it.kind==='msg'){ if(!await askConfirm('Send "'+it.title+'" to your '+catLabel(it.cat)+' channel?')){ return; } try{ await postToDiscord(applyTokens(it.text), getHook(it.cat)); showToast('Sent to '+catLabel(it.cat)); markSent(key); }catch(e){ showToast('Failed: '+e.message,false); } }
+  else if(it.kind==='cards'){ if(typeof sendCards==='function') await sendCards(); }
+  else if(it.kind==='chbet'){ if(typeof sendChallengePlan==='function') await sendChallengePlan(); }
+  else if(it.kind==='chres'){ if(typeof sendChallengeResult==='function') await sendChallengeResult(); }
+  else if(it.kind==='results'){ if(typeof shareAllNew==='function'){ await shareAllNew(); renderNotifs(); } }
+  else if(it.kind==='perf'){ if(typeof sendPerf==='function') await sendPerf(); }
+}
+function notifOpen(key){
+  var it=_nFind(key); if(!it) return; closeNotifs();
+  if(it.kind==='msg') showPage('today');
+  else if(it.kind==='cards') showPage('betcards');
+  else if(it.kind==='chbet') showPage('challenge');
+  else if(it.kind==='chres'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','challenge'); },130); }
+  else if(it.kind==='results'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','cards'); },130); }
+  else if(it.kind==='perf'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','performance'); },130); }
+  else if(it.kind==='edu') showPage('education');
+}
+function notifDismiss(key){ markSent(key); }
+function toggleNotifs(ev){ if(ev) ev.stopPropagation(); var p=document.getElementById('notifPanel'); if(!p) return; if(p.style.display==='none'||!p.style.display){ renderNotifs(); p.style.display='block'; } else p.style.display='none'; }
+function closeNotifs(){ var p=document.getElementById('notifPanel'); if(p) p.style.display='none'; }
+document.addEventListener('click', function(e){ var p=document.getElementById('notifPanel'); var b=document.getElementById('notifBtn'); if(!p||p.style.display==='none')return; if(p.contains(e.target)||(b&&b.contains(e.target)))return; p.style.display='none'; });
+
 
 showPage((function(){ try{ var p=localStorage.getItem('ba_page'); return p||'today'; }catch(e){ return 'today'; } })());
 try{ renderEdu(); }catch(e){}
