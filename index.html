@@ -408,6 +408,8 @@
         <button class="subtab" data-pp="quarterly" onclick="setPerfPeriod('quarterly')">Quarterly</button>
         <button class="subtab" data-pp="yearly" onclick="setPerfPeriod('yearly')">Yearly</button>
       </div>
+      <label class="lbl" style="display:block;margin:0 0 6px;font-weight:600;">Lessons learned <span style="font-weight:400;opacity:.7;">(your takeaway for this period, shown in the report)</span></label>
+      <textarea id="tr_lessons" rows="2" oninput="saveLessons()" placeholder="e.g. Sticking to the staking plan kept variance low and let the edge come through." style="width:100%;margin:0 0 14px;"></textarea>
       <div class="disc" id="perfPreview"></div>
       <div class="actions"><button class="btn" onclick="sendPerf()">Send to Track Record channel</button></div>
     </section>
@@ -567,7 +569,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v42";
+var EMBEDDED_VERSION = "2026-06-25-v43";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -659,7 +661,7 @@ const EMOJI = {
   ':crown:':'\u{1F451}',':small_orange_diamond:':'\u{1F536}',':moneybag:':'\u{1F4B0}',':mortar_board:':'\u{1F393}',
   ':white_check_mark:':'✅',':tennis:':'\u{1F3BE}',':soccer:':'⚽',':gift:':'\u{1F381}',':dart:':'\u{1F3AF}',':brain:':'\u{1F9E0}',':bank:':'\u{1F3E6}',':trophy:':'\u{1F3C6}',
   ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️',
-  ':bar_chart:':'\u{1F4CA}',':hourglass_flowing_sand:':'\u{23F3}',':green_circle:':'\u{1F7E2}',':red_circle:':'\u{1F534}',':coin:':'\u{1FA99}',':soccer_ball:':'⚽'
+  ':bar_chart:':'\u{1F4CA}',':hourglass_flowing_sand:':'\u{23F3}',':green_circle:':'\u{1F7E2}',':red_circle:':'\u{1F534}',':coin:':'\u{1FA99}',':soccer_ball:':'⚽',':clipboard:':'\u{1F4CB}',':rocket:':'\u{1F680}'
 };
 
 let messages = [];
@@ -1524,6 +1526,13 @@ if(document.getElementById('trTable')){ try{ renderTrack('all'); }catch(e){} }
 var TR_PERIOD='daily';
 function trDateObj(s){ var p=(s||'').split('-'); return p.length===3? new Date(parseInt(p[2],10),parseInt(p[1],10)-1,parseInt(p[0],10)) : null; }
 function dmyShort(d){ return ('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+d.getFullYear(); }
+function trLessonDefault(settled, best, roi){
+  if(!settled.length) return 'Discipline first. We only post bets we have a real edge on, and every result lands here, win or lose.';
+  if(roi>=0) return (best&&best.sport? best.sport+' led the way and ':'')+'staying strict on the staking plan let the edge come through. Same process tomorrow.';
+  return 'Variance went against us this period, but the staking plan kept it controlled and the process does not change. Edges show over volume, not over a single day.';
+}
+function getLessons(){ return (localStorage.getItem('ba_tr_lessons')||'').trim(); }
+function saveLessons(){ var t=document.getElementById('tr_lessons'); if(t) localStorage.setItem('ba_tr_lessons', t.value); renderTrackShare(); }
 function buildPerfMessage(period){
   period=period||'daily';
   var now=new Date(); now.setHours(0,0,0,0);
@@ -1532,35 +1541,41 @@ function buildPerfMessage(period){
   var label={daily:'DAILY',weekly:'WEEKLY',monthly:'MONTHLY',quarterly:'QUARTERLY',yearly:'YEARLY'}[period]||'DAILY';
   var list=TR.filter(function(e){ var d=trDateObj(e.date); if(!d) return false; d.setHours(0,0,0,0); return d>=from && d<=now; });
   var settled=list.filter(function(e){ var r=(e.result||'').toUpperCase(); return r==='W'||r==='L'; });
-  var w=0,l=0,staked=0,pl=0,oddsum=0;
-  settled.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W')w++; else l++; staked+=parseFloat(e.stake)||0; pl+=trPL(e); oddsum+=parseFloat(e.odds)||0; });
-  var roi=staked? pl/staked*100:0; var hit=settled.length? w/settled.length*100:0; var avg=settled.length? oddsum/settled.length:0;
+  var w=0,l=0,staked=0,pl=0,bySport={};
+  settled.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W')w++; else l++; staked+=parseFloat(e.stake)||0; var p=trPL(e); pl+=p; var sp=e.sport||'Other'; if(!bySport[sp])bySport[sp]={pl:0,n:0}; bySport[sp].pl+=p; bySport[sp].n++; });
+  var roi=staked? pl/staked*100:0;
+  var best=null; Object.keys(bySport).forEach(function(sp){ if(!best||bySport[sp].pl>best.pl) best={sport:sp,pl:bySport[sp].pl}; });
   var range=(period==='daily')? dmyShort(now) : (dmyShort(from)+' to '+dmyShort(now));
   var plStr=(pl>=0?'+':'')+trNum(pl).toFixed(2)+'u';
   var roiStr=(roi>=0?'+':'')+roi.toFixed(1)+'%';
-  var sign=pl>=0?':green_circle:':':red_circle:';
-  var m=':bar_chart: **BETLIFE365 - '+label+' PERFORMANCE**\n'+range+'\n\n';
+  var bestStr=best? best.sport+' ('+(best.pl>=0?'+':'')+trNum(best.pl).toFixed(2)+'u)':'-';
+  var lessons=getLessons()||trLessonDefault(settled,best,roi);
+  var line='━━━━━━━━━━━━';
+  var m=':bar_chart: **BETLIFE365 | '+label+' REPORT**\n'+range+'\n\n';
   if(!settled.length){
-    m+=':hourglass_flowing_sand: No settled bets in this period yet. New picks drop daily and every result is logged here.\n\n';
+    m+=':hourglass_flowing_sand: Results are still coming in for this period. Fresh picks drop daily and every single one is logged here, win or lose.\n';
+    m+=':brain: **Lessons learned:** '+lessons+'\n\n';
   } else {
-    m+=':white_check_mark: Settled bets: **'+settled.length+'**\n';
-    m+=':moneybag: Profit: **'+plStr+'**\n';
+    m+=':clipboard: Total bets: **'+settled.length+'**\n';
+    m+=':coin: Units: **'+plStr+'**\n';
     m+=':chart_with_upwards_trend: ROI: **'+roiStr+'**\n';
-    m+=':trophy: Record: **'+w+'W - '+l+'L** ('+hit.toFixed(0)+'% hit rate, avg odds '+avg.toFixed(2)+')\n\n';
+    m+=':trophy: Best performing sport: **'+bestStr+'**\n';
+    m+=':brain: **Lessons learned:** '+lessons+'\n\n';
   }
-  m+=sign+' Every single pick is logged, wins and losses included. Real units, full transparency, no cherry picking.\n';
-  m+=':fire: Want these picks before kickoff, plus the full bankroll plan? Join VIP: {VIP_LINK}\n';
-  m+=':warning: 18+ | play responsibly';
+  m+=line+'\n';
+  m+=':green_circle: Every pick is logged in units, winners and losers alike. No deleted bets, no cherry picking. The ROI above is the real number.\n';
+  m+=':fire: Picture this edge working on your bankroll. VIP members get the LOW, MID, HIGH and lucky shot lists before kickoff, plus the exact staking plan behind these results.\n';
+  m+=':rocket: Lock in your VIP access: {VIP_LINK}\n';
+  m+=':warning: 18+ | play responsibly. Past results do not guarantee future returns.';
   return m;
 }
-function renderTrackShare(){ var pv=document.getElementById('perfPreview'); if(pv) pv.innerHTML=renderDiscord(applyTokens(buildPerfMessage(TR_PERIOD))); }
+function renderTrackShare(){ var t=document.getElementById('tr_lessons'); if(t && document.activeElement!==t) t.value=getLessons(); var pv=document.getElementById('perfPreview'); if(pv) pv.innerHTML=renderDiscord(applyTokens(buildPerfMessage(TR_PERIOD))); }
 function setPerfPeriod(p){ TR_PERIOD=p; var bar=document.getElementById('perfPeriods'); if(bar){ var bs=bar.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-pp')===p); } renderTrackShare(); }
 async function sendPerf(){
-  if(!await askConfirm('Send the '+TR_PERIOD+' performance snapshot to your Track Record channel?')){ log('Cancelled.','info'); return; }
+  if(!await askConfirm('Send the '+TR_PERIOD+' performance report to your Track Record channel?')){ log('Cancelled.','info'); return; }
   try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('TRACK')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
   catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
-
 
 /* ---- Full backup / restore ---- */
 function exportFull(){
@@ -1581,7 +1596,6 @@ function importFull(){
 }
 
 showPage('today');
-
 </script>
 </body>
 </html>
