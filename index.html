@@ -490,6 +490,14 @@
       <div class="actions"><button class="btn" onclick="sendChallengeResult()">Send to VIP results channel</button></div>
     </section>
     </div>
+    <div id="vip-cardsresult" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Daily Betting Cards results</h2>
+      <p class="section-sub">Auto-updated recap of which single cards landed and which missed today, in a conversion format for your VIP results channel. It settles automatically as matches finish; you confirm the send.</p>
+      <div class="disc" id="cardsResultPreview"></div>
+      <div class="actions"><button class="btn" onclick="sendCardsResult()">Send to VIP results channel</button></div>
+    </section>
+    </div>
     </div>
 <div class="page" id="page-bankroll" style="display:none">
     <section class="card">
@@ -673,7 +681,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v64";
+var EMBEDDED_VERSION = "2026-06-25-v65";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1062,7 +1070,7 @@ var SUBTABS={
   trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
   automations:[['routine','Daily routine'],['backups','Backups & Notion'],['notify','Notifications & reminders'],['safeguards','Safeguards']],
-  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge']]
+  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge'],['cardsresult','🃏 Card results']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -1084,7 +1092,7 @@ function showSub(page, sub){
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
   else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
-  else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); if(vp)vp.style.display='none'; if(vc)vc.style.display='none'; if(vch)vch.style.display='none'; if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
+  else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); var vcr=document.getElementById('vip-cardsresult'); [vp,vc,vch,vcr].forEach(function(x){ if(x)x.style.display='none'; }); if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else if(sub==='cardsresult'){ if(vcr)vcr.style.display='block'; if(typeof renderCardsResult==='function') renderCardsResult(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1496,6 +1504,43 @@ async function sendChallengeUpdate(){
   catch(e){ log('FAILED challenge update: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 function renderChallengeShare(){ var pv=document.getElementById('challResultPreview'); if(!pv) return; if(typeof CH==='undefined' || !CH || !CH.history || !CH.history.length){ pv.innerHTML='<p class="section-sub">No settled challenge day yet. Mark a day Won or Lost under Challenges first, then come back to share it.</p>'; return; } pv.innerHTML=renderDiscord(applyTokens(buildChallengeResult())); }
+function _cardKeyStr(m,sel){ return (m||'')+'|'+(sel||''); }
+function cardResult(c){
+  var src=(typeof TR!=='undefined'&&TR)?TR:[]; var k=_cardKeyStr(c.match,c.selection);
+  for(var i=0;i<src.length;i++){ var e=src[i]; if(_cardKeyStr(e.match,e.selection)===k){ var r=(e.result||'').toUpperCase(); if(r==='W'||r==='L'||r==='V') return r; } }
+  return 'P';
+}
+function buildCardsResult(){
+  var cards=(typeof getParsedCards==='function')?getParsedCards():[];
+  var date=(typeof EMBEDDED_CARDS!=='undefined'&&EMBEDDED_CARDS&&EMBEDDED_CARDS.date)?dmy(EMBEDDED_CARDS.date):'';
+  var won=[],lost=[]; var net=0,settled=0;
+  cards.forEach(function(c){ var r=cardResult(c); var o=parseFloat(c.odds)||0; var st=parseFloat((c.stake||'').replace(/[^0-9.]/g,''))||0;
+    if(r==='W'){ won.push(c); net+=st*(o-1); settled++; }
+    else if(r==='L'){ lost.push(c); net-=st; settled++; }
+    else if(r==='V'){ settled++; }
+  });
+  var ch=(typeof vipChannelOut==='function')?vipChannelOut():''; var link=(typeof vipLink==='function')?vipLink():''; var cta=ch||link||'(set your VIP link under Settings)';
+  var line='━━━━━━━━━━━━';
+  var m=':bar_chart: **BETLIFE365 | DAILY CARDS RESULTS | '+date+'**\n\n';
+  if(!settled){ m+=':hourglass_flowing_sand: Results are still coming in. Every card is logged here, win or lose.\n\n'; }
+  else {
+    if(won.length){ m+=':white_check_mark: **LANDED ('+won.length+')**\n'; won.forEach(function(c){ m+='🟢 '+(c.match||'')+': '+(c.selection||'')+' @ '+(c.odds||'')+'\n'; }); m+='\n'; }
+    if(lost.length){ m+=':x: **MISSED ('+lost.length+')**\n'; lost.forEach(function(c){ m+='🔴 '+(c.match||'')+': '+(c.selection||'')+' @ '+(c.odds||'')+'\n'; }); m+='\n'; }
+  }
+  m+=line+'\n';
+  if(settled){ var netStr=(net>=0?'+':'')+net.toFixed(2)+'u'; m+=':coin: **'+won.length+'/'+(won.length+lost.length)+' picks landed**  ·  Net **'+netStr+'** on the cards today.\n'; }
+  m+=':green_circle: Every pick logged in units, winners and losers. Full transparency, no cherry picking.\n';
+  m+=':fire: Members had every one of these cards before kickoff, with the exact stake.\n';
+  m+=':rocket: Join VIP for tomorrow\'s full slate before kickoff: '+cta+'\n';
+  m+=':warning: 18+ | play responsibly';
+  return m;
+}
+function renderCardsResult(){ var pv=document.getElementById('cardsResultPreview'); if(pv) pv.innerHTML=renderDiscord(applyTokens(buildCardsResult())); }
+async function sendCardsResult(){
+  if(!await askConfirm('Send the daily cards results to your VIP results channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending cards results...','info'); await postToDiscord(applyTokens(buildCardsResult()), getHook('RESULTS')); log('OK - cards results sent.','ok'); showToast('Sent to VIP results'); }
+  catch(e){ log('FAILED cards results: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
 if(document.getElementById('challengeStats')) renderChallenge();
 
 
