@@ -303,6 +303,7 @@
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
       <div class="side-section">Discord</div>
       <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Messaging</button>
+      <button class="nav-item" data-page="education" onclick="showPage('education')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span> Education</button>
       <button class="nav-item" data-page="trackrecord" onclick="showPage('trackrecord')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13l3 3 4-5 4 4"/></svg></span> Track Record</button>
       <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> Share VIP results</button>
       <div class="side-section">Ledger</div>
@@ -493,6 +494,13 @@
       <div class="actions"><button class="btn" onclick="sendCustom()">Send to CUSTOM</button><span id="customState"></span></div>
     </section>
     </div>
+<div class="page" id="page-education" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Education</h2>
+      <p class="section-sub">A library of professional education posts to share with your members about twice a week: risk management, bankroll scaling, psychology and the maths behind a long term edge. Preview each post exactly as it lands in Discord, then send. Set the Education channel webhook in Settings &gt; Channels.</p>
+    </section>
+    <div id="eduList"></div>
+    </div>
 <div class="page" id="page-archive" style="display:none">
     <section class="card">
       <h2 class="section-title">Archive</h2>
@@ -510,7 +518,7 @@
         <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div>
+        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div><div class="field"><label>EDUCATION channel</label><input type="text" id="hook_EDU" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('EDU')">Test</button></div></div>
       </div>
       </div>
       <div id="set-vip" style="display:none">
@@ -567,7 +575,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v45";
+var EMBEDDED_VERSION = "2026-06-25-v46";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -687,7 +695,7 @@ function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(
 
 const CHANNELS = ['PARLEY','LUCKY'];
 function getHook(cat){ const el=document.getElementById('hook_'+cat); return el?el.value.trim():''; }
-function catLabel(cat){ return {PARLEY:'Daily Parley Tips',LOW:'Daily Parley Tips',MID:'Daily Parley Tips',HIGH:'Daily Parley Tips',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM'}[cat]||cat; }
+function catLabel(cat){ return {PARLEY:'Daily Parley Tips',LOW:'Daily Parley Tips',MID:'Daily Parley Tips',HIGH:'Daily Parley Tips',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM',EDU:'EDUCATION'}[cat]||cat; }
 function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; return'PARLEY'; }
 
 function applyTokens(t){
@@ -782,6 +790,7 @@ function saveAll(silent){
   localStorage.setItem('ba_hook_CHALLENGE', getHook('CHALLENGE'));
   localStorage.setItem('ba_hook_CARDS', getHook('CARDS'));
   localStorage.setItem('ba_hook_TRACK', getHook('TRACK'));
+  localStorage.setItem('ba_hook_EDU', getHook('EDU'));
   var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
   localStorage.setItem('ba_vip_link', vipLink());
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
@@ -977,6 +986,7 @@ var PAGE_META={
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
+  education:["Education","Value posts for your members, ready to send about 2x a week."],
   trackrecord:["Track Record","One unit-based entry per bet. Performance in units and ROI."],
   vip:["Share VIP results","Share settled results as a public card to your VIP channel."],
   archive:["Archive","Look back at earlier days, as a list or calendar."],
@@ -1029,6 +1039,7 @@ function showPage(id){
   var cc=document.getElementById('crumbCurrent'); if(cc)cc.textContent=meta[0];
   closeSidebar();
   renderSubbar(id);
+  if(id==='education'){ try{ renderEdu(); }catch(e){} }
   if((id==='journal'||id==='bankroll') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
@@ -1106,7 +1117,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     (function(){ var pe=document.getElementById('hook_PARLEY'); if(pe && !pe.value){ var mig=localStorage.getItem('ba_hook_PARLEY')||localStorage.getItem('ba_hook_LOW')||localStorage.getItem('ba_hook_MID')||localStorage.getItem('ba_hook_HIGH')||''; if(mig){ pe.value=mig; localStorage.setItem('ba_hook_PARLEY',mig); } } })();
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
@@ -1610,7 +1621,142 @@ function importFull(){
   }catch(e){ if(typeof showToast==='function') showToast('Invalid backup code', false); }
 }
 
+
+/* ---- Education library ---- */
+var EDU = `**🏦 BetLife365 Education | Bankroll Management 101**
+
+Your bankroll is the single most important tool you have. Not the picks, the bankroll.
+
+📋 The rules that keep you in the game:
+🔹 Set a dedicated betting bankroll you can afford to lose. This is your business capital, not your rent.
+🔹 Bet in units, not euros. 1 unit = 1% of your bankroll. A 2u play is 2%, and a single bet should rarely go above that.
+🔹 Never chase. A losing day is data, not a debt to win back.
+
+🧠 Why it works: flat, percentage based staking shrinks your stakes automatically in a bad run and grows them in a good one. You can never go broke in one night, and you are always in the game when the edge pays off.
+
+⚠️ 18+ | play responsibly. Discipline first, profit second.
+===EDU===
+**🎲 BetLife365 Education | It Is a Game of Probabilities**
+
+No bet is ever a sure thing. A 1.10 favourite still loses roughly 1 in 11 times. That is not a bad pick, that is maths.
+
+📈 What this means for you:
+🔹 Variance is normal. Even a long term winner has losing weeks. A coin can land tails five times in a row.
+🔹 Judge the process, not a single result. A well priced bet that loses was still the right bet.
+🔹 Volume smooths it out. The more quality bets you place, the closer your real results move to your true edge.
+
+🧠 Pros think in samples of hundreds of bets, not one slip. Zoom out and let the law of large numbers work for you.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**📊 BetLife365 Education | Win Rate Is a Trap**
+
+A tipster bragging about a 70% win rate tells you almost nothing. You can win 70% at short odds and still lose money.
+
+🎯 The number that actually matters is ROI in units.
+🔹 Win rate = how often you win. ROI = how much you profit per unit staked.
+🔹 A 40% hit rate at average odds of 3.00 is hugely profitable. A 65% hit rate at 1.30 can bleed slowly.
+🔹 We track every pick in units and report ROI, never win rate alone. That is the honest measure.
+
+🧠 Always ask a service for their ROI and their full record, not a cherry picked hit rate.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**💡 BetLife365 Education | Expected Value, the Core of It All**
+
+Every long term winner bets on one thing: value. Not who will win, but whether the price is bigger than the real chance.
+
+🎯 The idea in one line: if you think a team has a 50% chance (true price 2.00) and the bookie offers 2.20, that is a +EV bet, even if it loses today.
+🔹 +EV: the odds are higher than the true probability. Bet it.
+🔹 -EV: the odds are too short for the real chance. Skip it, no matter how certain it feels.
+
+🧠 You are not paid for being right. You are paid for being right more often than the price implied. Hunt prices, not winners.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**🧠 BetLife365 Education | Master Your Mind, Beat Tilt**
+
+The market does not beat most bettors. Their emotions do.
+
+❌ The traps:
+🔹 Chasing: doubling stakes to win back a loss. The fastest way to wipe a bankroll.
+🔹 Revenge betting: forcing action after a bad beat instead of waiting for value.
+🔹 Overconfidence: raising stakes on a heater and giving it all back.
+
+✅ The fix:
+🔹 Fixed staking, win or lose. The plan does not change with your mood.
+🔹 Step away after a rough run. The next spot will still be there tomorrow.
+🔹 Trust the sample, not the last result.
+
+🧠 Consistent, boring discipline is what separates investors from gamblers.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**🎯 BetLife365 Education | Let the Edge Do the Work**
+
+A real edge is small and slow. It shows up over hundreds of bets, not in one weekend.
+
+🔹 Do not force action. No value today means no bet today. Patience is a position.
+🔹 Do not overstake to speed it up. Bigger stakes do not increase your edge, only your variance.
+🔹 Stay consistent. Same staking, same discipline, every single day.
+
+📈 Think like the house. A casino has a tiny edge on each spin, but it never skips a night and never bets the farm. Over volume, that edge is unstoppable.
+
+🧠 Your job is simple: place +EV bets, size them sensibly, and let time compound the rest.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**📈 BetLife365 Education | Scaling Your Bankroll**
+
+Growing a bankroll is not about bigger one off bets. It is about scaling stakes with discipline.
+
+🔹 Stake in percentages, not fixed euros. As your bankroll grows, 1u grows with it, so winnings compound automatically.
+🔹 Recalculate your unit size periodically, for example monthly, not after every win.
+🔹 Scale down in a downswing too. A smaller bankroll means smaller units, which protects you.
+
+🧮 Example: 1u at 1% of a 1,000 bankroll is 10. At 1,500 it becomes 15. Same risk, bigger absolute returns, zero extra recklessness.
+
+🧠 Slow and compounding beats fast and fragile. Protect the downside and the upside takes care of itself.
+
+⚠️ 18+ | play responsibly.
+===EDU===
+**📋 BetLife365 Education | Track Every Single Bet**
+
+If you do not record it, you do not know if you are winning. Memory lies, the record does not.
+
+🔹 Log every bet: date, market, odds, stake in units, result, profit or loss.
+🔹 Review in units and ROI, never on feeling.
+🔹 No cherry picking. Winners and losers both go in, or the numbers mean nothing.
+
+📊 This is exactly why we publish a full, transparent track record. Real units, every result, nothing hidden. That is how you separate a genuine edge from a lucky week.
+
+🧠 What gets measured gets improved. Your log is your mirror.
+
+⚠️ 18+ | play responsibly.`.split('===EDU===').map(function(s){ return s.trim(); });
+
+function eduTitle(p){ var f=(p.split('\n')[0]||'').replace(/\*\*/g,''); var i=f.indexOf('| '); return i>-1? f.slice(i+2): f; }
+function renderEdu(){
+  var box=document.getElementById('eduList'); if(!box) return;
+  var hk=getHook('EDU');
+  var html='';
+  if(!hk){ html+='<section class="card" style="margin-bottom:14px;"><p class="section-sub" style="margin:0;">Tip: add your <b>EDUCATION</b> webhook in Settings &gt; Channels so you can send these straight to your education channel.</p></section>'; }
+  for(var i=0;i<EDU.length;i++){
+    html+='<section class="card" style="margin-bottom:14px;">'
+      + '<div class="actions" style="justify-content:space-between;margin:0 0 10px;"><span class="muted-sm" style="margin:0;font-weight:600;">Post '+(i+1)+' / '+EDU.length+': '+eduTitle(EDU[i])+'</span></div>'
+      + '<div class="disc">'+renderDiscord(applyTokens(EDU[i]))+'</div>'
+      + '<div class="actions"><button class="btn" onclick="sendEdu('+i+')">Send to Education channel</button></div>'
+      + '</section>';
+  }
+  box.innerHTML=html;
+}
+async function sendEdu(i){
+  if(!await askConfirm('Send education post '+(i+1)+' to your Education channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending education post '+(i+1)+'...','info'); await postToDiscord(applyTokens(EDU[i]), getHook('EDU')); log('OK - education post '+(i+1)+' sent.','ok'); showToast('Education post sent'); }
+  catch(e){ log('FAILED education: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
+
 showPage('today');
+try{ renderEdu(); }catch(e){}
 </script>
 </body>
 </html>
