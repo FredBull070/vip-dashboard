@@ -362,7 +362,7 @@
         <h2 class="section-title">Daily Betting Cards <span class="pill" id="cardsCount">0 cards</span></h2>
         <button class="btn" onclick="sendCards()">Send all to Daily Cards channel</button>
       </div>
-      <p class="section-sub">All of today's value picks as single cards, grouped by risk. Customers pick their own selections and build their own slip. Sent as one Discord message (auto-split if it gets long). Use the sub-tabs above to filter by risk or open the preview.</p>
+      <p class="section-sub">Today's value picks as single cards, grouped by risk so members build their own slip. Tick the picks you want and use <b>Share selected</b>, share a whole risk tier (🟢🟡🔴), or <b>Share this pick</b> on any card. The Discord format explains our tiering so it teaches the method while staying light and clear.</p>
     </section>
     <div id="betcards-visual"></div>
     <div id="betcards-preview" style="display:none"><section class="card"><h2 class="section-title">Discord preview</h2><p class="section-sub">Exactly how it will be sent. Long lists are split into multiple messages.</p><div class="disc" id="cardsPreviewBox"></div></section></div>
@@ -578,7 +578,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v52";
+var EMBEDDED_VERSION = "2026-06-25-v53";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1459,13 +1459,14 @@ RISK: high
 ANALYSIS: An open game with both teams likely to push for goals.`;
 function getCardsText(){ var el=document.getElementById('cardsRaw'); return (el && el.value.trim())? el.value : EMBEDDED_CARDS_TEXT; }
 function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); return o.match? o : null; }).filter(Boolean); }
-function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+c.match+'**\n> :dart: Market: '+(c.market||'')+'\n> :white_check_mark: Selection: '+(c.selection||'')+'\n> :moneybag: Odds: '+(c.odds||'')+'  ·  :coin: Stake: '+(c.stake||'')+'\n> :brain: '+(c.analysis||''); }
-function buildCardsChunks(){
-  var cards=parseCards(getCardsText()); if(!cards.length) return [];
+function cardRiskTag(r){ return r==='low'?'banker':(r==='medium'?'value play':'upside shot'); }
+function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+(c.selection||'')+'** @ '+(c.odds||'')+'\n🏟️ '+(c.match||'')+'  ·  '+(c.market||'')+'\n:coin: Stake '+(c.stake||'')+'  ('+cardRiskTag(c.risk)+')\n:bulb: '+(c.analysis||''); }
+function buildCardsChunks(cards){
+  cards = cards || parseCards(getCardsText()); if(!cards.length) return [];
   var date=(EMBEDDED_CARDS&&EMBEDDED_CARDS.date)?dmy(EMBEDDED_CARDS.date):'';
-  var header=':bar_chart: **DAILY BETTING CARDS - '+date+'**\nPick your own selections and build your slip. Stakes in units, odds may vary.\n';
-  var footer='\n:warning: 18+ | play responsibly';
-  var groups=[['low','🟢 **LOW RISK**'],['medium','🟡 **MEDIUM RISK**'],['high','🔴 **HIGH RISK**']];
+  var header=':bar_chart: **DAILY BETTING CARDS | '+date+'**\nBuild your own slip from today\'s value picks. How we tier them:\n🟢 Banker: high probability, our biggest stake.\n🟡 Value play: bigger edge, more variance, moderate stake.\n🔴 Upside shot: long odds, small stake, high payoff.\nStakes in units (1u = 1% of bankroll). Odds may vary by bookmaker.\n';
+  var footer='\n:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly';
+  var groups=[['low','🟢 **BANKERS**'],['medium','🟡 **VALUE PLAYS**'],['high','🔴 **UPSIDE SHOTS**']];
   var msgs=[]; var cur=header; var has=false;
   groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
     var gh='\n'+g[1]+'\n';
@@ -1476,28 +1477,34 @@ function buildCardsChunks(){
   if(has) msgs.push(cur+footer);
   return msgs;
 }
+function getParsedCards(){ return parseCards(getCardsText()); }
+function getSelectedCards(){ var all=getParsedCards(); var sel=[]; var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++){ if(chks[i].checked){ var k=parseInt(chks[i].getAttribute('data-cidx'),10); if(all[k]) sel.push(all[k]); } } return sel; }
+function selectAllCards(on){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++) chks[i].checked=!!on; updateCardSelCount(); }
+function updateCardSelCount(){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); var n=0; for(var i=0;i<chks.length;i++) if(chks[i].checked) n++; var el=document.getElementById('cardSelCount'); if(el) el.textContent=n+' of '+chks.length+' selected'; }
+async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages)':''))){ log('Cancelled.','info'); return; } for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); } log('Cards sent.','ok'); showToast('Sent to Daily Cards'); }
+async function shareSelected(){ var sel=getSelectedCards(); if(!sel.length){ showToast('Select at least one pick', false); return; } await sendCardChunks(buildCardsChunks(sel), sel.length+' selected pick'+(sel.length>1?'s':'')); }
+async function shareCategory(risk){ var cs=getParsedCards().filter(function(c){return c.risk===risk;}); if(!cs.length){ showToast('No '+risk+' picks', false); return; } await sendCardChunks(buildCardsChunks(cs), 'all '+risk+' picks'); }
+async function shareCard(i){ var c=getParsedCards()[i]; if(!c) return; await sendCardChunks(buildCardsChunks([c]), 'this pick'); }
 function renderCards(){
   var cards=parseCards(getCardsText());
   var cc=document.getElementById('cardsCount'); if(cc) cc.textContent=cards.length+(cards.length===1?' card':' cards');
   var vis=document.getElementById('betcards-visual');
-  if(vis){ var groups=[['low','🟢 Low risk'],['medium','🟡 Medium risk'],['high','🔴 High risk']]; var html='';
+  if(vis){
+    var bar='<div class="card" style="padding:12px 14px;margin-bottom:12px;"><div class="actions" style="margin:0;flex-wrap:wrap;gap:8px;align-items:center;"><button class="btn" onclick="shareSelected()">Share selected</button><span id="cardSelCount" class="muted-sm" style="margin:0;"></span><span style="flex:1 1 auto;"></span><button class="btn-secondary mini" onclick="selectAllCards(true)">All</button><button class="btn-secondary mini" onclick="selectAllCards(false)">None</button><button class="btn-secondary mini" onclick="shareCategory(\'low\')">Share 🟢</button><button class="btn-secondary mini" onclick="shareCategory(\'medium\')">Share 🟡</button><button class="btn-secondary mini" onclick="shareCategory(\'high\')">Share 🔴</button></div></div>';
+    var groups=[['low','🟢 Low risk'],['medium','🟡 Medium risk'],['high','🔴 High risk']]; var html='';
+    cards.forEach(function(c,i){ c._i=i; });
     groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
       html+='<div class="risk-head" data-risk="'+g[0]+'">'+g[1]+' <span class="dg-count">'+cs.length+'</span></div>';
-      cs.forEach(function(c){ html+='<div class="rcard r-'+c.risk+'" data-risk="'+c.risk+'"><div class="rc-top"><span class="rc-match">'+esc(c.match||'')+'</span><span class="rc-odds">'+esc(c.odds||'')+'</span></div><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div></div>'; });
+      cs.forEach(function(c){ var i=c._i; html+='<div class="rcard r-'+c.risk+'" data-risk="'+c.risk+'"><div class="rc-top"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="cardchk" data-cidx="'+i+'" checked onchange="updateCardSelCount()"><span class="rc-match">'+esc(c.match||'')+'</span></label><span class="rc-odds">'+esc(c.odds||'')+'</span></div><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div><div class="actions" style="margin-top:8px;"><button class="btn-secondary mini" onclick="shareCard('+i+')">Share this pick</button></div></div>'; });
     });
-    vis.innerHTML=html||'<p class="small">No cards yet. Add some under the Edit tab.</p>';
+    vis.innerHTML=bar+(html||'<p class="small">No cards yet. Add some under the Edit tab.</p>');
+    updateCardSelCount();
   }
   var pv=document.getElementById('cardsPreviewBox'); if(pv){ pv.innerHTML=renderDiscord(buildCardsChunks().join('\n\n──────────\n\n')); }
 }
 function cardsFilter(sub){ var want=(sub==='all'||!sub)?'all':sub; var els=document.querySelectorAll('#betcards-visual .rcard, #betcards-visual .risk-head'); for(var i=0;i<els.length;i++){ var r=els[i].getAttribute('data-risk'); els[i].style.display=(want==='all'||r===want)?'':'none'; } }
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=EMBEDDED_CARDS_TEXT; renderCards(); }
-async function sendCards(){
-  var chunks=buildCardsChunks(); if(!chunks.length){ log('No cards to send.','err'); return; }
-  var n=parseCards(getCardsText()).length;
-  if(!await askConfirm('Send the '+n+' betting cards to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages due to length)':''))){ log('Cancelled.','info'); return; }
-  for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+' / '+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); }
-  log('Betting cards sent.','ok'); showToast('Betting cards sent');
-}
+async function sendCards(){ var cards=getParsedCards(); await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); }
 (function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 
 
