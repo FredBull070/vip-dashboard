@@ -303,6 +303,7 @@
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
       <div class="side-section">Discord</div>
       <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Messaging</button>
+      <button class="nav-item" data-page="trackrecord" onclick="showPage('trackrecord')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13l3 3 4-5 4 4"/></svg></span> Track Record</button>
       <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> Share VIP results</button>
       <div class="side-section">Ledger</div>
       <button class="nav-item" data-page="archive" onclick="showPage('archive')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg></span> Archive</button>
@@ -365,6 +366,35 @@
     <div id="betcards-visual"></div>
     <div id="betcards-preview" style="display:none"><section class="card"><h2 class="section-title">Discord preview</h2><p class="section-sub">Exactly how it will be sent. Long lists are split into multiple messages.</p><div class="disc" id="cardsPreviewBox"></div></section></div>
     <div id="betcards-edit" style="display:none"><section class="card"><h2 class="section-title">Edit cards</h2><p class="section-sub">One card per block, separated by a line <code>===</code>. Fields per card: MATCH, MARKET, SELECTION, ODDS, STAKE, RISK (low/medium/high), ANALYSIS.</p><textarea id="cardsRaw" spellcheck="false" style="min-height:240px;"></textarea><div class="actions"><button class="btn-secondary" onclick="renderCards()">Refresh</button><button class="btn-secondary" onclick="loadCardsToday()">Load today's cards</button></div></section></div>
+    </div>
+<div class="page" id="page-trackrecord" style="display:none">
+    <section class="card">
+      <div class="card-head">
+        <h2 class="section-title">VIP Performance</h2>
+        <div class="actions" style="margin-top:0;"><button class="btn-secondary mini" onclick="addCardsToTrack()">Add today's cards</button><button class="btn-secondary mini" onclick="copyTrackNotion()">Copy for Notion</button><button class="btn-secondary mini" onclick="exportTrackCSV()">Export CSV</button></div>
+      </div>
+      <p class="section-sub">One unit-based entry per bet (not per card or per sport). Performance is shown in units and ROI, never as winrate alone. 18+, play responsibly.</p>
+      <div id="trStats" class="metrics"></div>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Add a bet</h2>
+      <div class="grid2" style="margin-top:12px;">
+        <div class="field"><label>Date (DD-MM-YYYY)</label><input type="text" id="tr_date" placeholder="25-06-2026"></div>
+        <div class="field"><label>Sport</label><input type="text" id="tr_sport" placeholder="Football"></div>
+        <div class="field"><label>Match</label><input type="text" id="tr_match" placeholder="Tunisia x Netherlands"></div>
+        <div class="field"><label>Market</label><input type="text" id="tr_market" placeholder="Match result"></div>
+        <div class="field"><label>Selection</label><input type="text" id="tr_selection" placeholder="Netherlands to win"></div>
+        <div class="field"><label>Odds</label><input type="text" id="tr_odds" placeholder="1.07"></div>
+        <div class="field"><label>Stake (units)</label><input type="text" id="tr_stake" placeholder="3"></div>
+        <div class="field"><label>Risk</label><select id="tr_risk"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+      </div>
+      <div class="actions"><button class="btn" onclick="addTrackManual()">Add to log</button><span id="trAddMsg" style="color:var(--green);font-size:12.5px;font-weight:600;"></span></div>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Bet log</h2>
+      <p class="section-sub" id="trEmpty" style="display:none;">No bets logged yet. Add today's cards or a bet above.</p>
+      <div class="tablewrap"><table id="trTable"><thead><tr><th>Date</th><th>Sport</th><th>Match</th><th>Market</th><th>Selection</th><th>Odds</th><th>Stake</th><th>Result</th><th>P/L</th><th>Running</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
     </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
@@ -520,7 +550,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v38";
+var EMBEDDED_VERSION = "2026-06-25-v39";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -911,6 +941,7 @@ var PAGE_META={
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
+  trackrecord:["Track Record","One unit-based entry per bet. Performance in units and ROI."],
   vip:["Share VIP results","Share settled results as a public card to your VIP channel."],
   archive:["Archive","Look back at earlier days, as a list or calendar."],
   settings:["Settings","Channels, VIP link, import/export and the activity log."],
@@ -923,7 +954,8 @@ var SUBTABS={
   journal:[['mybets','Your bets'],['results','Results'],['bankroll','Bankroll']],
   settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
-  betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']]
+  betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
+  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -942,6 +974,7 @@ function showSub(page, sub){
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
+  else if(page==='trackrecord'){ renderTrack(sub); }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1380,6 +1413,91 @@ async function sendCards(){
   log('Betting cards sent.','ok'); showToast('Betting cards sent');
 }
 (function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
+
+
+/* ---- Track Record (per-bet, unit-based) ---- */
+var TR=[]; try{ TR=JSON.parse(localStorage.getItem('ba_trackrecord')||'[]'); }catch(e){ TR=[]; }
+function saveTR(){ localStorage.setItem('ba_trackrecord', JSON.stringify(TR)); }
+function trPL(e){ var o=parseFloat(e.odds)||0, s=parseFloat(e.stake)||0; var r=(e.result||'P').toUpperCase(); if(r==='W') return s*(o-1); if(r==='L') return -s; return 0; }
+function trNum(x){ return Math.round((x||0)*100)/100; }
+function trUnit(x){ x=trNum(x); return (x>=0?'+':'')+x.toFixed(2)+'u'; }
+function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); }
+function setTrResult(id, val){ setTrField(id,'result',val); }
+function delTrack(id){ TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); }
+function renderTrack(filter){
+  filter=filter||CUR_SUB.trackrecord||'all';
+  var list=TR.filter(function(e){ return filter==='all' || (e.risk||'medium')===filter; });
+  var staked=0,pl=0,w=0,l=0,v=0,p=0,oddsum=0,oddn=0,running=0,rows='';
+  list.forEach(function(e){
+    var r=(e.result||'P').toUpperCase(); var x=trPL(e); running+=x;
+    if(r==='W')w++; else if(r==='L')l++; else if(r==='V')v++; else p++;
+    if(r==='W'||r==='L'){ staked+=parseFloat(e.stake)||0; pl+=x; oddsum+=parseFloat(e.odds)||0; oddn++; }
+    var rc=(e.risk==='low')?'🟢':((e.risk==='high')?'🔴':'🟡');
+    var cls=x>0?'pos':(x<0?'neg':'');
+    rows+='<tr><td>'+esc(e.date||'')+'</td><td>'+esc(e.sport||'')+'</td><td>'+esc(e.match||'')+'</td><td>'+esc(e.market||'')+'</td><td>'+esc(e.selection||'')+'</td>'+
+      '<td><input type="text" style="width:62px;padding:5px 7px;" value="'+esc(e.odds||'')+'" onchange="setTrField('+e.id+',\'odds\',this.value)"></td>'+
+      '<td><input type="text" style="width:52px;padding:5px 7px;" value="'+esc(e.stake||'')+'" onchange="setTrField('+e.id+',\'stake\',this.value)"></td>'+
+      '<td><select style="width:94px;padding:5px 7px;" onchange="setTrResult('+e.id+',this.value)">'+
+      ['P','W','L','V'].map(function(o){ var lbl={P:'Pending',W:'Won',L:'Lost',V:'Void'}[o]; return '<option value="'+o+'"'+(r===o?' selected':'')+'>'+lbl+'</option>'; }).join('')+'</select></td>'+
+      '<td class="'+cls+'">'+((r==='W'||r==='L')?trUnit(x):'-')+'</td>'+
+      '<td>'+rc+' '+trUnit(running)+'</td>'+
+      '<td><button class="btn-gray mini" onclick="delTrack('+e.id+')">&#10007;</button></td></tr>';
+  });
+  var tb=document.querySelector('#trTable tbody'); if(tb) tb.innerHTML=rows;
+  var emp=document.getElementById('trEmpty'); if(emp) emp.style.display=list.length?'none':'block';
+  var settled=w+l; var roi=staked?(pl/staked*100):0;
+  var st=document.getElementById('trStats'); if(st){
+    st.innerHTML='<div class="stat"><div class="v">'+settled+'</div><div class="l">Settled bets</div></div>'+
+      '<div class="stat"><div class="v '+(pl>=0?'pos':'neg')+'">'+trUnit(pl)+'</div><div class="l">Units</div></div>'+
+      '<div class="stat"><div class="v '+(roi>=0?'pos':'neg')+'">'+(roi>=0?'+':'')+roi.toFixed(1)+'%</div><div class="l">ROI</div></div>'+
+      '<div class="stat"><div class="v">'+w+'W-'+l+'L'+(v?' '+v+'V':'')+'</div><div class="l">Record'+(p?' ('+p+' open)':'')+'</div></div>';
+  }
+}
+function addTrackManual(){
+  var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+  var match=g('tr_match'); var odds=g('tr_odds'); var stake=g('tr_stake');
+  var msg=document.getElementById('trAddMsg');
+  if(!match || !odds || !stake){ if(msg){ msg.style.color='var(--red)'; msg.textContent='Match, odds and stake are required.'; } return; }
+  TR.push({ id:Date.now(), date:g('tr_date')||dmy((new Date()).toISOString().slice(0,10)), sport:g('tr_sport')||'Football', match:match, market:g('tr_market'), selection:g('tr_selection'), odds:odds, stake:stake, result:'P', risk:g('tr_risk')||'medium' });
+  saveTR();
+  ['tr_match','tr_market','tr_selection','tr_odds','tr_stake'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  if(msg){ msg.style.color='var(--green)'; msg.textContent='Added.'; setTimeout(function(){msg.textContent='';},1500); }
+  renderTrack();
+}
+function addCardsToTrack(){
+  var cards=(typeof parseCards==='function')?parseCards(getCardsText()):[];
+  if(!cards.length){ showToast('No cards to add', false); return; }
+  var date=(EMBEDDED_CARDS&&EMBEDDED_CARDS.date)?dmy(EMBEDDED_CARDS.date):'';
+  var added=0;
+  cards.forEach(function(c){
+    var exists=TR.some(function(e){ return e.date===date && e.match===c.match && e.selection===c.selection; });
+    if(exists) return;
+    var m=(c.odds||'').match(/[\d.]+/); var odds=m?m[0]:'';
+    TR.push({ id:Date.now()+added, date:date, sport:'Football', match:c.match, market:c.market||'', selection:c.selection||'', odds:odds, stake:(parseFloat(c.stake)||1).toString(), result:'P', risk:(c.risk||'medium') });
+    added++;
+  });
+  saveTR(); renderTrack();
+  showToast(added? (added+' bets added to log') : 'Already in log');
+}
+function trExportRows(){
+  var running=0; return TR.map(function(e){ var x=trPL(e); running+=x; var r=(e.result||'P').toUpperCase();
+    return [e.date||'', e.sport||'', e.match||'', e.market||'', e.selection||'', e.odds||'', e.stake||'', (r==='P'?'':{W:'W',L:'L',V:'Void'}[r]), ((r==='W'||r==='L')?trNum(x).toFixed(2):''), trNum(running).toFixed(2)]; });
+}
+function exportTrackCSV(){
+  var head=['Date','Sport','Match','Market','Selection','Odds','Stake (u)','Result','P/L (u)','Running (u)'];
+  var lines=[head.join(',')].concat(trExportRows().map(function(r){ return r.map(function(c){ c=(''+c).replace(/"/g,'""'); return /[",]/.test(c)?'"'+c+'"':c; }).join(','); }));
+  var txt=lines.join('\n');
+  try{ navigator.clipboard.writeText(txt); }catch(e){}
+  showToast('CSV copied to clipboard');
+}
+function copyTrackNotion(){
+  var head=['Date','Sport','Match','Market','Selection','Odds','Stake (u)','Result','P/L (u)','Running (u)'];
+  var lines=[head.join('\t')].concat(trExportRows().map(function(r){ return r.join('\t'); }));
+  var txt=lines.join('\n');
+  try{ navigator.clipboard.writeText(txt); }catch(e){}
+  showToast('Copied. Paste into a Notion table.');
+}
+if(document.getElementById('trTable')){ try{ renderTrack('all'); }catch(e){} }
 
 showPage('today');
 
