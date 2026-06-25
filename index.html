@@ -17,10 +17,10 @@
   html,body{margin:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",system-ui,sans-serif;
     background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;min-height:100vh;}
-  .neon-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(72% 52% at 50% -10%,rgba(255,138,61,.11),transparent 60%),radial-gradient(46% 42% at 90% 94%,rgba(255,122,26,.06),transparent 60%),radial-gradient(42% 42% at 4% 102%,rgba(255,160,77,.045),transparent 60%),#050505;}
-  .neon-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(125% 115% at 50% 38%,transparent 50%,rgba(0,0,0,.6));}
-  .neon-bg::before{content:"";position:absolute;inset:0;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-  .neon-bg svg{position:absolute;inset:-6% -4%;width:108%;height:115%;opacity:.4;filter:blur(.4px);}
+  .neon-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(125% 110% at 50% -5%, #1c1c1f 0%, #141416 32%, #0c0c0d 64%, #060607 100%);}
+  .neon-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 120% at 50% 34%, transparent 42%, rgba(0,0,0,.72));}
+  .neon-bg::before{content:"";position:absolute;inset:0;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .neon-bg svg{display:none;}
 
   .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:13px;height:52px;padding:0 16px;
     background:rgba(8,8,11,.72);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);
@@ -187,6 +187,42 @@
 
   .chprog{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:14px;}
   .chprog-bar{height:100%;background:linear-gradient(90deg,#ff7a1a,#ffa04d);border-radius:999px;transition:width .4s;}
+
+  /* logo badge */
+  .logo-badge{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;flex:0 0 auto;}
+  .topbar .logo-badge{width:30px;height:30px;margin-left:auto;box-shadow:0 0 16px rgba(255,122,26,.35);}
+  /* sidebar sections + brand/profile */
+  .side-section{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;padding:14px 12px 6px;opacity:.85;}
+  .side-section:first-child{padding-top:2px;}
+  .nav-sub{display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:1px dashed var(--line);background:transparent;color:var(--muted);font-weight:600;font-size:12.5px;padding:7px 12px;border-radius:9px;cursor:pointer;margin:2px 0 2px 16px;width:calc(100% - 16px);transition:.13s;}
+  .nav-sub:hover{background:rgba(255,255,255,.05);color:var(--text);border-style:solid;}
+  .side-foot{margin-top:auto;}
+  .brand-row{display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid var(--line2);cursor:pointer;border-radius:10px;transition:.13s;}
+  .brand-row:hover{background:rgba(255,255,255,.05);}
+  .brand-row .logo-badge{width:34px;height:34px;}
+  .brand-name{font-size:13.5px;font-weight:700;color:var(--text);line-height:1.15;}
+  .brand-sub{font-size:11px;color:var(--muted);line-height:1.15;margin-top:1px;}
+  .brand-gear{margin-left:auto;color:var(--muted);display:flex;}
+  /* daily bets grouping */
+  .daily-group{margin:18px 0 8px;display:flex;align-items:center;gap:10px;}
+  .daily-group .dg-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text);}
+  .daily-group .dg-count{font-size:11px;color:var(--muted);font-weight:600;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:999px;padding:2px 9px;}
+  .daily-group .dg-line{flex:1;height:1px;background:var(--line2);}
+  .cat-chip{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;}
+  .cc-FREE{background:rgba(48,209,88,.16);color:#48d169;} .cc-LOW{background:rgba(255,122,26,.16);color:#ff9a4d;}
+  .cc-MID{background:rgba(91,140,255,.16);color:#88aaff;} .cc-HIGH{background:rgba(255,69,58,.16);color:#ff7b72;}
+  .cc-LUCKY{background:rgba(191,90,242,.18);color:#c98cf5;} .cc-CUSTOM{background:rgba(255,255,255,.08);color:var(--muted);}
+  /* archive views */
+  .seg2{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:10px;padding:3px;gap:2px;margin-bottom:14px;}
+  .seg2 button{border:none;background:transparent;color:var(--muted);font-weight:600;font-size:13px;padding:6px 16px;border-radius:8px;cursor:pointer;}
+  .seg2 button.active{background:var(--accent);color:#fff;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px;}
+  .cal-h{font-size:10px;color:var(--muted);text-transform:uppercase;text-align:center;font-weight:700;padding-bottom:4px;}
+  .cal-cell{aspect-ratio:1;border:1px solid var(--line2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);background:rgba(255,255,255,.02);}
+  .cal-cell.has{background:rgba(255,122,26,.14);border-color:rgba(255,122,26,.4);color:#fff;font-weight:700;cursor:pointer;}
+  .cal-cell.has:hover{background:rgba(255,122,26,.26);}
+  .cal-cell.empty{border:none;background:transparent;}
+  .cal-month{font-size:14px;font-weight:600;text-align:center;margin:4px 0 10px;}
 </style>
 </head>
 <body>
@@ -197,12 +233,12 @@
 </svg></div>
 <div id="gate">
   <div class="gate-box">
-    <h2>VIP login</h2>
-    <input type="text" id="g_user" placeholder="Gebruikersnaam" autocomplete="off">
-    <input type="password" id="g_pass" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="btn" onclick="doLogin()">Inloggen</button>
+    <h2>BetLife365 login</h2>
+    <input type="text" id="g_user" placeholder="Username" autocomplete="off">
+    <input type="password" id="g_pass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn" onclick="doLogin()">Log in</button>
     <div id="g_err"></div>
-    <p class="muted-sm" style="margin:14px 0 0;">Beveiliging op clientniveau. Deel het wachtwoord alleen met VIP-leden.</p>
+    <p class="muted-sm" style="margin:14px 0 0;">Client-side protection. Share the password with VIP members only.</p>
   </div>
 </div>
 
@@ -216,82 +252,97 @@
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="profileModal">
+  <div class="modal-box" style="text-align:left;">
+    <h3 style="text-align:center;">Profile settings</h3>
+    <p style="text-align:center;">Change your dashboard login. Saved only in this browser.</p>
+    <label>New username</label>
+    <input type="text" id="pf_user" placeholder="username" autocomplete="off">
+    <label style="margin-top:10px;">New password</label>
+    <input type="password" id="pf_pass" placeholder="new password" autocomplete="new-password">
+    <div id="pf_msg" style="font-size:12.5px;color:var(--green);min-height:15px;margin-top:8px;text-align:center;"></div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button class="btn-secondary" onclick="closeProfile()">Cancel</button>
+      <button class="btn" onclick="saveProfile()">Save login</button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
 
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
-  <div class="crumbs"><span class="crumb-muted">Platform</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Vandaag</span></div>
-  <div class="brand-mark">&#10022;</div>
+  <div class="crumbs"><span class="crumb-muted">BetLife365</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
+  <span class="logo-badge"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
 </header>
 
 <div class="shell">
   <div class="side-backdrop" id="sideBackdrop" onclick="closeSidebar()"></div>
   <aside class="sidebar" id="sidebar">
     <div class="side-scroll">
-      <div class="side-label">Platform</div>
-      <nav>
-      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Vandaag</button>
-      <button class="nav-item" data-page="mybets" onclick="showPage('mybets')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span> Mijn bets</button>
-      <button class="nav-item" data-page="results" onclick="showPage('results')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span> Resultaten</button>
-      <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> VIP delen</button>
-      <button class="nav-item" data-page="bankroll" onclick="showPage('bankroll')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14" r="1.2"/></svg></span> Bankroll</button>
+      <div class="side-section">Betting</div>
+      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily bets</button>
+      <button class="nav-sub" data-page="edit" onclick="showPage('edit')">+ Edit lists</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
-      <div class="nav-sep"></div>
-      <button class="nav-item" data-page="edit" onclick="showPage('edit')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> Lijsten</button>
-      <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Eigen bericht</button>
-      <button class="nav-item" data-page="archive" onclick="showPage('archive')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg></span> Archief</button>
-      <button class="nav-item" data-page="channels" onclick="showPage('channels')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span> Kanalen</button>
-      <button class="nav-item" data-page="log" onclick="showPage('log')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18l2-1 2 1 2-1 2 1 2-1 2 1V3l-2 1-2-1-2 1-2-1-2 1Z"/><path d="M9 8h6M9 12h6"/></svg></span> Logboek</button>
-      </nav>
+      <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
+      <div class="side-section">Discord</div>
+      <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Messaging</button>
+      <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> Share VIP results</button>
+      <div class="side-section">Ledger</div>
+      <button class="nav-item" data-page="archive" onclick="showPage('archive')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg></span> Archive</button>
     </div>
-    <div class="side-user">
-      <div class="avatar">NV</div>
-      <div class="side-user-meta"><div class="su-name">NoCopyrightVault</div><div class="su-mail">VIP dashboard</div></div>
+    <div class="side-foot">
+      <button class="nav-item" data-page="settings" onclick="showPage('settings')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span> Settings</button>
+      <div class="brand-row" onclick="openProfile()" title="Profile and settings">
+        <span class="logo-badge" style="width:34px;height:34px;"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
+        <div><div class="brand-name">BetLife365</div><div class="brand-sub">Profile and settings</div></div>
+        <span class="brand-gear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span>
+      </div>
     </div>
+  
   </aside>
   <main class="main">
     <div class="app">
       <div class="page-head">
-        <h1 class="page-title" id="pageTitle">Vandaag</h1>
-        <p class="page-sub" id="pageSub">Vandaag&rsquo;s lijsten, klaar om te versturen naar je kanalen.</p>
+        <h1 class="page-title" id="pageTitle">Daily bets</h1>
+        <p class="page-sub" id="pageSub">Today's lists, grouped and ready to send to your channels.</p>
       </div>
-      <div id="status" class="banner">Laden...</div>
+      <div id="status" class="banner">Loading...</div>
       <div class="page" id="page-today">
     <section class="card">
       <div class="card-head">
-        <h2 class="section-title">Vandaag <span class="pill" id="count">0 berichten</span></h2>
-        <button class="btn" onclick="sendAll()" id="sendAllBtn">Verstuur alles</button>
+        <h2 class="section-title">Today <span class="pill" id="count">0 messages</span></h2>
+        <button class="btn" onclick="sendAll()" id="sendAllBtn">Send all</button>
       </div>
-      <p class="section-sub">Elk bericht gaat automatisch naar zijn eigen kanaal. Versturen vraagt eerst bevestiging.</p>
+      <p class="section-sub">Each message goes to its own channel. Sending always asks for confirmation. Bets are grouped by type below.</p>
       <div id="sportFilter" class="sportbar"></div>
       <div id="cards"></div>
     </section>
     </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
-      <h2 class="section-title">Mijn bets</h2>
-      <p class="section-sub">Vul de werkelijk geplaatste odd in en zet het resultaat. Werkt direct door in resultaten en bankroll.</p>
+      <h2 class="section-title">Your bets</h2>
+      <p class="section-sub">Enter the odds you actually placed and mark the result. This flows into results and bankroll.</p>
       <div id="sportFilterBets" class="sportbar"></div>
-      <div class="tablewrap"><table id="betEditor"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Geplaatste odd</th><th>Resultaat</th></tr></thead><tbody></tbody></table></div>
-      <div class="actions"><button class="btn-ghost" onclick="resetBetEdits()">Reset aanpassingen</button></div>
+      <div class="tablewrap"><table id="betEditor"><thead><tr><th>Date</th><th>Sport</th><th>List</th><th>Placed odd</th><th>Result</th></tr></thead><tbody></tbody></table></div>
+      <div class="actions"><button class="btn-ghost" onclick="resetBetEdits()">Reset changes</button></div>
     </section>
     </div>
 <div class="page" id="page-results" style="display:none">
     <section class="card">
-      <h2 class="section-title">Resultaten</h2>
+      <h2 class="section-title">Results</h2>
       <div id="statsRow" class="metrics"></div>
       <div id="sportFilterResults" class="sportbar"></div>
-      <div class="tablewrap"><table id="resultsTable"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Odds</th><th>Resultaat</th><th>P/L</th></tr></thead><tbody></tbody></table></div>
-      <p class="section-sub" id="noResults" style="display:none;">Nog geen resultaten geladen.</p>
+      <div class="tablewrap"><table id="resultsTable"><thead><tr><th>Date</th><th>Sport</th><th>List</th><th>Odds</th><th>Result</th><th>P/L</th></tr></thead><tbody></tbody></table></div>
+      <p class="section-sub" id="noResults" style="display:none;">No results yet.</p>
     </section>
     </div>
 <div class="page" id="page-vip" style="display:none">
     <section class="card">
-      <h2 class="section-title">VIP results delen</h2>
-      <p class="section-sub">Afgeronde lijsten als publieke result-kaart voor je VIP-kanaal.</p>
+      <h2 class="section-title">Share VIP results</h2>
+      <p class="section-sub">Settled lists as a public result card for your VIP channel.</p>
       <div class="actions">
-        <button class="btn" onclick="shareAllNew()">Deel nieuwe resultaten</button>
-        <label class="check"><input type="checkbox" id="autoShare" onchange="saveAll()"> Automatisch delen zodra ik W/V zet</label>
+        <button class="btn" onclick="shareAllNew()">Share new results</button>
+        <label class="check"><input type="checkbox" id="autoShare" onchange="saveAll()"> Auto-share as soon as I mark W/L</label>
       </div>
       <div id="sportFilterShare" class="sportbar"></div>
       <div id="shareList" style="margin-top:14px;"></div>
@@ -299,24 +350,24 @@
     </div>
 <div class="page" id="page-bankroll" style="display:none">
     <section class="card">
-      <h2 class="section-title">Bankroll instellingen</h2>
+      <h2 class="section-title">Bankroll settings</h2>
       <div class="grid2" style="margin-top:14px;">
-        <div class="field"><label>Start bankroll (EUR)</label><input type="text" id="bk_start" value="1000"></div>
-        <div class="field"><label>Huidige bankroll (EUR), leeg = auto</label><input type="text" id="bk_current" placeholder="auto"></div>
-        <div class="field"><label>Max risico per dag (% bankroll)</label><input type="text" id="bk_maxday" value="6"></div>
+        <div class="field"><label>Starting bankroll (EUR)</label><input type="text" id="bk_start" value="1000"></div>
+        <div class="field"><label>Current bankroll (EUR), empty = auto</label><input type="text" id="bk_current" placeholder="auto"></div>
+        <div class="field"><label>Max risk per day (% bankroll)</label><input type="text" id="bk_maxday" value="6"></div>
       </div>
-      <p class="section-sub" style="margin-top:16px;">Risk range per bet-type (% van bankroll per lijst), min en max.</p>
+      <p class="section-sub" style="margin-top:16px;">Risk range per bet type (% of bankroll per list), min and max.</p>
       <div class="grid2">
         <div class="field"><label>LOW range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LOW_min" value="1"><input type="text" id="bk_LOW_max" value="2"></div></div>
         <div class="field"><label>MID range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_MID_min" value="0.5"><input type="text" id="bk_MID_max" value="1"></div></div>
         <div class="field"><label>HIGH range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_HIGH_min" value="0.25"><input type="text" id="bk_HIGH_max" value="0.5"></div></div>
         <div class="field"><label>LUCKY SHOT range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LUCKY_min" value="0.05"><input type="text" id="bk_LUCKY_max" value="0.1"></div></div>
       </div>
-      <div class="actions"><button class="btn-secondary" onclick="saveBankroll()">Bewaar &amp; herbereken</button><span id="bkSave"></span></div>
+      <div class="actions"><button class="btn-secondary" onclick="saveBankroll()">Save &amp; recalculate</button><span id="bkSave"></span></div>
     </section>
     <section class="card">
-      <h2 class="section-title">Aanbevolen inzet</h2>
-      <div class="tablewrap"><table id="stakeTable"><thead><tr><th>Bet-type</th><th>Risk range %</th><th>Inzet (EUR)</th><th>Gem. odd</th><th>Mogelijke winst (EUR)</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="section-title">Recommended stake</h2>
+      <div class="tablewrap"><table id="stakeTable"><thead><tr><th>Bet type</th><th>Risk range %</th><th>Stake (EUR)</th><th>Avg odd</th><th>Potential win (EUR)</th></tr></thead><tbody></tbody></table></div>
       <p class="section-sub" id="dayExposure" style="margin-top:12px;"></p>
     </section>
     <section class="card">
@@ -327,70 +378,70 @@
 <div class="page" id="page-challenge" style="display:none">
     <section class="card">
       <h2 class="section-title">$10 to $1.000 Challenge</h2>
-      <p class="section-sub">Elke dag de zekerste bet met odd x2 of meer. Win = pot verdubbelt en een dag verder. Verlies = challenge gefaald (de inzet gaat all-in). 18+, speel verantwoord.</p>
+      <p class="section-sub">Each day the safest bet at odds x2 or more. Win = pot doubles and a day further. Loss = challenge failed (the stake goes all-in). 18+, play responsibly.</p>
       <div id="challengeStats" class="metrics"></div>
       <div id="challengeProg"></div>
     </section>
     <div id="challengeView"></div>
     <section class="card">
-      <h2 class="section-title">Verdubbel-schema</h2>
-      <div class="tablewrap"><table id="challengeSchedule"><thead><tr><th>Dag</th><th>Inzet</th><th>Doel bij winst</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="section-title">Doubling schedule</h2>
+      <div class="tablewrap"><table id="challengeSchedule"><thead><tr><th>Day</th><th>Stake</th><th>Target on win</th></tr></thead><tbody></tbody></table></div>
     </section>
     </div>
 <div class="page" id="page-edit" style="display:none">
     <section class="card">
-      <h2 class="section-title">Lijsten bewerken</h2>
-      <p class="section-sub">Bewerk vrij. Scheid elk bericht met een regel <code>===NEXT MESSAGE===</code>.</p>
+      <h2 class="section-title">Edit lists</h2>
+      <p class="section-sub">Edit freely. Separate each message with a line <code>===NEXT MESSAGE===</code>.</p>
       <textarea id="raw" spellcheck="false"></textarea>
       <div class="actions">
-        <button class="btn-secondary" onclick="parseMessages()">Vernieuw preview</button>
-        <button class="btn-secondary" onclick="loadToday()">Laad lijsten van vandaag</button>
-        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Importeer uit bestand</button>
+        <button class="btn-secondary" onclick="parseMessages()">Refresh preview</button>
+        <button class="btn-secondary" onclick="loadToday()">Load today's lists</button>
+        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Import from file</button>
         <input type="file" id="fileInput" accept=".txt,.js" style="display:none" onchange="importFile(this)">
-        <button class="btn-ghost" onclick="resetDefault()">Herstel standaard</button>
+        <button class="btn-ghost" onclick="resetDefault()">Reset to default</button>
       </div>
     </section>
     </div>
 <div class="page" id="page-custom" style="display:none">
     <section class="card">
-      <h2 class="section-title">Eigen bericht</h2>
-      <p class="section-sub">Vrije tekst naar je CUSTOM-kanaal. {VIP_LINK} en {VIP_CHANNEL} worden automatisch vervangen.</p>
-      <textarea id="custom_msg" spellcheck="false" placeholder="Typ hier je bericht..."></textarea>
-      <div class="actions"><button class="btn" onclick="sendCustom()">Verstuur naar CUSTOM</button><span id="customState"></span></div>
+      <h2 class="section-title">Messaging</h2>
+      <p class="section-sub">Free text to your CUSTOM channel. {VIP_LINK} and {VIP_CHANNEL} are replaced automatically.</p>
+      <textarea id="custom_msg" spellcheck="false" placeholder="Type your message here..."></textarea>
+      <div class="actions"><button class="btn" onclick="sendCustom()">Send to CUSTOM</button><span id="customState"></span></div>
     </section>
     </div>
 <div class="page" id="page-archive" style="display:none">
     <section class="card">
-      <h2 class="section-title">Archief</h2>
-      <div class="actions" style="margin-top:0;"><label class="muted-sm" style="margin:0;">Kies een dag:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
+      <h2 class="section-title">Archive</h2>
+      <div class="seg2" id="archiveViewToggle"><button data-av="list" class="active" onclick="setArchiveView('list')">List</button><button data-av="cal" onclick="setArchiveView('cal')">Calendar</button></div><div id="archiveCal" style="display:none;margin-bottom:14px;"></div><div class="actions" id="archiveListPick" style="margin-top:0;"><label class="muted-sm" style="margin:0;">Pick a day:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
       <div id="archiveView" style="margin-top:14px;"></div>
     </section>
     </div>
 <div class="page" id="page-channels" style="display:none">
     <section class="card">
-      <h2 class="section-title">Kanalen &amp; instellingen</h2>
-      <p class="section-sub">Webhooks per kanaal en je VIP-link/kanaal. Alles wordt lokaal in je browser bewaard.</p>
+      <h2 class="section-title">Channels &amp; settings</h2>
+      <p class="section-sub">A webhook per channel plus your VIP link/channel. Everything is saved locally in your browser.</p>
       <div class="grid2">
-        <div class="field"><label>LOW ODD kanaal</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div></div>
-        <div class="field"><label>MID ODD kanaal</label><input type="text" id="hook_MID" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('MID')">Test</button></div></div>
-        <div class="field"><label>HIGH ODD kanaal</label><input type="text" id="hook_HIGH" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('HIGH')">Test</button></div></div>
-        <div class="field"><label>LUCKY SHOT kanaal</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
-        <div class="field"><label>VIP RESULTS kanaal</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
-        <div class="field"><label>FREE BET kanaal</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM kanaal</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE kanaal ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div>
+        <div class="field"><label>LOW ODD channel</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div></div>
+        <div class="field"><label>MID ODD channel</label><input type="text" id="hook_MID" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('MID')">Test</button></div></div>
+        <div class="field"><label>HIGH ODD channel</label><input type="text" id="hook_HIGH" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('HIGH')">Test</button></div></div>
+        <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
+        <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
+        <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
+        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div>
       </div>
       <div class="grid2" style="margin-top:14px;">
-        <div class="field"><label>VIP-link voor {VIP_LINK}: invite-link, kanaal-link of kanaal-ID</label><input type="text" id="vip_link" placeholder="https://discord.gg/... of kanaal-link / kanaal-ID"></div>
-        <div class="field"><label>VIP-upgrade kanaal: kanaal-LINK of kanaal-ID (voor {VIP_CHANNEL})</label><input type="text" id="vip_channel" placeholder="https://discord.com/channels/... of kanaal-ID"></div>
+        <div class="field"><label>VIP link for {VIP_LINK}: invite link, channel link or channel ID</label><input type="text" id="vip_link" placeholder="https://discord.gg/... of kanaal-link / kanaal-ID"></div>
+        <div class="field"><label>VIP upgrade channel: channel LINK or channel ID (for {VIP_CHANNEL})</label><input type="text" id="vip_channel" placeholder="https://discord.com/channels/... of kanaal-ID"></div>
       </div>
-      <div class="actions"><button class="btn-secondary" onclick="saveAll()">Bewaar instellingen</button><span id="saveState"></span></div>
-      <p class="section-sub" style="margin-top:18px;">Instellingen overzetten naar een ander apparaat (bv. je telefoon): klik Exporteren, kopieer de code, en plak die op je telefoon onder Importeren.</p>
-      <textarea id="cfg_code" spellcheck="false" placeholder="Instellingen-code verschijnt hier bij Exporteren / plak hier je code om te Importeren" style="min-height:70px;"></textarea>
-      <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Exporteer instellingen</button><button class="btn-secondary" onclick="importSettings()">Importeer instellingen</button><span id="cfgState"></span></div>
+      <div class="actions"><button class="btn-secondary" onclick="saveAll()">Save settings</button><span id="saveState"></span></div>
+      <p class="section-sub" style="margin-top:18px;">Move settings to another device (e.g. your phone): click Export, copy the code, and paste it on your phone under Import.</p>
+      <textarea id="cfg_code" spellcheck="false" placeholder="Settings code appears here on Export / paste your code here to Import" style="min-height:70px;"></textarea>
+      <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Export settings</button><button class="btn-secondary" onclick="importSettings()">Import settings</button><span id="cfgState"></span></div>
     </section>
     </div>
 <div class="page" id="page-log" style="display:none">
-    <section class="card"><h2 class="section-title">Logboek</h2><div id="log">Klaar.</div></section>
+    <section class="card"><h2 class="section-title">Activity log</h2><div id="log">Ready.</div></section>
     </div>
     </div>
   </main>
@@ -405,15 +456,29 @@ async function doLogin(){
   try{
     const u=await sha((document.getElementById('g_user').value||'').trim());
     const p=await sha(document.getElementById('g_pass').value||'');
-    if(u===AUTH.user && p===AUTH.pass){ sessionStorage.setItem('ba_auth','1'); document.getElementById('gate').style.display='none'; }
-    else document.getElementById('g_err').textContent='Onjuiste inloggegevens.';
-  }catch(e){ document.getElementById('g_err').textContent='Inloggen vereist https (secure context).'; }
+    const cu=localStorage.getItem('ba_cred_user')||AUTH.user;
+    const cp=localStorage.getItem('ba_cred_pass')||AUTH.pass;
+    if(u===cu && p===cp){ sessionStorage.setItem('ba_auth','1'); document.getElementById('gate').style.display='none'; }
+    else document.getElementById('g_err').textContent='Incorrect login details.';
+  }catch(e){ document.getElementById('g_err').textContent='Login requires https (secure context).'; }
+}
+function openProfile(){ var m=document.getElementById('profileModal'); if(!m) return; document.getElementById('pf_msg').textContent=''; m.classList.add('show'); m.onclick=function(e){ if(e.target===m) closeProfile(); }; }
+function closeProfile(){ var m=document.getElementById('profileModal'); if(m) m.classList.remove('show'); }
+async function saveProfile(){
+  var u=(document.getElementById('pf_user').value||'').trim(); var p=document.getElementById('pf_pass').value||'';
+  var msg=document.getElementById('pf_msg');
+  if(!u || !p){ msg.style.color='var(--red)'; msg.textContent='Enter both a username and a password.'; return; }
+  try{ localStorage.setItem('ba_cred_user', await sha(u)); localStorage.setItem('ba_cred_pass', await sha(p));
+    msg.style.color='var(--green)'; msg.textContent='Saved. Use these the next time you log in.';
+    document.getElementById('pf_user').value=''; document.getElementById('pf_pass').value='';
+    if(typeof showToast==='function') showToast('Login updated'); setTimeout(closeProfile,1300);
+  }catch(e){ msg.style.color='var(--red)'; msg.textContent='Could not save: '+e.message; }
 }
 if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gate'); if(_g) _g.style.display='none'; }
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v35";
+var EMBEDDED_VERSION = "2026-06-25-v36";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -534,15 +599,25 @@ function applyTokens(t){
 function parseMessages(){
   const raw=document.getElementById('raw').value;
   messages=raw.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s);
-  document.getElementById('count').textContent=messages.length+' berichten';
+  document.getElementById('count').textContent=messages.length+(messages.length===1?' message':' messages');
   const cards=document.getElementById('cards'); cards.innerHTML='';
-  if(!messages.length){ cards.innerHTML='<p class="small">Geen lijsten in het tekstvak. Klik "Laad lijsten van vandaag" of "Herstel standaardlijsten".</p>'; saveAll(true); return; }
-  messages.forEach((m,i)=>{
-    const cat=detectCategory(m); const div=document.createElement('div'); div.className='card';
-    div.innerHTML='<div class="meta"><span>Bericht '+(i+1)+' / '+messages.length+' &nbsp; <span class="chan">naar '+catLabel(cat)+' kanaal</span></span>'+
-      '<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="sendOne('+i+')">Verstuur dit</button></div>'+
-      '<div class="disc">'+renderDiscord(applyTokens(m))+'</div>';
-    cards.appendChild(div);
+  if(!messages.length){ cards.innerHTML='<p class="small">No lists in the text box. Click "Load today\'s lists" or "Reset to default".</p>'; saveAll(true); return; }
+  var order=['FREE','LOW','MID','HIGH','LUCKY','CUSTOM'];
+  var labels={FREE:'Free bet',LOW:'Low odds',MID:'Mid odds',HIGH:'High odds',LUCKY:'Lucky shots',CUSTOM:'Other'};
+  var byCat={}; messages.forEach(function(m,i){ var c=detectCategory(m); (byCat[c]=byCat[c]||[]).push(i); });
+  var cats=order.filter(function(c){return byCat[c];}); Object.keys(byCat).forEach(function(c){ if(cats.indexOf(c)<0)cats.push(c); });
+  cats.forEach(function(c){
+    var idxs=byCat[c];
+    var hdr=document.createElement('div'); hdr.className='daily-group';
+    hdr.innerHTML='<span class="cat-chip cc-'+c+'">'+catLabel(c)+'</span><span class="dg-title">'+(labels[c]||c)+'</span><span class="dg-count">'+idxs.length+'</span><span class="dg-line"></span>';
+    cards.appendChild(hdr);
+    idxs.forEach(function(i){
+      var m=messages[i]; var div=document.createElement('div'); div.className='card'; div.setAttribute('data-sport', detectSport(m));
+      div.innerHTML='<div class="meta"><span><span class="chan">to '+catLabel(c)+' channel</span></span>'+
+        '<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="sendOne('+i+')">Send</button></div>'+
+        '<div class="disc">'+renderDiscord(applyTokens(m))+'</div>';
+      cards.appendChild(div);
+    });
   });
   saveAll(true);
 }
@@ -552,7 +627,7 @@ async function postToDiscord(content, hook){
   const res=await fetch(hook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
   if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
 }
-async function testHook(cat){ try{ log('Testbericht naar '+catLabel(cat)+'-kanaal...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' kanaal werkt.', getHook(cat)); log('OK - test verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function testHook(cat){ try{ log('Test message to '+catLabel(cat)+' channel...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' channel works.', getHook(cat)); log('OK - test sent to '+catLabel(cat)+'.', 'ok'); }catch(e){ log('FAILED ('+catLabel(cat)+'): '+e.message, 'err'); } }
 function askConfirm(msg, opts){
   return new Promise(function(resolve){
     var ov=document.getElementById('confirmModal');
@@ -575,22 +650,22 @@ function showToast(msg, ok){
   t.classList.add('show');
   clearTimeout(_toastT); _toastT=setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
-async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Bericht '+(i+1)+' versturen naar het '+catLabel(cat)+'-kanaal?')){ log('Geannuleerd.', 'info'); return; } try{ log('Bericht '+(i+1)+' naar '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - bericht '+(i+1)+' verstuurd naar '+catLabel(cat)+'.', 'ok'); showToast('Verzonden naar '+catLabel(cat)); }catch(e){ log('MISLUKT bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Mislukt: '+e.message, false); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Send message '+(i+1)+' to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Message '+(i+1)+' to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - message '+(i+1)+' sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent to '+catLabel(cat)); }catch(e){ log('FAILED bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
-  if(!messages.length){ log('Geen berichten geladen.', 'err'); return; }
-  if(!await askConfirm('Alle '+messages.length+' berichten versturen, elk naar zijn eigen kanaal?')){ log('Geannuleerd.', 'info'); return; }
+  if(!messages.length){ log('No messages loaded.', 'err'); return; }
+  if(!await askConfirm('Alle '+messages.length+' messages, each to its own channel?')){ log('Cancelled.', 'info'); return; }
   const btn=document.getElementById('sendAllBtn'); btn.disabled=true;
-  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('Verstuurd '+(i+1)+' / '+messages.length+' naar '+catLabel(cat), 'ok'); }catch(e){ log('MISLUKT '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
-  log('Klaar met versturen.', 'info'); btn.disabled=false; showToast('Alle berichten verzonden');
+  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('Sent '+(i+1)+' / '+messages.length+' to '+catLabel(cat), 'ok'); }catch(e){ log('FAILED '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
+  log('Done sending.', 'info'); btn.disabled=false; showToast('All messages sent');
 }
 
 async function sendCustom(){
   const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
   localStorage.setItem('ba_custom_msg', ta.value);
-  if(!t){ log('Custom bericht is leeg.', 'err'); return; }
-  if(!await askConfirm('Dit bericht naar je CUSTOM-kanaal sturen?')) return;
-  try{ log('Custom bericht versturen...', 'info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - custom bericht verstuurd.', 'ok'); showToast('Verzonden naar CUSTOM'); const e=document.getElementById('customState'); e.textContent='verstuurd'; setTimeout(()=>e.textContent='',1500); }
-  catch(e){ log('MISLUKT custom: '+e.message, 'err'); }
+  if(!t){ log('Custom message is empty.', 'err'); return; }
+  if(!await askConfirm('Send this message to your CUSTOM channel?')) return;
+  try{ log('Sending custom message...', 'info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - custom message sent.', 'ok'); showToast('Sent to CUSTOM'); const e=document.getElementById('customState'); e.textContent='sent'; setTimeout(()=>e.textContent='',1500); }
+  catch(e){ log('FAILED custom: '+e.message, 'err'); }
 }
 function saveAll(silent){
   CHANNELS.forEach(c=>localStorage.setItem('ba_hook_'+c, getHook(c)));
@@ -605,7 +680,7 @@ function saveAll(silent){
   localStorage.setItem('ba_messages', document.getElementById('raw').value);
   if(!silent){ const e=document.getElementById('saveState'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
 }
-function resetDefault(){ if(!confirm('Standaardlijsten terugzetten?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
+function resetDefault(){ if(!confirm('Reset to the default lists?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
 
 let BET_EDITS={}; try{ BET_EDITS=JSON.parse(localStorage.getItem('ba_betedits')||'{}'); }catch(e){ BET_EDITS={}; }
 function betId(r){ return r.date+'|'+r.sport+'|'+r.list; }
@@ -618,7 +693,7 @@ function updateBet(id, field, val){
   const auto=document.getElementById('autoShare');
   if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id, true);
 }
-function resetBetEdits(){ if(!confirm('Alle handmatige odds/resultaten terugzetten?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
+function resetBetEdits(){ if(!confirm('Reset all manual odds/results?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
 function renderBetEditor(){
   const data=window.RESULTS||[]; const tb=document.querySelector('#betEditor tbody'); if(!tb) return; tb.innerHTML='';
   data.forEach(r=>{
@@ -626,7 +701,7 @@ function renderBetEditor(){
     const opt=v=>'<option value="'+v+'"'+(e.result.toUpperCase()===v?' selected':'')+'>';
     tb.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td>'+
       '<td><input type="text" style="width:90px;padding:6px 8px;" value="'+e.odds.toFixed(2)+'" onchange="updateBet(\''+id+'\',\'odds\',this.value)"></td>'+
-      '<td><select style="width:140px;padding:6px 8px;" onchange="updateBet(\''+id+'\',\'result\',this.value)">'+opt('PENDING')+'Open</option>'+opt('W')+'Gewonnen</option>'+opt('V')+'Verloren</option>'+'</select></td></tr>';
+      '<td><select style="width:140px;padding:6px 8px;" onchange="updateBet(\''+id+'\',\'result\',this.value)">'+opt('PENDING')+'Open</option>'+opt('W')+'Won</option>'+opt('V')+'Lost</option>'+'</select></td></tr>';
   });
 }
 
@@ -653,16 +728,16 @@ function buildResultCard(r){
 function renderShare(){
   const wrap=document.getElementById('shareList'); if(!wrap) return;
   const settled=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; });
-  if(!settled.length){ wrap.innerHTML='<p class="small">Nog geen afgeronde lijsten. Zet eerst een resultaat op W of V in "Mijn bets".</p>'; return; }
+  if(!settled.length){ wrap.innerHTML='<p class="small">No settled lists yet. First mark a result as W or L under "Your bets".</p>'; return; }
   wrap.innerHTML='';
   settled.forEach(r=>{ const id=betId(r); const done=!!SHARED[id]; const div=document.createElement('div'); div.className='card';
-    div.innerHTML='<div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">gedeeld</span>':'')+'</span>'+
-      '<button class="'+(done?'btn-gray':'btn-accent')+'" style="padding:5px 12px;font-size:12px;" onclick="shareOne(\''+id+'\')">'+(done?'Opnieuw delen':'Deel naar VIP')+'</button></div>'+
+    div.innerHTML='<div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">shared</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" style="padding:5px 12px;font-size:12px;" onclick="shareOne(\''+id+'\')">'+(done?'Share again':'Share to VIP')+'</button></div>'+
       '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div>';
     wrap.appendChild(div); });
 }
-async function shareOne(id, skipConfirm, silentToast){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; if(!skipConfirm && !await askConfirm('Dit resultaat naar je VIP-kanaal delen?')){ log('Geannuleerd.', 'info'); return; } try{ log('Resultaat delen naar VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - resultaat gedeeld in VIP.', 'ok'); renderShare(); if(!silentToast) showToast('Gedeeld in VIP'); }catch(e){ log('MISLUKT VIP-deel: '+e.message, 'err'); showToast('Mislukt: '+e.message, false); } }
-async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('Geen nieuwe afgeronde resultaten om te delen.', 'info'); return; } if(!await askConfirm(s.length+' nieuwe resultaten naar je VIP-kanaal delen?')) return; for(const r of s){ await shareOne(betId(r), true, true); await new Promise(x=>setTimeout(x,1200)); } log('Klaar met delen.', 'info'); showToast(s.length+' resultaten gedeeld in VIP'); }
+async function shareOne(id, skipConfirm, silentToast){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; if(!skipConfirm && !await askConfirm('Share this result to your VIP channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sharing result to VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - result shared to VIP.', 'ok'); renderShare(); if(!silentToast) showToast('Shared to VIP'); }catch(e){ log('FAILED VIP share: '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
+async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('No new settled results to share.', 'info'); return; } if(!await askConfirm(s.length+' new results to your VIP channel?')) return; for(const r of s){ await shareOne(betId(r), true, true); await new Promise(x=>setTimeout(x,1200)); } log('Done sharing.', 'info'); showToast(s.length+' results shared to VIP'); }
 
 function renderResults(){
   const data=window.RESULTS||[]; const stake=(window.SETTINGS&&window.SETTINGS.stake)||1; const cur=(window.SETTINGS&&window.SETTINGS.currency)||'u';
@@ -715,22 +790,22 @@ function renderBankroll(){
   const pend=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u!=='W'&&u!=='V'; });
   let dayMin=0,dayMax=0; pend.forEach(r=>{ const rr=pctRange(mapList(r.list)); dayMin+=current*rr[0]/100; dayMax+=current*rr[1]/100; });
   const pMin=current?dayMin/current*100:0,pMax=current?dayMax/current*100:0,maxday=num('bk_maxday',6),warn=pMax>maxday;
-  document.getElementById('dayExposure').innerHTML='Openstaande lijsten vandaag: <b>'+pend.length+'</b>, totale inzet <b>EUR '+dayMin.toFixed(2)+' - '+dayMax.toFixed(2)+'</b> (<span class="'+(warn?'neg':'pos')+'">'+pMin.toFixed(1)+'% - '+pMax.toFixed(1)+'%</span> van bankroll, limiet '+maxday.toFixed(0)+'%). '+(warn?'<span class="neg">Bovengrens boven je daglimiet, blijf richting de onderkant.</span>':'Binnen je daglimiet.');
+  document.getElementById('dayExposure').innerHTML='Open lists today: <b>'+pend.length+'</b>, totale inzet <b>EUR '+dayMin.toFixed(2)+' - '+dayMax.toFixed(2)+'</b> (<span class="'+(warn?'neg':'pos')+'">'+pMin.toFixed(1)+'% - '+pMax.toFixed(1)+'%</span> van bankroll, limiet '+maxday.toFixed(0)+'%). '+(warn?'<span class="neg">Bovengrens boven je daglimiet, blijf richting de onderkant.</span>':'Binnen je daglimiet.');
   const roi=real.staked?real.pl/real.staked*100:0,plC=real.pl>=0?'pos':'neg';
   document.getElementById('bkStats').innerHTML='<div class="stat"><div class="v">EUR '+start.toFixed(0)+'</div><div class="l">Start bankroll</div></div>'+
-    '<div class="stat"><div class="v '+(current>=start?'pos':'neg')+'">EUR '+current.toFixed(2)+'</div><div class="l">Huidige bankroll</div></div>'+
+    '<div class="stat"><div class="v '+(current>=start?'pos':'neg')+'">EUR '+current.toFixed(2)+'</div><div class="l">Current bankroll</div></div>'+
     '<div class="stat"><div class="v '+plC+'">'+(real.pl>=0?'+':'')+'EUR '+real.pl.toFixed(2)+'</div><div class="l">Gerealiseerde P/L</div></div>'+
     '<div class="stat"><div class="v '+plC+'">'+(roi>=0?'+':'')+roi.toFixed(0)+'%</div><div class="l">ROI (midden range)</div></div>'+
-    '<div class="stat"><div class="v">'+real.wins+'/'+real.settled+'</div><div class="l">Gewonnen/afgerond</div></div>';
+    '<div class="stat"><div class="v">'+real.wins+'/'+real.settled+'</div><div class="l">Won/settled</div></div>';
 }
 
 function dateFromMessages(text){ const m=(text||'').match(/(\d{2}-\d{2}-\d{4})/); return m?m[1]:null; }
 function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archive')||'{}'); }catch(e){ return {}; } }
 function archiveDay(text){ const d=dateFromMessages(text); if(!d) return; const map=loadArchiveMap(); map[d]=text; localStorage.setItem('ba_archive', JSON.stringify(map)); }
-function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(nog geen archief)</option>'; viewArchive(); }
-function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">Geen lijsten voor deze dag.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
-function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Lijsten van vandaag geladen.', 'ok'); setStatus('Lijsten van vandaag opnieuw geladen ('+messages.length+' lijsten, '+DAILY_VERSION+').','ok'); }
-function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lijsten geimporteerd uit '+f.name+'.', 'ok'); setStatus('Lijsten geimporteerd uit '+f.name+' ('+messages.length+' lijsten).','ok'); }; reader.readAsText(f); input.value=''; }
+function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(no archive yet)</option>'; viewArchive(); }
+function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">No lists for this day.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
+function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Todays lists loaded.', 'ok'); setStatus('Todays lists reloaded ('+messages.length+' lists, '+DAILY_VERSION+').','ok'); }
+function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lists imported from '+f.name+'.', 'ok'); setStatus('Lists imported from '+f.name+' ('+messages.length+' lists).','ok'); }; reader.readAsText(f); input.value=''; }
 
 (function(){
   try{
@@ -746,52 +821,71 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
 
     const storedVer=localStorage.getItem('ba_msg_version');
     let raw=localStorage.getItem('ba_messages');
-    let source='browsergeheugen';
+    let source='browser memory';
     if(storedVer!==DAILY_VERSION || !raw || !raw.trim()){
-      raw=DAILY_MESSAGES; localStorage.setItem('ba_messages',raw); localStorage.setItem('ba_msg_version',DAILY_VERSION); source='nieuwe lijsten ('+DAILY_VERSION+')';
+      raw=DAILY_MESSAGES; localStorage.setItem('ba_messages',raw); localStorage.setItem('ba_msg_version',DAILY_VERSION); source='new lists ('+DAILY_VERSION+')';
     }
     document.getElementById('raw').value=raw; archiveDay(raw);
     BK_KEYS.forEach(k=>{ const v=localStorage.getItem('ba_'+k); if(v!==null){ const el=document.getElementById(k); if(el) el.value=v; } });
 
     parseMessages(); renderBetEditor(); renderResults(); renderBankroll(); renderShare(); renderArchiveSelect();
 
-    if(messages.length){ setStatus('<b>'+messages.length+' lijsten geladen</b> ('+source+'). Datum: '+(dateFromMessages(raw)||'onbekend')+'. Alles werkt.', 'ok'); }
-    else { setStatus('Geen lijsten beschikbaar. Klik "Laad lijsten van vandaag" of importeer een bestand.', 'warn'); }
-    log('Dashboard geladen.', 'info');
+    if(messages.length){ setStatus('<b>'+messages.length+' lists loaded</b> ('+source+'). Date: '+(dateFromMessages(raw)||'unknown')+'. All good.', 'ok'); }
+    else { setStatus('No lists available. Click "Load today lists" or import a file.', 'warn'); }
+    log('Dashboard loaded.', 'info');
   }catch(err){
-    setStatus('Er ging iets mis bij het laden: '+err.message+'. Probeer de pagina te herladen (Ctrl+F5).', 'err');
-    try{ log('INIT-FOUT: '+err.message, 'err'); }catch(e){}
+    setStatus('Something went wrong while loading: '+err.message+'. Try reloading the page (Ctrl+F5).', 'err');
+    try{ log('INIT ERROR: '+err.message, 'err'); }catch(e){}
   }
-})();
+}
+)();
 
-
-
+var _archiveView='list'; var _calRef=null;
+function setArchiveView(v){ _archiveView=v; var cal=document.getElementById('archiveCal'); var pick=document.getElementById('archiveListPick'); var tg=document.getElementById('archiveViewToggle'); if(tg){ var bs=tg.querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-av')===v); } if(v==='cal'){ if(cal)cal.style.display='block'; if(pick)pick.style.display='none'; renderArchiveCal(); } else { if(cal)cal.style.display='none'; if(pick)pick.style.display='flex'; } }
+function calMove(d){ if(!_calRef)_calRef=new Date(); _calRef.setMonth(_calRef.getMonth()+d); renderArchiveCal(); }
+function viewArchiveDate(ds){ var sel=document.getElementById('archiveDate'); if(sel) sel.value=ds; viewArchive(); }
+function renderArchiveCal(){
+  var box=document.getElementById('archiveCal'); if(!box) return;
+  var keys=Object.keys(loadArchiveMap());
+  if(!_calRef){ if(keys.length){ var s=keys.slice().sort(function(a,b){return a.split('-').reverse().join('').localeCompare(b.split('-').reverse().join(''));}); var p=s[s.length-1].split('-'); _calRef=new Date(parseInt(p[2]),parseInt(p[1])-1,1); } else { _calRef=new Date(); _calRef.setDate(1); } }
+  var y=_calRef.getFullYear(), mo=_calRef.getMonth();
+  var mn=['January','February','March','April','May','June','July','August','September','October','November','December'][mo];
+  var first=new Date(y,mo,1); var startDow=(first.getDay()+6)%7; var days=new Date(y,mo+1,0).getDate();
+  var have={}; keys.forEach(function(k){ have[k]=1; });
+  var html='<div class="actions" style="justify-content:space-between;margin:0 0 6px;"><button class="btn-secondary mini" onclick="calMove(-1)">&#8249;</button><div class="cal-month">'+mn+' '+y+'</div><button class="btn-secondary mini" onclick="calMove(1)">&#8250;</button></div><div class="cal-grid">';
+  ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(function(d){ html+='<div class="cal-h">'+d+'</div>'; });
+  for(var i=0;i<startDow;i++) html+='<div class="cal-cell empty"></div>';
+  for(var d=1;d<=days;d++){ var ds=('0'+d).slice(-2)+'-'+('0'+(mo+1)).slice(-2)+'-'+y; html+=have[ds]?'<div class="cal-cell has" onclick="viewArchiveDate(\''+ds+'\')">'+d+'</div>':'<div class="cal-cell">'+d+'</div>'; }
+  html+='</div>';
+  box.innerHTML=html;
+}
 var PAGE_META={
-  today:["Vandaag","Vandaag's lijsten, klaar om te versturen naar je kanalen."],
-  mybets:["Mijn bets","Vul de geplaatste odd in en markeer winst/verlies per selectie."],
-  results:["Resultaten","Overzicht van je afgeronde lijsten en P/L."],
-  vip:["VIP delen","Deel resultaten als wervende kaart naar je VIP-kanaal."],
-  bankroll:["Bankroll","Risk management en aanbevolen inzetten per bet-type."],
-  challenge:["Challenges","$10 to $1.000: de zekerste x2-bet van de dag, met dag-tracker."],
-  edit:["Lijsten","Bewerk de berichten van vandaag."],
-  custom:["Eigen bericht","Vrije tekst naar je CUSTOM-kanaal."],
-  archive:["Archief","Bekijk eerdere dagen terug."],
-  channels:["Kanalen","Webhooks en instellingen, lokaal in je browser bewaard."],
-  log:["Logboek","Activiteit en foutmeldingen."]
+  today:["Daily bets","Today's bets, grouped by type and ready to send."],
+  edit:["Edit lists","Edit today's raw messages."],
+  challenge:["Challenges","$10 to $1,000: the safest x2 bet of the day, with a day tracker."],
+  journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
+  custom:["Messaging","Free text to your CUSTOM channel."],
+  vip:["Share VIP results","Share settled results as a public card to your VIP channel."],
+  archive:["Archive","Look back at earlier days, as a list or calendar."],
+  settings:["Settings","Channels, VIP link, import/export and the activity log."],
+  mybets:["Your bets",""], results:["Results",""], bankroll:["Bankroll",""], channels:["Settings",""], log:["Activity log",""]
 };
 function toggleSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(!s)return; var o=s.classList.toggle('open'); if(b)b.classList.toggle('show',o); }
 function closeSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(s)s.classList.remove('open'); if(b)b.classList.remove('show'); }
 function showPage(id){
   var ps=document.querySelectorAll('.page'); for(var i=0;i<ps.length;i++) ps[i].style.display='none';
-  var el=document.getElementById('page-'+id); if(el) el.style.display='block';
+  var groups={journal:['mybets','results','bankroll'], settings:['channels','log']};
+  var show=groups[id]||[id];
+  for(var k=0;k<show.length;k++){ var el=document.getElementById('page-'+show[k]); if(el) el.style.display='block'; }
   var ns=document.querySelectorAll('.nav-item'); for(var j=0;j<ns.length;j++) ns[j].classList.toggle('active', ns[j].getAttribute('data-page')===id);
   var meta=PAGE_META[id]||[id,""];
   var t=document.getElementById('pageTitle'); if(t)t.textContent=meta[0];
   var su=document.getElementById('pageSub'); if(su)su.textContent=meta[1];
   var cc=document.getElementById('crumbCurrent'); if(cc)cc.textContent=meta[0];
   closeSidebar();
-  if(id==='bankroll' && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
+  if((id==='journal'||id==='bankroll') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
+  if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
   try{ window.scrollTo(0,0); }catch(e){}
 }
 
@@ -814,10 +908,10 @@ function filterSport(s){
 }
 function tagAndFilterSports(){
   var cards=document.querySelectorAll('#cards > .card'); var sports=[];
-  for(var i=0;i<cards.length;i++){ var sp=(typeof messages!=='undefined'&&messages[i])?detectSport(messages[i]):'Football'; cards[i].setAttribute('data-sport',sp); if(sports.indexOf(sp)<0) sports.push(sp); }
+  for(var i=0;i<cards.length;i++){ var sp=cards[i].getAttribute('data-sport')||'Football'; if(sports.indexOf(sp)<0) sports.push(sp); }
   var fb=document.getElementById('sportFilter'); if(!fb) return;
-  if(!cards.length){ fb.innerHTML=''; return; }
-  var html='<button class="sport-btn" data-sp="all">Alle</button>';
+  if(!cards.length || sports.length<2){ fb.innerHTML=''; return; }
+  var html='<button class="sport-btn" data-sp="all">All</button>';
   for(var k=0;k<sports.length;k++){ html+='<button class="sport-btn" data-sp="'+sports[k]+'">'+sports[k]+'</button>'; }
   fb.innerHTML=html;
   if(sports.indexOf(_curSport)<0) _curSport='all';
@@ -835,7 +929,7 @@ function _renderSportBar(barId,key){
   var sports=_sportsList(); if(sports.length<1){ bar.innerHTML=''; return; }
   if(sports.indexOf(_sportSel[key])<0) _sportSel[key]='all';
   var cur=_sportSel[key];
-  var html='<button class="sport-btn'+(cur==='all'?' active':'')+'" data-key="'+key+'" data-sp="all">Alle</button>';
+  var html='<button class="sport-btn'+(cur==='all'?' active':'')+'" data-key="'+key+'" data-sp="all">All</button>';
   for(var i=0;i<sports.length;i++){ html+='<button class="sport-btn'+(cur===sports[i]?' active':'')+'" data-key="'+key+'" data-sp="'+sports[i]+'">'+sports[i]+'</button>'; }
   bar.innerHTML=html;
 }
@@ -857,12 +951,12 @@ function exportSettings(){
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
   try{ navigator.clipboard.writeText(code); }catch(e){}
-  var st=document.getElementById('cfgState'); if(st){ st.textContent='gekopieerd'; setTimeout(function(){st.textContent='';},2000); }
-  log('Instellingen geexporteerd (gekopieerd naar klembord).', 'ok');
+  var st=document.getElementById('cfgState'); if(st){ st.textContent='copied'; setTimeout(function(){st.textContent='';},2000); }
+  log('Settings exported (copied to clipboard).', 'ok');
 }
 function importSettings(){
   var ta=document.getElementById('cfg_code'); var code=ta?(ta.value||'').trim():'';
-  if(!code){ log('Plak eerst een instellingen-code.', 'err'); return; }
+  if(!code){ log('Paste a settings code first.', 'err'); return; }
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
@@ -872,9 +966,9 @@ function importSettings(){
     var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
     if(typeof BK_KEYS!=='undefined') BK_KEYS.forEach(function(k){ var v=localStorage.getItem('ba_'+k); var el=document.getElementById(k); if(el&&v!==null) el.value=v; });
     if(typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
-    var st=document.getElementById('cfgState'); if(st){ st.textContent='geimporteerd'; setTimeout(function(){st.textContent='';},2000); }
-    log('Instellingen geimporteerd en toegepast.', 'ok');
-  }catch(e){ log('Ongeldige instellingen-code.', 'err'); }
+    var st=document.getElementById('cfgState'); if(st){ st.textContent='imported'; setTimeout(function(){st.textContent='';},2000); }
+    log('Settings imported and applied.', 'ok');
+  }catch(e){ log('Invalid settings code.', 'err'); }
 }
 
 
@@ -882,7 +976,7 @@ function vipChannelOut(){ var ch=document.getElementById('vip_channel'); var v=c
 function buildResultCard(r){
   var e=eff(r); var res=e.result.toUpperCase(); var rec=runningRecord(); var recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
   var tier=tierLabelFromList(r.list); var legs=selectionLines(findMessageFor(r));
-  var ch=vipChannelOut(); var link=vipLink(); var cta=ch||link||'(stel je VIP-link of kanaal in onder Kanalen)';
+  var ch=vipChannelOut(); var link=vipLink(); var cta=ch||link||'(set your VIP link or channel under Settings)';
   if(res==='W'){
     return ':trophy: **WINNER | '+tier+' | '+dmy(r.date)+' | '+r.sport+'** :white_check_mark:\n'+
       (legs.length?legs.join('\n')+'\n':'')+
@@ -901,14 +995,14 @@ function renderShare(){
   var wrap=document.getElementById('shareList'); if(!wrap) return;
   var data=window.RESULTS||[]; var wins=[],losses=[];
   data.forEach(function(r){ var u=eff(r).result.toUpperCase(); if(u==='W')wins.push(r); else if(u==='V')losses.push(r); });
-  if(!wins.length && !losses.length){ wrap.innerHTML='<p class="section-sub">Nog geen afgeronde lijsten. Zet eerst in "Mijn bets" een resultaat op Gewonnen of Verloren; daarna kies je hier per stuk wat je deelt.</p>'; if(typeof refreshShareFilter==='function') refreshShareFilter(); return; }
+  if(!wins.length && !losses.length){ wrap.innerHTML='<p class="section-sub">No settled lists yet. First mark a result as Won or Lost under "Your bets"; then choose here what to share.</p>'; if(typeof refreshShareFilter==='function') refreshShareFilter(); return; }
   function cardHtml(r){ var id=betId(r); var done=!!SHARED[id];
-    return '<div class="card" data-id="'+id+'"><div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">gedeeld</span>':'')+'</span>'+
-      '<button class="'+(done?'btn-gray':'btn-accent')+'" data-share="'+id+'">'+(done?'Opnieuw delen':'Deel naar VIP')+'</button></div>'+
+    return '<div class="card" data-id="'+id+'"><div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">shared</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" data-share="'+id+'">'+(done?'Share again':'Share to VIP')+'</button></div>'+
       '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div></div>'; }
   var html='';
-  if(wins.length){ html+='<div class="share-group">Gewonnen ('+wins.length+')</div>'; for(var i=0;i<wins.length;i++) html+=cardHtml(wins[i]); }
-  if(losses.length){ html+='<div class="share-group">Verloren ('+losses.length+')</div>'; for(var j=0;j<losses.length;j++) html+=cardHtml(losses[j]); }
+  if(wins.length){ html+='<div class="share-group">Won ('+wins.length+')</div>'; for(var i=0;i<wins.length;i++) html+=cardHtml(wins[i]); }
+  if(losses.length){ html+='<div class="share-group">Lost ('+losses.length+')</div>'; for(var j=0;j<losses.length;j++) html+=cardHtml(losses[j]); }
   wrap.innerHTML=html;
   if(typeof refreshShareFilter==='function') refreshShareFilter();
 }
@@ -946,12 +1040,12 @@ function renderBetEditor(){
     var id=betId(r); var e=eff(r); var resU=e.result.toUpperCase();
     var manual=(BET_EDITS[id]&&BET_EDITS[id].result)?String(BET_EDITS[id].result).toUpperCase():'';
     var roll=legRollup(r);
-    var badge = resU==='W'?'<span class="lg-badge lg-w">Gewonnen</span>': resU==='V'?'<span class="lg-badge lg-v">Verloren</span>':'<span class="lg-badge lg-p">Open</span>';
-    var autoNote = (roll && manual!=='W' && manual!=='V')? '<span class="lg-auto">auto via selecties</span>':'';
+    var badge = resU==='W'?'<span class="lg-badge lg-w">Won</span>': resU==='V'?'<span class="lg-badge lg-v">Lost</span>':'<span class="lg-badge lg-p">Open</span>';
+    var autoNote = (roll && manual!=='W' && manual!=='V')? '<span class="lg-auto">auto via selections</span>':'';
     function opt(v,lbl){ return '<option value="'+v+'"'+(resU===v?' selected':'')+'>'+lbl+'</option>'; }
     tb.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td>'+
       '<td><input type="text" style="width:90px;padding:6px 8px;" data-bet-odds="'+id+'" value="'+e.odds.toFixed(2)+'"></td>'+
-      '<td><select style="width:150px;padding:6px 8px;" data-bet-res="'+id+'">'+opt('PENDING','Auto (selecties)')+opt('W','Gewonnen')+opt('V','Verloren')+'</select> '+autoNote+'</td></tr>';
+      '<td><select style="width:150px;padding:6px 8px;" data-bet-res="'+id+'">'+opt('PENDING','Auto (selections)')+opt('W','Won')+opt('V','Lost')+'</select> '+autoNote+'</td></tr>';
     var legs=selectionLines(findMessageFor(r));
     if(legs.length){
       var cells='';
@@ -959,11 +1053,11 @@ function renderBetEditor(){
         var lv=(LEG_RESULTS[id+'|'+i]||'').toUpperCase();
         cells+='<div class="leg-row"><span class="leg-txt">'+legText(legs[i])+'</span>'+
           '<span class="leg-btns">'+
-          '<button class="leg-b '+(lv==='W'?'on-w':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="W" title="Selectie gewonnen">&#10003;</button>'+
-          '<button class="leg-b '+(lv==='V'?'on-v':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="V" title="Selectie verloren">&#10007;</button>'+
+          '<button class="leg-b '+(lv==='W'?'on-w':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="W" title="Selection won">&#10003;</button>'+
+          '<button class="leg-b '+(lv==='V'?'on-v':'')+'" data-leg="'+id+'" data-idx="'+i+'" data-val="V" title="Selection lost">&#10007;</button>'+
           '</span></div>';
       }
-      tb.innerHTML+='<tr class="legs-tr"><td colspan="5"><div class="legs-wrap"><div class="legs-head">Selecties &middot; markeer per wedstrijd '+badge+' '+(legs.length>1?'<span class="lg-auto">1 fout = hele bet verloren</span>':'')+'</div>'+cells+'</div></td></tr>';
+      tb.innerHTML+='<tr class="legs-tr"><td colspan="5"><div class="legs-wrap"><div class="legs-head">Selections &middot; mark per match '+badge+' '+(legs.length>1?'<span class="lg-auto">1 wrong = whole bet lost</span>':'')+'</div>'+cells+'</div></td></tr>';
     }
   });
   if(typeof refreshBetsFilter==='function') refreshBetsFilter();
@@ -1011,8 +1105,8 @@ function fmtUSD(n){ return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{m
 function buildChallengeMessage(){
   var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
   var lines=(ec.legs||[]).map(function(L){ var p=L.split(': '); if(p.length>=2){ return ':small_orange_diamond: '+p[0]+': **'+p.slice(1).join(': ')+'**'; } return ':small_orange_diamond: '+L; }).join('\n');
-  return ':dart: **$10 TO $1K CHALLENGE - DAG '+CH.day+'/8**\n\n'+
-    ':moneybag: Inzet vandaag: **'+fmtUSD(CH.pot)+'**  |  Doel bij winst: **'+fmtUSD(payout)+'**\n\n'+
+  return ':dart: **$10 TO $1K CHALLENGE - DAY '+CH.day+'/8**\n\n'+
+    ':moneybag: Stake today: **'+fmtUSD(CH.pot)+'**  |  Target on win: **'+fmtUSD(payout)+'**\n\n'+
     lines+'\n\n'+
     ':moneybag: Total odds: **± '+(ec.oddLow||2)+' - '+(ec.oddHigh||ec.oddLow||2)+'**\n'+
     'Odds may vary depending on the bookmaker or the time of placement.\n\n'+
@@ -1021,36 +1115,36 @@ function buildChallengeMessage(){
 }
 function challengeHistoryHtml(){
   if(!CH.history.length) return '';
-  var rows=CH.history.map(function(x){ return '<tr><td>Dag '+x.day+'</td><td>'+x.date+'</td><td>'+x.odd+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Gewonnen</span>':'<span class="badge b-v">Verloren</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td></tr>'; }).join('');
-  return '<section class="card"><h2 class="section-title">Historie</h2><div class="tablewrap"><table><thead><tr><th>Dag</th><th>Datum</th><th>Odd</th><th>Resultaat</th><th>Pot</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+  var rows=CH.history.map(function(x){ return '<tr><td>Day '+x.day+'</td><td>'+x.date+'</td><td>'+x.odd+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td></tr>'; }).join('');
+  return '<section class="card"><h2 class="section-title">History</h2><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
 }
 function renderChallenge(){
   var st=document.getElementById('challengeStats'); if(!st) return;
   var pct=Math.min(100, Math.round(CH.pot/CH.target*100));
-  st.innerHTML='<div class="stat"><div class="v">Dag '+CH.day+' / 8</div><div class="l">Challenge dag</div></div>'+
-    '<div class="stat"><div class="v">'+fmtUSD(CH.pot)+'</div><div class="l">Huidige pot</div></div>'+
-    '<div class="stat"><div class="v">'+fmtUSD(CH.target)+'</div><div class="l">Doel</div></div>'+
-    '<div class="stat"><div class="v">'+pct+'%</div><div class="l">Voortgang</div></div>';
+  st.innerHTML='<div class="stat"><div class="v">Day '+CH.day+' / 8</div><div class="l">Challenge day</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.pot)+'</div><div class="l">Current pot</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.target)+'</div><div class="l">Target</div></div>'+
+    '<div class="stat"><div class="v">'+pct+'%</div><div class="l">Progress</div></div>';
   var pr=document.getElementById('challengeProg'); if(pr) pr.innerHTML='<div class="chprog"><div class="chprog-bar" style="width:'+pct+'%"></div></div>';
-  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=8; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Dag '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
+  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=8; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
   var v=document.getElementById('challengeView'); if(!v) return;
   if(CH.status==='failed'){
-    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Dag '+CH.day+'. De pot is verloren (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="challengeRestart()">Start nieuwe challenge ($10, Dag 1)</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeHistoryHtml();
     return;
   }
   if(CH.status==='won' || CH.pot>=CH.target){
-    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge gehaald! Eindpot: '+fmtUSD(CH.pot)+'. Gefeliciteerd.</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="challengeRestart()">Start nieuwe challenge</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeHistoryHtml();
     return;
   }
   var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
   v.innerHTML='<section class="card">'+
-    '<div class="card-head"><h2 class="section-title">Challenge bet - Dag '+CH.day+'</h2><span class="pill">inzet '+fmtUSD(CH.pot)+'</span></div>'+
-    '<p class="section-sub">Doel bij winst: <strong style="color:var(--text)">'+fmtUSD(payout)+'</strong> bij odd x'+(ec.oddLow||2)+' of meer. Mijn zekerste keuze van vandaag.</p>'+
+    '<div class="card-head"><h2 class="section-title">Challenge bet - Day '+CH.day+'</h2><span class="pill">stake '+fmtUSD(CH.pot)+'</span></div>'+
+    '<p class="section-sub">Target on win: <strong style="color:var(--text)">'+fmtUSD(payout)+'</strong> bij odd x'+(ec.oddLow||2)+' or higher. My safest pick of the day.</p>'+
     '<div class="disc">'+renderDiscord(buildChallengeMessage())+'</div>'+
     '<div class="actions">'+
-      '<button class="btn" onclick="sendChallenge()">Verstuur naar Challenge-kanaal</button>'+
-      '<button class="btn-secondary" onclick="challengeWin()">Gewonnen</button>'+
-      '<button class="btn-secondary" onclick="challengeLoss()">Verloren</button>'+
+      '<button class="btn" onclick="sendChallenge()">Send to Challenge channel</button>'+
+      '<button class="btn-secondary" onclick="challengeWin()">Won</button>'+
+      '<button class="btn-secondary" onclick="challengeLoss()">Lost</button>'+
     '</div></section>'+challengeHistoryHtml();
 }
 function challengeWin(){
@@ -1058,22 +1152,22 @@ function challengeWin(){
   CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+odd, result:'W', potAfter:after});
   CH.pot=after;
   if(CH.pot>=CH.target){ CH.status='won'; } else { CH.day=CH.day+1; }
-  saveCH(); renderChallenge(); showToast('Gewonnen! Pot nu '+fmtUSD(CH.pot));
+  saveCH(); renderChallenge(); showToast('Won! Pot now '+fmtUSD(CH.pot));
 }
 function challengeLoss(){
   var ec=EMBEDDED_CHALLENGE;
   CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+(ec.oddLow||2), result:'V', potAfter:0});
-  CH.status='failed'; saveCH(); renderChallenge(); showToast('Challenge gefaald', false);
+  CH.status='failed'; saveCH(); renderChallenge(); showToast('Challenge failed', false);
 }
 function challengeRestart(){
-  if(!confirm('Nieuwe challenge starten? De huidige historie wordt gewist.')) return;
+  if(!confirm('Start a new challenge? The current history will be cleared.')) return;
   CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] };
-  saveCH(); renderChallenge(); showToast('Nieuwe challenge gestart');
+  saveCH(); renderChallenge(); showToast('New challenge started');
 }
 async function sendChallenge(){
-  if(!await askConfirm('Challenge bet van Dag '+CH.day+' naar je Challenge-kanaal sturen?')){ log('Geannuleerd.','info'); return; }
-  try{ log('Challenge bet versturen...','info'); await postToDiscord(applyTokens(buildChallengeMessage()), getHook('CHALLENGE')); log('OK - challenge verstuurd.','ok'); showToast('Verzonden naar Challenge'); }
-  catch(e){ log('MISLUKT challenge: '+e.message,'err'); showToast('Mislukt: '+e.message, false); }
+  if(!await askConfirm('Send the Day '+CH.day+' challenge bet to your Challenge channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending challenge bet...','info'); await postToDiscord(applyTokens(buildChallengeMessage()), getHook('CHALLENGE')); log('OK - challenge sent.','ok'); showToast('Sent to Challenge'); }
+  catch(e){ log('FAILED challenge: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 if(document.getElementById('challengeStats')) renderChallenge();
 
