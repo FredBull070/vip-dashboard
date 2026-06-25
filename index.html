@@ -599,7 +599,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v59";
+var EMBEDDED_VERSION = "2026-06-25-v60";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY | 25-06-2026**
 :soccer: Sport of the day: Football
 
@@ -799,11 +799,11 @@ function parseMessages(){
 }
 
 async function postToDiscord(content, hook){
-  if(!hook){ throw new Error('geen webhook ingevuld voor dit kanaal'); }
+  if(!hook){ throw new Error('No webhook set for this channel. Add it in Settings > Channels.'); }
   const res=await fetch(hook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
   if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
 }
-async function testHook(cat){ try{ log('Test message to '+catLabel(cat)+' channel...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' channel works.', getHook(cat)); log('OK - test sent to '+catLabel(cat)+'.', 'ok'); }catch(e){ log('FAILED ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function testHook(cat){ if(!await askConfirm('Send a test message to your '+catLabel(cat)+' channel?')){ log('Cancelled.','info'); return; } try{ log('Test message to '+catLabel(cat)+' channel...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' channel works.', getHook(cat)); log('OK - test sent to '+catLabel(cat)+'.', 'ok'); }catch(e){ log('FAILED ('+catLabel(cat)+'): '+e.message, 'err'); } }
 function askConfirm(msg, opts){
   return new Promise(function(resolve){
     var ov=document.getElementById('confirmModal');
@@ -857,7 +857,7 @@ function saveAll(silent){
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
   const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
   localStorage.setItem('ba_messages', document.getElementById('raw').value);
-  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } if(typeof showToast==='function') showToast('Settings saved'); }
+  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } var _bad=[]; ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU'].forEach(function(c){ var v=getHook(c); if(v && !/^https:\/\/[\w.]*discord(app)?\.com\/api\/webhooks\//i.test(v)) _bad.push(catLabel(c)); }); if(typeof showToast==='function'){ if(_bad.length) showToast('Saved. Check webhook URL for: '+_bad.join(', '), false); else showToast('Settings saved'); } }
 }
 function resetDefault(){ if(!confirm('Reset to the default lists?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
 
@@ -1621,7 +1621,7 @@ function trNum(x){ return Math.round((x||0)*100)/100; }
 function trUnit(x){ x=trNum(x); return (x>=0?'+':'')+x.toFixed(2)+'u'; }
 function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); try{ renderNotifs(); }catch(_e){} }
 function setTrResult(id, val){ setTrField(id,'result',val); var auto=document.getElementById('autoShare'); var u=(val||'').toUpperCase(); if(auto && auto.checked && (u==='W'||u==='L'||u==='V') && !SHARED['tr'+id]){ if(typeof shareTrackOne==='function') shareTrackOne(id, false, false); } }
-function delTrack(id){ TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); }
+async function delTrack(id){ if(!await askConfirm('Delete this bet from your track record? This cannot be undone.')){ return; } TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); try{ renderNotifs(); }catch(e){} }
 function renderTrack(filter){
   filter=filter||CUR_SUB.trackrecord||'all';
   var list=TR.filter(function(e){ return filter==='all' || (e.risk||'medium')===filter; });
