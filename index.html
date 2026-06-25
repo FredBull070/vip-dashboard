@@ -297,7 +297,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="side-scroll">
       <div class="side-section">Betting</div>
-      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily bets</button>
+      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily Parley Tips</button>
       <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
@@ -586,7 +586,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v56";
+var EMBEDDED_VERSION = "2026-06-25-v57";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1017,7 +1017,7 @@ function renderArchiveCal(){
   box.innerHTML=html;
 }
 var PAGE_META={
-  today:["Daily bets","Today's bets, grouped by type and ready to send."],
+  today:["Daily Parley Tips","Today's parleys, grouped by type and ready to send."],
   edit:["Edit lists","Edit today's raw messages."],
   challenge:["Challenges","$10 to $1,000: the safest x2 bet of the day, with a day tracker."],
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
@@ -1108,7 +1108,7 @@ function tagAndFilterSports(){
   var cards=document.querySelectorAll('#cards .card'); var sports=[];
   for(var i=0;i<cards.length;i++){ var sp=cards[i].getAttribute('data-sport')||'Football'; if(sports.indexOf(sp)<0) sports.push(sp); }
   var fb=document.getElementById('sportFilter'); if(!fb) return;
-  if(!cards.length || sports.length<2){ fb.innerHTML=''; return; }
+  if(!cards.length || sports.length<1){ fb.innerHTML=''; return; }
   var html='<button class="sport-btn" data-sp="all">All</button>';
   for(var k=0;k<sports.length;k++){ html+='<button class="sport-btn" data-sp="'+sports[k]+'">'+sports[k]+'</button>'; }
   fb.innerHTML=html;
@@ -1144,7 +1144,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
 function exportSettings(){
-  var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_hook_EDU','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -1526,7 +1526,7 @@ STAKE: 1u
 RISK: high
 ANALYSIS: An open game with both teams likely to push for goals.`;
 function getCardsText(){ var el=document.getElementById('cardsRaw'); return (el && el.value.trim())? el.value : EMBEDDED_CARDS_TEXT; }
-function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); return o.match? o : null; }).filter(Boolean); }
+function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); o.sport=o.sport||'Football'; return o.match? o : null; }).filter(Boolean); }
 function cardRiskTag(r){ return r==='low'?'banker':(r==='medium'?'value play':'upside shot'); }
 function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+(c.selection||'')+'** @ '+(c.odds||'')+'\n🏟️ '+(c.match||'')+'  ·  '+(c.market||'')+'\n:coin: Stake '+(c.stake||'')+'  ('+cardRiskTag(c.risk)+')\n:bulb: '+(c.analysis||''); }
 function buildCardsChunks(cards){
@@ -1563,14 +1563,19 @@ function renderCards(){
     cards.forEach(function(c,i){ c._i=i; });
     groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
       html+='<div class="risk-head" data-risk="'+g[0]+'">'+g[1]+' <span class="dg-count">'+cs.length+'</span></div>';
-      cs.forEach(function(c){ var i=c._i; html+='<div class="rcard r-'+c.risk+'" data-risk="'+c.risk+'"><div class="rc-top"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="cardchk" data-cidx="'+i+'" checked onchange="updateCardSelCount()"><span class="rc-match">'+esc(c.match||'')+'</span></label><span class="rc-odds">'+esc(c.odds||'')+'</span></div><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div><div class="actions" style="margin-top:8px;"><button class="btn-secondary mini" onclick="shareCard('+i+')">Share this pick</button></div></div>'; });
+      cs.forEach(function(c){ var i=c._i; html+='<div class="rcard r-'+c.risk+'" data-risk="'+c.risk+'" data-sport="'+esc(c.sport||'Football')+'"><div class="rc-top"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="cardchk" data-cidx="'+i+'" checked onchange="updateCardSelCount()"><span class="rc-match">'+esc(c.match||'')+'</span></label><span class="rc-odds">'+esc(c.odds||'')+'</span></div><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div><div class="actions" style="margin-top:8px;"><button class="btn-secondary mini" onclick="shareCard('+i+')">Share this pick</button></div></div>'; });
     });
-    vis.innerHTML=bar+(html||'<p class="small">No cards yet. Add some under the Edit tab.</p>');
-    updateCardSelCount();
+    var _sp=[]; cards.forEach(function(c){ var s=c.sport||'Football'; if(_sp.indexOf(s)<0)_sp.push(s); });
+    var sportBar=''; if(_sp.length){ sportBar='<div id="cardsSportBar" class="sportbar" style="margin:0 0 12px;"><button class="sport-btn'+(_cardSport==='all'?' active':'')+'" data-sp="all" onclick="cardsSportFilter(\'all\')">All sports</button>'; _sp.forEach(function(s){ sportBar+='<button class="sport-btn'+(_cardSport===s?' active':'')+'" data-sp="'+esc(s)+'" onclick="cardsSportFilter(\''+s+'\')">'+esc(s)+'</button>'; }); sportBar+='</div>'; }
+    vis.innerHTML=bar+sportBar+(html||'<p class="small">No cards yet. Add some under the Edit tab.</p>');
+    updateCardSelCount(); applyCardFilters();
   }
   var pv=document.getElementById('cardsPreviewBox'); if(pv){ pv.innerHTML=renderDiscord(buildCardsChunks().join('\n\n──────────\n\n')); }
 }
-function cardsFilter(sub){ var want=(sub==='all'||!sub)?'all':sub; var els=document.querySelectorAll('#betcards-visual .rcard, #betcards-visual .risk-head'); for(var i=0;i<els.length;i++){ var r=els[i].getAttribute('data-risk'); els[i].style.display=(want==='all'||r===want)?'':'none'; } }
+var _cardRisk='all', _cardSport='all';
+function applyCardFilters(){ var groups={}; var cards=document.querySelectorAll('#betcards-visual .rcard'); for(var i=0;i<cards.length;i++){ var r=cards[i].getAttribute('data-risk'); var sp=cards[i].getAttribute('data-sport')||'Football'; var show=(_cardRisk==='all'||r===_cardRisk)&&(_cardSport==='all'||sp===_cardSport); cards[i].style.display=show?'':'none'; if(show) groups[r]=true; } var heads=document.querySelectorAll('#betcards-visual .risk-head'); for(var j=0;j<heads.length;j++){ var hr=heads[j].getAttribute('data-risk'); heads[j].style.display=((_cardRisk==='all'||hr===_cardRisk)&&groups[hr])?'':'none'; } }
+function cardsFilter(sub){ _cardRisk=(sub==='all'||!sub)?'all':sub; applyCardFilters(); }
+function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#cardsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyCardFilters(); }
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=EMBEDDED_CARDS_TEXT; renderCards(); }
 async function sendCards(){ var cards=getParsedCards(); await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); }
 (function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
