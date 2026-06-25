@@ -55,6 +55,7 @@
   .nmail-row .nr-title{font-weight:700;font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .nmail-row.is-read .nr-title{font-weight:500;color:var(--muted);}
   .nmail-row .nr-snip{font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nmail-row .nr-time{font-size:10.5px;color:var(--muted);flex:0 0 auto;margin-left:6px;}
   .nmail-row .nr-dot{width:8px;height:8px;border-radius:50%;background:#ff7a1a;flex:0 0 auto;}
   .nmail-detail{flex:1;min-width:0;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 18px;background:rgba(255,255,255,.02);min-height:320px;}
   @media(max-width:760px){ .nmail{flex-direction:column;} .nmail-list{flex:1 1 auto;max-width:none;width:100%;max-height:none;} }
@@ -216,6 +217,9 @@
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .toast .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:0 0 auto;}
   .toast.err .dot{background:var(--red);}
+  .toast.undo-toast{pointer-events:auto;}
+  .undo-btn{background:transparent;border:none;color:#ff7a1a;font-weight:800;cursor:pointer;font-size:13px;padding:0 2px;text-transform:uppercase;letter-spacing:.04em;}
+  .undo-btn:hover{text-decoration:underline;}
 
   .chprog{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:14px;}
   .chprog-bar{height:100%;background:linear-gradient(90deg,#ff7a1a,#ffa04d);border-radius:999px;transition:width .4s;}
@@ -317,6 +321,7 @@
   </div>
 </div>
 <div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
+<div class="toast undo-toast" id="undoToast"><span id="undoMsg"></span><button class="undo-btn" id="undoBtn" onclick="doUndo()">Undo</button></div>
 
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
@@ -682,7 +687,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v67";
+var EMBEDDED_VERSION = "2026-06-25-v68";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -2717,6 +2722,8 @@ async function sendEdu(i){
 
 /* ---- Notification center ---- */
 var NSENT={}; try{ NSENT=JSON.parse(localStorage.getItem('ba_notif_sent')||'{}'); }catch(e){ NSENT={}; }
+var SEEN={}; try{ SEEN=JSON.parse(localStorage.getItem('ba_notif_seen')||'{}'); }catch(e){ SEEN={}; }
+function _fmtTime(ts){ if(!ts) return ''; var d=new Date(ts); var hm=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); var n=new Date(); if(d.toDateString()===n.toDateString()) return hm; return ('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+' '+hm; }
 function nSave(){ try{ localStorage.setItem('ba_notif_sent', JSON.stringify(NSENT)); }catch(e){} }
 function nIsSent(k){ return !!NSENT[k]; }
 function markSent(k){ if(!k) return; NSENT[k]=Date.now(); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} }
@@ -2725,7 +2732,7 @@ function _weekStr(){ var d=new Date(); var t=new Date(d.getFullYear(),d.getMonth
 function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); }
 var NITEMS=[];
 function buildNotifs(){
-  var items=[]; function add(o){ o.read=nIsSent(o.key); items.push(o); }
+  var items=[]; var _sd=false; function add(o){ if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
   try{ (messages||[]).forEach(function(m,i){ var cat=detectCategory(m); add({key:'msg|'+DAILY_VERSION+'|'+i,kind:'msg',idx:i,cat:cat,text:m,title:_cleanTitle(m)||catLabel(cat),sub:'to '+catLabel(cat)+' channel'}); }); }catch(e){}
   try{ var cards=(typeof getParsedCards==='function')?getParsedCards():[]; if(cards.length){ add({key:'cards|'+DAILY_VERSION,kind:'cards',title:'Daily Betting Cards ('+cards.length+' picks)',sub:'to Daily Cards channel'}); } }catch(e){}
   try{ if(typeof CH!=='undefined'&&CH&&CH.status==='active'){ add({key:'chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day,kind:'chbet',title:'Challenge Day '+CH.day+' bet',sub:'to Challenge channel (VIP)',text:(typeof buildChallengePlan==='function'?buildChallengePlan():'')}); } }catch(e){}
@@ -2733,7 +2740,7 @@ function buildNotifs(){
   try{ var settled=(typeof TR!=='undefined'&&TR)?TR.filter(function(e){var r=(e.result||'').toUpperCase(); return (r==='W'||r==='L'||r==='V') && !(typeof SHARED!=='undefined'&&SHARED['tr'+e.id]);}):[]; if(settled.length) add({key:'results|'+_todayStr(),kind:'results',title:settled.length+' result'+(settled.length>1?'s':'')+' ready to share',sub:'to VIP results channel'}); }catch(e){}
   try{ add({key:'perf|'+_weekStr(),kind:'perf',title:'Weekly performance report',sub:'reminder, to VIP results channel',text:(typeof buildPerfMessage==='function'?buildPerfMessage('weekly'):'')}); }catch(e){}
   try{ var dow=new Date().getDay(); if(dow===1||dow===4){ add({key:'edu|'+_todayStr(),kind:'edu',title:'Education post due (2x per week)',sub:'reminder, pick a post to share'}); } }catch(e){}
-  items.sort(function(a,b){ return (a.read?1:0)-(b.read?1:0); });
+  if(_sd){ try{ localStorage.setItem('ba_notif_seen', JSON.stringify(SEEN)); }catch(e){} }
   NITEMS=items; return items;
 }
 function renderNotifs(){
@@ -2744,7 +2751,7 @@ function renderNotifs(){
   var html='<div class="notif-head-row"><b>Notifications</b><span>'+(unread?'<button class="btn-ghost mini" onclick="notifMarkAll()">Mark all read</button> ':'')+'<button class="btn-ghost mini" onclick="closeNotifs()">Close</button></span></div>';
   if(!items.length){ html+='<div class="notif-empty">Nothing here yet.</div>'; }
   else { items.forEach(function(it){
-    html+='<div class="notif-item'+(it.read?' is-read':'')+'"><div class="nt-title">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div class="nt-sub">'+esc(it.sub)+'</div>';
+    html+='<div class="notif-item'+(it.read?' is-read':'')+'"><div class="nt-title">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div class="nt-sub">'+esc(it.sub)+' &middot; '+_fmtTime(it.seen)+(it.read?' &middot; read '+_fmtTime(it.readAt):'')+'</div>';
     if(it.text){ html+='<div class="nt-prev disc">'+renderDiscord(applyTokens(it.text))+'</div>'; }
     html+='<div class="nt-actions">';
     if(it.kind!=='edu') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
@@ -2786,7 +2793,7 @@ function renderNotifsPage(){
   var items=buildNotifs();
   if(!items.length){ list.innerHTML='<div style="padding:20px;color:var(--muted);font-size:13px;">Nothing here yet.</div>'; var d0=document.getElementById('notifDetail'); if(d0) d0.innerHTML='<p class="section-sub" style="margin:0;">Nothing to show.</p>'; return; }
   if(!_notifSel || !items.some(function(it){return it.key===_notifSel;})) _notifSel=items[0].key;
-  list.innerHTML=items.map(function(it){ return '<button class="nmail-row'+(it.read?' is-read':'')+(it.key===_notifSel?' sel':'')+'" onclick="openNotif(\''+it.key+'\')"><div class="nr-top">'+(it.read?'':'<span class="nr-dot"></span>')+'<span class="nr-title">'+esc(it.title)+'</span></div><div class="nr-snip">'+esc(it.sub||'')+'</div></button>'; }).join('');
+  list.innerHTML=items.map(function(it){ return '<button class="nmail-row'+(it.read?' is-read':'')+(it.key===_notifSel?' sel':'')+'" onclick="openNotif(\''+it.key+'\')"><div class="nr-top">'+(it.read?'':'<span class="nr-dot"></span>')+'<span class="nr-title">'+esc(it.title)+'</span><span class="nr-time">'+_fmtTime(it.seen)+'</span></div><div class="nr-snip">'+esc(it.sub||'')+'</div></button>'; }).join('');
   renderNotifDetail(_notifSel);
 }
 function renderNotifDetail(key){
@@ -2795,7 +2802,7 @@ function renderNotifDetail(key){
   for(var i=0;i<items.length;i++){ if(items[i].key===key){ it=items[i]; break; } }
   if(!it){ d.innerHTML='<p class="section-sub" style="margin:0;">Select an item on the left.</p>'; return; }
   var s='<div style="font-weight:800;font-size:16px;">'+esc(it.title)+'</div>';
-  s+='<div style="color:var(--muted);font-size:12.5px;margin:3px 0 14px;">'+esc(it.sub)+(it.read?' &middot; <span class="nt-read">read</span>':'')+'</div>';
+  s+='<div style="color:var(--muted);font-size:12.5px;margin:3px 0 14px;">'+esc(it.sub)+' &middot; Ready '+_fmtTime(it.seen)+(it.read?' &middot; <span class="nt-read">read</span> '+_fmtTime(it.readAt):'')+'</div>';
   if(it.text){ s+='<div class="disc" style="margin-bottom:14px;">'+renderDiscord(applyTokens(it.text))+'</div>'; }
   else { s+='<p class="section-sub" style="margin:0 0 14px;">No preview for this item. Use Open tab to handle it.</p>'; }
   s+='<div class="actions" style="margin:0;">';
@@ -2806,7 +2813,10 @@ function renderNotifDetail(key){
   d.innerHTML=s;
 }
 function openNotif(key){ _notifSel=key; renderNotifsPage(); }
-function notifMarkAll(){ buildNotifs(); NITEMS.forEach(function(it){ NSENT[it.key]=Date.now(); }); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('All marked as read'); }
+var _undoT, _undoFn=null;
+function showUndo(msg, fn){ var t=document.getElementById('undoToast'); if(!t){ return; } var m=document.getElementById('undoMsg'); if(m) m.textContent=msg; _undoFn=fn; t.classList.add('show'); clearTimeout(_undoT); _undoT=setTimeout(function(){ t.classList.remove('show'); _undoFn=null; }, 6000); }
+function doUndo(){ var t=document.getElementById('undoToast'); if(t) t.classList.remove('show'); clearTimeout(_undoT); if(_undoFn){ var f=_undoFn; _undoFn=null; f(); } }
+function notifMarkAll(){ buildNotifs(); var prevUnread=NITEMS.filter(function(it){ return !nIsSent(it.key); }).map(function(it){ return it.key; }); NITEMS.forEach(function(it){ NSENT[it.key]=Date.now(); }); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(prevUnread.length){ showUndo(prevUnread.length+' marked as read', function(){ prevUnread.forEach(function(k){ delete NSENT[k]; }); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('Undone'); }); } else if(typeof showToast==='function') showToast('Nothing to mark'); }
 function markUnread(k){ if(!k) return; delete NSENT[k]; nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} }
 function notifMarkRead(key){ markSent(key); }
 function notifMarkUnread(key){ markUnread(key); }
