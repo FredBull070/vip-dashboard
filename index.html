@@ -506,9 +506,7 @@
       <h2 class="section-title">Channels</h2>
       <p class="section-sub">A webhook per channel plus your VIP link/channel. Everything is saved locally in your browser.</p>
       <div class="grid2">
-        <div class="field"><label>LOW ODD channel</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div></div>
-        <div class="field"><label>MID ODD channel</label><input type="text" id="hook_MID" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('MID')">Test</button></div></div>
-        <div class="field"><label>HIGH ODD channel</label><input type="text" id="hook_HIGH" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('HIGH')">Test</button></div></div>
+        <div class="field"><label>Daily Parley Tips channel</label><input type="text" id="hook_PARLEY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('PARLEY')">Test</button></div></div>
         <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
@@ -569,7 +567,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v43";
+var EMBEDDED_VERSION = "2026-06-25-v44";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -588,7 +586,7 @@ The Netherlands and Ivory Coast are heavy favourites against weak opponents (Tun
 :trophy: Unlock the full daily slate plus bankroll plan in VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly
 ===NEXT MESSAGE===
-**:crown: LOW ODD BET: 25-06-2026**
+**🟢 Safe Builder Parley: 25-06-2026**
 
 :small_orange_diamond: Tunisia x Netherlands: **Netherlands to win @ 1.07***
 :small_orange_diamond: Curacao x Ivory Coast: **Ivory Coast to win @ 1.14***
@@ -602,7 +600,7 @@ The Netherlands and Ivory Coast are heavy favourites against weak opponents (Tun
 
 :bank: **Bankroll:** risk range 1-2% of bankroll. Doubler (>= 1.85), your core lowest-variance play.
 ===NEXT MESSAGE===
-**:crown: MID ODD BET: 25-06-2026**
+**🟡 Value Builder Parley: 25-06-2026**
 
 :small_orange_diamond: Tunisia x Netherlands: **Netherlands -1.5 @ 1.40 - 1.55***
 :small_orange_diamond: Curacao x Ivory Coast: **Ivory Coast -2.5 @ 1.85 - 2.10***
@@ -616,7 +614,7 @@ The Netherlands should beat Tunisia by a clear margin and Ivory Coast can run up
 
 :bank: **Bankroll:** risk range 0.5-1% of bankroll. Past doubler odds, more variance.
 ===NEXT MESSAGE===
-**:crown: HIGH ODD BET: 25-06-2026**
+**🔴 Jackpot Builder Parley: 25-06-2026**
 
 :small_orange_diamond: Ecuador x Germany: **Germany -1.5 @ 2.70 - 3.10***
 :small_orange_diamond: Curacao x Ivory Coast: **Over 3.5 goals @ 1.90 - 2.20***
@@ -671,10 +669,10 @@ function log(msg, cls){ const el=document.getElementById('log'); if(!el) return;
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(k).join(EMOJI[k]); } s=s.replace(/&lt;#\d+&gt;/g,'<span class="chan">#vip-upgrade</span>'); return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
 
-const CHANNELS = ['LOW','MID','HIGH','LUCKY'];
+const CHANNELS = ['PARLEY','LUCKY'];
 function getHook(cat){ const el=document.getElementById('hook_'+cat); return el?el.value.trim():''; }
-function catLabel(cat){ return {LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM'}[cat]||cat; }
-function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; if(h.includes('HIGH'))return'HIGH'; if(h.includes('MID'))return'MID'; return'LOW'; }
+function catLabel(cat){ return {PARLEY:'Daily Parley Tips',LOW:'Daily Parley Tips',MID:'Daily Parley Tips',HIGH:'Daily Parley Tips',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM'}[cat]||cat; }
+function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; return'PARLEY'; }
 
 function applyTokens(t){
   var _vl=vipLink(); var _vlo=(!_vl)?'(stel je VIP-link in)':(/^https?:/i.test(_vl)?_vl:(/^[0-9]+$/.test(_vl)?'<#'+_vl+'>':_vl));
@@ -1078,7 +1076,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
 function exportSettings(){
-  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -1092,7 +1090,8 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    (function(){ var pe=document.getElementById('hook_PARLEY'); if(pe && !pe.value){ var mig=localStorage.getItem('ba_hook_PARLEY')||localStorage.getItem('ba_hook_LOW')||localStorage.getItem('ba_hook_MID')||localStorage.getItem('ba_hook_HIGH')||''; if(mig){ pe.value=mig; localStorage.setItem('ba_hook_PARLEY',mig); } } })();
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
     var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
