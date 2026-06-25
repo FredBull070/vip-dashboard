@@ -567,7 +567,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v40";
+var EMBEDDED_VERSION = "2026-06-25-v41";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -658,7 +658,8 @@ const DEFAULT_MESSAGES = DAILY_MESSAGES;
 const EMOJI = {
   ':crown:':'\u{1F451}',':small_orange_diamond:':'\u{1F536}',':moneybag:':'\u{1F4B0}',':mortar_board:':'\u{1F393}',
   ':white_check_mark:':'✅',':tennis:':'\u{1F3BE}',':soccer:':'⚽',':gift:':'\u{1F381}',':dart:':'\u{1F3AF}',':brain:':'\u{1F9E0}',':bank:':'\u{1F3E6}',':trophy:':'\u{1F3C6}',
-  ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️'
+  ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️',
+  ':bar_chart:':'\u{1F4CA}',':hourglass_flowing_sand:':'\u{23F3}',':green_circle:':'\u{1F7E2}',':red_circle:':'\u{1F534}',':coin:':'\u{1FA99}',':soccer_ball:':'⚽'
 };
 
 let messages = [];
