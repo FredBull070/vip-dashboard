@@ -687,7 +687,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v68";
+var EMBEDDED_VERSION = "2026-06-25-v69";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1431,11 +1431,11 @@ function renderChallenge(){
   var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=7; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
   var v=document.getElementById('challengeView'); if(!v) return;
   if(CH.status==='failed'){
-    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml();
     return;
   }
   if(CH.status==='won' || CH.pot>=CH.target){
-    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml();
     return;
   }
   var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
@@ -1449,7 +1449,7 @@ function renderChallenge(){
       (CH.history.length?'<button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button>':'')+
       '<button class="btn-secondary" onclick="challengeWin()">Won</button>'+
       '<button class="btn-secondary" onclick="challengeLoss()">Lost</button>'+
-    '</div></section>'+challengeHistoryHtml();
+    '</div></section>'+challengeSharePreviews()+challengeHistoryHtml();
 }
 function challengeWin(){
   var ec=EMBEDDED_CHALLENGE; var odd=ec.oddLow||2; var after=Math.round(CH.pot*odd*100)/100;
@@ -1486,22 +1486,22 @@ function buildChallengeMemberUpdate(){
   if(last.result==='W'){
     var done=(CH.status==='won' || CH.pot>=CH.target);
     if(done){
-      return ':trophy: **$10 TO $1K CHALLENGE COMPLETE** \U0001F389\n'+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'**\n\n'+
-        ':bar_chart: Target reached in '+last.day+' days, one safe doubler a day, exactly to plan.\n'+
-        ':green_circle: Massive one, team. A fresh challenge starts tomorrow at $10. Thanks for riding along.\n'+
-        ':warning: 18+ | play responsibly';
+      return '🏆 **$10 to $1K Challenge COMPLETE!** 🎉\n'+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'**. We turned $10 into a grand, one banker at a time.\nHuge one, team. Fresh challenge starts tomorrow at $10, hope you rode it with us 🙌';
     }
     var ec=EMBEDDED_CHALLENGE; var nextTarget=CH.pot*(ec.oddLow||2);
-    return ':dart: **$10 TO $1K CHALLENGE | DAY '+last.day+' DONE** :white_check_mark:\n'+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'**\n\n'+
-      ':chart_with_upwards_trend: Progress: **'+chPct()+'%** to $1,000  ('+last.day+'/7 days)\n'+chBar(chPct())+'\n\n'+
-      ':green_circle: Day '+last.day+' is in the books. Day '+CH.day+' is next: stake **'+fmtUSD(CH.pot)+'**, target **'+fmtUSD(nextTarget)+'**.\n'+
-      '\U0001F512 Stick to the plan, one safe doubler a day, never chase. The next pick drops soon.\n'+
-      ':warning: 18+ | play responsibly';
+    return '✅ **$10 to $1K Challenge | Day '+last.day+' done!**\nBoom, Day '+last.day+' is in. '+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'** 📈  ('+chPct()+'% of the way to $1,000, '+last.day+'/7 days)\nOn to Day '+CH.day+' tomorrow: '+fmtUSD(CH.pot)+' on the line, going for '+fmtUSD(nextTarget)+'. One safe doubler a day, we keep it rolling 💪';
   }
-  return ':x: **$10 TO $1K CHALLENGE | DAY '+last.day+'**\nThe Day '+last.day+' bet did not land, so the run resets to $10. That is variance, not a broken plan.\n\n'+
-    ':bar_chart: We ran it fully transparent, every result logged.\n'+
-    '\U0001F504 Fresh start tomorrow at $10, Day 1. Discipline over everything, see you there.\n'+
-    ':warning: 18+ | play responsibly';
+  return '❌ **$10 to $1K Challenge | Day '+last.day+'**\nAh, Day '+last.day+" didn't land. No stress, that's just variance, not a broken plan.\nWe log it all, win or lose, so you always get the real picture.\nStraight back at it tomorrow: fresh $10, clean slate. We don't dwell, we run it again. See you there 💪";
+}
+function challengeSharePreviews(){
+  if(!CH.history || !CH.history.length) return '';
+  var a=''; var b='';
+  try{ a=renderDiscord(applyTokens(buildChallengeMemberUpdate())); }catch(e){}
+  try{ b=renderDiscord(applyTokens(buildChallengeResult())); }catch(e){}
+  return '<section class="card"><h2 class="section-title">What you will send</h2>'+
+    '<p class="section-sub" style="margin:6px 0 6px;"><b>Member update</b> &middot; Challenge channel (VIP members):</p><div class="disc" style="margin-bottom:16px;">'+a+'</div>'+
+    '<p class="section-sub" style="margin:0 0 6px;"><b>Result recap</b> &middot; VIP results channel (for conversion):</p><div class="disc">'+b+'</div>'+
+    '</section>';
 }
 async function sendChallengeUpdate(){
   if(!CH.history.length){ showToast('No settled day yet', false); return; }
