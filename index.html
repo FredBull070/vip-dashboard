@@ -332,8 +332,7 @@
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
   <div class="crumbs"><span class="crumb-muted">BetLife365</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
   <div class="top-status" id="topStatus" style="margin-left:auto;"></div>
-  <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:14px;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
-  <span class="logo-badge" style="margin-left:13px;"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
+  <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:auto;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
 </header>
 <div id="notifPanel" class="notif-panel" style="display:none;"></div>
 
@@ -692,7 +691,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v74";
+var EMBEDDED_VERSION = "2026-06-25-v75";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
