@@ -229,6 +229,17 @@
   .subtab:hover{color:var(--text);background:rgba(255,255,255,.05);}
   .subtab.active{background:var(--accent);color:#fff;}
   @media(max-width:820px){ .subbar{overflow-x:auto;flex-wrap:nowrap;} }
+
+  .rcard{border:1px solid var(--line2);border-left:3px solid var(--muted);border-radius:12px;padding:12px 15px;margin-bottom:10px;background:rgba(255,255,255,.02);}
+  .rcard.r-low{border-left-color:#30d158;} .rcard.r-medium{border-left-color:#f5b829;} .rcard.r-high{border-left-color:#ff453a;}
+  .rcard .rc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:3px;}
+  .rcard .rc-match{font-weight:700;font-size:14px;}
+  .rcard .rc-odds{font-weight:700;color:var(--accent);font-size:14px;white-space:nowrap;}
+  .rcard .rc-meta{font-size:12px;color:var(--muted);}
+  .rcard .rc-sel{font-size:13.5px;margin:3px 0 1px;color:#fff;font-weight:600;}
+  .rcard .rc-an{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:3px;}
+  .risk-head{display:flex;align-items:center;gap:9px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:var(--text);}
+  .risk-head:first-child{margin-top:2px;}
 </style>
 </head>
 <body>
@@ -287,6 +298,7 @@
     <div class="side-scroll">
       <div class="side-section">Betting</div>
       <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily bets</button>
+      <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
       <div class="side-section">Discord</div>
@@ -342,6 +354,18 @@
     </section>
   </div>
   </div>
+<div class="page" id="page-betcards" style="display:none">
+    <section class="card">
+      <div class="card-head">
+        <h2 class="section-title">Daily Betting Cards <span class="pill" id="cardsCount">0 cards</span></h2>
+        <button class="btn" onclick="sendCards()">Send all to Daily Cards channel</button>
+      </div>
+      <p class="section-sub">All of today's value picks as single cards, grouped by risk. Customers pick their own selections and build their own slip. Sent as one Discord message (auto-split if it gets long). Use the sub-tabs above to filter by risk or open the preview.</p>
+    </section>
+    <div id="betcards-visual"></div>
+    <div id="betcards-preview" style="display:none"><section class="card"><h2 class="section-title">Discord preview</h2><p class="section-sub">Exactly how it will be sent. Long lists are split into multiple messages.</p><div class="disc" id="cardsPreviewBox"></div></section></div>
+    <div id="betcards-edit" style="display:none"><section class="card"><h2 class="section-title">Edit cards</h2><p class="section-sub">One card per block, separated by a line <code>===</code>. Fields per card: MATCH, MARKET, SELECTION, ODDS, STAKE, RISK (low/medium/high), ANALYSIS.</p><textarea id="cardsRaw" spellcheck="false" style="min-height:240px;"></textarea><div class="actions"><button class="btn-secondary" onclick="renderCards()">Refresh</button><button class="btn-secondary" onclick="loadCardsToday()">Load today's cards</button></div></section></div>
+    </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
       <h2 class="section-title">Your bets</h2>
@@ -439,7 +463,7 @@
         <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div>
+        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div>
       </div>
       </div>
       <div id="set-vip" style="display:none">
@@ -496,7 +520,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v37";
+var EMBEDDED_VERSION = "2026-06-25-v38";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -692,6 +716,7 @@ function saveAll(silent){
   localStorage.setItem('ba_hook_FREE', getHook('FREE'));
   localStorage.setItem('ba_hook_CUSTOM', getHook('CUSTOM'));
   localStorage.setItem('ba_hook_CHALLENGE', getHook('CHALLENGE'));
+  localStorage.setItem('ba_hook_CARDS', getHook('CARDS'));
   var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
   localStorage.setItem('ba_vip_link', vipLink());
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
@@ -833,6 +858,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const fHook=localStorage.getItem('ba_hook_FREE'); if(fHook!==null) document.getElementById('hook_FREE').value=fHook;
     const cHook=localStorage.getItem('ba_hook_CUSTOM'); if(cHook!==null) document.getElementById('hook_CUSTOM').value=cHook;
     const chHook=localStorage.getItem('ba_hook_CHALLENGE'); if(chHook!==null && document.getElementById('hook_CHALLENGE')) document.getElementById('hook_CHALLENGE').value=chHook;
+    const caHook=localStorage.getItem('ba_hook_CARDS'); if(caHook!==null && document.getElementById('hook_CARDS')) document.getElementById('hook_CARDS').value=caHook;
     const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
@@ -882,6 +908,7 @@ var PAGE_META={
   today:["Daily bets","Today's bets, grouped by type and ready to send."],
   edit:["Edit lists","Edit today's raw messages."],
   challenge:["Challenges","$10 to $1,000: the safest x2 bet of the day, with a day tracker."],
+  betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
   vip:["Share VIP results","Share settled results as a public card to your VIP channel."],
@@ -895,7 +922,8 @@ var SUBTABS={
   today:[['bets','All'],['FREE','Free'],['LOW','Low'],['MID','Mid'],['HIGH','High'],['LUCKY','Lucky'],['edit','Edit lists']],
   journal:[['mybets','Your bets'],['results','Results'],['bankroll','Bankroll']],
   settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
-  archive:[['list','List'],['cal','Calendar']]
+  archive:[['list','List'],['cal','Calendar']],
+  betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -913,6 +941,7 @@ function showSub(page, sub){
   else if(page==='settings'){ ['set-channels','set-vip','set-io'].forEach(function(s){ var el=document.getElementById(s); if(el) el.style.display=(s==='set-'+sub)?'block':'none'; }); var pc=document.getElementById('page-channels'); var pl=document.getElementById('page-log'); if(pc) pc.style.display=(sub==='log')?'none':'block'; if(pl) pl.style.display=(sub==='log')?'block':'none'; }
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
+  else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -994,7 +1023,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
 function exportSettings(){
-  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -1008,7 +1037,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
     var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
@@ -1218,6 +1247,139 @@ async function sendChallenge(){
   catch(e){ log('FAILED challenge: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 if(document.getElementById('challengeStats')) renderChallenge();
+
+
+/* ---- Daily Betting Cards ---- */
+var EMBEDDED_CARDS = { date: "2026-06-25" };
+var EMBEDDED_CARDS_TEXT = `MATCH: Tunisia x Netherlands
+MARKET: Match result
+SELECTION: Netherlands to win
+ODDS: 1.07
+STAKE: 3u
+RISK: low
+ANALYSIS: Netherlands are far superior to Tunisia and should control the game from start to finish.
+===
+MATCH: Curacao x Ivory Coast
+MARKET: Match result
+SELECTION: Ivory Coast to win
+ODDS: 1.14
+STAKE: 3u
+RISK: low
+ANALYSIS: Curacao are the smallest nation in the tournament; Ivory Coast should win comfortably.
+===
+MATCH: Curacao x Ivory Coast
+MARKET: Total goals
+SELECTION: Over 1.5 goals
+ODDS: 1.22
+STAKE: 2u
+RISK: low
+ANALYSIS: Ivory Coast have the quality to score at least twice against a weak defence.
+===
+MATCH: Ecuador x Germany
+MARKET: Match result
+SELECTION: Germany to win
+ODDS: 1.65
+STAKE: 2u
+RISK: medium
+ANALYSIS: Germany are the stronger side and Ecuador have not scored in two games, but Germany are through and may rotate.
+===
+MATCH: Tunisia x Netherlands
+MARKET: Asian handicap
+SELECTION: Netherlands -1.5
+ODDS: 1.45
+STAKE: 1.5u
+RISK: medium
+ANALYSIS: The Netherlands should beat Tunisia by two or more given the gap in quality.
+===
+MATCH: Curacao x Ivory Coast
+MARKET: Asian handicap
+SELECTION: Ivory Coast -1.5
+ODDS: 1.35
+STAKE: 1.5u
+RISK: medium
+ANALYSIS: Ivory Coast should win by a clear margin against an overmatched Curacao.
+===
+MATCH: Japan x Sweden
+MARKET: Total goals
+SELECTION: Over 2.5 goals
+ODDS: 1.95
+STAKE: 1.5u
+RISK: medium
+ANALYSIS: Two attacking teams that should produce goals at both ends.
+===
+MATCH: Curacao x Ivory Coast
+MARKET: Asian handicap
+SELECTION: Ivory Coast -2.5
+ODDS: 2.50
+STAKE: 1u
+RISK: high
+ANALYSIS: Ivory Coast could rout the weakest team in the tournament by three or more.
+===
+MATCH: Ecuador x Germany
+MARKET: Asian handicap
+SELECTION: Germany -1.5
+ODDS: 2.80
+STAKE: 1u
+RISK: high
+ANALYSIS: If a full strength Germany click a two goal margin is on, but rotation adds risk.
+===
+MATCH: Turkiye x United States
+MARKET: Match result
+SELECTION: Draw
+ODDS: 3.10
+STAKE: 0.5u
+RISK: high
+ANALYSIS: A tight, even game between well matched sides that can finish level.
+===
+MATCH: Paraguay x Australia
+MARKET: Total goals
+SELECTION: Over 2.5 goals
+ODDS: 2.10
+STAKE: 1u
+RISK: high
+ANALYSIS: An open game with both teams likely to push for goals.`;
+function getCardsText(){ var el=document.getElementById('cardsRaw'); return (el && el.value.trim())? el.value : EMBEDDED_CARDS_TEXT; }
+function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); return o.match? o : null; }).filter(Boolean); }
+function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+c.match+'**\n> :dart: Market: '+(c.market||'')+'\n> :white_check_mark: Selection: '+(c.selection||'')+'\n> :moneybag: Odds: '+(c.odds||'')+'  ·  :coin: Stake: '+(c.stake||'')+'\n> :brain: '+(c.analysis||''); }
+function buildCardsChunks(){
+  var cards=parseCards(getCardsText()); if(!cards.length) return [];
+  var date=(EMBEDDED_CARDS&&EMBEDDED_CARDS.date)?dmy(EMBEDDED_CARDS.date):'';
+  var header=':bar_chart: **DAILY BETTING CARDS - '+date+'**\nPick your own selections and build your slip. Stakes in units, odds may vary.\n';
+  var footer='\n:warning: 18+ | play responsibly';
+  var groups=[['low','🟢 **LOW RISK**'],['medium','🟡 **MEDIUM RISK**'],['high','🔴 **HIGH RISK**']];
+  var msgs=[]; var cur=header; var has=false;
+  groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+    var gh='\n'+g[1]+'\n';
+    cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
+      if((cur+piece+footer).length>1900 && has){ msgs.push(cur+footer); cur=header+gh+'\n'+cardStr(c)+'\n'; }
+      else { cur+=piece; } has=true; });
+  });
+  if(has) msgs.push(cur+footer);
+  return msgs;
+}
+function renderCards(){
+  var cards=parseCards(getCardsText());
+  var cc=document.getElementById('cardsCount'); if(cc) cc.textContent=cards.length+(cards.length===1?' card':' cards');
+  var vis=document.getElementById('betcards-visual');
+  if(vis){ var groups=[['low','🟢 Low risk'],['medium','🟡 Medium risk'],['high','🔴 High risk']]; var html='';
+    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+      html+='<div class="risk-head" data-risk="'+g[0]+'">'+g[1]+' <span class="dg-count">'+cs.length+'</span></div>';
+      cs.forEach(function(c){ html+='<div class="rcard r-'+c.risk+'" data-risk="'+c.risk+'"><div class="rc-top"><span class="rc-match">'+esc(c.match||'')+'</span><span class="rc-odds">'+esc(c.odds||'')+'</span></div><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div></div>'; });
+    });
+    vis.innerHTML=html||'<p class="small">No cards yet. Add some under the Edit tab.</p>';
+  }
+  var pv=document.getElementById('cardsPreviewBox'); if(pv){ pv.innerHTML=renderDiscord(buildCardsChunks().join('\n\n──────────\n\n')); }
+}
+function cardsFilter(sub){ var want=(sub==='all'||!sub)?'all':sub; var els=document.querySelectorAll('#betcards-visual .rcard, #betcards-visual .risk-head'); for(var i=0;i<els.length;i++){ var r=els[i].getAttribute('data-risk'); els[i].style.display=(want==='all'||r===want)?'':'none'; } }
+function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=EMBEDDED_CARDS_TEXT; renderCards(); }
+async function sendCards(){
+  var chunks=buildCardsChunks(); if(!chunks.length){ log('No cards to send.','err'); return; }
+  var n=parseCards(getCardsText()).length;
+  if(!await askConfirm('Send the '+n+' betting cards to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages due to length)':''))){ log('Cancelled.','info'); return; }
+  for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+' / '+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); }
+  log('Betting cards sent.','ok'); showToast('Betting cards sent');
+}
+(function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 
 showPage('today');
 
