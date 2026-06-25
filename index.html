@@ -578,7 +578,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v53";
+var EMBEDDED_VERSION = "2026-06-25-v54";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1298,17 +1298,41 @@ try{ CH=JSON.parse(localStorage.getItem('ba_challenge')||'null'); }catch(e){ CH=
 if(!CH || typeof CH!=='object'){ CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] }; }
 function saveCH(){ localStorage.setItem('ba_challenge', JSON.stringify(CH)); }
 function fmtUSD(n){ return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function buildChallengeMessage(){
+function chPct(){ return Math.min(100, Math.round(CH.pot/CH.target*100)); }
+function chBar(pct){ var f=Math.round(pct/10); var s=''; for(var i=0;i<10;i++) s+=(i<f?'▰':'▱'); return s; }
+function buildChallengePlan(){
   var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
   var lines=(ec.legs||[]).map(function(L){ var p=L.split(': '); if(p.length>=2){ return ':small_orange_diamond: '+p[0]+': **'+p.slice(1).join(': ')+'**'; } return ':small_orange_diamond: '+L; }).join('\n');
-  return ':dart: **$10 TO $1K CHALLENGE - DAY '+CH.day+'/8**\n\n'+
-    ':moneybag: Stake today: **'+fmtUSD(CH.pot)+'**  |  Target on win: **'+fmtUSD(payout)+'**\n\n'+
+  return ':dart: **$10 TO $1K CHALLENGE | DAY '+CH.day+'/7**\n'+
+    ':chart_with_upwards_trend: Pot **'+fmtUSD(CH.pot)+'** of $1,000 target  ('+chPct()+'%)\n'+chBar(chPct())+'\n\n'+
+    ':moneybag: Today\'s stake: **'+fmtUSD(CH.pot)+'**  |  Target on win: **'+fmtUSD(payout)+'**\n\n'+
     lines+'\n\n'+
     ':moneybag: Total odds: **± '+(ec.oddLow||2)+' - '+(ec.oddHigh||ec.oddLow||2)+'**\n'+
     'Odds may vary depending on the bookmaker or the time of placement.\n\n'+
-    ':mortar_board:**Justification:**\n'+(ec.justification||'')+'\n\n'+
+    ':mortar_board: **The plan:** one safe doubler a day turns $10 into $1,000 in 7 winning days. Today is day '+CH.day+'.\n'+
+    ':brain: **Strategy:** we back only the safest x2 on the card and never chase. One loss resets the run, so discipline is everything.\n\n'+
     ':warning: 18+ | play responsibly';
 }
+function buildChallengeResult(){
+  var n=CH.history.length; if(!n) return '';
+  var last=CH.history[n-1]; var before=(n>1?CH.history[n-2].potAfter:CH.start);
+  var ch=(typeof vipChannelOut==='function')?vipChannelOut():''; var link=(typeof vipLink==='function')?vipLink():''; var cta=ch||link||'(set your VIP link under Settings)';
+  if(last.result==='W'){
+    var done=(CH.status==='won' || CH.pot>=CH.target);
+    var head=done?':trophy: **$10 TO $1K CHALLENGE COMPLETE**':':rocket: **$10 TO $1K CHALLENGE | DAY '+last.day+' WON** :white_check_mark:';
+    return head+'\n'+fmtUSD(before)+' → **'+fmtUSD(last.potAfter)+'**\n\n'+
+      ':bar_chart: Progress to $1,000: **'+chPct()+'%**  ('+last.day+'/7 days)\n'+chBar(chPct())+'\n\n'+
+      (done?':green_circle: We turned **$10 into '+fmtUSD(CH.pot)+'** with one safe doubler a day, every leg shared in VIP before kickoff.\n':':green_circle: Day '+last.day+' landed, exactly to plan: one safe doubler a day, $10 to $1,000.\n')+
+      ':fire: Want to copy every challenge bet before kickoff and ride it live? That is VIP only.\n'+
+      ':rocket: Join VIP and run the challenge with us: '+cta+'\n'+
+      ':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
+  }
+  return ':x: **$10 TO $1K CHALLENGE | DAY '+last.day+' - run ended**\nStake '+fmtUSD(before)+' did not land, so the run resets to $10.\n\n'+
+    ':bar_chart: We post **every** challenge result, win or lose. Full transparency.\n'+
+    ':bulb: The next run starts fresh at $10, and members get every safe doubler before kickoff: '+cta+'\n'+
+    ':warning: 18+ | play responsibly';
+}
+function buildChallengeMessage(){ return buildChallengePlan(); }
 function challengeHistoryHtml(){
   if(!CH.history.length) return '';
   var rows=CH.history.map(function(x){ return '<tr><td>Day '+x.day+'</td><td>'+x.date+'</td><td>'+x.odd+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td></tr>'; }).join('');
@@ -1317,28 +1341,29 @@ function challengeHistoryHtml(){
 function renderChallenge(){
   var st=document.getElementById('challengeStats'); if(!st) return;
   var pct=Math.min(100, Math.round(CH.pot/CH.target*100));
-  st.innerHTML='<div class="stat"><div class="v">Day '+CH.day+' / 8</div><div class="l">Challenge day</div></div>'+
+  st.innerHTML='<div class="stat"><div class="v">Day '+CH.day+' / 7</div><div class="l">Challenge day</div></div>'+
     '<div class="stat"><div class="v">'+fmtUSD(CH.pot)+'</div><div class="l">Current pot</div></div>'+
     '<div class="stat"><div class="v">'+fmtUSD(CH.target)+'</div><div class="l">Target</div></div>'+
     '<div class="stat"><div class="v">'+pct+'%</div><div class="l">Progress</div></div>';
   var pr=document.getElementById('challengeProg'); if(pr) pr.innerHTML='<div class="chprog"><div class="chprog-bar" style="width:'+pct+'%"></div></div>';
-  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=8; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
+  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=7; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
   var v=document.getElementById('challengeView'); if(!v) return;
   if(CH.status==='failed'){
-    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeHistoryHtml();
     return;
   }
   if(CH.status==='won' || CH.pot>=CH.target){
-    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeHistoryHtml();
     return;
   }
   var ec=EMBEDDED_CHALLENGE; var payout=CH.pot*(ec.oddLow||2);
   v.innerHTML='<section class="card">'+
     '<div class="card-head"><h2 class="section-title">Challenge bet - Day '+CH.day+'</h2><span class="pill">stake '+fmtUSD(CH.pot)+'</span></div>'+
     '<p class="section-sub">Target on win: <strong style="color:var(--text)">'+fmtUSD(payout)+'</strong> bij odd x'+(ec.oddLow||2)+' or higher. My safest pick of the day.</p>'+
-    '<div class="disc">'+renderDiscord(buildChallengeMessage())+'</div>'+
+    '<div class="disc">'+renderDiscord(buildChallengePlan())+'</div>'+
     '<div class="actions">'+
-      '<button class="btn" onclick="sendChallenge()">Send to Challenge channel</button>'+
+      '<button class="btn" onclick="sendChallengePlan()">Send planned bet (VIP)</button>'+
+      (CH.history.length?'<button class="btn-secondary" onclick="sendChallengeResult()">Share last result (VIP results)</button>':'')+
       '<button class="btn-secondary" onclick="challengeWin()">Won</button>'+
       '<button class="btn-secondary" onclick="challengeLoss()">Lost</button>'+
     '</div></section>'+challengeHistoryHtml();
@@ -1360,11 +1385,18 @@ function challengeRestart(){
   CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] };
   saveCH(); renderChallenge(); showToast('New challenge started');
 }
-async function sendChallenge(){
-  if(!await askConfirm('Send the Day '+CH.day+' challenge bet to your Challenge channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending challenge bet...','info'); await postToDiscord(applyTokens(buildChallengeMessage()), getHook('CHALLENGE')); log('OK - challenge sent.','ok'); showToast('Sent to Challenge'); }
+async function sendChallengePlan(){
+  if(!await askConfirm('Send the Day '+CH.day+' planned challenge bet to your Challenge channel (VIP members)?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending challenge plan...','info'); await postToDiscord(applyTokens(buildChallengePlan()), getHook('CHALLENGE')); log('OK - challenge plan sent.','ok'); showToast('Sent to Challenge'); }
   catch(e){ log('FAILED challenge: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
+async function sendChallengeResult(){
+  if(!CH.history.length){ showToast('No settled day to share yet', false); return; }
+  if(!await askConfirm('Share the latest challenge result to your VIP results channel (for conversion)?')){ log('Cancelled.','info'); return; }
+  try{ log('Sharing challenge result...','info'); await postToDiscord(applyTokens(buildChallengeResult()), getHook('RESULTS')); log('OK - challenge result shared.','ok'); showToast('Shared to VIP results'); }
+  catch(e){ log('FAILED challenge result: '+e.message,'err'); showToast('Failed: '+e.message, false); }
+}
+async function sendChallenge(){ return sendChallengePlan(); }
 if(document.getElementById('challengeStats')) renderChallenge();
 
 
