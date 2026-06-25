@@ -46,6 +46,18 @@
   .notif-item.is-read{opacity:.55;}
   .nt-read{font-size:9.5px;color:var(--muted);border:1px solid rgba(255,255,255,.16);border-radius:5px;padding:1px 5px;margin-left:6px;font-weight:600;vertical-align:middle;text-transform:uppercase;letter-spacing:.04em;}
   .nt-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff7a1a;margin-right:7px;vertical-align:middle;}
+  .nmail{display:flex;gap:14px;align-items:flex-start;}
+  .nmail-list{flex:0 0 330px;max-width:330px;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.02);max-height:72vh;overflow-y:auto;}
+  .nmail-row{display:block;width:100%;text-align:left;padding:12px 14px;border:none;border-bottom:1px solid rgba(255,255,255,.06);background:transparent;color:var(--text);cursor:pointer;}
+  .nmail-row:hover{background:rgba(255,255,255,.045);}
+  .nmail-row.sel{background:rgba(255,122,26,.13);box-shadow:inset 3px 0 0 #ff7a1a;}
+  .nmail-row .nr-top{display:flex;align-items:center;gap:8px;}
+  .nmail-row .nr-title{font-weight:700;font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nmail-row.is-read .nr-title{font-weight:500;color:var(--muted);}
+  .nmail-row .nr-snip{font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nmail-row .nr-dot{width:8px;height:8px;border-radius:50%;background:#ff7a1a;flex:0 0 auto;}
+  .nmail-detail{flex:1;min-width:0;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 18px;background:rgba(255,255,255,.02);min-height:320px;}
+  @media(max-width:760px){ .nmail{flex-direction:column;} .nmail-list{flex:1 1 auto;max-width:none;width:100%;max-height:none;} }
   .auto-list{list-style:none;margin:12px 0 0;padding:0;}
   .auto-list li{position:relative;padding:9px 0 9px 26px;font-size:13.5px;line-height:1.55;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted);}
   .auto-list li:last-child{border-bottom:none;}
@@ -619,9 +631,12 @@
 <div class="page" id="page-notifications" style="display:none">
     <section class="card">
       <div class="card-head"><h2 class="section-title">Notifications</h2><button class="btn-secondary" onclick="notifMarkAll()">Mark all as read</button></div>
-      <p class="section-sub">Everything that is ready to share, in one place. Review the exact Discord message, then Send now (with a confirmation) or Open tab.</p>
+      <p class="section-sub">Your inbox of everything ready to share. Click an item on the left to open it, review the exact Discord message, then send.</p>
     </section>
-    <div id="notifPageList"></div>
+    <div class="nmail">
+      <div class="nmail-list" id="notifList"></div>
+      <div class="nmail-detail" id="notifDetail"></div>
+    </div>
     </div>
     </div>
   </main>
@@ -658,7 +673,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v63c";
+var EMBEDDED_VERSION = "2026-06-25-v64";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -2719,7 +2734,32 @@ function notifDismiss(key){ markSent(key); }
 function toggleNotifs(ev){ if(ev) ev.stopPropagation(); var p=document.getElementById('notifPanel'); if(!p) return; if(p.style.display==='none'||!p.style.display){ renderNotifs(); p.style.display='block'; } else p.style.display='none'; }
 function closeNotifs(){ var p=document.getElementById('notifPanel'); if(p) p.style.display='none'; }
 function notifItemHtml(it){ var s='<section class="card" style="margin-bottom:12px;'+(it.read?'opacity:.6;':'')+'"><div style="font-weight:700;font-size:14px;">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div style="color:var(--muted);font-size:12px;margin-bottom:9px;">'+esc(it.sub)+'</div>'; if(it.text){ s+='<div class="disc" style="margin-bottom:10px;">'+renderDiscord(applyTokens(it.text))+'</div>'; } s+='<div class="actions" style="margin:0;">'; if(it.kind!=='edu') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>'; s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>'; s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>'; s+='</div></section>'; return s; }
-function renderNotifsPage(){ var box=document.getElementById('notifPageList'); if(!box) return; var items=buildNotifs(); if(!items.length){ box.innerHTML='<section class="card"><p class="section-sub" style="margin:0;">Nothing waiting. You are all caught up.</p></section>'; return; } box.innerHTML=items.map(notifItemHtml).join(''); }
+var _notifSel=null;
+function renderNotifsPage(){
+  var list=document.getElementById('notifList'); if(!list) return;
+  var items=buildNotifs();
+  if(!items.length){ list.innerHTML='<div style="padding:20px;color:var(--muted);font-size:13px;">Nothing here yet.</div>'; var d0=document.getElementById('notifDetail'); if(d0) d0.innerHTML='<p class="section-sub" style="margin:0;">Nothing to show.</p>'; return; }
+  if(!_notifSel || !items.some(function(it){return it.key===_notifSel;})) _notifSel=items[0].key;
+  list.innerHTML=items.map(function(it){ return '<button class="nmail-row'+(it.read?' is-read':'')+(it.key===_notifSel?' sel':'')+'" onclick="openNotif(\''+it.key+'\')"><div class="nr-top">'+(it.read?'':'<span class="nr-dot"></span>')+'<span class="nr-title">'+esc(it.title)+'</span></div><div class="nr-snip">'+esc(it.sub||'')+'</div></button>'; }).join('');
+  renderNotifDetail(_notifSel);
+}
+function renderNotifDetail(key){
+  var d=document.getElementById('notifDetail'); if(!d) return;
+  var items=(NITEMS&&NITEMS.length)?NITEMS:buildNotifs(); var it=null;
+  for(var i=0;i<items.length;i++){ if(items[i].key===key){ it=items[i]; break; } }
+  if(!it){ d.innerHTML='<p class="section-sub" style="margin:0;">Select an item on the left.</p>'; return; }
+  var s='<div style="font-weight:800;font-size:16px;">'+esc(it.title)+'</div>';
+  s+='<div style="color:var(--muted);font-size:12.5px;margin:3px 0 14px;">'+esc(it.sub)+(it.read?' &middot; <span class="nt-read">read</span>':'')+'</div>';
+  if(it.text){ s+='<div class="disc" style="margin-bottom:14px;">'+renderDiscord(applyTokens(it.text))+'</div>'; }
+  else { s+='<p class="section-sub" style="margin:0 0 14px;">No preview for this item. Use Open tab to handle it.</p>'; }
+  s+='<div class="actions" style="margin:0;">';
+  if(it.kind!=='edu') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+  s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
+  s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>';
+  s+='</div>';
+  d.innerHTML=s;
+}
+function openNotif(key){ _notifSel=key; renderNotifsPage(); }
 function notifMarkAll(){ buildNotifs(); NITEMS.forEach(function(it){ NSENT[it.key]=Date.now(); }); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('All marked as read'); }
 function markUnread(k){ if(!k) return; delete NSENT[k]; nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} }
 function notifMarkRead(key){ markSent(key); }
