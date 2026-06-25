@@ -223,6 +223,12 @@
   .cal-cell.has:hover{background:rgba(255,122,26,.26);}
   .cal-cell.empty{border:none;background:transparent;}
   .cal-month{font-size:14px;font-weight:600;text-align:center;margin:4px 0 10px;}
+
+  .subbar{display:flex;gap:4px;flex-wrap:wrap;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:12px;padding:4px;margin:0 0 20px;}
+  .subtab{border:none;background:transparent;color:var(--muted);font-weight:600;font-size:13px;padding:7px 15px;border-radius:9px;cursor:pointer;transition:.13s;white-space:nowrap;}
+  .subtab:hover{color:var(--text);background:rgba(255,255,255,.05);}
+  .subtab.active{background:var(--accent);color:#fff;}
+  @media(max-width:820px){ .subbar{overflow-x:auto;flex-wrap:nowrap;} }
 </style>
 </head>
 <body>
@@ -281,7 +287,6 @@
     <div class="side-scroll">
       <div class="side-section">Betting</div>
       <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily bets</button>
-      <button class="nav-sub" data-page="edit" onclick="showPage('edit')">+ Edit lists</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
       <div class="side-section">Discord</div>
@@ -306,8 +311,11 @@
         <h1 class="page-title" id="pageTitle">Daily bets</h1>
         <p class="page-sub" id="pageSub">Today's lists, grouped and ready to send to your channels.</p>
       </div>
+      <div class="subbar" id="subbar" style="display:none;"></div>
       <div id="status" class="banner">Loading...</div>
       <div class="page" id="page-today">
+  <div id="today-bets">
+
     <section class="card">
       <div class="card-head">
         <h2 class="section-title">Today <span class="pill" id="count">0 messages</span></h2>
@@ -317,7 +325,23 @@
       <div id="sportFilter" class="sportbar"></div>
       <div id="cards"></div>
     </section>
-    </div>
+  </div>
+  <div id="today-edit" style="display:none">
+
+    <section class="card">
+      <h2 class="section-title">Edit lists</h2>
+      <p class="section-sub">Edit freely. Separate each message with a line <code>===NEXT MESSAGE===</code>.</p>
+      <textarea id="raw" spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn-secondary" onclick="parseMessages()">Refresh preview</button>
+        <button class="btn-secondary" onclick="loadToday()">Load today's lists</button>
+        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Import from file</button>
+        <input type="file" id="fileInput" accept=".txt,.js" style="display:none" onchange="importFile(this)">
+        <button class="btn-ghost" onclick="resetDefault()">Reset to default</button>
+      </div>
+    </section>
+  </div>
+  </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
       <h2 class="section-title">Your bets</h2>
@@ -388,20 +412,6 @@
       <div class="tablewrap"><table id="challengeSchedule"><thead><tr><th>Day</th><th>Stake</th><th>Target on win</th></tr></thead><tbody></tbody></table></div>
     </section>
     </div>
-<div class="page" id="page-edit" style="display:none">
-    <section class="card">
-      <h2 class="section-title">Edit lists</h2>
-      <p class="section-sub">Edit freely. Separate each message with a line <code>===NEXT MESSAGE===</code>.</p>
-      <textarea id="raw" spellcheck="false"></textarea>
-      <div class="actions">
-        <button class="btn-secondary" onclick="parseMessages()">Refresh preview</button>
-        <button class="btn-secondary" onclick="loadToday()">Load today's lists</button>
-        <button class="btn-ghost" onclick="document.getElementById('fileInput').click()">Import from file</button>
-        <input type="file" id="fileInput" accept=".txt,.js" style="display:none" onchange="importFile(this)">
-        <button class="btn-ghost" onclick="resetDefault()">Reset to default</button>
-      </div>
-    </section>
-    </div>
 <div class="page" id="page-custom" style="display:none">
     <section class="card">
       <h2 class="section-title">Messaging</h2>
@@ -413,13 +423,14 @@
 <div class="page" id="page-archive" style="display:none">
     <section class="card">
       <h2 class="section-title">Archive</h2>
-      <div class="seg2" id="archiveViewToggle"><button data-av="list" class="active" onclick="setArchiveView('list')">List</button><button data-av="cal" onclick="setArchiveView('cal')">Calendar</button></div><div id="archiveCal" style="display:none;margin-bottom:14px;"></div><div class="actions" id="archiveListPick" style="margin-top:0;"><label class="muted-sm" style="margin:0;">Pick a day:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
+      <div id="archiveCal" style="display:none;margin-bottom:14px;"></div><div class="actions" id="archiveListPick" style="margin-top:0;"><label class="muted-sm" style="margin:0;">Pick a day:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
       <div id="archiveView" style="margin-top:14px;"></div>
     </section>
     </div>
 <div class="page" id="page-channels" style="display:none">
     <section class="card">
-      <h2 class="section-title">Channels &amp; settings</h2>
+      <div id="set-channels">
+      <h2 class="section-title">Channels</h2>
       <p class="section-sub">A webhook per channel plus your VIP link/channel. Everything is saved locally in your browser.</p>
       <div class="grid2">
         <div class="field"><label>LOW ODD channel</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div></div>
@@ -430,14 +441,21 @@
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
         <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div>
       </div>
+      </div>
+      <div id="set-vip" style="display:none">
+      <h2 class="section-title" style="margin-bottom:12px;">VIP &amp; links</h2>
       <div class="grid2" style="margin-top:14px;">
         <div class="field"><label>VIP link for {VIP_LINK}: invite link, channel link or channel ID</label><input type="text" id="vip_link" placeholder="https://discord.gg/... of kanaal-link / kanaal-ID"></div>
         <div class="field"><label>VIP upgrade channel: channel LINK or channel ID (for {VIP_CHANNEL})</label><input type="text" id="vip_channel" placeholder="https://discord.com/channels/... of kanaal-ID"></div>
       </div>
       <div class="actions"><button class="btn-secondary" onclick="saveAll()">Save settings</button><span id="saveState"></span></div>
+      </div>
+      <div id="set-io" style="display:none">
+      <h2 class="section-title" style="margin-bottom:12px;">Import / Export</h2>
       <p class="section-sub" style="margin-top:18px;">Move settings to another device (e.g. your phone): click Export, copy the code, and paste it on your phone under Import.</p>
       <textarea id="cfg_code" spellcheck="false" placeholder="Settings code appears here on Export / paste your code here to Import" style="min-height:70px;"></textarea>
       <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Export settings</button><button class="btn-secondary" onclick="importSettings()">Import settings</button><span id="cfgState"></span></div>
+      </div>
     </section>
     </div>
 <div class="page" id="page-log" style="display:none">
@@ -478,7 +496,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v36";
+var EMBEDDED_VERSION = "2026-06-25-v37";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -608,16 +626,17 @@ function parseMessages(){
   var cats=order.filter(function(c){return byCat[c];}); Object.keys(byCat).forEach(function(c){ if(cats.indexOf(c)<0)cats.push(c); });
   cats.forEach(function(c){
     var idxs=byCat[c];
-    var hdr=document.createElement('div'); hdr.className='daily-group';
+    var wrap=document.createElement('div'); wrap.className='daily-cat'; wrap.setAttribute('data-cat', c); var hdr=document.createElement('div'); hdr.className='daily-group';
     hdr.innerHTML='<span class="cat-chip cc-'+c+'">'+catLabel(c)+'</span><span class="dg-title">'+(labels[c]||c)+'</span><span class="dg-count">'+idxs.length+'</span><span class="dg-line"></span>';
-    cards.appendChild(hdr);
+    wrap.appendChild(hdr);
     idxs.forEach(function(i){
       var m=messages[i]; var div=document.createElement('div'); div.className='card'; div.setAttribute('data-sport', detectSport(m));
       div.innerHTML='<div class="meta"><span><span class="chan">to '+catLabel(c)+' channel</span></span>'+
         '<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="sendOne('+i+')">Send</button></div>'+
         '<div class="disc">'+renderDiscord(applyTokens(m))+'</div>';
-      cards.appendChild(div);
+      wrap.appendChild(div);
     });
+    cards.appendChild(wrap);
   });
   saveAll(true);
 }
@@ -872,6 +891,34 @@ var PAGE_META={
 };
 function toggleSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(!s)return; var o=s.classList.toggle('open'); if(b)b.classList.toggle('show',o); }
 function closeSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(s)s.classList.remove('open'); if(b)b.classList.remove('show'); }
+var SUBTABS={
+  today:[['bets','All'],['FREE','Free'],['LOW','Low'],['MID','Mid'],['HIGH','High'],['LUCKY','Lucky'],['edit','Edit lists']],
+  journal:[['mybets','Your bets'],['results','Results'],['bankroll','Bankroll']],
+  settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
+  archive:[['list','List'],['cal','Calendar']]
+};
+var CUR_SUB={};
+function renderSubbar(id){
+  var sb=document.getElementById('subbar'); if(!sb) return;
+  if(!SUBTABS[id]){ sb.style.display='none'; sb.innerHTML=''; return; }
+  var def=CUR_SUB[id]||SUBTABS[id][0][0];
+  sb.innerHTML=SUBTABS[id].map(function(t){ return '<button class="subtab" data-sub="'+t[0]+'" onclick="showSub(\''+id+'\',\''+t[0]+'\')">'+t[1]+'</button>'; }).join('');
+  sb.style.display='flex';
+  showSub(id, def);
+}
+function showSub(page, sub){
+  CUR_SUB[page]=sub;
+  var sb=document.getElementById('subbar'); if(sb){ var bs=sb.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-sub')===sub); }
+  if(page==='journal'){ ['mybets','results','bankroll'].forEach(function(p){ var el=document.getElementById('page-'+p); if(el) el.style.display=(p===sub)?'block':'none'; }); if(sub==='bankroll'&&typeof renderBankroll==='function'){try{renderBankroll();}catch(e){}} }
+  else if(page==='settings'){ ['set-channels','set-vip','set-io'].forEach(function(s){ var el=document.getElementById(s); if(el) el.style.display=(s==='set-'+sub)?'block':'none'; }); var pc=document.getElementById('page-channels'); var pl=document.getElementById('page-log'); if(pc) pc.style.display=(sub==='log')?'none':'block'; if(pl) pl.style.display=(sub==='log')?'block':'none'; }
+  else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
+  else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
+}
+function dailyFilter(sub){
+  var want=(sub==='bets'||!sub)?'all':sub;
+  var wraps=document.querySelectorAll('#cards .daily-cat');
+  for(var i=0;i<wraps.length;i++){ var c=wraps[i].getAttribute('data-cat'); wraps[i].style.display=(want==='all'||c===want)?'':'none'; }
+}
 function showPage(id){
   var ps=document.querySelectorAll('.page'); for(var i=0;i<ps.length;i++) ps[i].style.display='none';
   var groups={journal:['mybets','results','bankroll'], settings:['channels','log']};
@@ -883,6 +930,7 @@ function showPage(id){
   var su=document.getElementById('pageSub'); if(su)su.textContent=meta[1];
   var cc=document.getElementById('crumbCurrent'); if(cc)cc.textContent=meta[0];
   closeSidebar();
+  renderSubbar(id);
   if((id==='journal'||id==='bankroll') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
@@ -901,13 +949,13 @@ function detectSport(t){
 var _curSport='all';
 function filterSport(s){
   _curSport=s;
-  var cards=document.querySelectorAll('#cards > .card');
+  var cards=document.querySelectorAll('#cards .card');
   for(var i=0;i<cards.length;i++){ var sp=cards[i].getAttribute('data-sport'); cards[i].style.display=(s==='all'||sp===s)?'':'none'; }
   var b=document.querySelectorAll('#sportFilter .sport-btn');
   for(var j=0;j<b.length;j++) b[j].classList.toggle('active', b[j].getAttribute('data-sp')===s);
 }
 function tagAndFilterSports(){
-  var cards=document.querySelectorAll('#cards > .card'); var sports=[];
+  var cards=document.querySelectorAll('#cards .card'); var sports=[];
   for(var i=0;i<cards.length;i++){ var sp=cards[i].getAttribute('data-sport')||'Football'; if(sports.indexOf(sp)<0) sports.push(sp); }
   var fb=document.getElementById('sportFilter'); if(!fb) return;
   if(!cards.length || sports.length<2){ fb.innerHTML=''; return; }
