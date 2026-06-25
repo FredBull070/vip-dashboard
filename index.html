@@ -368,6 +368,7 @@
     <div id="betcards-edit" style="display:none"><section class="card"><h2 class="section-title">Edit cards</h2><p class="section-sub">One card per block, separated by a line <code>===</code>. Fields per card: MATCH, MARKET, SELECTION, ODDS, STAKE, RISK (low/medium/high), ANALYSIS.</p><textarea id="cardsRaw" spellcheck="false" style="min-height:240px;"></textarea><div class="actions"><button class="btn-secondary" onclick="renderCards()">Refresh</button><button class="btn-secondary" onclick="loadCardsToday()">Load today's cards</button></div></section></div>
     </div>
 <div class="page" id="page-trackrecord" style="display:none">
+    <div id="tr-log">
     <section class="card">
       <div class="card-head">
         <h2 class="section-title">VIP Performance</h2>
@@ -395,6 +396,22 @@
       <p class="section-sub" id="trEmpty" style="display:none;">No bets logged yet. Add today's cards or a bet above.</p>
       <div class="tablewrap"><table id="trTable"><thead><tr><th>Date</th><th>Sport</th><th>Match</th><th>Market</th><th>Selection</th><th>Odds</th><th>Stake</th><th>Result</th><th>P/L</th><th>Running</th><th></th></tr></thead><tbody></tbody></table></div>
     </section>
+    </div>
+    <div id="tr-share" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Share performance</h2>
+      <p class="section-sub">A clean, conversion-focused performance snapshot for a public channel to convince prospects to join VIP. Pick a period, preview the exact Discord message, then send. Built from your real logged results.</p>
+      <div class="subbar" style="margin:0 0 16px;" id="perfPeriods">
+        <button class="subtab active" data-pp="daily" onclick="setPerfPeriod('daily')">Daily</button>
+        <button class="subtab" data-pp="weekly" onclick="setPerfPeriod('weekly')">Weekly</button>
+        <button class="subtab" data-pp="monthly" onclick="setPerfPeriod('monthly')">Monthly</button>
+        <button class="subtab" data-pp="quarterly" onclick="setPerfPeriod('quarterly')">Quarterly</button>
+        <button class="subtab" data-pp="yearly" onclick="setPerfPeriod('yearly')">Yearly</button>
+      </div>
+      <div class="disc" id="perfPreview"></div>
+      <div class="actions"><button class="btn" onclick="sendPerf()">Send to Track Record channel</button></div>
+    </section>
+    </div>
     </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
@@ -493,7 +510,7 @@
         <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div>
+        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div>
       </div>
       </div>
       <div id="set-vip" style="display:none">
@@ -550,7 +567,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v39";
+var EMBEDDED_VERSION = "2026-06-25-v40";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -747,6 +764,7 @@ function saveAll(silent){
   localStorage.setItem('ba_hook_CUSTOM', getHook('CUSTOM'));
   localStorage.setItem('ba_hook_CHALLENGE', getHook('CHALLENGE'));
   localStorage.setItem('ba_hook_CARDS', getHook('CARDS'));
+  localStorage.setItem('ba_hook_TRACK', getHook('TRACK'));
   var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
   localStorage.setItem('ba_vip_link', vipLink());
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
@@ -889,6 +907,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const cHook=localStorage.getItem('ba_hook_CUSTOM'); if(cHook!==null) document.getElementById('hook_CUSTOM').value=cHook;
     const chHook=localStorage.getItem('ba_hook_CHALLENGE'); if(chHook!==null && document.getElementById('hook_CHALLENGE')) document.getElementById('hook_CHALLENGE').value=chHook;
     const caHook=localStorage.getItem('ba_hook_CARDS'); if(caHook!==null && document.getElementById('hook_CARDS')) document.getElementById('hook_CARDS').value=caHook;
+    const trHook=localStorage.getItem('ba_hook_TRACK'); if(trHook!==null && document.getElementById('hook_TRACK')) document.getElementById('hook_TRACK').value=trHook;
     const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
@@ -955,7 +974,7 @@ var SUBTABS={
   settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
-  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']]
+  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['share','Share & promote']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -974,7 +993,7 @@ function showSub(page, sub){
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
-  else if(page==='trackrecord'){ renderTrack(sub); }
+  else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); var ts=document.getElementById('tr-share'); if(sub==='share'){ if(tl)tl.style.display='none'; if(ts)ts.style.display='block'; renderTrackShare(); } else { if(tl)tl.style.display='block'; if(ts)ts.style.display='none'; renderTrack(sub); } }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1056,7 +1075,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
 function exportSettings(){
-  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -1070,7 +1089,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['LOW','MID','HIGH','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
     var a=document.getElementById('autoShare'); if(a) a.checked=(localStorage.getItem('ba_autoshare')==='1');
@@ -1498,6 +1517,48 @@ function copyTrackNotion(){
   showToast('Copied. Paste into a Notion table.');
 }
 if(document.getElementById('trTable')){ try{ renderTrack('all'); }catch(e){} }
+
+
+/* ---- Track Record performance sharing ---- */
+var TR_PERIOD='daily';
+function trDateObj(s){ var p=(s||'').split('-'); return p.length===3? new Date(parseInt(p[2],10),parseInt(p[1],10)-1,parseInt(p[0],10)) : null; }
+function dmyShort(d){ return ('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+d.getFullYear(); }
+function buildPerfMessage(period){
+  period=period||'daily';
+  var now=new Date(); now.setHours(0,0,0,0);
+  var spanDays={daily:1,weekly:7,monthly:30,quarterly:90,yearly:365}[period]||1;
+  var from=new Date(now); from.setDate(from.getDate()-(spanDays-1));
+  var label={daily:'DAILY',weekly:'WEEKLY',monthly:'MONTHLY',quarterly:'QUARTERLY',yearly:'YEARLY'}[period]||'DAILY';
+  var list=TR.filter(function(e){ var d=trDateObj(e.date); if(!d) return false; d.setHours(0,0,0,0); return d>=from && d<=now; });
+  var settled=list.filter(function(e){ var r=(e.result||'').toUpperCase(); return r==='W'||r==='L'; });
+  var w=0,l=0,staked=0,pl=0,oddsum=0;
+  settled.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W')w++; else l++; staked+=parseFloat(e.stake)||0; pl+=trPL(e); oddsum+=parseFloat(e.odds)||0; });
+  var roi=staked? pl/staked*100:0; var hit=settled.length? w/settled.length*100:0; var avg=settled.length? oddsum/settled.length:0;
+  var range=(period==='daily')? dmyShort(now) : (dmyShort(from)+' to '+dmyShort(now));
+  var plStr=(pl>=0?'+':'')+trNum(pl).toFixed(2)+'u';
+  var roiStr=(roi>=0?'+':'')+roi.toFixed(1)+'%';
+  var sign=pl>=0?':green_circle:':':red_circle:';
+  var m=':bar_chart: **BETLIFE365 - '+label+' PERFORMANCE**\n'+range+'\n\n';
+  if(!settled.length){
+    m+=':hourglass_flowing_sand: No settled bets in this period yet. New picks drop daily and every result is logged here.\n\n';
+  } else {
+    m+=':white_check_mark: Settled bets: **'+settled.length+'**\n';
+    m+=':moneybag: Profit: **'+plStr+'**\n';
+    m+=':chart_with_upwards_trend: ROI: **'+roiStr+'**\n';
+    m+=':trophy: Record: **'+w+'W - '+l+'L** ('+hit.toFixed(0)+'% hit rate, avg odds '+avg.toFixed(2)+')\n\n';
+  }
+  m+=sign+' Every single pick is logged, wins and losses included. Real units, full transparency, no cherry picking.\n';
+  m+=':fire: Want these picks before kickoff, plus the full bankroll plan? Join VIP: {VIP_LINK}\n';
+  m+=':warning: 18+ | play responsibly';
+  return m;
+}
+function renderTrackShare(){ var pv=document.getElementById('perfPreview'); if(pv) pv.innerHTML=renderDiscord(applyTokens(buildPerfMessage(TR_PERIOD))); }
+function setPerfPeriod(p){ TR_PERIOD=p; var bar=document.getElementById('perfPeriods'); if(bar){ var bs=bar.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-pp')===p); } renderTrackShare(); }
+async function sendPerf(){
+  if(!await askConfirm('Send the '+TR_PERIOD+' performance snapshot to your Track Record channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('TRACK')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
+  catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
 
 showPage('today');
 
