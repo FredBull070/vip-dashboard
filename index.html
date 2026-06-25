@@ -599,135 +599,55 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v60";
-var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY | 25-06-2026**
-:soccer: Sport of the day: Football
-
-Today's free pick, straight from the VIP slate. Exactly what we are on and why:
-
-**:small_orange_diamond: Tunisia x Netherlands**
-Netherlands to win (match result) @ 1.07*
-↳ Netherlands win the match in normal time.
-
-**:small_orange_diamond: Curacao x Ivory Coast**
-Ivory Coast to win (match result) @ 1.14*
-↳ Ivory Coast win the match in normal time.
-
-**:small_orange_diamond: Ecuador x Germany**
-Germany to win (match result) @ 1.65 - 1.80*
-↳ Germany win the match in normal time.
-
-**:moneybag: Total odds: ±2.01 - 2.20***
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-The Netherlands and Ivory Coast are heavy favourites against weak opponents and should win. Germany are already through and may rotate, but a toothless Ecuador have failed to score in two games, so Germany should still have enough.
-
-━━━━━━━━━━━━
-:green_circle: This is only our **Safe Builder**, the lowest risk play. VIP members also got the Value Builder, the Jackpot Builder, the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
-:chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
-:rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
-:warning: 18+ | play responsibly
-===NEXT MESSAGE===
-**🟢 #1 Safe Builder Parley: 25-06-2026**
-
-**:small_orange_diamond: Tunisia x Netherlands**
-Netherlands to win (match result) @ 1.07*
-↳ Netherlands win the match in normal time.
-
-**:small_orange_diamond: Curacao x Ivory Coast**
-Ivory Coast to win (match result) @ 1.14*
-↳ Ivory Coast win the match in normal time.
-
-**:small_orange_diamond: Ecuador x Germany**
-Germany to win (match result) @ 1.65 - 1.80*
-↳ Germany win the match in normal time.
-
-**:moneybag: Total odds: ±2.01 - 2.20***
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-The Netherlands and Ivory Coast are heavy favourites against weak opponents (Tunisia and the tournament's smallest nation Curacao) and should win. Germany are already through and may rotate, but Ecuador have failed to score in two games and lost their main creator, so Germany should still have enough. Two near certainties plus a strong favourite.
-
-**:bank: Bankroll:**
-2u stake (2 - 3% of bankroll). Your core, lowest-variance play.
-===NEXT MESSAGE===
-**🟡 #2 Value Builder Parley: 25-06-2026**
-
-**:small_orange_diamond: Tunisia x Netherlands**
-Netherlands -1.5 (Asian handicap) @ 1.40 - 1.55*
-↳ Netherlands must win by 2 or more goals.
-
-**:small_orange_diamond: Curacao x Ivory Coast**
-Ivory Coast -2.5 (Asian handicap) @ 1.85 - 2.10*
-↳ Ivory Coast must win by 3 or more goals.
-
-**:small_orange_diamond: Ecuador x Germany**
-Germany or draw (double chance) @ 1.18 - 1.28*
-↳ Wins if Germany win or the match ends in a draw.
-
-**:moneybag: Total odds: ±3.06 - 4.17***
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-The Netherlands should beat Tunisia by a clear margin and Ivory Coast can run up the score against a Curacao side out of its depth, so the handicaps are realistic. Germany are the better team and should at the very least avoid defeat against a toothless Ecuador.
-
-**:bank: Bankroll:**
-0.75u stake (0.5 - 1% of bankroll). Past a doubler, more variance.
-===NEXT MESSAGE===
-**🔴 #3 Jackpot Builder Parley: 25-06-2026**
-
-**:small_orange_diamond: Ecuador x Germany**
-Germany -1.5 (Asian handicap) @ 2.70 - 3.10*
-↳ Germany must win by 2 or more goals.
-
-**:small_orange_diamond: Curacao x Ivory Coast**
-Over 3.5 goals (total goals) @ 1.90 - 2.20*
-↳ 4 or more goals scored in the match in total.
-
-**:moneybag: Total odds: ±5.13 - 6.82***
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-Germany have the quality to beat Ecuador by two or more even with a rotated side, and Ivory Coast against the tournament's weakest team points to a high scoring rout with four or more goals well within reach.
-
-**:bank: Bankroll:**
-0.25u stake (0.25 - 0.5% of bankroll). Well beyond a doubler, high variance.
-===NEXT MESSAGE===
-**👑 Lucky Shot Parley: 25-06-2026**
-
-**:small_orange_diamond: Ecuador x Germany**
-Germany -1.5 (Asian handicap) @ 2.70 - 3.10*
-↳ Germany must win by 2 or more goals.
+var EMBEDDED_VERSION = "2026-06-25-v61";
+var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
 Netherlands -2.5 (Asian handicap) @ 2.10 - 2.45*
 ↳ Netherlands must win by 3 or more goals.
 
-**:small_orange_diamond: Curacao x Ivory Coast**
-Ivory Coast -3.5 (Asian handicap) @ 2.60 - 3.10*
-↳ Ivory Coast must win by 4 or more goals.
+**:moneybag: Total odds: ±2.10 - 2.45***
+Odds may vary depending on the bookmaker or the time of placement.
+
+**:mortar_board: Strategy Breakdown:**
+Netherlands are a clear level above Tunisia and can run up the score against a weak side, so a three goal cushion is realistic.
+
+**:bank: Bankroll:**
+2u stake (2 - 3% of bankroll). Your core, lowest-variance play.
+===NEXT MESSAGE===
+**🟡 #5 Value Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Japan x Sweden**
 Over 2.5 goals (total goals) @ 1.90 - 2.10*
+↳ 3 or more goals in the match in total.
+
+**:moneybag: Total odds: ±1.90 - 2.10***
+Odds may vary depending on the bookmaker or the time of placement.
+
+**:mortar_board: Strategy Breakdown:**
+Japan and Sweden are both attacking sides and the game should open up, which points to goals.
+
+**:bank: Bankroll:**
+0.75u stake (0.5 - 1% of bankroll). Past a doubler, more variance.
+===NEXT MESSAGE===
+**🔴 #6 Jackpot Builder Parley: 25-06-2026**
+
+**:small_orange_diamond: Paraguay x Australia**
+Over 2.5 goals (total goals) @ 2.00 - 2.25*
 ↳ 3 or more goals in the match in total.
 
 **:small_orange_diamond: Turkiye x United States**
 Draw (match result) @ 3.00 - 3.40*
 ↳ The match ends level after 90 minutes.
 
-**:small_orange_diamond: Paraguay x Australia**
-Over 2.5 goals (total goals) @ 2.00 - 2.25*
-↳ 3 or more goals in the match in total.
-
-**:moneybag: Total odds: ±168 - 378***
+**:moneybag: Total odds: ±6.00 - 7.65***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A high risk multi across six different games, one leg each so it combines cleanly, mixing Asian handicaps, goals lines and a draw. Germany, the Netherlands and Ivory Coast should all win comfortably and by a margin against weak opponents, Turkiye against the USA is a tight game that can finish level, and the Japan and Paraguay matches feature attacking teams that should bring goals.
+Paraguay against Australia is an even, end to end game that leans to goals, and Turkiye against the United States is a tight, well matched tie that can finish level.
 
 **:bank: Bankroll:**
-0.1u stake (0.05 - 0.1% of bankroll). Extreme long shot, fun money only.`;
+0.25u stake (0.25 - 0.5% of bankroll). Well beyond a doubler, high variance.`;
 
 var EMBEDDED_RESULTS = [{"date": "2026-06-25", "sport": "Football", "list": "LOW", "odds": 2.01, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "MID", "odds": 3.06, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "HIGH", "odds": 5.13, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "LUCKY SHOT", "odds": 168, "result": "pending"}];
 
