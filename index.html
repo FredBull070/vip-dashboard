@@ -94,7 +94,8 @@
 
   .banner{margin:0 0 20px;padding:12px 15px;border-radius:var(--r2);font-size:13.5px;border:1px solid var(--line2);
     background:var(--surface);color:var(--muted);}
-  .banner.ok{border-color:rgba(48,209,88,.3);background:rgba(48,209,88,.08);color:#7be29a;}
+  .banner.ok{border-color:rgba(48,209,88,.28);background:rgba(48,209,88,.08);color:#8fe3a9;display:inline-flex;align-items:center;gap:9px;padding:7px 14px;font-size:13px;}
+  .st-dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 8px rgba(48,209,88,.55);display:inline-block;flex:0 0 auto;}
   .banner.warn{border-color:rgba(245,184,41,.3);background:rgba(245,184,41,.08);color:#f0c662;}
   .banner.err{border-color:rgba(255,69,58,.3);background:rgba(255,69,58,.09);color:#ff9a92;}
 
@@ -681,7 +682,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v66";
+var EMBEDDED_VERSION = "2026-06-25-v67";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -985,7 +986,7 @@ function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archi
 function archiveDay(text){ const d=dateFromMessages(text); if(!d) return; const map=loadArchiveMap(); map[d]=text; localStorage.setItem('ba_archive', JSON.stringify(map)); }
 function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(no archive yet)</option>'; viewArchive(); }
 function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">No lists for this day.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
-function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Todays lists loaded.', 'ok'); setStatus('Todays lists reloaded ('+messages.length+' lists, '+DAILY_VERSION+').','ok'); }
+function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Todays lists loaded.', 'ok'); setStatus('<span class="st-dot"></span><b>'+messages.length+' lists reloaded</b>','ok'); }
 function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lists imported from '+f.name+'.', 'ok'); setStatus('Lists imported from '+f.name+' ('+messages.length+' lists).','ok'); }; reader.readAsText(f); input.value=''; }
 
 (function(){
@@ -1014,7 +1015,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
 
     parseMessages(); renderBetEditor(); renderResults(); renderBankroll(); renderShare(); renderArchiveSelect();
 
-    if(messages.length){ setStatus('<b>'+messages.length+' lists loaded</b> ('+source+'). Date: '+(dateFromMessages(raw)||'unknown')+'. All good.', 'ok'); }
+    if(messages.length){ setStatus('<span class="st-dot"></span><b>'+messages.length+' lists ready</b> &middot; '+(dateFromMessages(raw)||'unknown'), 'ok'); }
     else { setStatus('No lists available. Click "Load today lists" or import a file.', 'warn'); }
     log('Dashboard loaded.', 'info');
   }catch(err){
