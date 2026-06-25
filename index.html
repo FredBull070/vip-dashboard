@@ -398,23 +398,6 @@
       <div class="tablewrap"><table id="trTable"><thead><tr><th>Date</th><th>Sport</th><th>Match</th><th>Market</th><th>Selection</th><th>Odds</th><th>Stake</th><th>Result</th><th>P/L</th><th>Running</th><th></th></tr></thead><tbody></tbody></table></div>
     </section>
     </div>
-    <div id="tr-share" style="display:none">
-    <section class="card">
-      <h2 class="section-title">Share performance</h2>
-      <p class="section-sub">A clean, conversion-focused performance snapshot for a public channel to convince prospects to join VIP. Pick a period, preview the exact Discord message, then send. Built from your real logged results.</p>
-      <div class="subbar" style="margin:0 0 16px;" id="perfPeriods">
-        <button class="subtab active" data-pp="daily" onclick="setPerfPeriod('daily')">Daily</button>
-        <button class="subtab" data-pp="weekly" onclick="setPerfPeriod('weekly')">Weekly</button>
-        <button class="subtab" data-pp="monthly" onclick="setPerfPeriod('monthly')">Monthly</button>
-        <button class="subtab" data-pp="quarterly" onclick="setPerfPeriod('quarterly')">Quarterly</button>
-        <button class="subtab" data-pp="yearly" onclick="setPerfPeriod('yearly')">Yearly</button>
-      </div>
-      <label class="lbl" style="display:block;margin:0 0 6px;font-weight:600;">Lessons learned <span style="font-weight:400;opacity:.7;">(your takeaway for this period, shown in the report)</span></label>
-      <textarea id="tr_lessons" rows="2" oninput="saveLessons()" placeholder="e.g. Sticking to the staking plan kept variance low and let the edge come through." style="width:100%;margin:0 0 14px;"></textarea>
-      <div class="disc" id="perfPreview"></div>
-      <div class="actions"><button class="btn" onclick="sendPerf()">Send to Track Record channel</button></div>
-    </section>
-    </div>
     </div>
 <div class="page" id="page-mybets" style="display:none">
     <section class="card">
@@ -435,9 +418,27 @@
     </section>
     </div>
 <div class="page" id="page-vip" style="display:none">
+    <div id="vip-perf">
     <section class="card">
-      <h2 class="section-title">Share VIP results</h2>
-      <p class="section-sub">Settled lists as a public result card for your VIP channel.</p>
+      <h2 class="section-title">Performance report</h2>
+      <p class="section-sub">This is your public showroom. Non members see this channel, so it has one job: prove the edge is real and turn watchers into paying VIP members. Pick a period, preview the exact Discord message, then send. Built from your real logged results.</p>
+      <div class="subbar" style="margin:0 0 16px;" id="perfPeriods">
+        <button class="subtab active" data-pp="daily" onclick="setPerfPeriod('daily')">Daily</button>
+        <button class="subtab" data-pp="weekly" onclick="setPerfPeriod('weekly')">Weekly</button>
+        <button class="subtab" data-pp="monthly" onclick="setPerfPeriod('monthly')">Monthly</button>
+        <button class="subtab" data-pp="quarterly" onclick="setPerfPeriod('quarterly')">Quarterly</button>
+        <button class="subtab" data-pp="yearly" onclick="setPerfPeriod('yearly')">Yearly</button>
+      </div>
+      <label class="lbl" style="display:block;margin:0 0 6px;font-weight:600;">Lessons learned <span style="font-weight:400;opacity:.7;">(your takeaway for this period, shown in the report)</span></label>
+      <textarea id="tr_lessons" rows="2" oninput="saveLessons()" placeholder="e.g. Sticking to the staking plan kept variance low and let the edge come through." style="width:100%;margin:0 0 14px;"></textarea>
+      <div class="disc" id="perfPreview"></div>
+      <div class="actions"><button class="btn" onclick="sendPerf()">Send to VIP results channel</button></div>
+    </section>
+    </div>
+    <div id="vip-cards" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Result cards</h2>
+      <p class="section-sub">Settled lists as a public result card for your VIP results channel. Great as proof alongside the performance report.</p>
       <div class="actions">
         <button class="btn" onclick="shareAllNew()">Share new results</button>
         <label class="check"><input type="checkbox" id="autoShare" onchange="saveAll()"> Auto-share as soon as I mark W/L</label>
@@ -445,6 +446,7 @@
       <div id="sportFilterShare" class="sportbar"></div>
       <div id="shareList" style="margin-top:14px;"></div>
     </section>
+    </div>
     </div>
 <div class="page" id="page-bankroll" style="display:none">
     <section class="card">
@@ -576,7 +578,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v50";
+var EMBEDDED_VERSION = "2026-06-25-v51";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -989,7 +991,7 @@ var PAGE_META={
   custom:["Messaging","Free text to your CUSTOM channel."],
   education:["Education","Value posts for your members, ready to send about 2x a week."],
   trackrecord:["Track Record","One unit-based entry per bet. Performance in units and ROI."],
-  vip:["Share VIP results","Share settled results as a public card to your VIP channel."],
+  vip:["Share VIP results","Your public showroom: performance reports and result cards that convert non members into VIP."],
   archive:["Archive","Look back at earlier days, as a list or calendar."],
   settings:["Settings","Channels, VIP link, import/export and the activity log."],
   mybets:["Your bets",""], results:["Results",""], bankroll:["Bankroll",""], channels:["Settings",""], log:["Activity log",""]
@@ -1002,8 +1004,9 @@ var SUBTABS={
   settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
-  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['share','Share & promote']],
-  education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']]
+  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']],
+  education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
+  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -1022,8 +1025,9 @@ function showSub(page, sub){
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
-  else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); var ts=document.getElementById('tr-share'); if(sub==='share'){ if(tl)tl.style.display='none'; if(ts)ts.style.display='block'; renderTrackShare(); } else { if(tl)tl.style.display='block'; if(ts)ts.style.display='none'; renderTrack(sub); } }
+  else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
+  else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); if(sub==='cards'){ if(vp)vp.style.display='none'; if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else { if(vp)vp.style.display='block'; if(vc)vc.style.display='none'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1580,7 +1584,7 @@ function buildPerfMessage(period){
   var bestStr=best? best.sport+' ('+(best.pl>=0?'+':'')+trNum(best.pl).toFixed(2)+'u)':'-';
   var lessons=getLessons()||trLessonDefault(settled,best,roi);
   var line='━━━━━━━━━━━━';
-  var m=':bar_chart: **BETLIFE365 | '+label+' REPORT**\n'+range+'\n\n';
+  var m=':bar_chart: **BETLIFE365 | '+label+' PERFORMANCE**\n'+range+'\n\n';
   if(!settled.length){
     m+=':hourglass_flowing_sand: Results are still coming in for this period. Fresh picks drop daily and every single one is logged here, win or lose.\n';
     m+=':brain: **Lessons learned:** '+lessons+'\n\n';
@@ -1592,17 +1596,18 @@ function buildPerfMessage(period){
     m+=':brain: **Lessons learned:** '+lessons+'\n\n';
   }
   m+=line+'\n';
-  m+=':green_circle: Every pick is logged in units, winners and losers alike. No deleted bets, no cherry picking. The ROI above is the real number.\n';
-  m+=':fire: Picture this edge working on your bankroll. VIP members get the LOW, MID, HIGH and lucky shot lists before kickoff, plus the exact staking plan behind these results.\n';
-  m+=':rocket: Lock in your VIP access: {VIP_LINK}\n';
-  m+=':warning: 18+ | play responsibly. Past results do not guarantee future returns.';
+  m+=':green_circle: **Fully transparent.** Every pick logged in units, winners and losers alike. No deleted bets, no cherry picking. The ROI above is real and verifiable.\n';
+  m+=':moneybag: **What this means for you:** members had every one of these picks before kickoff, with the exact stake. Following along is how the bankroll above was built.\n';
+  m+='\u{1F513} This channel is just the free preview. The full daily slate (Safe, Value and Jackpot Builders), the lucky shots and the bankroll plan all live inside VIP.\n';
+  m+=':rocket: **Join VIP and stop watching from the sidelines:** {VIP_LINK}\n';
+  m+=':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
   return m;
 }
 function renderTrackShare(){ var t=document.getElementById('tr_lessons'); if(t && document.activeElement!==t) t.value=getLessons(); var pv=document.getElementById('perfPreview'); if(pv) pv.innerHTML=renderDiscord(applyTokens(buildPerfMessage(TR_PERIOD))); }
 function setPerfPeriod(p){ TR_PERIOD=p; var bar=document.getElementById('perfPeriods'); if(bar){ var bs=bar.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-pp')===p); } renderTrackShare(); }
 async function sendPerf(){
-  if(!await askConfirm('Send the '+TR_PERIOD+' performance report to your Track Record channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('TRACK')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
+  if(!await askConfirm('Send the '+TR_PERIOD+' performance report to your VIP results channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('RESULTS')); log('OK - performance sent.','ok'); showToast('Performance sent'); }
   catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 
