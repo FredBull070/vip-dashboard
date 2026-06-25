@@ -578,7 +578,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v51";
+var EMBEDDED_VERSION = "2026-06-25-v52";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -858,7 +858,7 @@ function renderShare(){
     wrap.appendChild(div); });
 }
 async function shareOne(id, skipConfirm, silentToast){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; if(!skipConfirm && !await askConfirm('Share this result to your VIP channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sharing result to VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - result shared to VIP.', 'ok'); renderShare(); if(!silentToast) showToast('Shared to VIP'); }catch(e){ log('FAILED VIP share: '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
-async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('No new settled results to share.', 'info'); return; } if(!await askConfirm(s.length+' new results to your VIP channel?')) return; for(const r of s){ await shareOne(betId(r), true, true); await new Promise(x=>setTimeout(x,1200)); } log('Done sharing.', 'info'); showToast(s.length+' results shared to VIP'); }
+async function shareAllNew(){ var src=[]; try{ if(typeof TR!=='undefined'&&TR) src=TR; }catch(e){} var s=src.filter(function(e){ var r=(e.result||'').toUpperCase(); return (r==='W'||r==='L'||r==='V') && !SHARED['tr'+e.id]; }); if(!s.length){ log('No new settled results to share.','info'); showToast('Nothing new to share'); return; } if(!await askConfirm(s.length+' new results to your VIP results channel?')) return; for(var i=0;i<s.length;i++){ await shareTrackOne(s[i].id, true, true); await new Promise(function(x){setTimeout(x,1200);}); } log('Done sharing.','info'); showToast(s.length+' results shared'); }
 
 function renderResults(){
   const data=window.RESULTS||[]; const stake=(window.SETTINGS&&window.SETTINGS.stake)||1; const cur=(window.SETTINGS&&window.SETTINGS.currency)||'u';
@@ -1156,20 +1156,51 @@ function buildResultCard(r){
     ':bulb: Off days happen. The winners more than cover them, and VIP gets the safe daily LOW bankers plus full bankroll staking. Join: '+cta+'\n'+
     ':warning: 18+ | play responsibly';
 }
+function trRecord(){ var w=0,l=0,u=0; var src=[]; try{ if(typeof TR!=='undefined'&&TR) src=TR; }catch(e){} src.forEach(function(e){ var r=(e.result||'').toUpperCase(); if(r==='W'){w++;u+=trPL(e);} else if(r==='L'){l++;u+=trPL(e);} }); return {w:w,l:l,u:u}; }
+function buildTrackCard(e){
+  var res=(e.result||'').toUpperCase(); var o=parseFloat(e.odds)||0; var st=parseFloat(e.stake)||0; var pl=trPL(e);
+  var rec=trRecord(); var recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
+  var ch=(typeof vipChannelOut==='function')?vipChannelOut():''; var link=(typeof vipLink==='function')?vipLink():''; var cta=ch||link||'(set your VIP link under Settings)';
+  var head='**:small_orange_diamond: '+(e.match||'')+'**\n'+(e.selection||'')+(o?' @ '+o.toFixed(2):'')+'\n';
+  if(res==='W'){
+    return ':trophy: **WINNER | '+(e.sport||'')+' | '+(e.date||'')+'** :white_check_mark:\n'+head+
+      ':moneybag: '+st+'u landed at **'+o.toFixed(2)+'** for **+'+pl.toFixed(2)+'u**\n'+
+      ':chart_with_upwards_trend: Verified record: **'+rec.w+'W-'+rec.l+'L, '+recU+'**\n'+
+      ':fire: This dropped in VIP before kickoff. Get the next full slate first: '+cta+'\n'+
+      ':warning: 18+ | play responsibly';
+  }
+  if(res==='V'){
+    return '⚪ **VOID | '+(e.sport||'')+' | '+(e.date||'')+'**\n'+head+
+      ':chart_with_upwards_trend: Stake returned. Running: **'+recU+'**\n'+
+      ':bulb: Full picks and bankroll plan in VIP: '+cta+'\n:warning: 18+ | play responsibly';
+  }
+  return ':x: **Settled | '+(e.sport||'')+' | '+(e.date||'')+'**\n'+head+
+    ':chart_with_upwards_trend: We post **every** result, win or lose. Running: **'+recU+'** over '+(rec.w+rec.l)+' settled bets.\n'+
+    ':bulb: Off days happen, the winners more than cover them. VIP gets the full daily slate plus bankroll staking: '+cta+'\n'+
+    ':warning: 18+ | play responsibly';
+}
+async function shareTrackOne(id, skipConfirm, silentToast){
+  var e=null; try{ e=(TR||[]).find(function(x){return x.id===id;}); }catch(err){} if(!e) return;
+  if(!skipConfirm && !await askConfirm('Share this result to your VIP results channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sharing result...','info'); await postToDiscord(buildTrackCard(e), getHook('RESULTS')); SHARED['tr'+id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - result shared.','ok'); renderShare(); if(!silentToast) showToast('Shared to VIP'); }
+  catch(err){ log('FAILED share: '+err.message,'err'); showToast('Failed: '+err.message,false); }
+}
 function renderShare(){
   var wrap=document.getElementById('shareList'); if(!wrap) return;
-  var data=window.RESULTS||[]; var wins=[],losses=[];
-  data.forEach(function(r){ var u=eff(r).result.toUpperCase(); if(u==='W')wins.push(r); else if(u==='V')losses.push(r); });
-  if(!wins.length && !losses.length){ wrap.innerHTML='<p class="section-sub">No settled lists yet. First mark a result as Won or Lost under "Your bets"; then choose here what to share.</p>'; if(typeof refreshShareFilter==='function') refreshShareFilter(); return; }
-  function cardHtml(r){ var id=betId(r); var done=!!SHARED[id];
-    return '<div class="card" data-id="'+id+'"><div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">shared</span>':'')+'</span>'+
-      '<button class="'+(done?'btn-gray':'btn-accent')+'" data-share="'+id+'">'+(done?'Share again':'Share to VIP')+'</button></div>'+
-      '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div></div>'; }
+  var sf=document.getElementById('sportFilterShare'); if(sf) sf.innerHTML='';
+  var src=[]; try{ if(typeof TR!=='undefined'&&TR) src=TR; }catch(e){}
+  var settled=src.filter(function(e){ var r=(e.result||'').toUpperCase(); return r==='W'||r==='L'||r==='V'; });
+  if(!settled.length){ wrap.innerHTML='<p class="section-sub">No settled bets yet. Mark bets as Won, Lost or Void in Track Record, then share them here.</p>'; return; }
+  var wins=settled.filter(function(e){return (e.result||'').toUpperCase()==='W';});
+  var others=settled.filter(function(e){return (e.result||'').toUpperCase()!=='W';});
+  function cardHtml(e){ var id='tr'+e.id; var done=!!SHARED[id];
+    return '<div class="card"><div class="meta"><span>'+(e.date||'')+' '+(e.sport||'')+' '+(e.match||'')+(done?' &nbsp; <span class="chan">shared</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" onclick="shareTrackOne('+e.id+')">'+(done?'Share again':'Share to VIP')+'</button></div>'+
+      '<div class="disc">'+renderDiscord(buildTrackCard(e))+'</div></div>'; }
   var html='';
-  if(wins.length){ html+='<div class="share-group">Won ('+wins.length+')</div>'; for(var i=0;i<wins.length;i++) html+=cardHtml(wins[i]); }
-  if(losses.length){ html+='<div class="share-group">Lost ('+losses.length+')</div>'; for(var j=0;j<losses.length;j++) html+=cardHtml(losses[j]); }
+  if(wins.length){ html+='<div class="share-group">Won ('+wins.length+')</div>'; wins.forEach(function(e){ html+=cardHtml(e); }); }
+  if(others.length){ html+='<div class="share-group">Lost / Void ('+others.length+')</div>'; others.forEach(function(e){ html+=cardHtml(e); }); }
   wrap.innerHTML=html;
-  if(typeof refreshShareFilter==='function') refreshShareFilter();
 }
 document.addEventListener('click', function(e){ var b=e.target.closest?e.target.closest('[data-share]'):null; if(b){ shareOne(b.getAttribute('data-share')); } });
 renderShare();
