@@ -692,7 +692,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v73";
+var EMBEDDED_VERSION = "2026-06-25-v74";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1022,7 +1022,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
 
     parseMessages(); renderBetEditor(); renderResults(); renderBankroll(); renderShare(); renderArchiveSelect();
 
-    if(messages.length){ setStatus('<span class="st-dot"></span><b>'+messages.length+' lists ready</b> &middot; '+(dateFromMessages(raw)||'unknown'), 'ok'); }
+    if(messages.length){ setStatus('',''); }
     else { setStatus('No lists available. Click "Load today lists" or import a file.', 'warn'); }
     log('Dashboard loaded.', 'info');
   }catch(err){
@@ -2743,6 +2743,7 @@ function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').repla
 var NITEMS=[];
 function buildNotifs(){
   var items=[]; var _sd=false; function add(o){ if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
+  try{ if(messages && messages.length){ var _rd=(typeof dateFromMessages==='function')?(dateFromMessages((document.getElementById('raw')||{}).value||'')||''):''; add({key:'ready|'+DAILY_VERSION,kind:'ready',title:messages.length+' new lists ready to send'+(_rd?' ('+_rd+')':''),sub:'open Daily Parley Tips to review and send'}); } }catch(e){}
   try{ (messages||[]).forEach(function(m,i){ var cat=detectCategory(m); add({key:'msg|'+DAILY_VERSION+'|'+i,kind:'msg',idx:i,cat:cat,text:m,title:_cleanTitle(m)||catLabel(cat),sub:'to '+catLabel(cat)+' channel'}); }); }catch(e){}
   try{ var cards=(typeof getParsedCards==='function')?getParsedCards():[]; if(cards.length){ add({key:'cards|'+DAILY_VERSION,kind:'cards',title:'Daily Betting Cards ('+cards.length+' picks)',sub:'to Daily Cards channel'}); } }catch(e){}
   try{ if(typeof CH!=='undefined'&&CH&&CH.status==='active'){ add({key:'chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day,kind:'chbet',title:'Challenge Day '+CH.day+' bet',sub:'to Challenge channel (VIP)',text:(typeof buildChallengePlan==='function'?buildChallengePlan():'')}); } }catch(e){}
@@ -2764,7 +2765,7 @@ function renderNotifs(){
     html+='<div class="notif-item'+(it.read?' is-read':'')+'"><div class="nt-title">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div class="nt-sub">'+esc(it.sub)+' &middot; '+_fmtTime(it.seen)+(it.read?' &middot; read '+_fmtTime(it.readAt):'')+'</div>';
     if(it.text){ html+='<div class="nt-prev disc">'+renderDiscord(applyTokens(it.text))+'</div>'; }
     html+='<div class="nt-actions">';
-    if(it.kind!=='edu') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+    if(it.kind!=='edu'&&it.kind!=='ready') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
     html+='<button class="btn-secondary mini" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
     html+= it.read? '<button class="btn-ghost mini" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost mini" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>';
     html+='</div></div>';
@@ -2784,7 +2785,7 @@ async function notifSend(key){
 }
 function notifOpen(key){
   var it=_nFind(key); if(!it) return; closeNotifs();
-  if(it.kind==='msg') showPage('today');
+  if(it.kind==='msg'||it.kind==='ready') showPage('today');
   else if(it.kind==='cards') showPage('betcards');
   else if(it.kind==='chbet') showPage('challenge');
   else if(it.kind==='chres'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','challenge'); },130); }
@@ -2796,7 +2797,7 @@ function notifOpen(key){
 function notifDismiss(key){ markSent(key); }
 function toggleNotifs(ev){ if(ev) ev.stopPropagation(); var p=document.getElementById('notifPanel'); if(!p) return; if(p.style.display==='none'||!p.style.display){ renderNotifs(); p.style.display='block'; } else p.style.display='none'; }
 function closeNotifs(){ var p=document.getElementById('notifPanel'); if(p) p.style.display='none'; }
-function notifItemHtml(it){ var s='<section class="card" style="margin-bottom:12px;'+(it.read?'opacity:.6;':'')+'"><div style="font-weight:700;font-size:14px;">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div style="color:var(--muted);font-size:12px;margin-bottom:9px;">'+esc(it.sub)+'</div>'; if(it.text){ s+='<div class="disc" style="margin-bottom:10px;">'+renderDiscord(applyTokens(it.text))+'</div>'; } s+='<div class="actions" style="margin:0;">'; if(it.kind!=='edu') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>'; s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>'; s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>'; s+='</div></section>'; return s; }
+function notifItemHtml(it){ var s='<section class="card" style="margin-bottom:12px;'+(it.read?'opacity:.6;':'')+'"><div style="font-weight:700;font-size:14px;">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div style="color:var(--muted);font-size:12px;margin-bottom:9px;">'+esc(it.sub)+'</div>'; if(it.text){ s+='<div class="disc" style="margin-bottom:10px;">'+renderDiscord(applyTokens(it.text))+'</div>'; } s+='<div class="actions" style="margin:0;">'; if(it.kind!=='edu'&&it.kind!=='ready') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>'; s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>'; s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>'; s+='</div></section>'; return s; }
 var _notifSel=null;
 function renderNotifsPage(){
   var list=document.getElementById('notifList'); if(!list) return;
@@ -2816,7 +2817,7 @@ function renderNotifDetail(key){
   if(it.text){ s+='<div class="disc" style="margin-bottom:14px;">'+renderDiscord(applyTokens(it.text))+'</div>'; }
   else { s+='<p class="section-sub" style="margin:0 0 14px;">No preview for this item. Use Open tab to handle it.</p>'; }
   s+='<div class="actions" style="margin:0;">';
-  if(it.kind!=='edu') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+  if(it.kind!=='edu'&&it.kind!=='ready') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>';
   s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
   s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>';
   s+='</div>';
