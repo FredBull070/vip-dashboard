@@ -658,7 +658,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v63b";
+var EMBEDDED_VERSION = "2026-06-25-v63c";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -2747,16 +2747,14 @@ function mergeSettled(){
 function applyChallengeResult(){
   try{
     if(typeof EMBEDDED_CHALLENGE_RESULT==='undefined' || !EMBEDDED_CHALLENGE_RESULT) return;
-    var cr=EMBEDDED_CHALLENGE_RESULT; var key=(cr.date||'')+'|'+cr.day+'|'+(cr.result||'');
-    if(localStorage.getItem('ba_chresult_applied')===key) return;
-    if(typeof CH==='undefined' || !CH) return;
-    if(CH.status==='active' && CH.day===cr.day){
-      var r=(cr.result||'').toUpperCase();
-      if(r==='W' && typeof challengeWin==='function') challengeWin();
-      else if((r==='L'||r==='V') && typeof challengeLoss==='function') challengeLoss();
-      localStorage.setItem('ba_chresult_applied', key);
-      try{ renderNotifs(); }catch(e){}
-    }
+    var cr=EMBEDDED_CHALLENGE_RESULT; if(!cr.date || !cr.result) return;
+    if(localStorage.getItem('ba_chresult_applied')===cr.date) return;
+    if(typeof CH==='undefined' || !CH || CH.status!=='active') return;
+    var r=(cr.result||'').toUpperCase();
+    if(r==='W' && typeof challengeWin==='function') challengeWin();
+    else if((r==='L'||r==='V') && typeof challengeLoss==='function') challengeLoss();
+    localStorage.setItem('ba_chresult_applied', cr.date);
+    try{ renderNotifs(); }catch(e){}
   }catch(e){}
 }
 
