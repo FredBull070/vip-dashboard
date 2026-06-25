@@ -575,7 +575,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v47";
+var EMBEDDED_VERSION = "2026-06-25-v48";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1001,7 +1001,8 @@ var SUBTABS={
   settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
-  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['share','Share & promote']]
+  trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['share','Share & promote']],
+  education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -1021,6 +1022,7 @@ function showSub(page, sub){
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); var ts=document.getElementById('tr-share'); if(sub==='share'){ if(tl)tl.style.display='none'; if(ts)ts.style.display='block'; renderTrackShare(); } else { if(tl)tl.style.display='block'; if(ts)ts.style.display='none'; renderTrack(sub); } }
+  else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1622,59 +1624,48 @@ function importFull(){
 }
 
 
-/* ---- Education library ---- */
-var EDU = `**🏦 BetLife365 Education | Bankroll Management 101**
+/* ---- Education library (categorised) ---- */
+var EDU = `@@mindset@@
+**🧭 BetLife365 | Winning Is Not Good, Losing Is Not Bad**
 
-Your bankroll is the single most important tool you have. Not the picks, the bankroll.
+This is the mindset shift that changes everything. A single win does not mean you were right, and a single loss does not mean you were wrong.
 
-📋 The rules that keep you in the game:
-🔹 Set a dedicated betting bankroll you can afford to lose. This is your business capital, not your rent.
-🔹 Bet in units, not euros. 1 unit = 1% of your bankroll. A 2u play is 2%, and a single bet should rarely go above that.
-🔹 Never chase. A losing day is data, not a debt to win back.
+🔹 A winning bet at a bad price is still a mistake. You just got bailed out by variance.
+🔹 A losing bet at a great price was still the correct decision. The maths was on your side.
+🔹 Judge the quality of the decision, not the result of one night.
 
-🧠 Why it works: flat, percentage based staking shrinks your stakes automatically in a bad run and grows them in a good one. You can never go broke in one night, and you are always in the game when the edge pays off.
+🧠 We are not here to be right today. We are here to be right over a thousand bets. Detach from the outcome and the noise disappears.
 
-⚠️ 18+ | play responsibly. Discipline first, profit second.
+📈 This is a system, not a gamble. Trust the process, ignore the scoreboard.
 ===EDU===
-**🎲 BetLife365 Education | It Is a Game of Probabilities**
+@@mindset@@
+**🎯 BetLife365 | Let the Edge Do the Work**
 
-No bet is ever a sure thing. A 1.10 favourite still loses roughly 1 in 11 times. That is not a bad pick, that is maths.
+A real edge is small and slow. It shows up over hundreds of bets, not in one weekend.
 
-📈 What this means for you:
-🔹 Variance is normal. Even a long term winner has losing weeks. A coin can land tails five times in a row.
-🔹 Judge the process, not a single result. A well priced bet that loses was still the right bet.
-🔹 Volume smooths it out. The more quality bets you place, the closer your real results move to your true edge.
+🔹 Do not force action. No value today means no bet today. Patience is a position.
+🔹 Do not overstake to speed it up. Bigger stakes do not grow your edge, only your variance.
+🔹 Stay consistent. Same staking, same discipline, every single day.
 
-🧠 Pros think in samples of hundreds of bets, not one slip. Zoom out and let the law of large numbers work for you.
+🏦 Think like the house. A casino has a tiny edge on each spin, never skips a night and never bets the farm. Over volume, that edge is unstoppable.
 
-⚠️ 18+ | play responsibly.
+📈 Place value bets, size them sensibly, and let time and maths compound the rest.
 ===EDU===
-**📊 BetLife365 Education | Win Rate Is a Trap**
+@@mindset@@
+**💼 BetLife365 | You Run a Business, Not a Bet Slip**
 
-A tipster bragging about a 70% win rate tells you almost nothing. You can win 70% at short odds and still lose money.
+Stop thinking like a punter. Start thinking like an operator running a structured system.
 
-🎯 The number that actually matters is ROI in units.
-🔹 Win rate = how often you win. ROI = how much you profit per unit staked.
-🔹 A 40% hit rate at average odds of 3.00 is hugely profitable. A 65% hit rate at 1.30 can bleed slowly.
-🔹 We track every pick in units and report ROI, never win rate alone. That is the honest measure.
+🔹 Your bankroll is working capital. Your stakes are position sizes. Your ROI is your margin.
+🔹 A business does not panic over one bad day of sales. It executes the model and reads the quarter.
+🔹 Every bet is a calculated transaction with a known edge, not a hope or a hunch.
 
-🧠 Always ask a service for their ROI and their full record, not a cherry picked hit rate.
+🧠 Emotions belong to gamblers. Operators run the numbers, log the results and repeat the process without drama.
 
-⚠️ 18+ | play responsibly.
+📈 Build the system, follow the system, and let the system pay you over the long run.
 ===EDU===
-**💡 BetLife365 Education | Expected Value, the Core of It All**
-
-Every long term winner bets on one thing: value. Not who will win, but whether the price is bigger than the real chance.
-
-🎯 The idea in one line: if you think a team has a 50% chance (true price 2.00) and the bookie offers 2.20, that is a +EV bet, even if it loses today.
-🔹 +EV: the odds are higher than the true probability. Bet it.
-🔹 -EV: the odds are too short for the real chance. Skip it, no matter how certain it feels.
-
-🧠 You are not paid for being right. You are paid for being right more often than the price implied. Hunt prices, not winners.
-
-⚠️ 18+ | play responsibly.
-===EDU===
-**🧠 BetLife365 Education | Master Your Mind, Beat Tilt**
+@@psychology@@
+**🧠 BetLife365 | Master Your Mind, Beat Tilt**
 
 The market does not beat most bettors. Their emotions do.
 
@@ -1688,70 +1679,176 @@ The market does not beat most bettors. Their emotions do.
 🔹 Step away after a rough run. The next spot will still be there tomorrow.
 🔹 Trust the sample, not the last result.
 
-🧠 Consistent, boring discipline is what separates investors from gamblers.
-
-⚠️ 18+ | play responsibly.
+📈 Boring, consistent discipline is the whole edge. Protect it.
 ===EDU===
-**🎯 BetLife365 Education | Let the Edge Do the Work**
+@@psychology@@
+**🪷 BetLife365 | Detach From the Outcome**
 
-A real edge is small and slow. It shows up over hundreds of bets, not in one weekend.
+The hardest skill in betting is caring about the decision and not the result.
 
-🔹 Do not force action. No value today means no bet today. Patience is a position.
-🔹 Do not overstake to speed it up. Bigger stakes do not increase your edge, only your variance.
-🔹 Stay consistent. Same staking, same discipline, every single day.
+🔹 You cannot control whether a 90th minute goal drops. You can only control whether you took a good price.
+🔹 Outcome obsession leads to tilt, chasing and abandoning a winning model after a normal losing streak.
+🔹 Process obsession leads to calm, repeatable execution that survives variance.
 
-📈 Think like the house. A casino has a tiny edge on each spin, but it never skips a night and never bets the farm. Over volume, that edge is unstoppable.
+🧠 Pros review a bet with one question: was this a good bet when I placed it? If yes, the result is irrelevant.
 
-🧠 Your job is simple: place +EV bets, size them sensibly, and let time compound the rest.
-
-⚠️ 18+ | play responsibly.
+📈 Detach, execute, repeat. Profit is a by product of good decisions made often.
 ===EDU===
-**📈 BetLife365 Education | Scaling Your Bankroll**
+@@psychology@@
+**⏳ BetLife365 | Patience Is a Position**
+
+Doing nothing is one of the most profitable moves in this game.
+
+🔹 There is no rule that says you must bet today. No value means no bet.
+🔹 FOMO, boredom and action cravings are where bankrolls go to die.
+🔹 The market offers mispriced spots on its schedule, not yours. Wait, then pounce.
+
+🧠 A sniper does not fire at everything that moves. One disciplined shot at the right price beats ten forced ones.
+
+📈 Waiting is not inactivity. It is risk management with the safety on.
+===EDU===
+@@strategy@@
+**💡 BetLife365 | Expected Value, the Core of It All**
+
+Every long term winner bets on one thing: value. Not who will win, but whether the price is bigger than the real chance.
+
+🎯 In one line: if you think a team has a 50% chance (true price 2.00) and the book offers 2.20, that is a value bet, even if it loses today.
+🔹 Value: the odds are higher than the true probability. Bet it.
+🔹 No value: the odds are too short for the real chance. Skip it, no matter how certain it feels.
+
+🧠 You are not paid for being right. You are paid for being right more often than the price implied.
+
+📈 Hunt prices, not winners. Value is the only edge that lasts.
+===EDU===
+@@strategy@@
+**📊 BetLife365 | Win Rate Is a Trap**
+
+A 70% win rate sounds great and tells you almost nothing. You can win 70% at short odds and still lose money.
+
+🎯 The number that matters is ROI in units.
+🔹 Win rate = how often you win. ROI = how much you profit per unit staked.
+🔹 A 40% hit rate at average odds of 3.00 is hugely profitable. A 65% hit rate at 1.30 can bleed slowly.
+🔹 We track every pick in units and report ROI, never win rate alone.
+
+🧠 Ask any service for their ROI and full record, not a cherry picked hit rate.
+
+📈 Profit per unit is the truth. Everything else is marketing.
+===EDU===
+@@strategy@@
+**🛒 BetLife365 | Line Shopping and Timing**
+
+The same bet at a better price is free money over time. This is where quiet profit hides.
+
+🔹 Always take the best available odds. 2.00 versus 1.90 on the same pick is a 5% swing straight into your ROI.
+🔹 Hold a few accounts and compare. The difference compounds across hundreds of bets.
+🔹 Timing matters: prices move on team news and money. Knowing when to strike adds edge.
+
+🧠 Two bettors can back the exact same selections and one wins long term purely on prices.
+
+📈 Protect your margin at the point of sale. Best price, every time.
+===EDU===
+@@bankroll@@
+**🏦 BetLife365 | Bankroll Management 101**
+
+Your bankroll is the single most important tool you have. Not the picks, the bankroll.
+
+📋 The rules that keep you in the game:
+🔹 Set a dedicated betting bankroll. This is working capital, ring fenced from your normal money.
+🔹 Bet in units, not euros. 1 unit = 1% of your bankroll, and a single bet should rarely go above 2 to 3 units.
+🔹 Never chase. A losing day is data, not a debt to win back.
+
+🧠 Flat, percentage based staking shrinks your stakes automatically in a bad run and grows them in a good one.
+
+📈 Survive first, compound second. The bankroll is the engine.
+===EDU===
+@@bankroll@@
+**📈 BetLife365 | Scaling Your Bankroll**
 
 Growing a bankroll is not about bigger one off bets. It is about scaling stakes with discipline.
 
-🔹 Stake in percentages, not fixed euros. As your bankroll grows, 1u grows with it, so winnings compound automatically.
+🔹 Stake in percentages, not fixed euros. As the bankroll grows, 1u grows with it, so winnings compound automatically.
 🔹 Recalculate your unit size periodically, for example monthly, not after every win.
 🔹 Scale down in a downswing too. A smaller bankroll means smaller units, which protects you.
 
-🧮 Example: 1u at 1% of a 1,000 bankroll is 10. At 1,500 it becomes 15. Same risk, bigger absolute returns, zero extra recklessness.
+🧮 Example: 1u at 1% of a 1,000 bankroll is 10. At 1,500 it becomes 15. Same risk, bigger absolute returns.
 
-🧠 Slow and compounding beats fast and fragile. Protect the downside and the upside takes care of itself.
-
-⚠️ 18+ | play responsibly.
+📈 Slow and compounding beats fast and fragile. Protect the downside and the upside takes care of itself.
 ===EDU===
-**📋 BetLife365 Education | Track Every Single Bet**
+@@bankroll@@
+**⚖️ BetLife365 | Staking Plans, Flat vs Percentage**
 
-If you do not record it, you do not know if you are winning. Memory lies, the record does not.
+How you size your bets matters as much as which bets you pick.
 
-🔹 Log every bet: date, market, odds, stake in units, result, profit or loss.
-🔹 Review in units and ROI, never on feeling.
-🔹 No cherry picking. Winners and losers both go in, or the numbers mean nothing.
+🔹 Flat staking: the same unit size on every bet. Simple, disciplined, great for reading your true edge.
+🔹 Percentage staking: each unit is a fixed % of the current bankroll, so you compound up and de risk in downswings automatically.
+🔹 Avoid: gut sized stakes, doubling after losses, going big on a feeling. That is how edges get erased.
 
-📊 This is exactly why we publish a full, transparent track record. Real units, every result, nothing hidden. That is how you separate a genuine edge from a lucky week.
+🧠 We stake in units and keep position sizes consistent. The model picks the bets, the staking plan controls the risk.
 
-🧠 What gets measured gets improved. Your log is your mirror.
+📈 Consistent sizing turns a small edge into a steady, compounding return.
+===EDU===
+@@probability@@
+**🎲 BetLife365 | It Is a Game of Probabilities**
 
-⚠️ 18+ | play responsibly.`.split('===EDU===').map(function(s){ return s.trim(); });
+No bet is ever a sure thing. A 1.10 favourite still loses roughly 1 in 11 times. That is not a bad pick, that is maths.
 
-function eduTitle(p){ var f=(p.split('\n')[0]||'').replace(/\*\*/g,''); var i=f.indexOf('| '); return i>-1? f.slice(i+2): f; }
-function renderEdu(){
+📈 What this means for you:
+🔹 Variance is normal. Even a long term winner has losing weeks. A coin can land tails five times in a row.
+🔹 Judge the process, not a single result. A well priced bet that loses was still the right bet.
+🔹 Volume smooths it out. The more quality bets you place, the closer your results move to your true edge.
+
+🧠 Pros think in samples of hundreds of bets, not one slip.
+
+📈 Zoom out and let the law of large numbers pay you.
+===EDU===
+@@probability@@
+**🔢 BetLife365 | The Law of Large Numbers**
+
+Your edge is real, but it only reveals itself over volume. This is the most important maths in betting.
+
+🔹 In a small sample, anything happens. You can be a long term winner and lose six in a row.
+🔹 In a large sample, results converge on your true edge. The noise cancels out and the signal pays.
+🔹 This is exactly why casinos never worry about one lucky player. They have the volume on their side.
+
+🧠 One bet is a coin flip. A thousand bets is a business plan.
+
+📈 Trust the sample size. Time is the edge's best friend.
+===EDU===
+@@probability@@
+**🌊 BetLife365 | Variance Is Not Losing**
+
+A downswing is not a problem with your system. It is a normal feature of a probabilistic game.
+
+🔹 Even a winning strategy has losing days, weeks and sometimes months. That is variance, not failure.
+🔹 The danger is reacting to it: raising stakes, abandoning the model, chasing. That turns normal variance into real damage.
+🔹 The fix is boring: keep sizing consistent, keep placing good bets, let the maths catch up.
+
+🧠 Winning does not mean you are good and losing does not mean you are broken. It means the dice are doing what dice do.
+
+📈 Hold the line through variance and the edge always pays in the end.`.split('===EDU===').map(function(s){ s=s.trim(); var nl=s.indexOf('\n'); var head=s.slice(0,nl).trim().replace(/@/g,''); var body=s.slice(nl+1).trim(); return {cat:head, body:body}; });
+
+function eduTitle(b){ var f=(b.split('\n')[0]||'').replace(/\*\*/g,''); var i=f.indexOf('| '); return i>-1? f.slice(i+2): f; }
+function renderEdu(sub){
   var box=document.getElementById('eduList'); if(!box) return;
+  var cat=sub||CUR_SUB['education']||'mindset';
   var hk=getHook('EDU');
   var html='';
   if(!hk){ html+='<section class="card" style="margin-bottom:14px;"><p class="section-sub" style="margin:0;">Tip: add your <b>EDUCATION</b> webhook in Settings &gt; Channels so you can send these straight to your education channel.</p></section>'; }
-  for(var i=0;i<EDU.length;i++){
+  var n=0;
+  for(var i=0;i<EDU.length;i++){ if(EDU[i].cat!==cat) continue; n++;
     html+='<section class="card" style="margin-bottom:14px;">'
-      + '<div class="actions" style="justify-content:space-between;margin:0 0 10px;"><span class="muted-sm" style="margin:0;font-weight:600;">Post '+(i+1)+' / '+EDU.length+': '+eduTitle(EDU[i])+'</span></div>'
-      + '<div class="disc">'+renderDiscord(applyTokens(EDU[i]))+'</div>'
+      + '<div class="actions" style="justify-content:space-between;margin:0 0 10px;"><span class="muted-sm" style="margin:0;font-weight:600;">'+eduTitle(EDU[i].body)+'</span></div>'
+      + '<div class="disc">'+renderDiscord(applyTokens(EDU[i].body))+'</div>'
       + '<div class="actions"><button class="btn" onclick="sendEdu('+i+')">Send to Education channel</button></div>'
       + '</section>';
   }
+  if(!n) html+='<section class="card"><p class="section-sub" style="margin:0;">No posts in this category yet.</p></section>';
   box.innerHTML=html;
 }
 async function sendEdu(i){
-  if(!await askConfirm('Send education post '+(i+1)+' to your Education channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending education post '+(i+1)+'...','info'); await postToDiscord(applyTokens(EDU[i]), getHook('EDU')); log('OK - education post '+(i+1)+' sent.','ok'); showToast('Education post sent'); }
+  var p=EDU[i]; if(!p) return;
+  if(!await askConfirm('Send this education post to your Education channel?')){ log('Cancelled.','info'); return; }
+  try{ log('Sending education post...','info'); await postToDiscord(applyTokens(p.body), getHook('EDU')); log('OK - education post sent.','ok'); showToast('Education post sent'); }
   catch(e){ log('FAILED education: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 
