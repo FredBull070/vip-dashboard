@@ -447,6 +447,14 @@
       <div id="shareList" style="margin-top:14px;"></div>
     </section>
     </div>
+    <div id="vip-challenge" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Challenge result</h2>
+      <p class="section-sub">Share the $10 to $1K challenge result after the day's bet settles. This is public proof: non members watch a $10 stake compound toward $1,000 and get a clear reason to join. Mark the day Won or Lost under Challenges first, then share it here.</p>
+      <div class="disc" id="challResultPreview"></div>
+      <div class="actions"><button class="btn" onclick="sendChallengeResult()">Send to VIP results channel</button></div>
+    </section>
+    </div>
     </div>
 <div class="page" id="page-bankroll" style="display:none">
     <section class="card">
@@ -578,7 +586,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v55";
+var EMBEDDED_VERSION = "2026-06-25-v56";
 var EMBEDDED_MESSAGES = `**:gift: FREE BET OF THE DAY: 25-06-2026**
 
 :soccer: Sport of the day: Football
@@ -1032,7 +1040,7 @@ var SUBTABS={
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
   trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
-  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards']]
+  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -1053,7 +1061,7 @@ function showSub(page, sub){
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
-  else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); if(sub==='cards'){ if(vp)vp.style.display='none'; if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else { if(vp)vp.style.display='block'; if(vc)vc.style.display='none'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
+  else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); if(vp)vp.style.display='none'; if(vc)vc.style.display='none'; if(vch)vch.style.display='none'; if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
   var want=(sub==='bets'||!sub)?'all':sub;
@@ -1349,6 +1357,7 @@ function buildChallengeResult(){
     return head+'\n'+fmtUSD(before)+' → **'+fmtUSD(last.potAfter)+'**\n\n'+
       ':bar_chart: Progress to $1,000: **'+chPct()+'%**  ('+last.day+'/7 days)\n'+chBar(chPct())+'\n\n'+
       (done?':green_circle: We turned **$10 into '+fmtUSD(CH.pot)+'** with one safe doubler a day, every leg shared in VIP before kickoff.\n':':green_circle: Day '+last.day+' landed, exactly to plan: one safe doubler a day, $10 to $1,000.\n')+
+      ':moneybag: It started with just **$10**. Imagine being in since day one.\n'+
       ':fire: Want to copy every challenge bet before kickoff and ride it live? That is VIP only.\n'+
       ':rocket: Join VIP and run the challenge with us: '+cta+'\n'+
       ':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
@@ -1423,6 +1432,7 @@ async function sendChallengeResult(){
   catch(e){ log('FAILED challenge result: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 async function sendChallenge(){ return sendChallengePlan(); }
+function renderChallengeShare(){ var pv=document.getElementById('challResultPreview'); if(!pv) return; if(typeof CH==='undefined' || !CH || !CH.history || !CH.history.length){ pv.innerHTML='<p class="section-sub">No settled challenge day yet. Mark a day Won or Lost under Challenges first, then come back to share it.</p>'; return; } pv.innerHTML=renderDiscord(applyTokens(buildChallengeResult())); }
 if(document.getElementById('challengeStats')) renderChallenge();
 
 
