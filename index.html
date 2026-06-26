@@ -167,6 +167,14 @@
   .pill{display:inline-block;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:980px;padding:2px 11px;font-size:12px;color:var(--muted);font-weight:600;margin-left:6px;}
   .chan{font-size:10px;font-weight:700;padding:3px 9px;border-radius:980px;background:rgba(255,122,26,.16);color:#ffb27a;text-transform:uppercase;letter-spacing:.04em;}
   .ndel{color:#ff9a92!important;}
+  .gap-ctrl{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--muted);}
+  .gap-ctrl .gap-ico{font-size:14px;opacity:.85;}
+  .gap-ctrl .gap-lbl{font-weight:600;}
+  .gap-ctrl input{width:34px;background:transparent;border:none;color:#fff;font-weight:700;font-size:13px;text-align:center;padding:0;}
+  .gap-ctrl input:focus{outline:none;}
+  .gap-ctrl input::-webkit-outer-spin-button,.gap-ctrl input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .gap-ctrl input{-moz-appearance:textfield;}
+  .gap-ctrl .gap-unit{font-size:11px;}
   .switch{position:relative;display:inline-block;width:46px;height:26px;flex:0 0 auto;}
   .switch input{opacity:0;width:0;height:0;}
   .switch .slider{position:absolute;cursor:pointer;inset:0;background:#3a3a3a;border-radius:999px;transition:.2s;}
@@ -446,7 +454,7 @@
     <section class="card">
       <div class="card-head">
         <h2 class="section-title">Today <span class="pill" id="count">0 messages</span></h2>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;"><span id="sendAllStatus" class="muted-sm" style="margin:0;"></span><label class="muted-sm" style="margin:0;display:flex;align-items:center;gap:5px;" title="Minutes between messages to the same channel so Discord shows each one with its own avatar (Discord groups messages sent within ~8 min).">Gap <input type="number" id="sendSpacing" min="0" step="0.5" value="8" style="width:52px;padding:4px 6px;" onchange="localStorage.setItem('ba_send_spacing', this.value); try{showToast('Spacing set to '+this.value+' min');}catch(e){}"> min</label><button class="btn-ghost mini" id="sendAllStop" style="display:none;" onclick="_sendCancel=true;">Stop</button><button class="btn" onclick="sendAll()" id="sendAllBtn">Send all</button></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;"><span id="sendAllStatus" class="muted-sm" style="margin:0;"></span><div class="gap-ctrl" title="Minutes between messages to the SAME channel, so Discord shows each one with its own avatar (it groups messages sent within ~8 min). Different channels send in parallel."><span class="gap-ico">&#9201;</span><span class="gap-lbl">Gap</span><input type="number" id="sendSpacing" min="0" step="0.5" value="8" onchange="localStorage.setItem('ba_send_spacing', this.value); try{showToast('Spacing set to '+this.value+' min');}catch(e){}"><span class="gap-unit">min</span></div><button class="btn-ghost mini" id="sendAllStop" style="display:none;" onclick="_sendCancel=true;">Stop</button><button class="btn" onclick="sendAll()" id="sendAllBtn">Send all</button></div>
       </div>
       <p class="section-sub">Each message goes to its own channel. Sending always asks for confirmation. Bets are grouped by type below.</p>
       <div id="sportFilter" class="sportbar"></div>
@@ -785,7 +793,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v103";
+var EMBEDDED_VERSION = "2026-06-26-v104";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -952,9 +960,12 @@ function showToast(msg, ok){
 async function sendOne(i){ const cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); if(!await askConfirm('Send "'+nm+'" to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sending "'+nm+'" to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - "'+nm+'" sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent: '+nm); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('No messages loaded.', 'err'); return; }
-  if(!await askConfirm('Send all '+messages.length+' messages? Each goes to its own channel. Messages to the same channel are spaced ~'+_spacingMin()+' min apart so Discord shows each one separately (this can take a while).')){ log('Cancelled.', 'info'); return; }
+  if(!await askConfirm('Send all '+messages.length+' messages? Different channels send in parallel; messages to the SAME channel are spaced ~'+_spacingMin()+' min apart so Discord shows each one separately.')){ log('Cancelled.', 'info'); return; }
   const btn=document.getElementById('sendAllBtn'); const stop=document.getElementById('sendAllStop'); const status=document.getElementById('sendAllStatus'); _sendCancel=false; if(btn)btn.disabled=true; if(stop)stop.style.display='';
-  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); const hook=getHook(cat); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var okw=await _waitForChannel(hook, 'sendAllStatus', 'Next: '+nm); if(!okw){ log('Send all stopped.','info'); break; } try{ await postToDiscord(applyTokens(messages[i]), hook); log('Sent '+(i+1)+' / '+messages.length+' to '+catLabel(cat), 'ok'); if(status) status.textContent='Sent '+(i+1)+'/'+messages.length+' to '+catLabel(cat); }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); } }
+  var groups={}; for(var gi=0;gi<messages.length;gi++){ var gc=detectCategory(messages[gi]); var gh=getHook(gc); (groups[gh]=groups[gh]||[]).push(gi); }
+  var total=messages.length, sent=0;
+  async function runGroup(hook, idxs){ for(var j=0;j<idxs.length;j++){ var i=idxs[j]; var cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var okw=await _waitForChannel(hook, 'sendAllStatus', 'Next to '+catLabel(cat)+': '+nm); if(!okw) return; try{ await postToDiscord(applyTokens(messages[i]), hook); sent++; log('Sent '+sent+' / '+total+' to '+catLabel(cat), 'ok'); if(status) status.textContent='Sent '+sent+'/'+total; }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); } } }
+  await Promise.all(Object.keys(groups).map(function(hook){ return runGroup(hook, groups[hook]); }));
   if(status){ status.textContent=_sendCancel?'Stopped.':'All sent.'; setTimeout(function(){ if(status)status.textContent=''; },4000); } if(btn)btn.disabled=false; if(stop)stop.style.display='none'; if(!_sendCancel){ log('Done sending.', 'info'); showToast('All messages sent'); }
 }
 
