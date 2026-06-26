@@ -87,26 +87,42 @@ France have far more quality than Norway and should control the game, while Belg
 **👑 Lucky Shot Parley: 26-06-2026**
 
 **:small_orange_diamond: Norway x France**
-Norway to win (match result) @ 5.50 - 6.50*
-↳ Norway win the match in normal time.
+France -1.5 (Asian handicap) @ 2.00 - 2.20*
+↳ France win by 2 or more goals.
+
+**:small_orange_diamond: New Zealand x Belgium**
+Belgium -1.5 (Asian handicap) @ 1.90 - 2.10*
+↳ Belgium win by 2 or more goals.
 
 **:small_orange_diamond: Uruguay x Spain**
-Uruguay to win (match result) @ 4.00 - 4.80*
-↳ Uruguay win the match in normal time.
+Spain to win (match result) @ 1.65 - 1.80*
+↳ Spain win the match in normal time.
+
+**:small_orange_diamond: Norway x France**
+Over 2.5 goals (total goals) @ 1.65 - 1.80*
+↳ 3 or more goals in the match in total.
+
+**:small_orange_diamond: Uruguay x Spain**
+Over 2.5 goals (total goals) @ 1.90 - 2.05*
+↳ 3 or more goals in the match in total.
 
 **:small_orange_diamond: Egypt x Iran**
-Iran to win (match result) @ 3.10 - 3.60*
-↳ Iran win the match in normal time.
+Over 2.5 goals (total goals) @ 1.90 - 2.05*
+↳ 3 or more goals in the match in total.
 
 **:small_orange_diamond: Cape Verde x Saudi Arabia**
-Cape Verde to win (match result) @ 4.50 - 5.50*
-↳ Cape Verde win the match in normal time.
+Saudi Arabia or draw (double chance) @ 1.40 - 1.55*
+↳ Wins if Saudi Arabia win or the match ends in a draw.
 
-**:moneybag: Total odds: ±306 - 617***
+**:small_orange_diamond: New Zealand x Belgium**
+Over 3.5 goals (total goals) @ 2.10 - 2.40*
+↳ 4 or more goals in the match in total.
+
+**:moneybag: Total odds: ±110 - 234***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four underdogs from four different games on one ticket. Extreme long shot, fun money only, but the payout is huge if the upsets land.
+Instead of stacking long shot upsets, this ticket backs the strongest favourites to dominate and the open games to produce goals. France, Belgium and Spain are all a clear level above their opponents, and several legs move together: if the favourites win big, the handicaps and the overs in those same games land too. It stays a long shot, but it is the realistic best case where the favourites all deliver, not a row of unlikely upsets.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
