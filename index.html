@@ -566,7 +566,7 @@
 <div class="page" id="page-challenge" style="display:none">
     <section class="card">
       <h2 class="section-title">$10 to $1.000 Challenge</h2>
-      <p class="section-sub">Each day the safest bet at odds x2 or more. Win = pot doubles and a day further. Loss = challenge failed (the stake goes all-in). 18+, play responsibly.</p>
+      <p class="section-sub">The plan: <b>$10 to $1,000 in 7 days</b>. Every day we go <b>all-in</b> on the safest bet at odds <b>x2 or higher</b> and double the pot: $10 &rarr; $20 &rarr; $40 &rarr; $80 &rarr; $160 &rarr; $320 &rarr; $640 &rarr; over $1,000. Win and we move a day on; one loss resets the run to $10. 18+, play responsibly.</p>
       <div id="challengeStats" class="metrics"></div>
       <div id="challengeProg"></div>
     </section>
@@ -725,7 +725,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v82";
+var EMBEDDED_VERSION = "2026-06-25-v83";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1101,7 +1101,7 @@ function renderArchiveCal(){
 var PAGE_META={
   today:["Daily Parley Tips","Today's parleys, grouped by type and ready to send."],
   edit:["Edit lists","Edit today's raw messages."],
-  challenge:["Challenges","$10 to $1,000: the safest x2 bet of the day, with a day tracker."],
+  challenge:["Challenges","$10 to $1,000 in 7 days: all-in on the safest x2 each day, doubling the pot."],
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
@@ -1464,7 +1464,7 @@ function buildChallengePlan(){
     lines+'\n\n'+
     ':moneybag: Total odds: **± '+(ec.oddLow||2)+' - '+(ec.oddHigh||ec.oddLow||2)+'**\n'+
     'Odds may vary depending on the bookmaker or the time of placement.\n\n'+
-    ':mortar_board: **The plan:** one safe doubler a day turns $10 into $1,000 in 7 winning days. Today is day '+CH.day+'.\n'+
+    ':mortar_board: **The plan:** $10 to $1,000 in 7 days. Each day we go **all-in** on the safest doubler (x2 or higher) and double the pot: $10 > $20 > $40 > $80 > $160 > $320 > $640 > over $1,000. Seven wins in a row gets us there. Today is day '+CH.day+'.\n'+
     ':brain: **Strategy:** we back only the safest x2 on the card and never chase. One loss resets the run, so discipline is everything.'+challengeLadderBlock(true)+'\n\n'+
     ':warning: 18+ | play responsibly';
 }
