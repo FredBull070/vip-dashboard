@@ -785,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v101";
+var EMBEDDED_VERSION = "2026-06-26-v102";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -901,7 +901,7 @@ function parseMessages(){
         '<span class="msg-title">'+esc(_sm.title)+'</span>'+
         (_sm.meta?'<span class="msg-meta2">'+_sm.meta+'</span>':'')+
         '<button class="btn-accent" style="padding:5px 12px;font-size:12px;margin-left:auto;" onclick="event.stopPropagation();sendOne('+i+')">Send</button>'+
-        (_legs?'<button class="btn-ghost mini msg-full-btn" onclick="event.stopPropagation();toggleMsgCard(this)">Full</button>':'')+'</div>'+
+        '</div>'+
         (_legs?'<div class="msg-legs">'+_legs+'</div>':'')+
         '<div class="disc msg-body">'+renderDiscord(applyTokens(m))+'</div>';
       wrap.appendChild(div);
@@ -939,7 +939,7 @@ function showToast(msg, ok){
   t.classList.add('show');
   clearTimeout(_toastT); _toastT=setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
-async function sendOne(i){ const cat=detectCategory(messages[i]); if(!await askConfirm('Send message '+(i+1)+' to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Message '+(i+1)+' to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - message '+(i+1)+' sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent to '+catLabel(cat)); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); if(!await askConfirm('Send "'+nm+'" to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sending "'+nm+'" to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - "'+nm+'" sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent: '+nm); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('No messages loaded.', 'err'); return; }
   if(!await askConfirm('Alle '+messages.length+' messages, each to its own channel?')){ log('Cancelled.', 'info'); return; }
@@ -1168,7 +1168,7 @@ function dateFromMessages(text){ const m=(text||'').match(/(\d{2}-\d{2}-\d{4})/)
 function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archive')||'{}'); }catch(e){ return {}; } }
 function archiveDay(text){ var d=dateFromMessages(text); if(!d) return; var map=loadArchiveMap(); var cur=map[d]; if(cur===undefined||cur===null){ map[d]=text; } else { var arr=Array.isArray(cur)?cur:[cur]; if(arr.indexOf(text)===-1) arr.push(text); map[d]=arr; } localStorage.setItem('ba_archive', JSON.stringify(map)); }
 function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(no archive yet)</option>'; viewArchive(); }
-function archiveBetCard(b){ var sm=_msgSummary(b); var legs=_msgLegsHtml(b); var head='<div class="meta msg-head"><span class="msg-title">'+esc(sm.title||'Bet')+'</span>'+(sm.meta?'<span class="msg-meta2">'+sm.meta+'</span>':'')+(legs?'<button class="btn-ghost mini msg-full-btn" style="margin-left:auto;" onclick="toggleMsgCard(this)">Full</button>':'')+'</div>'; return '<div class="card msg-card'+(legs?' collapsed':'')+'">'+head+(legs?'<div class="msg-legs">'+legs+'</div>':'')+'<div class="disc msg-body">'+renderDiscord(b)+'</div></div>'; }
+function archiveBetCard(b){ var sm=_msgSummary(b); var legs=_msgLegsHtml(b); var head='<div class="meta msg-head"><span class="msg-title">'+esc(sm.title||'Bet')+'</span>'+(sm.meta?'<span class="msg-meta2" style="margin-left:auto;">'+sm.meta+'</span>':'')+'</div>'; return '<div class="card msg-card'+(legs?' collapsed':'')+'"'+(legs?' onclick="eduCardClick(this,event)"':'')+'>'+head+(legs?'<div class="msg-legs">'+legs+'</div>':'')+'<div class="disc msg-body">'+renderDiscord(b)+'</div></div>'; }
 function viewArchive(){ var sel=document.getElementById('archiveDate'); var view=document.getElementById('archiveView'); if(!sel||!view) return; var v=loadArchiveMap()[sel.value]; if(!v){ view.innerHTML='<p class="small">No lists for this day.</p>'; return; } var builds=Array.isArray(v)?v:[v]; var html=''; builds.forEach(function(text,bi){ if(builds.length>1) html+='<div class="section-sub" style="margin:'+(bi?'20':'0')+'px 0 8px;font-weight:700;color:#ffb27a;">Build '+(bi+1)+' of '+builds.length+' this day</div>'; var blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(function(s){return s.trim();}).filter(function(s){return s;}); html+=blocks.map(function(b){return archiveBetCard(b);}).join(''); }); view.innerHTML=html; }
 function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Todays lists loaded.', 'ok'); setStatus('<span class="st-dot"></span><b>'+messages.length+' lists reloaded</b>','ok'); }
 function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lists imported from '+f.name+'.', 'ok'); setStatus('Lists imported from '+f.name+' ('+messages.length+' lists).','ok'); }; reader.readAsText(f); input.value=''; }
