@@ -228,6 +228,16 @@
   .dc-preview .dc-content.disc{background:transparent;padding:0;border:0;color:#dbdee1;}
   .dc-preview .dc-content.disc strong{color:#fff;}
   .dc-preview .dc-empty{color:#72767d;font-style:italic;}
+  .emoji-picker{margin-top:12px;background:#2b2d31;border:1px solid rgba(0,0,0,.4);border-radius:12px;padding:12px;max-width:400px;box-shadow:0 12px 32px rgba(0,0,0,.4);}
+  .emoji-search{width:100%;background:#1e1f22;border:1px solid rgba(255,255,255,.07);border-radius:8px;color:#dbdee1;padding:8px 11px;font-size:13px;margin-bottom:10px;font-family:inherit;box-sizing:border-box;}
+  .emoji-cats{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+  .emoji-cat{background:transparent;border:0;color:#949ba4;font-size:12px;font-weight:600;padding:4px 9px;border-radius:6px;cursor:pointer;}
+  .emoji-cat:hover{background:rgba(255,255,255,.06);color:#dbdee1;}
+  .emoji-cat.active{background:#404249;color:#fff;}
+  .emoji-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;max-height:230px;overflow-y:auto;}
+  .emoji-cell{background:transparent;border:0;font-size:21px;line-height:1;padding:6px 0;border-radius:8px;cursor:pointer;}
+  .emoji-cell:hover{background:rgba(255,255,255,.09);}
+  .emoji-none{color:#72767d;font-size:13px;padding:12px;grid-column:1/-1;text-align:center;}
   details.disclosure{padding:0;}
   details.disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
   details.disclosure>summary::-webkit-details-marker{display:none;}
@@ -655,7 +665,8 @@
       <h2 class="section-title">Messaging</h2>
       <p class="section-sub">Free text to your CUSTOM channel. {VIP_LINK} and {VIP_CHANNEL} are replaced automatically.</p>
       <textarea id="custom_msg" spellcheck="false" placeholder="Type your message here..." style="min-height:150px;font-size:14px;" oninput="renderCustomPreview()"></textarea>
-      <div class="actions"><button class="btn" onclick="sendCustom()">Send to CUSTOM</button><span id="customState"></span></div>
+      <div class="actions"><button class="btn" onclick="sendCustom()">Send to CUSTOM</button><button type="button" class="btn-secondary" onclick="toggleEmojiPicker(event)">😀 Emoji</button><span id="customState"></span></div>
+      <div id="emojiPicker" class="emoji-picker" style="display:none;"><input type="text" id="emojiSearch" class="emoji-search" placeholder="Search emoji..." oninput="renderEmojiGrid()"><div id="emojiCats" class="emoji-cats"></div><div id="emojiGrid" class="emoji-grid"></div></div>
       <p class="section-sub" style="margin:18px 0 0;font-weight:600;color:var(--text);">Discord preview</p>
       <p class="section-sub" style="margin:2px 0 0;">Exactly how your message appears once posted.</p>
       <div class="dc-preview" id="customDcPreview">
@@ -829,7 +840,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v108";
+var EMBEDDED_VERSION = "2026-06-26-v109";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1087,6 +1098,20 @@ function renderCustomPreview(){
   if(!t.trim()){ box.innerHTML='<span class="dc-empty">Your message preview will appear here as you type...</span>'; return; }
   try{ box.innerHTML=renderDiscord(applyTokens(t)); }catch(e){ box.textContent=t; }
 }
+var EMOJI_LIB={
+ 'Frequent':['✅|check yes win green','❌|cross no loss red','\U0001F525|fire hot streak','\U0001F4B0|money bag cash','\U0001F4C8|chart up profit','\U0001F4C9|chart down loss','\U0001F4CA|bar chart stats','\U0001F3C6|trophy win champion','\U0001F3AF|dart target','\U0001F680|rocket launch','⚽|soccer football','\U0001F3BE|tennis','\U0001F451|crown lucky king','\U0001F7E2|green circle safe','\U0001F7E1|yellow circle value','\U0001F534|red circle jackpot','⚠️|warning caution','\U0001F48E|diamond gem','\U0001F4AF|hundred perfect','\U0001F911|money face rich','\U0001F4B5|dollar','\U0001F4B8|money wings','\U0001F3E6|bank','⏳|hourglass time','\U0001F514|bell alert','\U0001F4E2|loudspeaker announce','\U0001F4CB|clipboard','\U0001F393|graduation strategy'],
+ 'Smileys':['\U0001F600|grin happy','\U0001F603|smile','\U0001F604|laugh','\U0001F601|beam','\U0001F606|laughing','\U0001F605|sweat smile','\U0001F602|joy tears','\U0001F923|rofl','\U0001F60A|blush','\U0001F642|slight smile','\U0001F609|wink','\U0001F60C|relieved','\U0001F60D|heart eyes love','\U0001F970|smiling hearts','\U0001F618|kiss','\U0001F60E|cool sunglasses','\U0001F929|star struck','\U0001F973|party','\U0001F60F|smirk','\U0001F614|pensive','\U0001F62C|grimace','\U0001F644|eyes roll','\U0001F914|thinking','\U0001F910|zipper','\U0001F62E|wow open','\U0001F632|astonished','\U0001F633|flushed','\U0001F92F|mind blown','\U0001F975|hot','\U0001F976|cold','\U0001F628|fearful','\U0001F62D|sob cry','\U0001F624|triumph angry','\U0001F620|angry','\U0001F621|rage','\U0001F92C|cursing','\U0001F634|sleep','\U0001F910|secret','\U0001F60B|yum','\U0001F61C|tongue wink'],
+ 'Gestures':['\U0001F44D|thumbs up good yes','\U0001F44E|thumbs down bad no','\U0001F44A|fist bump punch','✊|raised fist','\U0001F4AA|muscle strong power','\U0001F44F|clap applause','\U0001F64C|raised hands celebrate','\U0001F64F|pray please thanks','\U0001F91D|handshake deal','✌️|victory peace','\U0001F91E|fingers crossed luck','\U0001F44C|ok perfect','\U0001F44B|wave hi','\U0001F919|call me','\U0001F448|point left','\U0001F449|point right','\U0001F446|point up','\U0001F447|point down','☝️|index up','\U0001FAE1|salute','❤️|red heart love','\U0001F9E1|orange heart','\U0001F49B|yellow heart','\U0001F49A|green heart','\U0001F499|blue heart','\U0001F49C|purple heart','\U0001F5A4|black heart','\U0001F90D|white heart','\U0001F494|broken heart','\U0001F525|fire lit','⭐|star','\U0001F31F|glowing star','✨|sparkles','⚡|zap lightning'],
+ 'Sport':['⚽|soccer football','\U0001F3C0|basketball nba','\U0001F3C8|american football nfl','⚾|baseball','\U0001F3BE|tennis','\U0001F3D2|hockey nhl','\U0001F3D1|field hockey','\U0001F3C9|rugby','\U0001F3D0|volleyball','\U0001F94A|boxing','\U0001F3AF|darts target','⛳|golf','\U0001F3C7|horse racing','\U0001F3CE️|racing','\U0001F3C5|medal','\U0001F947|gold first','\U0001F948|silver second','\U0001F949|bronze third','\U0001F3C6|trophy','\U0001F3B0|slot casino','\U0001F3B2|dice','\U0001F0CF|joker card','♠️|spades','♥️|hearts','♦️|diamonds','♣️|clubs','\U0001F4AF|hundred'],
+ 'Money':['\U0001F4B0|money bag','\U0001F4B5|dollar bill','\U0001F4B4|yen','\U0001F4B6|euro','\U0001F4B7|pound','\U0001F4B8|money wings flying','\U0001FA99|coin','\U0001F4B3|card','\U0001F9FE|receipt','\U0001F4C8|chart up profit green','\U0001F4C9|chart down red loss','\U0001F4CA|bar chart','\U0001F911|money mouth rich','\U0001F3E6|bank','\U0001F4B9|stocks','\U0001F4B2|dollar sign','\U0001F51D|top','⬆️|up arrow','⬇️|down arrow','\U0001F48E|gem diamond'],
+ 'Symbols':['✅|check mark','✔️|heavy check','☑️|ballot check','❌|cross x','⭕|circle o','\U0001F6D1|stop','⛔|no entry','❗|exclamation','❓|question','‼️|double exclaim','⁉️|interrobang','\U0001F4A2|anger','\U0001F525|fire','⚠️|warning','\U0001F7E2|green','\U0001F7E1|yellow','\U0001F534|red','\U0001F7E0|orange','\U0001F535|blue','⏰|alarm clock','⏳|hourglass','\U0001F4C5|calendar','\U0001F512|lock','\U0001F513|unlock','\U0001F511|key','\U0001F389|party popper','\U0001F38A|confetti','\U0001F381|gift','\U0001F4E3|megaphone','\U0001F4E2|loudspeaker','\U0001F517|link','➕|plus','➖|minus']
+};
+var _emojiCat='';
+function toggleEmojiPicker(ev){ if(ev) ev.stopPropagation(); var p=document.getElementById('emojiPicker'); if(!p) return; var show=(p.style.display==='none'||!p.style.display); p.style.display=show?'block':'none'; if(show){ if(!_emojiCat) _emojiCat=Object.keys(EMOJI_LIB)[0]; var s=document.getElementById('emojiSearch'); if(s) s.value=''; renderEmojiCats(); renderEmojiGrid(); if(s) s.focus(); } }
+function renderEmojiCats(){ var b=document.getElementById('emojiCats'); if(!b) return; b.innerHTML=Object.keys(EMOJI_LIB).map(function(c){ return '<button type="button" class="emoji-cat'+(c===_emojiCat?' active':'')+'" onclick="setEmojiCat(\''+c+'\')">'+esc(c)+'</button>'; }).join(''); }
+function setEmojiCat(c){ _emojiCat=c; var s=document.getElementById('emojiSearch'); if(s) s.value=''; renderEmojiCats(); renderEmojiGrid(); }
+function renderEmojiGrid(){ var g=document.getElementById('emojiGrid'); if(!g) return; var q=((document.getElementById('emojiSearch')||{}).value||'').trim().toLowerCase(); var list=[]; if(q){ Object.keys(EMOJI_LIB).forEach(function(c){ EMOJI_LIB[c].forEach(function(it){ var p=it.split('|'); if((p[1]||'').toLowerCase().indexOf(q)>=0) list.push(p[0]); }); }); } else { (EMOJI_LIB[_emojiCat]||[]).forEach(function(it){ list.push(it.split('|')[0]); }); } var seen={}; var cells=list.filter(function(e){ if(seen[e])return false; seen[e]=1; return true; }).map(function(e){ return '<button type="button" class="emoji-cell" onclick="insertEmoji(this.textContent)">'+e+'</button>'; }).join(''); g.innerHTML=cells||'<div class="emoji-none">No emoji found</div>'; }
+function insertEmoji(e){ var ta=document.getElementById('custom_msg'); if(!ta) return; var s=(typeof ta.selectionStart==='number')?ta.selectionStart:(ta.value||'').length; var en=(typeof ta.selectionEnd==='number')?ta.selectionEnd:s; var v=ta.value||''; ta.value=v.slice(0,s)+e+v.slice(en); var np=s+e.length; try{ ta.selectionStart=ta.selectionEnd=np; ta.focus(); }catch(_e){} try{ renderCustomPreview(); }catch(_e){} try{ localStorage.setItem('ba_custom_msg', ta.value); }catch(_e){} }
 async function sendCustom(){
   const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
   localStorage.setItem('ba_custom_msg', ta.value);
