@@ -148,6 +148,19 @@
   .pill{display:inline-block;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:980px;padding:2px 11px;font-size:12px;color:var(--muted);font-weight:600;margin-left:6px;}
   .chan{font-size:10px;font-weight:700;padding:3px 9px;border-radius:980px;background:rgba(255,122,26,.16);color:#ffb27a;text-transform:uppercase;letter-spacing:.04em;}
   .ndel{color:#ff9a92!important;}
+  .switch{position:relative;display:inline-block;width:46px;height:26px;flex:0 0 auto;}
+  .switch input{opacity:0;width:0;height:0;}
+  .switch .slider{position:absolute;cursor:pointer;inset:0;background:#3a3a3a;border-radius:999px;transition:.2s;}
+  .switch .slider:before{content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
+  .switch input:checked + .slider{background:#30d158;}
+  .switch input:checked + .slider:before{transform:translateX(20px);}
+  .auto-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid rgba(255,255,255,.06);}
+  .auto-row:first-of-type{border-top:none;}
+  .auto-name{font-weight:700;font-size:14px;}
+  .auto-when{font-size:12px;color:#ffb27a;margin:3px 0 5px;}
+  .auto-desc{font-size:12.5px;color:var(--muted);max-width:660px;line-height:1.5;}
+  .auto-status{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  .auto-status.on{color:#30d158;} .auto-status.off{color:#ff9a92;}
   .msg-card.collapsed .msg-body{display:none;}
   .msg-card:not(.collapsed) .msg-legs{display:none;}
   .msg-head .msg-title{font-weight:600!important;color:#fff!important;font-size:13px!important;text-transform:none!important;letter-spacing:0!important;}
@@ -619,6 +632,13 @@
     </div>
 <div class="page" id="page-automations" style="display:none">
     <div id="auto-routine">
+    <section class="card">
+      <h2 class="section-title">Active automations</h2>
+      <p class="section-sub">What runs for you in the background, and a switch to set each one active or paused.</p>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">Daily lists builder</div><div class="auto-when">Every day around 10:00</div><div class="auto-desc">Settles yesterday's bets (Won, Lost or Void), builds today's Safe, Value and Jackpot Builders, the Free Bet, the Lucky Shot and the Daily Betting Cards, deploys the dashboard and backs everything up to Notion.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_daily">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_daily" onchange="toggleAutomation('daily')"><span class="slider"></span></label></div></div>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">Evening auto-settlement</div><div class="auto-when">Every evening at 22:00, 00:00 and 02:00</div><div class="auto-desc">Checks the final scores, auto-marks each bet Won, Lost or Void, updates the ledger and Notion, and queues the results in your Notifications ready to share. Never sends to Discord by itself.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_evening">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_evening" onchange="toggleAutomation('evening')"><span class="slider"></span></label></div></div>
+      <p class="section-sub" style="margin-top:15px;font-size:11.5px;">These run on Claude's schedule. The switch saves your preference and status here; tell Claude if you want a run fully paused or resumed.</p>
+    </section>
     <section class="card"><h2 class="section-title">Daily routine</h2>
       <p class="section-sub">Every morning a scheduled task does the full preparation. It never sends anything to Discord by itself, so you stay in control of every send.</p>
       <ul class="auto-list">
@@ -704,7 +724,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v79";
+var EMBEDDED_VERSION = "2026-06-25-v80b";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -793,6 +813,9 @@ function applyTokens(t){
   t=t.split('{VIP_CHANNEL}').join(out);
   return t;
 }
+function autoName(id){ return {daily:'Daily lists builder', evening:'Evening auto-settlement'}[id]||id; }
+function toggleAutomation(id){ var cb=document.getElementById('auto_toggle_'+id); if(!cb) return; var on=cb.checked; localStorage.setItem('ba_auto_'+id, on?'on':'off'); var st=document.getElementById('auto_status_'+id); if(st){ st.textContent=on?'Active':'Paused'; st.className='auto-status '+(on?'on':'off'); } if(typeof showToast==='function') showToast(autoName(id)+(on?' set to active':' set to paused')); }
+function renderAutoToggles(){ ['daily','evening'].forEach(function(id){ var cb=document.getElementById('auto_toggle_'+id); if(!cb) return; var on=localStorage.getItem('ba_auto_'+id)!=='off'; cb.checked=on; var st=document.getElementById('auto_status_'+id); if(st){ st.textContent=on?'Active':'Paused'; st.className='auto-status '+(on?'on':'off'); } }); }
 function _msgSummary(m){ var title=(typeof _cleanTitle==='function'?_cleanTitle(m):'')||''; var legs=(m.match(/small_orange_diamond/g)||[]).length; var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); var parts=[]; if(legs) parts.push(legs+' leg'+(legs>1?'s':'')); if(odds) parts.push(odds); return {title:title, meta:parts.join('  &middot;  ')}; }
 function _msgLegsHtml(m){ try{ var bet=parseParleyToBet(m); if(!bet.legs.length) return ''; var rows=bet.legs.map(function(L){ var p=L.split(': '); var mt=p[0]||''; var pk=p.slice(1).join(': '); return '<div class="leg-row"><span class="leg-match">'+esc(mt)+'</span>'+(pk?'<span class="leg-pick">'+esc(pk)+'</span>':'')+'</div>'; }).join(''); var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); return rows+(odds?'<div class="leg-odds">Total odds: '+esc(odds)+'</div>':''); }catch(e){ return ''; } }
 function toggleMsgCard(el){ var c=el.closest('.msg-card'); if(c){ c.classList.toggle('collapsed'); var b=c.querySelector('.msg-full-btn'); if(b) b.textContent=c.classList.contains('collapsed')?'Full':'Compact'; } }
@@ -1009,9 +1032,9 @@ function renderBankroll(){
 
 function dateFromMessages(text){ const m=(text||'').match(/(\d{2}-\d{2}-\d{4})/); return m?m[1]:null; }
 function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archive')||'{}'); }catch(e){ return {}; } }
-function archiveDay(text){ const d=dateFromMessages(text); if(!d) return; const map=loadArchiveMap(); map[d]=text; localStorage.setItem('ba_archive', JSON.stringify(map)); }
+function archiveDay(text){ var d=dateFromMessages(text); if(!d) return; var map=loadArchiveMap(); var cur=map[d]; if(cur===undefined||cur===null){ map[d]=text; } else { var arr=Array.isArray(cur)?cur:[cur]; if(arr.indexOf(text)===-1) arr.push(text); map[d]=arr; } localStorage.setItem('ba_archive', JSON.stringify(map)); }
 function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(no archive yet)</option>'; viewArchive(); }
-function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">No lists for this day.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
+function viewArchive(){ var sel=document.getElementById('archiveDate'); var view=document.getElementById('archiveView'); if(!sel||!view) return; var v=loadArchiveMap()[sel.value]; if(!v){ view.innerHTML='<p class="small">No lists for this day.</p>'; return; } var builds=Array.isArray(v)?v:[v]; var html=''; builds.forEach(function(text,bi){ if(builds.length>1) html+='<div class="section-sub" style="margin:'+(bi?'20':'0')+'px 0 8px;font-weight:700;color:#ffb27a;">Build '+(bi+1)+' of '+builds.length+' this day</div>'; var blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(function(s){return s.trim();}).filter(function(s){return s;}); html+=blocks.map(function(b){return '<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>';}).join(''); }); view.innerHTML=html; }
 function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Todays lists loaded.', 'ok'); setStatus('<span class="st-dot"></span><b>'+messages.length+' lists reloaded</b>','ok'); }
 function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lists imported from '+f.name+'.', 'ok'); setStatus('Lists imported from '+f.name+' ('+messages.length+' lists).','ok'); }; reader.readAsText(f); input.value=''; }
 
@@ -1121,7 +1144,7 @@ function showSub(page, sub){
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
-  else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
+  else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); try{ renderAutoToggles(); }catch(e){} }
   else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); var vcr=document.getElementById('vip-cardsresult'); [vp,vc,vch,vcr].forEach(function(x){ if(x)x.style.display='none'; }); if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else if(sub==='cardsresult'){ if(vcr)vcr.style.display='block'; if(typeof renderCardsResult==='function') renderCardsResult(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
