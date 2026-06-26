@@ -182,8 +182,8 @@
   .auto-status.on{color:#30d158;} .auto-status.off{color:#ff9a92;}
   .msg-card.collapsed .msg-body{display:none;}
   .msg-card:not(.collapsed) .msg-legs{display:none;}
-  .edu-card.collapsed{cursor:pointer;}
-  .edu-card.collapsed:hover{border-color:rgba(255,122,26,.35);}
+  .msg-card.collapsed{cursor:pointer;}
+  .msg-card.collapsed:hover{border-color:rgba(255,122,26,.35);}
   .edu-excerpt{margin-top:10px;font-size:13px;color:var(--muted);line-height:1.5;display:flex;flex-direction:column;gap:5px;}
   .edu-line{}
   .edu-excerpt-old{margin-top:9px;font-size:13px;color:var(--muted);line-height:1.55;}
@@ -775,7 +775,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v94";
+var EMBEDDED_VERSION = "2026-06-26-v95";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -886,12 +886,12 @@ function parseMessages(){
     hdr.innerHTML='<span class="cat-chip cc-'+c+'">'+catLabel(c)+'</span><span class="dg-title">'+(labels[c]||c)+'</span><span class="dg-count">'+idxs.length+'</span><span class="dg-line"></span>';
     wrap.appendChild(hdr);
     idxs.forEach(function(i){
-      var m=messages[i]; var div=document.createElement('div'); div.setAttribute('data-sport', detectSport(m)); var _sm=_msgSummary(m); var _legs=_msgLegsHtml(m); div.className='card msg-card'+(_legs?' collapsed':'');
+      var m=messages[i]; var div=document.createElement('div'); div.setAttribute('data-sport', detectSport(m)); var _sm=_msgSummary(m); var _legs=_msgLegsHtml(m); div.className='card msg-card'+(_legs?' collapsed':''); if(_legs) div.setAttribute('onclick','eduCardClick(this,event)');
       div.innerHTML='<div class="meta msg-head"><span class="chan">to '+catLabel(c)+' channel</span>'+
         '<span class="msg-title">'+esc(_sm.title)+'</span>'+
         (_sm.meta?'<span class="msg-meta2">'+_sm.meta+'</span>':'')+
-        '<button class="btn-accent" style="padding:5px 12px;font-size:12px;margin-left:auto;" onclick="sendOne('+i+')">Send</button>'+
-        (_legs?'<button class="btn-ghost mini msg-full-btn" onclick="toggleMsgCard(this)">Full</button>':'')+'</div>'+
+        '<button class="btn-accent" style="padding:5px 12px;font-size:12px;margin-left:auto;" onclick="event.stopPropagation();sendOne('+i+')">Send</button>'+
+        (_legs?'<button class="btn-ghost mini msg-full-btn" onclick="event.stopPropagation();toggleMsgCard(this)">Full</button>':'')+'</div>'+
         (_legs?'<div class="msg-legs">'+_legs+'</div>':'')+
         '<div class="disc msg-body">'+renderDiscord(applyTokens(m))+'</div>';
       wrap.appendChild(div);
