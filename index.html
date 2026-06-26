@@ -840,7 +840,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v115";
+var EMBEDDED_VERSION = "2026-06-26-v116";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1988,7 +1988,7 @@ function buildCardsChunks(cards){
       else { cur+=piece; } has=true; });
   });
   if(has) msgs.push(cur);
-  if(msgs.length){ for(var _fi=0; _fi<msgs.length-1; _fi++){ msgs[_fi]=msgs[_fi]+'\n.'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
+  if(msgs.length){ for(var _fi=0; _fi<msgs.length-1; _fi++){ msgs[_fi]=msgs[_fi]+'\n\u2800'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
   return msgs;
 }
 function getParsedCards(){ return parseCards(getCardsText()); }
