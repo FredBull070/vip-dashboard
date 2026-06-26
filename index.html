@@ -785,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v100";
+var EMBEDDED_VERSION = "2026-06-26-v101";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1192,7 +1192,8 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const storedVer=localStorage.getItem('ba_msg_version');
     let raw=localStorage.getItem('ba_messages');
     let source='browser memory';
-    if(storedVer!==DAILY_VERSION || !raw || !raw.trim()){
+    var _hasRemote=(typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim());
+    if(storedVer!==DAILY_VERSION || !raw || !raw.trim() || (_hasRemote && raw!==DAILY_MESSAGES)){
       raw=DAILY_MESSAGES; localStorage.setItem('ba_messages',raw); localStorage.setItem('ba_msg_version',DAILY_VERSION); source='new lists ('+DAILY_VERSION+')';
     }
     document.getElementById('raw').value=raw; archiveDay(raw);
