@@ -185,5 +185,8 @@ window.DAILY_CHALLENGE = {
   justification: "Two strong favourites, France and Belgium, from different matches. The safest route to just over x2."
 };
 
-window.DAILY_SETTLED = [];
+window.DAILY_SETTLED = [
+  { betid: "card|2026-06-26|Norway x France|France to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Match result", selection: "France to win", odds: 1.50, stake: 2, risk: "low", result: "W" },
+  { betid: "card|2026-06-26|Norway x France|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Total goals", selection: "Over 2.5 goals", odds: 1.65, stake: 1, risk: "medium", result: "W" }
+];
 window.DAILY_CHALLENGE_RESULT = null;
