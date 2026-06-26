@@ -632,19 +632,11 @@
     </div>
 <div class="page" id="page-nurturing" style="display:none">
     <section class="card">
-      <h2 class="section-title">Nurturing</h2>
-      <p class="section-sub">Warm up free members and leads toward VIP with light, value-first messages. Pick a template, tweak it and send it. {VIP_LINK} and {VIP_CHANNEL} are replaced automatically.</p>
-      <div class="actions" style="flex-wrap:wrap;gap:8px;">
-        <button class="btn-secondary mini" onclick="nurtTemplate('welcome')">Welcome</button>
-        <button class="btn-secondary mini" onclick="nurtTemplate('proof')">Social proof</button>
-        <button class="btn-secondary mini" onclick="nurtTemplate('value')">VIP value</button>
-        <button class="btn-secondary mini" onclick="nurtTemplate('reengage')">Re-engage</button>
-        <button class="btn-secondary mini" onclick="nurtTemplate('urgency')">Soft urgency</button>
-      </div>
-      <textarea id="nurt_msg" spellcheck="false" placeholder="Pick a template above or write your own nurturing message..." style="min-height:170px;margin-top:12px;"></textarea>
-      <div class="disc" id="nurtPreview" style="margin-top:6px;"></div>
-      <div class="actions"><button class="btn" onclick="sendNurturing()">Send to CUSTOM channel</button><span id="nurtState"></span></div>
+      <p class="section-sub" style="margin-top:0;">Your conversion hub: ready-to-send Discord messages built to turn free members into VIP. Pick a campaign in the tabs above, open a message, then Send or Copy. <b>{VIP_LINK}</b> and <b>{VIP_CHANNEL}</b> fill in automatically.</p>
+      <div class="field" style="max-width:600px;margin-top:6px;"><label>Marketing / nurturing channel webhook (optional, otherwise your CUSTOM channel is used)</label><input type="text" id="hook_NURT" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('NURT')">Test</button><button class="btn-secondary mini" onclick="saveAll()">Save</button></div></div>
     </section>
+    <div id="nurtIntro" class="section-sub" style="margin:0 0 14px;"></div>
+    <div id="nurtList"></div>
     </div>
 <div class="page" id="page-education" style="display:none">
     <section class="card">
@@ -793,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v96";
+var EMBEDDED_VERSION = "2026-06-26-v97";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -867,7 +859,7 @@ function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(
 
 const CHANNELS = ['PARLEY','LUCKY'];
 function getHook(cat){ const el=document.getElementById('hook_'+cat); return el?el.value.trim():''; }
-function catLabel(cat){ return {PARLEY:'Daily Parley Tips',LOW:'Daily Parley Tips',MID:'Daily Parley Tips',HIGH:'Daily Parley Tips',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM',EDU:'EDUCATION'}[cat]||cat; }
+function catLabel(cat){ return {PARLEY:'Daily Parley Tips',LOW:'Daily Parley Tips',MID:'Daily Parley Tips',HIGH:'Daily Parley Tips',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS',FREE:'FREE BET',CUSTOM:'CUSTOM',EDU:'EDUCATION',NURT:'Nurturing'}[cat]||cat; }
 function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('FREE'))return'FREE'; if(h.includes('LUCKY'))return'LUCKY'; return'PARLEY'; }
 
 function applyTokens(t){
@@ -965,6 +957,69 @@ urgency:':hourglass_flowing_sand: **Today\'s full slate is live**\nThe free pick
 };
 function nurtTemplate(k){ var t=NURT_TPL[k]||''; var el=document.getElementById('nurt_msg'); if(el){ el.value=t; } var pv=document.getElementById('nurtPreview'); if(pv){ pv.innerHTML=renderDiscord(applyTokens(t)); } }
 async function sendNurturing(){ var el=document.getElementById('nurt_msg'); var t=el?el.value.trim():''; if(!t){ showToast('Write or pick a message first', false); return; } if(!await askConfirm('Send this nurturing message to your CUSTOM channel?')){ return; } try{ log('Sending nurturing message...','info'); await postToDiscord(applyTokens(t), getHook('CUSTOM')); log('OK - nurturing message sent.','ok'); showToast('Sent to CUSTOM'); var s=document.getElementById('nurtState'); if(s){ s.textContent='sent'; setTimeout(function(){s.textContent='';},1500); } }catch(e){ log('FAILED nurturing: '+e.message,'err'); showToast('Failed: '+e.message,false); } }
+/* ---- Nurturing / conversion hub ---- */
+var NURT_INTRO={
+welcome:'<b>Welcome funnel.</b> A 7-message onboarding sequence that turns a brand new free member into a VIP. Send roughly one per day: build trust with transparency first, stack the value, then close. Usually the highest-converting flow.',
+proof:'<b>Social proof.</b> Transparency and a real, unit-based track record answer the tipster doubt. Send after good results or whenever trust needs a boost.',
+value:'<b>VIP value.</b> Show exactly what members get and why it is worth it: the full slate, the exact stakes, the challenge. Stack value, then one clear CTA.',
+urgency:'<b>Urgency.</b> Tie the ask to the slate of the day and the kickoff clock. Loss aversion converts: members already have the picks, the free reader does not. Use daily, before kickoff.',
+reengage:'<b>Re-engage.</b> Light, no-pressure nudges for cold or quiet leads. Keep the door open and let the track record do the work.',
+flex:'<b>Results.</b> Capitalise right after a winning day or at the end of the week, when proof is fresh and motivation is high.'
+};
+var NURT={
+welcome:[
+{t:'Day 1 - Welcome',b:':wave: **Welcome to BetLife365**\nGood to have you in. Here is the deal: most days you get a free pick, fully logged, win or lose.\n:chart_with_upwards_trend: No hype, no deleted bets, just a transparent track record you can actually trust.\nStick around and watch how we work.'},
+{t:'Day 2 - How we work',b:':mag: **How BetLife365 works**\nEvery pick is staked in units and logged the way a pro would.\n:green_circle: Safe, Value and Jackpot Builders, each with a clear risk level so you always know what you are on.\nDiscipline over hype, every single day.'},
+{t:'Day 3 - The receipts',b:':bar_chart: **The receipts**\nWe post every result, win or lose. That is the whole point.\n:moneybag: It started with small units and one rule: only bet real edges.\nImagine having been in since day one.'},
+{t:'Day 4 - Objection',b:':lock: **Is this just another tipster?**\nFair question. The difference is full transparency: no cherry picking, no hidden losses, everything logged in units.\nJudge us on the track record, not the promises.'},
+{t:'Day 5 - Value stack',b:':gem: **What VIP actually gets you**\nThe full daily slate before kickoff: the Safe, Value and Jackpot Builders, the Lucky Shot, the Daily Cards and the $10 to $1K challenge bet, each with the exact stake.\n:rocket: Everything we are on, in your hands first: {VIP_LINK}'},
+{t:'Day 6 - Soft urgency',b:':hourglass_flowing_sand: **You see one pick. VIP sees them all.**\nThe free pick is only our Safe Builder. Members already have the rest before kickoff.\nReady to stop watching from the sidelines? {VIP_LINK}'},
+{t:'Day 7 - Close',b:':dart: **Your move**\nYou have seen how we work and how we log it. The only thing between you and the full slate is one step.\n:rocket: Join VIP and run every play with us: {VIP_LINK}\n:warning: 18+ | play responsibly'}
+],
+proof:[
+{t:'Transparent track record',b:':bar_chart: **Every bet, logged**\nWin or lose, it goes on the record in units. No deleted bets, no cherry picking.\nThat is how you tell a real edge from a lucky week.\n:rocket: Want every pick before kickoff? {VIP_LINK}'},
+{t:'Imagine being in',b:':moneybag: **It started small**\nSmall units, strict rules, compounding discipline. The track record speaks for itself.\nImagine having followed every unit from day one.\n:rocket: Start now: {VIP_LINK}'},
+{t:'Units, not winrate',b:':brain: **Winrate lies, units do not**\nAnyone can post wins. We show profit in units and ROI, the only numbers that matter.\nThat honesty is the edge.\n:rocket: See the full slate: {VIP_LINK}'}
+],
+value:[
+{t:'The full slate',b:':gem: **Everything VIP gets, every day**\nSafe, Value and Jackpot Builders. The Lucky Shot. The Daily Cards. The $10 to $1K challenge bet. Each with the exact stake.\n:rocket: All before kickoff: {VIP_LINK}'},
+{t:'Exact stakes',b:':straight_ruler: **We tell you how much to bet**\nNot just the pick, the stake. Every play sized to a bankroll plan so you never overexpose.\n:rocket: Bet like it is managed for you: {VIP_LINK}'},
+{t:'The challenge',b:':rocket: **$10 to $1K, live**\nEvery day the safest x2 bet, all in, doubling toward $1,000 in 7 days. Members ride it with us.\n:fire: Want in on the run? {VIP_LINK}'}
+],
+urgency:[
+{t:'Slate of the day is live',b:':rotating_light: **The full slate of the day is live**\nThe free pick is out, but the Value, Jackpot, Lucky and challenge bets are VIP only, in member hands right now.\n:rocket: Do not miss it: {VIP_LINK}'},
+{t:'Kickoff clock',b:':hourglass: **The clock is ticking to kickoff**\nOnce the games start, the value is gone. VIP gets every pick before the whistle.\n:rocket: Lock in before kickoff: {VIP_LINK}'},
+{t:'Members already on it',b:':eyes: **Members are already on the plays**\nWhile you read this, VIP is set for the full slate. Every unit, before kickoff.\n:rocket: Join them: {VIP_LINK}'}
+],
+reengage:[
+{t:'Still here?',b:':wave: **Still with us?**\nNo pressure. Keep watching the free picks and the track record build.\nWhen the consistency clicks, you will know. We will be right here: {VIP_LINK}'},
+{t:'Last nudge',b:':bulb: **One thing before you go quiet**\nThe difference between watching and winning is the full slate, before kickoff, every day.\nWhenever you are ready: {VIP_LINK}'}
+],
+flex:[
+{t:'After a winning day',b:':white_check_mark: **Another one in the books**\nLogged in units, exactly as called, before kickoff. That is the VIP edge.\n:rocket: Want the next slate first? {VIP_LINK}'},
+{t:'Weekly recap',b:':bar_chart: **This week on the record**\nGreen where it counts, all transparent, all in units. The process keeps paying.\n:rocket: Run next week with us: {VIP_LINK}'}
+]
+};
+var NURT_CUR=[];
+function renderNurt(sub){
+  var cat=sub||(typeof CUR_SUB!=='undefined'&&CUR_SUB.nurturing)||'welcome';
+  NURT_CUR=NURT[cat]||[];
+  var intro=document.getElementById('nurtIntro'); if(intro) intro.innerHTML=NURT_INTRO[cat]||'';
+  var box=document.getElementById('nurtList'); if(!box) return;
+  box.innerHTML=NURT_CUR.map(function(it,i){
+    return '<section class="card msg-card edu-card collapsed" style="margin-bottom:12px;" onclick="eduCardClick(this,event)">'
+    +'<div class="meta msg-head"><span class="msg-title">'+esc(it.t)+'</span>'
+    +'<span class="edu-chev" style="margin-left:auto;">&#9662;</span>'
+    +'<button class="btn-ghost mini" style="padding:5px 10px;font-size:12px;" onclick="event.stopPropagation();copyNurt('+i+')">Copy</button>'
+    +'<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="event.stopPropagation();sendNurt('+i+')">Send</button></div>'
+    +'<div class="edu-excerpt">'+eduPreviewHtml(it.b)+'</div>'
+    +'<div class="msg-body"><div class="disc" style="margin-top:10px;">'+renderDiscord(applyTokens(it.b))+'</div></div>'
+    +'</section>';
+  }).join('');
+}
+async function sendNurt(i){ var it=NURT_CUR[i]; if(!it) return; if(!await askConfirm('Send "'+it.t+'" to your nurturing channel?')){ return; } var hook=getHook('NURT')||getHook('CUSTOM'); try{ log('Sending nurturing message...','info'); await postToDiscord(applyTokens(it.b), hook); log('OK - nurturing message sent.','ok'); showToast('Nurturing message sent'); }catch(e){ log('FAILED nurturing: '+e.message,'err'); showToast('Failed: '+e.message,false); } }
+function copyNurt(i){ var it=NURT_CUR[i]; if(!it) return; try{ navigator.clipboard.writeText(applyTokens(it.b)); showToast('Copied to clipboard'); }catch(e){ showToast('Copy failed',false); } }
+
 async function sendCustom(){
   const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
   localStorage.setItem('ba_custom_msg', ta.value);
@@ -982,12 +1037,13 @@ function saveAll(silent){
   localStorage.setItem('ba_hook_CARDS', getHook('CARDS'));
   localStorage.setItem('ba_hook_TRACK', getHook('TRACK'));
   localStorage.setItem('ba_hook_EDU', getHook('EDU'));
+  localStorage.setItem('ba_hook_NURT', getHook('NURT'));
   var _cm=document.getElementById('custom_msg'); if(_cm) localStorage.setItem('ba_custom_msg', _cm.value);
   localStorage.setItem('ba_vip_link', vipLink());
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
   const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
   localStorage.setItem('ba_messages', document.getElementById('raw').value);
-  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } var _bad=[]; ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU'].forEach(function(c){ var v=getHook(c); if(v && !/^https:\/\/[\w.]*discord(app)?\.com\/api\/webhooks\//i.test(v)) _bad.push(catLabel(c)); }); if(typeof showToast==='function'){ if(_bad.length) showToast('Saved. Check webhook URL for: '+_bad.join(', '), false); else showToast('Settings saved'); } }
+  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } var _bad=[]; ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var v=getHook(c); if(v && !/^https:\/\/[\w.]*discord(app)?\.com\/api\/webhooks\//i.test(v)) _bad.push(catLabel(c)); }); if(typeof showToast==='function'){ if(_bad.length) showToast('Saved. Check webhook URL for: '+_bad.join(', '), false); else showToast('Settings saved'); } }
 }
 function resetDefault(){ if(!confirm('Reset to the default lists?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
 
@@ -1127,6 +1183,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const caHook=localStorage.getItem('ba_hook_CARDS'); if(caHook!==null && document.getElementById('hook_CARDS')) document.getElementById('hook_CARDS').value=caHook;
     const trHook=localStorage.getItem('ba_hook_TRACK'); if(trHook!==null && document.getElementById('hook_TRACK')) document.getElementById('hook_TRACK').value=trHook;
     const edHook=localStorage.getItem('ba_hook_EDU'); if(edHook!==null && document.getElementById('hook_EDU')) document.getElementById('hook_EDU').value=edHook;
+    const nuHook=localStorage.getItem('ba_hook_NURT'); if(nuHook!==null && document.getElementById('hook_NURT')) document.getElementById('hook_NURT').value=nuHook;
     const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
@@ -1154,7 +1211,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
 )();
 
 /* auto-save webhook fields so a typed link is never lost before an explicit save */
-(function(){ try{ ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU'].forEach(function(c){ var el=document.getElementById('hook_'+c); if(!el) return; var persist=function(){ try{ localStorage.setItem('ba_hook_'+c, (el.value||'').trim()); }catch(e){} }; el.addEventListener('blur', persist); el.addEventListener('change', persist); }); }catch(e){} })();
+(function(){ try{ ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var el=document.getElementById('hook_'+c); if(!el) return; var persist=function(){ try{ localStorage.setItem('ba_hook_'+c, (el.value||'').trim()); }catch(e){} }; el.addEventListener('blur', persist); el.addEventListener('change', persist); }); }catch(e){} })();
 
 var _archiveView='list'; var _calRef=null;
 function setArchiveView(v){ _archiveView=v; var cal=document.getElementById('archiveCal'); var pick=document.getElementById('archiveListPick'); var tg=document.getElementById('archiveViewToggle'); if(tg){ var bs=tg.querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-av')===v); } if(v==='cal'){ if(cal)cal.style.display='block'; if(pick)pick.style.display='none'; renderArchiveCal(); } else { if(cal)cal.style.display='none'; if(pick)pick.style.display='flex'; } }
@@ -1203,7 +1260,8 @@ var SUBTABS={
   trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
   automations:[['routine','Daily routine'],['backups','Backups & Notion'],['notify','Notifications & reminders'],['safeguards','Safeguards']],
-  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge'],['cardsresult','🃏 Card results']]
+  vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge'],['cardsresult','🃏 Card results']],
+  nurturing:[['welcome','🚀 Welcome'],['proof','📊 Proof'],['value','💎 VIP value'],['urgency','⏳ Urgency'],['reengage','🔁 Re-engage'],['flex','🏆 Results']]
 };
 var CUR_SUB={};
 function renderSubbar(id){
@@ -1224,6 +1282,7 @@ function showSub(page, sub){
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
+  else if(page==='nurturing'){ if(typeof renderNurt==='function') renderNurt(sub); }
   else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); try{ renderAutoToggles(); }catch(e){} }
   else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); var vcr=document.getElementById('vip-cardsresult'); [vp,vc,vch,vcr].forEach(function(x){ if(x)x.style.display='none'; }); if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else if(sub==='cardsresult'){ if(vcr)vcr.style.display='block'; if(typeof renderCardsResult==='function') renderCardsResult(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
@@ -1245,6 +1304,7 @@ function showPage(id){
   closeSidebar();
   renderSubbar(id);
   if(id==='education'){ try{ renderEdu(); }catch(e){} }
+  if(id==='nurturing'){ try{ renderNurt(); }catch(e){} }
   if(id==='notifications'){ try{ renderNotifsPage(); }catch(e){} }
   if((id==='journal'||id==='bankroll'||id==='trackrecord') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
@@ -1312,7 +1372,7 @@ refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 function exportSettings(){
   if(typeof saveAll==='function'){ try{ saveAll(true); }catch(e){} }
-  var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_hook_EDU','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
+  var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_hook_EDU','ba_hook_NURT','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
   var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
@@ -1326,7 +1386,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     (function(){ var pe=document.getElementById('hook_PARLEY'); if(pe && !pe.value){ var mig=localStorage.getItem('ba_hook_PARLEY')||localStorage.getItem('ba_hook_LOW')||localStorage.getItem('ba_hook_MID')||localStorage.getItem('ba_hook_HIGH')||''; if(mig){ pe.value=mig; localStorage.setItem('ba_hook_PARLEY',mig); } } })();
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
