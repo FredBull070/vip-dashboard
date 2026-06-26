@@ -138,6 +138,14 @@
   .stat .v{font-size:25px;font-weight:600;letter-spacing:-0.02em;}
   .stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-weight:600;}
   .tablewrap{overflow:auto;margin-top:8px;}
+  .trb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:10px;}
+  .trb-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;}
+  .trb-row{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px;}
+  .trb-row:first-of-type{border-top:none;}
+  .trb-name{font-weight:600;}
+  .trb-rec{color:var(--muted);font-size:12px;}
+  .trb-u{font-weight:700;text-align:right;min-width:62px;}
+  .trb-roi{text-align:right;min-width:52px;font-size:12px;}
   table{width:100%;border-collapse:collapse;font-size:13.5px;}
   th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line2);}
   th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
@@ -462,6 +470,8 @@
       </div>
       <p class="section-sub">One unit-based entry per bet (not per card or per sport). Performance is shown in units and ROI, never as winrate alone. 18+, play responsibly.</p>
       <div id="trStats" class="metrics"></div>
+      <div id="trChart" style="margin-top:22px;"></div>
+      <div id="trBreak" style="margin-top:18px;"></div>
     </section>
     <section class="card">
       <h2 class="section-title">Add a bet</h2>
@@ -743,7 +753,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v87";
+var EMBEDDED_VERSION = "2026-06-26-v88";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1799,16 +1809,51 @@ function trUnit(x){ x=trNum(x); return (x>=0?'+':'')+x.toFixed(2)+'u'; }
 function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id===id){ TR[i][field]=val; break; } } saveTR(); renderTrack(); try{ renderNotifs(); }catch(_e){} }
 function setTrResult(id, val){ setTrField(id,'result',val); var auto=document.getElementById('autoShare'); var u=(val||'').toUpperCase(); if(auto && auto.checked && (u==='W'||u==='L'||u==='V') && !SHARED['tr'+id]){ if(typeof shareTrackOne==='function') shareTrackOne(id, false, false); } }
 async function delTrack(id){ if(!await askConfirm('Delete this bet from your track record? This cannot be undone.')){ return; } TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); try{ renderNotifs(); }catch(e){} }
+var TR_FILTER='all';
+function _trDateKey(d){ var m=(d||'').match(/(\d{1,2})-(\d{1,2})-(\d{4})/); return m?(m[3]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[1]).slice(-2)):(d||''); }
+function _trKpi(v,l,cls){ return '<div class="stat"><div class="v '+(cls||'')+'">'+v+'</div><div class="l">'+l+'</div></div>'; }
+function trChartSVG(pts){
+  if(!pts.length) return '<p class="section-sub" style="margin:0;">No settled bets yet. Your profit graph builds up here automatically as results come in.</p>';
+  var w=700,hh=170,pad=10; var mn=Math.min.apply(null,pts.concat([0])), mx=Math.max.apply(null,pts.concat([0])); var rng=(mx-mn)||1;
+  var n=pts.length; var dx=n>1?(w-2*pad)/(n-1):0;
+  var X=function(i){return pad+i*dx;}, Y=function(val){return hh-pad-((val-mn)/rng)*(hh-2*pad);};
+  var d=pts.map(function(val,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(val).toFixed(1);}).join(' ');
+  var z=Y(0); var col=pts[n-1]>=0?'#30d158':'#ff453a';
+  var area=d+' L '+X(n-1).toFixed(1)+' '+z.toFixed(1)+' L '+X(0).toFixed(1)+' '+z.toFixed(1)+' Z';
+  return '<svg viewBox="0 0 '+w+' '+hh+'" preserveAspectRatio="none" style="width:100%;height:170px;display:block;">'
+    +'<line x1="0" y1="'+z.toFixed(1)+'" x2="'+w+'" y2="'+z.toFixed(1)+'" stroke="rgba(255,255,255,.16)" stroke-width="1" stroke-dasharray="4 4"/>'
+    +'<path d="'+area+'" fill="'+col+'" fill-opacity="0.13"/>'
+    +'<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+}
+function trGroupHtml(title, groups){
+  var rows=groups.filter(function(g){return (g.w+g.l+g.v)>0;}).map(function(g){
+    var roi=g.staked?(g.units/g.staked*100):0; var cls=g.units>=0?'pos':'neg';
+    return '<div class="trb-row"><div class="trb-name">'+esc(g.label)+'</div>'
+      +'<div class="trb-rec">'+g.w+'W-'+g.l+'L'+(g.v?'-'+g.v+'V':'')+'</div>'
+      +'<div class="trb-u '+cls+'">'+(g.units>=0?'+':'')+g.units.toFixed(2)+'u</div>'
+      +'<div class="trb-roi '+cls+'">'+(roi>=0?'+':'')+roi.toFixed(1)+'%</div></div>';
+  }).join('');
+  if(!rows) return '';
+  return '<div class="trb-block"><div class="trb-title">'+title+'</div>'+rows+'</div>';
+}
 function renderTrack(filter){
-  filter=filter||CUR_SUB.trackrecord||'all';
-  var list=TR.filter(function(e){ return filter==='all' || (e.risk||'medium')===filter; });
-  var staked=0,pl=0,w=0,l=0,v=0,p=0,oddsum=0,oddn=0,running=0,rows='';
-  list.forEach(function(e){
-    var r=(e.result||'P').toUpperCase(); var x=trPL(e); running+=x;
+  if(filter) TR_FILTER=filter; var flt=TR_FILTER||CUR_SUB.trackrecord||'all';
+  var all=TR.filter(function(e){ return flt==='all' || (e.risk||'medium')===flt; });
+  var sorted=all.slice().sort(function(a,b){ var ka=_trDateKey(a.date),kb=_trDateKey(b.date); return ka<kb?-1:(ka>kb?1:((a.id||0)-(b.id||0))); });
+  var staked=0,pl=0,w=0,l=0,v=0,p=0,oddsum=0,oddn=0,cum=0,pts=[];
+  var byRisk={low:{label:'🟢 Low',w:0,l:0,v:0,units:0,staked:0},medium:{label:'🟡 Medium',w:0,l:0,v:0,units:0,staked:0},high:{label:'🔴 High',w:0,l:0,v:0,units:0,staked:0}};
+  var bySport={};
+  sorted.forEach(function(e){
+    var r=(e.result||'P').toUpperCase(); var x=trPL(e);
     if(r==='W')w++; else if(r==='L')l++; else if(r==='V')v++; else p++;
-    if(r==='W'||r==='L'){ staked+=parseFloat(e.stake)||0; pl+=x; oddsum+=parseFloat(e.odds)||0; oddn++; }
-    var rc=(e.risk==='low')?'🟢':((e.risk==='high')?'🔴':'🟡');
-    var cls=x>0?'pos':(x<0?'neg':'');
+    if(r==='W'||r==='L'){ staked+=parseFloat(e.stake)||0; pl+=x; oddsum+=parseFloat(e.odds)||0; oddn++; cum+=x; pts.push(cum); }
+    var rk=byRisk[(e.risk||'medium')]; if(rk){ if(r==='W')rk.w++; else if(r==='L')rk.l++; else if(r==='V')rk.v++; if(r==='W'||r==='L'){rk.units+=x; rk.staked+=parseFloat(e.stake)||0;} }
+    var sp=e.sport||'Other'; var sg=bySport[sp]||(bySport[sp]={label:sp,w:0,l:0,v:0,units:0,staked:0}); if(r==='W')sg.w++; else if(r==='L')sg.l++; else if(r==='V')sg.v++; if(r==='W'||r==='L'){sg.units+=x; sg.staked+=parseFloat(e.stake)||0;}
+  });
+  var running=0,rows='';
+  all.forEach(function(e){
+    var r=(e.result||'P').toUpperCase(); var x=trPL(e); running+=x;
+    var rc=(e.risk==='low')?'🟢':((e.risk==='high')?'🔴':'🟡'); var cls=x>0?'pos':(x<0?'neg':'');
     rows+='<tr><td>'+esc(e.date||'')+'</td><td>'+esc(e.sport||'')+'</td><td>'+esc(e.match||'')+'</td><td>'+esc(e.market||'')+'</td><td>'+esc(e.selection||'')+'</td>'+
       '<td><input type="text" style="width:62px;padding:5px 7px;" value="'+esc(e.odds||'')+'" onchange="setTrField('+e.id+',\'odds\',this.value)"></td>'+
       '<td><input type="text" style="width:52px;padding:5px 7px;" value="'+esc(e.stake||'')+'" onchange="setTrField('+e.id+',\'stake\',this.value)"></td>'+
@@ -1819,14 +1864,19 @@ function renderTrack(filter){
       '<td><button class="btn-gray mini" onclick="delTrack('+e.id+')">&#10007;</button></td></tr>';
   });
   var tb=document.querySelector('#trTable tbody'); if(tb) tb.innerHTML=rows;
-  var emp=document.getElementById('trEmpty'); if(emp) emp.style.display=list.length?'none':'block';
-  var settled=w+l; var roi=staked?(pl/staked*100):0;
-  var st=document.getElementById('trStats'); if(st){
-    st.innerHTML='<div class="stat"><div class="v">'+settled+'</div><div class="l">Settled bets</div></div>'+
-      '<div class="stat"><div class="v '+(pl>=0?'pos':'neg')+'">'+trUnit(pl)+'</div><div class="l">Units</div></div>'+
-      '<div class="stat"><div class="v '+(roi>=0?'pos':'neg')+'">'+(roi>=0?'+':'')+roi.toFixed(1)+'%</div><div class="l">ROI</div></div>'+
-      '<div class="stat"><div class="v">'+w+'W-'+l+'L'+(v?' '+v+'V':'')+'</div><div class="l">Record'+(p?' ('+p+' open)':'')+'</div></div>';
-  }
+  var emp=document.getElementById('trEmpty'); if(emp) emp.style.display=all.length?'none':'block';
+  var settled=w+l; var roi=staked?(pl/staked*100):0; var wr=settled?(w/settled*100):0; var avgodd=oddn?(oddsum/oddn):0;
+  var st=document.getElementById('trStats'); if(st){ st.innerHTML=
+    _trKpi(trUnit(pl),'Net profit (units)',pl>=0?'pos':'neg')+
+    _trKpi((roi>=0?'+':'')+roi.toFixed(1)+'%','ROI / yield',roi>=0?'pos':'neg')+
+    _trKpi(wr.toFixed(0)+'%','Win rate','')+
+    _trKpi(settled+'','Settled bets','')+
+    _trKpi(w+'W-'+l+'L'+(v?'-'+v+'V':''),'Record'+(p?' ('+p+' open)':''),'')+
+    _trKpi(staked.toFixed(2)+'u','Total staked','')+
+    _trKpi(avgodd?avgodd.toFixed(2):'-','Avg odds','')+
+    _trKpi(p+'','Pending',''); }
+  var ch=document.getElementById('trChart'); if(ch) ch.innerHTML='<div class="trb-title" style="margin-bottom:8px;">Profit over time (cumulative units)</div>'+trChartSVG(pts);
+  var bk=document.getElementById('trBreak'); if(bk) bk.innerHTML='<div class="trb-grid">'+trGroupHtml('By risk tier',[byRisk.low,byRisk.medium,byRisk.high])+trGroupHtml('By sport',Object.keys(bySport).map(function(k){return bySport[k];}))+'</div>';
 }
 function addTrackManual(){
   var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
