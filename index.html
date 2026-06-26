@@ -803,7 +803,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v106";
+var EMBEDDED_VERSION = "2026-06-26-v107";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -968,14 +968,16 @@ function showToast(msg, ok){
   t.classList.add('show');
   clearTimeout(_toastT); _toastT=setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
-async function sendOne(i){ const cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); if(!await askConfirm('Send "'+nm+'" to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sending "'+nm+'" to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - "'+nm+'" sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent: '+nm); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var _k='msg|'+DAILY_VERSION+'|'+i; if(typeof nIsDone==='function' && nIsDone(_k)){ if(!await askConfirm('You already sent "'+nm+'" to the '+catLabel(cat)+' channel. Are you sure you want to send it again?')){ log('Cancelled.', 'info'); return; } } else { if(!await askConfirm('Send "'+nm+'" to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } } try{ log('Sending "'+nm+'" to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - "'+nm+'" sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent: '+nm); try{ markDone(_k); }catch(_e){} }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('No messages loaded.', 'err'); return; }
-  if(!await askConfirm('Send all '+messages.length+' messages? Different channels send in parallel; messages to the SAME channel are spaced ~'+_spacingMin()+' min apart so Discord shows each one separately.')){ log('Cancelled.', 'info'); return; }
+  var _alreadyN=0; for(var _ci=0;_ci<messages.length;_ci++){ if(typeof nIsDone==='function' && nIsDone('msg|'+DAILY_VERSION+'|'+_ci)) _alreadyN++; }
+  var _q=(_alreadyN? (_alreadyN+' of these '+messages.length+' bets were already sent. Are you sure you want to send everything again? ') : ('Send all '+messages.length+' messages? '))+'Different channels send in parallel; messages to the SAME channel are spaced ~'+_spacingMin()+' min apart so Discord shows each one separately.';
+  if(!await askConfirm(_q)){ log('Cancelled.', 'info'); return; }
   const btn=document.getElementById('sendAllBtn'); const stop=document.getElementById('sendAllStop'); const status=document.getElementById('sendAllStatus'); _sendCancel=false; if(btn)btn.disabled=true; if(stop)stop.style.display='';
   var groups={}; for(var gi=0;gi<messages.length;gi++){ var gc=detectCategory(messages[gi]); var gh=getHook(gc); (groups[gh]=groups[gh]||[]).push(gi); }
   var total=messages.length, sent=0;
-  async function runGroup(hook, idxs){ for(var j=0;j<idxs.length;j++){ var i=idxs[j]; var cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var okw=await _waitForChannel(hook, 'sendAllStatus', 'Next to '+catLabel(cat)+': '+nm); if(!okw) return; try{ await postToDiscord(applyTokens(messages[i]), hook); sent++; log('Sent '+sent+' / '+total+' to '+catLabel(cat), 'ok'); if(status) status.textContent='Sent '+sent+'/'+total; }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); } } }
+  async function runGroup(hook, idxs){ for(var j=0;j<idxs.length;j++){ var i=idxs[j]; var cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var okw=await _waitForChannel(hook, 'sendAllStatus', 'Next to '+catLabel(cat)+': '+nm); if(!okw) return; try{ await postToDiscord(applyTokens(messages[i]), hook); sent++; try{ markDone('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} log('Sent '+sent+' / '+total+' to '+catLabel(cat), 'ok'); if(status) status.textContent='Sent '+sent+'/'+total; }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); } } }
   await Promise.all(Object.keys(groups).map(function(hook){ return runGroup(hook, groups[hook]); }));
   if(status){ status.textContent=_sendCancel?'Stopped.':'All sent.'; setTimeout(function(){ if(status)status.textContent=''; },4000); } if(btn)btn.disabled=false; if(stop)stop.style.display='none'; if(!_sendCancel){ log('Done sending.', 'info'); showToast('All messages sent'); }
 }
@@ -1728,13 +1730,13 @@ function challengeRestart(){
 }
 async function sendChallengePlan(){
   if(!await askConfirm('Send the Day '+CH.day+' planned challenge bet to your Challenge channel (VIP members)?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending challenge plan...','info'); await postToDiscord(applyTokens(buildChallengePlan()), getHook('CHALLENGE')); log('OK - challenge plan sent.','ok'); try{ markSent('chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day); }catch(_e){} showToast('Sent to Challenge'); }
+  try{ log('Sending challenge plan...','info'); await postToDiscord(applyTokens(buildChallengePlan()), getHook('CHALLENGE')); log('OK - challenge plan sent.','ok'); try{ markDone('chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day); }catch(_e){} showToast('Sent to Challenge'); }
   catch(e){ log('FAILED challenge: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 async function sendChallengeResult(){
   if(!CH.history.length){ showToast('No settled day to share yet', false); return; }
   if(!await askConfirm('Share the latest challenge result to your VIP results channel (for conversion)?')){ log('Cancelled.','info'); return; }
-  try{ log('Sharing challenge result...','info'); await postToDiscord(applyTokens(buildChallengeResult()), getHook('RESULTS')); log('OK - challenge result shared.','ok'); try{ var _l=CH.history[CH.history.length-1]; if(_l) markSent('chres|'+_l.day+'|'+_l.result); }catch(_e){} showToast('Shared to VIP results'); }
+  try{ log('Sharing challenge result...','info'); await postToDiscord(applyTokens(buildChallengeResult()), getHook('RESULTS')); log('OK - challenge result shared.','ok'); try{ var _l=CH.history[CH.history.length-1]; if(_l) markDone('chres|'+_l.day+'|'+_l.result); }catch(_e){} showToast('Shared to VIP results'); }
   catch(e){ log('FAILED challenge result: '+e.message,'err'); showToast('Failed: '+e.message, false); }
 }
 async function sendChallenge(){ return sendChallengePlan(); }
@@ -1766,7 +1768,7 @@ function challengeSharePreviews(){
 async function sendChallengeUpdate(){
   if(!CH.history.length){ showToast('No settled day yet', false); return; }
   if(!await askConfirm('Send the challenge update to your Challenge channel (VIP members)?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending challenge update...','info'); await postToDiscord(applyTokens(buildChallengeMemberUpdate()), getHook('CHALLENGE')); log('OK - challenge update sent.','ok'); try{ var _l=CH.history[CH.history.length-1]; if(_l) markSent('chupdate|'+_l.day+'|'+_l.result); }catch(_e){} showToast('Sent to Challenge'); }
+  try{ log('Sending challenge update...','info'); await postToDiscord(applyTokens(buildChallengeMemberUpdate()), getHook('CHALLENGE')); log('OK - challenge update sent.','ok'); try{ var _l=CH.history[CH.history.length-1]; if(_l) markDone('chupdate|'+_l.day+'|'+_l.result); }catch(_e){} showToast('Sent to Challenge'); }
   catch(e){ log('FAILED challenge update: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 function renderChallengeShare(){ var pv=document.getElementById('challResultPreview'); if(!pv) return; if(typeof CH==='undefined' || !CH || !CH.history || !CH.history.length){ pv.innerHTML='<p class="section-sub">No settled challenge day yet. Mark a day Won or Lost under Challenges first, then come back to share it.</p>'; return; } pv.innerHTML=renderDiscord(applyTokens(buildChallengeResult())); }
@@ -1956,7 +1958,7 @@ function applyCardFilters(){ var groups={}; var cards=document.querySelectorAll(
 function cardsFilter(sub){ _cardRisk=(sub==='all'||!sub)?'all':sub; applyCardFilters(); }
 function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#cardsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyCardFilters(); }
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); renderCards(); }
-async function sendCards(){ var cards=getParsedCards(); var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markSent('cards|'+DAILY_VERSION); }catch(_e){} } }
+async function sendCards(){ var cards=getParsedCards(); if(typeof nIsDone==='function' && nIsDone('cards|'+DAILY_VERSION)){ if(!await askConfirm('You already sent the Daily Betting Cards today. Are you sure you want to send them again?')) return; } var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markDone('cards|'+DAILY_VERSION); }catch(_e){} } }
 (function(){ var el=document.getElementById('cardsRaw'); var dc=(_allDailyCards()||EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 (function(){ try{ var ss=document.getElementById('sendSpacing'); if(ss && localStorage.getItem('ba_send_spacing')!==null) ss.value=localStorage.getItem('ba_send_spacing'); }catch(e){} })();
 
@@ -2157,7 +2159,7 @@ function renderTrackShare(){ var t=document.getElementById('tr_lessons'); if(t &
 function setPerfPeriod(p){ TR_PERIOD=p; var bar=document.getElementById('perfPeriods'); if(bar){ var bs=bar.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-pp')===p); } renderTrackShare(); }
 async function sendPerf(){
   if(!await askConfirm('Send the '+TR_PERIOD+' performance report to your VIP results channel?')){ log('Cancelled.','info'); return; }
-  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('RESULTS')); log('OK - performance sent.','ok'); try{ markSent('perf|'+_weekStr()); }catch(_e){} showToast('Performance sent'); }
+  try{ log('Sending performance...','info'); await postToDiscord(applyTokens(buildPerfMessage(TR_PERIOD)), getHook('RESULTS')); log('OK - performance sent.','ok'); try{ markDone('perf|'+_weekStr()); }catch(_e){} showToast('Performance sent'); }
   catch(e){ log('FAILED performance: '+e.message,'err'); showToast('Failed: '+e.message,false); }
 }
 
@@ -3056,12 +3058,15 @@ async function sendEdu(i){
 var NSENT={}; try{ NSENT=JSON.parse(localStorage.getItem('ba_notif_sent')||'{}'); }catch(e){ NSENT={}; }
 var SEEN={}; try{ SEEN=JSON.parse(localStorage.getItem('ba_notif_seen')||'{}'); }catch(e){ SEEN={}; }
 var NDEL={}; try{ NDEL=JSON.parse(localStorage.getItem('ba_notif_deleted')||'{}'); }catch(e){ NDEL={}; }
+var NDONE={}; try{ NDONE=JSON.parse(localStorage.getItem('ba_notif_done')||'{}'); }catch(e){ NDONE={}; }
 function nDelSave(){ try{ localStorage.setItem('ba_notif_deleted', JSON.stringify(NDEL)); }catch(e){} }
 function notifDelete(key){ if(!confirm('Delete this notification? It will be removed from your list.')) return; NDEL[key]=Date.now(); nDelSave(); if(_notifSel===key) _notifSel=null; try{ renderNotifsPage(); }catch(e){} try{ renderNotifs(); }catch(e){} if(typeof showToast==='function') showToast('Notification deleted'); }
 function _fmtTime(ts){ if(!ts) return ''; var d=new Date(ts); var hm=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); var n=new Date(); if(d.toDateString()===n.toDateString()) return hm; return ('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+' '+hm; }
 function nSave(){ try{ localStorage.setItem('ba_notif_sent', JSON.stringify(NSENT)); }catch(e){} }
 function nIsSent(k){ return !!NSENT[k]; }
 function markSent(k){ if(!k) return; NSENT[k]=Date.now(); nSave(); try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} }
+function nIsDone(k){ return !!NDONE[k]; }
+function markDone(k){ if(!k) return; NDONE[k]=Date.now(); try{ localStorage.setItem('ba_notif_done', JSON.stringify(NDONE)); }catch(e){} markSent(k); }
 function _todayStr(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
 function _weekStr(){ var d=new Date(); var t=new Date(d.getFullYear(),d.getMonth(),d.getDate()); var day=(t.getDay()+6)%7; t.setDate(t.getDate()-day+3); var firstThu=new Date(t.getFullYear(),0,4); var wk=1+Math.round(((t-firstThu)/86400000-3+((firstThu.getDay()+6)%7))/7); return t.getFullYear()+'-W'+('0'+wk).slice(-2); }
 function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); }
@@ -3071,8 +3076,8 @@ function notifTypeOn(kind){ if(!kind) return true; return localStorage.getItem('
 function toggleNotifType(kind){ var cb=document.getElementById('ntype_'+kind); if(!cb) return; var on=cb.checked; localStorage.setItem('ba_notiftype_'+kind, on?'on':'off'); var st=document.getElementById('ntype_status_'+kind); if(st){ st.textContent=on?'On':'Off'; st.className='auto-status '+(on?'on':'off'); } try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('Notifications updated'); }
 function renderNotifTypes(){ var b=document.getElementById('notifTypesBox'); if(!b) return; b.innerHTML=NOTIF_TYPES.map(function(t){ var on=notifTypeOn(t[0]); return '<div class="auto-row"><div class="auto-info"><div class="auto-name">'+t[1]+'</div><div class="auto-desc">'+t[2]+'</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status '+(on?'on':'off')+'" id="ntype_status_'+t[0]+'">'+(on?'On':'Off')+'</span><label class="switch"><input type="checkbox" id="ntype_'+t[0]+'" '+(on?'checked':'')+' onchange="toggleNotifType(\''+t[0]+'\')"><span class="slider"></span></label></div></div>'; }).join(''); }
 function buildNotifs(){
-  var items=[]; var _sd=false; function add(o){ if(NDEL[o.key]) return; if(o.kind && !notifTypeOn(o.kind)) return; if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
-  try{ if(messages && messages.length){ var _rd=(typeof dateFromMessages==='function')?(dateFromMessages((document.getElementById('raw')||{}).value||'')||''):''; add({key:'ready|'+DAILY_VERSION,kind:'ready',title:messages.length+' new lists ready to send'+(_rd?' ('+_rd+')':''),sub:'open Daily Parley Tips to review and send'}); } }catch(e){}
+  var items=[]; var _sd=false; function add(o){ if(NDEL[o.key]) return; if(NDONE[o.key]) return; if(o.kind && !notifTypeOn(o.kind)) return; if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
+  try{ if(messages && messages.length){ var _allDone=true; for(var _ri=0;_ri<messages.length;_ri++){ if(!NDONE['msg|'+DAILY_VERSION+'|'+_ri]){ _allDone=false; break; } } if(!_allDone){ var _rd=(typeof dateFromMessages==='function')?(dateFromMessages((document.getElementById('raw')||{}).value||'')||''):''; add({key:'ready|'+DAILY_VERSION,kind:'ready',title:messages.length+' new lists ready to send'+(_rd?' ('+_rd+')':''),sub:'open Daily Parley Tips to review and send'}); } } }catch(e){}
   try{ (messages||[]).forEach(function(m,i){ var cat=detectCategory(m); add({key:'msg|'+DAILY_VERSION+'|'+i,kind:'msg',idx:i,cat:cat,text:m,title:_cleanTitle(m)||catLabel(cat),sub:'to '+catLabel(cat)+' channel'}); }); }catch(e){}
   try{ var cards=(typeof getParsedCards==='function')?getParsedCards():[]; if(cards.length){ add({key:'cards|'+DAILY_VERSION,kind:'cards',title:'Daily Betting Cards ('+cards.length+' picks)',sub:'to Daily Cards channel'}); } }catch(e){}
   try{ if(typeof CH!=='undefined'&&CH&&CH.status==='active'){ add({key:'chbet|'+((typeof EMBEDDED_CHALLENGE!=='undefined'&&EMBEDDED_CHALLENGE.date)||'')+'|'+CH.day,kind:'chbet',title:'Challenge Day '+CH.day+' bet',sub:'to Challenge channel (VIP)',text:(typeof buildChallengePlan==='function'?buildChallengePlan():'')}); } }catch(e){}
@@ -3104,7 +3109,7 @@ function renderNotifs(){
 function _nFind(k){ for(var i=0;i<NITEMS.length;i++) if(NITEMS[i].key===k) return NITEMS[i]; return null; }
 async function notifSend(key){
   var it=_nFind(key); if(!it){ buildNotifs(); it=_nFind(key); } if(!it) return;
-  if(it.kind==='msg'){ if(!await askConfirm('Send "'+it.title+'" to your '+catLabel(it.cat)+' channel?')){ return; } try{ await postToDiscord(applyTokens(it.text), getHook(it.cat)); showToast('Sent to '+catLabel(it.cat)); markSent(key); }catch(e){ showToast('Failed: '+e.message,false); } }
+  if(it.kind==='msg'){ if(!await askConfirm('Send "'+it.title+'" to your '+catLabel(it.cat)+' channel?')){ return; } try{ await postToDiscord(applyTokens(it.text), getHook(it.cat)); showToast('Sent to '+catLabel(it.cat)); markDone(key); }catch(e){ showToast('Failed: '+e.message,false); } }
   else if(it.kind==='cards'){ if(typeof sendCards==='function') await sendCards(); }
   else if(it.kind==='chbet'){ if(typeof sendChallengePlan==='function') await sendChallengePlan(); }
   else if(it.kind==='chres'){ if(typeof sendChallengeResult==='function') await sendChallengeResult(); }
