@@ -146,6 +146,17 @@
   .trb-rec{color:var(--muted);font-size:12px;}
   .trb-u{font-weight:700;text-align:right;min-width:62px;}
   .trb-roi{text-align:right;min-width:52px;font-size:12px;}
+  .trcal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+  .trcal-nav{display:flex;align-items:center;gap:6px;}
+  .trcal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .trcal-dow{font-size:10px;color:var(--muted);text-transform:uppercase;text-align:center;font-weight:700;padding-bottom:2px;}
+  .trcal-cell{min-height:54px;border-radius:9px;background:rgba(255,255,255,.03);border:1px solid var(--line2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px;}
+  .trcal-cell.empty{background:transparent;border:none;}
+  .trcal-cell .cd{font-size:10px;color:var(--muted);}
+  .trcal-cell .u{font-size:11.5px;font-weight:700;}
+  .trcal-cell.win{background:rgba(48,209,88,.15);border-color:rgba(48,209,88,.32);}
+  .trcal-cell.loss{background:rgba(255,69,58,.14);border-color:rgba(255,69,58,.32);}
+  @media(max-width:600px){ .trcal-cell{min-height:42px;} .trcal-cell .u{font-size:10px;} }
   table{width:100%;border-collapse:collapse;font-size:13.5px;}
   th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line2);}
   th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
@@ -471,6 +482,7 @@
       <div id="trStats" class="metrics"></div>
       <div id="trChart" style="margin-top:22px;"></div>
       <div id="trBreak" style="margin-top:18px;"></div>
+      <div id="trCal" style="margin-top:26px;"></div>
     </section>
     <section class="card">
       <h2 class="section-title">Add a bet</h2>
@@ -754,7 +766,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v89";
+var EMBEDDED_VERSION = "2026-06-26-v90";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1837,17 +1849,32 @@ function trGroupHtml(title, groups){
   if(!rows) return '';
   return '<div class="trb-block"><div class="trb-title">'+title+'</div>'+rows+'</div>';
 }
+var _trCalRef=null;
+function trCalMove(d){ if(!_trCalRef)_trCalRef=new Date(); _trCalRef=new Date(_trCalRef.getFullYear(),_trCalRef.getMonth()+d,1); renderTrack(); }
+function renderTrackCal(daily){
+  var box=document.getElementById('trCal'); if(!box) return;
+  if(!_trCalRef){ var keys=Object.keys(daily).sort(); _trCalRef=keys.length?new Date(keys[keys.length-1]+'T00:00:00'):new Date(); }
+  var y=_trCalRef.getFullYear(), m=_trCalRef.getMonth();
+  var first=new Date(y,m,1); var startDow=(first.getDay()+6)%7; var days=new Date(y,m+1,0).getDate();
+  var mn=['January','February','March','April','May','June','July','August','September','October','November','December'][m]+' '+y;
+  var dows=['Mo','Tu','We','Th','Fr','Sa','Su']; var cells=dows.map(function(d){return '<div class="trcal-dow">'+d+'</div>';}).join('');
+  for(var i=0;i<startDow;i++) cells+='<div class="trcal-cell empty"></div>';
+  var monthPL=0;
+  for(var dd2=1;dd2<=days;dd2++){ var key=y+'-'+('0'+(m+1)).slice(-2)+'-'+('0'+dd2).slice(-2); var plv=daily[key]; var cls='',val=''; if(plv!==undefined){ monthPL+=plv; cls=plv>0?'win':(plv<0?'loss':''); val='<div class="u '+(plv>=0?'pos':'neg')+'">'+(plv>=0?'+':'')+plv.toFixed(1)+'</div>'; } cells+='<div class="trcal-cell '+cls+'"><div class="cd">'+dd2+'</div>'+val+'</div>'; }
+  box.innerHTML='<div class="trcal-head"><div class="trb-title" style="margin:0;">Profit calendar</div><div class="trcal-nav"><button class="btn-ghost mini" onclick="trCalMove(-1)">&lsaquo;</button><span style="font-size:12.5px;font-weight:600;min-width:130px;text-align:center;display:inline-block;">'+mn+'</span><button class="btn-ghost mini" onclick="trCalMove(1)">&rsaquo;</button><span style="font-size:12px;margin-left:8px;font-weight:700;" class="'+(monthPL>=0?'pos':'neg')+'">'+(monthPL>=0?'+':'')+monthPL.toFixed(2)+'u</span></div></div><div class="trcal-grid">'+cells+'</div>';
+}
 function renderTrack(filter){
   if(filter) TR_FILTER=filter; var flt=TR_FILTER||CUR_SUB.trackrecord||'all';
   var all=TR.filter(function(e){ return flt==='all' || (e.risk||'medium')===flt; });
   var sorted=all.slice().sort(function(a,b){ var ka=_trDateKey(a.date),kb=_trDateKey(b.date); return ka<kb?-1:(ka>kb?1:((a.id||0)-(b.id||0))); });
   var staked=0,pl=0,w=0,l=0,v=0,p=0,oddsum=0,oddn=0,cum=0,pts=[];
   var byRisk={low:{label:'🟢 Low',w:0,l:0,v:0,units:0,staked:0},medium:{label:'🟡 Medium',w:0,l:0,v:0,units:0,staked:0},high:{label:'🔴 High',w:0,l:0,v:0,units:0,staked:0}};
-  var bySport={};
+  var bySport={}; var winnings=0, daily={};
+  var byOdds={a:{label:'< 1.50',w:0,l:0,v:0,units:0,staked:0},b:{label:'1.50 - 1.99',w:0,l:0,v:0,units:0,staked:0},c:{label:'2.00 - 2.99',w:0,l:0,v:0,units:0,staked:0},d:{label:'3.00 - 4.99',w:0,l:0,v:0,units:0,staked:0},e:{label:'5.00 +',w:0,l:0,v:0,units:0,staked:0}};
   sorted.forEach(function(e){
     var r=(e.result||'P').toUpperCase(); var x=trPL(e);
     if(r==='W')w++; else if(r==='L')l++; else if(r==='V')v++; else p++;
-    if(r==='W'||r==='L'){ staked+=parseFloat(e.stake)||0; pl+=x; oddsum+=parseFloat(e.odds)||0; oddn++; cum+=x; pts.push(cum); }
+    if(r==='W'||r==='L'){ var es=parseFloat(e.stake)||0, eo=parseFloat(e.odds)||0; staked+=es; pl+=x; oddsum+=eo; oddn++; cum+=x; pts.push(cum); if(r==='W') winnings+=es*eo; var dk=_trDateKey(e.date); daily[dk]=(daily[dk]||0)+x; var ob=eo<1.5?'a':(eo<2?'b':(eo<3?'c':(eo<5?'d':'e'))); var og=byOdds[ob]; if(r==='W')og.w++; else og.l++; og.units+=x; og.staked+=es; }
     var rk=byRisk[(e.risk||'medium')]; if(rk){ if(r==='W')rk.w++; else if(r==='L')rk.l++; else if(r==='V')rk.v++; if(r==='W'||r==='L'){rk.units+=x; rk.staked+=parseFloat(e.stake)||0;} }
     var sp=e.sport||'Other'; var sg=bySport[sp]||(bySport[sp]={label:sp,w:0,l:0,v:0,units:0,staked:0}); if(r==='W')sg.w++; else if(r==='L')sg.l++; else if(r==='V')sg.v++; if(r==='W'||r==='L'){sg.units+=x; sg.staked+=parseFloat(e.stake)||0;}
   });
@@ -1867,17 +1894,21 @@ function renderTrack(filter){
   var tb=document.querySelector('#trTable tbody'); if(tb) tb.innerHTML=rows;
   var emp=document.getElementById('trEmpty'); if(emp) emp.style.display=all.length?'none':'block';
   var settled=w+l; var roi=staked?(pl/staked*100):0; var wr=settled?(w/settled*100):0; var avgodd=oddn?(oddsum/oddn):0;
+  var peak=0,maxdd=0; pts.forEach(function(c){ if(c>peak)peak=c; var dd=peak-c; if(dd>maxdd)maxdd=dd; });
   var st=document.getElementById('trStats'); if(st){ st.innerHTML=
-    _trKpi(trUnit(pl),'Net profit (units)',pl>=0?'pos':'neg')+
-    _trKpi((roi>=0?'+':'')+roi.toFixed(1)+'%','ROI / yield',roi>=0?'pos':'neg')+
-    _trKpi(wr.toFixed(0)+'%','Win rate','')+
-    _trKpi(settled+'','Settled bets','')+
-    _trKpi(w+'W-'+l+'L'+(v?'-'+v+'V':''),'Record'+(p?' ('+p+' open)':''),'')+
-    _trKpi(staked.toFixed(2)+'u','Total staked','')+
+    _trKpi(settled+'','Bets','')+
+    _trKpi(staked.toFixed(2)+'u','Stake','')+
+    _trKpi(trUnit(pl),'Profit',pl>=0?'pos':'neg')+
+    _trKpi((roi>=0?'+':'')+roi.toFixed(1)+'%','ROI',roi>=0?'pos':'neg')+
+    _trKpi(wr.toFixed(0)+'%','Success','')+
+    _trKpi('+'+winnings.toFixed(2)+'u','Winnings','pos')+
     _trKpi(avgodd?avgodd.toFixed(2):'-','Avg odds','')+
+    _trKpi('-'+maxdd.toFixed(2)+'u','Max drawdown',maxdd>0?'neg':'')+
+    _trKpi(w+'W-'+l+'L'+(v?'-'+v+'V':''),'Record','')+
     _trKpi(p+'','Pending',''); }
   var ch=document.getElementById('trChart'); if(ch) ch.innerHTML='<div class="trb-title" style="margin-bottom:8px;">Profit over time (cumulative units)</div>'+trChartSVG(pts);
-  var bk=document.getElementById('trBreak'); if(bk) bk.innerHTML='<div class="trb-grid">'+trGroupHtml('By risk tier',[byRisk.low,byRisk.medium,byRisk.high])+trGroupHtml('By sport',Object.keys(bySport).map(function(k){return bySport[k];}))+'</div>';
+  var bk=document.getElementById('trBreak'); if(bk) bk.innerHTML='<div class="trb-grid">'+trGroupHtml('By sport',Object.keys(bySport).map(function(k){return bySport[k];}))+trGroupHtml('By risk tier',[byRisk.low,byRisk.medium,byRisk.high])+trGroupHtml('By odds range',[byOdds.a,byOdds.b,byOdds.c,byOdds.d,byOdds.e])+'</div>';
+  try{ renderTrackCal(daily); }catch(e){}
 }
 function addTrackManual(){
   var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
