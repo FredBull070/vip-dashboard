@@ -785,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v98";
+var EMBEDDED_VERSION = "2026-06-26-v99";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1370,15 +1370,22 @@ if(typeof renderShare==='function'){ var _rs=renderShare; renderShare=function()
 refreshBetsFilter(); refreshResultsFilter(); refreshShareFilter();
 
 
+function _exportCopy(code){
+  var ta=document.getElementById('cfg_code'); if(ta){ ta.value=code; try{ ta.focus(); ta.select(); ta.setSelectionRange(0, code.length); }catch(e){} }
+  var ok=false; try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(code); ok=true; } }catch(e){}
+  if(!ok){ try{ ok=document.execCommand('copy'); }catch(e){} }
+  return ok;
+}
 function exportSettings(){
   if(typeof saveAll==='function'){ try{ saveAll(true); }catch(e){} }
+  try{ if(typeof BK_KEYS!=='undefined'){ BK_KEYS.forEach(function(k){ var el=document.getElementById(k); if(el) localStorage.setItem('ba_'+k, el.value); }); } }catch(e){}
   var keys=['ba_hook_PARLEY','ba_hook_LOW','ba_hook_MID','ba_hook_HIGH','ba_hook_LUCKY','ba_hook_RESULTS','ba_hook_FREE','ba_hook_CUSTOM','ba_hook_CHALLENGE','ba_hook_CARDS','ba_hook_TRACK','ba_hook_EDU','ba_hook_NURT','ba_vip_link','ba_vip_channel','ba_autoshare','ba_bk_start','ba_bk_current','ba_bk_maxday','ba_bk_LOW_min','ba_bk_LOW_max','ba_bk_MID_min','ba_bk_MID_max','ba_bk_HIGH_min','ba_bk_HIGH_max','ba_bk_LUCKY_min','ba_bk_LUCKY_max'];
   var o={}; keys.forEach(function(k){ var v=localStorage.getItem(k); if(v!==null) o[k]=v; });
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
-  var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
-  try{ navigator.clipboard.writeText(code); }catch(e){}
-  var st=document.getElementById('cfgState'); if(st){ st.textContent='copied'; setTimeout(function(){st.textContent='';},2000); }
-  log('Settings exported (copied to clipboard).', 'ok');
+  var ok=_exportCopy(code);
+  var st=document.getElementById('cfgState'); if(st){ st.textContent=ok?'copied':'select + Ctrl+C'; setTimeout(function(){st.textContent='';},2500); }
+  if(typeof showToast==='function') showToast(ok?('Settings code refreshed & copied ('+code.length+' chars)'):'Code refreshed below, select it and press Ctrl+C', ok);
+  log('Settings exported ('+code.length+' chars).', 'ok');
 }
 function importSettings(){
   var ta=document.getElementById('cfg_code'); var code=ta?(ta.value||'').trim():'';
@@ -2116,10 +2123,9 @@ function exportFull(){
   if(typeof saveAll==='function'){ try{ saveAll(true); }catch(e){} }
   var o={}; for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k && k.indexOf('ba_')===0) o[k]=localStorage.getItem(k); }
   var code=btoa(unescape(encodeURIComponent(JSON.stringify(o))));
-  var ta=document.getElementById('cfg_code'); if(ta) ta.value=code;
-  try{ navigator.clipboard.writeText(code); }catch(e){}
-  log('Full backup created and copied to clipboard ('+code.length+' chars).','ok');
-  if(typeof showToast==='function') showToast('Full backup copied');
+  var ok=_exportCopy(code);
+  log('Full backup created ('+code.length+' chars).','ok');
+  if(typeof showToast==='function') showToast(ok?('Full backup refreshed & copied ('+code.length+' chars)'):'Backup refreshed below, select it and press Ctrl+C', ok);
 }
 function importFull(){
   var ta=document.getElementById('cfg_code'); var code=ta?(ta.value||'').trim():'';
