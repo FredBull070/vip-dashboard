@@ -372,9 +372,9 @@
       <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <div class="side-section">Discord</div>
+      <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> VIP results</button>
       <button class="nav-item" data-page="education" onclick="showPage('education')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span> Education</button>
       <button class="nav-item" data-page="custom" onclick="showPage('custom')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span> Messaging</button>
-      <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> Share VIP results</button>
       <div class="side-section">Ledger</div>
       <button class="nav-item" data-page="journal" onclick="showPage('journal')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Betting journal</button>
       <button class="nav-item" data-page="trackrecord" onclick="showPage('trackrecord')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13l3 3 4-5 4 4"/></svg></span> Track Record</button>
@@ -725,7 +725,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v84";
+var EMBEDDED_VERSION = "2026-06-25-v85";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1109,7 +1109,7 @@ var PAGE_META={
   notifications:["Notifications","Everything that is ready to share, in one place."],
   education:["Education","Value posts for your members, ready to send about 2x a week."],
   trackrecord:["Track Record","One unit-based entry per bet. Performance in units and ROI."],
-  vip:["Share VIP results","Your public showroom: performance reports and result cards that convert non members into VIP."],
+  vip:["VIP results","Your public showroom: performance reports and result cards that convert non members into VIP."],
   archive:["Archive","Look back at earlier days, as a list or calendar."],
   settings:["Settings","Channels, VIP link, import/export and the activity log."],
   mybets:["Your bets",""], results:["Results",""], bankroll:["Bankroll",""], channels:["Settings",""], log:["Activity log",""]
