@@ -1,32 +1,7 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
 window.DAILY_VERSION = "2026-06-26";
 
-window.DAILY_MESSAGES = `**:gift: FREE BET OF THE DAY | 26-06-2026**
-:soccer: Sport of the day: Football
-
-Today's free pick, straight from the VIP slate. Exactly what we are on and why:
-
-**:small_orange_diamond: Norway x France**
-France to win (match result) @ 1.50 - 1.65*
-↳ France win the match in normal time.
-
-**:small_orange_diamond: New Zealand x Belgium**
-Belgium to win (match result) @ 1.36 - 1.50*
-↳ Belgium win the match in normal time.
-
-**:moneybag: Total odds: ±2.04 - 2.48***
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-France have far more quality than Norway and should control the game, while Belgium are a clear level above New Zealand. Two strong favourites from different matches.
-
-━━━━━━━━━━━━
-:green_circle: This is only our **Safe Builder**, the lowest risk play. VIP members also got the Value Builder, the Jackpot Builder, the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
-:chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
-:rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
-:warning: 18+ | play responsibly
-===NEXT MESSAGE===
-**🟢 #7 Safe Builder Parley: 26-06-2026**
+window.DAILY_MESSAGES = `**🟢 #7 Safe Builder Parley: 26-06-2026**
 
 **:small_orange_diamond: Norway x France**
 France to win (match result) @ 1.50 - 1.65*
@@ -65,7 +40,7 @@ Spain have the quality to beat a Uruguay side that may already be settled in the
 **🔴 #9 Jackpot Builder Parley: 26-06-2026**
 
 **:small_orange_diamond: Norway x France**
-Over 2.5 goals (total goals) @ 1.65 - 1.80*
+Over 2.5 goals (total goals) @ 1.72 - 1.88*
 ↳ 3 or more goals in the match in total.
 
 **:small_orange_diamond: Uruguay x Spain**
@@ -73,16 +48,41 @@ Over 2.5 goals (total goals) @ 1.90 - 2.05*
 ↳ 3 or more goals in the match in total.
 
 **:small_orange_diamond: Cape Verde x Saudi Arabia**
-Saudi Arabia to win (match result) @ 2.20 - 2.45*
+Saudi Arabia to win (match result) @ 2.45 - 2.75*
 ↳ Saudi Arabia win the match in normal time.
 
-**:moneybag: Total odds: ±6.90 - 9.05***
+**:moneybag: Total odds: ±8.00 - 10.60***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
 The France and Spain games should be open and high scoring against opponents chasing the match, while Saudi Arabia have the edge in quality over Cape Verde. A higher variance ticket built across three different games.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
+===NEXT MESSAGE===
+**:gift: FREE BET OF THE DAY | 26-06-2026**
+:soccer: Sport of the day: Football
+
+Today's free pick, straight from the VIP slate. Exactly what we are on and why:
+
+**:small_orange_diamond: Norway x France**
+France to win (match result) @ 1.50 - 1.65*
+↳ France win the match in normal time.
+
+**:small_orange_diamond: New Zealand x Belgium**
+Belgium to win (match result) @ 1.36 - 1.50*
+↳ Belgium win the match in normal time.
+
+**:moneybag: Total odds: ±2.04 - 2.48***
+Odds may vary depending on the bookmaker or the time of placement.
+
+**:mortar_board: Strategy Breakdown:**
+France have far more quality than Norway and should control the game, while Belgium are a clear level above New Zealand. Two strong favourites from different matches.
+
+━━━━━━━━━━━━
+:green_circle: This is only our **Safe Builder**, the lowest risk play. VIP members also got the Value Builder, the Jackpot Builder, the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
+:chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
+:rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
+:warning: 18+ | play responsibly
 ===NEXT MESSAGE===
 **👑 Lucky Shot Parley: 26-06-2026**
 
