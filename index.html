@@ -785,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v97";
+var EMBEDDED_VERSION = "2026-06-26-v98";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -2972,7 +2972,7 @@ function removeEdu(i){ var p=EDU[i]; if(!p) return; removeEduTitle(eduTitle(p.bo
 function restoreEdu(){ localStorage.removeItem('ba_edu_removed'); renderEdu(CUR_SUB['education']); if(typeof showToast==='function') showToast('Removed posts restored'); }
 function eduExcerpt(body){ var lines=(body||'').split('\n'); var parts=[]; for(var i=1;i<lines.length;i++){ var s=lines[i].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u2190-\u21FF\u2B00-\u2BFF]/gu,'').trim(); if(s){ parts.push(s); } if(parts.join(' ').length>210) break; } var out=parts.join('  '); if(out.length>210) out=out.slice(0,210).trim()+'\u2026'; return out; }
 function eduPreviewHtml(body){ var lines=(body||'').split('\n'); var out=[]; for(var i=1;i<lines.length && out.length<4;i++){ var raw=lines[i].trim(); if(!raw) continue; var s=raw.replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); if(!s) continue; out.push('<div class="edu-line">'+esc(s)+'</div>'); } return out.join(''); }
-function eduCardClick(sec, ev){ if(sec.classList.contains('collapsed')){ toggleMsgCard(sec); return; } if(ev && ev.target && ev.target.closest && ev.target.closest('.msg-body')) return; toggleMsgCard(sec); }
+function eduCardClick(sec, ev){ toggleMsgCard(sec); }
 function renderEdu(sub){
   var box=document.getElementById('eduList'); if(!box) return;
   var cat=sub||CUR_SUB['education']||'mindset';
