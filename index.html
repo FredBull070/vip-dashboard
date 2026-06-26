@@ -705,6 +705,10 @@
       <p class="section-sub">What runs for you in the background, and a switch to set each one active or paused.</p>
       <div class="auto-row"><div class="auto-info"><div class="auto-name">Daily lists builder</div><div class="auto-when">Every day around 10:00</div><div class="auto-desc">Settles yesterday's bets (Won, Lost or Void), builds today's Safe, Value and Jackpot Builders, the Free Bet, the Lucky Shot and the Daily Betting Cards, deploys the dashboard and backs everything up to Notion.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_daily">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_daily" onchange="toggleAutomation('daily')"><span class="slider"></span></label></div></div>
       <div class="auto-row"><div class="auto-info"><div class="auto-name">Evening auto-settlement</div><div class="auto-when">Every evening at 22:00, 00:00 and 02:00</div><div class="auto-desc">Checks the final scores, auto-marks each bet Won, Lost or Void, updates the ledger and Notion, and queues the results in your Notifications ready to share. Never sends to Discord by itself.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_evening">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_evening" onchange="toggleAutomation('evening')"><span class="slider"></span></label></div></div>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">Tennis bets builder</div><div class="auto-when">Every day around 09:30, once the order of play is out</div><div class="auto-desc">Builds the tennis bets for the day (Wimbledon and ATP/WTA) once the matchups, surfaces and order of play are confirmed, then deploys and backs up to Notion. Skips automatically on days with no tennis.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_tennis">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_tennis" onchange="toggleAutomation('tennis')"><span class="slider"></span></label></div></div>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">NBA bets builder</div><div class="auto-when">In the NBA season (Oct to Jun), each afternoon</div><div class="auto-desc">Builds the NBA bets for that night once the slate and injury reports are known. The schedule only fires during the NBA season; off-season it stays idle.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_nba">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_nba" onchange="toggleAutomation('nba')"><span class="slider"></span></label></div></div>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">NFL bets builder</div><div class="auto-when">In the NFL season (Sep to Feb), on game days</div><div class="auto-desc">Builds the NFL slate on game days once the inactives and lines are set. Only runs during the NFL season; otherwise idle.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_nfl">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_nfl" onchange="toggleAutomation('nfl')"><span class="slider"></span></label></div></div>
+      <div class="auto-row"><div class="auto-info"><div class="auto-name">NHL bets builder</div><div class="auto-when">In the NHL season (Oct to Jun), each day</div><div class="auto-desc">Builds the NHL bets for the day once the confirmed lineups are out. Only runs during the NHL season; otherwise idle.</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status on" id="auto_status_nhl">Active</span><label class="switch"><input type="checkbox" id="auto_toggle_nhl" onchange="toggleAutomation('nhl')"><span class="slider"></span></label></div></div>
       <p class="section-sub" style="margin-top:15px;font-size:11.5px;">These run on Claude's schedule. The switch saves your preference and status here; tell Claude if you want a run fully paused or resumed.</p>
     </section>
     <section class="card"><h2 class="section-title">Daily routine</h2>
@@ -760,7 +764,7 @@
     </div>
   </main>
 </div>
-<script>document.write('<scr'+'ipt src="bets.js?t='+Date.now()+'"><\/scr'+'ipt>');</script>
+<script>['bets.js','bets-tennis.js','bets-nba.js','bets-nfl.js','bets-nhl.js'].forEach(function(f){document.write('<scr'+'ipt src="'+f+'?t='+Date.now()+'"><\/scr'+'ipt>');});</script>
 <script>
 
 
@@ -793,7 +797,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v104";
+var EMBEDDED_VERSION = "2026-06-26-v105";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -842,7 +846,7 @@ Paraguay against Australia is an even, end to end game that leans to goals, and 
 
 var EMBEDDED_RESULTS = [{"date": "2026-06-25", "sport": "Football", "list": "LOW", "odds": 2.01, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "MID", "odds": 3.06, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "HIGH", "odds": 5.13, "result": "pending"}, {"date": "2026-06-25", "sport": "Football", "list": "LUCKY SHOT", "odds": 168, "result": "pending"}];
 
-var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
+var DAILY_MESSAGES = ([window.DAILY_MESSAGES, window.DAILY_TENNIS, window.DAILY_NBA, window.DAILY_NFL, window.DAILY_NHL].filter(function(x){return typeof x==='string' && x.trim();}).join('\n===NEXT MESSAGE===\n')) || EMBEDDED_MESSAGES;
 var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
 window.RESULTS  = (Array.isArray(window.RESULTS) && window.RESULTS.length)? window.RESULTS : EMBEDDED_RESULTS;
 window.SETTINGS = window.SETTINGS || {stake:1, currency:'u'};
@@ -882,9 +886,9 @@ function applyTokens(t){
   t=t.split('{VIP_CHANNEL}').join(out);
   return t;
 }
-function autoName(id){ return {daily:'Daily lists builder', evening:'Evening auto-settlement'}[id]||id; }
+function autoName(id){ return {daily:'Daily lists builder', evening:'Evening auto-settlement', tennis:'Tennis bets builder', nba:'NBA bets builder', nfl:'NFL bets builder', nhl:'NHL bets builder'}[id]||id; }
 function toggleAutomation(id){ var cb=document.getElementById('auto_toggle_'+id); if(!cb) return; var on=cb.checked; localStorage.setItem('ba_auto_'+id, on?'on':'off'); var st=document.getElementById('auto_status_'+id); if(st){ st.textContent=on?'Active':'Paused'; st.className='auto-status '+(on?'on':'off'); } if(typeof showToast==='function') showToast(autoName(id)+(on?' set to active':' set to paused')); }
-function renderAutoToggles(){ ['daily','evening'].forEach(function(id){ var cb=document.getElementById('auto_toggle_'+id); if(!cb) return; var on=localStorage.getItem('ba_auto_'+id)!=='off'; cb.checked=on; var st=document.getElementById('auto_status_'+id); if(st){ st.textContent=on?'Active':'Paused'; st.className='auto-status '+(on?'on':'off'); } }); }
+function renderAutoToggles(){ ['daily','evening','tennis','nba','nfl','nhl'].forEach(function(id){ var cb=document.getElementById('auto_toggle_'+id); if(!cb) return; var on=localStorage.getItem('ba_auto_'+id)!=='off'; cb.checked=on; var st=document.getElementById('auto_status_'+id); if(st){ st.textContent=on?'Active':'Paused'; st.className='auto-status '+(on?'on':'off'); } }); }
 function _msgSummary(m){ var title=(typeof _cleanTitle==='function'?_cleanTitle(m):'')||''; var legs=(m.match(/small_orange_diamond/g)||[]).length; var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); var parts=[]; if(legs) parts.push(legs+' leg'+(legs>1?'s':'')); if(odds) parts.push(odds); return {title:title, meta:parts.join('  &middot;  ')}; }
 function _msgLegsHtml(m){ try{ var bet=parseParleyToBet(m); if(!bet.legs.length) return ''; var rows=bet.legs.map(function(L){ var p=L.split(': '); var mt=p[0]||''; var pk=p.slice(1).join(': '); return '<div class="leg-row"><span class="leg-match">'+esc(mt)+'</span>'+(pk?'<span class="leg-pick">'+esc(pk)+'</span>':'')+'</div>'; }).join(''); var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); return rows+(odds?'<div class="leg-odds">Total odds: '+esc(odds)+'</div>':''); }catch(e){ return ''; } }
 function toggleMsgCard(el){ var c=el.closest('.msg-card'); if(c){ c.classList.toggle('collapsed'); var b=c.querySelector('.msg-full-btn'); if(b) b.textContent=c.classList.contains('collapsed')?'Full':'Compact'; } }
@@ -1884,7 +1888,8 @@ ODDS: 2.10
 STAKE: 1u
 RISK: high
 ANALYSIS: An open game with both teams likely to push for goals.`;
-function getCardsText(){ var el=document.getElementById('cardsRaw'); if(el && el.value.trim()) return el.value; return (typeof window.DAILY_CARDS==='string' && window.DAILY_CARDS.trim())? window.DAILY_CARDS : EMBEDDED_CARDS_TEXT; }
+function _allDailyCards(){ return [window.DAILY_CARDS, window.DAILY_TENNIS_CARDS, window.DAILY_NBA_CARDS, window.DAILY_NFL_CARDS, window.DAILY_NHL_CARDS].filter(function(x){return typeof x==='string' && x.trim();}).join('\n===\n'); }
+function getCardsText(){ var el=document.getElementById('cardsRaw'); if(el && el.value.trim()) return el.value; return _allDailyCards()||EMBEDDED_CARDS_TEXT; }
 function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); o.sport=o.sport||'Football'; return o.match? o : null; }).filter(Boolean); }
 function cardRiskTag(r){ return r==='low'?'banker':(r==='medium'?'value play':'upside shot'); }
 function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+(c.selection||'')+'** @ '+(c.odds||'')+'\n🏟️ '+(c.match||'')+'  ·  '+(c.market||'')+'\n:coin: Stake '+(c.stake||'')+'  ('+cardRiskTag(c.risk)+')\n:bulb: '+(c.analysis||''); }
@@ -1937,7 +1942,7 @@ function cardsFilter(sub){ _cardRisk=(sub==='all'||!sub)?'all':sub; applyCardFil
 function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#cardsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyCardFilters(); }
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); renderCards(); }
 async function sendCards(){ var cards=getParsedCards(); var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markSent('cards|'+DAILY_VERSION); }catch(_e){} } }
-(function(){ var el=document.getElementById('cardsRaw'); var dc=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
+(function(){ var el=document.getElementById('cardsRaw'); var dc=(_allDailyCards()||EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 (function(){ try{ var ss=document.getElementById('sendSpacing'); if(ss && localStorage.getItem('ba_send_spacing')!==null) ss.value=localStorage.getItem('ba_send_spacing'); }catch(e){} })();
 
 
