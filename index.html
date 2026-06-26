@@ -639,6 +639,11 @@
       <textarea id="cfg_code" spellcheck="false" placeholder="Settings code appears here on Export / paste your code here to Import" style="min-height:70px;"></textarea>
       <div class="actions"><button class="btn-secondary" onclick="exportSettings()">Export settings</button><button class="btn-secondary" onclick="importSettings()">Import settings</button><span id="cfgState"></span></div><p class="section-sub" style="margin-top:16px;">Full backup includes <b>everything</b> (track record, graded results, archive, challenge, webhooks and settings). Keep the code somewhere safe, or paste it into your Notion backup page. Restore it on any device to get all your data back.</p><div class="actions"><button class="btn" onclick="exportFull()">Full backup (all data)</button><button class="btn-secondary" onclick="importFull()">Restore full backup</button></div>
       </div>
+      <div id="set-notif" style="display:none">
+      <h2 class="section-title" style="margin-bottom:6px;">Notifications</h2>
+      <p class="section-sub">Choose which notifications show up in your bell and Notifications tab. Turn a type off and it stops appearing.</p>
+      <div id="notifTypesBox" style="margin-top:8px;"></div>
+      </div>
     </section>
     </div>
 <div class="page" id="page-log" style="display:none">
@@ -738,7 +743,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v86";
+var EMBEDDED_VERSION = "2026-06-25-v87";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1132,7 +1137,7 @@ function closeSidebar(){ var s=document.getElementById('sidebar'); var b=documen
 var SUBTABS={
   today:[['bets','All'],['FREE','Free'],['LOW','Low'],['MID','Mid'],['HIGH','High'],['LUCKY','Lucky'],['edit','Edit lists']],
   journal:[['mybets','Your bets'],['results','Results'],['bankroll','Bankroll']],
-  settings:[['channels','Channels'],['vip','VIP & links'],['io','Import / Export'],['log','Activity log']],
+  settings:[['channels','Channels'],['vip','VIP & links'],['notif','Notifications'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
   trackrecord:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High']],
@@ -1153,7 +1158,7 @@ function showSub(page, sub){
   CUR_SUB[page]=sub;
   var sb=document.getElementById('subbar'); if(sb){ var bs=sb.querySelectorAll('.subtab'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-sub')===sub); }
   if(page==='journal'){ ['mybets','results','bankroll'].forEach(function(p){ var el=document.getElementById('page-'+p); if(el) el.style.display=(p===sub)?'block':'none'; }); if(sub==='bankroll'&&typeof renderBankroll==='function'){try{renderBankroll();}catch(e){}} }
-  else if(page==='settings'){ ['set-channels','set-vip','set-io'].forEach(function(s){ var el=document.getElementById(s); if(el) el.style.display=(s==='set-'+sub)?'block':'none'; }); var pc=document.getElementById('page-channels'); var pl=document.getElementById('page-log'); if(pc) pc.style.display=(sub==='log')?'none':'block'; if(pl) pl.style.display=(sub==='log')?'block':'none'; }
+  else if(page==='settings'){ ['set-channels','set-vip','set-notif','set-io'].forEach(function(s){ var el=document.getElementById(s); if(el) el.style.display=(s==='set-'+sub)?'block':'none'; }); var pc=document.getElementById('page-channels'); var pl=document.getElementById('page-log'); if(pc) pc.style.display=(sub==='log')?'none':'block'; if(pl) pl.style.display=(sub==='log')?'block':'none'; if(sub==='notif'){ try{ renderNotifTypes(); }catch(e){} } }
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
@@ -2829,8 +2834,12 @@ function _todayStr(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMo
 function _weekStr(){ var d=new Date(); var t=new Date(d.getFullYear(),d.getMonth(),d.getDate()); var day=(t.getDay()+6)%7; t.setDate(t.getDate()-day+3); var firstThu=new Date(t.getFullYear(),0,4); var wk=1+Math.round(((t-firstThu)/86400000-3+((firstThu.getDay()+6)%7))/7); return t.getFullYear()+'-W'+('0'+wk).slice(-2); }
 function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); }
 var NITEMS=[];
+var NOTIF_TYPES=[['ready','New lists ready','When today\'s parley lists are built and ready to review and send.'],['msg','Parley send reminders','One reminder per parley (Safe, Value, Jackpot) waiting to be sent.'],['cards','Daily cards ready','When the Daily Betting Cards are ready to send.'],['chbet','Challenge bet ready','The day\'s challenge bet, ready for the Challenge channel.'],['chres','Challenge result','A challenge result ready to share in VIP results.'],['chupdate','Challenge member update','The casual member update for the Challenge channel.'],['results','Settled results','Graded results ready to share in VIP results.'],['perf','Weekly performance','A reminder to send the weekly performance report.'],['edu','Education reminder','Twice-a-week reminder to post an education piece.']];
+function notifTypeOn(kind){ if(!kind) return true; return localStorage.getItem('ba_notiftype_'+kind)!=='off'; }
+function toggleNotifType(kind){ var cb=document.getElementById('ntype_'+kind); if(!cb) return; var on=cb.checked; localStorage.setItem('ba_notiftype_'+kind, on?'on':'off'); var st=document.getElementById('ntype_status_'+kind); if(st){ st.textContent=on?'On':'Off'; st.className='auto-status '+(on?'on':'off'); } try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('Notifications updated'); }
+function renderNotifTypes(){ var b=document.getElementById('notifTypesBox'); if(!b) return; b.innerHTML=NOTIF_TYPES.map(function(t){ var on=notifTypeOn(t[0]); return '<div class="auto-row"><div class="auto-info"><div class="auto-name">'+t[1]+'</div><div class="auto-desc">'+t[2]+'</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status '+(on?'on':'off')+'" id="ntype_status_'+t[0]+'">'+(on?'On':'Off')+'</span><label class="switch"><input type="checkbox" id="ntype_'+t[0]+'" '+(on?'checked':'')+' onchange="toggleNotifType(\''+t[0]+'\')"><span class="slider"></span></label></div></div>'; }).join(''); }
 function buildNotifs(){
-  var items=[]; var _sd=false; function add(o){ if(NDEL[o.key]) return; if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
+  var items=[]; var _sd=false; function add(o){ if(NDEL[o.key]) return; if(o.kind && !notifTypeOn(o.kind)) return; if(!SEEN[o.key]){ SEEN[o.key]=Date.now(); _sd=true; } o.seen=SEEN[o.key]; o.read=nIsSent(o.key); o.readAt=o.read?(NSENT[o.key]||0):0; items.push(o); }
   try{ if(messages && messages.length){ var _rd=(typeof dateFromMessages==='function')?(dateFromMessages((document.getElementById('raw')||{}).value||'')||''):''; add({key:'ready|'+DAILY_VERSION,kind:'ready',title:messages.length+' new lists ready to send'+(_rd?' ('+_rd+')':''),sub:'open Daily Parley Tips to review and send'}); } }catch(e){}
   try{ (messages||[]).forEach(function(m,i){ var cat=detectCategory(m); add({key:'msg|'+DAILY_VERSION+'|'+i,kind:'msg',idx:i,cat:cat,text:m,title:_cleanTitle(m)||catLabel(cat),sub:'to '+catLabel(cat)+' channel'}); }); }catch(e){}
   try{ var cards=(typeof getParsedCards==='function')?getParsedCards():[]; if(cards.length){ add({key:'cards|'+DAILY_VERSION,kind:'cards',title:'Daily Betting Cards ('+cards.length+' picks)',sub:'to Daily Cards channel'}); } }catch(e){}
@@ -2912,7 +2921,7 @@ function renderNotifDetail(key){
   s+='</div>';
   d.innerHTML=s;
 }
-function openNotif(key){ _notifSel=key; renderNotifsPage(); }
+function openNotif(key){ _notifSel=key; try{ markSent(key); }catch(e){} renderNotifsPage(); }
 var _undoT, _undoFn=null;
 function showUndo(msg, fn){ var t=document.getElementById('undoToast'); if(!t){ return; } var m=document.getElementById('undoMsg'); if(m) m.textContent=msg; _undoFn=fn; t.classList.add('show'); clearTimeout(_undoT); _undoT=setTimeout(function(){ t.classList.remove('show'); _undoFn=null; }, 6000); }
 function doUndo(){ var t=document.getElementById('undoToast'); if(t) t.classList.remove('show'); clearTimeout(_undoT); if(_undoFn){ var f=_undoFn; _undoFn=null; f(); } }
