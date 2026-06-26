@@ -840,7 +840,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v114";
+var EMBEDDED_VERSION = "2026-06-26-v115";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1982,9 +1982,9 @@ function buildCardsChunks(cards){
   var groups=[['low','**:green_circle: CORE POSITIONS**'],['medium','**:yellow_circle: BALANCED POSITIONS**'],['high','**:red_circle: AGGRESSIVE POSITIONS**']];
   var msgs=[]; var cur=header; var has=false;
   groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
-    var gh='\n'+g[1]+'\n';
+    var gh='\n\n'+g[1]+'\n';
     cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
-      if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=gh+'\n'+cardStr(c)+'\n'; }
+      if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=g[1]+'\n\n'+cardStr(c)+'\n'; }
       else { cur+=piece; } has=true; });
   });
   if(has) msgs.push(cur);
@@ -1995,7 +1995,7 @@ function getParsedCards(){ return parseCards(getCardsText()); }
 function getSelectedCards(){ var all=getParsedCards(); var sel=[]; var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++){ if(chks[i].checked){ var k=parseInt(chks[i].getAttribute('data-cidx'),10); if(all[k]) sel.push(all[k]); } } return sel; }
 function selectAllCards(on){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++) chks[i].checked=!!on; updateCardSelCount(); }
 function updateCardSelCount(){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); var n=0; for(var i=0;i<chks.length;i++) if(chks[i].checked) n++; var el=document.getElementById('cardSelCount'); if(el) el.textContent=n+' of '+chks.length+' selected'; }
-async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages, spaced ~'+_spacingMin()+' min apart so each shows separately)':''))){ log('Cancelled.','info'); return; } _sendCancel=false; var stop=document.getElementById('cardsSendStop'); var status=document.getElementById('cardsSendStatus'); if(stop)stop.style.display=''; var hook=getHook('CARDS'); for(var i=0;i<chunks.length;i++){ var okw=await _waitForChannel(hook,'cardsSendStatus','Next card message'); if(!okw){ log('Cards send stopped.','info'); if(status)status.textContent='Stopped.'; if(stop)stop.style.display='none'; return; } try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), hook); if(status) status.textContent='Sent '+(i+1)+'/'+chunks.length; }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); if(stop)stop.style.display='none'; return; } } if(status){ status.textContent=''; } if(stop)stop.style.display='none'; log('Cards sent.','ok'); showToast('Sent to Daily Cards'); return true; }
+async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages, sent right after each other)':''))){ log('Cancelled.','info'); return; } _sendCancel=false; var stop=document.getElementById('cardsSendStop'); var status=document.getElementById('cardsSendStatus'); if(stop)stop.style.display=''; var hook=getHook('CARDS'); for(var i=0;i<chunks.length;i++){ if(_sendCancel){ log('Cards send stopped.','info'); if(status)status.textContent='Stopped.'; if(stop)stop.style.display='none'; return; } try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), hook); if(status) status.textContent='Sent '+(i+1)+'/'+chunks.length; }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); if(stop)stop.style.display='none'; return; } } if(status){ status.textContent=''; } if(stop)stop.style.display='none'; log('Cards sent.','ok'); showToast('Sent to Daily Cards'); return true; }
 async function shareSelected(){ var sel=getSelectedCards(); if(!sel.length){ showToast('Select at least one pick', false); return; } await sendCardChunks(buildCardsChunks(sel), sel.length+' selected pick'+(sel.length>1?'s':'')); }
 async function shareCategory(risk){ var cs=getParsedCards().filter(function(c){return c.risk===risk;}); if(!cs.length){ showToast('No '+risk+' picks', false); return; } await sendCardChunks(buildCardsChunks(cs), 'all '+risk+' picks'); }
 async function shareCard(i){ var c=getParsedCards()[i]; if(!c) return; await sendCardChunks(buildCardsChunks([c]), 'this pick'); }
