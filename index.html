@@ -446,7 +446,7 @@
     <section class="card">
       <div class="card-head">
         <h2 class="section-title">Today <span class="pill" id="count">0 messages</span></h2>
-        <button class="btn" onclick="sendAll()" id="sendAllBtn">Send all</button>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;"><span id="sendAllStatus" class="muted-sm" style="margin:0;"></span><label class="muted-sm" style="margin:0;display:flex;align-items:center;gap:5px;" title="Minutes between messages to the same channel so Discord shows each one with its own avatar (Discord groups messages sent within ~8 min).">Gap <input type="number" id="sendSpacing" min="0" step="0.5" value="8" style="width:52px;padding:4px 6px;" onchange="localStorage.setItem('ba_send_spacing', this.value); try{showToast('Spacing set to '+this.value+' min');}catch(e){}"> min</label><button class="btn-ghost mini" id="sendAllStop" style="display:none;" onclick="_sendCancel=true;">Stop</button><button class="btn" onclick="sendAll()" id="sendAllBtn">Send all</button></div>
       </div>
       <p class="section-sub">Each message goes to its own channel. Sending always asks for confirmation. Bets are grouped by type below.</p>
       <div id="sportFilter" class="sportbar"></div>
@@ -473,7 +473,7 @@
     <section class="card">
       <div class="card-head">
         <h2 class="section-title">Daily Betting Cards <span class="pill" id="cardsCount">0 cards</span></h2>
-        <button class="btn" onclick="sendCards()">Send all to Daily Cards channel</button>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;"><span id="cardsSendStatus" class="muted-sm" style="margin:0;"></span><button class="btn-ghost mini" id="cardsSendStop" style="display:none;" onclick="_sendCancel=true;">Stop</button><button class="btn" onclick="sendCards()">Send all to Daily Cards channel</button></div>
       </div>
       <p class="section-sub">Today's value picks as single cards, grouped by risk so members build their own slip. Tick the picks you want and use <b>Share selected</b>, share a whole risk tier (🟢🟡🔴), or <b>Share this pick</b> on any card. The Discord format explains our tiering so it teaches the method while staying light and clear.</p>
     </section>
@@ -785,7 +785,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v102";
+var EMBEDDED_VERSION = "2026-06-26-v103";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -911,10 +911,20 @@ function parseMessages(){
   saveAll(true);
 }
 
+var _lastSendAt={}; var _sendCancel=false;
+function _spacingMin(){ var m=parseFloat(localStorage.getItem('ba_send_spacing')); if(isNaN(m)||m<0) m=8; return m; }
+function _spacingMs(){ return _spacingMin()*60000; }
+function _fmtCd(ms){ var s=Math.ceil(ms/1000); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+async function _waitForChannel(hook, statusId, label){
+  if(!hook) return true; var statusEl=statusId?document.getElementById(statusId):null;
+  while(true){ var wait=_spacingMs()-(Date.now()-(_lastSendAt[hook]||0)); if(wait<=0) break; if(_sendCancel) return false; if(statusEl) statusEl.textContent=(label||'Next')+' in '+_fmtCd(wait)+' (so Discord shows it separately)'; await new Promise(function(r){ setTimeout(r, Math.min(1000, wait)); }); }
+  if(statusEl) statusEl.textContent=''; return !_sendCancel;
+}
 async function postToDiscord(content, hook){
   if(!hook){ throw new Error('No webhook set for this channel. Add it in Settings > Channels.'); }
   const res=await fetch(hook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
   if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
+  try{ _lastSendAt[hook]=Date.now(); }catch(e){}
 }
 async function testHook(cat){ if(!await askConfirm('Send a test message to your '+catLabel(cat)+' channel?')){ log('Cancelled.','info'); return; } try{ log('Test message to '+catLabel(cat)+' channel...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' channel works.', getHook(cat)); log('OK - test sent to '+catLabel(cat)+'.', 'ok'); }catch(e){ log('FAILED ('+catLabel(cat)+'): '+e.message, 'err'); } }
 function askConfirm(msg, opts){
@@ -942,10 +952,10 @@ function showToast(msg, ok){
 async function sendOne(i){ const cat=detectCategory(messages[i]); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); if(!await askConfirm('Send "'+nm+'" to the '+catLabel(cat)+' channel?')){ log('Cancelled.', 'info'); return; } try{ log('Sending "'+nm+'" to '+catLabel(cat)+'...', 'info'); await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('OK - "'+nm+'" sent to '+catLabel(cat)+'.', 'ok'); showToast('Sent: '+nm); try{ markSent('msg|'+DAILY_VERSION+'|'+i); }catch(_e){} }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); showToast('Failed: '+e.message, false); } }
 async function sendAll(){
   if(!messages.length){ log('No messages loaded.', 'err'); return; }
-  if(!await askConfirm('Alle '+messages.length+' messages, each to its own channel?')){ log('Cancelled.', 'info'); return; }
-  const btn=document.getElementById('sendAllBtn'); btn.disabled=true;
-  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(applyTokens(messages[i]), getHook(cat)); log('Sent '+(i+1)+' / '+messages.length+' to '+catLabel(cat), 'ok'); }catch(e){ log('FAILED '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
-  log('Done sending.', 'info'); btn.disabled=false; showToast('All messages sent');
+  if(!await askConfirm('Send all '+messages.length+' messages? Each goes to its own channel. Messages to the same channel are spaced ~'+_spacingMin()+' min apart so Discord shows each one separately (this can take a while).')){ log('Cancelled.', 'info'); return; }
+  const btn=document.getElementById('sendAllBtn'); const stop=document.getElementById('sendAllStop'); const status=document.getElementById('sendAllStatus'); _sendCancel=false; if(btn)btn.disabled=true; if(stop)stop.style.display='';
+  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); const hook=getHook(cat); var nm=(typeof _cleanTitle==='function' && _cleanTitle(messages[i]))||('message '+(i+1)); var okw=await _waitForChannel(hook, 'sendAllStatus', 'Next: '+nm); if(!okw){ log('Send all stopped.','info'); break; } try{ await postToDiscord(applyTokens(messages[i]), hook); log('Sent '+(i+1)+' / '+messages.length+' to '+catLabel(cat), 'ok'); if(status) status.textContent='Sent '+(i+1)+'/'+messages.length+' to '+catLabel(cat); }catch(e){ log('FAILED "'+nm+'" ('+catLabel(cat)+'): '+e.message, 'err'); } }
+  if(status){ status.textContent=_sendCancel?'Stopped.':'All sent.'; setTimeout(function(){ if(status)status.textContent=''; },4000); } if(btn)btn.disabled=false; if(stop)stop.style.display='none'; if(!_sendCancel){ log('Done sending.', 'info'); showToast('All messages sent'); }
 }
 
 var NURT_TPL={
@@ -1887,7 +1897,7 @@ function getParsedCards(){ return parseCards(getCardsText()); }
 function getSelectedCards(){ var all=getParsedCards(); var sel=[]; var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++){ if(chks[i].checked){ var k=parseInt(chks[i].getAttribute('data-cidx'),10); if(all[k]) sel.push(all[k]); } } return sel; }
 function selectAllCards(on){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); for(var i=0;i<chks.length;i++) chks[i].checked=!!on; updateCardSelCount(); }
 function updateCardSelCount(){ var chks=document.querySelectorAll('#betcards-visual .cardchk'); var n=0; for(var i=0;i<chks.length;i++) if(chks[i].checked) n++; var el=document.getElementById('cardSelCount'); if(el) el.textContent=n+' of '+chks.length+' selected'; }
-async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages)':''))){ log('Cancelled.','info'); return; } for(var i=0;i<chunks.length;i++){ try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), getHook('CARDS')); }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); return; } await new Promise(function(r){setTimeout(r,1200);}); } log('Cards sent.','ok'); showToast('Sent to Daily Cards'); return true; }
+async function sendCardChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages, spaced ~'+_spacingMin()+' min apart so each shows separately)':''))){ log('Cancelled.','info'); return; } _sendCancel=false; var stop=document.getElementById('cardsSendStop'); var status=document.getElementById('cardsSendStatus'); if(stop)stop.style.display=''; var hook=getHook('CARDS'); for(var i=0;i<chunks.length;i++){ var okw=await _waitForChannel(hook,'cardsSendStatus','Next card message'); if(!okw){ log('Cards send stopped.','info'); if(status)status.textContent='Stopped.'; if(stop)stop.style.display='none'; return; } try{ log('Sending cards '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), hook); if(status) status.textContent='Sent '+(i+1)+'/'+chunks.length; }catch(e){ log('FAILED cards: '+e.message,'err'); showToast('Failed: '+e.message,false); if(stop)stop.style.display='none'; return; } } if(status){ status.textContent=''; } if(stop)stop.style.display='none'; log('Cards sent.','ok'); showToast('Sent to Daily Cards'); return true; }
 async function shareSelected(){ var sel=getSelectedCards(); if(!sel.length){ showToast('Select at least one pick', false); return; } await sendCardChunks(buildCardsChunks(sel), sel.length+' selected pick'+(sel.length>1?'s':'')); }
 async function shareCategory(risk){ var cs=getParsedCards().filter(function(c){return c.risk===risk;}); if(!cs.length){ showToast('No '+risk+' picks', false); return; } await sendCardChunks(buildCardsChunks(cs), 'all '+risk+' picks'); }
 async function shareCard(i){ var c=getParsedCards()[i]; if(!c) return; await sendCardChunks(buildCardsChunks([c]), 'this pick'); }
@@ -1917,6 +1927,7 @@ function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); renderCards(); }
 async function sendCards(){ var cards=getParsedCards(); var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markSent('cards|'+DAILY_VERSION); }catch(_e){} } }
 (function(){ var el=document.getElementById('cardsRaw'); var dc=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
+(function(){ try{ var ss=document.getElementById('sendSpacing'); if(ss && localStorage.getItem('ba_send_spacing')!==null) ss.value=localStorage.getItem('ba_send_spacing'); }catch(e){} })();
 
 
 /* ---- Track Record (per-bet, unit-based) ---- */
