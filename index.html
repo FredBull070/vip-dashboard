@@ -775,7 +775,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v93";
+var EMBEDDED_VERSION = "2026-06-26-v94";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1818,9 +1818,9 @@ var _cardRisk='all', _cardSport='all';
 function applyCardFilters(){ var groups={}; var cards=document.querySelectorAll('#betcards-visual .rcard'); for(var i=0;i<cards.length;i++){ var r=cards[i].getAttribute('data-risk'); var sp=cards[i].getAttribute('data-sport')||'Football'; var show=(_cardRisk==='all'||r===_cardRisk)&&(_cardSport==='all'||sp===_cardSport); cards[i].style.display=show?'':'none'; if(show) groups[r]=true; } var heads=document.querySelectorAll('#betcards-visual .risk-head'); for(var j=0;j<heads.length;j++){ var hr=heads[j].getAttribute('data-risk'); heads[j].style.display=((_cardRisk==='all'||hr===_cardRisk)&&groups[hr])?'':'none'; } }
 function cardsFilter(sub){ _cardRisk=(sub==='all'||!sub)?'all':sub; applyCardFilters(); }
 function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#cardsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyCardFilters(); }
-function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=EMBEDDED_CARDS_TEXT; renderCards(); }
+function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); renderCards(); }
 async function sendCards(){ var cards=getParsedCards(); var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markSent('cards|'+DAILY_VERSION); }catch(_e){} } }
-(function(){ var el=document.getElementById('cardsRaw'); if(el && !el.value.trim()) el.value=EMBEDDED_CARDS_TEXT; if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
+(function(){ var el=document.getElementById('cardsRaw'); var dc=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
 
 
 /* ---- Track Record (per-bet, unit-based) ---- */
