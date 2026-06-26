@@ -149,11 +149,17 @@
   .chan{font-size:10px;font-weight:700;padding:3px 9px;border-radius:980px;background:rgba(255,122,26,.16);color:#ffb27a;text-transform:uppercase;letter-spacing:.04em;}
   .ndel{color:#ff9a92!important;}
   .msg-card.collapsed .msg-body{display:none;}
-  .msg-head{cursor:pointer;}
+  .msg-card:not(.collapsed) .msg-legs{display:none;}
   .msg-head .msg-title{font-weight:600!important;color:#fff!important;font-size:13px!important;text-transform:none!important;letter-spacing:0!important;}
   .msg-head .msg-meta2{color:var(--muted)!important;font-size:11.5px!important;text-transform:none!important;letter-spacing:0!important;font-weight:500!important;}
-  .msg-chev{color:var(--muted)!important;font-size:11px!important;transition:transform .15s;}
-  .msg-card:not(.collapsed) .msg-chev{transform:rotate(180deg);}
+  .msg-full-btn{margin-left:8px;flex:0 0 auto;}
+  .msg-legs{margin-top:9px;display:flex;flex-direction:column;}
+  .leg-row{display:flex;gap:12px;align-items:baseline;font-size:13px;padding:7px 2px;border-top:1px solid rgba(255,255,255,.06);}
+  .leg-row:first-child{border-top:none;}
+  .leg-match{font-weight:600;color:#fff;flex:0 0 200px;}
+  .leg-pick{color:var(--muted);flex:1 1 auto;}
+  .leg-odds{margin-top:7px;font-size:12px;color:#ffb27a;font-weight:600;}
+  @media(max-width:640px){ .leg-row{flex-direction:column;gap:2px;} .leg-match{flex-basis:auto;} }
   #cards .card,#shareList .card,#archiveView .card{box-shadow:none;border:1px solid var(--line2);border-left:3px solid var(--accent);
     border-radius:var(--r2);padding:14px 16px;margin-bottom:12px;background:rgba(255,255,255,.02);}
   #cards .meta,#shareList .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
@@ -698,7 +704,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v77";
+var EMBEDDED_VERSION = "2026-06-25-v79";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -788,7 +794,8 @@ function applyTokens(t){
   return t;
 }
 function _msgSummary(m){ var title=(typeof _cleanTitle==='function'?_cleanTitle(m):'')||''; var legs=(m.match(/small_orange_diamond/g)||[]).length; var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); var parts=[]; if(legs) parts.push(legs+' leg'+(legs>1?'s':'')); if(odds) parts.push(odds); return {title:title, meta:parts.join('  &middot;  ')}; }
-function toggleMsgCard(el){ var c=el.closest('.msg-card'); if(c) c.classList.toggle('collapsed'); }
+function _msgLegsHtml(m){ try{ var bet=parseParleyToBet(m); if(!bet.legs.length) return ''; var rows=bet.legs.map(function(L){ var p=L.split(': '); var mt=p[0]||''; var pk=p.slice(1).join(': '); return '<div class="leg-row"><span class="leg-match">'+esc(mt)+'</span>'+(pk?'<span class="leg-pick">'+esc(pk)+'</span>':'')+'</div>'; }).join(''); var odds=''; var om=m.match(/Total odds:\s*([^\n*]+)/i); if(om) odds=om[1].trim(); return rows+(odds?'<div class="leg-odds">Total odds: '+esc(odds)+'</div>':''); }catch(e){ return ''; } }
+function toggleMsgCard(el){ var c=el.closest('.msg-card'); if(c){ c.classList.toggle('collapsed'); var b=c.querySelector('.msg-full-btn'); if(b) b.textContent=c.classList.contains('collapsed')?'Full':'Compact'; } }
 function parseMessages(){
   const raw=document.getElementById('raw').value;
   messages=raw.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s);
@@ -805,12 +812,13 @@ function parseMessages(){
     hdr.innerHTML='<span class="cat-chip cc-'+c+'">'+catLabel(c)+'</span><span class="dg-title">'+(labels[c]||c)+'</span><span class="dg-count">'+idxs.length+'</span><span class="dg-line"></span>';
     wrap.appendChild(hdr);
     idxs.forEach(function(i){
-      var m=messages[i]; var div=document.createElement('div'); div.className='card msg-card collapsed'; div.setAttribute('data-sport', detectSport(m)); var _sm=_msgSummary(m);
-      div.innerHTML='<div class="meta msg-head" onclick="toggleMsgCard(this)"><span class="chan">to '+catLabel(c)+' channel</span>'+
+      var m=messages[i]; var div=document.createElement('div'); div.setAttribute('data-sport', detectSport(m)); var _sm=_msgSummary(m); var _legs=_msgLegsHtml(m); div.className='card msg-card'+(_legs?' collapsed':'');
+      div.innerHTML='<div class="meta msg-head"><span class="chan">to '+catLabel(c)+' channel</span>'+
         '<span class="msg-title">'+esc(_sm.title)+'</span>'+
         (_sm.meta?'<span class="msg-meta2">'+_sm.meta+'</span>':'')+
-        '<button class="btn-accent" style="padding:5px 12px;font-size:12px;margin-left:auto;" onclick="event.stopPropagation();sendOne('+i+')">Send</button>'+
-        '<span class="msg-chev">&#9662;</span></div>'+
+        '<button class="btn-accent" style="padding:5px 12px;font-size:12px;margin-left:auto;" onclick="sendOne('+i+')">Send</button>'+
+        (_legs?'<button class="btn-ghost mini msg-full-btn" onclick="toggleMsgCard(this)">Full</button>':'')+'</div>'+
+        (_legs?'<div class="msg-legs">'+_legs+'</div>':'')+
         '<div class="disc msg-body">'+renderDiscord(applyTokens(m))+'</div>';
       wrap.appendChild(div);
     });
@@ -1399,6 +1407,8 @@ function saveCH(){ localStorage.setItem('ba_challenge', JSON.stringify(CH)); }
 function fmtUSD(n){ return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function chPct(){ return Math.min(100, Math.round(CH.pot/CH.target*100)); }
 function chBar(pct){ var f=Math.round(pct/10); var s=''; for(var i=0;i<10;i++) s+=(i<f?'▰':'▱'); return s; }
+function challengeLadder(pending){ var out=[]; (CH.history||[]).forEach(function(hh){ out.push('Day '+hh.day+': '+(hh.result==='W'?'✅':'❌')); }); if(pending && CH.status==='active'){ out.push('Day '+CH.day+': ⏳'); } if(!out.length) return ''; return '**Challenge so far:**\n'+out.join('\n'); }
+function challengeLadderBlock(pending){ var l=challengeLadder(pending); return l?('\n\n'+l):''; }
 function parseParleyToBet(m){
   var legs=[]; var lines=(m||'').split('\n');
   for(var i=0;i<lines.length;i++){ var mm=lines[i].match(/small_orange_diamond:\s*(.+?)\*\*/); if(mm){ var match=mm[1].trim(); var sel=''; for(var j=i+1;j<lines.length;j++){ var s=lines[j].replace(/\*/g,'').trim(); if(s){ sel=s.replace(/^[↳]\s*/,''); break; } } legs.push(sel?(match+': '+sel):match); } }
@@ -1430,7 +1440,7 @@ function buildChallengePlan(){
     ':moneybag: Total odds: **± '+(ec.oddLow||2)+' - '+(ec.oddHigh||ec.oddLow||2)+'**\n'+
     'Odds may vary depending on the bookmaker or the time of placement.\n\n'+
     ':mortar_board: **The plan:** one safe doubler a day turns $10 into $1,000 in 7 winning days. Today is day '+CH.day+'.\n'+
-    ':brain: **Strategy:** we back only the safest x2 on the card and never chase. One loss resets the run, so discipline is everything.\n\n'+
+    ':brain: **Strategy:** we back only the safest x2 on the card and never chase. One loss resets the run, so discipline is everything.'+challengeLadderBlock(true)+'\n\n'+
     ':warning: 18+ | play responsibly';
 }
 function buildChallengeResult(){
@@ -1445,12 +1455,12 @@ function buildChallengeResult(){
       (done?':green_circle: We turned **$10 into '+fmtUSD(CH.pot)+'** with one safe doubler a day, every leg shared in VIP before kickoff.\n':':green_circle: Day '+last.day+' landed, exactly to plan: one safe doubler a day, $10 to $1,000.\n')+
       ':moneybag: It started with just **$10**. Imagine being in since day one.\n'+
       ':fire: Want to copy every challenge bet before kickoff and ride it live? That is VIP only.\n'+
-      ':rocket: Join VIP and run the challenge with us: '+cta+'\n'+
+      ':rocket: Join VIP and run the challenge with us: '+cta+challengeLadderBlock()+'\n'+
       ':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
   }
   return ':x: **$10 TO $1K CHALLENGE | DAY '+last.day+' - run ended**\nStake '+fmtUSD(before)+' did not land, so the run resets to $10.\n\n'+
     ':bar_chart: We post **every** challenge result, win or lose. Full transparency.\n'+
-    ':bulb: The next run starts fresh at $10, and members get every safe doubler before kickoff: '+cta+'\n'+
+    ':bulb: The next run starts fresh at $10, and members get every safe doubler before kickoff: '+cta+challengeLadderBlock()+'\n'+
     ':warning: 18+ | play responsibly';
 }
 function buildChallengeMessage(){ return buildChallengePlan(); }
@@ -1528,12 +1538,12 @@ function buildChallengeMemberUpdate(){
   if(last.result==='W'){
     var done=(CH.status==='won' || CH.pot>=CH.target);
     if(done){
-      return '🏆 **$10 to $1K Challenge COMPLETE!** 🎉\nWE DID IT. '+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'**. Seven bankers, one grand, $10 turned into a thousand.\nMassive one, team. Fresh challenge starts tomorrow at $10. Onto the next 🙌';
+      return '🏆 **$10 to $1K Challenge COMPLETE!** 🎉\nWE DID IT. '+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'**. Seven bankers, one grand, $10 turned into a thousand.\nMassive one, team. Fresh challenge starts tomorrow at $10. Onto the next 🙌'+challengeLadderBlock();
     }
     var ec=currentChallengeBet(); var nextTarget=CH.pot*(ec.oddLow||2);
-    return '✅ **$10 to $1K Challenge | Day '+last.day+' done!**\n'+(winLines[last.day]||('Day '+last.day+' is in the books.'))+'\n'+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'** 📈  ('+chPct()+'% of the way to $1,000)\nDay '+CH.day+' is next: '+fmtUSD(CH.pot)+' up, going for '+fmtUSD(nextTarget)+'. Keep it rolling 💪';
+    return '✅ **$10 to $1K Challenge | Day '+last.day+' done!**\n'+(winLines[last.day]||('Day '+last.day+' is in the books.'))+'\n'+fmtUSD(before)+' → **'+fmtUSD(CH.pot)+'** 📈  ('+chPct()+'% of the way to $1,000)\nDay '+CH.day+' is next: '+fmtUSD(CH.pot)+' up, going for '+fmtUSD(nextTarget)+'. Keep it rolling 💪'+challengeLadderBlock();
   }
-  return '❌ **$10 to $1K Challenge | Day '+last.day+'**\n'+lossLine(last.day)+' 💪';
+  return '❌ **$10 to $1K Challenge | Day '+last.day+'**\n'+lossLine(last.day)+' 💪'+challengeLadderBlock();
 }
 function challengeSharePreviews(){
   if(!CH.history || !CH.history.length) return '';
