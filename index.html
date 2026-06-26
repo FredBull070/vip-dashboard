@@ -840,7 +840,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v110";
+var EMBEDDED_VERSION = "2026-06-26-v111";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -902,7 +902,7 @@ const EMOJI = {
   ':crown:':'\u{1F451}',':small_orange_diamond:':'\u{1F536}',':moneybag:':'\u{1F4B0}',':mortar_board:':'\u{1F393}',
   ':white_check_mark:':'✅',':tennis:':'\u{1F3BE}',':soccer:':'⚽',':gift:':'\u{1F381}',':dart:':'\u{1F3AF}',':brain:':'\u{1F9E0}',':bank:':'\u{1F3E6}',':trophy:':'\u{1F3C6}',
   ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️',
-  ':bar_chart:':'\u{1F4CA}',':hourglass_flowing_sand:':'\u{23F3}',':green_circle:':'\u{1F7E2}',':red_circle:':'\u{1F534}',':coin:':'\u{1FA99}',':soccer_ball:':'⚽',':clipboard:':'\u{1F4CB}',':rocket:':'\u{1F680}'
+  ':bar_chart:':'\u{1F4CA}',':hourglass_flowing_sand:':'\u{23F3}',':green_circle:':'\u{1F7E2}',':red_circle:':'\u{1F534}',':coin:':'\u{1FA99}',':soccer_ball:':'⚽',':clipboard:':'\u{1F4CB}',':rocket:':'\u{1F680}',':yellow_circle:':'\u{1F7E1}',':basketball:':'\u{1F3C0}',':football:':'\u{1F3C8}',':ice_hockey:':'\u{1F3D2}',':baseball:':'⚾'
 };
 
 let messages = [];
@@ -1960,17 +1960,26 @@ ODDS: 2.10
 STAKE: 1u
 RISK: high
 ANALYSIS: An open game with both teams likely to push for goals.`;
-function _allDailyCards(){ return [window.DAILY_CARDS, window.DAILY_TENNIS_CARDS, window.DAILY_NBA_CARDS, window.DAILY_NFL_CARDS, window.DAILY_NHL_CARDS].filter(function(x){return typeof x==='string' && x.trim();}).join('\n===\n'); }
+function _allDailyCards(){
+  var srcs=[[window.DAILY_CARDS,'Football'],[window.DAILY_TENNIS_CARDS,'Tennis'],[window.DAILY_NBA_CARDS,'Basketbal'],[window.DAILY_NFL_CARDS,'NFL'],[window.DAILY_NHL_CARDS,'NHL']];
+  var out=[];
+  srcs.forEach(function(s){ var txt=s[0]; if(typeof txt!=='string'||!txt.trim()) return;
+    var blocks=txt.split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; if(!/^\s*SPORT\s*:/im.test(b)) b='SPORT: '+s[1]+'\n'+b; return b; }).filter(Boolean);
+    if(blocks.length) out.push(blocks.join('\n===\n'));
+  });
+  return out.join('\n===\n');
+}
 function getCardsText(){ var el=document.getElementById('cardsRaw'); if(el && el.value.trim()) return el.value; return _allDailyCards()||EMBEDDED_CARDS_TEXT; }
 function parseCards(t){ return (t||'').split(/^\s*===\s*$/m).map(function(b){ b=b.trim(); if(!b) return null; var o={}; b.split('\n').forEach(function(line){ var m=line.match(/^\s*([A-Za-z]+):\s*(.*)$/); if(m) o[m[1].toLowerCase()]=m[2].trim(); }); o.risk=(o.risk||'medium').toLowerCase(); o.sport=o.sport||'Football'; return o.match? o : null; }).filter(Boolean); }
 function cardRiskTag(r){ return r==='low'?'banker':(r==='medium'?'value play':'upside shot'); }
-function cardStr(c){ var e=c.risk==='low'?'🟢':(c.risk==='medium'?'🟡':'🔴'); return e+' **'+(c.selection||'')+'** @ '+(c.odds||'')+'\n🏟️ '+(c.match||'')+'  ·  '+(c.market||'')+'\n:coin: Stake '+(c.stake||'')+'  ('+cardRiskTag(c.risk)+')\n:bulb: '+(c.analysis||''); }
+function sportEmoji(sp){ sp=(sp||'').toLowerCase(); if(sp.indexOf('basket')>=0||sp.indexOf('nba')>=0) return ':basketball:'; if(sp.indexOf('tennis')>=0) return ':tennis:'; if(sp.indexOf('nfl')>=0||sp.indexOf('american')>=0) return ':football:'; if(sp.indexOf('nhl')>=0||sp.indexOf('hockey')>=0) return ':ice_hockey:'; if(sp.indexOf('baseball')>=0) return ':baseball:'; return ':soccer:'; }
+function cardStr(c){ return '**'+sportEmoji(c.sport)+' '+(c.match||'')+':**\n:chart_with_upwards_trend: '+(c.selection||'')+' @ '+(c.odds||'')+'\n:moneybag: Stake: '+(c.stake||'')+'\n:brain: '+(c.analysis||''); }
 function buildCardsChunks(cards){
   cards = cards || parseCards(getCardsText()); if(!cards.length) return [];
   var date=(EMBEDDED_CARDS&&EMBEDDED_CARDS.date)?dmy(EMBEDDED_CARDS.date):'';
-  var header=':bar_chart: **DAILY BETTING CARDS | '+date+'**\nBuild your own slip from today\'s value picks. How we tier them:\n🟢 Banker: high probability, our biggest stake.\n🟡 Value play: bigger edge, more variance, moderate stake.\n🔴 Upside shot: long odds, small stake, high payoff.\nStakes in units (1u = 1% of bankroll). Odds may vary by bookmaker.\n';
-  var footer='\n:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly';
-  var groups=[['low','🟢 **BANKERS**'],['medium','🟡 **VALUE PLAYS**'],['high','🔴 **UPSIDE SHOTS**']];
+  var header=':bar_chart: **DAILY BETTING CARDS | '+date+'**\nBetLife365 does not provide fixed betting slips.\nEach Daily Card is a portfolio of selected positions, not a must-play list.\nYou choose how to use it based on your own bankroll and risk preference.\n**:green_circle: Conservative** → focus on Core Positions\n**:yellow_circle: Balanced** → mix Core + Value Positions\n**:red_circle: Aggressive** → include Opportunity Positions\n';
+  var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
+  var groups=[['low','**:green_circle: CORE POSITIONS**'],['medium','**:yellow_circle: BALANCED POSITIONS**'],['high','**:red_circle: AGGRESSIVE POSITIONS**']];
   var msgs=[]; var cur=header; var has=false;
   groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
     var gh='\n'+g[1]+'\n';
