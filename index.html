@@ -724,7 +724,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-25-v80b";
+var EMBEDDED_VERSION = "2026-06-25-settle0219";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1420,8 +1420,8 @@ var EMBEDDED_CHALLENGE = {
   oddLow: 2.01, oddHigh: 2.20,
   justification: "Two near certainties (Netherlands and Ivory Coast against weak sides) plus Germany, who should beat a toothless Ecuador even if rotated. A safe route to just over x2."
 };
-var EMBEDDED_SETTLED = [];
-var EMBEDDED_CHALLENGE_RESULT = null;
+var EMBEDDED_SETTLED = [{"date":"25-06-2026","sport":"Football","match":"Curacao x Ivory Coast","market":"Match result","selection":"Ivory Coast to win","odds":1.14,"stake":3,"result":"W","risk":"low"},{"date":"25-06-2026","sport":"Football","match":"Curacao x Ivory Coast","market":"Total goals","selection":"Over 1.5 goals","odds":1.22,"stake":2,"result":"W","risk":"low"},{"date":"25-06-2026","sport":"Football","match":"Ecuador x Germany","market":"Match result","selection":"Germany to win","odds":1.65,"stake":2,"result":"L","risk":"medium"},{"date":"25-06-2026","sport":"Football","match":"Curacao x Ivory Coast","market":"Asian handicap","selection":"Ivory Coast -1.5","odds":1.35,"stake":1.5,"result":"W","risk":"medium"},{"date":"25-06-2026","sport":"Football","match":"Curacao x Ivory Coast","market":"Asian handicap","selection":"Ivory Coast -2.5","odds":2.5,"stake":1,"result":"L","risk":"high"},{"date":"25-06-2026","sport":"Football","match":"Ecuador x Germany","market":"Asian handicap","selection":"Germany -1.5","odds":2.8,"stake":1,"result":"L","risk":"high"}];
+var EMBEDDED_CHALLENGE_RESULT = {date:'25-06-2026', result:'L'};
 var CH;
 try{ CH=JSON.parse(localStorage.getItem('ba_challenge')||'null'); }catch(e){ CH=null; }
 if(!CH || typeof CH!=='object'){ CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] }; }
