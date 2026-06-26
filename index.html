@@ -214,6 +214,20 @@
   #cards .meta,#shareList .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
   #cards .meta span,#shareList .meta span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600;}
   .disc{white-space:pre-wrap;font-size:14px;line-height:1.55;} .disc strong{font-weight:600;color:#fff;}
+  .dc-preview{background:#313338;border-radius:12px;padding:14px 16px 18px;margin-top:16px;border:1px solid rgba(0,0,0,.35);box-shadow:0 8px 26px rgba(0,0,0,.28);}
+  .dc-preview .dc-channel{color:#80848e;font-size:12px;font-weight:700;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);}
+  .dc-preview .dc-msg{display:flex;gap:15px;align-items:flex-start;}
+  .dc-preview .dc-avatar{width:42px;height:42px;border-radius:50%;flex:0 0 auto;background:linear-gradient(135deg,#ff7a1a,#ff4d4d);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:17px;overflow:hidden;}
+  .dc-preview .dc-avatar img{width:100%;height:100%;object-fit:cover;}
+  .dc-preview .dc-body{flex:1 1 auto;min-width:0;}
+  .dc-preview .dc-head{display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;}
+  .dc-preview .dc-user{color:#f2f3f5;font-weight:600;font-size:15px;}
+  .dc-preview .dc-bot{background:#5865f2;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px 2px;letter-spacing:.4px;text-transform:uppercase;}
+  .dc-preview .dc-time{color:#949ba4;font-size:11px;}
+  .dc-preview .dc-content{color:#dbdee1;font-size:15px;line-height:1.46;}
+  .dc-preview .dc-content.disc{background:transparent;padding:0;border:0;color:#dbdee1;}
+  .dc-preview .dc-content.disc strong{color:#fff;}
+  .dc-preview .dc-empty{color:#72767d;font-style:italic;}
   details.disclosure{padding:0;}
   details.disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
   details.disclosure>summary::-webkit-details-marker{display:none;}
@@ -640,8 +654,20 @@
     <section class="card">
       <h2 class="section-title">Messaging</h2>
       <p class="section-sub">Free text to your CUSTOM channel. {VIP_LINK} and {VIP_CHANNEL} are replaced automatically.</p>
-      <textarea id="custom_msg" spellcheck="false" placeholder="Type your message here..."></textarea>
+      <textarea id="custom_msg" spellcheck="false" placeholder="Type your message here..." style="min-height:150px;font-size:14px;" oninput="renderCustomPreview()"></textarea>
       <div class="actions"><button class="btn" onclick="sendCustom()">Send to CUSTOM</button><span id="customState"></span></div>
+      <p class="section-sub" style="margin:18px 0 0;font-weight:600;color:var(--text);">Discord preview</p>
+      <p class="section-sub" style="margin:2px 0 0;">Exactly how your message appears once posted.</p>
+      <div class="dc-preview" id="customDcPreview">
+        <div class="dc-channel"># vip-custom</div>
+        <div class="dc-msg">
+          <div class="dc-avatar">B</div>
+          <div class="dc-body">
+            <div class="dc-head"><span class="dc-user">BetLife365</span><span class="dc-bot">App</span><span class="dc-time" id="customDcTime">Today at 00:00</span></div>
+            <div class="dc-content disc" id="customPreview"><span class="dc-empty">Your message preview will appear here as you type...</span></div>
+          </div>
+        </div>
+      </div>
     </section>
     </div>
 <div class="page" id="page-nurturing" style="display:none">
@@ -803,7 +829,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v107";
+var EMBEDDED_VERSION = "2026-06-26-v108";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1054,6 +1080,13 @@ function renderNurt(sub){
 async function sendNurt(i){ var it=NURT_CUR[i]; if(!it) return; if(!await askConfirm('Send "'+it.t+'" to your nurturing channel?')){ return; } var hook=getHook('NURT')||getHook('CUSTOM'); try{ log('Sending nurturing message...','info'); await postToDiscord(applyTokens(it.b), hook); log('OK - nurturing message sent.','ok'); showToast('Nurturing message sent'); }catch(e){ log('FAILED nurturing: '+e.message,'err'); showToast('Failed: '+e.message,false); } }
 function copyNurt(i){ var it=NURT_CUR[i]; if(!it) return; try{ navigator.clipboard.writeText(applyTokens(it.b)); showToast('Copied to clipboard'); }catch(e){ showToast('Copy failed',false); } }
 
+function renderCustomPreview(){
+  var ta=document.getElementById('custom_msg'); var box=document.getElementById('customPreview'); if(!box) return;
+  var t=(ta&&ta.value)||'';
+  var tm=document.getElementById('customDcTime'); if(tm){ var d=new Date(); tm.textContent='Today at '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+  if(!t.trim()){ box.innerHTML='<span class="dc-empty">Your message preview will appear here as you type...</span>'; return; }
+  try{ box.innerHTML=renderDiscord(applyTokens(t)); }catch(e){ box.textContent=t; }
+}
 async function sendCustom(){
   const ta=document.getElementById('custom_msg'); const t=(ta.value||'').trim();
   localStorage.setItem('ba_custom_msg', ta.value);
@@ -1218,7 +1251,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     const trHook=localStorage.getItem('ba_hook_TRACK'); if(trHook!==null && document.getElementById('hook_TRACK')) document.getElementById('hook_TRACK').value=trHook;
     const edHook=localStorage.getItem('ba_hook_EDU'); if(edHook!==null && document.getElementById('hook_EDU')) document.getElementById('hook_EDU').value=edHook;
     const nuHook=localStorage.getItem('ba_hook_NURT'); if(nuHook!==null && document.getElementById('hook_NURT')) document.getElementById('hook_NURT').value=nuHook;
-    const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg;
+    const cMsg=localStorage.getItem('ba_custom_msg'); if(cMsg!==null) document.getElementById('custom_msg').value=cMsg; try{ renderCustomPreview(); }catch(e){}
     const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
     const vc=localStorage.getItem('ba_vip_channel'); if(vc!==null) document.getElementById('vip_channel').value=vc;
     if(localStorage.getItem('ba_autoshare')==='1') document.getElementById('autoShare').checked=true;
@@ -1344,6 +1377,7 @@ function showPage(id){
   renderSubbar(id);
   if(id==='education'){ try{ renderEdu(); }catch(e){} }
   if(id==='nurturing'){ try{ renderNurt(); }catch(e){} }
+  if(id==='custom'){ try{ renderCustomPreview(); }catch(e){} }
   if(id==='notifications'){ try{ renderNotifsPage(); }catch(e){} }
   if((id==='journal'||id==='bankroll'||id==='trackrecord') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
