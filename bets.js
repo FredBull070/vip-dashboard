@@ -87,42 +87,30 @@ France have far more quality than Norway and should control the game, while Belg
 **👑 Lucky Shot Parley: 26-06-2026**
 
 **:small_orange_diamond: Norway x France**
-France -1.5 (Asian handicap) @ 2.00 - 2.20*
-↳ France win by 2 or more goals.
+France -2.5 (Asian handicap) @ 2.90 - 3.30*
+↳ France win by 3 or more goals.
 
 **:small_orange_diamond: New Zealand x Belgium**
-Belgium -1.5 (Asian handicap) @ 1.90 - 2.10*
-↳ Belgium win by 2 or more goals.
+Belgium -2.5 (Asian handicap) @ 2.80 - 3.20*
+↳ Belgium win by 3 or more goals.
 
 **:small_orange_diamond: Uruguay x Spain**
-Spain to win (match result) @ 1.65 - 1.80*
-↳ Spain win the match in normal time.
-
-**:small_orange_diamond: Norway x France**
-Over 2.5 goals (total goals) @ 1.65 - 1.80*
-↳ 3 or more goals in the match in total.
-
-**:small_orange_diamond: Uruguay x Spain**
-Over 2.5 goals (total goals) @ 1.90 - 2.05*
-↳ 3 or more goals in the match in total.
+Spain -1.5 (Asian handicap) @ 2.20 - 2.50*
+↳ Spain win by 2 or more goals.
 
 **:small_orange_diamond: Egypt x Iran**
-Over 2.5 goals (total goals) @ 1.90 - 2.05*
-↳ 3 or more goals in the match in total.
-
-**:small_orange_diamond: Cape Verde x Saudi Arabia**
-Saudi Arabia or draw (double chance) @ 1.40 - 1.55*
-↳ Wins if Saudi Arabia win or the match ends in a draw.
-
-**:small_orange_diamond: New Zealand x Belgium**
-Over 3.5 goals (total goals) @ 2.10 - 2.40*
+Over 3.5 goals (total goals) @ 2.50 - 2.80*
 ↳ 4 or more goals in the match in total.
 
-**:moneybag: Total odds: ±110 - 234***
+**:small_orange_diamond: Cape Verde x Saudi Arabia**
+Saudi Arabia to win (match result) @ 2.30 - 2.60*
+↳ Saudi Arabia win the match in normal time.
+
+**:moneybag: Total odds: ±103 - 192***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Instead of stacking long shot upsets, this ticket backs the strongest favourites to dominate and the open games to produce goals. France, Belgium and Spain are all a clear level above their opponents, and several legs move together: if the favourites win big, the handicaps and the overs in those same games land too. It stays a long shot, but it is the realistic best case where the favourites all deliver, not a row of unlikely upsets.
+One selection per match, so it places as a normal accumulator. It backs the big favourites to win comfortably (France, Belgium and Spain are all a clear level above their opponents), an open Egypt against Iran to produce goals, and Saudi Arabia to edge a tight game with Cape Verde. A genuine long shot, but the realistic best case where the favourites all deliver on the same night.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
