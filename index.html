@@ -389,6 +389,20 @@
 </style>
 </head>
 <body>
+<div id="blGate" style="position:fixed;inset:0;z-index:2147483647;background:#0a0908;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">
+<form id="blGateForm" style="width:330px;max-width:92%;background:linear-gradient(180deg,#15120f,#100d0c);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:30px 28px;box-shadow:0 30px 80px rgba(0,0,0,.6);">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(150deg,#ffa23d,#ff7a1a);display:flex;align-items:center;justify-content:center;color:#1c0d00;font-weight:800;font-size:15px;">B</div><div><div style="color:#f6f4f1;font-weight:600;font-size:15px;">BetLife365</div><div style="color:#8b8178;font-size:12px;">Private desk</div></div></div>
+<input id="blU" autocomplete="username" placeholder="Username" style="width:100%;box-sizing:border-box;background:#0c0b0a;border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#f6f4f1;font-size:15px;padding:12px 14px;margin-bottom:10px;outline:none;">
+<input id="blP" type="password" autocomplete="current-password" placeholder="Password" style="width:100%;box-sizing:border-box;background:#0c0b0a;border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#f6f4f1;font-size:15px;padding:12px 14px;outline:none;">
+<button type="submit" style="width:100%;margin-top:16px;background:linear-gradient(180deg,#ffa23d,#ff7a1a);color:#1c0d00;font-weight:700;font-size:15px;border:0;border-radius:980px;padding:13px;cursor:pointer;">Enter</button>
+<div id="blErr" style="color:#ff6a4d;font-size:13px;margin-top:12px;display:none;text-align:center;">Wrong username or password.</div>
+</form></div>
+<script>(function(){var HASH="58dfe59ffbcef6260a625fe04b8addcf57d0039b889431800e89937099339c98",SALT="betlife365::",USER="wfsirvania";
+function rm(){var g=document.getElementById('blGate');if(g&&g.parentNode)g.parentNode.removeChild(g);}
+try{if(localStorage.getItem('bl_dash_auth')===HASH){rm();}}catch(e){}
+function sha(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return('0'+x.toString(16)).slice(-2);}).join('');});}
+function wire(){var f=document.getElementById('blGateForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var u=(document.getElementById('blU').value||'').trim().toLowerCase();var p=document.getElementById('blP').value||'';sha(SALT+p).then(function(hh){if(u===USER&&hh===HASH){try{localStorage.setItem('bl_dash_auth',HASH);}catch(e){}rm();}else{var er=document.getElementById('blErr');if(er)er.style.display='block';document.getElementById('blP').value='';}});});}
+if(document.readyState!=='loading')wire();else document.addEventListener('DOMContentLoaded',wire);})();</script>
 <div class="neon-bg" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none">
 <path d="M-100 300 C320 210 560 360 900 285 C1180 220 1380 350 1620 280" stroke="#ff9a4d" stroke-opacity="0.06" stroke-width="1.2"/>
 <path d="M-100 470 C300 390 580 540 920 460 C1200 395 1400 520 1620 450" stroke="#ff8a3d" stroke-opacity="0.05" stroke-width="1.2"/>
@@ -840,7 +854,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v116";
+var EMBEDDED_VERSION = "2026-06-26-v117";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
