@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Betting Advisory</title>
+<title>BetLife365 · Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjI2IiBmaWxsPSIjMGIwYTA5Ii8+PGcgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCw4KSI+PHJlY3QgeD0iMjAiIHk9Ijg0IiB3aWR0aD0iODAiIGhlaWdodD0iMTIiIHJ4PSI0Ii8+PHBhdGggZD0iTTIyIDg2IEwxNCA0NCBRMTIgMzUgMjAgNDAgTDQ4IDYzIEw1NiAzMyBMNjQgMzMgTDcyIDYzIEwxMDAgNDAgUTEwOCAzNSAxMDYgNDQgTDk4IDg2IFoiLz48cmVjdCB4PSI1NiIgeT0iMTgiIHdpZHRoPSI4IiBoZWlnaHQ9IjI0IiByeD0iMiIvPjxyZWN0IHg9IjQ4IiB5PSIyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjciIHJ4PSIyIi8+PHBhdGggZD0iTTYwIDcgTDY4IDE1IEw2MCAyMyBMNTIgMTUgWiIvPjwvZz48L3N2Zz4=">
 <style>
 
   :root{
@@ -32,6 +33,16 @@
   .crumbs{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;}
   .crumb-muted{color:var(--muted);} .crumb-sep{color:var(--muted);opacity:.55;}
   .crumb-cur{color:var(--text);}
+  .brand-wm{font-weight:800;font-size:17px;letter-spacing:-.03em;color:#fff;line-height:1;}
+  .brand-wm-o{color:var(--accent);}
+  #confirmMsg{white-space:pre-line;text-align:left;}
+  .step-h{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:var(--text);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em;}
+  .step-n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#1c0d00;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
+  .step-hint{font-size:12.5px;color:var(--muted);margin:0 0 4px;}
+  .wl-row{display:flex;gap:10px;margin:4px 0 2px;}
+  .btn-won{flex:1;background:rgba(70,205,151,.14);color:#46cd97;border:1px solid rgba(70,205,151,.45);font-weight:800;}
+  .btn-lost{flex:1;background:rgba(255,106,77,.12);color:#ff6a4d;border:1px solid rgba(255,106,77,.45);font-weight:800;}
+  .ed-legs{width:100%;min-height:120px;background:#0c0b0a;border:1px solid #333;border-radius:9px;color:#fff;font-size:13px;padding:10px 11px;font-family:inherit;line-height:1.5;}
   .notif-btn{position:relative;font-size:17px;line-height:1;}
   .notif-badge{position:absolute;top:-5px;right:-5px;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:#ff7a1a;color:#15150f;font-size:10px;font-weight:800;line-height:16px;text-align:center;}
   .notif-panel{position:fixed;top:56px;right:14px;width:382px;max-width:calc(100vw - 24px);max-height:80vh;overflow-y:auto;background:#15151a;border:1px solid rgba(255,255,255,.1);border-radius:14px;box-shadow:0 18px 54px rgba(0,0,0,.6);z-index:140;padding:12px;}
@@ -430,12 +441,32 @@
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="editDayModal">
+  <div class="modal-box" style="text-align:left;">
+    <h3 style="text-align:center;" id="edDayTitle">Edit day</h3>
+    <p class="step-hint" style="text-align:center;margin-bottom:10px;">Fix the result or the matches of this day. The pot and ladder recalculate automatically.</p>
+    <label>Result</label>
+    <select id="edResult" style="width:100%;padding:9px 11px;background:#161616;border:1px solid #333;border-radius:9px;color:#fff;font-size:13px;">
+      <option value="W">Won</option>
+      <option value="V">Lost</option>
+    </select>
+    <label style="margin-top:10px;">Total odds (x)</label>
+    <input type="number" step="0.01" id="edOdd" placeholder="2.00" style="width:100%;padding:9px 11px;background:#161616;border:1px solid #333;border-radius:9px;color:#fff;font-size:13px;">
+    <label style="margin-top:10px;">Matches (one per line, format: Match: pick)</label>
+    <textarea id="edLegs" class="ed-legs" placeholder="Norway x France: France to win"></textarea>
+    <div id="ed_msg" style="font-size:12.5px;color:var(--muted);min-height:15px;margin-top:6px;text-align:center;"></div>
+    <div class="modal-actions" style="margin-top:12px;display:flex;gap:10px;justify-content:space-between;">
+      <button class="btn-lost" style="flex:0 0 auto;padding:9px 14px;" onclick="deleteEditDay()">Remove this day</button>
+      <span style="display:flex;gap:10px;"><button class="btn-secondary" onclick="closeEditDay()">Cancel</button><button class="btn" onclick="saveEditDay()">Save</button></span>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
 <div class="toast undo-toast" id="undoToast"><span id="undoMsg"></span><button class="undo-btn" id="undoBtn" onclick="doUndo()">Undo</button></div>
 
 <header class="topbar">
   <button class="icon-btn menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
-  <div class="crumbs"><span class="crumb-muted">BetLife365</span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
+  <div class="crumbs"><span class="brand-wm">BetLife<span class="brand-wm-o">365</span></span><span class="crumb-sep">&rsaquo;</span><span class="crumb-cur" id="crumbCurrent">Daily bets</span></div>
   <div class="top-status" id="topStatus" style="margin-left:auto;"></div>
   <button class="icon-btn notif-btn" id="notifBtn" onclick="toggleNotifs(event)" aria-label="Notifications" style="margin-left:auto;">🔔<span class="notif-badge" id="notifBadge" style="display:none;">0</span></button>
 </header>
@@ -463,11 +494,7 @@
       <button class="nav-item" data-page="automations" onclick="showPage('automations')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span> Automations</button>
       <button class="nav-item" data-page="notifications" onclick="showPage('notifications')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span> Notifications</button>
       <button class="nav-item" data-page="settings" onclick="showPage('settings')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span> Settings</button>
-      <div class="brand-row" onclick="openProfile()" title="Profile and settings">
-        <span class="logo-badge" style="width:34px;height:34px;"><svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;"><circle cx="50" cy="50" r="47" fill="#16331f"/><circle cx="50" cy="50" r="47" fill="none" stroke="#ff7a1a" stroke-width="6"/><path d="M27 55 L23 35 L36 46 L50 27 L64 46 L77 35 L73 55 Z" fill="#fff"/><rect x="27" y="55" width="46" height="6" rx="2" fill="#fff"/><text x="50" y="84" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" fill="#ff7a1a" text-anchor="middle">365</text></svg></span>
-        <div><div class="brand-name">BetLife365</div><div class="brand-sub">Profile and settings</div></div>
-        <span class="brand-gear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span>
-      </div>
+      <button class="nav-item" onclick="logoutDash()"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span> Log out</button>
     </div>
   
   </aside>
@@ -3330,6 +3357,160 @@ function applyChallengeResult(){
     try{ renderNotifs(); }catch(e){}
   }catch(e){}
 }
+
+/* ============================================================
+   Challenge: foolproof flow, correct leg capture, edit-a-day
+   ============================================================ */
+function _clLeg(L){ return String(L).replace(/\s*\((?:match result|total goals|both teams|handicap|double chance)[^)]*\)/ig,'').replace(/\s*@.*$/,'').trim(); }
+function _chSrcBet(){
+  if(typeof CH!=='undefined' && CH && CH.live && CH.live.day===CH.day && (CH.live.legs||[]).length){
+    return {legs:CH.live.legs.slice(), odd:CH.live.odd||2, date:CH.live.date||'', title:CH.live.title||''};
+  }
+  var b=(typeof currentChallengeBet==='function')?currentChallengeBet():{};
+  return {legs:(b.legs||[]).slice(), odd:(b.oddLow||2), date:b.date||(typeof _challDate==='function'?_challDate():''), title:b.title||''};
+}
+function _freezeChallengeLive(){
+  try{ if(typeof CH==='undefined'||!CH||CH.status!=='active') return;
+    if(!CH.live || CH.live.day!==CH.day){
+      var b=(typeof currentChallengeBet==='function')?currentChallengeBet():{};
+      CH.live={day:CH.day, legs:(b.legs||[]).slice(), odd:(b.oddLow||2), date:b.date||(typeof _challDate==='function'?_challDate():''), title:b.title||''};
+      if(typeof saveCH==='function') saveCH();
+    }
+  }catch(e){}
+}
+function recomputeChallenge(){
+  if(typeof CH==='undefined'||!CH) return;
+  var pot=CH.start||10, status='active', i;
+  for(i=0;i<CH.history.length;i++){
+    var h=CH.history[i]; h.day=i+1;
+    var odd=parseFloat(String(h.odd).replace(/[^0-9.]/g,''))||2;
+    if(h.result==='W'){ pot=Math.round(pot*odd*100)/100; h.potAfter=pot; }
+    else { h.result='V'; h.potAfter=0; status='failed'; CH.history=CH.history.slice(0,i+1); break; }
+  }
+  if(status==='failed'){ CH.status='failed'; CH.pot=0; CH.day=CH.history.length; }
+  else if(pot>=(CH.target||1000)){ CH.status='won'; CH.pot=pot; CH.day=CH.history.length; }
+  else { CH.status='active'; CH.pot=pot; CH.day=CH.history.length+1; }
+  CH.live=null;
+  if(typeof saveCH==='function') saveCH();
+}
+function _challengeSettleCore(res, src){
+  var s=src||_chSrcBet(); var odd=s.odd||2;
+  var dt=(s.date?dmy(s.date):dmy(_todayStr()));
+  if(res==='W'){
+    var after=Math.round(CH.pot*odd*100)/100;
+    CH.history.push({day:CH.day, date:dt, odd:'x'+odd, result:'W', potAfter:after, legs:(s.legs||[])});
+    CH.pot=after; if(CH.pot>=CH.target){ CH.status='won'; } else { CH.day=CH.day+1; }
+  } else {
+    CH.history.push({day:CH.day, date:dt, odd:'x'+odd, result:'V', potAfter:0, legs:(s.legs||[])});
+    CH.status='failed';
+  }
+  CH.live=null; if(typeof saveCH==='function') saveCH(); if(typeof renderChallenge==='function') renderChallenge();
+}
+challengeWin=async function(){
+  if(typeof CH==='undefined'||!CH) return;
+  var s=_chSrcBet(); var legs=(s.legs||[]).map(_clLeg).filter(Boolean);
+  var preview=legs.length?legs.join('\n'):'(no matches set for this bet)';
+  if(typeof askConfirm==='function'){ if(!await askConfirm('Mark Day '+CH.day+' as WON?\n\nThis is the exact bet you are settling:\n\n'+preview, {title:'Mark Day '+CH.day+' as won', yes:'Yes, it won'})) return; }
+  _challengeSettleCore('W', s); showToast('Day marked won. Pot now '+fmtUSD(CH.pot));
+};
+challengeLoss=async function(){
+  if(typeof CH==='undefined'||!CH) return;
+  var s=_chSrcBet(); var legs=(s.legs||[]).map(_clLeg).filter(Boolean);
+  var preview=legs.length?legs.join('\n'):'(no matches set for this bet)';
+  if(typeof askConfirm==='function'){ if(!await askConfirm('Mark Day '+CH.day+' as LOST? This ends the run and resets the pot to $10.\n\nThe bet:\n\n'+preview, {title:'Mark Day '+CH.day+' as lost', yes:'Yes, it lost'})) return; }
+  _challengeSettleCore('V', s); showToast('Run ended, pot reset to $10', false);
+};
+if(typeof setChallengePick==='function'){
+  var _origSetPick=setChallengePick;
+  setChallengePick=function(v){ try{ if(typeof CH!=='undefined'&&CH){ CH.live=null; if(typeof saveCH==='function') saveCH(); } }catch(e){} return _origSetPick(v); };
+}
+challengeHistoryHtml=function(){
+  if(typeof CH==='undefined'||!CH||!CH.history.length) return '';
+  var rows=CH.history.map(function(x,idx){
+    return '<tr><td>Day '+x.day+'</td><td>'+(x.date||'')+'</td><td>'+(x.odd||'')+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td><td style="text-align:right;"><button class="btn-secondary" style="padding:4px 11px;font-size:12px;" onclick="editChallengeDay('+idx+')">Edit</button></td></tr>';
+  }).join('');
+  return '<section class="card"><h2 class="section-title">History</h2><p class="section-sub" style="margin:0 0 10px;">Made a mistake? Click <b>Edit</b> on any day to fix the result or the matches. The pot and the ladder recalculate by themselves.</p><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+};
+var _editIdx=null;
+function editChallengeDay(i){
+  if(typeof CH==='undefined'||!CH||!CH.history[i]) return; _editIdx=i; var h=CH.history[i];
+  document.getElementById('edDayTitle').textContent='Edit Day '+(i+1)+(h.date?(' ('+h.date+')'):'');
+  document.getElementById('edResult').value=(h.result==='W'?'W':'V');
+  document.getElementById('edOdd').value=String(h.odd||'x2').replace(/[^0-9.]/g,'')||'2';
+  document.getElementById('edLegs').value=(h.legs||[]).map(_clLeg).filter(Boolean).join('\n');
+  document.getElementById('ed_msg').textContent='';
+  var m=document.getElementById('editDayModal'); m.classList.add('show'); m.onclick=function(e){ if(e.target===m) closeEditDay(); };
+}
+function closeEditDay(){ var m=document.getElementById('editDayModal'); if(m) m.classList.remove('show'); _editIdx=null; }
+function saveEditDay(){
+  var i=_editIdx; if(i==null||!CH.history[i]){ closeEditDay(); return; }
+  var h=CH.history[i];
+  h.result=(document.getElementById('edResult').value==='W'?'W':'V');
+  var od=parseFloat(document.getElementById('edOdd').value)||2; h.odd='x'+od;
+  h.legs=document.getElementById('edLegs').value.split('\n').map(function(s){return s.trim();}).filter(Boolean);
+  recomputeChallenge(); closeEditDay(); renderChallenge(); showToast('Day '+(i+1)+' updated');
+}
+function deleteEditDay(){
+  var i=_editIdx; if(i==null) return;
+  if(!confirm('Remove Day '+(i+1)+' and every day after it? This rolls the challenge back to before that day.')) return;
+  CH.history=CH.history.slice(0,i); recomputeChallenge(); closeEditDay(); renderChallenge(); showToast('Rolled back');
+}
+renderChallenge=function(){
+  var st=document.getElementById('challengeStats'); if(!st) return;
+  _freezeChallengeLive();
+  var pct=Math.min(100, Math.round(CH.pot/CH.target*100));
+  st.innerHTML='<div class="stat"><div class="v">Day '+CH.day+' / 7</div><div class="l">Challenge day</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.pot)+'</div><div class="l">Current pot</div></div>'+
+    '<div class="stat"><div class="v">'+fmtUSD(CH.target)+'</div><div class="l">Target</div></div>'+
+    '<div class="stat"><div class="v">'+pct+'%</div><div class="l">Progress</div></div>';
+  var pr=document.getElementById('challengeProg'); if(pr) pr.innerHTML='<div class="chprog"><div class="chprog-bar" style="width:'+pct+'%"></div></div>';
+  var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=7; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
+  var v=document.getElementById('challengeView'); if(!v) return;
+  var settled=CH.history.length;
+  var shareStep = settled ? (
+      '<div class="step-h"><span class="step-n">3</span> Share the result</div>'+
+      '<p class="step-hint">Post the last settled day to your channels. Scroll down to <b>What you will send</b> to check the exact message first.</p>'+
+      '<div class="actions" style="margin-top:6px;"><button class="btn" onclick="sendChallengeResult()">Share result to VIP results</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button></div>'
+    ) : '';
+  var editHint = settled ? '<p class="step-hint" style="margin-top:16px;border-top:1px solid var(--line2);padding-top:12px;">Marked the wrong thing? Open <b>History</b> below and click <b>Edit</b> on any day to fix the result or the matches. Everything recalculates by itself.</p>' : '';
+  if(CH.status==='failed'){
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Run ended on Day '+CH.day+'. The pot resets to $10.</div>'+shareStep+
+      '<div class="step-h"><span class="step-n">+</span> Start a new run</div><div class="actions" style="margin-top:4px;"><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div>'+editHint+'</section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
+    return;
+  }
+  if(CH.status==='won' || CH.pot>=CH.target){
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div>'+shareStep+
+      '<div class="step-h"><span class="step-n">+</span> Start a new run</div><div class="actions" style="margin-top:4px;"><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div>'+editHint+'</section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
+    return;
+  }
+  v.innerHTML='<section class="card">'+
+    '<div class="card-head"><h2 class="section-title">Challenge - Day '+CH.day+'</h2><span class="pill">stake '+fmtUSD(CH.pot)+'</span></div>'+
+    '<div class="step-h"><span class="step-n">1</span> Today’s bet</div>'+
+    '<p class="step-hint">Pick today’s safest doubler (or keep the default), then send it to your VIP members before kickoff.</p>'+
+    '<div style="margin:2px 0 12px;">'+challengePickSelect()+'</div>'+
+    '<div class="disc">'+renderDiscord(buildChallengePlan())+'</div>'+
+    '<div class="actions" style="margin-top:8px;"><button class="btn" onclick="sendChallengePlan()">Send today’s bet to VIP</button></div>'+
+    '<div class="step-h"><span class="step-n">2</span> Mark the result</div>'+
+    '<p class="step-hint">After the match finishes, mark Day '+CH.day+'. You will see the exact bet before it is saved.</p>'+
+    '<div class="wl-row"><button class="btn btn-won" onclick="challengeWin()">&#10003; Day '+CH.day+' won</button><button class="btn btn-lost" onclick="challengeLoss()">&#10007; Day '+CH.day+' lost</button></div>'+
+    shareStep+editHint+
+    '</section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
+};
+applyChallengeResult=function(){
+  try{
+    if(typeof EMBEDDED_CHALLENGE_RESULT==='undefined' || !EMBEDDED_CHALLENGE_RESULT) return;
+    var cr=EMBEDDED_CHALLENGE_RESULT; if(!cr.date || !cr.result) return;
+    if(localStorage.getItem('ba_chresult_applied')===cr.date) return;
+    if(typeof CH==='undefined' || !CH || CH.status!=='active') return;
+    _freezeChallengeLive();
+    var r=(cr.result||'').toUpperCase();
+    if(r==='W') _challengeSettleCore('W');
+    else if(r==='L'||r==='V') _challengeSettleCore('V');
+    localStorage.setItem('ba_chresult_applied', cr.date);
+    try{ renderNotifs(); }catch(e){}
+  }catch(e){}
+};
+function logoutDash(){ try{ sessionStorage.removeItem('ba_auth'); }catch(e){} location.reload(); }
 
 try{ autoSeedTrack(); }catch(e){}
 try{ mergeSettled(); }catch(e){}
