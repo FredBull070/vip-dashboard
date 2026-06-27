@@ -199,4 +199,4 @@ window.DAILY_SETTLED = [
 { betid: "parley|2026-06-26|#9 Jackpot Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + Uruguay x Spain + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "#9 Jackpot Builder Parley: 26-06-2026", odds: 8.00, stake: 0.25, risk: "high", result: "L" },
 { betid: "parley|2026-06-26|Lucky Shot Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + New Zealand x Belgium + Uruguay x Spain + Egypt x Iran + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "Lucky Shot Parley: 26-06-2026", odds: 103, stake: 0.1, risk: "high", result: "L" }
 ];
-window.DAILY_CHALLENGE_RESULT = {date: "2026-06-26", result: "W"};
+window.DAILY_CHALLENGE_RESULT = {date:"2026-06-26", result:"W"};
