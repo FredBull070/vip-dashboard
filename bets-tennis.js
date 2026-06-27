@@ -62,3 +62,12 @@ ODDS: 1.57 - 1.70
 STAKE: 0.75u
 RISK: medium
 ANALYSIS: Experienced second seed on home soil with an all court game against a raw big server.`;
+/* Settled by evening-settlement bot 2026-06-27. Append (do not overwrite) so the football
+   DAILY_SETTLED seeded by bets.js survives; the dashboard merges by betid. Humbert x Bergs
+   (Eastbourne ATP final) was rain-suspended to Sunday, so that card and parley #T2 stay Pending. */
+window.DAILY_SETTLED = (window.DAILY_SETTLED || []).concat([
+  { betid: "card|2026-06-27|Madison Keys x Tatjana Maria (Eastbourne WTA Final)|Madison Keys", kind: "card", date: "2026-06-27", sport: "Tennis", match: "Madison Keys x Tatjana Maria (Eastbourne WTA Final)", market: "Match Winner", selection: "Madison Keys", odds: 1.30, stake: 2, risk: "low", result: "W" },
+  { betid: "card|2026-06-27|Naomi Osaka x Karolina Muchova (Bad Homburg WTA Final)|Naomi Osaka", kind: "card", date: "2026-06-27", sport: "Tennis", match: "Naomi Osaka x Karolina Muchova (Bad Homburg WTA Final)", market: "Match Winner", selection: "Naomi Osaka", odds: 1.65, stake: 2, risk: "low", result: "L" },
+  { betid: "card|2026-06-27|Alejandro Davidovich Fokina x Ethan Quinn (Mallorca ATP Final)|Alejandro Davidovich Fokina", kind: "card", date: "2026-06-27", sport: "Tennis", match: "Alejandro Davidovich Fokina x Ethan Quinn (Mallorca ATP Final)", market: "Match Winner", selection: "Alejandro Davidovich Fokina", odds: 1.57, stake: 0.75, risk: "medium", result: "W" },
+  { betid: "parley|2026-06-27|#T1 Safe Builder Parley (Tennis): 27-06-2026", kind: "parley", date: "2026-06-27", sport: "Tennis", match: "Madison Keys x Tatjana Maria + Naomi Osaka x Karolina Muchova", market: "Accumulator", selection: "#T1 Safe Builder Parley (Tennis): 27-06-2026", odds: 2.15, stake: 2, risk: "low", result: "L" }
+]);
