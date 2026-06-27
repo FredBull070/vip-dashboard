@@ -841,7 +841,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v120";
+var EMBEDDED_VERSION = "2026-06-26-v121";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1747,6 +1747,21 @@ function buildChallengeResult(){
     ':warning: 18+ | play responsibly';
 }
 function buildChallengeMessage(){ return buildChallengePlan(); }
+function loadChallengeRuns(){ try{ return JSON.parse(localStorage.getItem('ba_challenge_runs')||'[]'); }catch(e){ return []; } }
+function archiveCurrentRun(){ try{ if(CH && CH.history && CH.history.length){ var runs=loadChallengeRuns(); var last=CH.history[CH.history.length-1]; runs.push({ archivedAt:(typeof _todayStr==='function'?_todayStr():''), status:CH.status, days:CH.history.length, start:CH.start, finalPot:(last?last.potAfter:0), startDate:CH.history[0].date, endDate:(last?last.date:''), history:CH.history }); localStorage.setItem('ba_challenge_runs', JSON.stringify(runs)); } }catch(e){} }
+function challengeRunsArchiveHtml(){
+  var runs=loadChallengeRuns(); if(!runs.length) return '';
+  var out=runs.slice().reverse().map(function(r,idx){
+    var n=runs.length-idx;
+    var badge=(r.status==='won')?'<span class="badge b-w">Completed $1K</span>':'<span class="badge b-v">Run reset</span>';
+    var rows=(r.history||[]).map(function(x){
+      var legs=(x.legs||[]).map(function(L){ var c=String(L).replace(/\s*\([^)]*\)/g,'').replace(/\s*@.*$/,'').trim(); return esc(c); }).join('<br>');
+      return '<tr><td>Day '+x.day+'</td><td>'+esc(x.date||'')+'</td><td>'+esc(x.odd||'')+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter||0)+'</td><td style="font-size:12px;color:var(--muted);">'+(legs||'&mdash;')+'</td></tr>';
+    }).join('');
+    return '<div style="margin:'+(idx?'18':'0')+'px 0 0;"><div class="section-sub" style="font-weight:700;color:#ffb27a;margin-bottom:6px;">Run '+n+' &middot; '+esc(r.startDate||'?')+(r.endDate&&r.endDate!==r.startDate?(' &rarr; '+esc(r.endDate)):'')+' &middot; '+(r.days||0)+' day'+((r.days||0)===1?'':'s')+' &middot; final pot '+fmtUSD(r.finalPot||0)+' &nbsp;'+badge+'</div><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th><th>Bet</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+  }).join('');
+  return '<section class="card"><h2 class="section-title">Past challenge runs</h2><p class="section-sub" style="margin:0 0 10px;">Every finished run is kept here permanently, also after a reset.</p>'+out+'</section>';
+}
 function challengeHistoryHtml(){
   if(!CH.history.length) return '';
   var rows=CH.history.map(function(x){ return '<tr><td>Day '+x.day+'</td><td>'+x.date+'</td><td>'+x.odd+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td></tr>'; }).join('');
@@ -1763,11 +1778,11 @@ function renderChallenge(){
   var tb=document.querySelector('#challengeSchedule tbody'); if(tb){ var rows=''; var p=CH.start; for(var d=1; d<=7; d++){ var goal=p*2; rows+='<tr'+(d===CH.day&&CH.status==='active'?' style="color:var(--accent);font-weight:700;"':'')+'><td>Day '+d+'</td><td>'+fmtUSD(p)+'</td><td>'+fmtUSD(goal)+'</td></tr>'; p=goal; } tb.innerHTML=rows; }
   var v=document.getElementById('challengeView'); if(!v) return;
   if(CH.status==='failed'){
-    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner err" style="margin:0 0 14px;">Challenge gefaald op Day '+CH.day+'. The pot is lost (all-in).</div><div class="actions" style="margin-top:0;"><button class="btn-secondary" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn" onclick="challengeRestart()">Start new challenge ($10, Day 1)</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
     return;
   }
   if(CH.status==='won' || CH.pot>=CH.target){
-    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml();
+    v.innerHTML='<section class="card"><div class="banner ok" style="margin:0 0 14px;">Challenge complete! Final pot: '+fmtUSD(CH.pot)+'. Congratulations.</div><div class="actions" style="margin-top:0;"><button class="btn" onclick="sendChallengeResult()">Share result (VIP results)</button><button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button><button class="btn-secondary" onclick="challengeRestart()">Start new challenge</button></div></section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
     return;
   }
   var ec=currentChallengeBet(); var payout=CH.pot*(ec.oddLow||2);
@@ -1782,7 +1797,7 @@ function renderChallenge(){
       (CH.history.length?'<button class="btn-secondary" onclick="sendChallengeUpdate()">Send update to members</button>':'')+
       '<button class="btn-secondary" onclick="challengeWin()">Won</button>'+
       '<button class="btn-secondary" onclick="challengeLoss()">Lost</button>'+
-    '</div></section>'+challengeSharePreviews()+challengeHistoryHtml();
+    '</div></section>'+challengeSharePreviews()+challengeHistoryHtml()+challengeRunsArchiveHtml();
 }
 function challengeWin(){
   var ec=currentChallengeBet(); var odd=ec.oddLow||2; var after=Math.round(CH.pot*odd*100)/100;
@@ -1797,7 +1812,8 @@ function challengeLoss(){
   CH.status='failed'; saveCH(); renderChallenge(); showToast('Challenge failed', false);
 }
 function challengeRestart(){
-  if(!confirm('Start a new challenge? The current history will be cleared.')) return;
+  if(!confirm('Start a new challenge? The previous run is saved permanently under Past challenge runs.')) return;
+  archiveCurrentRun();
   CH={ start:10, target:1000, pot:10, day:1, status:'active', history:[] };
   saveCH(); renderChallenge(); showToast('New challenge started');
 }
