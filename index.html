@@ -841,7 +841,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v118";
+var EMBEDDED_VERSION = "2026-06-26-v119";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1713,6 +1713,19 @@ function buildChallengePlan(){
     ':brain: **Strategy:** we back only the safest x2 on the card and never chase. One loss resets the run, so discipline is everything.'+challengeLadderBlock(true)+'\n\n'+
     ':warning: 18+ | play responsibly';
 }
+function challengeBetLines(hh){
+  var legs=(hh&&hh.legs)||[];
+  if(!legs.length) return '';
+  var seen={}, lines=[];
+  legs.forEach(function(L){
+    var clean=String(L).replace(/\s*\((?:match result|total goals|both teams|handicap|double chance)[^)]*\)/ig,'').replace(/\s*@.*$/,'').trim();
+    if(!clean||seen[clean]) return; seen[clean]=1;
+    var p=clean.split(': ');
+    lines.push(p.length>=2 ? ':small_orange_diamond: '+p[0]+': **'+p.slice(1).join(': ')+'**' : ':small_orange_diamond: '+clean);
+  });
+  if(!lines.length) return '';
+  return '\n:receipt: **The Day '+(hh.day||'')+' bet'+(hh.odd?' (odd '+hh.odd+')':'')+':**\n'+lines.join('\n')+'\n';
+}
 function buildChallengeResult(){
   var n=CH.history.length; if(!n) return '';
   var last=CH.history[n-1]; var before=(n>1?CH.history[n-2].potAfter:CH.start);
@@ -1720,7 +1733,7 @@ function buildChallengeResult(){
   if(last.result==='W'){
     var done=(CH.status==='won' || CH.pot>=CH.target);
     var head=done?':trophy: **$10 TO $1K CHALLENGE COMPLETE**':':rocket: **$10 TO $1K CHALLENGE | DAY '+last.day+' WON** :white_check_mark:';
-    return head+'\n'+fmtUSD(before)+' → **'+fmtUSD(last.potAfter)+'**\n\n'+
+    return head+'\n'+fmtUSD(before)+' → **'+fmtUSD(last.potAfter)+'**\n'+challengeBetLines(last)+'\n'+
       ':bar_chart: Progress to $1,000: **'+chPct()+'%**  ('+last.day+'/7 days)\n'+chBar(chPct())+'\n\n'+
       (done?':green_circle: We turned **$10 into '+fmtUSD(CH.pot)+'** with one safe doubler a day, every leg shared in VIP before kickoff.\n':':green_circle: Day '+last.day+' landed, exactly to plan: one safe doubler a day, $10 to $1,000.\n')+
       ':moneybag: It started with just **$10**. Imagine being in since day one.\n'+
@@ -1728,7 +1741,7 @@ function buildChallengeResult(){
       ':rocket: Join VIP and run the challenge with us: '+cta+challengeLadderBlock()+'\n'+
       ':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
   }
-  return ':x: **$10 TO $1K CHALLENGE | DAY '+last.day+' - run ended**\nStake '+fmtUSD(before)+' did not land, so the run resets to $10.\n\n'+
+  return ':x: **$10 TO $1K CHALLENGE | DAY '+last.day+' - run ended**\nStake '+fmtUSD(before)+' did not land, so the run resets to $10.\n'+challengeBetLines(last)+'\n'+
     ':bar_chart: We post **every** challenge result, win or lose. Full transparency.\n'+
     ':bulb: The next run starts fresh at $10, and members get every safe doubler before kickoff: '+cta+challengeLadderBlock()+'\n'+
     ':warning: 18+ | play responsibly';
@@ -1773,14 +1786,14 @@ function renderChallenge(){
 }
 function challengeWin(){
   var ec=currentChallengeBet(); var odd=ec.oddLow||2; var after=Math.round(CH.pot*odd*100)/100;
-  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+odd, result:'W', potAfter:after});
+  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+odd, result:'W', potAfter:after, legs:(ec.legs||[])});
   CH.pot=after;
   if(CH.pot>=CH.target){ CH.status='won'; } else { CH.day=CH.day+1; }
   saveCH(); renderChallenge(); showToast('Won! Pot now '+fmtUSD(CH.pot));
 }
 function challengeLoss(){
   var ec=currentChallengeBet();
-  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+(ec.oddLow||2), result:'V', potAfter:0});
+  CH.history.push({day:CH.day, date:dmy(ec.date||''), odd:'x'+(ec.oddLow||2), result:'V', potAfter:0, legs:(ec.legs||[])});
   CH.status='failed'; saveCH(); renderChallenge(); showToast('Challenge failed', false);
 }
 function challengeRestart(){
