@@ -841,7 +841,7 @@ if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gat
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
-var EMBEDDED_VERSION = "2026-06-26-v119";
+var EMBEDDED_VERSION = "2026-06-26-v120";
 var EMBEDDED_MESSAGES = `**🟢 #4 Safe Builder Parley: 25-06-2026**
 
 **:small_orange_diamond: Tunisia x Netherlands**
@@ -1724,7 +1724,7 @@ function challengeBetLines(hh){
     lines.push(p.length>=2 ? ':small_orange_diamond: '+p[0]+': **'+p.slice(1).join(': ')+'**' : ':small_orange_diamond: '+clean);
   });
   if(!lines.length) return '';
-  return '\n:receipt: **The Day '+(hh.day||'')+' bet'+(hh.odd?' (odd '+hh.odd+')':'')+':**\n'+lines.join('\n')+'\n';
+  return '\n🧾 **The Day '+(hh.day||'')+' bet'+(hh.odd?' (odd '+hh.odd+')':'')+':**\n'+lines.join('\n')+'\n';
 }
 function buildChallengeResult(){
   var n=CH.history.length; if(!n) return '';
