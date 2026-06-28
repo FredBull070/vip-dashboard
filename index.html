@@ -484,6 +484,7 @@
       <div class="side-section">Betting</div>
       <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily Parley Tips</button>
       <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
+      <button class="nav-item" data-page="propcards" onclick="showPage('propcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span> Daily Prop Cards</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <button class="nav-item" data-page="allevents" onclick="showPage('allevents')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> All Events</button>
       <div class="side-section">Discord</div>
@@ -552,6 +553,18 @@
     <div id="betcards-visual"></div>
     <div id="betcards-preview" style="display:none"><section class="card"><h2 class="section-title">Discord preview</h2><p class="section-sub">Exactly how it will be sent. Long lists are split into multiple messages.</p><div class="disc" id="cardsPreviewBox"></div></section></div>
     <div id="betcards-edit" style="display:none"><section class="card"><h2 class="section-title">Edit cards</h2><p class="section-sub">One card per block, separated by a line <code>===</code>. Fields per card: MATCH, MARKET, SELECTION, ODDS, STAKE, RISK (low/medium/high), ANALYSIS.</p><textarea id="cardsRaw" spellcheck="false" style="min-height:240px;"></textarea><div class="actions"><button class="btn-secondary" onclick="renderCards()">Refresh</button><button class="btn-secondary" onclick="loadCardsToday()">Load today's cards</button></div></section></div>
+    </div>
+<div class="page" id="page-propcards" style="display:none">
+    <section class="card">
+      <div class="card-head">
+        <h2 class="section-title">Daily Prop Cards <span class="pill" id="propsCount">0 props</span></h2>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;"><span id="propsSendStatus" class="muted-sm" style="margin:0;"></span><button class="btn-ghost mini" id="propsSendStop" style="display:none;" onclick="_sendCancel=true;">Stop</button><button class="btn" onclick="sendProps()">Send all to Daily Prop Cards channel</button></div>
+      </div>
+      <p class="section-sub">Today's player prop picks as single cards, grouped by risk so members build their own slip. Tick the props you want and use <b>Share selected</b>, share a whole risk tier (🟢🟡🔴), or <b>Share this prop</b> on any card.</p>
+    </section>
+    <div id="propcards-visual"></div>
+    <div id="propcards-preview" style="display:none"><section class="card"><h2 class="section-title">Discord preview</h2><p class="section-sub">Exactly how it will be sent. Long lists are split into multiple messages.</p><div class="disc" id="propsPreviewBox"></div></section></div>
+    <div id="propcards-edit" style="display:none"><section class="card"><h2 class="section-title">Edit props</h2><p class="section-sub">One prop per block, separated by a line <code>===</code>. Fields per prop: SPORT, MATCH, MARKET, SELECTION, ODDS, STAKE, RISK (low/medium/high), ANALYSIS.</p><textarea id="propsRaw" spellcheck="false" style="min-height:240px;"></textarea><div class="actions"><button class="btn-secondary" onclick="renderProps()">Refresh</button><button class="btn-secondary" onclick="loadPropsToday()">Load today's props</button></div></section></div>
     </div>
 <div class="page" id="page-trackrecord" style="display:none">
     <div id="tr-log">
@@ -752,7 +765,7 @@
         <div class="field"><label>LUCKY SHOT channel</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div></div>
         <div class="field"><label>VIP RESULTS channel</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div></div>
         <div class="field"><label>FREE BET channel</label><input type="text" id="hook_FREE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('FREE')">Test</button></div></div>
-        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div><div class="field"><label>EDUCATION channel</label><input type="text" id="hook_EDU" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('EDU')">Test</button></div></div>
+        <div class="field"><label>CUSTOM channel</label><input type="text" id="hook_CUSTOM" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CUSTOM')">Test</button></div></div><div class="field"><label>CHALLENGE channel ($10 to $1K)</label><input type="text" id="hook_CHALLENGE" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CHALLENGE')">Test</button></div></div><div class="field"><label>DAILY CARDS channel</label><input type="text" id="hook_CARDS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('CARDS')">Test</button></div></div><div class="field"><label>DAILY PROP CARDS channel</label><input type="text" id="hook_PROPS" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('PROPS')">Test</button></div></div><div class="field"><label>TRACK RECORD channel</label><input type="text" id="hook_TRACK" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('TRACK')">Test</button></div></div><div class="field"><label>EDUCATION channel</label><input type="text" id="hook_EDU" placeholder="https://discord.com/api/webhooks/..."><div class="actions"><button class="btn-yellow mini" onclick="testHook('EDU')">Test</button></div></div>
       </div>
       <div class="actions" style="margin-top:8px;"><button class="btn" onclick="saveAll()">Save channels</button></div>
       </div>
@@ -1086,7 +1099,7 @@
     </div>
   </main>
 </div>
-<script>['bets.js','bets-tennis.js','bets-nba.js','bets-nfl.js','bets-nhl.js','trackrecord_history.js'].forEach(function(f){document.write('<scr'+'ipt src="'+f+'?t='+Date.now()+'"><\/scr'+'ipt>');});</script>
+<script>['bets.js','bets-tennis.js','bets-nba.js','bets-nfl.js','bets-nhl.js','bets-props.js','trackrecord_history.js'].forEach(function(f){document.write('<scr'+'ipt src="'+f+'?t='+Date.now()+'"><\/scr'+'ipt>');});</script>
 <script>
 
 
@@ -1415,7 +1428,7 @@ function saveAll(silent){
   var _vc=document.getElementById('vip_channel'); if(_vc) localStorage.setItem('ba_vip_channel', _vc.value);
   const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
   localStorage.setItem('ba_messages', document.getElementById('raw').value);
-  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } var _bad=[]; ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var v=getHook(c); if(v && !/^https:\/\/[\w.]*discord(app)?\.com\/api\/webhooks\//i.test(v)) _bad.push(catLabel(c)); }); if(typeof showToast==='function'){ if(_bad.length) showToast('Saved. Check webhook URL for: '+_bad.join(', '), false); else showToast('Settings saved'); } }
+  if(!silent){ const e=document.getElementById('saveState'); if(e){ e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); } var _bad=[]; ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','PROPS','TRACK','EDU','NURT'].forEach(function(c){ var v=getHook(c); if(v && !/^https:\/\/[\w.]*discord(app)?\.com\/api\/webhooks\//i.test(v)) _bad.push(catLabel(c)); }); if(typeof showToast==='function'){ if(_bad.length) showToast('Saved. Check webhook URL for: '+_bad.join(', '), false); else showToast('Settings saved'); } }
 }
 function resetDefault(){ if(!confirm('Reset to the default lists?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
 
@@ -1584,7 +1597,7 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
 )();
 
 /* auto-save webhook fields so a typed link is never lost before an explicit save */
-(function(){ try{ ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var el=document.getElementById('hook_'+c); if(!el) return; var persist=function(){ try{ localStorage.setItem('ba_hook_'+c, (el.value||'').trim()); }catch(e){} }; el.addEventListener('blur', persist); el.addEventListener('change', persist); }); }catch(e){} })();
+(function(){ try{ ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','PROPS','TRACK','EDU','NURT'].forEach(function(c){ var el=document.getElementById('hook_'+c); if(!el) return; var persist=function(){ try{ localStorage.setItem('ba_hook_'+c, (el.value||'').trim()); }catch(e){} }; el.addEventListener('blur', persist); el.addEventListener('change', persist); }); }catch(e){} })();
 
 var _archiveView='list'; var _calRef=null;
 function setArchiveView(v){ _archiveView=v; var cal=document.getElementById('archiveCal'); var pick=document.getElementById('archiveListPick'); var tg=document.getElementById('archiveViewToggle'); if(tg){ var bs=tg.querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.toggle('active', bs[i].getAttribute('data-av')===v); } if(v==='cal'){ if(cal)cal.style.display='block'; if(pick)pick.style.display='none'; renderArchiveCal(); } else { if(cal)cal.style.display='none'; if(pick)pick.style.display='flex'; } }
@@ -1611,6 +1624,7 @@ var PAGE_META={
   challenge:["Challenges","$10 to $1,000 in 7 days: all-in on the safest x2 each day, doubling the pot."],
   allevents:["All Events","Upcoming games across every sport we cover, grouped per sport."],
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
+  propcards:["Daily Prop Cards","Today's player prop picks as single cards, grouped by risk. Members build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
   nurturing:["Nurturing","Warm up free members and leads toward VIP with value-first nurturing messages."],
@@ -1633,6 +1647,7 @@ var SUBTABS={
   settings:[['channels','Channels'],['vip','VIP & links'],['notif','Notifications'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
   betcards:[['all','All'],['low','\ud83d\udfe2 Low'],['medium','\ud83d\udfe1 Medium'],['high','\ud83d\udd34 High'],['preview','Discord preview'],['edit','Edit']],
+  propcards:[['all','All'],['low','\ud83d\udfe2 Core'],['medium','\ud83d\udfe1 Value'],['high','\ud83d\udd34 Aggressive'],['preview','Discord preview'],['edit','Edit']],
   trackrecord:[['cards','\ud83c\udccf Daily Cards'],['parleys','\ud83c\udfaf Parleys'],['all','All']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
   automations:[['routine','Daily routine'],['backups','Backups & Notion'],['notify','Notifications & reminders'],['safeguards','Safeguards']],
@@ -1658,6 +1673,7 @@ function showSub(page, sub){
   else if(page==='allevents'){ try{ renderAllEvents(sub); }catch(e){} }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
+  else if(page==='propcards'){ var pv2=document.getElementById('propcards-visual'); var pp=document.getElementById('propcards-preview'); var pe=document.getElementById('propcards-edit'); if(sub==='preview'){ if(pv2)pv2.style.display='none'; if(pp)pp.style.display='block'; if(pe)pe.style.display='none'; renderProps(); } else if(sub==='edit'){ if(pv2)pv2.style.display='none'; if(pp)pp.style.display='none'; if(pe)pe.style.display='block'; } else { if(pv2)pv2.style.display='block'; if(pp)pp.style.display='none'; if(pe)pe.style.display='none'; renderProps(); propsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
   else if(page==='nurturing'){ if(typeof renderNurt==='function') renderNurt(sub); }
@@ -1867,7 +1883,7 @@ function importSettings(){
   try{
     var o=JSON.parse(decodeURIComponent(escape(atob(code))));
     Object.keys(o).forEach(function(k){ localStorage.setItem(k, o[k]); });
-    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','TRACK','EDU','NURT'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
+    ['PARLEY','LUCKY','RESULTS','FREE','CUSTOM','CHALLENGE','CARDS','PROPS','TRACK','EDU','NURT'].forEach(function(c){ var v=localStorage.getItem('ba_hook_'+c); var el=document.getElementById('hook_'+c); if(el&&v!==null) el.value=v; });
     (function(){ var pe=document.getElementById('hook_PARLEY'); if(pe && !pe.value){ var mig=localStorage.getItem('ba_hook_PARLEY')||localStorage.getItem('ba_hook_LOW')||localStorage.getItem('ba_hook_MID')||localStorage.getItem('ba_hook_HIGH')||''; if(mig){ pe.value=mig; localStorage.setItem('ba_hook_PARLEY',mig); } } })();
     var vl=localStorage.getItem('ba_vip_link'); if(vl!==null&&document.getElementById('vip_link')) document.getElementById('vip_link').value=vl;
     var vc=localStorage.getItem('ba_vip_channel'); if(vc!==null&&document.getElementById('vip_channel')) document.getElementById('vip_channel').value=vc;
@@ -2434,6 +2450,63 @@ function cardsSportFilter(sp){ _cardSport=sp; var b=document.querySelectorAll('#
 function loadCardsToday(){ var el=document.getElementById('cardsRaw'); if(el) el.value=((typeof window.DAILY_CARDS==='string'&&window.DAILY_CARDS.trim())?window.DAILY_CARDS:EMBEDDED_CARDS_TEXT); renderCards(); }
 async function sendCards(){ var cards=getParsedCards(); if(typeof nIsDone==='function' && nIsDone('cards|'+DAILY_VERSION)){ if(!await askConfirm('You already sent the Daily Betting Cards today. Are you sure you want to send them again?')) return; } var ok=await sendCardChunks(buildCardsChunks(cards), 'all '+cards.length+' cards'); if(ok){ try{ markDone('cards|'+DAILY_VERSION); }catch(_e){} } }
 (function(){ var el=document.getElementById('cardsRaw'); var dc=(_allDailyCards()||EMBEDDED_CARDS_TEXT); if(el && !el.value.trim()) el.value=dc; if(window.DAILY_VERSION){ EMBEDDED_CARDS.date=window.DAILY_VERSION; } if(typeof renderCards==='function'){ try{ renderCards(); }catch(e){} } })();
+/* ---- Daily Prop Cards (clone of Daily Betting Cards: own data source + channel) ---- */
+function getPropsText(){ var el=document.getElementById('propsRaw'); if(el && el.value.trim()) return el.value; return (typeof window.DAILY_PROPS==='string'&&window.DAILY_PROPS.trim())?window.DAILY_PROPS:''; }
+function getParsedProps(){ return parseCards(getPropsText()); }
+function buildPropChunks(cards){
+  cards = cards || parseCards(getPropsText()); if(!cards.length) return [];
+  var date=(window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date)?dmy(window.EMBEDDED_PROPS.date):'';
+  var header=':dart: **DAILY PROP CARDS | '+date+'**\nPlayer prop picks for today, grouped by risk so you build your own slip.\n\n**:green_circle: Conservative** → focus on Core Props\n**:yellow_circle: Balanced** → mix Core + Value Props\n**:red_circle: Aggressive** → include Aggressive Props\n';
+  var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
+  var groups=[['low','**:green_circle: CORE PROPS**'],['medium','**:yellow_circle: VALUE PROPS**'],['high','**:red_circle: AGGRESSIVE PROPS**']];
+  var msgs=[]; var cur=header; var has=false;
+  groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+    var gh='\n\n'+g[1]+'\n';
+    cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
+      if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=g[1]+'\n\n'+cardStr(c)+'\n'; }
+      else { cur+=piece; } has=true; });
+  });
+  if(has) msgs.push(cur);
+  if(msgs.length){ for(var _fi=0; _fi<msgs.length-1; _fi++){ msgs[_fi]=msgs[_fi]+'\n⠀'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
+  return msgs;
+}
+function getSelectedProps(){ var all=getParsedProps(); var sel=[]; var chks=document.querySelectorAll('#propcards-visual .cardchk'); for(var i=0;i<chks.length;i++){ if(chks[i].checked){ var k=parseInt(chks[i].getAttribute('data-cidx'),10); if(all[k]) sel.push(all[k]); } } return sel; }
+function selectAllProps(on){ var chks=document.querySelectorAll('#propcards-visual .cardchk'); for(var i=0;i<chks.length;i++) chks[i].checked=!!on; updatePropSelCount(); }
+function updatePropSelCount(){ var chks=document.querySelectorAll('#propcards-visual .cardchk'); var n=0; for(var i=0;i<chks.length;i++) if(chks[i].checked) n++; var el=document.getElementById('propSelCount'); if(el) el.textContent=n+' of '+chks.length+' selected'; }
+async function sendPropChunks(chunks, label){ if(!chunks.length){ showToast('Nothing to share', false); return; } if(!await askConfirm('Send '+label+' to your Daily Prop Cards channel?'+(chunks.length>1?' ('+chunks.length+' messages)':''))){ log('Cancelled.','info'); return; } _sendCancel=false; var stop=document.getElementById('propsSendStop'); var status=document.getElementById('propsSendStatus'); if(stop)stop.style.display=''; var hook=getHook('PROPS'); for(var i=0;i<chunks.length;i++){ if(_sendCancel){ if(status)status.textContent='Stopped.'; if(stop)stop.style.display='none'; return; } try{ log('Sending props '+(i+1)+'/'+chunks.length+'...','info'); await postToDiscord(applyTokens(chunks[i]), hook); if(status) status.textContent='Sent '+(i+1)+'/'+chunks.length; }catch(e){ log('FAILED props: '+e.message,'err'); showToast('Failed: '+e.message,false); if(stop)stop.style.display='none'; return; } } if(status) status.textContent=''; if(stop)stop.style.display='none'; log('Props sent.','ok'); showToast('Sent to Daily Prop Cards'); return true; }
+async function sharePropsSelected(){ var sel=getSelectedProps(); if(!sel.length){ showToast('Select at least one prop', false); return; } await sendPropChunks(buildPropChunks(sel), sel.length+' selected prop'+(sel.length>1?'s':'')); }
+async function sharePropsCategory(risk){ var cs=getParsedProps().filter(function(c){return c.risk===risk;}); if(!cs.length){ showToast('No '+risk+' props', false); return; } await sendPropChunks(buildPropChunks(cs), 'all '+risk+' props'); }
+async function shareProp(i){ var c=getParsedProps()[i]; if(!c) return; await sendPropChunks(buildPropChunks([c]), 'this prop'); }
+var _propSport='all', _propRisk='all';
+function renderProps(){
+  var cards=parseCards(getPropsText());
+  var cc=document.getElementById('propsCount'); if(cc) cc.textContent=cards.length+(cards.length===1?' prop':' props');
+  var vis=document.getElementById('propcards-visual');
+  if(vis){
+    var bar='<div class="card" style="padding:12px 14px;margin-bottom:12px;"><div class="actions" style="margin:0;flex-wrap:wrap;gap:8px;align-items:center;"><button class="btn" onclick="sharePropsSelected()">Share selected</button><span id="propSelCount" class="muted-sm" style="margin:0;"></span><span style="flex:1 1 auto;"></span><button class="btn-secondary mini" onclick="selectAllProps(true)">All</button><button class="btn-secondary mini" onclick="selectAllProps(false)">None</button><button class="btn-secondary mini" onclick="sharePropsCategory(\'low\')">Share 🟢</button><button class="btn-secondary mini" onclick="sharePropsCategory(\'medium\')">Share 🟡</button><button class="btn-secondary mini" onclick="sharePropsCategory(\'high\')">Share 🔴</button></div></div>';
+    var groups=[['low','🟢 Core'],['medium','🟡 Value'],['high','🔴 Aggressive']]; var html='';
+    cards.forEach(function(c,i){ c._i=i; });
+    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+      html+='<div class="risk-head" data-risk="'+g[0]+'">'+g[1]+' <span class="dg-count">'+cs.length+'</span></div>';
+      cs.forEach(function(c){ var i=c._i; html+='<div class="rcard r-'+c.risk+' collapsed" data-risk="'+c.risk+'" data-sport="'+esc(c.sport||'Football')+'" onclick="rcardClick(this,event)">'
+        +'<div class="rc-top"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="event.stopPropagation()"><input type="checkbox" class="cardchk" data-cidx="'+i+'" checked onchange="updatePropSelCount()"><span class="rc-match">'+esc(c.match||'')+'</span></label><span class="rc-odds">'+esc(c.odds||'')+'<span class="rc-chev">▾</span></span></div>'
+        +'<div class="rc-sum">'+esc(c.selection||'')+(c.market?'  ·  '+esc(c.market):'')+'</div>'
+        +'<div class="rc-detail"><div class="rc-meta">'+esc(c.market||'')+'  ·  Stake '+esc(c.stake||'')+'</div><div class="rc-sel">'+esc(c.selection||'')+'</div><div class="rc-an">'+esc(c.analysis||'')+'</div><div class="actions" style="margin-top:8px;"><button class="btn-secondary mini" onclick="event.stopPropagation();shareProp('+i+')">Share this prop</button></div></div>'
+        +'</div>'; });
+    });
+    var _sp=[]; cards.forEach(function(c){ var s=c.sport||'Football'; if(_sp.indexOf(s)<0)_sp.push(s); });
+    var sportBar=''; if(_sp.length){ sportBar='<div id="propsSportBar" class="sportbar" style="margin:0 0 12px;"><button class="sport-btn'+(_propSport==='all'?' active':'')+'" data-sp="all" onclick="propsSportFilter(\'all\')">All sports</button>'; _sp.forEach(function(s){ sportBar+='<button class="sport-btn'+(_propSport===s?' active':'')+'" data-sp="'+esc(s)+'" onclick="propsSportFilter(\''+s+'\')">'+esc(s)+'</button>'; }); sportBar+='</div>'; }
+    vis.innerHTML=bar+sportBar+(html||'<p class="small">No props yet. Add some under the Edit tab.</p>');
+    updatePropSelCount(); applyPropFilters();
+  }
+  var pv=document.getElementById('propsPreviewBox'); if(pv){ pv.innerHTML=renderDiscord(buildPropChunks().join('\n\n')); }
+}
+function applyPropFilters(){ var groups={}; var cards=document.querySelectorAll('#propcards-visual .rcard'); for(var i=0;i<cards.length;i++){ var r=cards[i].getAttribute('data-risk'); var sp=cards[i].getAttribute('data-sport')||'Football'; var show=(_propRisk==='all'||r===_propRisk)&&(_propSport==='all'||sp===_propSport); cards[i].style.display=show?'':'none'; if(show) groups[r]=true; } var heads=document.querySelectorAll('#propcards-visual .risk-head'); for(var j=0;j<heads.length;j++){ var hr=heads[j].getAttribute('data-risk'); heads[j].style.display=((_propRisk==='all'||hr===_propRisk)&&groups[hr])?'':'none'; } }
+function propsFilter(sub){ _propRisk=(sub==='all'||!sub)?'all':sub; applyPropFilters(); }
+function propsSportFilter(sp){ _propSport=sp; var b=document.querySelectorAll('#propsSportBar .sport-btn'); for(var i=0;i<b.length;i++) b[i].classList.toggle('active', b[i].getAttribute('data-sp')===sp); applyPropFilters(); }
+function loadPropsToday(){ var el=document.getElementById('propsRaw'); if(el) el.value=((typeof window.DAILY_PROPS==='string'&&window.DAILY_PROPS.trim())?window.DAILY_PROPS:''); renderProps(); }
+async function sendProps(){ var cards=getParsedProps(); if(typeof nIsDone==='function' && nIsDone('props|'+(window.DAILY_PROPS_VERSION||''))){ if(!await askConfirm('You already sent the Daily Prop Cards today. Send again?')) return; } var ok=await sendPropChunks(buildPropChunks(cards), 'all '+cards.length+' props'); if(ok){ try{ markDone('props|'+(window.DAILY_PROPS_VERSION||'')); }catch(_e){} } }
+(function(){ var el=document.getElementById('propsRaw'); var dp=(typeof window.DAILY_PROPS==='string'?window.DAILY_PROPS:''); if(el && !el.value.trim()) el.value=dp; if(typeof renderProps==='function'){ try{ renderProps(); }catch(e){} } })();
 (function(){ try{ var ss=document.getElementById('sendSpacing'); if(ss && localStorage.getItem('ba_send_spacing')!==null) ss.value=localStorage.getItem('ba_send_spacing'); }catch(e){} })();
 
 
