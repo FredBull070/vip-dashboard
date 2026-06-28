@@ -3,10 +3,10 @@
  {"s":"football","m":"Brazil x Japan","k":"Brazil","o":1.69},
  {"s":"football","m":"Netherlands x Morocco","k":"Netherlands","o":2.10},
  {"s":"football","m":"South Africa x Canada","k":"Canada","o":1.71},
- {"s":"football","m":"Germany x Paraguay","k":"Germany to qualify","o":1.13},
- {"s":"football","m":"Brazil x Japan","k":"Over 2.5","o":1.85},
- {"s":"football","m":"Netherlands x Morocco","k":"Morocco to qualify","o":2.52},
- {"s":"football","m":"South Africa x Canada","k":"Over 2.5","o":1.95},
- {"s":"football","m":"Brazil x Japan","k":"Brazil to qualify","o":1.32},
- {"s":"football","m":"Germany x Paraguay","k":"Germany -1","o":1.55}
+ {"s":"tennis","m":"Sinner x Kecmanovic","k":"Sinner","o":1.05},
+ {"s":"tennis","m":"Djokovic x Wu Yibing","k":"Djokovic","o":1.08},
+ {"s":"tennis","m":"Sabalenka x Kostovic","k":"Sabalenka","o":1.04},
+ {"s":"tennis","m":"Medvedev x Cilic","k":"Medvedev","o":1.30},
+ {"s":"tennis","m":"Andreeva x Linette","k":"Andreeva","o":1.25},
+ {"s":"tennis","m":"Raducanu x Ruzic","k":"Raducanu","o":1.40}
 ]
