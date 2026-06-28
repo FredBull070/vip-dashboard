@@ -50,3 +50,8 @@ RISK: high
 ANALYSIS: Combative midfielder likely chasing the game in a tight knockout tie; card risk elevated.`;
 
 window.EMBEDDED_PROPS = { date: "2026-06-28" };
+
+/* Filled by the evening-settlement task once a prop is confirmed by verified player data.
+   Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
+   these into the Track Record. No result is ever written without verified player-level data. */
+window.DAILY_PROPS_SETTLED = [];

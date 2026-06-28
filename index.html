@@ -482,9 +482,9 @@
   <aside class="sidebar" id="sidebar">
     <div class="side-scroll">
       <div class="side-section">Betting</div>
-      <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily Parley Tips</button>
       <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
-      <button class="nav-item" data-page="propcards" onclick="showPage('propcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span> Daily Prop Cards</button>
+      <button class="nav-item" data-page="propcards" onclick="showPage('propcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg></span> Daily Prop Cards</button>
+      <button class="nav-item" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily Parley Tips</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
       <button class="nav-item" data-page="allevents" onclick="showPage('allevents')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> All Events</button>
       <div class="side-section">Discord</div>
@@ -3855,13 +3855,33 @@ function seedHistory(){
     if(changed){ if(typeof saveTR==='function') saveTR(); try{ renderTrack(); }catch(e){} try{ renderNotifs(); }catch(e){} }
   }catch(e){}
 }
+/* ---- Daily Prop Cards -> Track Record (logged as Pending, settles when verified) ---- */
+function seedProps(){
+  try{
+    if(typeof TR==='undefined' || !TR) return;
+    var txt=(typeof window.DAILY_PROPS==='string')?window.DAILY_PROPS:''; if(!txt.trim()) return;
+    var date=(window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date)?dmy(window.EMBEDDED_PROPS.date):(window.DAILY_PROPS_VERSION?dmy(window.DAILY_PROPS_VERSION):'');
+    if(!date) return;
+    var cards=(typeof parseCards==='function')?parseCards(txt):[]; var changed=false;
+    cards.forEach(function(c){
+      var betid='prop|'+date+'|'+(c.match||'')+'|'+(c.selection||'');
+      if(TR.some(function(e){ return (e.betid||'')===betid; })) return;
+      var m=(c.odds||'').toString().match(/[\d.]+/); var odds=m?m[0]:((c.odds||'').toString());
+      TR.push({ id:Date.now()+Math.floor(Math.random()*1000000), betid:betid, kind:'card', date:date, sport:(c.sport||'Football'), match:c.match, market:(c.market||'')+' (prop)', selection:c.selection||'', odds:odds.toString(), stake:(parseFloat(c.stake)||1).toString(), result:'P', risk:(c.risk||'medium'), prop:true });
+      changed=true;
+    });
+    if(changed){ if(typeof saveTR==='function') saveTR(); try{ renderTrack(); }catch(e){} try{ renderNotifs(); }catch(e){} }
+  }catch(e){}
+}
 /* ---- Auto-settlement merge (filled by the evening settlement task) ---- */
 function mergeSettled(){
   try{
-    if(typeof EMBEDDED_SETTLED==='undefined' || !EMBEDDED_SETTLED || !EMBEDDED_SETTLED.length) return;
     if(typeof TR==='undefined' || !TR) return;
+    var _ps=Array.isArray(window.DAILY_PROPS_SETTLED)?window.DAILY_PROPS_SETTLED:[];
+    var _src=(typeof EMBEDDED_SETTLED!=='undefined'&&Array.isArray(EMBEDDED_SETTLED)?EMBEDDED_SETTLED:[]).concat(_ps);
+    if(!_src.length) return;
     var changed=false;
-    EMBEDDED_SETTLED.forEach(function(s){
+    _src.forEach(function(s){
       if(!s || !s.result) return;
       var sk=s.betid||((s.date||'')+'|'+(s.match||'')+'|'+(s.selection||''));
       var found=null;
@@ -4129,6 +4149,7 @@ function logoutDash(){ try{ sessionStorage.removeItem('ba_auth'); }catch(e){} lo
 
 try{ autoSeedTrack(); }catch(e){}
 try{ seedHistory(); }catch(e){}
+try{ seedProps(); }catch(e){}
 try{ mergeSettled(); }catch(e){}
 try{ applyChallengeResult(); }catch(e){}
 showPage((function(){ try{ var p=localStorage.getItem('ba_page'); return p||'today'; }catch(e){ return 'today'; } })());
