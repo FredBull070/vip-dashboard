@@ -3434,12 +3434,61 @@ if(typeof setChallengePick==='function'){
     return r;
   };
 }
+function _chPctFor(pot){ return Math.min(100, Math.round((pot/((CH&&CH.target)||1000))*100)); }
+function buildChallengeResultFor(i){
+  if(typeof CH==='undefined'||!CH||!CH.history[i]) return '';
+  var h=CH.history[i]; var before=(i>0?CH.history[i-1].potAfter:CH.start);
+  var ch=(typeof vipChannelOut==='function')?vipChannelOut():''; var link=(typeof vipLink==='function')?vipLink():''; var cta=ch||link||'(set your VIP link under Settings)';
+  if(h.result==='W'){
+    var done=(h.potAfter>=CH.target);
+    var head=done?':trophy: **$10 TO $1K CHALLENGE COMPLETE**':':rocket: **$10 TO $1K CHALLENGE | DAY '+h.day+' WON** :white_check_mark:';
+    return head+'\n'+fmtUSD(before)+' → **'+fmtUSD(h.potAfter)+'**\n'+challengeBetLines(h)+'\n'+
+      ':bar_chart: Progress to $1,000: **'+_chPctFor(h.potAfter)+'%**  ('+h.day+'/7 days)\n'+chBar(_chPctFor(h.potAfter))+'\n\n'+
+      (done?':green_circle: We turned **$10 into '+fmtUSD(h.potAfter)+'** with one safe doubler a day, every leg shared in VIP before kickoff.\n':':green_circle: Day '+h.day+' landed, exactly to plan: one safe doubler a day, $10 to $1,000.\n')+
+      ':moneybag: It started with just **$10**. Imagine being in since day one.\n'+
+      ':fire: Want to copy every challenge bet before kickoff and ride it live? That is VIP only.\n'+
+      ':rocket: Join VIP and run the challenge with us: '+cta+challengeLadderBlock()+'\n'+
+      ':warning: 18+ | play responsibly. Past results do not guarantee future profit.';
+  }
+  return ':x: **$10 TO $1K CHALLENGE | DAY '+h.day+' - run ended**\nStake '+fmtUSD(before)+' did not land, so the run resets to $10.\n'+challengeBetLines(h)+'\n'+
+    ':bar_chart: We post **every** challenge result, win or lose. Full transparency.\n'+
+    ':bulb: The next run starts fresh at $10, and members get every safe doubler before kickoff: '+cta+challengeLadderBlock()+'\n'+
+    ':warning: 18+ | play responsibly';
+}
+function buildChallengeMemberUpdateFor(i){
+  if(typeof CH==='undefined'||!CH||!CH.history[i]) return '';
+  var h=CH.history[i]; var before=(i>0?CH.history[i-1].potAfter:CH.start);
+  var winLines={1:"And we are off! Day 1 in the bank, the snowball starts right here.",2:"Day 2 done, the compounding is kicking in nicely now.",3:"Day 3 banked, nearly a third of the way there, momentum is building.",4:"Day 4 secured, the pot is getting properly chunky now.",5:"Day 5 landed, we can almost smell it, the grand is in sight.",6:"Day 6 done!! One more banker and we hit a full $1,000. Hold tight, team."};
+  function lossLine(d){ if(d>=6) return "Nooo, Day "+d+"! We could almost taste the grand, that one really stings. But we reset to $10 and go again tomorrow, that is the game."; if(d>=4) return "Oof, Day "+d+", and we were building something nice. That one hurts a little. Reset to $10, we run it back tomorrow."; if(d>=2) return "Argh, fell at Day "+d+". We were just getting going too. Back to $10, fresh run tomorrow, we do not dwell."; return "Ah, Day "+d+" didn't land. No biggie, that is just variance. Reset to $10 and straight back at it tomorrow."; }
+  if(h.result==='W'){
+    var done=(h.potAfter>=CH.target);
+    if(done){ return '🏆 **$10 to $1K Challenge COMPLETE!** 🎉\nWE DID IT. '+fmtUSD(before)+' → **'+fmtUSD(h.potAfter)+'**. Seven bankers, one grand, $10 turned into a thousand.\nMassive one, team. Fresh challenge starts tomorrow at $10. Onto the next 🙌'+challengeLadderBlock(); }
+    var nextTarget=Math.round(h.potAfter*2*100)/100;
+    return '✅ **$10 to $1K Challenge | Day '+h.day+' done!**\n'+(winLines[h.day]||('Day '+h.day+' is in the books.'))+'\n'+fmtUSD(before)+' → **'+fmtUSD(h.potAfter)+'** 📈  ('+_chPctFor(h.potAfter)+'% of the way to $1,000)\nDay '+(h.day+1)+' is next: '+fmtUSD(h.potAfter)+' up, going for '+fmtUSD(nextTarget)+'. Keep it rolling 💪'+challengeLadderBlock();
+  }
+  return '❌ **$10 to $1K Challenge | Day '+h.day+'**\n'+lossLine(h.day)+' 💪'+challengeLadderBlock();
+}
+async function sendChallengeResultFor(i){
+  if(typeof CH==='undefined'||!CH||!CH.history[i]){ showToast('No such day',false); return; }
+  var preview=(CH.history[i].legs||[]).map(_clLeg).filter(Boolean).join('\n')||'(no matches saved)';
+  if(typeof askConfirm==='function'){ if(!await askConfirm('Share the Day '+CH.history[i].day+' RESULT to your VIP results channel?\n\nThe bet:\n\n'+preview, {title:'Share Day '+CH.history[i].day+' result to VIP', yes:'Share to VIP'})) return; }
+  try{ log('Sharing Day '+CH.history[i].day+' result...','info'); await postToDiscord(applyTokens(buildChallengeResultFor(i)), getHook('RESULTS')); log('OK - result shared.','ok'); showToast('Shared to VIP results'); }
+  catch(e){ log('FAILED: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
+async function sendChallengeUpdateFor(i){
+  if(typeof CH==='undefined'||!CH||!CH.history[i]){ showToast('No such day',false); return; }
+  var preview=(CH.history[i].legs||[]).map(_clLeg).filter(Boolean).join('\n')||'(no matches saved)';
+  if(typeof askConfirm==='function'){ if(!await askConfirm('Send the Day '+CH.history[i].day+' member update to your Challenge channel (VIP members)?\n\nThe bet:\n\n'+preview, {title:'Share Day '+CH.history[i].day+' update to members', yes:'Share to members'})) return; }
+  try{ log('Sending Day '+CH.history[i].day+' update...','info'); await postToDiscord(applyTokens(buildChallengeMemberUpdateFor(i)), getHook('CHALLENGE')); log('OK - update sent.','ok'); showToast('Sent to Challenge'); }
+  catch(e){ log('FAILED: '+e.message,'err'); showToast('Failed: '+e.message,false); }
+}
 challengeHistoryHtml=function(){
   if(typeof CH==='undefined'||!CH||!CH.history.length) return '';
   var rows=CH.history.map(function(x,idx){
-    return '<tr><td>Day '+x.day+'</td><td>'+(x.date||'')+'</td><td>'+(x.odd||'')+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td><td style="text-align:right;"><button class="btn-secondary" style="padding:4px 11px;font-size:12px;" onclick="editChallengeDay('+idx+')">Edit</button></td></tr>';
+    var legs=(x.legs||[]).map(function(L){return esc(_clLeg(L));}).filter(Boolean).join('<br>')||'&mdash;';
+    return '<tr><td>Day '+x.day+'</td><td>'+(x.date||'')+'</td><td>'+(x.odd||'')+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter)+'</td><td style="font-size:12px;color:var(--muted);line-height:1.6;">'+legs+'</td><td style="white-space:nowrap;text-align:right;"><button class="btn mini" style="margin:1px;" onclick="sendChallengeResultFor('+idx+')">Share to VIP</button><button class="btn-secondary mini" style="margin:1px;" onclick="sendChallengeUpdateFor('+idx+')">Share to members</button><button class="btn-ghost mini" style="margin:1px;" onclick="editChallengeDay('+idx+')">Edit</button></td></tr>';
   }).join('');
-  return '<section class="card"><h2 class="section-title">History</h2><p class="section-sub" style="margin:0 0 10px;">Made a mistake? Click <b>Edit</b> on any day to fix the result or the matches. The pot and the ladder recalculate by themselves.</p><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+  return '<section class="card"><h2 class="section-title">History</h2><p class="section-sub" style="margin:0 0 10px;">Each day shows the exact matches that were bet. <b>Share to VIP</b> posts the result recap to your VIP results channel, <b>Share to members</b> posts the member update to the Challenge channel, <b>Edit</b> fixes a result. The pot and ladder recalculate by themselves.</p><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th><th>Matches</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
 };
 var _editIdx=null;
 function editChallengeDay(i){
