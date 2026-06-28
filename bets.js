@@ -179,11 +179,24 @@ RISK: high
 ANALYSIS: Both sides will go for the win in a decisive group game, which can open the match up.`;
 
 window.DAILY_CHALLENGE = {
-  date: "2026-06-27",
-  legs: ["Panama x England: England to win @ 1.22 - 1.30", "Croatia x Ghana: Croatia to win @ 1.66 - 1.80"],
-  oddLow: 2.03, oddHigh: 2.34,
-  justification: "England are clear favourites against Panama and Croatia should have too much for Ghana. Two strong favourites from different Group L matches, the safest route to just over x2."
+  date: "2026-06-26",
+  legs: ["Norway x France: France to win @ 1.50 - 1.65", "New Zealand x Belgium: Belgium to win @ 1.36 - 1.50"],
+  oddLow: 2.04, oddHigh: 2.48,
+  justification: "Two strong favourites, France and Belgium, from different matches. The safest route to just over x2."
 };
 
-window.DAILY_SETTLED = [];
-window.DAILY_CHALLENGE_RESULT = null;
+window.DAILY_SETTLED = [
+  { betid: "card|2026-06-26|Norway x France|France to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Match result", selection: "France to win", odds: 1.50, stake: 2, risk: "low", result: "W" },
+  { betid: "card|2026-06-26|New Zealand x Belgium|Belgium to win", kind: "card", date: "2026-06-26", sport: "Football", match: "New Zealand x Belgium", market: "Match result", selection: "Belgium to win", odds: 1.36, stake: 2, risk: "low", result: "W" },
+  { betid: "card|2026-06-26|Uruguay x Spain|Spain to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain", market: "Match result", selection: "Spain to win", odds: 1.65, stake: 1.5, risk: "medium", result: "W" },
+  { betid: "card|2026-06-26|Egypt x Iran|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Egypt x Iran", market: "Total goals", selection: "Over 2.5 goals", odds: 1.90, stake: 1, risk: "medium", result: "L" },
+  { betid: "card|2026-06-26|Norway x France|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Total goals", selection: "Over 2.5 goals", odds: 1.65, stake: 1, risk: "medium", result: "W" },
+  { betid: "card|2026-06-26|Uruguay x Spain|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain", market: "Total goals", selection: "Over 2.5 goals", odds: 1.90, stake: 0.75, risk: "medium", result: "L" },
+  { betid: "card|2026-06-26|Cape Verde x Saudi Arabia|Saudi Arabia to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Cape Verde x Saudi Arabia", market: "Match result", selection: "Saudi Arabia to win", odds: 2.20, stake: 0.5, risk: "high", result: "L" },
+  { betid: "card|2026-06-26|Cape Verde x Saudi Arabia|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Cape Verde x Saudi Arabia", market: "Total goals", selection: "Over 2.5 goals", odds: 2.00, stake: 0.5, risk: "high", result: "L" },
+  { betid: "parley|2026-06-26|#7 Safe Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + New Zealand x Belgium", market: "Accumulator", selection: "#7 Safe Builder Parley: 26-06-2026", odds: 2.04, stake: 2, risk: "low", result: "W" },
+  { betid: "parley|2026-06-26|#8 Value Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain + Egypt x Iran", market: "Accumulator", selection: "#8 Value Builder Parley: 26-06-2026", odds: 3.14, stake: 0.75, risk: "medium", result: "L" },
+  { betid: "parley|2026-06-26|#9 Jackpot Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + Uruguay x Spain + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "#9 Jackpot Builder Parley: 26-06-2026", odds: 8.00, stake: 0.25, risk: "high", result: "L" },
+  { betid: "parley|2026-06-26|Lucky Shot Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + New Zealand x Belgium + Uruguay x Spain + Egypt x Iran + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "Lucky Shot Parley: 26-06-2026", odds: 103, stake: 0.1, risk: "high", result: "L" }
+];
+window.DAILY_CHALLENGE_RESULT = { date: "2026-06-26", result: "W" };
