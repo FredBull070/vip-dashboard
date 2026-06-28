@@ -1006,6 +1006,66 @@
       <p class="section-sub" style="margin:8px 0 0;">I add market research, competitor notes and data findings here whenever we do them, so it stays in one place.</p>
     </section>
   </div>
+  <div id="kn-tech" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Tech stack</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>Plain static HTML, CSS and JavaScript</b> (vanilla, no framework like React). No build step or compiler; what you write is what ships.</li>
+        <li>Each page is a <b>single self-contained file</b> (HTML + inline CSS + inline JS).</li>
+        <li>The dashboard is one large <code>index.html</code>. The public website is a set of standalone HTML files.</li>
+        <li>No backend and no database. All logic runs in the browser.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Where it is built and hosted</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>Code lives in <b>GitHub</b> (two repos, below). Hosting is <b>Cloudflare Pages</b>, with each repo connected for <b>git-based auto-deploy</b>.</li>
+        <li>Publishing = commit a file to the repo's <code>main</code> branch (I upload the file via GitHub, which creates the commit). Cloudflare then builds and goes live in about a minute.</li>
+        <li>The daily scheduled tasks publish the bets files the same way.</li>
+        <li>SSL/HTTPS and the CDN are handled automatically by Cloudflare.</li>
+        <li>A <code>_headers</code> file sets <code>Cache-Control: no-cache</code> so a new version shows for everyone on the next refresh.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Repositories and files</h2>
+      <div class="tablewrap"><table><thead><tr><th>Repo</th><th>Serves</th><th>Key files</th></tr></thead><tbody>
+        <tr><td>FredBull070/betlife365</td><td>betlife365.com + www</td><td>index.html (landing), member.html (member zone), terms.html, privacy.html, ticker.json, _headers</td></tr>
+        <tr><td>FredBull070/vip-dashboard</td><td>dashboard.betlife365.com</td><td>index.html (the dashboard app), bets.js (football), bets-tennis.js, bets-nba.js, bets-nfl.js, bets-nhl.js, ticker.json, _headers, archive/bets-YYYY-MM-DD.js</td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Domains and DNS</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>The domain betlife365.com is managed in <b>Cloudflare</b> (DNS, SSL, CDN).</li>
+        <li><b>betlife365.com</b> and <b>www.betlife365.com</b> point to the betlife365 Pages project.</li>
+        <li><b>dashboard.betlife365.com</b> points to the vip-dashboard project (built from that repo).</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Data and state</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>The <b>bets-*.js</b> files are plain scripts that set global variables (today's messages, cards, challenge). The dashboard loads them with a cache-busting <code>?t=</code> so it always reads the newest.</li>
+        <li><b>ticker.json</b> feeds the moving odds ticker on the landing page.</li>
+        <li>The dashboard's own working state (challenge progress, settings, which messages were sent) lives in the browser's <b>localStorage</b>, so it is per browser/device.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Login and integrations</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>Dashboard login</b>: a client-side gate; the password is stored hashed (SHA-256), the session in sessionStorage. For you only.</li>
+        <li><b>Member zone</b>: accounts in localStorage with hashed passwords, plus <b>Google sign-in</b> (Google Identity Services OAuth).</li>
+        <li><b>Stripe</b>: payments for VIP (pending your KvK). <b>Discord</b>: community and sending via channel webhooks (set in Settings). <b>Notion</b>: the track-record ledger backup.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Assets and styling</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>System font stack (SF Pro Display and similar), dark theme with the orange accent.</li>
+        <li>Favicon is an inline SVG of the orange "365" (no separate image file). Logos are inline SVG/text.</li>
+        <li>Hero imagery on the landing page is sourced from Unsplash.</li>
+      </ul>
+    </section>
+  </div>
     </div>
 <div class="page" id="page-notifications" style="display:none">
     <section class="card">
@@ -1568,7 +1628,7 @@ var SUBTABS={
   trackrecord:[['cards','\ud83c\udccf Daily Cards'],['parleys','\ud83c\udfaf Parleys'],['all','All']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
   automations:[['routine','Daily routine'],['backups','Backups & Notion'],['notify','Notifications & reminders'],['safeguards','Safeguards']],
-  knowledge:[['overview','📋 Overview'],['build','🗓️ Daily build'],['discord','💬 Discord'],['challenge','🚀 Challenge'],['ops','🛡️ Operations'],['research','🔎 Research'],['rules','📜 Rules & to-do']],
+  knowledge:[['overview','📋 Overview'],['tech','🧱 Tech stack'],['build','🗓️ Daily build'],['discord','💬 Discord'],['challenge','🚀 Challenge'],['ops','🛡️ Operations'],['research','🔎 Research'],['rules','📜 Rules & to-do']],
   vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge'],['cardsresult','🃏 Card results']],
   nurturing:[['welcome','🚀 Welcome'],['proof','📊 Proof'],['value','💎 VIP value'],['urgency','⏳ Urgency'],['reengage','🔁 Re-engage'],['flex','🏆 Results']]
 };
@@ -1593,7 +1653,7 @@ function showSub(page, sub){
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
   else if(page==='nurturing'){ if(typeof renderNurt==='function') renderNurt(sub); }
   else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); try{ renderAutoToggles(); }catch(e){} }
-  else if(page==='knowledge'){ ['overview','build','discord','challenge','ops','research','rules'].forEach(function(s){ var el=document.getElementById('kn-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
+  else if(page==='knowledge'){ ['overview','tech','build','discord','challenge','ops','research','rules'].forEach(function(s){ var el=document.getElementById('kn-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
   else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); var vcr=document.getElementById('vip-cardsresult'); [vp,vc,vch,vcr].forEach(function(x){ if(x)x.style.display='none'; }); if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else if(sub==='cardsresult'){ if(vcr)vcr.style.display='block'; if(typeof renderCardsResult==='function') renderCardsResult(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
