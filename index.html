@@ -561,9 +561,11 @@
         <div class="actions" style="margin-top:0;"><button class="btn-secondary mini" onclick="addCardsToTrack()">Add today's cards</button><button class="btn-secondary mini" onclick="copyTrackNotion()">Copy for Notion</button><button class="btn-secondary mini" onclick="exportTrackCSV()">Export CSV</button></div>
       </div>
       <p class="section-sub">One unit-based entry per bet (not per card or per sport). Performance is shown in units and ROI, never as winrate alone. 18+, play responsibly.</p>
-      <div id="trStats" class="metrics"></div>
+      <div id="trFilters"></div>
+      <div id="trStats" class="metrics" style="margin-top:12px;"></div>
       <div id="trChart" style="margin-top:22px;"></div>
       <div id="trBreak" style="margin-top:18px;"></div>
+      <div id="trCalib" style="margin-top:14px;"></div>
       <div id="trCal" style="margin-top:26px;"></div>
     </section>
     <section class="card">
@@ -2445,6 +2447,74 @@ function setTrField(id, field, val){ for(var i=0;i<TR.length;i++){ if(TR[i].id==
 function setTrResult(id, val){ setTrField(id,'result',val); var auto=document.getElementById('autoShare'); var u=(val||'').toUpperCase(); if(auto && auto.checked && (u==='W'||u==='L'||u==='V') && !SHARED['tr'+id]){ if(typeof shareTrackOne==='function') shareTrackOne(id, false, false); } }
 async function delTrack(id){ if(!await askConfirm('Delete this bet from your track record? This cannot be undone.')){ return; } TR=TR.filter(function(e){return e.id!==id;}); saveTR(); renderTrack(); try{ renderNotifs(); }catch(e){} }
 var TR_FILTER='all';
+/* ===== Analytics: filters + segmentation + calibration ===== */
+var FILTERS={period:'all',sport:'all',tier:'all',market:'all',betType:'all',odds:'all',result:'all'};
+function _oddsBucket(o){ o=parseFloat(o)||0; return o<1.5?'<1.50':(o<2?'1.50-1.99':(o<3?'2.00-2.99':(o<5?'3.00-4.99':'5.00+'))); }
+function _mktKey(e){ var s=(((e&&e.market)||'')+' '+((e&&e.selection)||'')).toLowerCase();
+  if(/over|under|total goals/.test(s)) return 'Over/Under';
+  if(/both teams|btts/.test(s)) return 'BTTS';
+  if(/handicap|[+-]\s?\d(\.5)?/.test(s)) return 'Handicap';
+  if(/\bdraw\b/.test(s)) return 'Draw';
+  if(/qualif/.test(s)) return 'To qualify';
+  if(/winner|to win|match result/.test(s)) return 'Match winner';
+  return 'Other'; }
+var _DOW=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function _dowKey(e){ var k=_trDateKey(e.date); if(!k)return null; var d=new Date(k+'T00:00:00'); return isNaN(d)?null:_DOW[d.getDay()]; }
+function _typeKey(e){ return _trKind(e)==='parley'?'Parleys':'Singles'; }
+function _tierKey(e){ return {low:'🟢 Low',medium:'🟡 Medium',high:'🔴 High'}[e.risk||'medium']; }
+function _periodStart(p){ if(p==='all'||!p)return null; var n=parseInt(p,10); if(!n)return null; var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-n); return d; }
+function applyFilters(list){
+  var ps=_periodStart(FILTERS.period);
+  return list.filter(function(e){
+    if(FILTERS.sport!=='all'&&(e.sport||'Other')!==FILTERS.sport) return false;
+    if(FILTERS.tier!=='all'&&(e.risk||'medium')!==FILTERS.tier) return false;
+    if(FILTERS.market!=='all'&&_mktKey(e)!==FILTERS.market) return false;
+    if(FILTERS.betType!=='all'&&_trKind(e)!==FILTERS.betType) return false;
+    if(FILTERS.odds!=='all'&&_oddsBucket(e.odds)!==FILTERS.odds) return false;
+    if(FILTERS.result!=='all'&&(e.result||'P').toUpperCase()!==FILTERS.result) return false;
+    if(ps){ var k=_trDateKey(e.date); if(!k)return false; var d=new Date(k+'T00:00:00'); if(isNaN(d)||d<ps)return false; }
+    return true;
+  });
+}
+function _groupBy(list, keyFn){
+  var g={}, order=[];
+  list.forEach(function(e){ var r=(e.result||'P').toUpperCase(); if(r!=='W'&&r!=='L'&&r!=='V')return; var k=keyFn(e); if(k==null)return;
+    if(!g[k]){ g[k]={label:k,w:0,l:0,v:0,units:0,staked:0}; order.push(k); } var o=g[k];
+    if(r==='W')o.w++; else if(r==='L')o.l++; else o.v++;
+    if(r==='W'||r==='L'){ o.units+=trPL(e); o.staked+=parseFloat(e.stake)||0; } });
+  return order.map(function(k){ return g[k]; });
+}
+function calibrationHtml(list){
+  var bs=[['< 1.50',1,1.5],['1.50 - 1.99',1.5,2],['2.00 - 2.99',2,3],['3.00 - 4.99',3,5],['5.00 +',5,1e9]];
+  var rows=bs.map(function(b){ var w=0,l=0,impl=0,n=0;
+    list.forEach(function(e){ var r=(e.result||'P').toUpperCase(); if(r!=='W'&&r!=='L')return; var o=parseFloat(e.odds)||0; if(o>=b[1]&&o<b[2]){ if(r==='W')w++; else l++; impl+=1/o; n++; } });
+    if(!n)return '';
+    var actual=w/(w+l)*100, implied=impl/n*100, edge=actual-implied, cls=edge>=0?'pos':'neg';
+    return '<div class="trb-row"><div class="trb-name">'+b[0]+'</div><div class="trb-rec">'+n+' bets</div><div class="trb-u">impl '+implied.toFixed(0)+'%</div><div class="trb-roi">act '+actual.toFixed(0)+'%</div><div class="trb-roi '+cls+'">'+(edge>=0?'+':'')+edge.toFixed(0)+'%</div></div>';
+  }).join('');
+  if(!rows) return '<div class="trb-block"><div class="trb-title">Calibration</div><div class="trb-row"><div class="trb-name" style="color:var(--ink-faint);">No settled bets yet — fills as results come in.</div></div></div>';
+  return '<div class="trb-block"><div class="trb-title">Calibration · actual win% vs odds-implied (edge = beating the market)</div>'+rows+'</div>';
+}
+function setFilter(n,v){ FILTERS[n]=v; if(n==='betType') TR_FILTER=(v==='card'?'cards':(v==='parley'?'parleys':'all')); renderTrack(); }
+function resetFilters(){ FILTERS={period:'all',sport:'all',tier:'all',market:'all',betType:'all',odds:'all',result:'all'}; TR_FILTER='all'; renderTrack(); }
+function buildFilterBar(){
+  var box=document.getElementById('trFilters'); if(!box) return;
+  var sports=[],markets=[]; TR.forEach(function(e){ var s=e.sport||'Other'; if(sports.indexOf(s)<0)sports.push(s); var m=_mktKey(e); if(m&&markets.indexOf(m)<0)markets.push(m); });
+  sports.sort(); markets.sort();
+  function opt(v,cur,lbl){ return '<option value="'+esc(v)+'"'+(cur===v?' selected':'')+'>'+esc(lbl||v)+'</option>'; }
+  function many(arr,cur){ return opt('all',cur,'All')+arr.map(function(v){return opt(v,cur);}).join(''); }
+  function sel(name,label,opts){ return '<label style="display:flex;flex-direction:column;gap:4px;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;"><span>'+label+'</span><select onchange="setFilter(\''+name+'\',this.value)" style="padding:7px 9px;background:#0c0b0a;border:1px solid rgba(255,255,255,.14);border-radius:9px;color:var(--ink);font-size:12.5px;font-weight:600;min-width:104px;">'+opts+'</select></label>'; }
+  box.style.cssText='display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:2px 0 4px;';
+  box.innerHTML=
+     sel('period','Period', opt('all',FILTERS.period,'All time')+opt('7',FILTERS.period,'Last 7d')+opt('30',FILTERS.period,'Last 30d')+opt('90',FILTERS.period,'Last 90d'))
+    +sel('sport','Sport', many(sports,FILTERS.sport))
+    +sel('tier','Tier', opt('all',FILTERS.tier,'All')+opt('low',FILTERS.tier,'Low')+opt('medium',FILTERS.tier,'Medium')+opt('high',FILTERS.tier,'High'))
+    +sel('market','Market', many(markets,FILTERS.market))
+    +sel('betType','Type', opt('all',FILTERS.betType,'All')+opt('card',FILTERS.betType,'Singles')+opt('parley',FILTERS.betType,'Parleys'))
+    +sel('odds','Odds', many(['<1.50','1.50-1.99','2.00-2.99','3.00-4.99','5.00+'],FILTERS.odds))
+    +sel('result','Result', opt('all',FILTERS.result,'All')+opt('W',FILTERS.result,'Won')+opt('L',FILTERS.result,'Lost')+opt('V',FILTERS.result,'Void')+opt('P',FILTERS.result,'Pending'))
+    +'<button class="btn-secondary mini" onclick="resetFilters()" style="align-self:flex-end;">Reset</button>';
+}
 function _trDateKey(d){ var m=(d||'').match(/(\d{1,2})-(\d{1,2})-(\d{4})/); return m?(m[3]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[1]).slice(-2)):(d||''); }
 function _trKpi(v,l,cls){ return '<div class="stat"><div class="v '+(cls||'')+'">'+v+'</div><div class="l">'+l+'</div></div>'; }
 function trChartSVG(pts){
@@ -2488,7 +2558,7 @@ function renderTrackCal(daily){
 function _trKind(e){ if(e&&e.kind) return e.kind; var s=(((e&&e.selection)||'')+' '+((e&&e.match)||'')); return /parley|builder|lucky shot/i.test(s)?'parley':'card'; }
 function renderTrack(filter){
   if(filter) TR_FILTER=filter; var flt=TR_FILTER||CUR_SUB.trackrecord||'cards';
-  var all=TR.filter(function(e){ if(flt==='all')return true; var k=_trKind(e); return (flt==='cards'&&k==='card')||(flt==='parleys'&&k==='parley'); });
+  var all=applyFilters(TR).filter(function(e){ if(flt==='all')return true; var k=_trKind(e); return (flt==='cards'&&k==='card')||(flt==='parleys'&&k==='parley'); });
   var sorted=all.slice().sort(function(a,b){ var ka=_trDateKey(a.date),kb=_trDateKey(b.date); return ka<kb?-1:(ka>kb?1:((a.id||0)-(b.id||0))); });
   var staked=0,pl=0,w=0,l=0,v=0,p=0,oddsum=0,oddn=0,cum=0,pts=[];
   var byRisk={low:{label:'🟢 Low',w:0,l:0,v:0,units:0,staked:0},medium:{label:'🟡 Medium',w:0,l:0,v:0,units:0,staked:0},high:{label:'🔴 High',w:0,l:0,v:0,units:0,staked:0}};
@@ -2518,8 +2588,14 @@ function renderTrack(filter){
   var emp=document.getElementById('trEmpty'); if(emp) emp.style.display=all.length?'none':'block';
   var settled=w+l; var roi=staked?(pl/staked*100):0; var wr=settled?(w/settled*100):0; var avgodd=oddn?(oddsum/oddn):0;
   var peak=0,maxdd=0; pts.forEach(function(c){ if(c>peak)peak=c; var dd=peak-c; if(dd>maxdd)maxdd=dd; });
+  var _sk=sorted.filter(function(e){var r=(e.result||'P').toUpperCase();return r==='W'||r==='L';}); var streakN=0,streakT='';
+  for(var si=_sk.length-1;si>=0;si--){ var rr=(_sk[si].result||'').toUpperCase(); if(!streakT){streakT=rr;streakN=1;} else if(rr===streakT)streakN++; else break; }
+  var streakStr=streakN?(streakN+(streakT==='W'?'W':'L')):'-', streakCls=streakT==='W'?'pos':(streakT==='L'?'neg':'');
+  var yield_=staked?(pl/staked*100):0;
   var st=document.getElementById('trStats'); if(st){ st.innerHTML=
     _trKpi(settled+'','Bets','')+
+    _trKpi((yield_>=0?'+':'')+yield_.toFixed(1)+'%','Yield',yield_>=0?'pos':'neg')+
+    _trKpi(streakStr,'Streak',streakCls)+
     _trKpi(staked.toFixed(2)+'u','Stake','')+
     _trKpi(trUnit(pl),'Profit',pl>=0?'pos':'neg')+
     _trKpi((roi>=0?'+':'')+roi.toFixed(1)+'%','ROI',roi>=0?'pos':'neg')+
@@ -2530,7 +2606,16 @@ function renderTrack(filter){
     _trKpi(w+'W-'+l+'L'+(v?'-'+v+'V':''),'Record','')+
     _trKpi(p+'','Pending',''); }
   var ch=document.getElementById('trChart'); if(ch) ch.innerHTML='<div class="trb-title" style="margin-bottom:8px;">Profit over time (cumulative units)</div>'+trChartSVG(pts);
-  var bk=document.getElementById('trBreak'); if(bk) bk.innerHTML='<div class="trb-grid">'+trGroupHtml('By sport',Object.keys(bySport).map(function(k){return bySport[k];}))+trGroupHtml('By risk tier',[byRisk.low,byRisk.medium,byRisk.high])+trGroupHtml('By odds range',[byOdds.a,byOdds.b,byOdds.c,byOdds.d,byOdds.e])+'</div>';
+  var bk=document.getElementById('trBreak'); if(bk) bk.innerHTML='<div class="trb-grid">'
+    +trGroupHtml('By sport',Object.keys(bySport).map(function(k){return bySport[k];}))
+    +trGroupHtml('By tier',[byRisk.low,byRisk.medium,byRisk.high])
+    +trGroupHtml('By odds range',[byOdds.a,byOdds.b,byOdds.c,byOdds.d,byOdds.e])
+    +trGroupHtml('By market',_groupBy(all,_mktKey))
+    +trGroupHtml('By weekday',_groupBy(all,_dowKey))
+    +trGroupHtml('Singles vs parleys',_groupBy(all,_typeKey))
+    +'</div>';
+  var cb=document.getElementById('trCalib'); if(cb) cb.innerHTML=calibrationHtml(all);
+  try{ buildFilterBar(); }catch(e){}
   try{ renderTrackCal(daily); }catch(e){}
 }
 function addTrackManual(){
