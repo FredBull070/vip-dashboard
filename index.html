@@ -3511,9 +3511,39 @@ function saveEditDay(){
 }
 function deleteEditDay(){
   var i=_editIdx; if(i==null) return;
-  if(!confirm('Remove Day '+(i+1)+' and every day after it? This rolls the challenge back to before that day.')) return;
-  CH.history=CH.history.slice(0,i); recomputeChallenge(); closeEditDay(); renderChallenge(); showToast('Rolled back');
+  var after=CH.history.length-1-i;
+  var msg='Remove Day '+(i+1)+(after>0?(' and the '+after+' day'+(after>1?'s':'')+' after it'):'')+'?\n\nEverything before it stays exactly as it is, and the challenge continues from there.';
+  if(!confirm(msg)) return;
+  CH.history=CH.history.slice(0,i);  // keep earlier days untouched
+  if(CH.history.length){ var last=CH.history[CH.history.length-1]; CH.pot=last.potAfter; CH.day=last.day+1; CH.status='active'; }
+  else { CH.pot=CH.start||10; CH.day=1; CH.status='active'; }
+  CH.live=null; if(typeof saveCH==='function') saveCH();
+  closeEditDay(); renderChallenge(); showToast('Removed Day '+(i+1)+'. Challenge continues from Day '+CH.day+'.');
 }
+challengeRunsArchiveHtml=function(){
+  function _box(v,l){ return '<div style="flex:1;min-width:110px;background:#0c0b0a;border:1px solid var(--line2,#222);border-radius:12px;padding:12px 14px;"><div style="font-size:18px;font-weight:800;color:var(--text);">'+v+'</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;">'+l+'</div></div>'; }
+  var runs=(typeof loadChallengeRuns==='function')?loadChallengeRuns():[];
+  var all=runs.slice();
+  try{ if(typeof CH!=='undefined'&&CH&&((CH.history&&CH.history.length)||CH.status==='active')){
+    var last=(CH.history&&CH.history.length)?CH.history[CH.history.length-1]:null;
+    all.push({current:true,status:CH.status,days:(CH.history?CH.history.length:0),start:CH.start,finalPot:(last?last.potAfter:CH.start),startDate:(CH.history&&CH.history[0]?CH.history[0].date:''),endDate:(last?last.date:''),history:(CH.history||[])});
+  } }catch(e){}
+  if(!all.length) return '';
+  var attempts=all.length, furthest=0, bestPot=0;
+  all.forEach(function(r){ if((r.days||0)>furthest)furthest=r.days; if((r.finalPot||0)>bestPot)bestPot=r.finalPot; });
+  var summary='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">'+_box(attempts,'Attempts')+_box('Day '+furthest,'Furthest reached')+_box(fmtUSD(bestPot),'Best pot')+'</div>';
+  var out=all.slice().reverse().map(function(r,idx){
+    var n=all.length-idx;
+    var badge = r.current ? '<span style="background:rgba(255,122,26,.16);color:var(--accent);padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;">In progress</span>' : ((r.status==='won')?'<span class="badge b-w">Completed $1K</span>':'<span class="badge b-v">Run reset</span>');
+    var rows=(r.history||[]).map(function(x){
+      var legs=(x.legs||[]).map(function(L){return esc(_clLeg(L));}).filter(Boolean).join('<br>');
+      return '<tr><td>Day '+x.day+'</td><td>'+esc(x.date||'')+'</td><td>'+esc(x.odd||'')+'</td><td>'+(x.result==='W'?'<span class="badge b-w">Won</span>':'<span class="badge b-v">Lost</span>')+'</td><td>'+fmtUSD(x.potAfter||0)+'</td><td style="font-size:12px;color:var(--muted);line-height:1.5;">'+(legs||'&mdash;')+'</td></tr>';
+    }).join('');
+    if(!rows) rows='<tr><td colspan="6" style="color:var(--muted);">No bets settled in this run yet.</td></tr>';
+    return '<div style="margin:'+(idx?'20':'0')+'px 0 0;"><div class="section-sub" style="font-weight:700;color:#ffb27a;margin-bottom:6px;">Attempt '+n+' &middot; '+esc(r.startDate||'?')+(r.endDate&&r.endDate!==r.startDate?(' &rarr; '+esc(r.endDate)):'')+' &middot; reached Day '+(r.days||0)+'/7 &middot; pot '+fmtUSD(r.finalPot||0)+' &nbsp;'+badge+'</div><div class="tablewrap"><table><thead><tr><th>Day</th><th>Date</th><th>Odd</th><th>Result</th><th>Pot</th><th>Bet</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+  }).join('');
+  return '<section class="card"><h2 class="section-title">Challenge attempts</h2><p class="section-sub" style="margin:0 0 10px;">Every run of the $10 to $1K challenge: how far it got and the exact bets placed each day. Your live run plus every finished run, kept permanently.</p>'+summary+out+'</section>';
+};
 renderChallenge=function(){
   var st=document.getElementById('challengeStats'); if(!st) return;
   _freezeChallengeLive();
