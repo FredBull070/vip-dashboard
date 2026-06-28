@@ -1714,10 +1714,12 @@ function _evStatus(date,time){
     return {label:'Finished', color:'var(--muted)', bg:'rgba(255,255,255,.05)'};
   }catch(e){ return null; }
 }
+function _evToday(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function _evGet(sp){
+  var today=_evToday();
   var ev=window[sp.events];
   if(Object.prototype.toString.call(ev)==='[object Array]' && ev.length){
-    return ev.map(function(e){ return {match:e.match,date:e.date,time:e.time,comp:e.comp,stage:e.stage,venue:e.venue,pick:e.pick,tier:e.tier,rich:true}; });
+    return ev.filter(function(e){ return !e.date || e.date>=today; }).map(function(e){ return {match:e.match,date:e.date,time:e.time,comp:e.comp,stage:e.stage,venue:e.venue,pick:e.pick,tier:e.tier,rich:true}; });
   }
   var byKey={}, order=[], date='';
   (sp.srcs||[]).forEach(function(v){
@@ -1728,6 +1730,7 @@ function _evGet(sp){
       if(byKey[key]===undefined){ byKey[key]=mm; order.push(key); } else if(mm.length>byKey[key].length){ byKey[key]=mm; }
     });
   });
+  if(date && date<today) return [];
   return order.map(function(k){ return {match:byKey[k], date:date, rich:false}; });
 }
 function renderAllEvents(sub){

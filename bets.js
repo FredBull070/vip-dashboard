@@ -196,5 +196,5 @@ window.FOOTBALL_EVENTS = [
   {match:"Brazil x Japan", date:"2026-06-28", time:"19:00", comp:"FIFA World Cup", stage:"Round of 32", venue:"Houston", pick:"Brazil to win", tier:"Safe Builder"},
   {match:"South Africa x Canada", date:"2026-06-28", time:"21:00", comp:"FIFA World Cup", stage:"Round of 32", venue:"Los Angeles", pick:"Canada to win", tier:"Value Builder"},
   {match:"Germany x Paraguay", date:"2026-06-28", time:"22:30", comp:"FIFA World Cup", stage:"Round of 32", venue:"Foxborough", pick:"Germany to win", tier:"Safe Builder"},
-  {match:"Netherlands x Morocco", date:"2026-06-29", time:"03:00", comp:"FIFA World Cup", stage:"Round of 32", venue:"Guadalajara", pick:"Netherlands to win", tier:"Value Builder"}
+  {match:"Netherlands x Morocco", date:"2026-06-29", time:"03:00", comp:"FIFA World Cup", stage:"Round of 32", venue:"Monterrey", pick:"Netherlands to win", tier:"Value Builder"}
 ];
