@@ -39,27 +39,27 @@ The two tighter knockout ties on the slate, priced for value. Netherlands carry 
 ===NEXT MESSAGE===
 **🔴 #15 Jackpot Builder Parley: 28-06-2026**
 
-**:small_orange_diamond: Germany x Paraguay**
-Germany to win (match result) @ 1.33 - 1.40
-↳ Germany see off Paraguay.
-
 **:small_orange_diamond: Brazil x Japan**
-Brazil to win (match result) @ 1.65 - 1.75
-↳ Brazil get past Japan.
+Over 2.5 goals @ 1.78 - 1.90*
+↳ Three or more goals in the match.
 
 **:small_orange_diamond: Netherlands x Morocco**
-Netherlands to win (match result) @ 2.05 - 2.18
-↳ Netherlands edge Morocco.
+Both teams to score @ 1.85 - 2.00*
+↳ Both Netherlands and Morocco find the net.
 
 **:small_orange_diamond: South Africa x Canada**
-Canada to win (match result) @ 1.66 - 1.78
-↳ Canada beat South Africa.
+Over 2.5 goals @ 1.90 - 2.05*
+↳ Three or more goals in the match.
 
-**:moneybag: Total odds: ±7.47 - 9.50**
+**:small_orange_diamond: Germany x Paraguay**
+Over 1.5 goals @ 1.20 - 1.28*
+↳ Two or more goals in the match.
+
+**:moneybag: Total odds: ±7.51 - 9.97***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-All four favourites on day one of the Round of 32 stacked into one ticket. Each is a justified favourite in its own tie; combined they turn a strong-favourites day into a genuine jackpot price.
+A different angle from the win-based builders. The Round of 32 favourites should force open, high-tempo ties, so this ticket targets goals across all four games instead of repeating the match winners. That keeps the Jackpot a stand-alone play rather than a stack of the Safe and Value picks.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ===NEXT MESSAGE===
@@ -186,8 +186,8 @@ window.DAILY_CHALLENGE = {
   ],
   oddLow: 2.08,
   oddHigh: 2.49,
-  justification: "De drie zwaarste favorieten van de dag om door te gaan naar de volgende ronde (inclusief verlenging en penalty's), samen een veilige x2. Doorgaan is veiliger dan winnen in 90 minuten."
+  justification: "De drie zwaarste favorieten van de dag gaan door naar de volgende ronde (inclusief verlenging en penalties), samen een veilige keer twee. Doorgaan is veiliger dan winnen in de 90 minuten."
 };
 
 window.DAILY_SETTLED = [];
-window.DAILY_CHALLENGE_RESULT 
+window.DAILY_CHALLENGE_RESULT = null;
