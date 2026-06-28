@@ -1095,6 +1095,22 @@
       <div class="nmail-list" id="notifList"></div>
       <div class="nmail-detail" id="notifDetail"></div>
     </div>
+    <section class="card" id="agendaCard" style="margin-top:14px;">
+      <div class="card-head"><h2 class="section-title">Agenda</h2><div class="actions" style="margin-top:0;"><button class="btn-secondary mini" onclick="downloadAgendaICS()">Download .ics</button><button class="btn-secondary mini" onclick="copyAgendaSubscribe()">Subscribe in Google Calendar</button></div></div>
+      <p class="section-sub">All planned commitments in one place: your monthly, quarterly and yearly reviews plus your own appointments. Add any single item to Google Calendar with one click, or subscribe the whole agenda so it syncs.</p>
+      <div class="grid2" style="margin-top:10px;align-items:end;">
+        <div class="field"><label>New appointment</label><input type="text" id="agTitle" placeholder="e.g. Sponsor call"></div>
+        <div class="field"><label>Date &amp; time</label><input type="datetime-local" id="agWhen"></div>
+      </div>
+      <div class="actions"><button class="btn" onclick="addAgendaItem()">Add to agenda</button></div>
+      <div id="agendaList" style="margin-top:14px;"></div>
+    </section>
+    <section class="card" id="todoCard" style="margin-top:14px;">
+      <div class="card-head"><h2 class="section-title">To-do</h2></div>
+      <p class="section-sub">Your open tasks. Check them off when done.</p>
+      <div class="actions" style="margin-top:6px;"><input type="text" id="todoInput" placeholder="Add a task..." style="flex:1 1 auto;min-width:200px;" onkeydown="if(event.key==='Enter')addTodo()"><button class="btn" onclick="addTodo()">Add</button></div>
+      <div id="todoList" style="margin-top:12px;"></div>
+    </section>
     </div>
     </div>
   </main>
@@ -1705,7 +1721,7 @@ function showPage(id){
   if(id==='education'){ try{ renderEdu(); }catch(e){} }
   if(id==='nurturing'){ try{ renderNurt(); }catch(e){} }
   if(id==='custom'){ try{ renderCustomPreview(); }catch(e){} }
-  if(id==='notifications'){ try{ renderNotifsPage(); }catch(e){} }
+  if(id==='notifications'){ try{ renderNotifsPage(); }catch(e){} try{ renderAgenda(); }catch(e){} try{ renderTodos(); }catch(e){} }
   if((id==='journal'||id==='bankroll'||id==='trackrecord') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
   if(id==='allevents'){ try{ renderAllEvents(); }catch(e){} }
@@ -3702,7 +3718,7 @@ function _todayStr(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMo
 function _weekStr(){ var d=new Date(); var t=new Date(d.getFullYear(),d.getMonth(),d.getDate()); var day=(t.getDay()+6)%7; t.setDate(t.getDate()-day+3); var firstThu=new Date(t.getFullYear(),0,4); var wk=1+Math.round(((t-firstThu)/86400000-3+((firstThu.getDay()+6)%7))/7); return t.getFullYear()+'-W'+('0'+wk).slice(-2); }
 function _cleanTitle(t){ return (t||'').split('\n')[0].replace(/\*\*/g,'').replace(/:[a-z_]+:/g,'').trim(); }
 var NITEMS=[];
-var NOTIF_TYPES=[['ready','New lists ready','When today\'s parley lists are built and ready to review and send.'],['msg','Parley send reminders','One reminder per parley (Safe, Value, Jackpot) waiting to be sent.'],['cards','Daily cards ready','When the Daily Betting Cards are ready to send.'],['chbet','Challenge bet ready','The day\'s challenge bet, ready for the Challenge channel.'],['chres','Challenge result','A challenge result ready to share in VIP results.'],['chupdate','Challenge member update','The casual member update for the Challenge channel.'],['results','Settled results','Graded results ready to share in VIP results.'],['perf','Weekly performance','A reminder to send the weekly performance report.'],['edu','Education reminder','Twice-a-week reminder to post an education piece.']];
+var NOTIF_TYPES=[['ready','New lists ready','When today\'s parley lists are built and ready to review and send.'],['msg','Parley send reminders','One reminder per parley (Safe, Value, Jackpot) waiting to be sent.'],['cards','Daily cards ready','When the Daily Betting Cards are ready to send.'],['chbet','Challenge bet ready','The day\'s challenge bet, ready for the Challenge channel.'],['chres','Challenge result','A challenge result ready to share in VIP results.'],['chupdate','Challenge member update','The casual member update for the Challenge channel.'],['results','Settled results','Graded results ready to share in VIP results.'],['perf','Weekly performance','A reminder to send the weekly performance report.'],['edu','Education reminder','Twice-a-week reminder to post an education piece.'],['review','Performance reviews','Monthly, quarterly and yearly reminders to review your track record data and develop your edge.']];
 function notifTypeOn(kind){ if(!kind) return true; return localStorage.getItem('ba_notiftype_'+kind)!=='off'; }
 function toggleNotifType(kind){ var cb=document.getElementById('ntype_'+kind); if(!cb) return; var on=cb.checked; localStorage.setItem('ba_notiftype_'+kind, on?'on':'off'); var st=document.getElementById('ntype_status_'+kind); if(st){ st.textContent=on?'On':'Off'; st.className='auto-status '+(on?'on':'off'); } try{ renderNotifs(); }catch(e){} try{ renderNotifsPage(); }catch(e){} if(typeof showToast==='function') showToast('Notifications updated'); }
 function renderNotifTypes(){ var b=document.getElementById('notifTypesBox'); if(!b) return; b.innerHTML=NOTIF_TYPES.map(function(t){ var on=notifTypeOn(t[0]); return '<div class="auto-row"><div class="auto-info"><div class="auto-name">'+t[1]+'</div><div class="auto-desc">'+t[2]+'</div></div><div style="display:flex;align-items:center;gap:11px;flex:0 0 auto;"><span class="auto-status '+(on?'on':'off')+'" id="ntype_status_'+t[0]+'">'+(on?'On':'Off')+'</span><label class="switch"><input type="checkbox" id="ntype_'+t[0]+'" '+(on?'checked':'')+' onchange="toggleNotifType(\''+t[0]+'\')"><span class="slider"></span></label></div></div>'; }).join(''); }
@@ -3716,6 +3732,11 @@ function buildNotifs(){
   try{ var settled=(typeof TR!=='undefined'&&TR)?TR.filter(function(e){var r=(e.result||'').toUpperCase(); return (r==='W'||r==='L'||r==='V') && !(typeof SHARED!=='undefined'&&SHARED['tr'+e.id]);}):[]; if(settled.length) add({key:'results|'+_todayStr(),kind:'results',title:settled.length+' result'+(settled.length>1?'s':'')+' ready to share',sub:'to VIP results channel'}); }catch(e){}
   try{ add({key:'perf|'+_weekStr(),kind:'perf',title:'Weekly performance report',sub:'reminder, to VIP results channel',text:(typeof buildPerfMessage==='function'?buildPerfMessage('weekly'):'')}); }catch(e){}
   try{ var dow=new Date().getDay(); if(dow===1||dow===4){ add({key:'edu|'+_todayStr(),kind:'edu',title:'Education post due (2x per week)',sub:'reminder, pick a post to share'}); } }catch(e){}
+  try{ var _rv=new Date(), _ry=_rv.getFullYear(), _rm=_rv.getMonth();
+    add({key:'review-m|'+_ry+'-'+('0'+(_rm+1)).slice(-2),kind:'review',title:'Monthly performance review',sub:'open Track Record: check ROI, yield & calibration and adjust volume where the edge is'});
+    if(_rm===0||_rm===3||_rm===6||_rm===9){ add({key:'review-q|'+_ry+'-Q'+(Math.floor(_rm/3)+1),kind:'review',title:'Quarterly strategy review (Q'+(Math.floor(_rm/3)+1)+' '+_ry+')',sub:'deep-dive: which sports, markets and tiers carry your edge - scale there, trim the rest'}); }
+    if(_rm===0){ add({key:'review-y|'+_ry,kind:'review',title:'Yearly strategy review ('+_ry+')',sub:'full-year ROI, yield, drawdown and edge review; set the plan and targets for the year'}); }
+  }catch(e){}
   if(_sd){ try{ localStorage.setItem('ba_notif_seen', JSON.stringify(SEEN)); }catch(e){} }
   NITEMS=items; return items;
 }
@@ -3730,7 +3751,7 @@ function renderNotifs(){
     html+='<div class="notif-item'+(it.read?' is-read':'')+'"><div class="nt-title">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div class="nt-sub">'+esc(it.sub)+' &middot; '+_fmtTime(it.seen)+(it.read?' &middot; read '+_fmtTime(it.readAt):'')+'</div>';
     if(it.text){ html+='<div class="nt-prev disc">'+renderDiscord(applyTokens(it.text))+'</div>'; }
     html+='<div class="nt-actions">';
-    if(it.kind!=='edu'&&it.kind!=='ready') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+    if(it.kind!=='edu'&&it.kind!=='ready'&&it.kind!=='review') html+='<button class="btn mini" onclick="notifSend(\''+it.key+'\')">Send now</button>';
     html+='<button class="btn-secondary mini" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
     html+= it.read? '<button class="btn-ghost mini" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost mini" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>';
     html+='</div></div>';
@@ -3758,11 +3779,12 @@ function notifOpen(key){
   else if(it.kind==='results'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','cards'); },130); }
   else if(it.kind==='perf'){ showPage('vip'); setTimeout(function(){ if(typeof showSub==='function') showSub('vip','performance'); },130); }
   else if(it.kind==='edu') showPage('education');
+  else if(it.kind==='review') showPage('trackrecord');
 }
 function notifDismiss(key){ markSent(key); }
 function toggleNotifs(ev){ if(ev) ev.stopPropagation(); var p=document.getElementById('notifPanel'); if(!p) return; if(p.style.display==='none'||!p.style.display){ renderNotifs(); p.style.display='block'; } else p.style.display='none'; }
 function closeNotifs(){ var p=document.getElementById('notifPanel'); if(p) p.style.display='none'; }
-function notifItemHtml(it){ var s='<section class="card" style="margin-bottom:12px;'+(it.read?'opacity:.6;':'')+'"><div style="font-weight:700;font-size:14px;">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div style="color:var(--muted);font-size:12px;margin-bottom:9px;">'+esc(it.sub)+'</div>'; if(it.text){ s+='<div class="disc" style="margin-bottom:10px;">'+renderDiscord(applyTokens(it.text))+'</div>'; } s+='<div class="actions" style="margin:0;">'; if(it.kind!=='edu'&&it.kind!=='ready') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>'; s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>'; s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>'; s+='</div></section>'; return s; }
+function notifItemHtml(it){ var s='<section class="card" style="margin-bottom:12px;'+(it.read?'opacity:.6;':'')+'"><div style="font-weight:700;font-size:14px;">'+(it.read?'':'<span class="nt-dot"></span>')+esc(it.title)+(it.read?' <span class="nt-read">read</span>':'')+'</div><div style="color:var(--muted);font-size:12px;margin-bottom:9px;">'+esc(it.sub)+'</div>'; if(it.text){ s+='<div class="disc" style="margin-bottom:10px;">'+renderDiscord(applyTokens(it.text))+'</div>'; } s+='<div class="actions" style="margin:0;">'; if(it.kind!=='edu'&&it.kind!=='ready'&&it.kind!=='review') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>'; s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>'; s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>'; s+='</div></section>'; return s; }
 var _notifSel=null;
 function renderNotifsPage(){
   var list=document.getElementById('notifList'); if(!list) return;
@@ -3782,7 +3804,7 @@ function renderNotifDetail(key){
   if(it.text){ s+='<div class="disc" style="margin-bottom:14px;">'+renderDiscord(applyTokens(it.text))+'</div>'; }
   else { s+='<p class="section-sub" style="margin:0 0 14px;">No preview for this item. Use Open tab to handle it.</p>'; }
   s+='<div class="actions" style="margin:0;">';
-  if(it.kind!=='edu'&&it.kind!=='ready') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>';
+  if(it.kind!=='edu'&&it.kind!=='ready'&&it.kind!=='review') s+='<button class="btn" onclick="notifSend(\''+it.key+'\')">Send now</button>';
   s+='<button class="btn-secondary" onclick="notifOpen(\''+it.key+'\')">Open tab</button>';
   s+= it.read? '<button class="btn-ghost" onclick="notifMarkUnread(\''+it.key+'\')">Mark unread</button>' : '<button class="btn-ghost" onclick="notifMarkRead(\''+it.key+'\')">Mark read</button>';
   s+='<button class="btn-ghost ndel" onclick="notifDelete(\''+it.key+'\')">Delete</button>';
@@ -3790,6 +3812,80 @@ function renderNotifDetail(key){
   d.innerHTML=s;
 }
 function openNotif(key){ _notifSel=key; try{ markSent(key); }catch(e){} renderNotifsPage(); }
+/* ---- Agenda + To-do (Notifications tab), linkable to Google Calendar ---- */
+function _agLoad(k){ try{ return JSON.parse(localStorage.getItem(k)||'[]'); }catch(e){ return []; } }
+function _agSave(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+function _icsDate(d){ return d.getUTCFullYear()+('0'+(d.getUTCMonth()+1)).slice(-2)+('0'+d.getUTCDate()).slice(-2)+'T'+('0'+d.getUTCHours()).slice(-2)+('0'+d.getUTCMinutes()).slice(-2)+'00Z'; }
+function _agRecurring(){
+  var now=new Date(), y=now.getFullYear(), m=now.getMonth();
+  var nm=new Date(y, m+1, 1, 9, 0);
+  var qIdx=Math.floor(m/3), qNextM=(qIdx+1)*3, qy=y; if(qNextM>11){ qNextM=0; qy++; }
+  var nq=new Date(qy, qNextM, 1, 9, 0);
+  var ny=new Date(y+1, 0, 1, 9, 0);
+  return [
+    {id:'rev-m', title:'Monthly performance review', when:nm.toISOString(), repeat:'monthly', fixed:true, details:'Open the Track Record. Check ROI, yield and calibration for the past month and adjust volume where the edge is.'},
+    {id:'rev-q', title:'Quarterly strategy review', when:nq.toISOString(), repeat:'quarterly', fixed:true, details:'Deep-dive the data: which sports, markets and tiers carry your edge. Scale there, trim the rest.'},
+    {id:'rev-y', title:'Yearly strategy review', when:ny.toISOString(), repeat:'yearly', fixed:true, details:'Full-year ROI, yield, drawdown and edge review. Set the plan and targets for the year.'}
+  ];
+}
+function _agendaAll(){
+  var custom=_agLoad('ba_agenda').map(function(x){ return {id:x.id,title:x.title,when:x.when,details:x.details||'',custom:true}; });
+  return _agRecurring().concat(custom).filter(function(x){ return x.when; }).sort(function(a,b){ return new Date(a.when)-new Date(b.when); });
+}
+function _gcalLink(title, whenISO, details, repeat){
+  var d=new Date(whenISO), s=_icsDate(d), e=_icsDate(new Date(d.getTime()+3600000));
+  var u='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+s+'/'+e+'&details='+encodeURIComponent(details||'');
+  if(repeat){ var r={monthly:'MONTHLY',quarterly:'MONTHLY;INTERVAL=3',yearly:'YEARLY'}[repeat]; if(r) u+='&recur='+encodeURIComponent('RRULE:FREQ='+r); }
+  return u;
+}
+function renderAgenda(){
+  var box=document.getElementById('agendaList'); if(!box) return; var items=_agendaAll();
+  if(!items.length){ box.innerHTML='<p class="section-sub" style="margin:0;">No appointments yet.</p>'; return; }
+  box.innerHTML=items.map(function(it){
+    var d=new Date(it.when);
+    var ds=d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})+(it.fixed?'':' · '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}));
+    var rep=it.repeat?(' <span class="pill">'+it.repeat+'</span>'):'';
+    return '<div class="trb-row" style="align-items:center;gap:10px;"><div class="trb-name" style="flex:1 1 auto;">'+esc(it.title)+rep+'<div style="font-size:11.5px;color:var(--ink-faint);margin-top:2px;">'+esc(ds)+'</div></div>'
+      +'<a class="btn-secondary mini" target="_blank" rel="noopener" href="'+_gcalLink(it.title,it.when,it.details,it.repeat)+'">+ Google Calendar</a>'
+      +(it.custom?'<button class="btn-ghost mini" onclick="delAgenda(\''+it.id+'\')">✕</button>':'')
+      +'</div>';
+  }).join('');
+}
+function addAgendaItem(){
+  var t=document.getElementById('agTitle'), w=document.getElementById('agWhen'); if(!t||!w) return;
+  if(!t.value.trim()||!w.value){ showToast('Add a title and date', false); return; }
+  var arr=_agLoad('ba_agenda'); arr.push({id:'c'+Date.now(), title:t.value.trim(), when:new Date(w.value).toISOString()}); _agSave('ba_agenda',arr);
+  t.value=''; w.value=''; renderAgenda(); showToast('Added to agenda');
+}
+function delAgenda(id){ _agSave('ba_agenda', _agLoad('ba_agenda').filter(function(x){return x.id!==id;})); renderAgenda(); }
+function buildAgendaICS(){
+  var lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//BetLife365//Agenda//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:BetLife365 Agenda'];
+  _agendaAll().forEach(function(it){ var d=new Date(it.when);
+    lines.push('BEGIN:VEVENT','UID:'+it.id+'-'+_icsDate(d)+'@betlife365','DTSTAMP:'+_icsDate(new Date()),'DTSTART:'+_icsDate(d),'DTEND:'+_icsDate(new Date(d.getTime()+3600000)),'SUMMARY:'+(it.title||'').replace(/[,;\\]/g,' '));
+    if(it.details) lines.push('DESCRIPTION:'+it.details.replace(/[,;\\\n]/g,' '));
+    if(it.repeat){ var r={monthly:'MONTHLY',quarterly:'MONTHLY;INTERVAL=3',yearly:'YEARLY'}[it.repeat]; if(r) lines.push('RRULE:FREQ='+r); }
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR'); return lines.join('\r\n');
+}
+function downloadAgendaICS(){
+  try{ var blob=new Blob([buildAgendaICS()],{type:'text/calendar'}); var u=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=u; a.download='betlife365-agenda.ics'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(u);},1500);
+    showToast('Agenda .ics downloaded — import it in Google Calendar (Settings > Import)');
+  }catch(e){ showToast('Could not build .ics', false); }
+}
+function copyAgendaSubscribe(){
+  var url=location.origin+'/agenda.ics';
+  try{ navigator.clipboard.writeText(url); showToast('Subscribe URL copied. In Google Calendar: Other calendars > From URL > paste.'); }catch(e){ window.prompt('Subscribe URL — add it in Google Calendar > Other calendars > From URL:', url); }
+}
+function renderTodos(){
+  var box=document.getElementById('todoList'); if(!box) return; var arr=_agLoad('ba_todos');
+  if(!arr.length){ box.innerHTML='<p class="section-sub" style="margin:0;">No open tasks.</p>'; return; }
+  box.innerHTML=arr.map(function(t){ return '<div class="trb-row" style="align-items:center;gap:10px;"><label style="display:flex;align-items:center;gap:9px;flex:1 1 auto;cursor:pointer;"><input type="checkbox" '+(t.done?'checked':'')+' onchange="toggleTodo(\''+t.id+'\')"><span style="'+(t.done?'text-decoration:line-through;color:var(--ink-faint);':'')+'">'+esc(t.text)+'</span></label><button class="btn-ghost mini" onclick="delTodo(\''+t.id+'\')">✕</button></div>'; }).join('');
+}
+function addTodo(){ var i=document.getElementById('todoInput'); if(!i||!i.value.trim()) return; var arr=_agLoad('ba_todos'); arr.push({id:'t'+Date.now(),text:i.value.trim(),done:false}); _agSave('ba_todos',arr); i.value=''; renderTodos(); }
+function toggleTodo(id){ var arr=_agLoad('ba_todos'); arr.forEach(function(t){ if(t.id===id) t.done=!t.done; }); _agSave('ba_todos',arr); renderTodos(); }
+function delTodo(id){ _agSave('ba_todos', _agLoad('ba_todos').filter(function(t){return t.id!==id;})); renderTodos(); }
 var _undoT, _undoFn=null;
 function showUndo(msg, fn){ var t=document.getElementById('undoToast'); if(!t){ return; } var m=document.getElementById('undoMsg'); if(m) m.textContent=msg; _undoFn=fn; t.classList.add('show'); clearTimeout(_undoT); _undoT=setTimeout(function(){ t.classList.remove('show'); _undoFn=null; }, 6000); }
 function doUndo(){ var t=document.getElementById('undoToast'); if(t) t.classList.remove('show'); clearTimeout(_undoT); if(_undoFn){ var f=_undoFn; _undoFn=null; f(); } }

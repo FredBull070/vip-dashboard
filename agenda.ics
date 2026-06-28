@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BetLife365//Agenda//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:BetLife365 Reviews
+X-WR-TIMEZONE:Europe/Amsterdam
+BEGIN:VEVENT
+UID:rev-monthly@betlife365
+DTSTAMP:20260629T080000Z
+DTSTART:20260701T070000Z
+DTEND:20260701T080000Z
+RRULE:FREQ=MONTHLY;BYMONTHDAY=1
+SUMMARY:BetLife365 - Monthly performance review
+DESCRIPTION:Open the Track Record. Check ROI yield and calibration for the past month and adjust volume where the edge is.
+END:VEVENT
+BEGIN:VEVENT
+UID:rev-quarterly@betlife365
+DTSTAMP:20260629T080000Z
+DTSTART:20260701T070000Z
+DTEND:20260701T083000Z
+RRULE:FREQ=MONTHLY;INTERVAL=3
+SUMMARY:BetLife365 - Quarterly strategy review
+DESCRIPTION:Deep-dive the data which sports markets and tiers carry your edge. Scale there trim the rest.
+END:VEVENT
+BEGIN:VEVENT
+UID:rev-yearly@betlife365
+DTSTAMP:20260629T080000Z
+DTSTART:20270101T070000Z
+DTEND:20270101T090000Z
+RRULE:FREQ=YEARLY
+SUMMARY:BetLife365 - Yearly strategy review
+DESCRIPTION:Full-year ROI yield drawdown and edge review. Set the plan and targets for the year.
+END:VEVENT
+END:VCALENDAR
