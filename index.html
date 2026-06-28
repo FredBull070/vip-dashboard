@@ -1187,7 +1187,7 @@ let messages = [];
 
 function setStatus(msg, cls){ var el=document.getElementById('topStatus'); if(!el) return; el.className='top-status '+(cls||''); el.innerHTML=msg; }
 function log(msg, cls){ const el=document.getElementById('log'); if(!el) return; const t=new Date().toLocaleTimeString('nl-NL'); el.innerHTML += '\n<span class="'+(cls||'')+'">['+t+'] '+msg+'</span>'; el.scrollTop=el.scrollHeight; }
-function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(k).join(EMOJI[k]); } s=s.replace(/&lt;#\d+&gt;/g,'<span class="chan">#vip-upgrade</span>'); return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
 
 const CHANNELS = ['PARLEY','LUCKY'];
