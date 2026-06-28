@@ -1626,6 +1626,7 @@ function toggleSidebar(){ var s=document.getElementById('sidebar'); var b=docume
 function closeSidebar(){ var s=document.getElementById('sidebar'); var b=document.getElementById('sideBackdrop'); if(s)s.classList.remove('open'); if(b)b.classList.remove('show'); }
 var SUBTABS={
   today:[['bets','All'],['SAFE','🟢 Safe'],['VALUE','🟡 Value'],['JACKPOT','🔴 Jackpot'],['FREE','🎁 Free'],['LUCKY','👑 Lucky'],['edit','Edit lists']],
+  allevents:[['all','All'],['football','⚽ Football'],['tennis','🎾 Tennis'],['nba','🏀 NBA'],['nfl','🏈 NFL'],['nhl','🏒 NHL']],
   journal:[['mybets','Your bets'],['results','Results'],['bankroll','Bankroll']],
   settings:[['channels','Channels'],['vip','VIP & links'],['notif','Notifications'],['io','Import / Export'],['log','Activity log']],
   archive:[['list','List'],['cal','Calendar']],
@@ -1652,6 +1653,7 @@ function showSub(page, sub){
   if(page==='journal'){ ['mybets','results','bankroll'].forEach(function(p){ var el=document.getElementById('page-'+p); if(el) el.style.display=(p===sub)?'block':'none'; }); if(sub==='bankroll'&&typeof renderBankroll==='function'){try{renderBankroll();}catch(e){}} }
   else if(page==='settings'){ ['set-channels','set-vip','set-notif','set-io'].forEach(function(s){ var el=document.getElementById(s); if(el) el.style.display=(s==='set-'+sub)?'block':'none'; }); var pc=document.getElementById('page-channels'); var pl=document.getElementById('page-log'); if(pc) pc.style.display=(sub==='log')?'none':'block'; if(pl) pl.style.display=(sub==='log')?'block':'none'; if(sub==='notif'){ try{ renderNotifTypes(); }catch(e){} } }
   else if(page==='archive'){ if(typeof setArchiveView==='function') setArchiveView(sub); }
+  else if(page==='allevents'){ try{ renderAllEvents(sub); }catch(e){} }
   else if(page==='today'){ var ed=document.getElementById('today-edit'); var bw=document.getElementById('today-bets'); if(sub==='edit'){ if(ed)ed.style.display='block'; if(bw)bw.style.display='none'; } else { if(ed)ed.style.display='none'; if(bw)bw.style.display='block'; dailyFilter(sub); } }
   else if(page==='betcards'){ var bv=document.getElementById('betcards-visual'); var bp=document.getElementById('betcards-preview'); var be=document.getElementById('betcards-edit'); if(sub==='preview'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='block'; if(be)be.style.display='none'; renderCards(); } else if(sub==='edit'){ if(bv)bv.style.display='none'; if(bp)bp.style.display='none'; if(be)be.style.display='block'; } else { if(bv)bv.style.display='block'; if(bp)bp.style.display='none'; if(be)be.style.display='none'; renderCards(); cardsFilter(sub); } }
   else if(page==='trackrecord'){ var tl=document.getElementById('tr-log'); if(tl)tl.style.display='block'; renderTrack(sub); }
@@ -1700,50 +1702,85 @@ function _evMatchesFromText(t){
   var re2=/MATCH:\s*([^\n]+)/g; while((m=re2.exec(t))){ out.push(m[1].trim()); }
   return out;
 }
-function renderAllEvents(){
-  var host=document.getElementById('allEventsView'); if(!host) return;
-  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  var SPORTS=[
-    {name:'Football', emoji:'⚽', srcs:['DAILY_CARDS']},
-    {name:'Tennis', emoji:'🎾', srcs:['DAILY_TENNIS','DAILY_TENNIS_CARDS']},
-    {name:'Basketball · NBA', emoji:'🏀', srcs:['DAILY_NBA','DAILY_NBA_CARDS']},
-    {name:'American Football · NFL', emoji:'🏈', srcs:['DAILY_NFL','DAILY_NFL_CARDS']},
-    {name:'Ice Hockey · NHL', emoji:'🏒', srcs:['DAILY_NHL','DAILY_NHL_CARDS']}
-  ];
-  var html='', total=0, anyDate='';
-  SPORTS.forEach(function(sp){
-    var byKey={}, order=[], date='';
-    sp.srcs.forEach(function(v){
-      var t=window[v];
-      if(!date && typeof t==='string'){ var dm=t.match(/(\d{2}-\d{2}-\d{4})/); if(dm) date=dm[1]; }
-      _evMatchesFromText(t).forEach(function(mm){
-        var key=mm.toLowerCase().replace(/\([^)]*\)/g,'').replace(/[^a-z0-9]/g,''); if(!key) return;
-        if(byKey[key]===undefined){ byKey[key]=mm; order.push(key); }
-        else if(mm.length>byKey[key].length){ byKey[key]=mm; }
-      });
+function _evDayLabel(d){ try{ var dt=new Date(d+"T00:00:00"); if(isNaN(dt)) return d; return dt.toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short'}); }catch(e){ return d; } }
+function _evStatus(date,time){
+  if(!date) return null;
+  try{
+    var start=new Date(date+"T"+((time&&/^\d{1,2}:\d{2}$/.test(time))?time:"00:00")+":00");
+    if(isNaN(start)) return null;
+    var diff=(start-new Date())/60000;
+    if(diff>0){ var cd=diff<60?('in '+Math.max(1,Math.round(diff))+'m'):('in '+Math.floor(diff/60)+'h '+Math.round(diff%60)+'m'); return {label:'Upcoming · '+cd, color:'#36c08a', bg:'rgba(54,192,138,.14)'}; }
+    if(diff>-180) return {label:'Live now', color:'#ff7a1a', bg:'rgba(255,122,26,.16)'};
+    return {label:'Finished', color:'var(--muted)', bg:'rgba(255,255,255,.05)'};
+  }catch(e){ return null; }
+}
+function _evGet(sp){
+  var ev=window[sp.events];
+  if(Object.prototype.toString.call(ev)==='[object Array]' && ev.length){
+    return ev.map(function(e){ return {match:e.match,date:e.date,time:e.time,comp:e.comp,stage:e.stage,venue:e.venue,pick:e.pick,tier:e.tier,rich:true}; });
+  }
+  var byKey={}, order=[], date='';
+  (sp.srcs||[]).forEach(function(v){
+    var t=window[v];
+    if(!date && typeof t==='string'){ var dm=t.match(/(\d{2})-(\d{2})-(\d{4})/); if(dm) date=dm[3]+'-'+dm[2]+'-'+dm[1]; }
+    _evMatchesFromText(t).forEach(function(mm){
+      var key=mm.toLowerCase().replace(/\([^)]*\)/g,'').replace(/[^a-z0-9]/g,''); if(!key) return;
+      if(byKey[key]===undefined){ byKey[key]=mm; order.push(key); } else if(mm.length>byKey[key].length){ byKey[key]=mm; }
     });
-    var list=order.map(function(k){return byKey[k];});
-    if(!list.length) return;
-    total+=list.length; if(date&&!anyDate) anyDate=date;
-    html+='<section class="card" style="margin-bottom:14px">'+
-      '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">'+
-        '<h2 class="section-title" style="margin:0">'+sp.emoji+'  '+esc(sp.name)+'</h2>'+
-        '<span style="font-size:12px;color:var(--muted);background:rgba(255,255,255,.06);border-radius:999px;padding:4px 11px;white-space:nowrap">'+list.length+' '+(list.length===1?'game':'games')+(date?' · '+esc(date):'')+'</span>'+
-      '</div>'+
-      '<div style="display:flex;flex-direction:column;gap:6px">'+
-      list.map(function(mm){
-        return '<div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)">'+
-          '<span style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto"></span>'+
-          '<span style="font-weight:600;color:var(--text)">'+esc(mm)+'</span>'+
-        '</div>';
-      }).join('')+
-      '</div></section>';
+  });
+  return order.map(function(k){ return {match:byKey[k], date:date, rich:false}; });
+}
+function renderAllEvents(sub){
+  var host=document.getElementById('allEventsView'); if(!host) return;
+  sub=sub||(CUR_SUB&&CUR_SUB.allevents)||'all';
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var SP=[
+    {key:'football', name:'Football', emoji:'⚽', events:'FOOTBALL_EVENTS', srcs:['DAILY_CARDS']},
+    {key:'tennis', name:'Tennis', emoji:'🎾', events:'TENNIS_EVENTS', srcs:['DAILY_TENNIS','DAILY_TENNIS_CARDS']},
+    {key:'nba', name:'Basketball · NBA', emoji:'🏀', events:'NBA_EVENTS', srcs:['DAILY_NBA','DAILY_NBA_CARDS']},
+    {key:'nfl', name:'American Football · NFL', emoji:'🏈', events:'NFL_EVENTS', srcs:['DAILY_NFL','DAILY_NFL_CARDS']},
+    {key:'nhl', name:'Ice Hockey · NHL', emoji:'🏒', events:'NHL_EVENTS', srcs:['DAILY_NHL','DAILY_NHL_CARDS']}
+  ];
+  function card(e,sp){
+    var st=e.rich?_evStatus(e.date,e.time):null;
+    var meta=[];
+    if(e.date) meta.push('🗓 '+esc(_evDayLabel(e.date)));
+    meta.push('🕒 '+(e.time?esc(e.time)+' NL':'time TBC'));
+    if(e.venue) meta.push('📍 '+esc(e.venue));
+    var comp=[e.comp,e.stage].filter(Boolean).join(' · ');
+    var top=(sub==='all'?sp.emoji+'  ':'')+(comp?esc(comp):esc(sp.name));
+    return '<div style="padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:7px">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">'
+        +'<span style="font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)">'+top+'</span>'
+        +(st?'<span style="font-size:11px;font-weight:700;color:'+st.color+';background:'+st.bg+';border-radius:999px;padding:3px 10px;white-space:nowrap">'+esc(st.label)+'</span>':'')
+      +'</div>'
+      +'<div style="font-weight:700;color:var(--text);font-size:15.5px">'+esc(e.match)+'</div>'
+      +'<div style="color:var(--muted);font-size:13px">'+meta.join('     ')+'</div>'
+      +(e.pick?'<div style="font-size:12.5px;color:var(--muted)">Our pick: <b style="color:var(--text);font-weight:600">'+esc(e.pick)+'</b>'+(e.tier?' · '+esc(e.tier):'')+'</div>':'')
+    +'</div>';
+  }
+  var labels={all:'every sport',football:'Football',tennis:'Tennis',nba:'NBA',nfl:'NFL',nhl:'NHL'};
+  var sections='', total=0;
+  SP.forEach(function(sp){
+    if(sub!=='all' && sub!==sp.key) return;
+    var evs=_evGet(sp); if(!evs.length) return;
+    evs.sort(function(a,b){ var ka=(a.date||'9999')+(a.time||'99:99'), kb=(b.date||'9999')+(b.time||'99:99'); return ka<kb?-1:(ka>kb?1:0); });
+    total+=evs.length;
+    var anyRich=evs.some(function(e){return e.rich;});
+    sections+='<section class="card" style="margin-bottom:14px">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">'
+        +'<h2 class="section-title" style="margin:0">'+sp.emoji+'  '+esc(sp.name)+'</h2>'
+        +'<span style="font-size:12px;color:var(--muted);background:rgba(255,255,255,.06);border-radius:999px;padding:4px 11px;white-space:nowrap">'+evs.length+' '+(evs.length===1?'game':'games')+'</span>'
+      +'</div>'
+      +(anyRich?'':'<p class="section-sub" style="margin:-4px 0 10px;font-size:12.5px">Start times and details fill in here once this sport’s list is rebuilt.</p>')
+      +'<div style="display:flex;flex-direction:column;gap:8px">'+evs.map(function(e){return card(e,sp);}).join('')+'</div>'
+    +'</section>';
   });
   if(!total){
-    host.innerHTML='<section class="card"><h2 class="section-title">No upcoming events yet</h2><p class="section-sub">As soon as today’s list is built for any sport (football, tennis, NBA, NFL or NHL), the upcoming games show up here automatically, grouped per sport.</p></section>';
+    host.innerHTML='<section class="card"><h2 class="section-title">No '+(sub==='all'?'':esc(labels[sub]||sub)+' ')+'events yet</h2><p class="section-sub">As soon as the list for '+(sub==='all'?'any sport':esc(labels[sub]||sub))+' is built, the upcoming games show up here with their day, start time and details.</p></section>';
     return;
   }
-  host.innerHTML='<p class="section-sub" style="margin:-2px 0 16px">The games we are covering'+(anyDate?', for '+esc(anyDate):'')+', grouped per sport. This updates automatically as each sport’s list is built.</p>'+html;
+  host.innerHTML='<p class="section-sub" style="margin:-2px 0 16px">Upcoming games we are covering across '+esc(labels[sub]||'every sport')+'. Each game shows the day, start time (NL), competition and our pick, and updates automatically as the lists are built.</p>'+sections;
 }
 
 function detectSport(t){
