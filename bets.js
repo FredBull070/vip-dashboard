@@ -186,17 +186,215 @@ window.DAILY_CHALLENGE = {
 };
 
 window.DAILY_SETTLED = [
-  { betid: "card|2026-06-26|Norway x France|France to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Match result", selection: "France to win", odds: 1.50, stake: 2, risk: "low", result: "W" },
-  { betid: "card|2026-06-26|New Zealand x Belgium|Belgium to win", kind: "card", date: "2026-06-26", sport: "Football", match: "New Zealand x Belgium", market: "Match result", selection: "Belgium to win", odds: 1.36, stake: 2, risk: "low", result: "W" },
-  { betid: "card|2026-06-26|Uruguay x Spain|Spain to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain", market: "Match result", selection: "Spain to win", odds: 1.65, stake: 1.5, risk: "medium", result: "W" },
-  { betid: "card|2026-06-26|Egypt x Iran|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Egypt x Iran", market: "Total goals", selection: "Over 2.5 goals", odds: 1.90, stake: 1, risk: "medium", result: "L" },
-  { betid: "card|2026-06-26|Norway x France|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Norway x France", market: "Total goals", selection: "Over 2.5 goals", odds: 1.65, stake: 1, risk: "medium", result: "W" },
-  { betid: "card|2026-06-26|Uruguay x Spain|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain", market: "Total goals", selection: "Over 2.5 goals", odds: 1.90, stake: 0.75, risk: "medium", result: "L" },
-  { betid: "card|2026-06-26|Cape Verde x Saudi Arabia|Saudi Arabia to win", kind: "card", date: "2026-06-26", sport: "Football", match: "Cape Verde x Saudi Arabia", market: "Match result", selection: "Saudi Arabia to win", odds: 2.20, stake: 0.5, risk: "high", result: "L" },
-  { betid: "card|2026-06-26|Cape Verde x Saudi Arabia|Over 2.5 goals", kind: "card", date: "2026-06-26", sport: "Football", match: "Cape Verde x Saudi Arabia", market: "Total goals", selection: "Over 2.5 goals", odds: 2.00, stake: 0.5, risk: "high", result: "L" },
-  { betid: "parley|2026-06-26|#7 Safe Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + New Zealand x Belgium", market: "Accumulator", selection: "#7 Safe Builder Parley: 26-06-2026", odds: 2.04, stake: 2, risk: "low", result: "W" },
-  { betid: "parley|2026-06-26|#8 Value Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Uruguay x Spain + Egypt x Iran", market: "Accumulator", selection: "#8 Value Builder Parley: 26-06-2026", odds: 3.14, stake: 0.75, risk: "medium", result: "L" },
-  { betid: "parley|2026-06-26|#9 Jackpot Builder Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + Uruguay x Spain + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "#9 Jackpot Builder Parley: 26-06-2026", odds: 8.00, stake: 0.25, risk: "high", result: "L" },
-  { betid: "parley|2026-06-26|Lucky Shot Parley: 26-06-2026", kind: "parley", date: "2026-06-26", sport: "Football", match: "Norway x France + New Zealand x Belgium + Uruguay x Spain + Egypt x Iran + Cape Verde x Saudi Arabia", market: "Accumulator", selection: "Lucky Shot Parley: 26-06-2026", odds: 103, stake: 0.1, risk: "high", result: "L" }
+  {
+    "betid": "card|2026-06-26|Norway x France|France to win",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Norway x France",
+    "market": "Match result",
+    "selection": "France to win",
+    "odds": 1.5,
+    "stake": 2.0,
+    "risk": "low",
+    "result": "W",
+    "evidence": {
+      "score": "Norway 1-4 France",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "card|2026-06-26|New Zealand x Belgium|Belgium to win",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "New Zealand x Belgium",
+    "market": "Match result",
+    "selection": "Belgium to win",
+    "odds": 1.36,
+    "stake": 2.0,
+    "risk": "low",
+    "result": "W",
+    "evidence": {
+      "score": "New Zealand 1-5 Belgium",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "card|2026-06-26|Egypt x Iran|Over 2.5 goals",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Egypt x Iran",
+    "market": "Total goals",
+    "selection": "Over 2.5 goals",
+    "odds": 1.9,
+    "stake": 1.0,
+    "risk": "medium",
+    "result": "L",
+    "evidence": {
+      "score": "Egypt 1-1 Iran",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "card|2026-06-26|Norway x France|Over 2.5 goals",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Norway x France",
+    "market": "Total goals",
+    "selection": "Over 2.5 goals",
+    "odds": 1.65,
+    "stake": 1.0,
+    "risk": "medium",
+    "result": "W",
+    "evidence": {
+      "score": "Norway 1-4 France",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "card|2026-06-26|Cape Verde x Saudi Arabia|Saudi Arabia to win",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Cape Verde x Saudi Arabia",
+    "market": "Match result",
+    "selection": "Saudi Arabia to win",
+    "odds": 2.2,
+    "stake": 0.5,
+    "risk": "high",
+    "result": "L",
+    "evidence": {
+      "score": "Cape Verde 0-0 Saudi Arabia",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "card|2026-06-26|Cape Verde x Saudi Arabia|Over 2.5 goals",
+    "kind": "card",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Cape Verde x Saudi Arabia",
+    "market": "Total goals",
+    "selection": "Over 2.5 goals",
+    "odds": 2.0,
+    "stake": 0.5,
+    "risk": "high",
+    "result": "L",
+    "evidence": {
+      "score": "Cape Verde 0-0 Saudi Arabia",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "parley|2026-06-26|#7 Safe Builder Parley: 26-06-2026",
+    "kind": "parley",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Norway x France + New Zealand x Belgium",
+    "market": "Accumulator",
+    "selection": "#7 Safe Builder Parley: 26-06-2026",
+    "odds": 2.04,
+    "stake": 2.0,
+    "risk": "low",
+    "result": "W",
+    "evidence": {
+      "score": "Norway x France: Norway 1-4 France (W) | New Zealand x Belgium: New Zealand 1-5 Belgium (W)",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "parley|2026-06-26|#8 Value Builder Parley: 26-06-2026",
+    "kind": "parley",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Uruguay x Spain + Egypt x Iran",
+    "market": "Accumulator",
+    "selection": "#8 Value Builder Parley: 26-06-2026",
+    "odds": 3.14,
+    "stake": 0.75,
+    "risk": "medium",
+    "result": "L",
+    "evidence": {
+      "score": "Uruguay x Spain: Uruguay ?-? Spain (P) | Egypt x Iran: Egypt 1-1 Iran (L)",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "parley|2026-06-26|#9 Jackpot Builder Parley: 26-06-2026",
+    "kind": "parley",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Norway x France + Uruguay x Spain + Cape Verde x Saudi Arabia",
+    "market": "Accumulator",
+    "selection": "#9 Jackpot Builder Parley: 26-06-2026",
+    "odds": 8.0,
+    "stake": 0.25,
+    "risk": "high",
+    "result": "L",
+    "evidence": {
+      "score": "Norway x France: Norway 1-4 France (W) | Uruguay x Spain: Uruguay ?-? Spain (P) | Cape Verde x Saudi Arabia: Cape Verde 0-0 Saudi Arabia (L)",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  },
+  {
+    "betid": "parley|2026-06-26|Lucky Shot Parley: 26-06-2026",
+    "kind": "parley",
+    "date": "2026-06-26",
+    "sport": "Football",
+    "match": "Norway x France + New Zealand x Belgium + Uruguay x Spain + Egypt x Iran + Cape Verde x Saudi Arabia",
+    "market": "Accumulator",
+    "selection": "Lucky Shot Parley: 26-06-2026",
+    "odds": 103.0,
+    "stake": 0.1,
+    "risk": "high",
+    "result": "L",
+    "evidence": {
+      "score": "Norway x France: Norway 1-4 France (W) | New Zealand x Belgium: New Zealand 1-5 Belgium (W) | Uruguay x Spain: Uruguay ?-? Spain (P) | Egypt x Iran: Egypt 1-1 Iran (L) | Cape Verde x Saudi Arabia: Cape Verde 0-0 Saudi Arabia (L)",
+      "confirmed_by": [
+        "ESPN",
+        "TheSportsDB"
+      ],
+      "fetched_at": "2026-06-28T22:35:00Z"
+    }
+  }
 ];
-window.DAILY_CHALLENGE_RESULT = {date: "2026-06-26", result: "W"};
+window.DAILY_CHALLENGE_RESULT = {"date": "2026-06-26", "result": "W"};
