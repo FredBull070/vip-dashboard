@@ -485,6 +485,7 @@
       <button class="nav-item active" data-page="today" onclick="showPage('today')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> Daily Parley Tips</button>
       <button class="nav-item" data-page="betcards" onclick="showPage('betcards')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="16" rx="2"/><path d="M7 5V3h14v16h-2"/></svg></span> Daily Betting Cards</button>
       <button class="nav-item" data-page="challenge" onclick="showPage('challenge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/></svg></span> Challenges</button>
+      <button class="nav-item" data-page="allevents" onclick="showPage('allevents')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span> All Events</button>
       <div class="side-section">Discord</div>
       <button class="nav-item" data-page="vip" onclick="showPage('vip')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> VIP results</button>
       <button class="nav-item" data-page="education" onclick="showPage('education')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span> Education</button>
@@ -692,6 +693,9 @@
       <h2 class="section-title">Doubling schedule</h2>
       <div class="tablewrap"><table id="challengeSchedule"><thead><tr><th>Day</th><th>Stake</th><th>Target on win</th></tr></thead><tbody></tbody></table></div>
     </section>
+    </div>
+<div class="page" id="page-allevents" style="display:none">
+    <div id="allEventsView"></div>
     </div>
 <div class="page" id="page-custom" style="display:none">
     <section class="card">
@@ -1603,6 +1607,7 @@ var PAGE_META={
   today:["Daily Parley Tips","Today's parleys, grouped by type and ready to send."],
   edit:["Edit lists","Edit today's raw messages."],
   challenge:["Challenges","$10 to $1,000 in 7 days: all-in on the safest x2 each day, doubling the pot."],
+  allevents:["All Events","Upcoming games across every sport we cover, grouped per sport."],
   betcards:["Daily Betting Cards","All of today's value picks as single cards. Customers build their own slip."],
   journal:["Betting journal","Grade your bets, track results and manage your bankroll."],
   custom:["Messaging","Free text to your CUSTOM channel."],
@@ -1683,10 +1688,62 @@ function showPage(id){
   if(id==='notifications'){ try{ renderNotifsPage(); }catch(e){} }
   if((id==='journal'||id==='bankroll'||id==='trackrecord') && typeof renderBankroll==='function'){ try{ renderBankroll(); }catch(e){} }
   if(id==='challenge' && typeof renderChallenge==='function'){ try{ renderChallenge(); }catch(e){} }
+  if(id==='allevents'){ try{ renderAllEvents(); }catch(e){} }
   if(id==='archive'){ if(typeof renderArchiveSelect==='function'){ try{ renderArchiveSelect(); }catch(e){} } if(_archiveView==='cal' && typeof renderArchiveCal==='function'){ try{ renderArchiveCal(); }catch(e){} } }
   try{ if(id) localStorage.setItem('ba_page', id); }catch(e){}
   try{ renderNotifs(); }catch(e){}
   try{ window.scrollTo(0,0); }catch(e){}
+}
+function _evMatchesFromText(t){
+  var out=[]; if(typeof t!=='string'||!t) return out; var m;
+  var re=/:small_orange_diamond:\s*([^\n]+?)\s*\*\*/g; while((m=re.exec(t))){ out.push(m[1].trim()); }
+  var re2=/MATCH:\s*([^\n]+)/g; while((m=re2.exec(t))){ out.push(m[1].trim()); }
+  return out;
+}
+function renderAllEvents(){
+  var host=document.getElementById('allEventsView'); if(!host) return;
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var SPORTS=[
+    {name:'Football', emoji:'⚽', srcs:['DAILY_CARDS']},
+    {name:'Tennis', emoji:'🎾', srcs:['DAILY_TENNIS','DAILY_TENNIS_CARDS']},
+    {name:'Basketball · NBA', emoji:'🏀', srcs:['DAILY_NBA','DAILY_NBA_CARDS']},
+    {name:'American Football · NFL', emoji:'🏈', srcs:['DAILY_NFL','DAILY_NFL_CARDS']},
+    {name:'Ice Hockey · NHL', emoji:'🏒', srcs:['DAILY_NHL','DAILY_NHL_CARDS']}
+  ];
+  var html='', total=0, anyDate='';
+  SPORTS.forEach(function(sp){
+    var byKey={}, order=[], date='';
+    sp.srcs.forEach(function(v){
+      var t=window[v];
+      if(!date && typeof t==='string'){ var dm=t.match(/(\d{2}-\d{2}-\d{4})/); if(dm) date=dm[1]; }
+      _evMatchesFromText(t).forEach(function(mm){
+        var key=mm.toLowerCase().replace(/\([^)]*\)/g,'').replace(/[^a-z0-9]/g,''); if(!key) return;
+        if(byKey[key]===undefined){ byKey[key]=mm; order.push(key); }
+        else if(mm.length>byKey[key].length){ byKey[key]=mm; }
+      });
+    });
+    var list=order.map(function(k){return byKey[k];});
+    if(!list.length) return;
+    total+=list.length; if(date&&!anyDate) anyDate=date;
+    html+='<section class="card" style="margin-bottom:14px">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">'+
+        '<h2 class="section-title" style="margin:0">'+sp.emoji+'  '+esc(sp.name)+'</h2>'+
+        '<span style="font-size:12px;color:var(--muted);background:rgba(255,255,255,.06);border-radius:999px;padding:4px 11px;white-space:nowrap">'+list.length+' '+(list.length===1?'game':'games')+(date?' · '+esc(date):'')+'</span>'+
+      '</div>'+
+      '<div style="display:flex;flex-direction:column;gap:6px">'+
+      list.map(function(mm){
+        return '<div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)">'+
+          '<span style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto"></span>'+
+          '<span style="font-weight:600;color:var(--text)">'+esc(mm)+'</span>'+
+        '</div>';
+      }).join('')+
+      '</div></section>';
+  });
+  if(!total){
+    host.innerHTML='<section class="card"><h2 class="section-title">No upcoming events yet</h2><p class="section-sub">As soon as today’s list is built for any sport (football, tennis, NBA, NFL or NHL), the upcoming games show up here automatically, grouped per sport.</p></section>';
+    return;
+  }
+  host.innerHTML='<p class="section-sub" style="margin:-2px 0 16px">The games we are covering'+(anyDate?', for '+esc(anyDate):'')+', grouped per sport. This updates automatically as each sport’s list is built.</p>'+html;
 }
 
 function detectSport(t){
