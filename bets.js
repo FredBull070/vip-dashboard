@@ -17,7 +17,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 **:mortar_board: Strategy Breakdown:**
 Two of the strongest sides in the bracket open the knockout rounds as clear favourites. Germany controlled their group and Paraguay sit deep, while Brazil's attacking quality should overwhelm a Japan side that has to chase the game.
 
-**:bank: Bankroll:** 2u stake (2 - 3% of bankroll)===NEXT MESSAGE===**🟡 #14 Value Builder Parley: 28-06-2026**
+**:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
+===NEXT MESSAGE===
+**🟡 #14 Value Builder Parley: 28-06-2026**
 
 **:small_orange_diamond: Netherlands x Morocco**
 Netherlands to win (match result) @ 2.05 - 2.18
@@ -33,7 +35,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 **:mortar_board: Strategy Breakdown:**
 The two tighter knockout ties on the slate, priced for value. Netherlands carry far more firepower than Morocco even if the underdog defends well, and Canada's home advantage and squad depth make them the rightful favourite against South Africa.
 
-**:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)===NEXT MESSAGE===**🔴 #15 Jackpot Builder Parley: 28-06-2026**
+**:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
+===NEXT MESSAGE===
+**🔴 #15 Jackpot Builder Parley: 28-06-2026**
 
 **:small_orange_diamond: Germany x Paraguay**
 Germany to win (match result) @ 1.33 - 1.40
@@ -57,7 +61,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 **:mortar_board: Strategy Breakdown:**
 All four favourites on day one of the Round of 32 stacked into one ticket. Each is a justified favourite in its own tie; combined they turn a strong-favourites day into a genuine jackpot price.
 
-**:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)===NEXT MESSAGE===**:gift: FREE BET OF THE DAY | 28-06-2026**
+**:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
+===NEXT MESSAGE===
+**:gift: FREE BET OF THE DAY | 28-06-2026**
 
 :soccer: Sport of the day: Football
 
@@ -79,7 +85,9 @@ Two of the strongest sides in the bracket open the knockout rounds as clear favo
 :green_circle: This is only our **Safe Builder**, the lowest risk play. VIP members also got the Value Builder, the Jackpot Builder, the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
-:warning: 18+ | play responsibly===NEXT MESSAGE===**👑 Lucky Shot Parley: 28-06-2026**
+:warning: 18+ | play responsibly
+===NEXT MESSAGE===
+**👑 Lucky Shot Parley: 28-06-2026**
 
 **:small_orange_diamond: Brazil x Japan**
 Brazil to win to nil (win + clean sheet) @ 2.70 - 3.00*
@@ -182,4 +190,4 @@ window.DAILY_CHALLENGE = {
 };
 
 window.DAILY_SETTLED = [];
-window.DAILY_CHALLENGE_RESULT = null;
+window.DAILY_CHALLENGE_RESULT 
