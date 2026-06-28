@@ -967,6 +967,45 @@
       </ul>
     </section>
   </div>
+  <div id="kn-research" style="display:none">
+    <section class="card">
+      <h2 class="section-title">Market positioning</h2>
+      <p class="section-sub" style="margin:0 0 8px;">What makes BetLife365 different from the average tipster, and why that wins long term:</p>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>Transparency as the product</b>: every bet logged in units, no deleted bets, no cherry picking, a public auditable track record. Most tipsters hide losses; our honesty is the moat.</li>
+        <li><b>A system, not "locks"</b>: structured positions by risk (Safe/Value/Jackpot), unit staking and a bankroll framework. We sell discipline and process.</li>
+        <li><b>Education included</b>: members learn to run the method themselves, which builds trust and retention.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Audience, funnel and pricing</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>Target</b>: disciplined bettors who manage a bankroll and think long term, not chase-gamblers.</li>
+        <li><b>Funnel</b>: one free pick per day in Discord (no card needed) at the top, then VIP for the full slate, builders, lucky shot and the challenge.</li>
+        <li><b>Conversion hook</b>: the $10 to $1K challenge is public proof that compounds, the strongest reason to upgrade.</li>
+        <li><b>Pricing</b>: VIP at $80 / month.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">How we research the bets</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>Anchor odds on bet365.nl and oddschecker.com; conservative ranges, estimates marked with *.</li>
+        <li>Build once the key info is known (order of play, confirmed line-ups, starting goalie, inactives).</li>
+        <li>Favourite-led builders with decorrelation (no team carries more than one builder), one selection per match.</li>
+        <li>International football is the priority while a major tournament runs.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2 class="section-title">Research and findings log</h2>
+      <p class="section-sub" style="margin:0 0 8px;">A running log of research and analysis. New findings get added here with a date.</p>
+      <div class="tablewrap"><table><thead><tr><th>Date</th><th>Finding</th></tr></thead><tbody>
+        <tr><td>28-06-2026</td><td>Build-timing: NL afternoon equals US morning, so NBA/NHL/NFL builds at 15:00-16:00 NL can run before US line-ups are final. Consider moving those later.</td></tr>
+        <tr><td>28-06-2026</td><td>June 2026 is the FIFA World Cup group stage (USA/Canada/Mexico). International football is the lead sport during the tournament.</td></tr>
+        <tr><td>27-06-2026</td><td>World Cup final group day (Groups J, K, L). Used for the daily slate: Argentina, England, Croatia as the safe favourites.</td></tr>
+      </tbody></table></div>
+      <p class="section-sub" style="margin:8px 0 0;">I add market research, competitor notes and data findings here whenever we do them, so it stays in one place.</p>
+    </section>
+  </div>
     </div>
 <div class="page" id="page-notifications" style="display:none">
     <section class="card">
@@ -1529,7 +1568,7 @@ var SUBTABS={
   trackrecord:[['cards','\ud83c\udccf Daily Cards'],['parleys','\ud83c\udfaf Parleys'],['all','All']],
   education:[['mindset','🧭 Mindset'],['psychology','🧠 Psychology'],['strategy','🎯 Strategy'],['bankroll','🏦 Bankroll'],['probability','🎲 Probability']],
   automations:[['routine','Daily routine'],['backups','Backups & Notion'],['notify','Notifications & reminders'],['safeguards','Safeguards']],
-  knowledge:[['overview','📋 Overview'],['build','🗓️ Daily build'],['discord','💬 Discord'],['challenge','🚀 Challenge'],['ops','🛡️ Operations'],['rules','📜 Rules & to-do']],
+  knowledge:[['overview','📋 Overview'],['build','🗓️ Daily build'],['discord','💬 Discord'],['challenge','🚀 Challenge'],['ops','🛡️ Operations'],['research','🔎 Research'],['rules','📜 Rules & to-do']],
   vip:[['performance','📣 Performance report'],['cards','🏆 Result cards'],['challenge','🚀 Challenge'],['cardsresult','🃏 Card results']],
   nurturing:[['welcome','🚀 Welcome'],['proof','📊 Proof'],['value','💎 VIP value'],['urgency','⏳ Urgency'],['reengage','🔁 Re-engage'],['flex','🏆 Results']]
 };
@@ -1554,7 +1593,7 @@ function showSub(page, sub){
   else if(page==='education'){ if(typeof renderEdu==='function') renderEdu(sub); }
   else if(page==='nurturing'){ if(typeof renderNurt==='function') renderNurt(sub); }
   else if(page==='automations'){ ['routine','backups','notify','safeguards'].forEach(function(s){ var el=document.getElementById('auto-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); try{ renderAutoToggles(); }catch(e){} }
-  else if(page==='knowledge'){ ['overview','build','discord','challenge','ops','rules'].forEach(function(s){ var el=document.getElementById('kn-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
+  else if(page==='knowledge'){ ['overview','build','discord','challenge','ops','research','rules'].forEach(function(s){ var el=document.getElementById('kn-'+s); if(el) el.style.display=(s===sub)?'block':'none'; }); }
   else if(page==='vip'){ var vp=document.getElementById('vip-perf'); var vc=document.getElementById('vip-cards'); var vch=document.getElementById('vip-challenge'); var vcr=document.getElementById('vip-cardsresult'); [vp,vc,vch,vcr].forEach(function(x){ if(x)x.style.display='none'; }); if(sub==='cards'){ if(vc)vc.style.display='block'; if(typeof renderShare==='function') renderShare(); } else if(sub==='challenge'){ if(vch)vch.style.display='block'; if(typeof renderChallengeShare==='function') renderChallengeShare(); } else if(sub==='cardsresult'){ if(vcr)vcr.style.display='block'; if(typeof renderCardsResult==='function') renderCardsResult(); } else { if(vp)vp.style.display='block'; if(typeof renderTrackShare==='function') renderTrackShare(); } }
 }
 function dailyFilter(sub){
