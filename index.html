@@ -3424,7 +3424,15 @@ challengeLoss=async function(){
 };
 if(typeof setChallengePick==='function'){
   var _origSetPick=setChallengePick;
-  setChallengePick=function(v){ try{ if(typeof CH!=='undefined'&&CH){ CH.live=null; if(typeof saveCH==='function') saveCH(); } }catch(e){} return _origSetPick(v); };
+  setChallengePick=function(v){
+    try{ if(typeof CH!=='undefined'&&CH){ CH.live=null; if(typeof saveCH==='function') saveCH(); } }catch(e){}
+    var r=_origSetPick(v);
+    // keep every challenge preview + the notification center in sync with the chosen bet
+    try{ if(typeof buildNotifs==='function') buildNotifs(); }catch(e){}
+    try{ if(typeof renderNotifs==='function') renderNotifs(); }catch(e){}
+    try{ if(typeof renderNotifsPage==='function') renderNotifsPage(); }catch(e){}
+    return r;
+  };
 }
 challengeHistoryHtml=function(){
   if(typeof CH==='undefined'||!CH||!CH.history.length) return '';
