@@ -495,6 +495,7 @@
     <div class="side-foot">
       <button class="nav-item" data-page="automations" onclick="showPage('automations')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span> Automations</button>
       <button class="nav-item" data-page="notifications" onclick="showPage('notifications')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span> Notifications</button>
+      <button class="nav-item" data-page="knowledge" onclick="showPage('knowledge')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span> Knowledge</button>
       <button class="nav-item" data-page="settings" onclick="showPage('settings')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span> Settings</button>
       <button class="nav-item" onclick="logoutDash()"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span> Log out</button>
     </div>
@@ -822,6 +823,135 @@
       </ul>
     </section>
     </div>
+    </div>
+<div class="page" id="page-knowledge" style="display:none">
+    <section class="card">
+      <h2 class="section-title">How BetLife365 runs</h2>
+      <p class="section-sub" style="margin:0 0 6px;">Your single reference for the whole setup: hosting, the daily build per sport, the challenge, backups and the house rules. Last updated 28 June 2026.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">1. The two live sites</h2>
+      <p class="section-sub" style="margin:0 0 8px;">Everything runs on Cloudflare Pages, each connected to a GitHub repo. Any push to a repo deploys automatically. A no-cache rule makes new versions show for everyone on the next refresh (no hard refresh needed).</p>
+      <div class="tablewrap"><table><thead><tr><th>What</th><th>Address</th><th>GitHub repo</th></tr></thead><tbody>
+        <tr><td>Public website (landing, member zone, terms, privacy)</td><td>betlife365.com + www.betlife365.com</td><td>FredBull070/betlife365</td></tr>
+        <tr><td>VIP dashboard (this control panel) + all bets data</td><td>dashboard.betlife365.com</td><td>FredBull070/vip-dashboard</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">2. How the bets data works</h2>
+      <p class="section-sub" style="margin:0 0 8px;">The dashboard code (index.html) and the bets are kept separate. The daily tasks only write the bets files, never the dashboard, so a build can never break the dashboard.</p>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>bets.js</b> = football (the main daily slate + the challenge bet)</li>
+        <li><b>bets-tennis.js, bets-nba.js, bets-nfl.js, bets-nhl.js</b> = one file per sport</li>
+        <li><b>ticker.json</b> = the mixed-sport ticker on the landing page</li>
+        <li>The dashboard reads these live, so the Daily Parley Tips, Cards, Challenge and ticker always show the latest deployed bets.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">3. When the bets are built (per sport)</h2>
+      <p class="section-sub" style="margin:0 0 8px;">All times are local (NL). The rule is the same everywhere: build as late as possible once the key info is known (order of play, line-ups, goalie, injuries/inactives), but well before kickoff so it is shareable.</p>
+      <div class="tablewrap"><table><thead><tr><th>Sport</th><th>Time</th><th>Days / season</th><th>Why</th></tr></thead><tbody>
+        <tr><td>Football</td><td>10:07 daily</td><td>all year</td><td>Morning build so the full slate is live before afternoon/evening kickoffs. (Odds helper runs 09:09.)</td></tr>
+        <tr><td>Tennis</td><td>09:33 daily</td><td>all year</td><td>Once the day's order of play is published.</td></tr>
+        <tr><td>NBA</td><td>16:00</td><td>daily, Oct-Jun</td><td>When the slate and injury reports are in.</td></tr>
+        <tr><td>NHL</td><td>15:00</td><td>daily, Oct-Jun</td><td>When confirmed line-ups and the starting goalie are known.</td></tr>
+        <tr><td>NFL</td><td>15:00</td><td>Sun/Mon/Thu, Sep-Feb</td><td>When inactives (about 90 min pre-game) and lines are set.</td></tr>
+        <tr><td>Settlement</td><td>from 19:00, then every 30 min to ~02:00</td><td>all year</td><td>Grades results about 10 min after games finish, updates Notion + dashboard.</td></tr>
+      </tbody></table></div>
+      <p class="section-sub" style="margin:8px 0 0;color:#ffb27a;">Note: NL afternoon = US morning, so for NBA/NHL/NFL the build can run before US line-ups are final. These can be moved later if needed.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">4. What gets built each day</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li><b>Safe Builder</b> (total odds 2.00 to 3.00), <b>Value Builder</b> (3.00 to 6.00), <b>Jackpot Builder</b> (6.00 to 12.00)</li>
+        <li><b>Free Bet of the day</b> (a copy of the Safe Builder, the only public pick)</li>
+        <li><b>Lucky Shot</b> (extreme long shot, total 100+)</li>
+        <li><b>Daily Betting Cards</b> (single picks grouped by risk) and the <b>$10 to $1K challenge bet</b></li>
+        <li>Bookmaker rule: max one selection per match in any parley (NL bookies block two markets from the same match). Each leg comes from a different game.</li>
+        <li>Decorrelation: no team carries more than one Builder.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">5. The Discord server</h2>
+      <p class="section-sub" style="margin:0 0 8px;">Server: BetLife365 (invite discord.gg/sVxE2yqvBu). Nothing is posted automatically; you send each message yourself from this dashboard. Where each thing goes:</p>
+      <div class="tablewrap"><table><thead><tr><th>Channel</th><th>Access</th><th>What goes here</th></tr></thead><tbody>
+        <tr><td>#daily-free-bet</td><td>Public</td><td>The one free pick of the day (a copy of the Safe Builder).</td></tr>
+        <tr><td>#daily-parley-tips</td><td>VIP</td><td>Safe, Value and Jackpot Builders.</td></tr>
+        <tr><td>#daily-betting-cards</td><td>VIP</td><td>The Daily Betting Cards (single picks by risk).</td></tr>
+        <tr><td>#10-1k-challenge</td><td>VIP</td><td>The daily challenge bet and the member updates.</td></tr>
+        <tr><td>#lucky-shot</td><td>VIP</td><td>The Lucky Shot long shot.</td></tr>
+        <tr><td>#vip-track-record</td><td>VIP</td><td>Settled result recaps (the proof, for conversion).</td></tr>
+        <tr><td>#education</td><td>VIP</td><td>Education posts, about twice a week.</td></tr>
+        <tr><td>#vip-upgrade</td><td>Public</td><td>The upgrade call to action that the free posts link to.</td></tr>
+        <tr><td>#who-we-are, #announcements, #rules, #disclaimer, #chat</td><td>Public/Community</td><td>Info, rules and community.</td></tr>
+      </tbody></table></div>
+      <p class="section-sub" style="margin:8px 0 0;">Every free/public post ends with the 18+ and responsible-gambling line and a link to upgrade.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">6. The $10 to $1K challenge</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>One safe doubler (x2 or higher) per day, all-in. Seven wins in a row turns $10 into over $1,000. One loss resets the run to $10.</li>
+        <li>On the Challenge page you: send the day's bet, mark it Won or Lost (you see the exact bet first), and share the result to VIP or to members.</li>
+        <li><b>History</b>: every day shows the exact matches, with Share to VIP, Share to members and Edit per day.</li>
+        <li><b>Edit</b> fixes a day's result or matches; <b>Remove</b> deletes a day and everything after it, keeping earlier days exactly as they are.</li>
+        <li><b>Challenge attempts</b> (bottom of the page): every run, how far it got and the bets placed, with summary stats.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">7. Backups and the publication guarantee</h2>
+      <p class="section-sub" style="margin:0 0 8px;">After the June 27 build failed silently, the daily task was hardened so this cannot happen unnoticed:</p>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>Backs up to <b>Notion</b> first (the ledger never falls behind), then deploys.</li>
+        <li>After deploy it <b>verifies</b> the live file shows today's date, retries once, and sends a <b>loud alert</b> if publishing still fails.</li>
+        <li>Keeps a dated <b>archive copy</b> (archive/bets-YYYY-MM-DD.js) as a second backup. With the git history that is three independent copies per day.</li>
+        <li>You get a notification after every run.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">8. Members, payments and login</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>VIP is <b>$80 / month</b> via Stripe. Stripe activation is waiting on your KvK; until then the member zone falls back gracefully and nothing breaks.</li>
+        <li>Member zone: email signup and Google sign-in, edit contact details, change password, manage the subscription. Built to AVG/GDPR with Terms and Privacy pages live.</li>
+        <li>Free members get one daily pick in Discord; VIP gets the full slate, builders, lucky shot and the challenge before kickoff.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">9. Good to know about this dashboard</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>The dashboard is login-protected (only you). Cloudflare Access (an extra email-only lock) is available to add on top.</li>
+        <li>Your challenge progress and edits are stored <b>per browser</b> (local storage), so they do not sync across devices unless we move that to the shared file. Use one main browser, or ask to enable shared sync.</li>
+        <li>Code updates are visible to everyone on the next refresh thanks to the no-cache rule.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">10. House rules</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>Nothing is auto-posted to Discord. You always send yourself.</li>
+        <li>The track record stays fully transparent: every bet logged, no deleted bets, no cherry picking, and no backdating bets after results are known.</li>
+        <li>No em-dash anywhere in the content.</li>
+        <li>18+ and responsible gambling on everything public.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">11. Still open</h2>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);font-size:13px;line-height:1.7;">
+        <li>Activate Stripe once the KvK is sorted, then plug in the payment link and customer portal.</li>
+        <li>Optional: Cloudflare Access on the dashboard (only your email).</li>
+        <li>Optional: shared challenge state across all your devices.</li>
+        <li>Optional: move the US-sport builds later so they catch final line-ups.</li>
+      </ul>
+    </section>
     </div>
 <div class="page" id="page-notifications" style="display:none">
     <section class="card">
@@ -1365,6 +1495,7 @@ var PAGE_META={
   nurturing:["Nurturing","Warm up free members and leads toward VIP with value-first nurturing messages."],
   automations:["Automations","Everything BetLife365 runs for you automatically."],
   notifications:["Notifications","Everything that is ready to share, in one place."],
+  knowledge:["Knowledge","How everything runs: website, dashboard, Discord, schedules and rules."],
   education:["Education","Value posts for your members, ready to send about 2x a week."],
   trackrecord:["Track Record","Daily Cards are the main focus. Parleys live in their own tab. Auto-settled in units and ROI."],
   vip:["VIP results","Your public showroom: performance reports and result cards that convert non members into VIP."],
