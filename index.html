@@ -1084,7 +1084,7 @@
     </div>
   </main>
 </div>
-<script>['bets.js','bets-tennis.js','bets-nba.js','bets-nfl.js','bets-nhl.js'].forEach(function(f){document.write('<scr'+'ipt src="'+f+'?t='+Date.now()+'"><\/scr'+'ipt>');});</script>
+<script>['bets.js','bets-tennis.js','bets-nba.js','bets-nfl.js','bets-nhl.js','trackrecord_history.js'].forEach(function(f){document.write('<scr'+'ipt src="'+f+'?t='+Date.now()+'"><\/scr'+'ipt>');});</script>
 <script>
 
 
@@ -3673,6 +3673,30 @@ function autoSeedTrack(){
     if(changed){ if(typeof saveTR==='function') saveTR(); try{ renderTrack(); }catch(e){} try{ renderNotifs(); }catch(e){} }
   }catch(e){}
 }
+/* ---- Backfilled historical track record (imported 1:1 from Discord posts) ---- */
+function seedHistory(){
+  try{
+    if(typeof TR==='undefined' || !TR) return;
+    if(typeof window.TRACK_HISTORY==='undefined' || !window.TRACK_HISTORY) return;
+    var H=window.TRACK_HISTORY, changed=false;
+    function dm(iso){ var p=(iso||'').split('-'); return p.length===3 ? p[2]+'-'+p[1]+'-'+p[0] : iso; }
+    function rid(){ return Date.now()+Math.floor(Math.random()*1000000); }
+    (H.cards||[]).forEach(function(c){
+      var date=dm(c.date); var betid='card|'+date+'|'+c.match+'|'+c.selection;
+      if(TR.some(function(e){ return (e.betid||'')===betid; })) return;
+      TR.push({ id:rid(), betid:betid, kind:'card', date:date, sport:c.sport||'Football', match:c.match, market:c.market||'', selection:c.selection||'', odds:(c.odds||'').toString(), stake:(c.stake||0).toString(), result:'P', risk:(c.tier==='Core'?'low':(c.tier==='Opportunity'?'high':'medium')), history:true });
+      changed=true;
+    });
+    (H.parleys||[]).forEach(function(p){
+      var date=dm(p.date); var betid='parley|'+date+'|'+p.id;
+      if(TR.some(function(e){ return (e.betid||'')===betid; })) return;
+      var teams=(p.legs||[]).map(function(l){ return l.match; }).join(' + ');
+      TR.push({ id:rid(), betid:betid, kind:'parley', date:date, sport:p.sport||'Football', match:teams||'Multi', market:'Accumulator', selection:p.id, odds:(p.odds||'').toString(), stake:(p.stake||0).toString(), result:'P', risk:(p.tier==='Safe'?'low':(p.tier==='Value'?'medium':'high')), history:true });
+      changed=true;
+    });
+    if(changed){ if(typeof saveTR==='function') saveTR(); try{ renderTrack(); }catch(e){} try{ renderNotifs(); }catch(e){} }
+  }catch(e){}
+}
 /* ---- Auto-settlement merge (filled by the evening settlement task) ---- */
 function mergeSettled(){
   try{
@@ -3946,6 +3970,7 @@ applyChallengeResult=function(){
 function logoutDash(){ try{ sessionStorage.removeItem('ba_auth'); }catch(e){} location.reload(); }
 
 try{ autoSeedTrack(); }catch(e){}
+try{ seedHistory(); }catch(e){}
 try{ mergeSettled(); }catch(e){}
 try{ applyChallengeResult(); }catch(e){}
 showPage((function(){ try{ var p=localStorage.getItem('ba_page'); return p||'today'; }catch(e){ return 'today'; } })());
