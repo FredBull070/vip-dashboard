@@ -372,7 +372,7 @@ window.DAILY_PROPS_SETTLED = [];
     if(!Array.isArray(chunks)) return chunks;
     return chunks.map(function(ch){
       if(typeof ch!=='string') return ch;
-      return ch.split('\n').map(function(l){
+      var out=ch.split('\n').map(function(l){
         if(l.indexOf('→')>=0){
           return l.replace(/Conservative/g,'Safe').replace(/\bBalanced\b/g,'Value').replace(/Aggressive/g,'Jackpot')
                   .replace(/focus on Core Positions/gi,'lowest risk positions')
@@ -381,6 +381,10 @@ window.DAILY_PROPS_SETTLED = [];
         }
         return l.replace(/CORE POSITIONS/gi,'SAFE BUILDER CARDS').replace(/BALANCED POSITIONS/gi,'VALUE BUILDER CARDS').replace(/(AGGRESSIVE|OPPORTUNITY) POSITIONS/gi,'JACKPOT BUILDER CARDS');
       }).join('\n');
+      var TL=out.split('\n');
+      while(TL.length && /^[\s⠀]*$/.test(TL[TL.length-1])) TL.pop();
+      TL.push('⠀');
+      return TL.join('\n');
     });
   }
   function wrap(name){
