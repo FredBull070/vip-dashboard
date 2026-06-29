@@ -313,25 +313,37 @@ window.DAILY_PROPS_SETTLED = [];
     var today=todayKey(); if(!today) return;
     var s=settledSets();
     var yest=yesterdayKey();
-    // A list is FINISHED (-> archive, hidden from daily) only when it is settled,
-    // or when every one of its matches is dated before today. A list with any match
-    // still to play (today or upcoming) stays ACTIVE and visible.
-    [].slice.call(document.querySelectorAll('.msg-card')).forEach(function(card){
-      var titleEl=card.querySelector('.msg-title'); if(!titleEl) return;
+    function pageOf(el){ var n=el; while(n && n!==document.body){ if(n.id && n.id.indexOf('page-')===0) return n.id; n=n.parentElement; } return '_root'; }
+    function msgFin(card){
+      var titleEl=card.querySelector('.msg-title'); if(!titleEl) return false;
       var title=norm(titleEl.textContent||'');
-      var finished=false;
-      for(var key in s.P){ if(key && title.indexOf(key)>=0){ finished=true; break; } }
-      if(!finished){ var led=latestEventDate(card.textContent||''); if(led && led<today) finished=true; }
-      if(!finished){ var dk=dmyKey(titleEl.textContent||''); if(dk && yest && dk<yest) finished=true; }
-      if(finished) hideCard(card); else showCard(card);
-    });
-    [].slice.call(document.querySelectorAll('.rcard')).forEach(function(card){
+      for(var key in s.P){ if(key && title.indexOf(key)>=0) return true; }
+      var led=latestEventDate(card.textContent||''); if(led && led<today) return true;
+      var dk=dmyKey(titleEl.textContent||''); if(dk && yest && dk<yest) return true;
+      return false;
+    }
+    function rcardFin(card){
       var t=norm(card.textContent||'');
-      var finished=false;
-      for(var i=0;i<s.C.length;i++){ var mc=s.C[i].split('~'); if(mc[0]&&mc[1]&&t.indexOf(mc[0])>=0&&t.indexOf(mc[1])>=0){ finished=true; break; } }
-      if(!finished){ var led=latestEventDate(card.textContent||''); if(led && led<today) finished=true; }
-      if(finished) hideCard(card); else showCard(card);
-    });
+      for(var i=0;i<s.C.length;i++){ var mc=s.C[i].split('~'); if(mc[0]&&mc[1]&&t.indexOf(mc[0])>=0&&t.indexOf(mc[1])>=0) return true; }
+      var led=latestEventDate(card.textContent||''); if(led && led<today) return true;
+      return false;
+    }
+    // Hide finished cards ONLY if some live (unfinished) cards remain on the SAME
+    // page. If a whole page's slate is finished (e.g. today's build hasn't run yet),
+    // keep it visible so the page is never empty. Once a new slate arrives, the old
+    // finished cards hide again automatically.
+    function group(sel, finFn){
+      var byPage={};
+      [].slice.call(document.querySelectorAll(sel)).forEach(function(card){
+        var pg=pageOf(card); (byPage[pg]=byPage[pg]||[]).push({c:card, f:finFn(card)});
+      });
+      Object.keys(byPage).forEach(function(pg){
+        var arr=byPage[pg], live=arr.filter(function(o){return !o.f;}).length;
+        arr.forEach(function(o){ if(o.f && live>0) hideCard(o.c); else showCard(o.c); });
+      });
+    }
+    group('.msg-card', msgFin);
+    group('.rcard', rcardFin);
   }
   function start(){ sweep(); setInterval(sweep, 4000); document.addEventListener('click', function(){ setTimeout(sweep, 300); }, true); }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(start, 700); }); }
