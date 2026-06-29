@@ -310,40 +310,12 @@ window.DAILY_PROPS_SETTLED = [];
   function hideCard(el){ if(el && el.style.display!=='none'){ el.style.display='none'; el.setAttribute('data-bl-finished','1'); } }
   function showCard(el){ if(el && el.getAttribute('data-bl-finished')==='1'){ el.style.display=''; el.removeAttribute('data-bl-finished'); } }
   function sweep(){
-    var today=todayKey(); if(!today) return;
-    var s=settledSets();
-    var yest=yesterdayKey();
-    function pageOf(el){ var n=el; while(n && n!==document.body){ if(n.id && n.id.indexOf('page-')===0) return n.id; n=n.parentElement; } return '_root'; }
-    function msgFin(card){
-      var titleEl=card.querySelector('.msg-title'); if(!titleEl) return false;
-      var title=norm(titleEl.textContent||'');
-      for(var key in s.P){ if(key && title.indexOf(key)>=0) return true; }
-      var led=latestEventDate(card.textContent||''); if(led && led<today) return true;
-      var dk=dmyKey(titleEl.textContent||''); if(dk && yest && dk<yest) return true;
-      return false;
-    }
-    function rcardFin(card){
-      var t=norm(card.textContent||'');
-      for(var i=0;i<s.C.length;i++){ var mc=s.C[i].split('~'); if(mc[0]&&mc[1]&&t.indexOf(mc[0])>=0&&t.indexOf(mc[1])>=0) return true; }
-      var led=latestEventDate(card.textContent||''); if(led && led<today) return true;
-      return false;
-    }
-    // Hide finished cards ONLY if some live (unfinished) cards remain on the SAME
-    // page. If a whole page's slate is finished (e.g. today's build hasn't run yet),
-    // keep it visible so the page is never empty. Once a new slate arrives, the old
-    // finished cards hide again automatically.
-    function group(sel, finFn){
-      var byPage={};
-      [].slice.call(document.querySelectorAll(sel)).forEach(function(card){
-        var pg=pageOf(card); (byPage[pg]=byPage[pg]||[]).push({c:card, f:finFn(card)});
-      });
-      Object.keys(byPage).forEach(function(pg){
-        var arr=byPage[pg], live=arr.filter(function(o){return !o.f;}).length;
-        arr.forEach(function(o){ if(o.f && live>0) hideCard(o.c); else showCard(o.c); });
-      });
-    }
-    group('.msg-card', msgFin);
-    group('.rcard', rcardFin);
+    // Operator dashboard: never auto-hide bets. Always show every card in the
+    // current slate so nothing silently disappears. The daily build replaces the
+    // slate each day, and the Archive tab holds the history. (Parleys are still
+    // kept off the singles page by hideParleys, which is separate from this.)
+    [].slice.call(document.querySelectorAll('.rcard')).forEach(showCard);
+    [].slice.call(document.querySelectorAll('.msg-card')).forEach(showCard);
   }
   function start(){ sweep(); setInterval(sweep, 4000); document.addEventListener('click', function(){ setTimeout(sweep, 300); }, true); }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(start, 700); }); }
