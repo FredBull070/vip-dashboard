@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BetLife365 — Track Record</title>
+<style>
+  :root{ --bg:#0c0d10; --card:#15171c; --line:#23262e; --txt:#e9eaee; --mut:#8a8f9a;
+         --acc:#ff7a1a; --win:#37d67a; --loss:#ff5a5a; --void:#8a8f9a; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:22px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 2px;letter-spacing:.3px}
+  h1 b{color:var(--acc)}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .v{font-size:24px;font-weight:700}
+  .stat .k{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-top:3px}
+  .pos{color:var(--win)} .neg{color:var(--loss)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:18px}
+  .panel h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:0 0 12px}
+  svg{width:100%;height:160px;display:block}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  td.r,th.r{text-align:right}
+  .pill{display:inline-block;min-width:22px;text-align:center;padding:2px 8px;border-radius:20px;font-weight:700;font-size:12px}
+  .W{background:rgba(55,214,122,.15);color:var(--win)} .L{background:rgba(255,90,90,.15);color:var(--loss)}
+  .V,.Push{background:rgba(138,143,154,.18);color:var(--void)} .P{background:rgba(255,122,26,.14);color:var(--acc)}
+  .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .tab{background:var(--card);border:1px solid var(--line);color:var(--txt);padding:7px 14px;border-radius:20px;cursor:pointer;font-size:13px}
+  .tab.on{background:var(--acc);border-color:var(--acc);color:#1a1206;font-weight:700}
+  .foot{color:var(--mut);font-size:12px;text-align:center;margin-top:18px}
+  .dim{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><b>BetLife365</b> Track Record</h1>
+  <div class="sub">Every pick logged in units. Auto-settled from verified sources. No deleted bets, no cherry-picking. 18+ · play responsibly.</div>
+
+  <div class="grid" id="stats"></div>
+
+  <div class="panel">
+    <h2>Profit over time (cumulative units)</h2>
+    <svg id="chart" viewBox="0 0 800 160" preserveAspectRatio="none"></svg>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <div class="tab on" data-f="all">All</div>
+    <div class="tab" data-f="card">Daily Cards</div>
+    <div class="tab" data-f="parley">Parleys</div>
+    <div class="tab" data-f="prop">Props</div>
+  </div>
+  <div class="panel" style="padding:0;overflow:auto">
+    <table id="tbl"><thead><tr>
+      <th>Date</th><th>Sport</th><th>Pick</th><th class="r">Odds</th><th class="r">Stake</th><th class="r">Result</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
+
+  <div class="foot" id="foot">Loading…</div>
+</div>
+<script>
+var MASTER='https://raw.githubusercontent.com/FredBull070/vip-dashboard/main/trackrecord.json';
+var DECIDED={W:1,L:1,V:1,Push:1};
+var rows=[], filter='all';
+
+function num(x){ var n=parseFloat(x); return isNaN(n)?0:n; }
+function kindOf(r){ return r.prop?'prop':(r.kind==='parley'?'parley':'card'); }
+
+function stats(list){
+  var staked=0,profit=0,w=0,l=0;
+  list.forEach(function(r){
+    if(!DECIDED[r.result]) return;
+    if(r.result==='V'||r.result==='Push') return;
+    var s=num(r.stake), o=num(r.odds);
+    staked+=s;
+    if(r.result==='W'){profit+=s*(o-1);w++;} else if(r.result==='L'){profit-=s;l++;}
+  });
+  var n=w+l;
+  return {bets:n,w:w,l:l,profit:profit,staked:staked,
+    roi: staked? (100*profit/staked):0, wr: n?(100*w/n):0};
+}
+
+function fmt(u){ return (u>=0?'+':'')+u.toFixed(2)+'u'; }
+
+function render(){
+  var pub=rows.filter(function(r){return r.public!==false;});
+  var s=stats(pub);
+  var pend=pub.filter(function(r){return r.result==='P';}).length;
+  var cards=[
+    ['RECORD', s.w+'W-'+s.l+'L', ''],
+    ['PROFIT', fmt(s.profit), s.profit>=0?'pos':'neg'],
+    ['ROI', (s.roi>=0?'+':'')+s.roi.toFixed(1)+'%', s.roi>=0?'pos':'neg'],
+    ['WIN RATE', s.wr.toFixed(0)+'%', ''],
+    ['SETTLED BETS', String(s.bets), ''],
+    ['PENDING', String(pend), '']
+  ];
+  document.getElementById('stats').innerHTML=cards.map(function(c){
+    return '<div class="stat"><div class="v '+c[2]+'">'+c[1]+'</div><div class="k">'+c[0]+'</div></div>';
+  }).join('');
+
+  // cumulative profit chart over decided public bets, ordered by date then id
+  var dec=pub.filter(function(r){return DECIDED[r.result];}).slice().sort(function(a,b){
+    var da=a.date.split('-').reverse().join(''), db=b.date.split('-').reverse().join('');
+    return da===db? ((a.id||0)-(b.id||0)) : (da<db?-1:1);
+  });
+  var pts=[], cum=0;
+  dec.forEach(function(r){
+    if(r.result==='W') cum+=num(r.stake)*(num(r.odds)-1);
+    else if(r.result==='L') cum-=num(r.stake);
+    pts.push(cum);
+  });
+  drawChart(pts);
+
+  // table
+  var list=pub.filter(function(r){ return filter==='all'?true:kindOf(r)===filter; })
+    .slice().sort(function(a,b){ var da=a.date.split('-').reverse().join(''),db=b.date.split('-').reverse().join(''); return da<db?1:(da>db?-1:(b.id||0)-(a.id||0)); });
+  var body=list.map(function(r){
+    var pick=(r.selection||'').replace(/\*\*/g,'');
+    return '<tr><td class="dim">'+r.date+'</td><td>'+(r.sport||'')+'</td><td>'+r.match+'<br><span class="dim">'+pick+'</span></td>'+
+      '<td class="r">'+(r.odds||'')+'</td><td class="r">'+(r.stake||'')+'u</td>'+
+      '<td class="r"><span class="pill '+r.result+'">'+r.result+'</span></td></tr>';
+  }).join('');
+  document.querySelector('#tbl tbody').innerHTML=body||'<tr><td colspan="6" class="dim" style="padding:16px">No bets in this view.</td></tr>';
+  document.getElementById('foot').textContent='Source: live master ledger · '+pub.length+' positions · updates automatically.';
+}
+
+function drawChart(pts){
+  var svg=document.getElementById('chart'); var W=800,H=160,pad=8;
+  if(pts.length<2){ svg.innerHTML='<text x="12" y="86" fill="#8a8f9a" font-size="13">Graph builds as results settle.</text>'; return; }
+  var min=Math.min.apply(null,pts.concat([0])), max=Math.max.apply(null,pts.concat([0]));
+  var rng=(max-min)||1;
+  function X(i){ return pad+(W-2*pad)*i/(pts.length-1); }
+  function Y(v){ return pad+(H-2*pad)*(1-(v-min)/rng); }
+  var d=pts.map(function(v,i){ return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1); }).join(' ');
+  var zero=Y(0).toFixed(1);
+  var area=d+' L'+X(pts.length-1).toFixed(1)+' '+zero+' L'+X(0).toFixed(1)+' '+zero+' Z';
+  var up=pts[pts.length-1]>=0;
+  svg.innerHTML=
+    '<line x1="0" y1="'+zero+'" x2="800" y2="'+zero+'" stroke="#23262e" stroke-width="1"/>'+
+    '<path d="'+area+'" fill="'+(up?'rgba(55,214,122,.10)':'rgba(255,90,90,.10)')+'"/>'+
+    '<path d="'+d+'" fill="none" stroke="'+(up?'#37d67a':'#ff5a5a')+'" stroke-width="2"/>';
+}
+
+document.getElementById('tabs').addEventListener('click',function(e){
+  var t=e.target.closest('.tab'); if(!t) return;
+  filter=t.getAttribute('data-f');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===t);});
+  render();
+});
+
+fetch(MASTER+'?t='+Date.now()).then(function(r){return r.json();}).then(function(d){
+  rows=Array.isArray(d)?d:[]; render();
+}).catch(function(){ document.getElementById('foot').textContent='Could not load the track record right now.'; });
+</script>
+</body>
+</html>
