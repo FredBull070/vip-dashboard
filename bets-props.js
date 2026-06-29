@@ -411,8 +411,39 @@ window.DAILY_PROPS_SETTLED = [];
     if(document.getElementById('blOddsFix')) return true;
     if(!document.head) return false;
     var st=document.createElement('style'); st.id='blOddsFix';
-    st.textContent='.rcard .rc-top{display:flex !important;align-items:center;gap:10px;} .rcard .rc-top > *:first-child{margin-right:auto !important;}';
+    st.textContent='.rcard .rc-top{display:flex !important;align-items:center;gap:10px;} .rcard .rc-top > *:first-child{margin-right:auto !important;} .rcard .rc-top .bl-cd{order:1 !important;} .rcard .rc-top .rc-odds{order:2 !important;}';
     document.head.appendChild(st); return true;
   }
   if(!inject()){ var c=0, t=setInterval(function(){ if(inject()||++c>30) clearInterval(t); }, 200); }
+})();
+
+/* ---------------------------------------------------------------------------
+   Rename the risk categories in the Daily Cards / Prop Cards UI from
+   Low/Medium/High (and "LOW RISK" headers) to Safe / Value / Jackpot, so the
+   dashboard filter + section headers match the Safe/Value/Jackpot taxonomy.
+   Display-only relabel scoped to those two pages; underlying values untouched. */
+(function(){
+  // Section headers live as text nodes "🟢 Low risk" inside #page-betcards/#page-propcards;
+  // filter pills are BUTTON.subtab text nodes "🟢 Low" inside #subbar. Relabel both, display only.
+  function relabelIn(root){
+    if(!root) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, nodes=[];
+    while(n=w.nextNode()) nodes.push(n);
+    for(var i=0;i<nodes.length;i++){
+      var tn=nodes[i], t=tn.nodeValue; if(!t || !t.trim()) continue;
+      if(tn.parentNode && tn.parentNode.tagName==='OPTION') continue;
+      if(/low risk/i.test(t)){ tn.nodeValue=t.replace(/low risk/ig,'Safe'); }
+      else if(/medium risk/i.test(t)){ tn.nodeValue=t.replace(/medium risk/ig,'Value'); }
+      else if(/high risk/i.test(t)){ tn.nodeValue=t.replace(/high risk/ig,'Jackpot'); }
+      else { var core=t.replace(/[^A-Za-z]/g,'');
+        if(core==='Low'){ tn.nodeValue=t.replace('Low','Safe'); }
+        else if(core==='Medium'){ tn.nodeValue=t.replace('Medium','Value'); }
+        else if(core==='High'){ tn.nodeValue=t.replace('High','Jackpot'); }
+      }
+    }
+  }
+  function go(){ relabelIn(document.getElementById('page-betcards')); relabelIn(document.getElementById('page-propcards')); relabelIn(document.getElementById('subbar')); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(go,800);}); else setTimeout(go,800);
+  setInterval(go, 1500);
+  document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
