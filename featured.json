@@ -2,9 +2,9 @@
   "type": "parley",
   "period": "week",
   "label": "Parleys · this week",
-  "roi": 43.1,
-  "bets": 9,
+  "roi": null,
+  "bets": null,
   "approved_by": "fred",
-  "updated_at": "2026-06-29T21:56:25.150Z",
+  "updated_at": "2026-06-29T21:58:47.321Z",
   "via": "worker"
 }
