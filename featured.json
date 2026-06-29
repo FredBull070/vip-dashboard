@@ -2,12 +2,9 @@
   "type": "parley",
   "period": "week",
   "label": "Parleys · this week",
-  "roi": 8.9,
-  "bets": 11,
-  "profit": 0.83,
-  "metric": "roi",
-  "min_bets": 10,
-  "approved_by": "auto-initial",
-  "updated_at": "2026-06-29",
-  "note": "Public headline slice for betlife365.com. Chosen on highest ROI% with >=10 settled bets. The site always shows the All/total alongside this."
+  "roi": 43.1,
+  "bets": 9,
+  "approved_by": "fred",
+  "updated_at": "2026-06-29T21:56:25.150Z",
+  "via": "worker"
 }
