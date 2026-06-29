@@ -1,10 +1,6 @@
 /* BetLife365 tennis bets - written by the tennis task, read by the dashboard. */
 window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (Tennis): 29-06-2026**
 
-**:small_orange_diamond: Aryna Sabalenka x Teodora Kostovic**
-Aryna Sabalenka to win (moneyline) @ 1.05 - 1.09*
-↳ Top seed opens against a qualifier with no grass pedigree; a routine win is expected.
-
 **:small_orange_diamond: Mirra Andreeva x Magda Linette**
 Mirra Andreeva to win (moneyline) @ 1.20 - 1.30*
 ↳ Andreeva is a clear class above; Linette is solid but not a grass threat.
@@ -17,11 +13,11 @@ Felix Auger-Aliassime to win (moneyline) @ 1.24 - 1.32*
 Andrey Rublev to win (moneyline) @ 1.26 - 1.34*
 ↳ Seeded Rublev has the firepower edge over compatriot Safiullin.
 
-**:moneybag: Total odds: ±2.05 - 2.45***
+**:moneybag: Total odds: ±1.90 - 2.30***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four short-priced favourites in winnable openers stacked into a controlled-risk core. None of the legs is a coin-flip, which keeps variance low.
+Three short-priced favourites in winnable openers stacked into a controlled-risk core. We deliberately leave out ultra-short legs (under 1.15) because they add almost nothing to the price while still carrying upset risk.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
@@ -114,15 +110,7 @@ Odds may vary depending on the bookmaker or the time of placement.
 A long-shot built from heavy favourites on game-handicap lines across seven different matches, none of them load-bearing in the other tickets.
 
 **:bank: Bankroll:** 0.1u stake`;
-window.DAILY_TENNIS_CARDS = `MATCH: Aryna Sabalenka x Teodora Kostovic
-MARKET: Match Winner
-SELECTION: Aryna Sabalenka to win
-ODDS: 1.05 - 1.09*
-STAKE: 2u (Safe Builder leg)
-RISK: Low
-ANALYSIS: Top seed against a qualifier with no grass pedigree; a comfortable opener.
-===
-MATCH: Mirra Andreeva x Magda Linette
+window.DAILY_TENNIS_CARDS = `MATCH: Mirra Andreeva x Magda Linette
 MARKET: Match Winner
 SELECTION: Mirra Andreeva to win
 ODDS: 1.20 - 1.30*
@@ -267,7 +255,6 @@ RISK: Very High
 ANALYSIS: Big-serving Frenchman favoured against a low-ranked home wildcard.`;
 window.TENNIS_EVENTS = [
 {match:"Jannik Sinner x Miomir Kecmanovic", date:"2026-06-29", time:"14:30", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Jannik Sinner", tier:"Value Builder"},
-{match:"Aryna Sabalenka x Teodora Kostovic", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Aryna Sabalenka", tier:"Safe Builder"},
 {match:"Novak Djokovic x Yibing Wu", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Novak Djokovic", tier:"Jackpot Builder"},
 {match:"Daniil Medvedev x Marin Cilic", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 1 Court", pick:"Daniil Medvedev", tier:"Value Builder"},
 {match:"Mirra Andreeva x Magda Linette", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 1 Court", pick:"Mirra Andreeva", tier:"Safe Builder"},
