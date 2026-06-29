@@ -903,6 +903,7 @@ window.DAILY_PROPS_SETTLED = [];
   function pLabel(p){ for(var i=0;i<PERIODS.length;i++) if(PERIODS[i][0]===p) return PERIODS[i][1]; return p; }
   function cap(s){ return s? s.charAt(0).toUpperCase()+s.slice(1):s; }
   var st={featured:null,sugg:null,pending:null,open:false,sel:{type:'parley',period:'week'},loaded:false};
+  window.BL_PUBLISH_URL='https://betlife365-publish.wfsirvania.workers.dev';
   try{ st.pending=JSON.parse(localStorage.getItem('ba_featured_pending')||'null'); }catch(e){}
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function flags(){
