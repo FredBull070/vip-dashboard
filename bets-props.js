@@ -511,3 +511,189 @@ window.DAILY_PROPS_SETTLED = [];
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(paint,1200); }); else setTimeout(paint,1200);
   setInterval(paint, 5000);
 })();
+
+/* ---------------------------------------------------------------------------
+   LEDGER — a clean, plain-language Track Record anyone can read & filter.
+   Replaces the dense #tr-log panel with: summary in plain words, filters
+   (sport / period / outcome / type+risk), and a per-bet list with a 2-state
+   status (Open vs verified Done) where each row expands to show the final
+   score + source (proof) and what the bet meant. Reads ba_trackrecord. */
+(function(){
+  var DEC={W:1,L:1,V:1,Push:1};
+  var st={sport:'all',period:'all',outcome:'all',type:'all',tier:'all',q:''};
+  function num(x){var n=parseFloat(x);return isNaN(n)?0:n;}
+  function load(){ try{return JSON.parse(localStorage.getItem('ba_trackrecord')||'[]');}catch(e){return [];} }
+  function kindOf(r){ return r.prop?'prop':(r.kind==='parley'?'parley':'card'); }
+  function tierOf(r){ var s=(r.selection||'').toLowerCase();
+    if(/lucky/.test(s))return 'lucky'; if(/jackpot/.test(s))return 'jackpot'; if(/value/.test(s))return 'value'; if(/safe/.test(s))return 'safe';
+    var rk=(r.risk||'').toLowerCase(); if(rk==='low')return 'safe'; if(rk==='medium')return 'value'; if(rk==='high'||rk==='very high')return 'jackpot'; return ''; }
+  function ep(d){ var p=(d||'').split('-'); return p.length===3? new Date(+p[2],+p[1]-1,+p[0]).getTime():0; }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function clean(s){ return String(s||'').replace(/\*\*/g,'').replace(/[\u{1F300}-\u{1FAFF}]/gu,'').trim(); }
+
+  function compute(rows){
+    var staked=0,profit=0,w=0,l=0,open=0;
+    rows.forEach(function(r){
+      if(!DEC[r.result]){ open++; return; }
+      if(r.result==='V'||r.result==='Push') return;
+      var s=num(r.stake),o=num(r.odds); staked+=s;
+      if(r.result==='W'){profit+=s*(o-1);w++;} else if(r.result==='L'){profit-=s;l++;}
+    });
+    var n=w+l;
+    return {profit:profit,roi:staked?100*profit/staked:0,wr:n?100*w/n:0,w:w,l:l,open:open,staked:staked};
+  }
+  function inPeriod(r){
+    if(st.period==='all') return true;
+    var t=ep(r.date), now=Date.now(), day=864e5;
+    if(st.period==='today'){ var d=new Date(); var k=('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+d.getFullYear(); return r.date===k; }
+    if(st.period==='week') return t>=now-7*day;
+    if(st.period==='month') return t>=now-31*day;
+    return true;
+  }
+  function pass(r){
+    if(st.sport!=='all' && (r.sport||'').toLowerCase()!==st.sport) return false;
+    if(!inPeriod(r)) return false;
+    if(st.outcome!=='all'){
+      if(st.outcome==='open' && DEC[r.result]) return false;
+      if(st.outcome==='won' && r.result!=='W') return false;
+      if(st.outcome==='lost' && r.result!=='L') return false;
+      if(st.outcome==='void' && !(r.result==='V'||r.result==='Push')) return false;
+    }
+    if(st.type!=='all' && kindOf(r)!==st.type) return false;
+    if(st.tier!=='all' && tierOf(r)!==st.tier) return false;
+    if(st.q){ var hay=((r.match||'')+' '+(r.selection||'')).toLowerCase(); if(hay.indexOf(st.q.toLowerCase())<0) return false; }
+    return true;
+  }
+  function fmtU(u){ return (u>=0?'+':'')+u.toFixed(2)+'u'; }
+  function statusPill(r){
+    if(DEC[r.result]) return '<span class="bl-st done">✅ Klaar</span>';
+    if(r.needs_review) return '<span class="bl-st rev">⚠ Wordt nagekeken</span>';
+    return '<span class="bl-st open">⏳ Open</span>';
+  }
+  function resPill(r){
+    var m={W:['Gewonnen','w'],L:['Verloren','l'],V:['Void','v'],Push:['Push','v'],P:['—','p']};
+    var x=m[r.result]||m.P; return '<span class="bl-res '+x[1]+'">'+x[0]+'</span>';
+  }
+  var TIERNAME={safe:'🟢 Safe',value:'🟡 Value',jackpot:'🔴 Jackpot',lucky:'👑 Lucky'};
+  var TIEREXPL={safe:'laagste risico',value:'gemiddeld risico',jackpot:'hoog risico / hoge uitbetaling',lucky:'lange shot, mini-inzet'};
+
+  function rowHTML(r){
+    var tier=tierOf(r), legs=(r.kind==='parley' && r.match)? r.match.split(' + '):null;
+    var ev=r.evidence||{};
+    var details='<div class="bl-det">'+
+      '<div class="bl-drow"><b>Wat is dit?</b> '+(r.kind==='parley'?'Een combi (parley): meerdere keuzes samen, alles moet kloppen.':(r.prop?'Een speler-weddenschap (prop).':'Eén losse keuze (kaartje).'))+'</div>'+
+      (tier?'<div class="bl-drow"><b>Risico:</b> '+TIERNAME[tier]+' — '+TIEREXPL[tier]+'</div>':'')+
+      '<div class="bl-drow"><b>Onze keuze:</b> '+esc(clean(r.selection))+' @ '+esc(r.odds)+' · inzet '+esc(r.stake)+'u</div>'+
+      (legs?'<div class="bl-drow"><b>Wedstrijden:</b> '+esc(legs.join('  •  '))+'</div>':'')+
+      (DEC[r.result]? '<div class="bl-drow ok"><b>Uitslag (geverifieerd):</b> '+esc(ev.score||r.result)+(ev.sources?' · bron: '+esc([].concat(ev.sources).join(', ')):'')+'</div>'
+                    : '<div class="bl-drow"><b>Status:</b> '+(r.needs_review? 'wordt nagekeken — '+esc(r.needs_review):'wedstrijd nog niet (geverifieerd) afgelopen')+'</div>')+
+      '</div>';
+    return '<div class="bl-bet" data-id="'+esc(r.betid)+'">'+
+      '<div class="bl-head">'+
+        '<div class="bl-when">'+esc(r.date)+'<span class="bl-sport">'+esc(r.sport||'')+'</span></div>'+
+        '<div class="bl-mid"><div class="bl-match">'+esc(r.match)+'</div><div class="bl-pick">'+esc(clean(r.selection))+'</div></div>'+
+        '<div class="bl-odds">'+esc(r.odds)+'</div>'+
+        '<div class="bl-status">'+statusPill(r)+'</div>'+
+        '<div class="bl-result">'+resPill(r)+'</div>'+
+        '<div class="bl-caret">▾</div>'+
+      '</div>'+details+'</div>';
+  }
+
+  function buildHTML(rows){
+    var f=rows.filter(pass);
+    f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da || (b.id||0)-(a.id||0); });
+    var s=compute(rows.filter(function(r){return r.public!==false;}));
+    var opts=function(arr,cur){ return arr.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===cur?' selected':'')+'>'+o[1]+'</option>';}).join(''); };
+    var stat=function(v,k,cls){ return '<div class="bl-card"><div class="bl-v '+(cls||'')+'">'+v+'</div><div class="bl-k">'+k+'</div></div>'; };
+    var html=''+
+    '<div class="bl-ledger">'+
+      '<div class="bl-top"><h2>Onze Ledger</h2><p>Elke pick die we delen, eerlijk bijgehouden in eenheden (units). Niets verwijderd, niets verstopt. Een <b>unit</b> = onze vaste basisinzet, zodat het voor elke portemonnee klopt. 18+ · speel bewust.</p></div>'+
+      '<div class="bl-cards">'+
+        stat(s.w+'<span class="dim">W</span> '+s.l+'<span class="dim">L</span>','Gewonnen / verloren')+
+        stat(fmtU(s.profit),'Winst in units', s.profit>=0?'pos':'neg')+
+        stat((s.roi>=0?'+':'')+s.roi.toFixed(1)+'%','Rendement (ROI)', s.roi>=0?'pos':'neg')+
+        stat(s.wr.toFixed(0)+'%','Trefkans')+
+        stat(String(s.open),'Nog open')+
+      '</div>'+
+      '<div class="bl-legend">🟢 Safe = laagste risico · 🟡 Value = gemiddeld · 🔴 Jackpot = hoog risico/hoge uitbetaling · <b>Rendement</b> = winst t.o.v. totale inzet · <b>Trefkans</b> = % gewonnen van de afgeronde bets.</div>'+
+      '<div class="bl-filters">'+
+        '<input id="blq" class="bl-inp" type="text" placeholder="🔎 zoek team of speler" value="'+esc(st.q)+'">'+
+        '<select class="bl-sel" data-k="sport">'+opts([['all','Alle sporten'],['football','Voetbal'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
+        '<select class="bl-sel" data-k="period">'+opts([['all','Alle datums'],['today','Vandaag'],['week','Deze week'],['month','Deze maand']],st.period)+'</select>'+
+        '<select class="bl-sel" data-k="outcome">'+opts([['all','Alle uitkomsten'],['won','Gewonnen'],['lost','Verloren'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
+        '<select class="bl-sel" data-k="type">'+opts([['all','Alle types'],['card','Los kaartje'],['parley','Parley (combi)'],['prop','Prop (speler)']],st.type)+'</select>'+
+        '<select class="bl-sel" data-k="tier">'+opts([['all','Alle risico'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot'],['lucky','👑 Lucky']],st.tier)+'</select>'+
+        '<button class="bl-reset" data-k="reset">Reset</button>'+
+      '</div>'+
+      '<div class="bl-count">'+f.length+' van '+rows.length+' bets</div>'+
+      '<div class="bl-list">'+(f.length? f.map(rowHTML).join(''):'<div class="bl-empty">Geen bets met deze filters.</div>')+'</div>'+
+    '</div>';
+    return html;
+  }
+
+  function injectCSS(){
+    if(document.getElementById('blLedgerCSS')) return;
+    var s=document.createElement('style'); s.id='blLedgerCSS';
+    s.textContent=[
+      '.bl-ledger{font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e9eaee}',
+      '.bl-top h2{font-size:20px;margin:0 0 4px}.bl-top p{color:#9aa0ab;margin:0 0 16px;max-width:760px;font-size:13px}',
+      '.bl-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}',
+      '.bl-card{background:#15171c;border:1px solid #23262e;border-radius:12px;padding:13px 15px}',
+      '.bl-card .bl-v{font-size:22px;font-weight:700}.bl-card .bl-k{color:#9aa0ab;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}',
+      '.bl-v .dim{color:#9aa0ab;font-size:13px;font-weight:600;margin:0 6px 0 1px}',
+      '.pos{color:#37d67a}.neg{color:#ff5a5a}',
+      '.bl-legend{background:#13151a;border:1px solid #23262e;border-radius:10px;padding:9px 13px;color:#9aa0ab;font-size:12px;margin-bottom:14px}',
+      '.bl-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}',
+      '.bl-inp,.bl-sel,.bl-reset{background:#15171c;border:1px solid #2a2e37;color:#e9eaee;border-radius:9px;padding:8px 11px;font-size:13px}',
+      '.bl-inp{flex:1;min-width:180px}.bl-sel{cursor:pointer}.bl-reset{cursor:pointer;color:#ff7a1a}',
+      '.bl-count{color:#9aa0ab;font-size:12px;margin:4px 2px 10px}',
+      '.bl-bet{background:#15171c;border:1px solid #23262e;border-radius:11px;margin-bottom:8px;overflow:hidden}',
+      '.bl-head{display:grid;grid-template-columns:96px 1fr 64px 130px 110px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
+      '.bl-when{font-size:12px;color:#9aa0ab}.bl-when .bl-sport{display:block;color:#6f7682;font-size:11px}',
+      '.bl-match{font-weight:600}.bl-pick{color:#9aa0ab;font-size:12px}',
+      '.bl-odds{font-weight:700;text-align:right}',
+      '.bl-st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}',
+      '.bl-st.done{background:rgba(55,214,122,.14);color:#37d67a}.bl-st.open{background:rgba(255,122,26,.14);color:#ff9a4d}.bl-st.rev{background:rgba(255,90,90,.16);color:#ff7a7a}',
+      '.bl-res{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}',
+      '.bl-res.w{background:rgba(55,214,122,.16);color:#37d67a}.bl-res.l{background:rgba(255,90,90,.16);color:#ff5a5a}.bl-res.v{background:rgba(138,143,154,.18);color:#aeb4be}.bl-res.p{background:rgba(138,143,154,.1);color:#6f7682}',
+      '.bl-caret{color:#6f7682;text-align:center;transition:transform .15s}',
+      '.bl-bet.open-row .bl-caret{transform:rotate(180deg)}',
+      '.bl-det{display:none;padding:2px 14px 13px;border-top:1px solid #23262e;color:#c7ccd4;font-size:13px}',
+      '.bl-bet.open-row .bl-det{display:block}',
+      '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#37d67a}.bl-drow b{color:#e9eaee}',
+      '.bl-empty{color:#9aa0ab;padding:20px;text-align:center}',
+      '@media(max-width:720px){.bl-head{grid-template-columns:1fr 96px 22px;grid-auto-rows:auto}.bl-when{order:3}.bl-status,.bl-result{order:4}}'
+    ].join('');
+    document.head.appendChild(s);
+  }
+
+  var box=null;
+  function render(){
+    var host=document.getElementById('page-trackrecord'); if(!host) return;
+    injectCSS();
+    var log=document.getElementById('tr-log'); if(log) log.style.display='none';
+    if(!box || !box.isConnected){
+      box=document.createElement('div'); box.id='blLedger';
+      host.insertBefore(box, host.firstChild);
+      box.addEventListener('click', onClick);
+      box.addEventListener('change', onChange);
+      box.addEventListener('input', onInput);
+    }
+    var sc=box.scrollTop;
+    box.innerHTML=buildHTML(load());
+    box.scrollTop=sc;
+  }
+  function onClick(e){
+    var rs=e.target.closest('.bl-reset');
+    if(rs){ st={sport:'all',period:'all',outcome:'all',type:'all',tier:'all',q:''}; render(); return; }
+    var head=e.target.closest('.bl-head');
+    if(head){ head.parentNode.classList.toggle('open-row'); }
+  }
+  function onChange(e){ var sel=e.target.closest('.bl-sel'); if(sel){ st[sel.getAttribute('data-k')]=sel.value; render(); } }
+  var qt;
+  function onInput(e){ if(e.target.id==='blq'){ clearTimeout(qt); var v=e.target.value; qt=setTimeout(function(){ st.q=v; render(); var i=document.getElementById('blq'); if(i){i.focus();i.setSelectionRange(v.length,v.length);} }, 250); } }
+
+  function tick(){ var p=document.getElementById('page-trackrecord'); if(p && getComputedStyle(p).display!=='none') render(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(tick,900); }); else setTimeout(tick,900);
+  setInterval(tick, 1500);
+})();
