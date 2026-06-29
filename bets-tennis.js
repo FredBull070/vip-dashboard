@@ -2,14 +2,14 @@
 window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (🎾 Tennis): 29-06-2026**
 
 **:small_orange_diamond: Denis Shapovalov x Pablo Carreno Busta**
-Denis Shapovalov to win (moneyline) @ 1.36
+Denis Shapovalov to win (moneyline) @ 1.37
 ↳ Big-hitting lefty with the firepower edge on grass over an ageing, clay-leaning Carreno Busta.
 
 **:small_orange_diamond: Aleksandar Vukic x Jenson Brooksby**
-Jenson Brooksby to win (moneyline) @ 1.44
+Jenson Brooksby to win (moneyline) @ 1.43
 ↳ Brooksby's return game and consistency make him the clear favourite over Vukic.
 
-**:moneybag: Total odds: ±1.95 - 2.00**
+**:moneybag: Total odds: ±1.96**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -20,22 +20,22 @@ Two clear favourites from today's Wimbledon order of play stacked into a control
 **🟡 #T2 Value Builder Parley (🎾 Tennis): 29-06-2026**
 
 **:small_orange_diamond: Aleksandar Kovacevic x Botic Van De Zandschulp**
-Botic Van De Zandschulp to win (moneyline) @ 1.53
+Botic Van De Zandschulp to win (moneyline) @ 1.50
 ↳ The more experienced grass performer, favoured to come through against Kovacevic.
 
 **:small_orange_diamond: Daniil Medvedev x Marin Cilic**
-Daniil Medvedev to win (moneyline) @ 1.28 - 1.40*
+Daniil Medvedev to win (moneyline) @ 1.32
 ↳ Cilic is dangerous on grass but past his peak; Medvedev's return game should grind him down.
 
 **:small_orange_diamond: Stefanos Tsitsipas x Hugo Gaston**
-Stefanos Tsitsipas to win (moneyline) @ 1.30 - 1.42*
+Stefanos Tsitsipas to win (moneyline) @ 1.48
 ↳ Tsitsipas has the bigger weapons; Gaston's touch game is least effective on quick grass.
 
 **:small_orange_diamond: Naomi Osaka x Elsa Jacquemot**
-Naomi Osaka to win (moneyline) @ 1.34 - 1.46*
+Naomi Osaka to win (moneyline) @ 1.13
 ↳ Osaka's power translates well to grass against an opponent more at home on clay.
 
-**:moneybag: Total odds: ±3.40 - 4.45***
+**:moneybag: Total odds: ±3.31***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -109,7 +109,7 @@ A long-shot built from heavy favourites on game-handicap lines across seven diff
 window.DAILY_TENNIS_CARDS = `MATCH: Denis Shapovalov x Pablo Carreno Busta
 MARKET: Match Winner
 SELECTION: Denis Shapovalov to win
-ODDS: 1.36
+ODDS: 1.37
 STAKE: 2u (Safe Builder leg)
 RISK: Low
 ANALYSIS: Big-hitting lefty with the firepower edge on grass over an ageing Carreno Busta.
@@ -117,7 +117,7 @@ ANALYSIS: Big-hitting lefty with the firepower edge on grass over an ageing Carr
 MATCH: Aleksandar Vukic x Jenson Brooksby
 MARKET: Match Winner
 SELECTION: Jenson Brooksby to win
-ODDS: 1.44
+ODDS: 1.43
 STAKE: 2u (Safe Builder leg)
 RISK: Low
 ANALYSIS: Brooksby's return game and consistency make him the clear favourite over Vukic.
@@ -125,7 +125,7 @@ ANALYSIS: Brooksby's return game and consistency make him the clear favourite ov
 MATCH: Aleksandar Kovacevic x Botic Van De Zandschulp
 MARKET: Match Winner
 SELECTION: Botic Van De Zandschulp to win
-ODDS: 1.53
+ODDS: 1.50
 STAKE: 0.75u (Value Builder leg)
 RISK: Medium
 ANALYSIS: The more experienced grass performer, favoured to come through against Kovacevic.
@@ -133,7 +133,7 @@ ANALYSIS: The more experienced grass performer, favoured to come through against
 MATCH: Daniil Medvedev x Marin Cilic
 MARKET: Match Winner
 SELECTION: Daniil Medvedev to win
-ODDS: 1.28 - 1.40*
+ODDS: 1.32
 STAKE: 0.75u (Value Builder leg)
 RISK: Medium
 ANALYSIS: Cilic is dangerous on grass but past his peak; Medvedev's return should grind him down.
@@ -141,7 +141,7 @@ ANALYSIS: Cilic is dangerous on grass but past his peak; Medvedev's return shoul
 MATCH: Stefanos Tsitsipas x Hugo Gaston
 MARKET: Match Winner
 SELECTION: Stefanos Tsitsipas to win
-ODDS: 1.30 - 1.42*
+ODDS: 1.48
 STAKE: 0.75u (Value Builder leg)
 RISK: Medium
 ANALYSIS: Tsitsipas has the bigger weapons; Gaston's touch game is least effective on grass.
@@ -149,7 +149,7 @@ ANALYSIS: Tsitsipas has the bigger weapons; Gaston's touch game is least effecti
 MATCH: Naomi Osaka x Elsa Jacquemot
 MARKET: Match Winner
 SELECTION: Naomi Osaka to win
-ODDS: 1.34 - 1.46*
+ODDS: 1.13
 STAKE: 0.75u (Value Builder leg)
 RISK: Medium
 ANALYSIS: Osaka's power translates well to grass against a clay-leaning opponent.
