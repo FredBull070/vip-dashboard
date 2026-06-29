@@ -166,3 +166,27 @@ window.DAILY_PROPS_SETTLED = [];
   var n=0, iv=setInterval(function(){ tick(); if(++n>25) clearInterval(iv); }, 1000);
   document.addEventListener('click', function(){ setTimeout(tick,250); }, true);
 })();
+
+/* ---------------------------------------------------------------------------
+   Single-source-of-truth for the daily slate. The daily bets (messages, the
+   editor snapshot and the day archive) must ALWAYS come from the server
+   bets-*.js files, which the daily build updates and which every device loads
+   fresh on each visit (the dashboard already auto-adopts the server version on
+   load). They must NOT travel through device-sync, otherwise one device's old
+   snapshot could be pushed to the cloud and pulled onto another device, making
+   them disagree. So we strip the slate keys out of whatever device-sync stores.
+   Settings, webhooks and the track record still sync normally. */
+(function(){
+  var SLATE=['ba_messages','ba_msg_version','ba_archive'];
+  function patch(){
+    if(typeof window._syncCollect==='function' && !window._syncCollect.__slateStripped){
+      var orig=window._syncCollect;
+      var wrapped=function(){ var o=orig.apply(this,arguments)||{}; SLATE.forEach(function(k){ try{ delete o[k]; }catch(e){} }); return o; };
+      wrapped.__slateStripped=true;
+      window._syncCollect=wrapped;
+      return true;
+    }
+    return !!(window._syncCollect && window._syncCollect.__slateStripped);
+  }
+  if(!patch()){ var c=0, t=setInterval(function(){ if(patch()||++c>20) clearInterval(t); }, 500); }
+})();
