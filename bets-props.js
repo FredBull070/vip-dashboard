@@ -447,3 +447,34 @@ window.DAILY_PROPS_SETTLED = [];
   setInterval(go, 1500);
   document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
+
+/* ---------------------------------------------------------------------------
+   TRACK RECORD MASTER LOADER.
+   trackrecord.json in the repo is the single machine-master for the track
+   record. On every load (every device) we fetch it and seed ba_trackrecord,
+   so the dashboard always shows the master, settled state. Rows the user has
+   manually locked (manual_lock=true) locally win over the master and are kept,
+   so a hand-correction is never clobbered by a redeploy. */
+(function(){
+  var URL='https://raw.githubusercontent.com/FredBull070/vip-dashboard/main/trackrecord.json';
+  function load(){
+    fetch(URL+'?t='+Date.now()).then(function(r){ return r.ok?r.json():null; }).then(function(master){
+      if(!Array.isArray(master) || !master.length) return;
+      var local=[]; try{ local=JSON.parse(localStorage.getItem('ba_trackrecord')||'[]'); }catch(e){}
+      var by={};
+      master.forEach(function(r){ if(r && r.betid) by[r.betid]=r; });
+      // manual-locked local rows override the master (never clobber a hand-correction)
+      local.forEach(function(r){ if(r && r.betid && r.manual_lock===true) by[r.betid]=r; });
+      var merged=Object.keys(by).map(function(k){ return by[k]; });
+      var prev=localStorage.getItem('ba_trackrecord');
+      var next=JSON.stringify(merged);
+      if(next!==prev){
+        localStorage.setItem('ba_trackrecord', next);
+        // re-render if the dashboard exposes a hook, else next navigation picks it up
+        ['renderTrackRecord','renderTR','drawTrackRecord','renderLedger'].forEach(function(fn){ try{ if(typeof window[fn]==='function') window[fn](); }catch(e){} });
+        try{ if(typeof showPage==='function' && document.querySelector('#page-trackrecord.active, #page-trackrecord:not([hidden])')) showPage('trackrecord'); }catch(e){}
+      }
+    }).catch(function(){});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', load); else load();
+})();
