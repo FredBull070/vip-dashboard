@@ -499,34 +499,38 @@ window.DAILY_PROPS_SETTLED = [];
 /* ---------------------------------------------------------------------------
    NEEDS-REVIEW SAFETY NET.
    When the settlement bot cannot settle a bet (sources disagree, result
-   unclear, postponed) it leaves the row Pending and sets needs_review. Fred's
-   chosen alert is a dashboard notification, so we surface a fixed banner that
-   lists those bets. Nothing ever stays wrong silently. */
+   unclear, postponed) it leaves the row Pending and sets needs_review. These
+   are surfaced inside the dashboard's NATIVE notification bell (not a banner):
+   one notification per flagged bet, which disappears automatically once the
+   bet is graded (needs_review clears). Nothing ever stays wrong silently. */
 (function(){
-  function scan(){
+  function reviewItems(){
     var tr=[]; try{ tr=JSON.parse(localStorage.getItem('ba_trackrecord')||'[]'); }catch(e){}
-    return tr.filter(function(r){ return r && r.needs_review; });
+    return tr.filter(function(r){ return r && r.needs_review; }).map(function(r){
+      var why=(r.needs_review && r.needs_review!==true) ? (''+r.needs_review) : 'needs a manual check';
+      return { key:'review|'+(r.betid||r.match||''), kind:'review',
+               title:'Review: '+(r.match||r.selection||'bet'), sub:why, text:why,
+               read:false, seen:Date.now(), readAt:0 };
+    });
   }
-  function paint(){
-    if(!document.body) return;
-    var rows=scan(), ex=document.getElementById('blReviewBar');
-    if(!rows.length){ if(ex) ex.remove(); return; }
-    if(!ex){
-      ex=document.createElement('div'); ex.id='blReviewBar';
-      ex.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#7a2b00;color:#ffd9b0;font:600 13px/1.45 system-ui,sans-serif;padding:9px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.45)';
-      document.body.appendChild(ex);
-    }
-    var names=rows.slice(0,3).map(function(r){ return (r.match||r.selection||'').slice(0,42)+(r.needs_review&&r.needs_review!==true?' — '+r.needs_review:''); }).join('  ·  ');
-    ex.textContent='';
-    var t=document.createElement('span');
-    t.textContent='⚠ '+rows.length+' bet'+(rows.length>1?'s':'')+' need review: '+names+(rows.length>3?'  …':'');
-    var b=document.createElement('span');
-    b.textContent='✕'; b.title='hide'; b.style.cssText='margin-left:auto;cursor:pointer;opacity:.75;padding:0 4px';
-    b.onclick=function(){ ex.remove(); };
-    ex.appendChild(t); ex.appendChild(b);
+  function patch(){
+    if(window.__blReviewPatched || typeof window.buildNotifs!=='function') return false;
+    window.__blReviewPatched=true;
+    try{ if(Array.isArray(window.NOTIF_TYPES) && !window.NOTIF_TYPES.some(function(t){return t[0]==='review';}))
+      window.NOTIF_TYPES.push(['review','Track record review','Bets the settle-bot could not grade from two verified sources — need a manual check.']); }catch(e){}
+    var orig=window.buildNotifs;
+    window.buildNotifs=function(){
+      var items=[]; try{ items=orig.apply(this,arguments)||[]; }catch(e){ items=[]; }
+      try{ if(window.notifTypeOn && !window.notifTypeOn('review')) return items; }catch(e){}
+      try{ reviewItems().forEach(function(it){ items.push(it); }); }catch(e){}
+      return items;
+    };
+    var ex=document.getElementById('blReviewBar'); if(ex) ex.remove();
+    try{ if(typeof window.renderNotifs==='function') window.renderNotifs(); }catch(e){}
+    return true;
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(paint,1200); }); else setTimeout(paint,1200);
-  setInterval(paint, 5000);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(patch,800); }); else setTimeout(patch,800);
+  var n=0, iv=setInterval(function(){ if(window.__blReviewPatched || ++n>30){ clearInterval(iv); } else patch(); }, 500);
 })();
 
 /* ---------------------------------------------------------------------------
