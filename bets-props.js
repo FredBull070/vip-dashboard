@@ -470,9 +470,9 @@ window.DAILY_PROPS_SETTLED = [];
       var next=JSON.stringify(merged);
       if(next!==prev){
         localStorage.setItem('ba_trackrecord', next);
-        // re-render if the dashboard exposes a hook, else next navigation picks it up
-        ['renderTrackRecord','renderTR','drawTrackRecord','renderLedger'].forEach(function(fn){ try{ if(typeof window[fn]==='function') window[fn](); }catch(e){} });
-        try{ if(typeof showPage==='function' && document.querySelector('#page-trackrecord.active, #page-trackrecord:not([hidden])')) showPage('trackrecord'); }catch(e){}
+        // the dashboard computes its stats once at init, so a one-time reload makes the
+        // freshly-seeded master render correctly. Guarded so it never loops.
+        if(!sessionStorage.getItem('__tr_seeded')){ sessionStorage.setItem('__tr_seeded','1'); location.reload(); return; }
       }
     }).catch(function(){});
   }
