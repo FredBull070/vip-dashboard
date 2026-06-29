@@ -190,3 +190,82 @@ window.DAILY_PROPS_SETTLED = [];
   }
   if(!patch()){ var c=0, t=setInterval(function(){ if(patch()||++c>20) clearInterval(t); }, 500); }
 })();
+
+/* ---------------------------------------------------------------------------
+   Start-time / countdown badges (operator-only, dashboard). For every parley,
+   card and prop on the dashboard we show when its FIRST match starts and how
+   long until then. Times come from the per-sport *_EVENTS arrays (match/date/
+   time in NL time). This only paints badges in the dashboard DOM; it never
+   touches the data that gets sent to Discord, so shared messages are unchanged. */
+(function(){
+  function amsToEpoch(dateStr, timeStr){
+    if(!dateStr || !timeStr) return null;
+    var tm=(''+timeStr).match(/(\d{1,2}):(\d{2})/); if(!tm) return null;
+    var dp=(''+dateStr).split('-'); if(dp.length<3) return null;
+    var y=+dp[0], mo=+dp[1], d=+dp[2], hh=+tm[1], mi=+tm[2];
+    if(!y||!mo||!d) return null;
+    var guess=Date.UTC(y, mo-1, d, hh, mi, 0);
+    function offset(ts){
+      try{
+        var f=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Amsterdam',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+        var p={}; f.formatToParts(new Date(ts)).forEach(function(x){ p[x.type]=x.value; });
+        var asUTC=Date.UTC(+p.year, +p.month-1, +p.day, +p.hour, +p.minute, +p.second);
+        return asUTC-ts;
+      }catch(e){ return 2*3600000; }
+    }
+    return guess - offset(guess);
+  }
+  function norm(s){ return (''+s).toLowerCase().replace(/\s+/g,' ').replace(/ /g,' ').trim(); }
+  function events(){
+    var arrs=['FOOTBALL_EVENTS','TENNIS_EVENTS','NBA_EVENTS','NFL_EVENTS','NHL_EVENTS'];
+    var list=[];
+    arrs.forEach(function(k){ var a=window[k]; if(Array.isArray(a)) a.forEach(function(e){ if(e&&e.match){ var ep=amsToEpoch(e.date,e.time); list.push({ m:norm(e.match), epoch:ep }); } }); });
+    return list;
+  }
+  function clock(epoch){ try{ return new Intl.DateTimeFormat('nl-NL',{timeZone:'Europe/Amsterdam',hour:'2-digit',minute:'2-digit'}).format(new Date(epoch)); }catch(e){ return ''; } }
+  function dayLabel(epoch){ try{ return new Intl.DateTimeFormat('nl-NL',{timeZone:'Europe/Amsterdam',weekday:'short',day:'2-digit',month:'2-digit'}).format(new Date(epoch)); }catch(e){ return ''; } }
+  function label(epoch){
+    if(epoch==null) return '';
+    var diff=epoch-Date.now();
+    if(diff<=0){ return diff>-3*3600000 ? ('▶ bezig · '+clock(epoch)) : ('— afgelopen'); }
+    if(diff>18*3600000){ return '⏱ '+dayLabel(epoch)+' '+clock(epoch); }
+    var mins=Math.floor(diff/60000), h=Math.floor(mins/60), m=mins%60;
+    var rel = h>0 ? ('begint over '+h+'u '+m+'m') : ('begint over '+m+'m');
+    return '⏱ '+rel+' · '+clock(epoch);
+  }
+  function earliestFor(text, ev){
+    var t=norm(text), best=null, any=false;
+    for(var i=0;i<ev.length;i++){ if(ev[i].m && t.indexOf(ev[i].m)>=0){ any=true; if(ev[i].epoch!=null && (best==null || ev[i].epoch<best)) best=ev[i].epoch; } }
+    return any ? best : undefined; // undefined = no match found at all; null = match found but no time
+  }
+  function badgeEl(host){
+    var b=host.querySelector(':scope > .bl-cd');
+    if(!b){ b=document.createElement('span'); b.className='bl-cd'; b.style.cssText='display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(255,138,61,.14);color:#ffb27a;font-size:11px;font-weight:600;white-space:nowrap;vertical-align:middle;'; host.appendChild(b); }
+    return b;
+  }
+  function paint(){
+    var ev=events();
+    if(!ev.length) return;
+    // Parleys: .msg-card -> badge in .msg-title (whole card text = all legs)
+    [].slice.call(document.querySelectorAll('.msg-card')).forEach(function(card){
+      var host=card.querySelector('.msg-title'); if(!host) return;
+      var r=earliestFor(card.textContent||'', ev);
+      var txt = r===undefined ? '' : (r===null ? '⏱ tijd t.b.d.' : label(r));
+      var b=host.querySelector('.bl-cd');
+      if(!txt){ if(b) b.remove(); return; }
+      badgeEl(host).textContent=txt;
+    });
+    // Single cards & props: .rcard -> badge in .rc-top (header holds the match)
+    [].slice.call(document.querySelectorAll('.rcard')).forEach(function(card){
+      var host=card.querySelector('.rc-top') || card;
+      var r=earliestFor(card.textContent||'', ev);
+      var b=host.querySelector('.bl-cd');
+      if(r===undefined){ if(b) b.remove(); return; }
+      var txt = r===null ? '⏱ tijd t.b.d.' : label(r);
+      badgeEl(host).textContent=txt;
+    });
+  }
+  function start(){ paint(); setInterval(paint, 30000); document.addEventListener('click', function(){ setTimeout(paint, 350); }, true); }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(start, 600); }); }
+  else { setTimeout(start, 600); }
+})();
