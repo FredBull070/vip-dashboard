@@ -55,3 +55,34 @@ window.EMBEDDED_PROPS = { date: "2026-06-28" };
    Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
    these into the Track Record. No result is ever written without verified player-level data. */
 window.DAILY_PROPS_SETTLED = [];
+
+/* ---------------------------------------------------------------------------
+   Universal webhook-field loader (deployed via this file so it is independent
+   of the dashboard's own init). The dashboard's on-load loader did not populate
+   the DAILY PROP CARDS field from localStorage, so after a device sync the
+   ba_hook_PROPS value lived in storage but its input stayed blank. This fills
+   EVERY hook_<CAT> field from its ba_hook_<CAT> value, but only when the field
+   is currently empty, so it never clobbers anything the operator is editing.
+   Runs after load (so it wins over the partial init loader) and again after any
+   navigation click (e.g. opening Settings) and right after a "Sync now" pull. */
+(function(){
+  function loadAllHooks(){
+    try{
+      for(var i=0;i<localStorage.length;i++){
+        var k=localStorage.key(i);
+        if(k && k.indexOf('ba_hook_')===0){
+          var el=document.getElementById('hook_'+k.slice(8));
+          if(el){ var v=localStorage.getItem(k); if(v!==null && v!=='' && !el.value) el.value=v; }
+        }
+      }
+    }catch(e){}
+  }
+  window._loadAllHooks=loadAllHooks;
+  function start(){
+    var runs=0;
+    var iv=setInterval(function(){ loadAllHooks(); if(++runs>15) clearInterval(iv); }, 1000);
+    document.addEventListener('click', function(){ setTimeout(loadAllHooks, 300); }, true);
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', start); }
+  else { start(); }
+})();
