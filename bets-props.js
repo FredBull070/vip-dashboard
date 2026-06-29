@@ -613,55 +613,78 @@ window.DAILY_PROPS_SETTLED = [];
       '</div>'+details+'</div>';
   }
 
-  function chartSVG(rows){
-    var dec=rows.filter(function(r){return r.public!==false && DEC[r.result];}).slice()
-      .sort(function(a,b){var da=ep(a.date),db=ep(b.date);return da-db||(a.id||0)-(b.id||0);});
-    var pts=[],cum=0;
-    dec.forEach(function(r){ if(r.result==='W')cum+=num(r.stake)*(num(r.odds)-1); else if(r.result==='L')cum-=num(r.stake); else return; pts.push(cum); });
-    var W=800,H=150,pad=8;
-    if(pts.length<2) return '<div class="bl-chart"><div class="bl-ph">Winst over tijd (units)</div><svg viewBox="0 0 800 150"><text x="12" y="80" fill="#6f7682" font-size="13">De grafiek vult zich zodra er meer resultaten binnen zijn.</text></svg></div>';
-    var mn=Math.min.apply(null,pts.concat([0])),mx=Math.max.apply(null,pts.concat([0])),rng=(mx-mn)||1;
+  function fmtSigned(u){ return (u>=0?'+':'')+(Math.round(u*10)/10).toFixed(1)+'u'; }
+  var MND=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  function fmtDate(e){ var d=new Date(e); return d.getDate()+' '+MND[d.getMonth()]; }
+  function heroChartSVG(pts){
+    var W=600,H=190,pad=6;
+    if(pts.length<2) return '<svg class="bl-hsvg" viewBox="0 0 600 190"><text x="12" y="98" fill="#6f7682" font-size="13">De grafiek vult zich zodra er meer resultaten zijn.</text></svg>';
+    var mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),rng=(mx-mn)||1;
     function X(i){return pad+(W-2*pad)*i/(pts.length-1);}
     function Y(v){return pad+(H-2*pad)*(1-(v-mn)/rng);}
     var d=pts.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
-    var z=Y(0).toFixed(1), up=pts[pts.length-1]>=0;
-    return '<div class="bl-chart"><div class="bl-ph">Winst over tijd (units)</div><svg viewBox="0 0 800 150" preserveAspectRatio="none">'+
-      '<line x1="0" y1="'+z+'" x2="800" y2="'+z+'" stroke="#23262e" stroke-width="1"/>'+
-      '<path d="'+d+' L'+X(pts.length-1).toFixed(1)+' '+z+' L'+X(0).toFixed(1)+' '+z+' Z" fill="'+(up?'rgba(55,214,122,.10)':'rgba(255,90,90,.10)')+'"/>'+
-      '<path d="'+d+'" fill="none" stroke="'+(up?'#37d67a':'#ff5a5a')+'" stroke-width="2"/></svg></div>';
+    var area=d+' L'+X(pts.length-1).toFixed(1)+' '+(H-pad)+' L'+X(0).toFixed(1)+' '+(H-pad)+' Z';
+    return '<svg class="bl-hsvg" viewBox="0 0 600 190" preserveAspectRatio="none">'+
+      '<defs><linearGradient id="blGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(240,120,42,.40)"/><stop offset="1" stop-color="rgba(240,120,42,0)"/></linearGradient></defs>'+
+      '<path d="'+area+'" fill="url(#blGrad)"/>'+
+      '<path d="'+d+'" fill="none" stroke="#f0782a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
+      '<circle cx="'+X(pts.length-1).toFixed(1)+'" cy="'+Y(pts[pts.length-1]).toFixed(1)+'" r="4" fill="#f0782a"/></svg>';
   }
-
   function buildHTML(rows){
-    var f=rows.filter(pass);
-    f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da || (b.id||0)-(a.id||0); });
-    var s=compute(rows.filter(function(r){return r.public!==false;}));
+    var pub=rows.filter(function(r){return r.public!==false;});
+    var f=rows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
+    var s=compute(pub);
+    var dec=pub.filter(function(r){return r.result==='W'||r.result==='L';});
+    var settled=pub.filter(function(r){return DEC[r.result];}).length;
+    var avg=dec.length? dec.reduce(function(a,r){return a+num(r.odds);},0)/dec.length : 0;
+    var ser=dec.slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return da-db||(a.id||0)-(b.id||0);});
+    var cum=0,peak=0,maxdd=0,pts=[],dts=[];
+    ser.forEach(function(r){ cum+= r.result==='W'? num(r.stake)*(num(r.odds)-1):-num(r.stake); peak=Math.max(peak,cum); maxdd=Math.min(maxdd,cum-peak); pts.push(cum); dts.push(ep(r.date)); });
+    var sp={}; ser.forEach(function(r){ var k=r.sport||'?'; sp[k]=(sp[k]||0)+(r.result==='W'?num(r.stake)*(num(r.odds)-1):-num(r.stake)); });
+    var sportArr=Object.keys(sp).map(function(k){return [k,sp[k]];}).sort(function(a,b){return b[1]-a[1];});
+    var maxAbs=sportArr.reduce(function(m,x){return Math.max(m,Math.abs(x[1]));},1);
+    var recent=pub.filter(function(r){return DEC[r.result];}).slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return db-da||(b.id||0)-(a.id||0);}).slice(0,6);
+    var dsall=pub.map(function(r){return ep(r.date);}).filter(Boolean).sort(function(a,b){return a-b;});
+    var per=dsall.length?(fmtDate(dsall[0])+' – '+fmtDate(dsall[dsall.length-1])):'Alle tijd';
+    var pc=s.profit>=0?'pos':'neg', rc=s.roi>=0?'pos':'neg';
+    var labs=''; if(dts.length){ var seen={}; labs=[0,.25,.5,.75,1].map(function(t){var k=fmtDate(dts[Math.round(t*(dts.length-1))]); if(seen[k])return '<span></span>'; seen[k]=1; return '<span>'+k+'</span>';}).join(''); }
+    var pg=function(r){ return r.result==='W'? num(r.stake)*(num(r.odds)-1):(r.result==='L'?-num(r.stake):0); };
     var opts=function(arr,cur){ return arr.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===cur?' selected':'')+'>'+o[1]+'</option>';}).join(''); };
-    var stat=function(v,k,cls){ return '<div class="bl-card"><div class="bl-v '+(cls||'')+'">'+v+'</div><div class="bl-k">'+k+'</div></div>'; };
-    var html=''+
-    '<div class="bl-ledger">'+
-      '<div class="bl-top"><h2>Onze Ledger</h2><p>Elke pick die we delen, eerlijk bijgehouden in eenheden (units). Niets verwijderd, niets verstopt. Een <b>unit</b> = onze vaste basisinzet, zodat het voor elke portemonnee klopt. 18+ · speel bewust.</p></div>'+
-      '<div class="bl-cards">'+
-        stat(s.w+'<span class="dim">W</span> '+s.l+'<span class="dim">L</span>','Gewonnen / verloren')+
-        stat(fmtU(s.profit),'Winst in units', s.profit>=0?'pos':'neg')+
-        stat((s.roi>=0?'+':'')+s.roi.toFixed(1)+'%','Rendement (ROI)', s.roi>=0?'pos':'neg')+
-        stat(s.wr.toFixed(0)+'%','Trefkans')+
-        stat(String(s.open),'Nog open')+
-      '</div>'+
-      '<div class="bl-legend">🟢 Safe = laagste risico · 🟡 Value = gemiddeld · 🔴 Jackpot = hoog risico/hoge uitbetaling · <b>Rendement</b> = winst t.o.v. totale inzet · <b>Trefkans</b> = % gewonnen van de afgeronde bets.</div>'+
-      chartSVG(rows)+
-      '<div class="bl-filters">'+
-        '<input id="blq" class="bl-inp" type="text" placeholder="🔎 zoek team of speler" value="'+esc(st.q)+'">'+
-        '<select class="bl-sel" data-k="sport">'+opts([['all','Alle sporten'],['football','Voetbal'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
-        '<select class="bl-sel" data-k="period">'+opts([['all','Alle datums'],['today','Vandaag'],['week','Deze week'],['month','Deze maand']],st.period)+'</select>'+
-        '<select class="bl-sel" data-k="outcome">'+opts([['all','Alle uitkomsten'],['won','Gewonnen'],['lost','Verloren'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
-        '<select class="bl-sel" data-k="type">'+opts([['all','Alle types'],['card','Los kaartje'],['parley','Parley (combi)'],['prop','Prop (speler)']],st.type)+'</select>'+
-        '<select class="bl-sel" data-k="tier">'+opts([['all','Alle risico'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot'],['lucky','👑 Lucky']],st.tier)+'</select>'+
-        '<button class="bl-reset" data-k="reset">Reset</button>'+
-      '</div>'+
-      '<div class="bl-count">'+f.length+' van '+rows.length+' bets</div>'+
-      '<div class="bl-list">'+(f.length? f.map(rowHTML).join(''):'<div class="bl-empty">Geen bets met deze filters.</div>')+'</div>'+
-    '</div>';
-    return html;
+
+    var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span><span class="bl-per">'+esc(per)+'</span></div>'+
+      '<div class="bl-hgrid"><div class="bl-hleft">'+
+        '<div class="bl-big '+pc+'">'+fmtSigned(s.profit)+'</div><div class="bl-bigsub">Netto winst, bijgehouden in units</div>'+
+        '<div class="bl-h4">'+
+          '<div><div class="hv '+rc+'">'+(s.roi>=0?'+':'')+s.roi.toFixed(1)+'%</div><div class="hk">ROI</div></div>'+
+          '<div><div class="hv">'+s.wr.toFixed(0)+'%</div><div class="hk">Trefkans</div></div>'+
+          '<div><div class="hv">'+avg.toFixed(2)+'</div><div class="hk">Gem. odds</div></div>'+
+          '<div><div class="hv">'+settled+'</div><div class="hk">Bets afgerekend</div></div>'+
+        '</div></div>'+
+        '<div class="bl-hright">'+heroChartSVG(pts)+'<div class="bl-xlabels">'+labs+'</div><div class="bl-cap">Cumulatieve units. Op- en neer-periodes, alles gelogd, niets verwijderd.</div></div>'+
+      '</div></div>';
+
+    var cell=function(v,k,cls){return '<div class="bl-cell"><div class="cv '+(cls||'')+'">'+v+'</div><div class="ck">'+k+'</div></div>';};
+    var strip='<div class="bl-strip">'+
+      cell(fmtSigned(s.profit),'Netto winst',pc)+cell((s.roi>=0?'+':'')+s.roi.toFixed(1)+'%','ROI',rc)+
+      cell(s.wr.toFixed(0)+'%','Trefkans')+cell(String(settled),'Bets afgerekend')+
+      cell(avg.toFixed(2),'Gem. odds')+cell(maxdd.toFixed(1)+'u','Max drawdown','neg')+'</div>';
+
+    var bars=sportArr.length? sportArr.map(function(x){var w=Math.max(4,Math.round(Math.abs(x[1])/maxAbs*100));var pos=x[1]>=0;return '<div class="bl-bar"><span class="bn">'+esc(x[0])+'</span><span class="bt"><span class="bf '+(pos?'':'negf')+'" style="width:'+w+'%"></span></span><span class="bv '+(pos?'pos':'neg')+'">'+fmtSigned(x[1])+'</span></div>';}).join('') : '<div class="bl-empty">Nog geen afgerekende bets.</div>';
+    var rec=recent.length? recent.map(function(r){var g=pg(r);var cls=r.result==='W'?'w':(r.result==='L'?'l':'v');return '<div class="bl-rr"><span class="rm">'+esc(r.match)+'</span><span class="rg '+cls+'">'+r.result+'</span><span class="rv '+(g>=0?'pos':'neg')+'">'+fmtSigned(g)+'</span></div>';}).join('') : '<div class="bl-empty">Nog geen resultaten.</div>';
+    var panels='<div class="bl-two"><div class="bl-panel"><div class="bl-ph">Winst per sport</div>'+bars+'</div><div class="bl-panel"><div class="bl-ph">Recente resultaten</div>'+rec+'</div></div>';
+
+    var filters='<div class="bl-filters">'+
+      '<input id="blq" class="bl-inp" type="text" placeholder="🔎 zoek team of speler" value="'+esc(st.q)+'">'+
+      '<select class="bl-sel" data-k="sport">'+opts([['all','Alle sporten'],['football','Voetbal'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
+      '<select class="bl-sel" data-k="period">'+opts([['all','Alle datums'],['today','Vandaag'],['week','Deze week'],['month','Deze maand']],st.period)+'</select>'+
+      '<select class="bl-sel" data-k="outcome">'+opts([['all','Alle uitkomsten'],['won','Gewonnen'],['lost','Verloren'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
+      '<select class="bl-sel" data-k="type">'+opts([['all','Alle types'],['card','Los kaartje'],['parley','Parley (combi)'],['prop','Prop']],st.type)+'</select>'+
+      '<select class="bl-sel" data-k="tier">'+opts([['all','Alle risico'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot'],['lucky','👑 Lucky']],st.tier)+'</select>'+
+      '<button class="bl-reset" data-k="reset">Reset</button></div>';
+
+    return '<div class="bl-ledger">'+hero+strip+panels+
+      '<div class="bl-fwrap">'+filters+'<div class="bl-count">'+f.length+' van '+rows.length+' bets</div>'+
+      '<div class="bl-list">'+(f.length? f.map(rowHTML).join(''):'<div class="bl-empty">Geen bets met deze filters.</div>')+'</div></div></div>';
   }
 
   function injectCSS(){
@@ -669,36 +692,48 @@ window.DAILY_PROPS_SETTLED = [];
     var s=document.createElement('style'); s.id='blLedgerCSS';
     s.textContent=[
       '.bl-ledger{font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e9eaee}',
-      '.bl-top h2{font-size:20px;margin:0 0 4px}.bl-top p{color:#9aa0ab;margin:0 0 16px;max-width:760px;font-size:13px}',
-      '.bl-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}',
-      '.bl-card{background:#15171c;border:1px solid #23262e;border-radius:12px;padding:13px 15px}',
-      '.bl-card .bl-v{font-size:22px;font-weight:700}.bl-card .bl-k{color:#9aa0ab;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}',
-      '.bl-v .dim{color:#9aa0ab;font-size:13px;font-weight:600;margin:0 6px 0 1px}',
-      '.pos{color:#37d67a}.neg{color:#ff5a5a}',
-      '.bl-legend{background:#13151a;border:1px solid #23262e;border-radius:10px;padding:9px 13px;color:#9aa0ab;font-size:12px;margin-bottom:14px}',
-      '.bl-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}',
-      '.bl-inp,.bl-sel,.bl-reset{background:#15171c;border:1px solid #2a2e37;color:#e9eaee;border-radius:9px;padding:8px 11px;font-size:13px}',
-      '.bl-inp{flex:1;min-width:180px}.bl-sel{cursor:pointer}.bl-reset{cursor:pointer;color:#ff7a1a}',
-      '.bl-count{color:#9aa0ab;font-size:12px;margin:4px 2px 10px}',
+      '.bl-ledger .pos{color:#35c66b}.bl-ledger .neg{color:#ff6a4d}',
+      '.bl-hero{background:#121317;border:1px solid #232631;border-radius:18px;padding:18px 20px;margin-bottom:14px}',
+      '.bl-hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}',
+      '.bl-brand{font-weight:600;font-size:14px}.bl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0782a;margin-right:7px;vertical-align:middle}',
+      '.bl-per{color:#7d828d;font-size:12px}',
+      '.bl-hgrid{display:grid;grid-template-columns:minmax(210px,1fr) 1.45fr;gap:26px;align-items:center}',
+      '.bl-big{font-size:46px;font-weight:800;line-height:1;color:#f0782a;letter-spacing:-1px}.bl-big.neg{color:#ff6a4d}',
+      '.bl-bigsub{color:#9aa0ab;font-size:13px;margin:9px 0 20px}',
+      '.bl-h4{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px}',
+      '.bl-h4 .hv{font-size:19px;font-weight:700}.bl-h4 .hk{color:#7d828d;font-size:12px;margin-top:1px}',
+      '.bl-hright .bl-hsvg{width:100%;height:188px;display:block}',
+      '.bl-xlabels{display:flex;justify-content:space-between;color:#6f7682;font-size:11px;margin-top:5px}',
+      '.bl-cap{color:#7d828d;font-size:12px;margin-top:11px;max-width:430px}',
+      '.bl-strip{display:grid;grid-template-columns:repeat(6,1fr);background:#121317;border:1px solid #232631;border-radius:14px;margin-bottom:14px;overflow:hidden}',
+      '.bl-cell{padding:14px 16px;border-left:1px solid #1e212a}.bl-cell:first-child{border-left:0}',
+      '.bl-cell .cv{font-size:20px;font-weight:700}.bl-cell .ck{color:#7d828d;font-size:11px;margin-top:2px}',
+      '.bl-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}',
+      '.bl-panel{background:#121317;border:1px solid #232631;border-radius:14px;padding:14px 16px}',
+      '.bl-ph{color:#7d828d;font-size:11px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px}',
+      '.bl-bar{display:grid;grid-template-columns:74px 1fr 56px;align-items:center;gap:10px;margin-bottom:11px}',
+      '.bl-bar .bn{font-size:13px}.bl-bar .bt{height:8px;background:#23262e;border-radius:6px;overflow:hidden}.bl-bar .bf{display:block;height:100%;background:#f0782a;border-radius:6px}.bl-bar .bf.negf{background:#ff6a4d}.bl-bar .bv{text-align:right;font-size:13px;font-weight:600}',
+      '.bl-rr{display:grid;grid-template-columns:1fr 26px 56px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #1c1f26}.bl-rr:last-child{border-bottom:0}',
+      '.bl-rr .rm{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bl-rr .rg{font-size:11px;font-weight:800;text-align:center;border-radius:6px;padding:2px 0}.bl-rr .rg.w{background:rgba(53,198,107,.16);color:#35c66b}.bl-rr .rg.l{background:rgba(255,106,77,.16);color:#ff6a4d}.bl-rr .rg.v{background:rgba(138,143,154,.16);color:#aeb4be}.bl-rr .rv{text-align:right;font-size:13px;font-weight:700}',
+      '.bl-fwrap{background:#121317;border:1px solid #232631;border-radius:14px;padding:14px 16px}',
+      '.bl-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}',
+      '.bl-inp,.bl-sel,.bl-reset{background:#0e0f13;border:1px solid #2a2e37;color:#e9eaee;border-radius:9px;padding:9px 12px;font-size:13px}',
+      '.bl-inp{flex:1;min-width:180px}.bl-sel{cursor:pointer}.bl-reset{cursor:pointer;color:#f0782a}',
+      '.bl-count{color:#7d828d;font-size:12px;margin:2px 2px 10px}',
       '.bl-bet{background:#15171c;border:1px solid #23262e;border-radius:11px;margin-bottom:8px;overflow:hidden}',
-      '.bl-head{display:grid;grid-template-columns:96px 1fr 64px 130px 110px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
+      '.bl-head{display:grid;grid-template-columns:92px 1fr 60px 124px 92px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
       '.bl-when{font-size:12px;color:#9aa0ab}.bl-when .bl-sport{display:block;color:#6f7682;font-size:11px}',
       '.bl-match{font-weight:600}.bl-pick{color:#9aa0ab;font-size:12px}',
       '.bl-odds{font-weight:700;text-align:right}',
       '.bl-st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}',
-      '.bl-st.done{background:rgba(55,214,122,.14);color:#37d67a}.bl-st.open{background:rgba(255,122,26,.14);color:#ff9a4d}.bl-st.rev{background:rgba(255,90,90,.16);color:#ff7a7a}',
+      '.bl-st.done{background:rgba(53,198,107,.14);color:#35c66b}.bl-st.open{background:rgba(240,120,42,.16);color:#f0a36a}.bl-st.rev{background:rgba(255,90,90,.16);color:#ff7a7a}',
       '.bl-res{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}',
-      '.bl-res.w{background:rgba(55,214,122,.16);color:#37d67a}.bl-res.l{background:rgba(255,90,90,.16);color:#ff5a5a}.bl-res.v{background:rgba(138,143,154,.18);color:#aeb4be}.bl-res.p{background:rgba(138,143,154,.1);color:#6f7682}',
-      '.bl-caret{color:#6f7682;text-align:center;transition:transform .15s}',
-      '.bl-bet.open-row .bl-caret{transform:rotate(180deg)}',
-      '.bl-det{display:none;padding:2px 14px 13px;border-top:1px solid #23262e;color:#c7ccd4;font-size:13px}',
-      '.bl-bet.open-row .bl-det{display:block}',
-      '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#37d67a}.bl-drow b{color:#e9eaee}',
-      '.bl-empty{color:#9aa0ab;padding:20px;text-align:center}',
-      '.bl-chart{background:#13151a;border:1px solid #23262e;border-radius:12px;padding:14px 16px 6px;margin-bottom:14px}',
-      '.bl-chart .bl-ph{color:#9aa0ab;font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}',
-      '.bl-chart svg{width:100%;height:150px;display:block}',
-      '@media(max-width:720px){.bl-head{grid-template-columns:1fr 96px 22px;grid-auto-rows:auto}.bl-when{order:3}.bl-status,.bl-result{order:4}}'
+      '.bl-res.w{background:rgba(53,198,107,.16);color:#35c66b}.bl-res.l{background:rgba(255,106,77,.16);color:#ff6a4d}.bl-res.v{background:rgba(138,143,154,.18);color:#aeb4be}.bl-res.p{background:rgba(138,143,154,.1);color:#6f7682}',
+      '.bl-caret{color:#6f7682;text-align:center;transition:transform .15s}.bl-bet.open-row .bl-caret{transform:rotate(180deg)}',
+      '.bl-det{display:none;padding:2px 14px 13px;border-top:1px solid #23262e;color:#c7ccd4;font-size:13px}.bl-bet.open-row .bl-det{display:block}',
+      '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#35c66b}.bl-drow b{color:#e9eaee}',
+      '.bl-empty{color:#9aa0ab;padding:18px;text-align:center}',
+      '@media(max-width:860px){.bl-hgrid{grid-template-columns:1fr}.bl-strip{grid-template-columns:repeat(3,1fr)}.bl-cell:nth-child(4){border-left:0}.bl-two{grid-template-columns:1fr}.bl-head{grid-template-columns:1fr 80px 22px}.bl-when,.bl-status{display:none}}'
     ].join('');
     document.head.appendChild(s);
   }
