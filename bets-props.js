@@ -661,7 +661,9 @@ window.DAILY_PROPS_SETTLED = [];
     var tabs='<div class="bl-tabs">'+tb('card','Daily Betting Cards',cCard)+tb('parley','Parleys',cPar)+tb('prop','Daily Prop Cards',cProp)+tb('all','All',base.length)+'</div>';
     var sub=st.tab==='card'?'single picks':(st.tab==='parley'?'parleys':(st.tab==='prop'?'prop cards':'all bets'));
 
-    var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span><span class="bl-per">'+esc(per)+'</span></div>'+
+    var TF=[['all','All'],['today','Daily'],['week','Weekly'],['month','Monthly'],['quarter','Quarterly'],['year','Yearly']];
+    var tfChips='<span class="bl-tfs">'+TF.map(function(o){return '<button class="bl-tf'+(st.period===o[0]?' on':'')+'" data-tf="'+o[0]+'">'+o[1]+'</button>';}).join('')+'</span>';
+    var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span>'+tfChips+'<span class="bl-per">'+esc(per)+'</span></div>'+
       '<div class="bl-hgrid"><div class="bl-hleft">'+
         '<div class="bl-big '+pc+'">'+fmtSigned(s.profit)+'</div><div class="bl-bigsub">Net profit · '+sub+' · tracked in units</div>'+
         '<div class="bl-h4">'+
@@ -686,7 +688,6 @@ window.DAILY_PROPS_SETTLED = [];
     var filters='<div class="bl-filters">'+
       '<input id="blq" class="bl-inp" type="text" placeholder="🔎 search team or player" value="'+esc(st.q)+'">'+
       '<select class="bl-sel" data-k="sport">'+opts([['all','All sports'],['football','Football'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
-      '<select class="bl-sel" data-k="period">'+opts([['all','All time'],['today','Daily'],['week','Weekly'],['month','Monthly'],['quarter','Quarterly'],['year','Yearly']],st.period)+'</select>'+
       '<select class="bl-sel" data-k="outcome">'+opts([['all','All outcomes'],['won','Won'],['lost','Lost'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
       '<select class="bl-sel" data-k="tier">'+opts([['all','All risk'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot']],st.tier)+'</select>'+
       '<button class="bl-reset" data-k="reset">Reset</button></div>';
@@ -707,9 +708,12 @@ window.DAILY_PROPS_SETTLED = [];
       '.bl-tab.on{background:#f0782a;border-color:#f0782a;color:#1a1206}',
       '.bl-tab .bl-tn{opacity:.7;font-weight:600;margin-left:3px}.bl-tab.on .bl-tn{opacity:.85}',
       '.bl-hero{background:#121317;border:1px solid #232631;border-radius:18px;padding:18px 20px;margin-bottom:14px}',
-      '.bl-hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}',
-      '.bl-brand{font-weight:600;font-size:14px}.bl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0782a;margin-right:7px;vertical-align:middle}',
+      '.bl-hrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}',
+      '.bl-brand{font-weight:600;font-size:14px;margin-right:auto}.bl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0782a;margin-right:7px;vertical-align:middle}',
       '.bl-per{color:#7d828d;font-size:12px}',
+      '.bl-tfs{display:inline-flex;gap:3px;background:#0e0f13;border:1px solid #232631;border-radius:9px;padding:3px}',
+      '.bl-tf{background:transparent;border:0;color:#9aa0ab;font-size:12px;font-weight:600;padding:5px 10px;border-radius:7px;cursor:pointer}',
+      '.bl-tf.on{background:#f0782a;color:#1a1206}',
       '.bl-hgrid{display:grid;grid-template-columns:minmax(210px,1fr) 1.45fr;gap:26px;align-items:center}',
       '.bl-big{font-size:46px;font-weight:800;line-height:1;color:#f0782a;letter-spacing:-1px}.bl-big.neg{color:#ff6a4d}',
       '.bl-bigsub{color:#9aa0ab;font-size:13px;margin:9px 0 20px}',
@@ -784,6 +788,8 @@ window.DAILY_PROPS_SETTLED = [];
     if(cntEl) cntEl.textContent=f.length+' of '+tabRows.length+' '+sub;
   }
   function onClick(e){
+    var tf=e.target.closest('.bl-tf');
+    if(tf){ st.period=tf.getAttribute('data-tf'); render(); return; }
     var t=e.target.closest('.bl-tab');
     if(t){ st.tab=t.getAttribute('data-tab'); render(); return; }
     var rs=e.target.closest('.bl-reset');
