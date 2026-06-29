@@ -358,10 +358,10 @@ window.DAILY_PROPS_SETTLED = [];
         var idx=0; while(idx<lines.length && lines[idx].trim()==='') idx++;
         if(idx<lines.length && /POSITIONS/.test(lines[idx])){
           var cat=catKey(lines[idx]);
-          if(cat && cat===active){ lines.splice(idx,1); ch=lines.join('\n'); }
+          if(cat && cat===active){ lines.splice(idx,1); if(idx<lines.length && lines[idx].trim()==='') lines.splice(idx,1); ch=lines.join('\n'); }
         }
+        ch=ch.replace(/^\n+/,''); // start the continuation message at its content; no extra leading blank
       }
-      if(i>0){ ch='\n'+ch.replace(/^\n+/,''); } // one blank line between messages
       chunks[i]=ch;
       var heads=ch.match(/[^\n]*POSITIONS[^\n]*/g);
       if(heads && heads.length){ var k=catKey(heads[heads.length-1]); if(k) active=k; }
