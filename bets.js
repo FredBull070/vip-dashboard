@@ -1,7 +1,7 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
 window.DAILY_VERSION = "2026-06-28";
 
-window.DAILY_MESSAGES = `**🟢 ⚽ #13 Safe Builder Parley (Football): 28-06-2026**
+window.DAILY_MESSAGES = `**🟢 #13 Safe Builder Parley (⚽ Football): 28-06-2026**
 
 **:small_orange_diamond: Germany x Paraguay**
 Germany to win (match result) @ 1.33 - 1.40
@@ -19,7 +19,7 @@ Two of the strongest sides in the bracket open the knockout rounds as clear favo
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 ⚽ #14 Value Builder Parley (Football): 28-06-2026**
+**🟡 #14 Value Builder Parley (⚽ Football): 28-06-2026**
 
 **:small_orange_diamond: Netherlands x Morocco**
 Netherlands to win (match result) @ 2.05 - 2.18
@@ -37,7 +37,7 @@ The two tighter knockout ties on the slate, priced for value. Netherlands carry 
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 ⚽ #15 Jackpot Builder Parley (Football): 28-06-2026**
+**🔴 #15 Jackpot Builder Parley (⚽ Football): 28-06-2026**
 
 **:small_orange_diamond: Brazil x Japan**
 Over 2.5 goals @ 1.78 - 1.90*
@@ -87,7 +87,7 @@ Two of the strongest sides in the bracket open the knockout rounds as clear favo
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly
 ===NEXT MESSAGE===
-**👑 ⚽ Lucky Shot Parley (Football): 28-06-2026**
+**👑 Lucky Shot Parley (⚽ Football): 28-06-2026**
 
 **:small_orange_diamond: Brazil x Japan**
 Brazil to win to nil (win + clean sheet) @ 2.70 - 3.00*
