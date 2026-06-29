@@ -442,7 +442,21 @@ window.DAILY_PROPS_SETTLED = [];
       }
     }
   }
-  function go(){ relabelIn(document.getElementById('page-betcards')); relabelIn(document.getElementById('page-propcards')); relabelIn(document.getElementById('subbar')); }
+  // Hard guarantee: a parley must NEVER appear in the single Daily Cards / Prop
+  // Cards lists. A parley card's match field joins legs with ' + ', or its text
+  // mentions a Builder/Lucky Shot Parley/Accumulator. Hide any such row.
+  function hideParleys(){
+    ['page-betcards','page-propcards'].forEach(function(pid){
+      var root=document.getElementById(pid); if(!root) return;
+      [].slice.call(root.querySelectorAll('.rcard')).forEach(function(c){
+        var lab=c.querySelector('label, b, strong, .rc-top *');
+        var matchTxt=lab?(lab.textContent||''):'';
+        var full=(c.textContent||'');
+        if(/ \+ /.test(matchTxt) || /builder parley|lucky shot|accumulator/i.test(full)){ c.style.display='none'; }
+      });
+    });
+  }
+  function go(){ relabelIn(document.getElementById('page-betcards')); relabelIn(document.getElementById('page-propcards')); relabelIn(document.getElementById('subbar')); hideParleys(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(go,800);}); else setTimeout(go,800);
   setInterval(go, 1500);
   document.addEventListener('click', function(){ setTimeout(go,200); }, true);
@@ -599,6 +613,24 @@ window.DAILY_PROPS_SETTLED = [];
       '</div>'+details+'</div>';
   }
 
+  function chartSVG(rows){
+    var dec=rows.filter(function(r){return r.public!==false && DEC[r.result];}).slice()
+      .sort(function(a,b){var da=ep(a.date),db=ep(b.date);return da-db||(a.id||0)-(b.id||0);});
+    var pts=[],cum=0;
+    dec.forEach(function(r){ if(r.result==='W')cum+=num(r.stake)*(num(r.odds)-1); else if(r.result==='L')cum-=num(r.stake); else return; pts.push(cum); });
+    var W=800,H=150,pad=8;
+    if(pts.length<2) return '<div class="bl-chart"><div class="bl-ph">Winst over tijd (units)</div><svg viewBox="0 0 800 150"><text x="12" y="80" fill="#6f7682" font-size="13">De grafiek vult zich zodra er meer resultaten binnen zijn.</text></svg></div>';
+    var mn=Math.min.apply(null,pts.concat([0])),mx=Math.max.apply(null,pts.concat([0])),rng=(mx-mn)||1;
+    function X(i){return pad+(W-2*pad)*i/(pts.length-1);}
+    function Y(v){return pad+(H-2*pad)*(1-(v-mn)/rng);}
+    var d=pts.map(function(v,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);}).join(' ');
+    var z=Y(0).toFixed(1), up=pts[pts.length-1]>=0;
+    return '<div class="bl-chart"><div class="bl-ph">Winst over tijd (units)</div><svg viewBox="0 0 800 150" preserveAspectRatio="none">'+
+      '<line x1="0" y1="'+z+'" x2="800" y2="'+z+'" stroke="#23262e" stroke-width="1"/>'+
+      '<path d="'+d+' L'+X(pts.length-1).toFixed(1)+' '+z+' L'+X(0).toFixed(1)+' '+z+' Z" fill="'+(up?'rgba(55,214,122,.10)':'rgba(255,90,90,.10)')+'"/>'+
+      '<path d="'+d+'" fill="none" stroke="'+(up?'#37d67a':'#ff5a5a')+'" stroke-width="2"/></svg></div>';
+  }
+
   function buildHTML(rows){
     var f=rows.filter(pass);
     f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da || (b.id||0)-(a.id||0); });
@@ -616,6 +648,7 @@ window.DAILY_PROPS_SETTLED = [];
         stat(String(s.open),'Nog open')+
       '</div>'+
       '<div class="bl-legend">🟢 Safe = laagste risico · 🟡 Value = gemiddeld · 🔴 Jackpot = hoog risico/hoge uitbetaling · <b>Rendement</b> = winst t.o.v. totale inzet · <b>Trefkans</b> = % gewonnen van de afgeronde bets.</div>'+
+      chartSVG(rows)+
       '<div class="bl-filters">'+
         '<input id="blq" class="bl-inp" type="text" placeholder="🔎 zoek team of speler" value="'+esc(st.q)+'">'+
         '<select class="bl-sel" data-k="sport">'+opts([['all','Alle sporten'],['football','Voetbal'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
@@ -662,6 +695,9 @@ window.DAILY_PROPS_SETTLED = [];
       '.bl-bet.open-row .bl-det{display:block}',
       '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#37d67a}.bl-drow b{color:#e9eaee}',
       '.bl-empty{color:#9aa0ab;padding:20px;text-align:center}',
+      '.bl-chart{background:#13151a;border:1px solid #23262e;border-radius:12px;padding:14px 16px 6px;margin-bottom:14px}',
+      '.bl-chart .bl-ph{color:#9aa0ab;font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}',
+      '.bl-chart svg{width:100%;height:150px;display:block}',
       '@media(max-width:720px){.bl-head{grid-template-columns:1fr 96px 22px;grid-auto-rows:auto}.bl-when{order:3}.bl-status,.bl-result{order:4}}'
     ].join('');
     document.head.appendChild(s);
