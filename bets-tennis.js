@@ -1,23 +1,23 @@
 /* BetLife365 tennis bets - written by the tennis task, read by the dashboard. */
 window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (Tennis): 29-06-2026**
 
-**:small_orange_diamond: Mirra Andreeva x Magda Linette**
-Mirra Andreeva to win (moneyline) @ 1.20 - 1.30*
-↳ Andreeva is a clear class above; Linette is solid but not a grass threat.
+**:small_orange_diamond: Denis Shapovalov x Pablo Carreno Busta**
+Denis Shapovalov to win (moneyline) @ 1.36
+↳ Big-hitting lefty with the firepower edge on grass over an ageing, clay-leaning Carreno Busta.
 
-**:small_orange_diamond: Felix Auger-Aliassime x Aleksandr Shevchenko**
-Felix Auger-Aliassime to win (moneyline) @ 1.24 - 1.32*
-↳ Big serve suits grass and there is a clear gap in level over Shevchenko.
+**:small_orange_diamond: Aleksandar Vukic x Jenson Brooksby**
+Jenson Brooksby to win (moneyline) @ 1.44
+↳ Brooksby's return game and consistency make him the clear favourite over Vukic.
 
-**:small_orange_diamond: Andrey Rublev x Roman Safiullin**
-Andrey Rublev to win (moneyline) @ 1.26 - 1.34*
-↳ Seeded Rublev has the firepower edge over compatriot Safiullin.
+**:small_orange_diamond: Aleksandar Kovacevic x Botic Van De Zandschulp**
+Botic Van De Zandschulp to win (moneyline) @ 1.53
+↳ The more experienced grass performer, favoured to come through against Kovacevic.
 
-**:moneybag: Total odds: ±1.90 - 2.30***
+**:moneybag: Total odds: ±2.95 - 3.05**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three short-priced favourites in winnable openers stacked into a controlled-risk core. We deliberately leave out ultra-short legs (under 1.15) because they add almost nothing to the price while still carrying upset risk.
+Three clear favourites from today's Wimbledon order of play stacked into a controlled-risk core. Every leg is priced above 1.15, so each one adds real value instead of dead weight.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
@@ -110,29 +110,29 @@ Odds may vary depending on the bookmaker or the time of placement.
 A long-shot built from heavy favourites on game-handicap lines across seven different matches, none of them load-bearing in the other tickets.
 
 **:bank: Bankroll:** 0.1u stake`;
-window.DAILY_TENNIS_CARDS = `MATCH: Mirra Andreeva x Magda Linette
+window.DAILY_TENNIS_CARDS = `MATCH: Denis Shapovalov x Pablo Carreno Busta
 MARKET: Match Winner
-SELECTION: Mirra Andreeva to win
-ODDS: 1.20 - 1.30*
+SELECTION: Denis Shapovalov to win
+ODDS: 1.36
 STAKE: 2u (Safe Builder leg)
 RISK: Low
-ANALYSIS: Andreeva is a class above; Linette is steady but not a grass danger.
+ANALYSIS: Big-hitting lefty with the firepower edge on grass over an ageing Carreno Busta.
 ===
-MATCH: Felix Auger-Aliassime x Aleksandr Shevchenko
+MATCH: Aleksandar Vukic x Jenson Brooksby
 MARKET: Match Winner
-SELECTION: Felix Auger-Aliassime to win
-ODDS: 1.24 - 1.32*
+SELECTION: Jenson Brooksby to win
+ODDS: 1.44
 STAKE: 2u (Safe Builder leg)
 RISK: Low
-ANALYSIS: Big serve suits grass and there is a clear gap in level over Shevchenko.
+ANALYSIS: Brooksby's return game and consistency make him the clear favourite over Vukic.
 ===
-MATCH: Andrey Rublev x Roman Safiullin
+MATCH: Aleksandar Kovacevic x Botic Van De Zandschulp
 MARKET: Match Winner
-SELECTION: Andrey Rublev to win
-ODDS: 1.26 - 1.34*
+SELECTION: Botic Van De Zandschulp to win
+ODDS: 1.53
 STAKE: 2u (Safe Builder leg)
 RISK: Low
-ANALYSIS: Seeded Rublev has the firepower edge over compatriot Safiullin.
+ANALYSIS: The more experienced grass performer, favoured to come through against Kovacevic.
 ===
 MATCH: Jannik Sinner x Miomir Kecmanovic
 MARKET: Set Betting (3-0)
@@ -257,10 +257,10 @@ window.TENNIS_EVENTS = [
 {match:"Jannik Sinner x Miomir Kecmanovic", date:"2026-06-29", time:"14:30", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Jannik Sinner", tier:"Value Builder"},
 {match:"Novak Djokovic x Yibing Wu", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Novak Djokovic", tier:"Jackpot Builder"},
 {match:"Daniil Medvedev x Marin Cilic", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 1 Court", pick:"Daniil Medvedev", tier:"Value Builder"},
-{match:"Mirra Andreeva x Magda Linette", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 1 Court", pick:"Mirra Andreeva", tier:"Safe Builder"},
+{match:"Denis Shapovalov x Pablo Carreno Busta", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Denis Shapovalov", tier:"Safe Builder"},
 {match:"Jessica Pegula x Darja Vidmanova", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"No 2 Court", pick:"Jessica Pegula", tier:"Jackpot Builder"},
 {match:"Cameron Norrie x Michael Zheng", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 2 Court", pick:"Cameron Norrie", tier:"Jackpot Builder"},
-{match:"Felix Auger-Aliassime x Aleksandr Shevchenko", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 2 Court", pick:"Felix Auger-Aliassime", tier:"Safe Builder"},
+{match:"Aleksandar Vukic x Jenson Brooksby", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Jenson Brooksby", tier:"Safe Builder"},
 {match:"Coco Gauff x Tamara Korpatsch", date:"2026-06-29", time:"17:30", comp:"Wimbledon", stage:"Round 1", venue:"No 2 Court", pick:"Coco Gauff", tier:"Jackpot Builder"},
 {match:"Casper Ruud x Hubert Hurkacz", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 3 Court", pick:"Hubert Hurkacz", tier:"Jackpot Builder"},
 {match:"Naomi Osaka x Elsa Jacquemot", date:"2026-06-29", time:"15:30", comp:"Wimbledon", stage:"Round 1", venue:"No 3 Court", pick:"Naomi Osaka", tier:"Value Builder"},
@@ -270,6 +270,6 @@ window.TENNIS_EVENTS = [
 {match:"Belinda Bencic x Mika Stojsavljevic", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Belinda Bencic", tier:"Jackpot Builder"},
 {match:"Tommy Paul x Alexandre Muller", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Tommy Paul", tier:"Jackpot Builder"},
 {match:"Joao Fonseca x Roberto Bautista Agut", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Joao Fonseca", tier:"Jackpot Builder"},
-{match:"Andrey Rublev x Roman Safiullin", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"Court 16", pick:"Andrey Rublev", tier:"Safe Builder"},
+{match:"Aleksandar Kovacevic x Botic Van De Zandschulp", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Botic Van De Zandschulp", tier:"Safe Builder"},
 {match:"Stefanos Tsitsipas x Hugo Gaston", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 16", pick:"Stefanos Tsitsipas", tier:"Value Builder"}
 ];
