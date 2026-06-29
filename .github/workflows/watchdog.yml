@@ -1,0 +1,43 @@
+name: trackrecord-watchdog
+# Free cloud safety net. Runs on GitHub's servers (even when Fred's PC is off).
+# Checks whether the track record master was updated today by the app-based
+# tasks; if not, it opens/updates a GitHub issue so Fred gets an email alert.
+on:
+  schedule:
+    - cron: '0 17,21 * * *'   # ~19:00 and 23:00 Europe/Amsterdam (CEST)
+  workflow_dispatch: {}        # allow a manual "Run workflow" from the Actions tab
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check track record freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          TODAY=$(TZ=Europe/Amsterdam date +%d-%m-%Y)
+          ARCH="archive/trackrecord-$TODAY.json"
+          LAST=$(git log -1 --format=%ct -- trackrecord.json 2>/dev/null || echo 0)
+          NOW=$(date +%s)
+          AGE_H=$(( (NOW - LAST) / 3600 ))
+          STALE=0; REASON=""
+          if [ ! -f "$ARCH" ]; then STALE=1; REASON="Geen archief-snapshot voor vandaag ($TODAY). "; fi
+          if [ "$AGE_H" -gt 26 ]; then STALE=1; REASON="${REASON}trackrecord.json is ${AGE_H}u niet bijgewerkt. "; fi
+          TITLE="⚠ BetLife365 track record niet bijgewerkt"
+          OPEN=$(gh issue list --repo "$REPO" --state open --search "$TITLE in:title" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ "$STALE" = "1" ]; then
+            BODY="De geplande taken lijken vandaag niet te hebben gedraaid (pc/app mogelijk uit). ${REASON}Actie: open de Claude-app en draai 'trackrecord-intake' en 'evening-settlement' (of laat de pc aan staan). Automatische check op $(date -u '+%Y-%m-%d %H:%M UTC')."
+            if [ -n "$OPEN" ]; then gh issue comment "$OPEN" --repo "$REPO" --body "$BODY";
+            else gh issue create --repo "$REPO" --title "$TITLE" --body "$BODY"; fi
+            echo "STALE: $REASON"
+          else
+            if [ -n "$OPEN" ]; then gh issue close "$OPEN" --repo "$REPO" --comment "Hersteld: het track record is weer bijgewerkt."; fi
+            echo "OK: vers (${AGE_H}u oud, archief aanwezig)."
+          fi
