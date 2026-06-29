@@ -1,5 +1,5 @@
 /* BetLife365 tennis bets - written by the tennis task, read by the dashboard. */
-window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (Tennis): 29-06-2026**
+window.DAILY_TENNIS = `**🟢 🎾 #T1 Safe Builder Parley (Tennis): 29-06-2026**
 
 **:small_orange_diamond: Denis Shapovalov x Pablo Carreno Busta**
 Denis Shapovalov to win (moneyline) @ 1.36
@@ -17,7 +17,7 @@ Two clear favourites from today's Wimbledon order of play stacked into a control
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 #T2 Value Builder Parley (Tennis): 29-06-2026**
+**🟡 🎾 #T2 Value Builder Parley (Tennis): 29-06-2026**
 
 **:small_orange_diamond: Aleksandar Kovacevic x Botic Van De Zandschulp**
 Botic Van De Zandschulp to win (moneyline) @ 1.53
@@ -43,7 +43,7 @@ Strong favourites with one straight-sets upgrade to lift the price into value te
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 #T3 Jackpot Builder Parley (Tennis): 29-06-2026**
+**🔴 🎾 #T3 Jackpot Builder Parley (Tennis): 29-06-2026**
 
 **:small_orange_diamond: Novak Djokovic x Yibing Wu**
 Novak Djokovic to win 3-0 (sets) @ 1.50 - 1.72*
@@ -69,7 +69,7 @@ Built around a live underdog (Hurkacz) plus two straight-sets calls, deliberatel
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Tennis): 29-06-2026**
+**👑 🎾 Lucky Shot Parley (Tennis): 29-06-2026**
 
 **:small_orange_diamond: Jessica Pegula x Darja Vidmanova**
 Jessica Pegula -4.5 games @ 1.85 - 2.05*
