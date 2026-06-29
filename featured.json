@@ -1,10 +1,10 @@
 {
-  "type": "card",
+  "type": "parley",
   "period": "week",
-  "label": "Daily Cards · this week",
+  "label": "Parleys · this week",
   "roi": null,
   "bets": null,
   "approved_by": "fred",
-  "updated_at": "2026-06-29T22:28:58.328Z",
+  "updated_at": "2026-06-29T22:30:03.232Z",
   "via": "worker"
 }
