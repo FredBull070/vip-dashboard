@@ -521,6 +521,7 @@ window.DAILY_PROPS_SETTLED = [];
     var orig=window.buildNotifs;
     window.buildNotifs=function(){
       var items=[]; try{ items=orig.apply(this,arguments)||[]; }catch(e){ items=[]; }
+      try{ if(window.__blFeaturedChanged && window.__blFeaturedSugg){ var fs=window.__blFeaturedSugg; items.push({key:'featpub|'+fs.type+'|'+fs.period, kind:'review', title:'Sterkere slice beschikbaar: '+(fs.label||fs.type), sub:'+'+fs.roi+'% over '+fs.bets+' bets — open Track Record om te publiceren', read:false, seen:Date.now(), readAt:0}); } }catch(e){}
       try{ if(window.notifTypeOn && !window.notifTypeOn('review')) return items; }catch(e){}
       try{ reviewItems().forEach(function(it){ items.push(it); }); }catch(e){}
       return items;
@@ -884,4 +885,106 @@ window.DAILY_PROPS_SETTLED = [];
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(tick,900); }); else setTimeout(tick,900);
   setInterval(tick, 1500);
+})();
+
+/* ---------------------------------------------------------------------------
+   PUBLIC HEADLINE CONTROL (operator-only).
+   Fred decides which slice the PUBLIC site (betlife365.com) shows as its
+   headline. The daily suggestion engine writes featured_suggestion.json; the
+   currently-published config is featured.json. This bar sits on top of the
+   Track Record tab: it shows what's public now, the strongest current slice,
+   and lets Fred publish that or pick any type+timeline himself. Publishing
+   POSTs to the Cloudflare Worker (window.BL_PUBLISH_URL) when configured; until
+   then it stores the choice locally and tells him it goes live once connected. */
+(function(){
+  var TYPES=[['card','Daily Cards'],['prop','Daily Props'],['parley','Parleys'],['all','All']];
+  var PERIODS=[['today','today'],['week','this week'],['month','this month'],['quarter','this quarter'],['year','this year'],['all','all-time']];
+  function tLabel(t){ for(var i=0;i<TYPES.length;i++) if(TYPES[i][0]===t) return TYPES[i][1]; return t; }
+  function pLabel(p){ for(var i=0;i<PERIODS.length;i++) if(PERIODS[i][0]===p) return PERIODS[i][1]; return p; }
+  function cap(s){ return s? s.charAt(0).toUpperCase()+s.slice(1):s; }
+  var st={featured:null,sugg:null,pending:null,open:false,sel:{type:'parley',period:'week'},loaded:false};
+  try{ st.pending=JSON.parse(localStorage.getItem('ba_featured_pending')||'null'); }catch(e){}
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function flags(){
+    window.__blFeaturedSugg=st.sugg;
+    window.__blFeaturedChanged=!!(st.sugg && st.featured && (st.sugg.type!==st.featured.type || st.sugg.period!==st.featured.period));
+  }
+  function fetchCfg(){
+    fetch('/featured.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j){ st.featured=j; if(!st.loaded){ st.sel={type:j.type||'parley',period:j.period||'week'}; st.loaded=true; } flags(); paint(true); } }).catch(function(){});
+    fetch('/featured_suggestion.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j){ st.sugg=j; flags(); paint(true); } }).catch(function(){});
+  }
+  function injectCSS(){
+    if(document.getElementById('blPubCSS')) return;
+    var s=document.createElement('style'); s.id='blPubCSS';
+    s.textContent=[
+      '#blPub{background:linear-gradient(180deg,#1b1410,#15171c);border:1px solid #3a2a1c;border-radius:14px;padding:13px 16px;margin-bottom:14px}',
+      '.blpub-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}',
+      '.blpub-lbl{font-size:12px;color:#9aa0ab}.blpub-cur{font-weight:700;color:#e9eaee}.blpub-sugg{color:#f0a36a;font-weight:600}',
+      '.blpub-btn{background:#f0782a;border:0;color:#1a1206;font-weight:700;font-size:12px;padding:8px 14px;border-radius:9px;cursor:pointer}',
+      '.blpub-btn.ghost{background:transparent;border:1px solid #3a3f4a;color:#e9eaee}',
+      '.blpub-sp{margin-left:auto}',
+      '.blpub-pick{margin-top:11px;display:none;gap:10px;flex-wrap:wrap;align-items:center}#blPub.open .blpub-pick{display:flex}',
+      '.blpub-sel{height:38px;background:#0e0f13;border:1px solid #2a2e37;color:#e9eaee;border-radius:9px;padding:0 12px;font-size:13px}',
+      '.blpub-note{font-size:11px;color:#6f7682;margin-top:9px}.blpub-ok{color:#35c66b}'
+    ].join('');
+    document.head.appendChild(s);
+  }
+  function curLabel(){ var f=st.pending||st.featured; return f? (f.label||(tLabel(f.type)+' · '+pLabel(f.period))):'—'; }
+  function html(){
+    var f=st.featured, s=st.sugg, pend=st.pending, cur=curLabel();
+    var curRoi=(pend&&pend.roi!=null)?pend.roi:(f&&f.roi!=null?f.roi:null);
+    var changed=st.sugg && st.featured && (st.sugg.type!==st.featured.type || st.sugg.period!==st.featured.period);
+    var h='<div class="blpub-row"><span>🌐</span><span class="blpub-lbl">Publiek op de site:</span> <span class="blpub-cur">'+esc(cur)+(curRoi!=null?' · '+(curRoi>=0?'+':'')+curRoi+'% ROI':'')+'</span>';
+    if(changed){
+      h+='<span class="blpub-lbl">— sterkste nu:</span> <span class="blpub-sugg">'+esc(s.label||(tLabel(s.type)+' · '+pLabel(s.period)))+' · +'+s.roi+'% over '+s.bets+' bets</span>'+
+         '<button class="blpub-btn blpub-sp" data-pub="sugg">Publiceer suggestie</button><button class="blpub-btn ghost" data-toggle="1">Zelf kiezen ▾</button>';
+    } else {
+      h+='<button class="blpub-btn ghost blpub-sp" data-toggle="1">Zelf kiezen ▾</button>';
+    }
+    h+='</div><div class="blpub-pick">'+
+      '<select class="blpub-sel" data-k="type">'+TYPES.map(function(o){return '<option value="'+o[0]+'"'+(st.sel.type===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+'</select>'+
+      '<select class="blpub-sel" data-k="period">'+PERIODS.map(function(o){return '<option value="'+o[0]+'"'+(st.sel.period===o[0]?' selected':'')+'>'+cap(o[1])+'</option>';}).join('')+'</select>'+
+      '<button class="blpub-btn" data-pub="pick">Publiceer deze keuze</button></div>';
+    var note=window.BL_PUBLISH_URL ? 'Goedkeuren = direct live op betlife365.com.'
+      : (pend? '<span class="blpub-ok">Keuze opgeslagen ✓</span> — gaat live zodra de publisher (Cloudflare Worker) is gekoppeld.'
+             : 'De landing toont de laatst goedgekeurde slice; het eerlijke totaal staat er altijd naast.');
+    return h+'<div class="blpub-note">'+note+'</div>';
+  }
+  function ensure(){
+    var host=document.getElementById('page-trackrecord'); if(!host) return null;
+    var bar=document.getElementById('blPub');
+    if(!bar){ bar=document.createElement('div'); bar.id='blPub'; bar.addEventListener('click',onClick); bar.addEventListener('change',onChange); }
+    var led=document.getElementById('blLedger');
+    if(led){ if(bar.nextSibling!==led || bar.parentNode!==host) host.insertBefore(bar,led); }
+    else if(bar.parentNode!==host){ host.insertBefore(bar,host.firstChild); }
+    return bar;
+  }
+  function paint(force){
+    if(!st.featured && !st.sugg) return;
+    injectCSS(); var bar=ensure(); if(!bar) return;
+    var sig=JSON.stringify([st.featured,st.sugg,st.pending,st.open]);
+    if(!force && bar.__sig===sig) return; bar.__sig=sig;
+    bar.innerHTML=html();
+    if(st.open) bar.classList.add('open'); else bar.classList.remove('open');
+  }
+  function publish(cfg){
+    cfg.approved_by='fred'; cfg.updated_at=new Date().toISOString();
+    if(window.BL_PUBLISH_URL){
+      fetch(window.BL_PUBLISH_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)})
+        .then(function(r){ if(r.ok){ st.featured=cfg; st.pending=null; localStorage.removeItem('ba_featured_pending'); flags(); toast('Live op de site ✓'); } else { toast('Publiceren mislukt ('+r.status+')'); } paint(true); })
+        .catch(function(){ toast('Publiceren mislukt — netwerk'); });
+    } else {
+      st.pending=cfg; localStorage.setItem('ba_featured_pending',JSON.stringify(cfg)); toast('Keuze opgeslagen ✓'); paint(true);
+    }
+  }
+  function onClick(e){
+    var tg=e.target.closest('[data-toggle]'); if(tg){ st.open=!st.open; paint(true); return; }
+    var pb=e.target.closest('[data-pub]'); if(!pb) return;
+    if(pb.getAttribute('data-pub')==='sugg' && st.sugg){ publish({type:st.sugg.type,period:st.sugg.period,label:st.sugg.label,roi:st.sugg.roi,bets:st.sugg.bets}); }
+    else { publish({type:st.sel.type,period:st.sel.period,label:tLabel(st.sel.type)+' · '+pLabel(st.sel.period)}); }
+  }
+  function onChange(e){ var sel=e.target.closest('.blpub-sel'); if(sel) st.sel[sel.getAttribute('data-k')]=sel.value; }
+  function toast(m){ try{ if(typeof window.showToast==='function'){ window.showToast(m); return; } }catch(e){} var t=document.createElement('div'); t.textContent=m; t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#15171c;border:1px solid #2a2e37;color:#e9eaee;padding:10px 16px;border-radius:10px;z-index:99999;font:600 13px system-ui'; document.body.appendChild(t); setTimeout(function(){t.remove();},2600); }
+  fetchCfg(); setInterval(fetchCfg,60000); setInterval(function(){ paint(false); },1500);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(function(){paint(true);},1000); }); else setTimeout(function(){paint(true);},1000);
 })();
