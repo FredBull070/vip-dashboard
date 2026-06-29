@@ -592,6 +592,35 @@ window.DAILY_PROPS_SETTLED = [];
   }
   var TIERNAME={safe:'🟢 Safe',value:'🟡 Value',jackpot:'🔴 Jackpot',lucky:'👑 Lucky'};
   var TIEREXPL={safe:'lowest risk',value:'medium risk',jackpot:'high risk / high payout',lucky:'long shot, tiny stake'};
+  // Kick-off time: use the time stored on the row if present, else look it up from
+  // today's live *_EVENTS arrays by match name. Returns {t:'HH:MM', epoch} or null.
+  function evNorm(s){ return (''+s).toLowerCase().replace(/\s+/g,' ').trim(); }
+  function amsEpoch(dateStr,timeStr){
+    var tm=(''+timeStr).match(/(\d{1,2}):(\d{2})/); if(!tm) return null;
+    var dp=(''+dateStr).split('-'); if(dp.length<3) return null;
+    var y=+dp[0],mo=+dp[1],d=+dp[2]; if(!y||!mo||!d) return null;
+    var guess=Date.UTC(y,mo-1,d,+tm[1],+tm[2],0);
+    try{ var f=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Amsterdam',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      var p={}; f.formatToParts(new Date(guess)).forEach(function(x){p[x.type]=x.value;});
+      var asUTC=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second); return guess-(asUTC-guess);
+    }catch(e){ return guess-2*3600000; }
+  }
+  function matchTime(r){
+    if(r.time){ return {t:(''+r.time).match(/\d{1,2}:\d{2}/)?(''+r.time).match(/\d{1,2}:\d{2}/)[0]:r.time, epoch:amsEpoch(r.date,r.time)}; }
+    var arrs=['FOOTBALL_EVENTS','TENNIS_EVENTS','NBA_EVENTS','NFL_EVENTS','NHL_EVENTS'];
+    var tgt=evNorm(r.match), best=null, bt='';
+    for(var ai=0;ai<arrs.length;ai++){ var a=window[arrs[ai]]; if(!Array.isArray(a)) continue;
+      for(var i=0;i<a.length;i++){ var e=a[i]; if(e&&e.match&&e.time&&tgt&&tgt.indexOf(evNorm(e.match))>=0){ var ep3=amsEpoch(e.date,e.time); if(ep3!=null&&(best==null||ep3<best)){best=ep3;bt=(''+e.time).match(/\d{1,2}:\d{2}/)?(''+e.time).match(/\d{1,2}:\d{2}/)[0]:e.time;} } }
+    }
+    return best!=null? {t:bt,epoch:best} : null;
+  }
+  function timeChip(r){
+    var mt=matchTime(r);
+    if(!mt || !mt.t) return DEC[r.result]? '' : '';
+    if(!DEC[r.result] && mt.epoch!=null && (mt.epoch-Date.now())<=0)
+      return '<span class="bl-time live">🔴 In progress</span>';
+    return '<span class="bl-time">🕒 '+esc(mt.t)+'</span>';
+  }
 
   function rowHTML(r){
     var tier=tierOf(r), legs=(r.kind==='parley' && r.match)? r.match.split(' + '):null;
@@ -606,9 +635,10 @@ window.DAILY_PROPS_SETTLED = [];
       '</div>';
     return '<div class="bl-bet" data-id="'+esc(r.betid)+'">'+
       '<div class="bl-head">'+
-        '<div class="bl-when">'+esc(r.date)+'<span class="bl-sport">'+esc(r.sport||'')+'</span></div>'+
+        '<div class="bl-when"><span class="bl-date">'+esc(r.date)+'</span>'+timeChip(r)+'<span class="bl-sport">'+esc(r.sport||'')+'</span></div>'+
         '<div class="bl-mid"><div class="bl-match">'+esc(r.match)+'</div><div class="bl-pick">'+esc(clean(r.selection))+'</div></div>'+
-        '<div class="bl-odds">'+esc(r.odds)+'</div>'+
+        '<div class="bl-odds">'+esc(r.odds)+'<span class="bl-cap">odds</span></div>'+
+        '<div class="bl-stake">'+esc(r.stake)+'u<span class="bl-cap">units</span></div>'+
         '<div class="bl-status">'+statusPill(r)+'</div>'+
         '<div class="bl-result">'+resPill(r)+'</div>'+
         '<div class="bl-caret">▾</div>'+
@@ -742,10 +772,13 @@ window.DAILY_PROPS_SETTLED = [];
       '@media(max-width:760px){.bl-filters{grid-template-columns:1fr 1fr}}',
       '.bl-count{color:#7d828d;font-size:12px;margin:2px 2px 10px}',
       '.bl-bet{background:#15171c;border:1px solid #23262e;border-radius:11px;margin-bottom:8px;overflow:hidden}',
-      '.bl-head{display:grid;grid-template-columns:92px 1fr 60px 124px 92px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
-      '.bl-when{font-size:12px;color:#9aa0ab}.bl-when .bl-sport{display:block;color:#6f7682;font-size:11px}',
+      '.bl-head{display:grid;grid-template-columns:108px 1fr 58px 58px 116px 84px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
+      '.bl-when{font-size:12px;color:#9aa0ab;line-height:1.45}.bl-when .bl-date{display:block;font-weight:600;color:#c7ccd4}.bl-when .bl-sport{display:block;color:#6f7682;font-size:11px}',
+      '.bl-time{display:inline-block;font-size:11px;font-weight:600;color:#9aa0ab}.bl-time.live{color:#46d17a}',
       '.bl-match{font-weight:600}.bl-pick{color:#9aa0ab;font-size:12px}',
-      '.bl-odds{font-weight:700;text-align:right}',
+      '.bl-odds,.bl-stake{font-weight:700;text-align:right;line-height:1.15}',
+      '.bl-stake{color:#f0a36a}',
+      '.bl-cap{display:block;font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#6f7682;margin-top:1px}',
       '.bl-st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}',
       '.bl-st.done{background:rgba(53,198,107,.14);color:#35c66b}.bl-st.open{background:rgba(240,120,42,.16);color:#f0a36a}.bl-st.rev{background:rgba(255,90,90,.16);color:#ff7a7a}',
       '.bl-res{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}',
@@ -754,7 +787,7 @@ window.DAILY_PROPS_SETTLED = [];
       '.bl-det{display:none;padding:2px 14px 13px;border-top:1px solid #23262e;color:#c7ccd4;font-size:13px}.bl-bet.open-row .bl-det{display:block}',
       '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#35c66b}.bl-drow b{color:#e9eaee}',
       '.bl-empty{color:#9aa0ab;padding:18px;text-align:center}',
-      '@media(max-width:860px){.bl-hgrid{grid-template-columns:1fr}.bl-strip{grid-template-columns:repeat(3,1fr)}.bl-cell:nth-child(4){border-left:0}.bl-two{grid-template-columns:1fr}.bl-head{grid-template-columns:1fr 80px 22px}.bl-when,.bl-status{display:none}}'
+      '@media(max-width:860px){.bl-hgrid{grid-template-columns:1fr}.bl-strip{grid-template-columns:repeat(3,1fr)}.bl-cell:nth-child(4){border-left:0}.bl-two{grid-template-columns:1fr}.bl-head{grid-template-columns:1fr 52px 70px 22px}.bl-when,.bl-odds,.bl-status{display:none}}'
     ].join('');
     document.head.appendChild(s);
   }
