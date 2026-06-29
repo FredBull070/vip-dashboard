@@ -622,14 +622,30 @@ window.DAILY_PROPS_SETTLED = [];
     return '<span class="bl-time">🕒 '+esc(mt.t)+'</span>';
   }
 
+  function typeBadge(r){
+    var t=tierOf(r);
+    var lbl=t?TIERNAME[t]:(r.prop?'Prop':'Single');
+    var cls=t||(r.prop?'prop':'na');
+    return '<span class="bl-ty '+cls+'">'+lbl+'</span>';
+  }
   function rowHTML(r){
     var tier=tierOf(r), legs=(r.kind==='parley' && r.match)? r.match.split(' + '):null;
     var ev=r.evidence||{};
+    var legHTML='';
+    if(r.legs && r.legs.length){
+      legHTML='<div class="bl-drow"><b>Legs — what hit, what missed:</b><div class="bl-legs">'+r.legs.map(function(L){
+        var cls=L.result==='W'?'ok':(L.result==='L'?'no':'pend');
+        var ic=L.result==='W'?'✓':(L.result==='L'?'✗':'•');
+        return '<div class="bl-leg '+cls+'"><span class="lg-ic">'+ic+'</span><span class="lg-m">'+esc(L.match)+'</span><span class="lg-s">'+esc(clean(L.selection))+'</span></div>';
+      }).join('')+'</div></div>';
+    } else if(legs){
+      legHTML='<div class="bl-drow"><b>Matches:</b> '+esc(legs.join('  •  '))+'</div>';
+    }
     var details='<div class="bl-det">'+
       '<div class="bl-drow"><b>What is this?</b> '+(r.kind==='parley'?'A parley (accumulator): several picks combined, all must land.':(r.prop?'A player prop bet.':'A single pick (card).'))+'</div>'+
       (tier?'<div class="bl-drow"><b>Risk:</b> '+TIERNAME[tier]+' — '+TIEREXPL[tier]+'</div>':'')+
       '<div class="bl-drow"><b>Our pick:</b> '+esc(clean(r.selection))+' @ '+esc(r.odds)+' · '+esc(r.stake)+'u stake</div>'+
-      (legs?'<div class="bl-drow"><b>Matches:</b> '+esc(legs.join('  •  '))+'</div>':'')+
+      legHTML+
       (DEC[r.result]? '<div class="bl-drow ok"><b>Result (verified):</b> '+esc(ev.score||r.result)+(ev.sources?' · source: '+esc([].concat(ev.sources).join(', ')):'')+'</div>'
                     : '<div class="bl-drow"><b>Status:</b> '+(r.needs_review? 'under review — '+esc(r.needs_review):'match not (verified) finished yet')+'</div>')+
       '</div>';
@@ -637,9 +653,10 @@ window.DAILY_PROPS_SETTLED = [];
       '<div class="bl-head">'+
         '<div class="bl-when"><span class="bl-date">'+esc(r.date)+'</span>'+timeChip(r)+'<span class="bl-sport">'+esc(r.sport||'')+'</span></div>'+
         '<div class="bl-mid"><div class="bl-match">'+esc(r.match)+'</div><div class="bl-pick">'+esc(clean(r.selection))+'</div></div>'+
-        '<div class="bl-odds">'+esc(r.odds)+'<span class="bl-cap">odds</span></div>'+
-        '<div class="bl-stake">'+esc(r.stake)+'u<span class="bl-cap">units</span></div>'+
         '<div class="bl-status">'+statusPill(r)+'</div>'+
+        '<div class="bl-type">'+typeBadge(r)+'</div>'+
+        '<div class="bl-stake">'+esc(r.stake)+'u<span class="bl-cap">units</span></div>'+
+        '<div class="bl-odds">'+esc(r.odds)+'<span class="bl-cap">odds</span></div>'+
         '<div class="bl-result">'+resPill(r)+'</div>'+
         '<div class="bl-caret">▾</div>'+
       '</div>'+details+'</div>';
@@ -772,13 +789,20 @@ window.DAILY_PROPS_SETTLED = [];
       '@media(max-width:760px){.bl-filters{grid-template-columns:1fr 1fr}}',
       '.bl-count{color:#7d828d;font-size:12px;margin:2px 2px 10px}',
       '.bl-bet{background:#15171c;border:1px solid #23262e;border-radius:11px;margin-bottom:8px;overflow:hidden}',
-      '.bl-head{display:grid;grid-template-columns:108px 1fr 58px 58px 116px 84px 22px;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}',
+      '.bl-head{display:grid;grid-template-columns:104px 1fr 110px 96px 60px 60px 84px 20px;align-items:center;gap:12px;padding:11px 14px;cursor:pointer}',
       '.bl-when{font-size:12px;color:#9aa0ab;line-height:1.45}.bl-when .bl-date{display:block;font-weight:600;color:#c7ccd4}.bl-when .bl-sport{display:block;color:#6f7682;font-size:11px}',
       '.bl-time{display:inline-block;font-size:11px;font-weight:600;color:#9aa0ab}.bl-time.live{color:#46d17a}',
       '.bl-match{font-weight:600}.bl-pick{color:#9aa0ab;font-size:12px}',
-      '.bl-odds,.bl-stake{font-weight:700;text-align:right;line-height:1.15}',
+      '.bl-status,.bl-type,.bl-result{display:flex;justify-content:center}',
+      '.bl-odds,.bl-stake{font-weight:700;text-align:center;line-height:1.15}',
       '.bl-stake{color:#f0a36a}',
       '.bl-cap{display:block;font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#6f7682;margin-top:1px}',
+      '.bl-ty{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}',
+      '.bl-ty.safe{background:rgba(53,198,107,.14);color:#35c66b}.bl-ty.value{background:rgba(240,170,60,.16);color:#f0aa3c}.bl-ty.jackpot{background:rgba(255,90,90,.16);color:#ff7a7a}.bl-ty.lucky{background:rgba(178,120,255,.18);color:#b27aff}.bl-ty.prop{background:rgba(90,160,255,.16);color:#5aa0ff}.bl-ty.na{background:rgba(138,143,154,.14);color:#9aa0ab}',
+      '.bl-legs{margin-top:7px;display:flex;flex-direction:column;gap:5px}',
+      '.bl-leg{display:grid;grid-template-columns:16px 1fr auto;align-items:center;gap:9px;background:#0e0f13;border:1px solid #1c1f26;border-radius:8px;padding:6px 11px}',
+      '.bl-leg .lg-ic{font-weight:800;text-align:center}.bl-leg.ok .lg-ic{color:#35c66b}.bl-leg.no .lg-ic{color:#ff6a4d}.bl-leg.pend .lg-ic{color:#9aa0ab}',
+      '.bl-leg .lg-m{font-weight:600;color:#e9eaee}.bl-leg .lg-s{color:#9aa0ab;font-size:12px;text-align:right}',
       '.bl-st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}',
       '.bl-st.done{background:rgba(53,198,107,.14);color:#35c66b}.bl-st.open{background:rgba(240,120,42,.16);color:#f0a36a}.bl-st.rev{background:rgba(255,90,90,.16);color:#ff7a7a}',
       '.bl-res{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}',
@@ -787,7 +811,7 @@ window.DAILY_PROPS_SETTLED = [];
       '.bl-det{display:none;padding:2px 14px 13px;border-top:1px solid #23262e;color:#c7ccd4;font-size:13px}.bl-bet.open-row .bl-det{display:block}',
       '.bl-drow{padding:7px 0;border-bottom:1px solid #1c1f26}.bl-drow:last-child{border-bottom:0}.bl-drow.ok b{color:#35c66b}.bl-drow b{color:#e9eaee}',
       '.bl-empty{color:#9aa0ab;padding:18px;text-align:center}',
-      '@media(max-width:860px){.bl-hgrid{grid-template-columns:1fr}.bl-strip{grid-template-columns:repeat(3,1fr)}.bl-cell:nth-child(4){border-left:0}.bl-two{grid-template-columns:1fr}.bl-head{grid-template-columns:1fr 52px 70px 22px}.bl-when,.bl-odds,.bl-status{display:none}}'
+      '@media(max-width:860px){.bl-hgrid{grid-template-columns:1fr}.bl-strip{grid-template-columns:repeat(3,1fr)}.bl-cell:nth-child(4){border-left:0}.bl-two{grid-template-columns:1fr}.bl-head{grid-template-columns:1fr 84px 50px 72px 20px}.bl-when,.bl-status,.bl-odds{display:none}}'
     ].join('');
     document.head.appendChild(s);
   }
