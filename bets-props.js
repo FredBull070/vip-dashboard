@@ -534,7 +534,12 @@ window.DAILY_PROPS_SETTLED = [];
    score + source (proof) and what the bet meant. Reads ba_trackrecord. */
 (function(){
   var DEC={W:1,L:1,V:1,Push:1};
-  var st={sport:'all',period:'all',outcome:'all',type:'all',tier:'all',q:''};
+  var st={tab:'card',sport:'all',period:'all',outcome:'all',tier:'all',q:''};
+  // A Lucky-Shot leg is a very-high-risk single that was never shared as a loose
+  // Daily Card (it only exists inside the Lucky Shot parley). It must NOT count as
+  // a standalone bet. Loose Daily Cards are the Safe/Value/Jackpot singles.
+  function isLuckyLeg(r){ return r && r.kind!=='parley' && !r.prop && (r.risk||'').toLowerCase()==='very high'; }
+  function typeTab(r){ return r.kind==='parley'?'parley':(r.prop?'prop':'card'); }
   function num(x){var n=parseFloat(x);return isNaN(n)?0:n;}
   function load(){ try{return JSON.parse(localStorage.getItem('ba_trackrecord')||'[]');}catch(e){return [];} }
   function kindOf(r){ return r.prop?'prop':(r.kind==='parley'?'parley':'card'); }
@@ -573,34 +578,33 @@ window.DAILY_PROPS_SETTLED = [];
       if(st.outcome==='lost' && r.result!=='L') return false;
       if(st.outcome==='void' && !(r.result==='V'||r.result==='Push')) return false;
     }
-    if(st.type!=='all' && kindOf(r)!==st.type) return false;
     if(st.tier!=='all' && tierOf(r)!==st.tier) return false;
     if(st.q){ var hay=((r.match||'')+' '+(r.selection||'')).toLowerCase(); if(hay.indexOf(st.q.toLowerCase())<0) return false; }
     return true;
   }
   function fmtU(u){ return (u>=0?'+':'')+u.toFixed(2)+'u'; }
   function statusPill(r){
-    if(DEC[r.result]) return '<span class="bl-st done">✅ Klaar</span>';
-    if(r.needs_review) return '<span class="bl-st rev">⚠ Wordt nagekeken</span>';
+    if(DEC[r.result]) return '<span class="bl-st done">✅ Settled</span>';
+    if(r.needs_review) return '<span class="bl-st rev">⚠ Under review</span>';
     return '<span class="bl-st open">⏳ Open</span>';
   }
   function resPill(r){
-    var m={W:['Gewonnen','w'],L:['Verloren','l'],V:['Void','v'],Push:['Push','v'],P:['—','p']};
+    var m={W:['Won','w'],L:['Lost','l'],V:['Void','v'],Push:['Push','v'],P:['—','p']};
     var x=m[r.result]||m.P; return '<span class="bl-res '+x[1]+'">'+x[0]+'</span>';
   }
   var TIERNAME={safe:'🟢 Safe',value:'🟡 Value',jackpot:'🔴 Jackpot',lucky:'👑 Lucky'};
-  var TIEREXPL={safe:'laagste risico',value:'gemiddeld risico',jackpot:'hoog risico / hoge uitbetaling',lucky:'lange shot, mini-inzet'};
+  var TIEREXPL={safe:'lowest risk',value:'medium risk',jackpot:'high risk / high payout',lucky:'long shot, tiny stake'};
 
   function rowHTML(r){
     var tier=tierOf(r), legs=(r.kind==='parley' && r.match)? r.match.split(' + '):null;
     var ev=r.evidence||{};
     var details='<div class="bl-det">'+
-      '<div class="bl-drow"><b>Wat is dit?</b> '+(r.kind==='parley'?'Een combi (parley): meerdere keuzes samen, alles moet kloppen.':(r.prop?'Een speler-weddenschap (prop).':'Eén losse keuze (kaartje).'))+'</div>'+
-      (tier?'<div class="bl-drow"><b>Risico:</b> '+TIERNAME[tier]+' — '+TIEREXPL[tier]+'</div>':'')+
-      '<div class="bl-drow"><b>Onze keuze:</b> '+esc(clean(r.selection))+' @ '+esc(r.odds)+' · inzet '+esc(r.stake)+'u</div>'+
-      (legs?'<div class="bl-drow"><b>Wedstrijden:</b> '+esc(legs.join('  •  '))+'</div>':'')+
-      (DEC[r.result]? '<div class="bl-drow ok"><b>Uitslag (geverifieerd):</b> '+esc(ev.score||r.result)+(ev.sources?' · bron: '+esc([].concat(ev.sources).join(', ')):'')+'</div>'
-                    : '<div class="bl-drow"><b>Status:</b> '+(r.needs_review? 'wordt nagekeken — '+esc(r.needs_review):'wedstrijd nog niet (geverifieerd) afgelopen')+'</div>')+
+      '<div class="bl-drow"><b>What is this?</b> '+(r.kind==='parley'?'A parley (accumulator): several picks combined, all must land.':(r.prop?'A player prop bet.':'A single pick (card).'))+'</div>'+
+      (tier?'<div class="bl-drow"><b>Risk:</b> '+TIERNAME[tier]+' — '+TIEREXPL[tier]+'</div>':'')+
+      '<div class="bl-drow"><b>Our pick:</b> '+esc(clean(r.selection))+' @ '+esc(r.odds)+' · '+esc(r.stake)+'u stake</div>'+
+      (legs?'<div class="bl-drow"><b>Matches:</b> '+esc(legs.join('  •  '))+'</div>':'')+
+      (DEC[r.result]? '<div class="bl-drow ok"><b>Result (verified):</b> '+esc(ev.score||r.result)+(ev.sources?' · source: '+esc([].concat(ev.sources).join(', ')):'')+'</div>'
+                    : '<div class="bl-drow"><b>Status:</b> '+(r.needs_review? 'under review — '+esc(r.needs_review):'match not (verified) finished yet')+'</div>')+
       '</div>';
     return '<div class="bl-bet" data-id="'+esc(r.betid)+'">'+
       '<div class="bl-head">'+
@@ -631,11 +635,12 @@ window.DAILY_PROPS_SETTLED = [];
       '<circle cx="'+X(pts.length-1).toFixed(1)+'" cy="'+Y(pts[pts.length-1]).toFixed(1)+'" r="4" fill="#f0782a"/></svg>';
   }
   function buildHTML(rows){
-    var pub=rows.filter(function(r){return r.public!==false;});
-    var f=rows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
-    var s=compute(pub);
-    var dec=pub.filter(function(r){return r.result==='W'||r.result==='L';});
-    var settled=pub.filter(function(r){return DEC[r.result];}).length;
+    var base=rows.filter(function(r){return r.public!==false && !isLuckyLeg(r);});
+    var tabRows=base.filter(function(r){ return st.tab==='all'?true:typeTab(r)===st.tab; });
+    var f=tabRows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
+    var s=compute(tabRows);
+    var dec=tabRows.filter(function(r){return r.result==='W'||r.result==='L';});
+    var settled=tabRows.filter(function(r){return DEC[r.result];}).length;
     var avg=dec.length? dec.reduce(function(a,r){return a+num(r.odds);},0)/dec.length : 0;
     var ser=dec.slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return da-db||(a.id||0)-(b.id||0);});
     var cum=0,peak=0,maxdd=0,pts=[],dts=[];
@@ -643,48 +648,54 @@ window.DAILY_PROPS_SETTLED = [];
     var sp={}; ser.forEach(function(r){ var k=r.sport||'?'; sp[k]=(sp[k]||0)+(r.result==='W'?num(r.stake)*(num(r.odds)-1):-num(r.stake)); });
     var sportArr=Object.keys(sp).map(function(k){return [k,sp[k]];}).sort(function(a,b){return b[1]-a[1];});
     var maxAbs=sportArr.reduce(function(m,x){return Math.max(m,Math.abs(x[1]));},1);
-    var recent=pub.filter(function(r){return DEC[r.result];}).slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return db-da||(b.id||0)-(a.id||0);}).slice(0,6);
-    var dsall=pub.map(function(r){return ep(r.date);}).filter(Boolean).sort(function(a,b){return a-b;});
+    var recent=tabRows.filter(function(r){return DEC[r.result];}).slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return db-da||(b.id||0)-(a.id||0);}).slice(0,6);
+    var dsall=tabRows.map(function(r){return ep(r.date);}).filter(Boolean).sort(function(a,b){return a-b;});
     var per=dsall.length?(fmtDate(dsall[0])+' – '+fmtDate(dsall[dsall.length-1])):'Alle tijd';
     var pc=s.profit>=0?'pos':'neg', rc=s.roi>=0?'pos':'neg';
     var labs=''; if(dts.length){ var seen={}; labs=[0,.25,.5,.75,1].map(function(t){var k=fmtDate(dts[Math.round(t*(dts.length-1))]); if(seen[k])return '<span></span>'; seen[k]=1; return '<span>'+k+'</span>';}).join(''); }
     var pg=function(r){ return r.result==='W'? num(r.stake)*(num(r.odds)-1):(r.result==='L'?-num(r.stake):0); };
     var opts=function(arr,cur){ return arr.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===cur?' selected':'')+'>'+o[1]+'</option>';}).join(''); };
 
+    var cCard=base.filter(function(r){return typeTab(r)==='card';}).length;
+    var cPar=base.filter(function(r){return typeTab(r)==='parley';}).length;
+    var cProp=base.filter(function(r){return typeTab(r)==='prop';}).length;
+    var tb=function(k,lbl,n){ return '<button class="bl-tab'+(st.tab===k?' on':'')+'" data-tab="'+k+'">'+lbl+' <span class="bl-tn">'+n+'</span></button>'; };
+    var tabs='<div class="bl-tabs">'+tb('card','Daily Betting Cards',cCard)+tb('parley','Parleys',cPar)+tb('prop','Daily Prop Cards',cProp)+tb('all','All',base.length)+'</div>';
+    var sub=st.tab==='card'?'single picks':(st.tab==='parley'?'parleys':(st.tab==='prop'?'prop cards':'all bets'));
+
     var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span><span class="bl-per">'+esc(per)+'</span></div>'+
       '<div class="bl-hgrid"><div class="bl-hleft">'+
-        '<div class="bl-big '+pc+'">'+fmtSigned(s.profit)+'</div><div class="bl-bigsub">Netto winst, bijgehouden in units</div>'+
+        '<div class="bl-big '+pc+'">'+fmtSigned(s.profit)+'</div><div class="bl-bigsub">Net profit · '+sub+' · tracked in units</div>'+
         '<div class="bl-h4">'+
           '<div><div class="hv '+rc+'">'+(s.roi>=0?'+':'')+s.roi.toFixed(1)+'%</div><div class="hk">ROI</div></div>'+
-          '<div><div class="hv">'+s.wr.toFixed(0)+'%</div><div class="hk">Trefkans</div></div>'+
-          '<div><div class="hv">'+avg.toFixed(2)+'</div><div class="hk">Gem. odds</div></div>'+
-          '<div><div class="hv">'+settled+'</div><div class="hk">Bets afgerekend</div></div>'+
+          '<div><div class="hv">'+s.wr.toFixed(0)+'%</div><div class="hk">Strike rate</div></div>'+
+          '<div><div class="hv">'+avg.toFixed(2)+'</div><div class="hk">Avg odds</div></div>'+
+          '<div><div class="hv">'+settled+'</div><div class="hk">Bets settled</div></div>'+
         '</div></div>'+
-        '<div class="bl-hright">'+heroChartSVG(pts)+'<div class="bl-xlabels">'+labs+'</div><div class="bl-cap">Cumulatieve units. Op- en neer-periodes, alles gelogd, niets verwijderd.</div></div>'+
+        '<div class="bl-hright">'+heroChartSVG(pts)+'<div class="bl-xlabels">'+labs+'</div><div class="bl-cap">Cumulative units. Up and down periods, all logged, nothing removed.</div></div>'+
       '</div></div>';
 
     var cell=function(v,k,cls){return '<div class="bl-cell"><div class="cv '+(cls||'')+'">'+v+'</div><div class="ck">'+k+'</div></div>';};
     var strip='<div class="bl-strip">'+
-      cell(fmtSigned(s.profit),'Netto winst',pc)+cell((s.roi>=0?'+':'')+s.roi.toFixed(1)+'%','ROI',rc)+
-      cell(s.wr.toFixed(0)+'%','Trefkans')+cell(String(settled),'Bets afgerekend')+
-      cell(avg.toFixed(2),'Gem. odds')+cell(maxdd.toFixed(1)+'u','Max drawdown','neg')+'</div>';
+      cell(fmtSigned(s.profit),'Net profit',pc)+cell((s.roi>=0?'+':'')+s.roi.toFixed(1)+'%','ROI',rc)+
+      cell(s.wr.toFixed(0)+'%','Strike rate')+cell(String(settled),'Bets settled')+
+      cell(avg.toFixed(2),'Avg odds')+cell(maxdd.toFixed(1)+'u','Max drawdown','neg')+'</div>';
 
-    var bars=sportArr.length? sportArr.map(function(x){var w=Math.max(4,Math.round(Math.abs(x[1])/maxAbs*100));var pos=x[1]>=0;return '<div class="bl-bar"><span class="bn">'+esc(x[0])+'</span><span class="bt"><span class="bf '+(pos?'':'negf')+'" style="width:'+w+'%"></span></span><span class="bv '+(pos?'pos':'neg')+'">'+fmtSigned(x[1])+'</span></div>';}).join('') : '<div class="bl-empty">Nog geen afgerekende bets.</div>';
-    var rec=recent.length? recent.map(function(r){var g=pg(r);var cls=r.result==='W'?'w':(r.result==='L'?'l':'v');return '<div class="bl-rr"><span class="rm">'+esc(r.match)+'</span><span class="rg '+cls+'">'+r.result+'</span><span class="rv '+(g>=0?'pos':'neg')+'">'+fmtSigned(g)+'</span></div>';}).join('') : '<div class="bl-empty">Nog geen resultaten.</div>';
-    var panels='<div class="bl-two"><div class="bl-panel"><div class="bl-ph">Winst per sport</div>'+bars+'</div><div class="bl-panel"><div class="bl-ph">Recente resultaten</div>'+rec+'</div></div>';
+    var bars=sportArr.length? sportArr.map(function(x){var w=Math.max(4,Math.round(Math.abs(x[1])/maxAbs*100));var pos=x[1]>=0;return '<div class="bl-bar"><span class="bn">'+esc(x[0])+'</span><span class="bt"><span class="bf '+(pos?'':'negf')+'" style="width:'+w+'%"></span></span><span class="bv '+(pos?'pos':'neg')+'">'+fmtSigned(x[1])+'</span></div>';}).join('') : '<div class="bl-empty">No settled bets yet.</div>';
+    var rec=recent.length? recent.map(function(r){var g=pg(r);var cls=r.result==='W'?'w':(r.result==='L'?'l':'v');return '<div class="bl-rr"><span class="rm">'+esc(r.match)+'</span><span class="rg '+cls+'">'+r.result+'</span><span class="rv '+(g>=0?'pos':'neg')+'">'+fmtSigned(g)+'</span></div>';}).join('') : '<div class="bl-empty">No results yet.</div>';
+    var panels='<div class="bl-two"><div class="bl-panel"><div class="bl-ph">Profit by sport</div>'+bars+'</div><div class="bl-panel"><div class="bl-ph">Recent results</div>'+rec+'</div></div>';
 
     var filters='<div class="bl-filters">'+
-      '<input id="blq" class="bl-inp" type="text" placeholder="🔎 zoek team of speler" value="'+esc(st.q)+'">'+
-      '<select class="bl-sel" data-k="sport">'+opts([['all','Alle sporten'],['football','Voetbal'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
-      '<select class="bl-sel" data-k="period">'+opts([['all','Alle datums'],['today','Vandaag'],['week','Deze week'],['month','Deze maand']],st.period)+'</select>'+
-      '<select class="bl-sel" data-k="outcome">'+opts([['all','Alle uitkomsten'],['won','Gewonnen'],['lost','Verloren'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
-      '<select class="bl-sel" data-k="type">'+opts([['all','Alle types'],['card','Los kaartje'],['parley','Parley (combi)'],['prop','Prop']],st.type)+'</select>'+
-      '<select class="bl-sel" data-k="tier">'+opts([['all','Alle risico'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot'],['lucky','👑 Lucky']],st.tier)+'</select>'+
+      '<input id="blq" class="bl-inp" type="text" placeholder="🔎 search team or player" value="'+esc(st.q)+'">'+
+      '<select class="bl-sel" data-k="sport">'+opts([['all','All sports'],['football','Football'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
+      '<select class="bl-sel" data-k="period">'+opts([['all','All dates'],['today','Today'],['week','This week'],['month','This month']],st.period)+'</select>'+
+      '<select class="bl-sel" data-k="outcome">'+opts([['all','All outcomes'],['won','Won'],['lost','Lost'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
+      '<select class="bl-sel" data-k="tier">'+opts([['all','All risk'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot']],st.tier)+'</select>'+
       '<button class="bl-reset" data-k="reset">Reset</button></div>';
 
-    return '<div class="bl-ledger">'+hero+strip+panels+
-      '<div class="bl-fwrap">'+filters+'<div class="bl-count">'+f.length+' van '+rows.length+' bets</div>'+
-      '<div class="bl-list">'+(f.length? f.map(rowHTML).join(''):'<div class="bl-empty">Geen bets met deze filters.</div>')+'</div></div></div>';
+    return '<div class="bl-ledger">'+tabs+hero+strip+panels+
+      '<div class="bl-fwrap">'+filters+'<div class="bl-count">'+f.length+' of '+tabRows.length+' '+sub+'</div>'+
+      '<div class="bl-list">'+(f.length? f.map(rowHTML).join(''):'<div class="bl-empty">No bets match these filters.</div>')+'</div></div></div>';
   }
 
   function injectCSS(){
@@ -693,6 +704,10 @@ window.DAILY_PROPS_SETTLED = [];
     s.textContent=[
       '.bl-ledger{font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e9eaee}',
       '.bl-ledger .pos{color:#35c66b}.bl-ledger .neg{color:#ff6a4d}',
+      '.bl-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}',
+      '.bl-tab{background:#121317;border:1px solid #232631;color:#c7ccd4;border-radius:10px;padding:9px 15px;font-size:13px;font-weight:600;cursor:pointer}',
+      '.bl-tab.on{background:#f0782a;border-color:#f0782a;color:#1a1206}',
+      '.bl-tab .bl-tn{opacity:.7;font-weight:600;margin-left:3px}.bl-tab.on .bl-tn{opacity:.85}',
       '.bl-hero{background:#121317;border:1px solid #232631;border-radius:18px;padding:18px 20px;margin-bottom:14px}',
       '.bl-hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}',
       '.bl-brand{font-weight:600;font-size:14px}.bl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0782a;margin-right:7px;vertical-align:middle}',
@@ -755,8 +770,10 @@ window.DAILY_PROPS_SETTLED = [];
     box.scrollTop=sc;
   }
   function onClick(e){
+    var t=e.target.closest('.bl-tab');
+    if(t){ st.tab=t.getAttribute('data-tab'); render(); return; }
     var rs=e.target.closest('.bl-reset');
-    if(rs){ st={sport:'all',period:'all',outcome:'all',type:'all',tier:'all',q:''}; render(); return; }
+    if(rs){ st={tab:st.tab,sport:'all',period:'all',outcome:'all',tier:'all',q:''}; render(); return; }
     var head=e.target.closest('.bl-head');
     if(head){ head.parentNode.classList.toggle('open-row'); }
   }
@@ -764,7 +781,11 @@ window.DAILY_PROPS_SETTLED = [];
   var qt;
   function onInput(e){ if(e.target.id==='blq'){ clearTimeout(qt); var v=e.target.value; qt=setTimeout(function(){ st.q=v; render(); var i=document.getElementById('blq'); if(i){i.focus();i.setSelectionRange(v.length,v.length);} }, 250); } }
 
-  function tick(){ var p=document.getElementById('page-trackrecord'); if(p && getComputedStyle(p).display!=='none') render(); }
+  function tick(){
+    var p=document.getElementById('page-trackrecord'), sb=document.getElementById('subbar');
+    if(p && getComputedStyle(p).display!=='none'){ render(); if(sb) sb.style.display='none'; }
+    else if(sb && sb.style.display==='none'){ sb.style.display=''; }
+  }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(tick,900); }); else setTimeout(tick,900);
   setInterval(tick, 1500);
 })();
