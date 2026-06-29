@@ -375,9 +375,9 @@ window.DAILY_PROPS_SETTLED = [];
       return ch.split('\n').map(function(l){
         if(l.indexOf('→')>=0){
           return l.replace(/Conservative/g,'Safe').replace(/\bBalanced\b/g,'Value').replace(/Aggressive/g,'Jackpot')
-                  .replace(/focus on Core Positions/gi,'the lowest-risk single picks')
-                  .replace(/mix Core \+ Value Positions/gi,'a mix of Safe + Value Builder Cards')
-                  .replace(/include Opportunity Positions/gi,'the Jackpot Builder Cards');
+                  .replace(/focus on Core Positions/gi,'lowest risk positions')
+                  .replace(/mix Core \+ Value Positions/gi,'moderate risk positions')
+                  .replace(/include Opportunity Positions/gi,'high risk positions');
         }
         return l.replace(/CORE POSITIONS/gi,'SAFE BUILDER CARDS').replace(/BALANCED POSITIONS/gi,'VALUE BUILDER CARDS').replace(/(AGGRESSIVE|OPPORTUNITY) POSITIONS/gi,'JACKPOT BUILDER CARDS');
       }).join('\n');
