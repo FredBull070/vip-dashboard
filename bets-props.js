@@ -288,34 +288,49 @@ window.DAILY_PROPS_SETTLED = [];
 (function(){
   function todayKey(){ try{ var p={}; new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',day:'2-digit',month:'2-digit',year:'numeric'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;}); return p.year+'-'+p.month+'-'+p.day; }catch(e){ return ''; } }
   function dmyKey(s){ var m=(''+s).match(/(\d{2})-(\d{2})-(\d{4})/); return m ? (m[3]+'-'+m[2]+'-'+m[1]) : ''; }
+  function keyForDate(d){ try{ var p={}; new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',day:'2-digit',month:'2-digit',year:'numeric'}).formatToParts(d).forEach(function(x){p[x.type]=x.value;}); return p.year+'-'+p.month+'-'+p.day; }catch(e){ return ''; } }
+  function yesterdayKey(){ return keyForDate(new Date(Date.now()-86400000)); }
   function norm(s){ return (''+s).toLowerCase().replace(/\s+/g,' ').trim(); }
-  function eventDateKey(text){
+  function latestEventDate(text){
     var t=norm(text), best='';
     ['FOOTBALL_EVENTS','TENNIS_EVENTS','NBA_EVENTS','NFL_EVENTS','NHL_EVENTS'].forEach(function(k){
       var a=window[k]; if(!Array.isArray(a)) return;
-      a.forEach(function(e){ if(e&&e.match&&e.date&&t.indexOf(norm(e.match))>=0){ if(!best||e.date<best) best=e.date; } });
+      a.forEach(function(e){ if(e&&e.match&&e.date&&t.indexOf(norm(e.match))>=0){ if(e.date>best) best=e.date; } });
     });
     return best;
   }
-  function slateMatchNames(str){ var out=[]; (''+str).split(/\n|===/).forEach(function(l){ var m=l.match(/MATCH:\s*(.+)/i); if(m) out.push(norm(m[1])); }); return out; }
+  function settledSets(){
+    var P={}, C=[];
+    [window.DAILY_SETTLED, window.EMBEDDED_SETTLED, window.DAILY_PROPS_SETTLED].forEach(function(a){
+      if(!Array.isArray(a)) return;
+      a.forEach(function(x){ if(!x||!x.result) return; if(x.kind==='parley' && x.selection){ P[norm(x.selection)]=1; } else if(x.match && x.selection){ C.push(norm(x.match)+'~'+norm(x.selection)); } });
+    });
+    return {P:P, C:C};
+  }
   function hideCard(el){ if(el && el.style.display!=='none'){ el.style.display='none'; el.setAttribute('data-bl-finished','1'); } }
+  function showCard(el){ if(el && el.getAttribute('data-bl-finished')==='1'){ el.style.display=''; el.removeAttribute('data-bl-finished'); } }
   function sweep(){
     var today=todayKey(); if(!today) return;
-    var stale=[];
-    var fv=(typeof DAILY_VERSION!=='undefined')?DAILY_VERSION:'';
-    if(fv && fv<today && typeof DAILY_CARDS!=='undefined') stale=stale.concat(slateMatchNames(DAILY_CARDS));
-    var pv=window.DAILY_PROPS_VERSION;
-    if(pv && pv<today && typeof window.DAILY_PROPS!=='undefined') stale=stale.concat(slateMatchNames(window.DAILY_PROPS));
+    var s=settledSets();
+    var yest=yesterdayKey();
+    // A list is FINISHED (-> archive, hidden from daily) only when it is settled,
+    // or when every one of its matches is dated before today. A list with any match
+    // still to play (today or upcoming) stays ACTIVE and visible.
     [].slice.call(document.querySelectorAll('.msg-card')).forEach(function(card){
-      var title=(card.querySelector('.msg-title')||{}).textContent||'';
-      var k=dmyKey(title);
-      if(k && k<today) hideCard(card);
+      var titleEl=card.querySelector('.msg-title'); if(!titleEl) return;
+      var title=norm(titleEl.textContent||'');
+      var finished=false;
+      for(var key in s.P){ if(key && title.indexOf(key)>=0){ finished=true; break; } }
+      if(!finished){ var led=latestEventDate(card.textContent||''); if(led && led<today) finished=true; }
+      if(!finished){ var dk=dmyKey(titleEl.textContent||''); if(dk && yest && dk<yest) finished=true; }
+      if(finished) hideCard(card); else showCard(card);
     });
     [].slice.call(document.querySelectorAll('.rcard')).forEach(function(card){
       var t=norm(card.textContent||'');
-      var ek=eventDateKey(card.textContent||'');
-      if(ek){ if(ek<today) hideCard(card); return; }
-      for(var i=0;i<stale.length;i++){ if(stale[i] && t.indexOf(stale[i])>=0){ hideCard(card); return; } }
+      var finished=false;
+      for(var i=0;i<s.C.length;i++){ var mc=s.C[i].split('~'); if(mc[0]&&mc[1]&&t.indexOf(mc[0])>=0&&t.indexOf(mc[1])>=0){ finished=true; break; } }
+      if(!finished){ var led=latestEventDate(card.textContent||''); if(led && led<today) finished=true; }
+      if(finished) hideCard(card); else showCard(card);
     });
   }
   function start(){ sweep(); setInterval(sweep, 4000); document.addEventListener('click', function(){ setTimeout(sweep, 300); }, true); }
