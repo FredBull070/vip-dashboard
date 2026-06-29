@@ -275,3 +275,50 @@ window.DAILY_PROPS_SETTLED = [];
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(start, 600); }); }
   else { setTimeout(start, 600); }
 })();
+
+/* ---------------------------------------------------------------------------
+   Daily-list lifecycle. A list belongs in the DAILY tabs only while it is still
+   active (today or upcoming). The moment its day is in the past it is finished,
+   so it is hidden from the daily tabs - it lives on in the Archive (the
+   dashboard already keeps a dated archive). Active lists always stay. This is
+   what stops an old slate (e.g. football that never got replaced) from lingering
+   among today's lists. Dating: parleys carry DD-MM-YYYY in their title; single
+   cards/props are dated via the *_EVENTS arrays, or, when a slate has no event
+   data, via that slate's own version date. */
+(function(){
+  function todayKey(){ try{ var p={}; new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',day:'2-digit',month:'2-digit',year:'numeric'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;}); return p.year+'-'+p.month+'-'+p.day; }catch(e){ return ''; } }
+  function dmyKey(s){ var m=(''+s).match(/(\d{2})-(\d{2})-(\d{4})/); return m ? (m[3]+'-'+m[2]+'-'+m[1]) : ''; }
+  function norm(s){ return (''+s).toLowerCase().replace(/\s+/g,' ').trim(); }
+  function eventDateKey(text){
+    var t=norm(text), best='';
+    ['FOOTBALL_EVENTS','TENNIS_EVENTS','NBA_EVENTS','NFL_EVENTS','NHL_EVENTS'].forEach(function(k){
+      var a=window[k]; if(!Array.isArray(a)) return;
+      a.forEach(function(e){ if(e&&e.match&&e.date&&t.indexOf(norm(e.match))>=0){ if(!best||e.date<best) best=e.date; } });
+    });
+    return best;
+  }
+  function slateMatchNames(str){ var out=[]; (''+str).split(/\n|===/).forEach(function(l){ var m=l.match(/MATCH:\s*(.+)/i); if(m) out.push(norm(m[1])); }); return out; }
+  function hideCard(el){ if(el && el.style.display!=='none'){ el.style.display='none'; el.setAttribute('data-bl-finished','1'); } }
+  function sweep(){
+    var today=todayKey(); if(!today) return;
+    var stale=[];
+    var fv=(typeof DAILY_VERSION!=='undefined')?DAILY_VERSION:'';
+    if(fv && fv<today && typeof DAILY_CARDS!=='undefined') stale=stale.concat(slateMatchNames(DAILY_CARDS));
+    var pv=window.DAILY_PROPS_VERSION;
+    if(pv && pv<today && typeof window.DAILY_PROPS!=='undefined') stale=stale.concat(slateMatchNames(window.DAILY_PROPS));
+    [].slice.call(document.querySelectorAll('.msg-card')).forEach(function(card){
+      var title=(card.querySelector('.msg-title')||{}).textContent||'';
+      var k=dmyKey(title);
+      if(k && k<today) hideCard(card);
+    });
+    [].slice.call(document.querySelectorAll('.rcard')).forEach(function(card){
+      var t=norm(card.textContent||'');
+      var ek=eventDateKey(card.textContent||'');
+      if(ek){ if(ek<today) hideCard(card); return; }
+      for(var i=0;i<stale.length;i++){ if(stale[i] && t.indexOf(stale[i])>=0){ hideCard(card); return; } }
+    });
+  }
+  function start(){ sweep(); setInterval(sweep, 4000); document.addEventListener('click', function(){ setTimeout(sweep, 300); }, true); }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(start, 700); }); }
+  else { setTimeout(start, 700); }
+})();
