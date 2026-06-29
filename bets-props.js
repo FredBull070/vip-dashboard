@@ -86,3 +86,83 @@ window.DAILY_PROPS_SETTLED = [];
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', start); }
   else { start(); }
 })();
+
+/* ---------------------------------------------------------------------------
+   Webhook links are masked (password style) by default so they are never
+   readable over-the-shoulder or on a shared screen. A "Show links" button in
+   Settings > Channels reveals them, but only after the operator enters the
+   sync / security password (verified the same way as device sync:
+   sha('bl365-sync-pw-v3:'+pw) === ba_sync_skey). Revealed links auto-hide
+   again after 2 minutes and on any page reload. Masking never affects Save or
+   Test - those read the real value regardless. */
+(function(){
+  var SKEY_PREFIX='bl365-sync-pw-v3:';
+  var revealed=false, hideTimer=null;
+  function hookInputs(){ return [].slice.call(document.querySelectorAll('input[id^="hook_"]')); }
+  function injectCss(){
+    if(document.getElementById('hookMaskCss')) return;
+    var st=document.createElement('style'); st.id='hookMaskCss';
+    /* hide the native password-reveal eye (Edge/IE) so it cannot bypass the gate */
+    st.textContent='input[id^="hook_"]::-ms-reveal{display:none!important;}';
+    document.head.appendChild(st);
+  }
+  function applyMask(){ hookInputs().forEach(function(el){ var want=revealed?'text':'password'; if(el.type!==want) el.type=want; }); }
+  function expected(){ return localStorage.getItem('ba_sync_skey')||''; }
+  function verify(pw){ return Promise.resolve(sha(SKEY_PREFIX+pw)).then(function(h){ var e=expected(); return !!e && (''+h).toLowerCase()===e.toLowerCase(); }); }
+
+  function overlay(onok){
+    if(document.getElementById('hookRevealOverlay')) return;
+    var hasPw=!!expected();
+    var bg=document.createElement('div'); bg.id='hookRevealOverlay';
+    bg.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:99999;display:flex;align-items:center;justify-content:center;';
+    var box=document.createElement('div');
+    box.style.cssText='background:#15171c;border:1px solid #2a2d36;border-radius:14px;padding:22px;width:330px;max-width:90vw;box-shadow:0 24px 60px rgba(0,0,0,.55);color:#e7e9ee;font-family:inherit;';
+    if(!hasPw){
+      box.innerHTML='<div style="font-weight:700;font-size:16px;margin-bottom:8px;">No sync password set</div>'+
+        '<div style="font-size:13px;color:#9aa0ac;margin-bottom:16px;line-height:1.5;">Set up your sync / security password first (it is the same one that unlocks device sync). Then you can reveal the links.</div>'+
+        '<div style="display:flex;justify-content:flex-end;"><button data-x="c" style="padding:8px 14px;border-radius:8px;border:0;background:#ff8a3d;color:#1a1206;font-weight:700;cursor:pointer;">OK</button></div>';
+      bg.appendChild(box); document.body.appendChild(bg);
+      box.querySelector('[data-x="c"]').onclick=function(){ try{document.body.removeChild(bg);}catch(e){} };
+      return;
+    }
+    box.innerHTML='<div style="font-weight:700;font-size:16px;margin-bottom:6px;">Show webhook links</div>'+
+      '<div style="font-size:13px;color:#9aa0ac;margin-bottom:14px;">Enter your sync / security password to reveal the channel links.</div>'+
+      '<input type="password" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:9px;border:1px solid #2a2d36;background:#0e1014;color:#fff;font-size:14px;" placeholder="Sync password">'+
+      '<div class="hrErr" style="color:#ff6b6b;font-size:12px;margin-top:8px;min-height:14px;"></div>'+
+      '<div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;">'+
+      '<button data-x="c" style="padding:8px 14px;border-radius:8px;border:1px solid #2a2d36;background:transparent;color:#cfd3da;cursor:pointer;">Cancel</button>'+
+      '<button data-x="o" style="padding:8px 14px;border-radius:8px;border:0;background:#ff8a3d;color:#1a1206;font-weight:700;cursor:pointer;">Show</button></div>';
+    bg.appendChild(box); document.body.appendChild(bg);
+    var inp=box.querySelector('input'), err=box.querySelector('.hrErr');
+    setTimeout(function(){ try{inp.focus();}catch(e){} },30);
+    function close(){ try{ document.body.removeChild(bg); }catch(e){} }
+    function submit(){ var pw=inp.value||''; if(!pw){ return; } verify(pw).then(function(ok){ if(ok){ close(); onok(); } else { err.textContent='Wrong password.'; inp.value=''; inp.focus(); } }); }
+    box.querySelector('[data-x="c"]').onclick=close;
+    box.querySelector('[data-x="o"]').onclick=submit;
+    inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } else if(e.key==='Escape'){ close(); } });
+    bg.addEventListener('mousedown', function(e){ if(e.target===bg) close(); });
+  }
+
+  function setLabel(b){ b.textContent=revealed?'Hide links':'Show links'; }
+  function reveal(b){ revealed=true; applyMask(); setLabel(b); clearTimeout(hideTimer); hideTimer=setTimeout(function(){ revealed=false; applyMask(); setLabel(b); }, 120000); }
+  function ensureBtn(){
+    var box=document.getElementById('set-channels'); if(!box) return;
+    var b=document.getElementById('hookRevealBtn');
+    if(!b){
+      var wrap=document.createElement('div'); wrap.style.cssText='margin:0 0 12px;display:flex;align-items:center;gap:10px;';
+      b=document.createElement('button'); b.id='hookRevealBtn'; b.type='button';
+      b.style.cssText='padding:8px 14px;border-radius:8px;border:1px solid #2a2d36;background:#1b1e25;color:#ffb27a;font-weight:600;cursor:pointer;font-size:13px;';
+      var note=document.createElement('span'); note.style.cssText='font-size:12px;color:#7d828c;'; note.textContent='Links are hidden for your security.';
+      setLabel(b);
+      b.onclick=function(){ if(revealed){ revealed=false; applyMask(); setLabel(b); clearTimeout(hideTimer); } else { overlay(function(){ reveal(b); }); } };
+      wrap.appendChild(b); wrap.appendChild(note);
+      box.insertBefore(wrap, box.firstChild);
+    }
+    setLabel(b);
+  }
+  function tick(){ injectCss(); ensureBtn(); applyMask(); }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ setTimeout(tick,400); }); }
+  else { setTimeout(tick,400); }
+  var n=0, iv=setInterval(function(){ tick(); if(++n>25) clearInterval(iv); }, 1000);
+  document.addEventListener('click', function(){ setTimeout(tick,250); }, true);
+})();
