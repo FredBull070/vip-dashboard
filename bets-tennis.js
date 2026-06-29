@@ -19,9 +19,9 @@ Two clear favourites from today's Wimbledon order of play stacked into a control
 ===NEXT MESSAGE===
 **🟡 #T2 Value Builder Parley (Tennis): 29-06-2026**
 
-**:small_orange_diamond: Jannik Sinner x Miomir Kecmanovic**
-Jannik Sinner to win 3-0 (sets) @ 1.45 - 1.65*
-↳ Defending champion opening on Centre Court; expected to drop no sets against Kecmanovic.
+**:small_orange_diamond: Aleksandar Kovacevic x Botic Van De Zandschulp**
+Botic Van De Zandschulp to win (moneyline) @ 1.53
+↳ The more experienced grass performer, favoured to come through against Kovacevic.
 
 **:small_orange_diamond: Daniil Medvedev x Marin Cilic**
 Daniil Medvedev to win (moneyline) @ 1.28 - 1.40*
@@ -35,7 +35,7 @@ Stefanos Tsitsipas to win (moneyline) @ 1.30 - 1.42*
 Naomi Osaka to win (moneyline) @ 1.34 - 1.46*
 ↳ Osaka's power translates well to grass against an opponent more at home on clay.
 
-**:moneybag: Total odds: ±3.55 - 4.40***
+**:moneybag: Total odds: ±3.40 - 4.45***
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -122,13 +122,13 @@ STAKE: 2u (Safe Builder leg)
 RISK: Low
 ANALYSIS: Brooksby's return game and consistency make him the clear favourite over Vukic.
 ===
-MATCH: Jannik Sinner x Miomir Kecmanovic
-MARKET: Set Betting (3-0)
-SELECTION: Jannik Sinner to win 3-0
-ODDS: 1.45 - 1.65*
+MATCH: Aleksandar Kovacevic x Botic Van De Zandschulp
+MARKET: Match Winner
+SELECTION: Botic Van De Zandschulp to win
+ODDS: 1.53
 STAKE: 0.75u (Value Builder leg)
 RISK: Medium
-ANALYSIS: Defending champion opening on Centre Court; expected to drop no sets.
+ANALYSIS: The more experienced grass performer, favoured to come through against Kovacevic.
 ===
 MATCH: Daniil Medvedev x Marin Cilic
 MARKET: Match Winner
@@ -242,7 +242,7 @@ STAKE: 0.1u (Lucky Shot leg)
 RISK: Very High
 ANALYSIS: Big-serving Frenchman favoured against a low-ranked home wildcard.`;
 window.TENNIS_EVENTS = [
-{match:"Jannik Sinner x Miomir Kecmanovic", date:"2026-06-29", time:"14:30", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Jannik Sinner", tier:"Value Builder"},
+{match:"Aleksandar Kovacevic x Botic Van De Zandschulp", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Botic Van De Zandschulp", tier:"Value Builder"},
 {match:"Novak Djokovic x Yibing Wu", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Centre Court", pick:"Novak Djokovic", tier:"Jackpot Builder"},
 {match:"Daniil Medvedev x Marin Cilic", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"No 1 Court", pick:"Daniil Medvedev", tier:"Value Builder"},
 {match:"Denis Shapovalov x Pablo Carreno Busta", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Denis Shapovalov", tier:"Safe Builder"},
