@@ -563,15 +563,13 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function inPeriod(r){
     if(st.period==='all') return true;
+    var span={today:1,week:7,month:31,quarter:92,year:366}[st.period];
+    if(!span) return true;
     var t=ep(r.date), now=Date.now(), day=864e5;
-    if(st.period==='today'){ var d=new Date(); var k=('0'+d.getDate()).slice(-2)+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+d.getFullYear(); return r.date===k; }
-    if(st.period==='week') return t>=now-7*day;
-    if(st.period==='month') return t>=now-31*day;
-    return true;
+    return t>=now-span*day && t<=now+day;
   }
   function pass(r){
     if(st.sport!=='all' && (r.sport||'').toLowerCase()!==st.sport) return false;
-    if(!inPeriod(r)) return false;
     if(st.outcome!=='all'){
       if(st.outcome==='open' && DEC[r.result]) return false;
       if(st.outcome==='won' && r.result!=='W') return false;
@@ -636,7 +634,7 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function buildHTML(rows){
     var base=rows.filter(function(r){return r.public!==false && !isLuckyLeg(r);});
-    var tabRows=base.filter(function(r){ return st.tab==='all'?true:typeTab(r)===st.tab; });
+    var tabRows=base.filter(function(r){ return st.tab==='all'?true:typeTab(r)===st.tab; }).filter(inPeriod);
     var f=tabRows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
     var s=compute(tabRows);
     var dec=tabRows.filter(function(r){return r.result==='W'||r.result==='L';});
@@ -688,7 +686,7 @@ window.DAILY_PROPS_SETTLED = [];
     var filters='<div class="bl-filters">'+
       '<input id="blq" class="bl-inp" type="text" placeholder="🔎 search team or player" value="'+esc(st.q)+'">'+
       '<select class="bl-sel" data-k="sport">'+opts([['all','All sports'],['football','Football'],['tennis','Tennis'],['nba','NBA'],['nfl','NFL'],['nhl','NHL']],st.sport)+'</select>'+
-      '<select class="bl-sel" data-k="period">'+opts([['all','All dates'],['today','Today'],['week','This week'],['month','This month']],st.period)+'</select>'+
+      '<select class="bl-sel" data-k="period">'+opts([['all','All time'],['today','Daily'],['week','Weekly'],['month','Monthly'],['quarter','Quarterly'],['year','Yearly']],st.period)+'</select>'+
       '<select class="bl-sel" data-k="outcome">'+opts([['all','All outcomes'],['won','Won'],['lost','Lost'],['open','Open'],['void','Void']],st.outcome)+'</select>'+
       '<select class="bl-sel" data-k="tier">'+opts([['all','All risk'],['safe','🟢 Safe'],['value','🟡 Value'],['jackpot','🔴 Jackpot']],st.tier)+'</select>'+
       '<button class="bl-reset" data-k="reset">Reset</button></div>';
@@ -753,7 +751,7 @@ window.DAILY_PROPS_SETTLED = [];
     document.head.appendChild(s);
   }
 
-  var box=null;
+  var box=null, lastSig=null;
   function render(){
     var host=document.getElementById('page-trackrecord'); if(!host) return;
     injectCSS();
@@ -765,9 +763,25 @@ window.DAILY_PROPS_SETTLED = [];
       box.addEventListener('change', onChange);
       box.addEventListener('input', onInput);
     }
+    var raw=localStorage.getItem('ba_trackrecord')||'[]'; lastSig=raw;
     var sc=box.scrollTop;
-    box.innerHTML=buildHTML(load());
+    var rows; try{rows=JSON.parse(raw);}catch(e){rows=[];}
+    box.innerHTML=buildHTML(rows);
     box.scrollTop=sc;
+  }
+  // Lightweight update: rebuild only the result list + count, leaving the filter
+  // controls and hero in place — so dropdowns and the search box never reset or
+  // close. Used for the browse filters (sport / outcome / risk / search).
+  function renderResults(){
+    if(!box) return;
+    var rows; try{rows=JSON.parse(localStorage.getItem('ba_trackrecord')||'[]');}catch(e){rows=[];}
+    var base=rows.filter(function(r){return r.public!==false && !isLuckyLeg(r);});
+    var tabRows=base.filter(function(r){ return st.tab==='all'?true:typeTab(r)===st.tab; }).filter(inPeriod);
+    var f=tabRows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
+    var sub=st.tab==='card'?'single picks':(st.tab==='parley'?'parleys':(st.tab==='prop'?'prop cards':'all bets'));
+    var listEl=box.querySelector('.bl-list'), cntEl=box.querySelector('.bl-count');
+    if(listEl) listEl.innerHTML=f.length? f.map(rowHTML).join(''):'<div class="bl-empty">No bets match these filters.</div>';
+    if(cntEl) cntEl.textContent=f.length+' of '+tabRows.length+' '+sub;
   }
   function onClick(e){
     var t=e.target.closest('.bl-tab');
@@ -777,14 +791,22 @@ window.DAILY_PROPS_SETTLED = [];
     var head=e.target.closest('.bl-head');
     if(head){ head.parentNode.classList.toggle('open-row'); }
   }
-  function onChange(e){ var sel=e.target.closest('.bl-sel'); if(sel){ st[sel.getAttribute('data-k')]=sel.value; render(); } }
+  function onChange(e){
+    var sel=e.target.closest('.bl-sel'); if(!sel) return;
+    var k=sel.getAttribute('data-k'); st[k]=sel.value;
+    if(k==='period') render(); else renderResults();
+  }
   var qt;
-  function onInput(e){ if(e.target.id==='blq'){ clearTimeout(qt); var v=e.target.value; qt=setTimeout(function(){ st.q=v; render(); var i=document.getElementById('blq'); if(i){i.focus();i.setSelectionRange(v.length,v.length);} }, 250); } }
+  function onInput(e){ if(e.target.id==='blq'){ clearTimeout(qt); st.q=e.target.value; qt=setTimeout(renderResults, 200); } }
 
   function tick(){
     var p=document.getElementById('page-trackrecord'), sb=document.getElementById('subbar');
-    if(p && getComputedStyle(p).display!=='none'){ render(); if(sb) sb.style.display='none'; }
-    else if(sb && sb.style.display==='none'){ sb.style.display=''; }
+    if(p && getComputedStyle(p).display!=='none'){
+      if(sb) sb.style.display='none';
+      if(!box || !box.isConnected){ render(); return; }
+      var cur=localStorage.getItem('ba_trackrecord')||'[]';
+      if(cur!==lastSig) render();
+    } else if(sb && sb.style.display==='none'){ sb.style.display=''; }
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(tick,900); }); else setTimeout(tick,900);
   setInterval(tick, 1500);
