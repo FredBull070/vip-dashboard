@@ -368,10 +368,25 @@ window.DAILY_PROPS_SETTLED = [];
     }
     return chunks;
   }
+  function rename(chunks){
+    if(!Array.isArray(chunks)) return chunks;
+    return chunks.map(function(ch){
+      if(typeof ch!=='string') return ch;
+      return ch.split('\n').map(function(l){
+        if(l.indexOf('→')>=0){
+          return l.replace(/Conservative/g,'Safe').replace(/\bBalanced\b/g,'Value').replace(/Aggressive/g,'Jackpot')
+                  .replace(/focus on Core Positions/gi,'the lowest-risk single picks')
+                  .replace(/mix Core \+ Value Positions/gi,'a mix of Safe + Value Builder Cards')
+                  .replace(/include Opportunity Positions/gi,'the Jackpot Builder Cards');
+        }
+        return l.replace(/CORE POSITIONS/gi,'SAFE BUILDER CARDS').replace(/BALANCED POSITIONS/gi,'VALUE BUILDER CARDS').replace(/(AGGRESSIVE|OPPORTUNITY) POSITIONS/gi,'JACKPOT BUILDER CARDS');
+      }).join('\n');
+    });
+  }
   function wrap(name){
     var orig=window[name];
     if(typeof orig==='function' && !orig.__dedup){
-      var w=function(){ return dedupe(orig.apply(this, arguments)); };
+      var w=function(){ return rename(dedupe(orig.apply(this, arguments))); };
       w.__dedup=true; try{ w.toString=function(){ return orig.toString(); }; }catch(e){}
       window[name]=w;
     }
@@ -379,4 +394,21 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function go(){ var a=wrap('buildCardsChunks'); var b=wrap('buildPropChunks'); return a&&b; }
   if(!go()){ var c=0, t=setInterval(function(){ if(go()||++c>30) clearInterval(t); }, 500); }
+})();
+
+/* ---------------------------------------------------------------------------
+   Odds alignment on the single Daily Cards / Prop Cards rows. The per-card
+   status badge (In progress / start time) is added into the card header flex
+   row; without this the odds drifted to the middle. This clusters the odds,
+   caret and status badge neatly on the right by letting the match-info column
+   take the remaining space. */
+(function(){
+  function inject(){
+    if(document.getElementById('blOddsFix')) return true;
+    if(!document.head) return false;
+    var st=document.createElement('style'); st.id='blOddsFix';
+    st.textContent='.rcard .rc-top{display:flex !important;align-items:center;gap:10px;} .rcard .rc-top > *:first-child{margin-right:auto !important;}';
+    document.head.appendChild(st); return true;
+  }
+  if(!inject()){ var c=0, t=setInterval(function(){ if(inject()||++c>30) clearInterval(t); }, 200); }
 })();
