@@ -9,15 +9,11 @@ Denis Shapovalov to win (moneyline) @ 1.36
 Jenson Brooksby to win (moneyline) @ 1.44
 ↳ Brooksby's return game and consistency make him the clear favourite over Vukic.
 
-**:small_orange_diamond: Aleksandar Kovacevic x Botic Van De Zandschulp**
-Botic Van De Zandschulp to win (moneyline) @ 1.53
-↳ The more experienced grass performer, favoured to come through against Kovacevic.
-
-**:moneybag: Total odds: ±2.95 - 3.05**
+**:moneybag: Total odds: ±1.95 - 2.00**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three clear favourites from today's Wimbledon order of play stacked into a controlled-risk core. Every leg is priced above 1.15, so each one adds real value instead of dead weight.
+Two clear favourites from today's Wimbledon order of play stacked into a controlled-risk core. Both legs are priced above 1.15, so each one adds real value instead of dead weight.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
@@ -125,14 +121,6 @@ ODDS: 1.44
 STAKE: 2u (Safe Builder leg)
 RISK: Low
 ANALYSIS: Brooksby's return game and consistency make him the clear favourite over Vukic.
-===
-MATCH: Aleksandar Kovacevic x Botic Van De Zandschulp
-MARKET: Match Winner
-SELECTION: Botic Van De Zandschulp to win
-ODDS: 1.53
-STAKE: 2u (Safe Builder leg)
-RISK: Low
-ANALYSIS: The more experienced grass performer, favoured to come through against Kovacevic.
 ===
 MATCH: Jannik Sinner x Miomir Kecmanovic
 MARKET: Set Betting (3-0)
@@ -269,7 +257,5 @@ window.TENNIS_EVENTS = [
 {match:"Brandon Nakashima x Jack Pinnington Jones", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 12", pick:"Brandon Nakashima", tier:"Jackpot Builder"},
 {match:"Belinda Bencic x Mika Stojsavljevic", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Belinda Bencic", tier:"Jackpot Builder"},
 {match:"Tommy Paul x Alexandre Muller", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Tommy Paul", tier:"Jackpot Builder"},
-{match:"Joao Fonseca x Roberto Bautista Agut", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Joao Fonseca", tier:"Jackpot Builder"},
-{match:"Aleksandar Kovacevic x Botic Van De Zandschulp", date:"2026-06-29", time:"12:00", comp:"Wimbledon", stage:"Round 1", venue:"", pick:"Botic Van De Zandschulp", tier:"Safe Builder"},
-{match:"Stefanos Tsitsipas x Hugo Gaston", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 16", pick:"Stefanos Tsitsipas", tier:"Value Builder"}
+{match:"Joao Fonseca x Roberto Bautista Agut", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 18", pick:"Joao Fonseca", tier:"Jackpot Builder"},{match:"Stefanos Tsitsipas x Hugo Gaston", date:"2026-06-29", time:"", comp:"Wimbledon", stage:"Round 1", venue:"Court 16", pick:"Stefanos Tsitsipas", tier:"Value Builder"}
 ];

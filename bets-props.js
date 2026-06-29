@@ -227,11 +227,17 @@ window.DAILY_PROPS_SETTLED = [];
   function label(epoch){
     if(epoch==null) return '';
     var diff=epoch-Date.now();
-    if(diff<=0){ return diff>-3*3600000 ? ('▶ bezig · '+clock(epoch)) : ('— afgelopen'); }
+    if(diff<=0){ return '⏳ In progress'; }
     if(diff>18*3600000){ return '⏱ '+dayLabel(epoch)+' '+clock(epoch); }
     var mins=Math.floor(diff/60000), h=Math.floor(mins/60), m=mins%60;
     var rel = h>0 ? ('begint over '+h+'u '+m+'m') : ('begint over '+m+'m');
     return '⏱ '+rel+' · '+clock(epoch);
+  }
+  function setBadge(host, txt){
+    var b=badgeEl(host); b.textContent=txt;
+    var live=txt.indexOf('In progress')>=0;
+    b.style.background = live ? 'rgba(46,209,122,.16)' : 'rgba(255,138,61,.14)';
+    b.style.color = live ? '#46d17a' : '#ffb27a';
   }
   function earliestFor(text, ev){
     var t=norm(text), best=null, any=false;
@@ -253,7 +259,7 @@ window.DAILY_PROPS_SETTLED = [];
       var txt = r===undefined ? '' : (r===null ? '⏱ tijd t.b.d.' : label(r));
       var b=host.querySelector('.bl-cd');
       if(!txt){ if(b) b.remove(); return; }
-      badgeEl(host).textContent=txt;
+      setBadge(host, txt);
     });
     // Single cards & props: .rcard -> badge in .rc-top (header holds the match)
     [].slice.call(document.querySelectorAll('.rcard')).forEach(function(card){
@@ -262,7 +268,7 @@ window.DAILY_PROPS_SETTLED = [];
       var b=host.querySelector('.bl-cd');
       if(r===undefined){ if(b) b.remove(); return; }
       var txt = r===null ? '⏱ tijd t.b.d.' : label(r);
-      badgeEl(host).textContent=txt;
+      setBadge(host, txt);
     });
   }
   function start(){ paint(); setInterval(paint, 30000); document.addEventListener('click', function(){ setTimeout(paint, 350); }, true); }
