@@ -39,22 +39,22 @@ Two outright favourites from different games, decorrelated from the Safe ticket.
 **🔴 #18 Jackpot Builder Parley (⚽ Football): 30-06-2026**
 
 **:small_orange_diamond: France x Sweden**
-France to win (Match Result) @ 1.29
-↳ The banker of the night.
+Over 2.5 goals @ 1.43
+↳ France's firepower should make for a high-scoring tie.
 
 **:small_orange_diamond: Ivory Coast x Norway**
-Norway to win (Match Result) @ 2.12
-↳ Norway's quality over the line.
+Over 2.5 goals @ 1.84
+↳ Two sides that both carry a goal threat in an open knockout.
 
 **:small_orange_diamond: Mexico x Ecuador**
-Mexico to win (Match Result) @ 2.23
-↳ Home advantage in Mexico City.
+Over 2.5 goals @ 2.95
+↳ The longshot leg of the ticket: goals if the game opens up.
 
-**:moneybag: Total odds: 6.10**
+**:moneybag: Total odds: 7.76**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-All three Round of 32 favourites in one ticket. Higher variance, big return if the chalk holds. Thin 3-match day, so this shares legs with the Safe and Value tickets.
+A pure goals ticket (Over 2.5 in all three ties), a completely different market from the Safe and Value match-result picks, so there is no overlap with them. Higher variance by design.
 
 **:bank: Bankroll:** 0.25u stake
 ===NEXT MESSAGE===
