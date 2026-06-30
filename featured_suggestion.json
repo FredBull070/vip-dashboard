@@ -1,0 +1,15 @@
+{
+  "type": "parley",
+  "period": "week",
+  "label": "Parleys · this week",
+  "roi": 10.59,
+  "bets": 13,
+  "profit": 1.212,
+  "total": {
+    "roi": -5.99,
+    "bets": 54,
+    "profit": -3.323
+  },
+  "computed_at": "2026-06-30 06:42",
+  "changed": false
+}
