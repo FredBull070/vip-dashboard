@@ -1,12 +1,13 @@
 [
- {"s":"football","m":"Germany x Paraguay","k":"Germany","o":1.36},
- {"s":"football","m":"Brazil x Japan","k":"Brazil","o":1.69},
- {"s":"football","m":"Netherlands x Morocco","k":"Netherlands","o":2.10},
- {"s":"football","m":"South Africa x Canada","k":"Canada","o":1.71},
- {"s":"tennis","m":"Sinner x Kecmanovic","k":"Sinner","o":1.05},
- {"s":"tennis","m":"Djokovic x Wu Yibing","k":"Djokovic","o":1.08},
- {"s":"tennis","m":"Sabalenka x Kostovic","k":"Sabalenka","o":1.04},
- {"s":"tennis","m":"Medvedev x Cilic","k":"Medvedev","o":1.30},
- {"s":"tennis","m":"Andreeva x Linette","k":"Andreeva","o":1.25},
- {"s":"tennis","m":"Raducanu x Ruzic","k":"Raducanu","o":1.40}
+  {"s":"football","m":"Spain x Austria","k":"Spain","o":1.32},
+  {"s":"football","m":"Portugal x Croatia","k":"Portugal","o":1.75},
+  {"s":"football","m":"Switzerland x Algeria","k":"Switzerland","o":2.00},
+  {"s":"tennis","m":"Alex De Minaur x Adrian Mannarino","k":"De Minaur","o":1.20},
+  {"s":"tennis","m":"Karolina Pliskova x Iga Swiatek","k":"Swiatek","o":1.24},
+  {"s":"tennis","m":"Jakub Mensik x Grigor Dimitrov","k":"Mensik","o":1.53},
+  {"s":"tennis","m":"Karen Khachanov x Yannick Hanfmann","k":"Khachanov","o":1.72},
+  {"s":"tennis","m":"Jasmine Paolini x Viktorija Golubic","k":"Paolini","o":1.61},
+  {"s":"tennis","m":"Matteo Berrettini x Arthur Fils","k":"Fils","o":1.35},
+  {"s":"tennis","m":"Kamilla Rakhimova x Maria Sakkari","k":"Sakkari","o":1.50},
+  {"s":"tennis","m":"Sorana Cirstea x Kimberly Birrell","k":"Cirstea","o":1.37}
 ]
