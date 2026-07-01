@@ -1,10 +1,10 @@
 {
-  "type": "parley",
-  "period": "week",
-  "label": "Parleys · this week",
-  "roi": null,
-  "bets": null,
+  "type": "all",
+  "period": "today",
+  "label": "All bets · today",
+  "roi": 42.76,
+  "bets": 26,
   "approved_by": "fred",
-  "updated_at": "2026-06-29T23:48:48.711Z",
+  "updated_at": "2026-07-01T22:45:48.786Z",
   "via": "worker"
 }
