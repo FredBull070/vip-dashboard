@@ -916,3 +916,44 @@
   fetchCfg(); setInterval(fetchCfg,60000); setInterval(function(){ paint(false); },1500);
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ setTimeout(function(){paint(true);},1000); }); else setTimeout(function(){paint(true);},1000);
 })();
+
+/* --- Rich card meta: day, sport, kickoff time (+ countdown), competition/round and
+   implied win% on the Daily Betting Cards and Daily Prop Cards. Reads the per-sport
+   *_EVENTS arrays; degrades gracefully when a card has no matching event. --- */
+(function(){
+  var SP={FOOTBALL_EVENTS:['⚽','Football'],TENNIS_EVENTS:['🎾','Tennis'],NBA_EVENTS:['🏀','NBA'],NFL_EVENTS:['🏈','NFL'],NHL_EVENTS:['🏒','NHL']};
+  function norm(s){return (''+s).toLowerCase().replace(/\s+/g,' ').trim();}
+  function evFor(text){
+    var t=norm(text),found=null,fk=null,fs='';
+    Object.keys(SP).forEach(function(k){
+      var a=window[k]; if(!Array.isArray(a)) return;
+      a.forEach(function(e){ if(e&&e.match&&t.indexOf(norm(e.match))>=0){ var s=(e.date||'')+(e.time||''); if(!found||s<fs){found=e;fs=s;fk=k;} } });
+    });
+    return found?{ev:found,sp:SP[fk]}:null;
+  }
+  function wd(d){ try{var x=new Date(d+'T12:00:00');var w=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][x.getDay()];var p=d.split('-');return w+' '+p[2]+'-'+p[1];}catch(e){return d;} }
+  function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
+  function timeStr(e){ if(!e.time) return ''; var ep=koEpoch(e); if(ep==null) return '🕒 '+e.time; var now=Date.now(); if(now>=ep&&now<ep+3.5*3600000) return '🔴 Live'; if(now>=ep) return '✅ done'; var m=Math.round((ep-now)/60000); if(m<60) return '⏱ '+e.time+' (in '+m+'m)'; if(m<1440) return '🕒 '+e.time+' (in '+Math.round(m/60)+'h)'; return '🕒 '+e.time; }
+  function implied(card){ var o=card.querySelector('.rc-odds'); if(!o)return ''; var m=(o.textContent||'').match(/(\d+\.\d+)/); if(!m)return ''; var v=parseFloat(m[1]); if(!(v>1))return ''; return Math.round(100/v)+'% implied'; }
+  function metaFor(card){
+    var f=evFor(card.textContent||''); if(!f) return null;
+    var e=f.ev,parts=[];
+    if(e.date) parts.push('🗓 '+wd(e.date));
+    parts.push(f.sp[0]+' '+f.sp[1]);
+    var ts=timeStr(e); if(ts) parts.push(ts);
+    var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
+    var ip=implied(card); if(ip) parts.push(ip);
+    return parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+  }
+  function paint(){
+    [].slice.call(document.querySelectorAll('#page-betcards .rcard, #page-propcards .rcard')).forEach(function(card){
+      var html=metaFor(card);
+      var m=card.querySelector(':scope > .bl-cardmeta');
+      if(!html){ if(m) m.remove(); return; }
+      if(!m){ m=document.createElement('div'); m.className='bl-cardmeta'; m.style.cssText='margin:1px 0 7px;font-size:11.5px;color:#9fb0c7;font-weight:600;line-height:1.5;'; var top=card.querySelector('.rc-top'); if(top){ card.insertBefore(m, top.nextSibling); } else { card.insertBefore(m, card.firstChild); } }
+      if(m.getAttribute('data-h')!==html){ m.innerHTML=html; m.setAttribute('data-h',html); }
+    });
+  }
+  function boot(){ paint(); setInterval(paint,30000); document.addEventListener('click',function(){setTimeout(paint,350);},true); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(boot,700);}); else setTimeout(boot,700);
+})();
