@@ -1,112 +1,103 @@
+/* BetLife365 daily PROP cards - written by the prop-cards-builder task, read by the dashboard.
+   Same structure as DAILY_CARDS (MATCH/MARKET/SELECTION/ODDS/STAKE/RISK/ANALYSIS, grouped by
+   risk: low=Core, medium=Value, high=Aggressive). Player props across every sport we offer.
+   Code stays separate from the dashboard. Odds marked * are conservative estimates. */
 window.DAILY_PROPS_VERSION = "2026-07-02";
-window.DAILY_PROPS = `SPORT: Tennis
-MATCH: Wimbledon R2 - Iga Swiatek v Karolina Pliskova
-MARKET: Match Winner
-SELECTION: Iga Swiatek to win
-ODDS: 1.45*
-STAKE: 1.0
-RISK: low
-ANALYSIS: World number one caliber Swiatek is a clear favourite against 34-year-old former finalist Pliskova; even on grass the class and consistency gap is large.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Elena Rybakina v Caty McNally
-MARKET: Set Betting
-SELECTION: Rybakina to win in straight sets (2-0)
+
+window.DAILY_PROPS = `SPORT: Football
+MATCH: Spain x Austria
+MARKET: Shots on target
+SELECTION: Lamine Yamal 1+ shots on target
 ODDS: 1.55*
-STAKE: 1.0
+STAKE: 1u
 RISK: low
-ANALYSIS: Former Wimbledon champion Rybakina has one of the best grass games in the draw; McNally lacks the firepower to take a set off her.
+ANALYSIS: Spain's main creative outlet against an Austria side that has to sit deep; Yamal takes a high volume of efforts from the right.
 ===
-SPORT: Voetbal
-MATCH: WK Round of 32 - Spain v Austria
-MARKET: Player Shots on Target
-SELECTION: Lamine Yamal Over 0.5 shots on target
-ODDS: 1.50*
-STAKE: 1.0
+SPORT: Tennis
+MATCH: Emma Navarro x Oksana Selekhmeteva
+MARKET: Total games
+SELECTION: Under 20.5 total games
+ODDS: 1.80*
+STAKE: 1u
 RISK: low
-ANALYSIS: Yamal is Spain's primary attacking outlet and a nailed starter; Spain are heavy favourites (around -300) and will dominate territory, giving him steady shooting volume.
+ANALYSIS: Navarro is a heavy favourite and the far more solid returner, so a routine two set win in few games is the likely path.
 ===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Matteo Berrettini v Arthur Fils
-MARKET: Player Aces
-SELECTION: Matteo Berrettini Over 10.5 aces
-ODDS: 1.85*
-STAKE: 0.5
+SPORT: Football
+MATCH: Spain x Austria
+MARKET: Total shots
+SELECTION: Nico Williams 2+ shots
+ODDS: 1.62*
+STAKE: 1u
 RISK: medium
-ANALYSIS: Berrettini is one of the biggest servers on grass and this looks like a long, competitive match, boosting his ace count across sets.
+ANALYSIS: Williams attacks the left flank relentlessly and against a defensive Austria he should rack up shot attempts.
 ===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Alexander Zverev v Valentin Royer
-MARKET: Set Betting
-SELECTION: Zverev to win in straight sets (3-0)
-ODDS: 1.75*
-STAKE: 0.5
-RISK: medium
-ANALYSIS: Zverev holds a large ranking and quality edge over Royer; his serve travels well on grass and he should control the match in three sets.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Jakub Mensik v Grigor Dimitrov
-MARKET: Player Aces
-SELECTION: Jakub Mensik Over 9.5 aces
-ODDS: 1.90*
-STAKE: 0.5
-RISK: medium
-ANALYSIS: Mensik is a young, huge server built for grass; against veteran Dimitrov this should go the distance and produce a high ace tally.
-===
-SPORT: Voetbal
-MATCH: WK Round of 32 - Spain v Austria
-MARKET: Anytime Goalscorer
-SELECTION: Mikel Oyarzabal anytime goalscorer
-ODDS: 2.40*
-STAKE: 0.5
-RISK: medium
-ANALYSIS: Oyarzabal is a regular starter and Spain's penalty option; as heavy favourites Spain should create plenty of chances for their forwards.
-===
-SPORT: Voetbal
-MATCH: WK Round of 32 - Portugal v Croatia
-MARKET: Player Shots on Target
-SELECTION: Bruno Fernandes Over 0.5 shots on target
+SPORT: Football
+MATCH: Portugal x Croatia
+MARKET: Shots on target
+SELECTION: Bruno Fernandes 1+ shots on target
 ODDS: 1.65*
-STAKE: 0.5
+STAKE: 1u
 RISK: medium
-ANALYSIS: Fernandes is a guaranteed starter with heavy involvement on shots, set pieces and long-range efforts; a tight knockout tie will see Portugal test the keeper often.
-===
-SPORT: Voetbal
-MATCH: WK Round of 32 - Switzerland v Algeria
-MARKET: Anytime Goalscorer
-SELECTION: Breel Embolo anytime goalscorer
-ODDS: 3.20*
-STAKE: 0.25
-RISK: high
-ANALYSIS: Embolo is Switzerland's main central striker and focal point of their attack; in a tight, decisive match he is their most likely goal source.
-===
-SPORT: Voetbal
-MATCH: WK Round of 32 - Spain v Austria
-MARKET: Anytime Goalscorer
-SELECTION: Lamine Yamal anytime goalscorer
-ODDS: 3.00*
-STAKE: 0.25
-RISK: high
-ANALYSIS: As Spain's star creator against a defensive Austria side, Yamal cutting inside for shots gives real value on the anytime market at this price.
+ANALYSIS: Portugal's midfield engine arrives late into the box and strikes from range and set pieces, so at least one shot on target is well priced.
 ===
 SPORT: Tennis
-MATCH: Wimbledon R2 - Matteo Berrettini v Arthur Fils
-MARKET: Match Winner
-SELECTION: Arthur Fils to win
-ODDS: 2.10*
-STAKE: 0.25
-RISK: high
-ANALYSIS: Fils is the No. 20 seed and the younger, more athletic player; if Berrettini's serve wobbles Fils has the return and legs to grind through this one.
+MATCH: Gabriel Diallo x Lorenzo Sonego
+MARKET: Player total aces
+SELECTION: Gabriel Diallo over 11.5 aces
+ODDS: 1.85*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Diallo owns one of the biggest serves on tour and on quick grass in a five setter his ace count should be high.
 ===
 SPORT: Tennis
-MATCH: Wimbledon R2 - Jaume Munar v Jacob Fearnley
-MARKET: Match Winner
-SELECTION: Jacob Fearnley to win
-ODDS: 2.30*
-STAKE: 0.25
+MATCH: Karen Khachanov x Yannick Hanfmann
+MARKET: Match total aces
+SELECTION: Over 19.5 total aces
+ODDS: 1.90*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Two heavy servers on a fast grass court, a best of five that projects to plenty of free points on serve.
+===
+SPORT: Tennis
+MATCH: Alex De Minaur x Adrian Mannarino
+MARKET: Game handicap
+SELECTION: Alex De Minaur -5.5 games
+ODDS: 1.95*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: De Minaur is a clear level above and his speed should let him break the veteran Mannarino repeatedly across five sets.
+===
+SPORT: Tennis
+MATCH: Alexandra Eala x Maya Joint
+MARKET: Game handicap
+SELECTION: Alexandra Eala -3.5 games
+ODDS: 1.90*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Eala is the sharper, higher ranked player and should control the baseline exchanges to win by a comfortable margin.
+===
+SPORT: Tennis
+MATCH: Diana Shnaider x Ludmilla Samsonova
+MARKET: Total games
+SELECTION: Over 21.5 total games
+ODDS: 1.85*
+STAKE: 0.5u
 RISK: high
-ANALYSIS: Munar is a clay-oriented Spaniard while home favourite Fearnley suits grass and rides strong crowd support; a live underdog price with real edge.`;
+ANALYSIS: A close matchup between two big hitters who both hold serve well, pointing to a long, competitive contest.
+===
+SPORT: Tennis
+MATCH: Tyra Caterina Grant x Marie Bouzkova
+MARKET: Game handicap
+SELECTION: Marie Bouzkova -3.5 games
+ODDS: 2.00*
+STAKE: 0.5u
+RISK: high
+ANALYSIS: Bouzkova is the more experienced grass court player and is favoured to pull clear of the young qualifier Grant.`;
+
 window.EMBEDDED_PROPS = { date: "2026-07-02" };
+/* Filled by the evening-settlement task once a prop is confirmed by verified player data.
+   Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
+   these into the Track Record. No result is ever written without verified player-level data. */
 window.DAILY_PROPS_SETTLED = [];
 
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
