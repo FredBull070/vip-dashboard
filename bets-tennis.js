@@ -1,231 +1,182 @@
-/* BetLife365 tennis bets - written by the tennis task, read by the dashboard. */
-window.DAILY_TENNIS = `**🟢 #T4 Safe Builder Parley (🎾 Tennis): 02-07-2026**
+/* BetLife365 daily TENNIS bets - written by the tennis-bets-builder task, read by the dashboard. Code stays separate. */
+window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (🎾 Tennis): 02-07-2026**
 
-**:small_orange_diamond: Alex De Minaur x Adrian Mannarino**
-Alex De Minaur to win (moneyline) @ 1.20
-↳ Seeded De Minaur is far quicker and steadier on grass than the veteran Mannarino.
-
-**:small_orange_diamond: Karolina Pliskova x Iga Swiatek**
-Iga Swiatek to win (moneyline) @ 1.24
-↳ The reigning champion is a clear step above a Pliskova short of grass matches.
+**:small_orange_diamond: Karen Khachanov x Yannick Hanfmann**
+Karen Khachanov to win (match winner) @ 1.61
+↳ Khachanov wins the match.
 
 **:small_orange_diamond: Jacob Fearnley x Jaume Munar**
-Jaume Munar to win (moneyline) @ 1.60
-↳ The more consistent baseliner over a home hope who will feel the occasion.
+Jaume Munar to win (match winner) @ 1.60
+↳ Munar wins the match.
 
-**:moneybag: Total odds: ±2.38**
+**:moneybag: Total odds: ±2.58**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three clear Round 2 favourites from three different matches stacked into a controlled core. Every leg is priced above 1.15, so each one earns its place.
+Khachanov has the greater power and big match experience against Hanfmann, while Munar is the steadier, higher ranked player against Fearnley. Two solid favourites from different matches.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 #T5 Value Builder Parley (🎾 Tennis): 02-07-2026**
+**🟡 #T2 Value Builder Parley (🎾 Tennis): 02-07-2026**
 
-**:small_orange_diamond: Kamilla Rakhimova x Maria Sakkari**
-Maria Sakkari to win (moneyline) @ 1.50
-↳ Sakkari has the bigger weapons and grass experience against a lower-ranked opponent.
+**:small_orange_diamond: Zizou Bergs x Jaime Faria**
+Zizou Bergs to win (match winner) @ 1.44
+↳ Bergs wins the match.
 
-**:small_orange_diamond: Jakub Mensik x Grigor Dimitrov**
-Jakub Mensik to win (moneyline) @ 1.53
-↳ The big-serving youngster is favoured over an ageing Dimitrov on a quick court.
+**:small_orange_diamond: Zachary Svajda x Kamil Majchrzak**
+Kamil Majchrzak to win (match winner) @ 1.53
+↳ Majchrzak wins the match.
 
-**:small_orange_diamond: Karen Khachanov x Yannick Hanfmann**
-Karen Khachanov to win (moneyline) @ 1.72
-↳ The seed has the firepower and depth to see off Hanfmann across the distance.
+**:small_orange_diamond: Diana Shnaider x Ludmilla Samsonova**
+Diana Shnaider to win (match winner) @ 1.71
+↳ Shnaider wins the match.
 
-**:moneybag: Total odds: ±3.95**
+**:moneybag: Total odds: ±3.77**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three mid-priced favourites from separate matches combined to push the ticket into value territory without reaching for an upset. Different players to the Safe core.
+Three favourites in form from three different matches. Bergs and Majchrzak are the stronger grass movers in their ties, and Shnaider has the cleaner ball striking against Samsonova.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 #T6 Jackpot Builder Parley (🎾 Tennis): 02-07-2026**
+**🔴 #T3 Jackpot Builder Parley (🎾 Tennis): 02-07-2026**
 
-**:small_orange_diamond: Jasmine Paolini x Viktorija Golubic**
-Jasmine Paolini to win (moneyline) @ 1.61
-↳ The seed is a level above Golubic and moves well enough on grass.
+**:small_orange_diamond: Gabriel Diallo x Lorenzo Sonego**
+Gabriel Diallo to win (match winner) @ 1.92
+↳ Diallo wins the match.
 
-**:small_orange_diamond: Matteo Berrettini x Arthur Fils**
-Arthur Fils to win (moneyline) @ 1.35
-↳ The younger, higher-ranked Fils is favoured over an injury-prone Berrettini.
+**:small_orange_diamond: Alex De Minaur x Adrian Mannarino**
+Alex De Minaur to win (match winner) @ 1.20
+↳ De Minaur wins the match.
 
 **:small_orange_diamond: Arthur Fery x Otto Virtanen**
-Otto Virtanen to win (moneyline) @ 1.68
-↳ The bigger server has the edge over a home wildcard on grass.
+Otto Virtanen to win (match winner) @ 1.68
+↳ Virtanen wins the match.
 
-**:small_orange_diamond: Zachary Svajda x Kamil Majchrzak**
-Kamil Majchrzak to win (moneyline) @ 1.53
-↳ Majchrzak is the more proven tour-level operator in this pairing.
+**:small_orange_diamond: Alexandra Eala x Maya Joint**
+Alexandra Eala to win (match winner) @ 1.27
+↳ Eala wins the match.
 
-**:small_orange_diamond: Sorana Cirstea x Kimberly Birrell**
-Sorana Cirstea to win (moneyline) @ 1.37
-↳ The experienced Cirstea should have too much for Birrell over three sets.
+**:small_orange_diamond: Tyra Caterina Grant x Marie Bouzkova**
+Marie Bouzkova to win (match winner) @ 1.33
+↳ Bouzkova wins the match.
 
-**:moneybag: Total odds: ±7.65**
+**:small_orange_diamond: Emma Navarro x Oksana Selekhmeteva**
+Emma Navarro to win (match winner) @ 1.18
+↳ Navarro wins the match.
+
+**:moneybag: Total odds: ±7.71**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Five moderate favourites across five different matches, deliberately built on players not used in the Safe or Value tickets. All legs above 1.15.
+A six leg accumulator of grass court favourites, each from a different match. Diallo's serve, De Minaur's speed, Virtanen's power, and the higher ranked women in Eala, Bouzkova and Navarro all carry a clear edge.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ===NEXT MESSAGE===
 **👑 Lucky Shot Parley (🎾 Tennis): 02-07-2026**
 
-**:small_orange_diamond: Taylor Fritz x Patrick Kypson**
-Taylor Fritz -5.5 games @ 1.80*
-↳ Heavy favourite expected to win by a wide margin against a qualifier-level opponent.
+**:small_orange_diamond: Alex De Minaur x Adrian Mannarino**
+Adrian Mannarino to win (match winner) @ 4.50
+↳ Mannarino pulls off the upset.
 
-**:small_orange_diamond: Valentin Royer x Alexander Zverev**
-Alexander Zverev -5.5 games @ 1.75*
-↳ The world-class Zverev should cover a large games line against Royer.
+**:small_orange_diamond: Arthur Fery x Otto Virtanen**
+Arthur Fery to win (match winner) @ 2.18
+↳ Fery wins as the home hope.
 
-**:small_orange_diamond: Frances Tiafoe x Jan Choinski**
-Frances Tiafoe -4.5 games @ 1.85*
-↳ Class gap on grass points to a comfortable Tiafoe margin.
+**:small_orange_diamond: Zachary Svajda x Kamil Majchrzak**
+Zachary Svajda to win (match winner) @ 2.50
+↳ Svajda springs the surprise.
 
-**:small_orange_diamond: Katie Swan x Madison Keys**
-Madison Keys -4.5 games @ 1.80*
-↳ The seed's power should overwhelm a home wildcard by a clear margin.
+**:small_orange_diamond: Zizou Bergs x Jaime Faria**
+Jaime Faria to win (match winner) @ 2.80
+↳ Faria takes it against the seed.
 
-**:small_orange_diamond: Amanda Anisimova x Sofia Kenin**
-Amanda Anisimova -3.5 games @ 1.90*
-↳ Anisimova favoured to win by a solid games margin against an out-of-form Kenin.
+**:small_orange_diamond: Karen Khachanov x Yannick Hanfmann**
+Yannick Hanfmann to win (match winner) @ 2.30
+↳ Hanfmann causes the shock.
 
-**:small_orange_diamond: Daria Snigur x Leolia Jeanjean**
-Daria Snigur -3.5 games @ 1.95*
-↳ Strong favourite expected to control the match and the games line.
-
-**:small_orange_diamond: Kyrian Jacquet x Alexander Bublik**
-Alexander Bublik -2.5 games @ 1.90*
-↳ The far higher-ranked Bublik should edge ahead comfortably on games.
-
-**:small_orange_diamond: Emma Navarro x Oksana Selekhmeteva**
-Emma Navarro -3.5 games @ 1.95*
-↳ The seed should win by a clear margin against a much lower-ranked opponent.
-
-**:moneybag: Total odds: ±144***
+**:moneybag: Total odds: ±157.94**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-An extreme long-shot built from heavy favourites on game-handicap lines across eight different Round 2 matches, none of them load-bearing in the other tickets. Handicap prices marked with an asterisk are estimates.
+One selection per match across five different ties, all on the underdogs. Grass is the great leveller and a single day of upsets is exactly where this long shot lands. A genuine lottery ticket for the night the outsiders deliver together.
 
-**:bank: Bankroll:** 0.1u stake`;
-window.DAILY_TENNIS_CARDS = `MATCH: Alex De Minaur x Adrian Mannarino
-MARKET: Match Winner
-SELECTION: Alex De Minaur to win
-ODDS: 1.20
-STAKE: 2u (Safe Builder leg)
-RISK: Low
-ANALYSIS: Seeded De Minaur is far quicker and steadier on grass than the veteran Mannarino.
-===
-MATCH: Karolina Pliskova x Iga Swiatek
-MARKET: Match Winner
-SELECTION: Iga Swiatek to win
-ODDS: 1.24
-STAKE: 2u (Safe Builder leg)
-RISK: Low
-ANALYSIS: The reigning champion is a clear step above a Pliskova short of grass matches.
+**:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
+
+window.DAILY_TENNIS_CARDS = `MATCH: Karen Khachanov x Yannick Hanfmann
+MARKET: Match winner
+SELECTION: Karen Khachanov to win
+ODDS: 1.61
+STAKE: 2u
+RISK: low
+ANALYSIS: Khachanov has the bigger serve and more big match experience and should overpower Hanfmann on grass.
 ===
 MATCH: Jacob Fearnley x Jaume Munar
-MARKET: Match Winner
+MARKET: Match winner
 SELECTION: Jaume Munar to win
 ODDS: 1.60
-STAKE: 2u (Safe Builder leg)
-RISK: Low
-ANALYSIS: The more consistent baseliner over a home hope who will feel the occasion.
+STAKE: 1.5u
+RISK: low
+ANALYSIS: Munar is the higher ranked and more consistent player and is favoured to see off the home hope Fearnley.
 ===
-MATCH: Kamilla Rakhimova x Maria Sakkari
-MARKET: Match Winner
-SELECTION: Maria Sakkari to win
-ODDS: 1.50
-STAKE: 0.75u (Value Builder leg)
-RISK: Low
-ANALYSIS: Sakkari has the bigger weapons and grass experience against a lower-ranked opponent.
-===
-MATCH: Jakub Mensik x Grigor Dimitrov
-MARKET: Match Winner
-SELECTION: Jakub Mensik to win
-ODDS: 1.53
-STAKE: 0.75u (Value Builder leg)
-RISK: Medium
-ANALYSIS: The big-serving youngster is favoured over an ageing Dimitrov on a quick court.
-===
-MATCH: Karen Khachanov x Yannick Hanfmann
-MARKET: Match Winner
-SELECTION: Karen Khachanov to win
-ODDS: 1.72
-STAKE: 0.75u (Value Builder leg)
-RISK: Medium
-ANALYSIS: The seed has the firepower and depth to see off Hanfmann across the distance.
-===
-MATCH: Jasmine Paolini x Viktorija Golubic
-MARKET: Match Winner
-SELECTION: Jasmine Paolini to win
-ODDS: 1.61
-STAKE: 0.25u (Jackpot Builder leg)
-RISK: Medium
-ANALYSIS: The seed is a level above Golubic and moves well enough on grass.
-===
-MATCH: Matteo Berrettini x Arthur Fils
-MARKET: Match Winner
-SELECTION: Arthur Fils to win
-ODDS: 1.35
-STAKE: 0.25u (Jackpot Builder leg)
-RISK: Medium
-ANALYSIS: The younger, higher-ranked Fils is favoured over an injury-prone Berrettini.
-===
-MATCH: Arthur Fery x Otto Virtanen
-MARKET: Match Winner
-SELECTION: Otto Virtanen to win
-ODDS: 1.68
-STAKE: 0.25u (Jackpot Builder leg)
-RISK: Medium
-ANALYSIS: The bigger server has the edge over a home wildcard on grass.
+MATCH: Zizou Bergs x Jaime Faria
+MARKET: Match winner
+SELECTION: Zizou Bergs to win
+ODDS: 1.44
+STAKE: 1u
+RISK: medium
+ANALYSIS: Bergs is the sharper mover and more aggressive baseliner and holds a clear edge over Faria.
 ===
 MATCH: Zachary Svajda x Kamil Majchrzak
-MARKET: Match Winner
+MARKET: Match winner
 SELECTION: Kamil Majchrzak to win
 ODDS: 1.53
-STAKE: 0.25u (Jackpot Builder leg)
-RISK: Medium
-ANALYSIS: Majchrzak is the more proven tour-level operator in this pairing.
+STAKE: 1u
+RISK: medium
+ANALYSIS: Majchrzak has the stronger recent form and greater firepower to get past the young Svajda.
 ===
-MATCH: Sorana Cirstea x Kimberly Birrell
-MARKET: Match Winner
-SELECTION: Sorana Cirstea to win
-ODDS: 1.37
-STAKE: 0.25u (Jackpot Builder leg)
-RISK: Medium
-ANALYSIS: The experienced Cirstea should have too much for Birrell over three sets.`;
+MATCH: Diana Shnaider x Ludmilla Samsonova
+MARKET: Match winner
+SELECTION: Diana Shnaider to win
+ODDS: 1.71
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Shnaider has the cleaner ball striking and lefty variety to trouble Samsonova over three sets.
+===
+MATCH: Alex De Minaur x Adrian Mannarino
+MARKET: Match winner
+SELECTION: Alex De Minaur to win
+ODDS: 1.20
+STAKE: 1u
+RISK: low
+ANALYSIS: De Minaur is a level above and his speed and return should wear down the veteran Mannarino.
+===
+MATCH: Gabriel Diallo x Lorenzo Sonego
+MARKET: Match winner
+SELECTION: Gabriel Diallo to win
+ODDS: 1.92
+STAKE: 0.5u
+RISK: high
+ANALYSIS: A tight tie, but Diallo's huge serve is a real weapon on grass and gives him the slight edge.
+===
+MATCH: Emma Navarro x Oksana Selekhmeteva
+MARKET: Match winner
+SELECTION: Emma Navarro to win
+ODDS: 1.18
+STAKE: 0.5u
+RISK: low
+ANALYSIS: Navarro is the far higher ranked and more solid player and is a strong favourite to advance.`;
+
 window.TENNIS_EVENTS = [
-{match:"Alex De Minaur x Adrian Mannarino", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Alex De Minaur", tier:"Safe Builder"},
-{match:"Karolina Pliskova x Iga Swiatek", date:"2026-07-02", time:"14:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Iga Swiatek", tier:"Safe Builder"},
-{match:"Jacob Fearnley x Jaume Munar", date:"2026-07-02", time:"13:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Jaume Munar", tier:"Safe Builder"},
-{match:"Kamilla Rakhimova x Maria Sakkari", date:"2026-07-02", time:"14:50", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Maria Sakkari", tier:"Value Builder"},
-{match:"Jakub Mensik x Grigor Dimitrov", date:"2026-07-02", time:"16:50", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Jakub Mensik", tier:"Value Builder"},
-{match:"Karen Khachanov x Yannick Hanfmann", date:"2026-07-02", time:"13:40", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Karen Khachanov", tier:"Value Builder"},
-{match:"Jasmine Paolini x Viktorija Golubic", date:"2026-07-02", time:"17:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Jasmine Paolini", tier:"Jackpot Builder"},
-{match:"Matteo Berrettini x Arthur Fils", date:"2026-07-02", time:"15:40", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Arthur Fils", tier:"Jackpot Builder"},
-{match:"Arthur Fery x Otto Virtanen", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Otto Virtanen", tier:"Jackpot Builder"},
-{match:"Zachary Svajda x Kamil Majchrzak", date:"2026-07-02", time:"13:10", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Kamil Majchrzak", tier:"Jackpot Builder"},
-{match:"Sorana Cirstea x Kimberly Birrell", date:"2026-07-02", time:"15:10", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Sorana Cirstea", tier:"Jackpot Builder"},
-{match:"Taylor Fritz x Patrick Kypson", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Taylor Fritz", tier:""},
-{match:"Valentin Royer x Alexander Zverev", date:"2026-07-02", time:"15:10", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Alexander Zverev", tier:""},
-{match:"Frances Tiafoe x Jan Choinski", date:"2026-07-02", time:"15:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Frances Tiafoe", tier:""},
-{match:"Katie Swan x Madison Keys", date:"2026-07-02", time:"14:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Madison Keys", tier:""},
-{match:"Amanda Anisimova x Sofia Kenin", date:"2026-07-02", time:"14:15", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Amanda Anisimova", tier:""},
-{match:"Daria Snigur x Leolia Jeanjean", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Daria Snigur", tier:""},
-{match:"Kyrian Jacquet x Alexander Bublik", date:"2026-07-02", time:"16:20", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Alexander Bublik", tier:""},
-{match:"Emma Navarro x Oksana Selekhmeteva", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Emma Navarro", tier:""},
-{match:"Caty McNally x Elena Rybakina", date:"2026-07-02", time:"17:20", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Elena Rybakina", tier:""},
-{match:"Diana Shnaider x Ludmilla Samsonova", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Diana Shnaider", tier:""},
-{match:"Alexandra Eala x Maya Joint", date:"2026-07-02", time:"13:40", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Alexandra Eala", tier:""},
-{match:"Duckworth x Flavio Cobolli", date:"2026-07-02", time:"15:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Flavio Cobolli", tier:""},
-{match:"Jiri Lehecka x Alex Molcan", date:"2026-07-02", time:"15:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Jiri Lehecka", tier:""},
-{match:"Zizou Bergs x Jaime Faria", date:"2026-07-02", time:"13:10", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Zizou Bergs", tier:""},
-{match:"Camila Osorio x Linda Noskova", date:"2026-07-02", time:"17:30", comp:"Wimbledon", stage:"Round 2", venue:"London", pick:"Linda Noskova", tier:""}
+  {match:"Alex De Minaur x Adrian Mannarino", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Alex De Minaur", tier:"Jackpot Builder"},
+  {match:"Arthur Fery x Otto Virtanen", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Otto Virtanen", tier:"Jackpot Builder"},
+  {match:"Gabriel Diallo x Lorenzo Sonego", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Gabriel Diallo", tier:"Jackpot Builder"},
+  {match:"Emma Navarro x Oksana Selekhmeteva", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Emma Navarro", tier:"Jackpot Builder"},
+  {match:"Diana Shnaider x Ludmilla Samsonova", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Diana Shnaider", tier:"Value Builder"},
+  {match:"Tyra Caterina Grant x Marie Bouzkova", date:"2026-07-02", time:"12:00", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Marie Bouzkova", tier:"Jackpot Builder"},
+  {match:"Zizou Bergs x Jaime Faria", date:"2026-07-02", time:"13:10", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Zizou Bergs", tier:"Value Builder"},
+  {match:"Zachary Svajda x Kamil Majchrzak", date:"2026-07-02", time:"13:10", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Kamil Majchrzak", tier:"Value Builder"},
+  {match:"Jacob Fearnley x Jaume Munar", date:"2026-07-02", time:"13:30", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Jaume Munar", tier:"Safe Builder"},
+  {match:"Karen Khachanov x Yannick Hanfmann", date:"2026-07-02", time:"13:40", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Karen Khachanov", tier:"Safe Builder"},
+  {match:"Alexandra Eala x Maya Joint", date:"2026-07-02", time:"13:40", comp:"Wimbledon", stage:"Round of 64", venue:"London", pick:"Alexandra Eala", tier:"Jackpot Builder"}
 ];
