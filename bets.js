@@ -1,56 +1,56 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
-window.DAILY_VERSION = "2026-06-30";
-window.DAILY_MESSAGES = `**🟢 #16 Safe Builder Parley (⚽ Football): 30-06-2026**
+window.DAILY_VERSION = "2026-07-01";
+window.DAILY_MESSAGES = `**🟢 #19 Safe Builder Parley (⚽ Football): 01-07-2026**
 
-**:small_orange_diamond: France x Sweden**
-France to win (Match Result) @ 1.29
-↳ France are clear favourites and Sweden have to chase the game.
+**:small_orange_diamond: England x DR Congo**
+England to win (Match Result) @ 1.26
+↳ England have been one of the tournament's best attacks; DR Congo are big outsiders.
 
-**:small_orange_diamond: Ivory Coast x Norway**
-Ivory Coast or Draw (Double Chance) @ 1.70
-↳ Ivory Coast are hard to beat at this tournament; the draw is covered as insurance.
+**:small_orange_diamond: United States x Bosnia and Herzegovina**
+United States to win (Match Result) @ 1.36
+↳ Co-hosts at home with Pulisic fit, against a Bosnia side that keeps conceding.
 
-**:moneybag: Total odds: 2.19**
+**:moneybag: Total odds: 1.71**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two low-variance legs from different games: one clear favourite plus a double-chance safety net.
+Two clear favourites from different Round of 32 ties, both heavy home/near-home picks. Lowest-variance core of the day.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 #17 Value Builder Parley (⚽ Football): 30-06-2026**
+**🟡 #20 Value Builder Parley (⚽ Football): 01-07-2026**
 
-**:small_orange_diamond: Ivory Coast x Norway**
-Norway to win (Match Result) @ 2.12
-↳ Norway carry the cutting edge to win a tight knockout outright.
+**:small_orange_diamond: Belgium x Senegal**
+Belgium to win (Match Result) @ 2.15
+↳ Unbeaten in 16 with Courtois back; the standout value price of the day against a Mendy-less Senegal.
 
-**:small_orange_diamond: Mexico x Ecuador**
-Mexico to win (Match Result) @ 2.23
-↳ Mexico get the home edge in Mexico City in an even matchup.
+**:small_orange_diamond: England x DR Congo**
+England to win (Match Result) @ 1.26
+↳ Heavy favourites anchoring the ticket in a different tie.
 
-**:moneybag: Total odds: 4.73**
+**:moneybag: Total odds: 2.71**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two outright favourites from different games, decorrelated from the Safe ticket.
+The day's value leg (Belgium outright) stacked onto a short-priced anchor from another game.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 #18 Jackpot Builder Parley (⚽ Football): 30-06-2026**
+**🔴 #21 Jackpot Builder Parley (⚽ Football): 01-07-2026**
 
-**:small_orange_diamond: France x Sweden**
-Over 2.5 goals @ 1.43
-↳ France's firepower should make for a high-scoring tie.
+**:small_orange_diamond: England x DR Congo**
+Over 2.5 goals @ 1.85
+↳ England's chance volume should push this over on its own.
 
-**:small_orange_diamond: Ivory Coast x Norway**
-Over 2.5 goals @ 1.84
+**:small_orange_diamond: Belgium x Senegal**
+Over 2.5 goals @ 1.95
 ↳ Two sides that both carry a goal threat in an open knockout.
 
-**:small_orange_diamond: Mexico x Ecuador**
-Over 2.5 goals @ 2.95
-↳ The longshot leg of the ticket: goals if the game opens up.
+**:small_orange_diamond: United States x Bosnia and Herzegovina**
+Over 2.5 goals @ 1.80
+↳ Heavily backed Over; the USMNT attack plus a leaky Bosnia defence.
 
-**:moneybag: Total odds: 7.76**
+**:moneybag: Total odds: 6.49**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -58,70 +58,70 @@ A pure goals ticket (Over 2.5 in all three ties), a completely different market 
 
 **:bank: Bankroll:** 0.25u stake
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 30-06-2026**
+**:gift: FREE BET OF THE DAY | 01-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: France x Sweden**
-France to win (Match Result) @ 1.29
+**:small_orange_diamond: England x DR Congo**
+England to win (Match Result) @ 1.26
 
-**:small_orange_diamond: Ivory Coast x Norway**
-Ivory Coast or Draw (Double Chance) @ 1.70
+**:small_orange_diamond: United States x Bosnia and Herzegovina**
+United States to win (Match Result) @ 1.36
 
-**:moneybag: Total odds: 2.19**
+**:moneybag: Total odds: 1.71**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Our lowest-risk play of the day: a clear favourite plus a double-chance safety net.
+Our lowest-risk play of the day: two clear favourites from different Round of 32 ties.
 
 :green_circle: This is our **Safe Builder** of the day, our lowest-risk play.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly`;
-window.DAILY_CARDS = `MATCH: France x Sweden
+window.DAILY_CARDS = `MATCH: England x DR Congo
 MARKET: Match Result
-SELECTION: France to win
-ODDS: 1.29
+SELECTION: England to win
+ODDS: 1.26
 STAKE: 1u
 RISK: low
-ANALYSIS: France are heavy favourites for the Round of 32 tie; Sweden have to open up and chase.
+ANALYSIS: England are heavy favourites with the tournament's best attack; DR Congo are big outsiders.
 ===
-MATCH: Ivory Coast x Norway
-MARKET: Double Chance
-SELECTION: Ivory Coast or Draw (1X)
-ODDS: 1.70
+MATCH: United States x Bosnia and Herzegovina
+MARKET: Match Result
+SELECTION: United States to win
+ODDS: 1.36
 STAKE: 1u
 RISK: low
-ANALYSIS: Ivory Coast are tough to beat; the double chance covers the draw in a tight knockout.
+ANALYSIS: Co-hosts at home with Pulisic fit against a Bosnia side that keeps conceding.
 ===
-MATCH: Ivory Coast x Norway
+MATCH: Belgium x Senegal
 MARKET: Match Result
-SELECTION: Norway to win
-ODDS: 2.12
+SELECTION: Belgium to win
+ODDS: 2.15
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Norway carry the greater attacking threat to win it outright.
+ANALYSIS: Unbeaten in 16 with Courtois back; the day's standout value against a weakened Senegal.
 ===
-MATCH: Mexico x Ecuador
-MARKET: Match Result
-SELECTION: Mexico to win
-ODDS: 2.23
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Mexico get the home advantage in Mexico City in an even matchup.
-===
-MATCH: France x Sweden
-MARKET: Both Teams To Score
-SELECTION: Yes
-ODDS: 1.80
+MATCH: England x DR Congo
+MARKET: Total Goals
+SELECTION: Over 2.5
+ODDS: 1.85
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: France will attack but Sweden carry a threat on the break; both teams to score offers value.`;
-window.DAILY_CHALLENGE = { date: "2026-06-30", legs: ["France x Sweden: France to win @ 1.29", "Ivory Coast x Norway: Ivory Coast or Draw @ 1.70"], oddLow: 2.19, oddHigh: 2.19, justification: "Safest double of the day from two different World Cup ties, both within 24h." };
+ANALYSIS: England's chance volume should carry this over the line.
+===
+MATCH: Belgium x Senegal
+MARKET: Both Teams To Score
+SELECTION: Yes
+ODDS: 1.73
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Belgium should score but Senegal carry enough threat to trouble Courtois once.`;
+window.DAILY_CHALLENGE = { date: "2026-07-01", legs: ["England x DR Congo: England to win @ 1.26", "United States x Bosnia and Herzegovina: United States to win @ 1.36"], oddLow: 1.71, oddHigh: 1.71, justification: "Safest double of the day from two different Round of 32 ties, both heavy favourites." };
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 window.FOOTBALL_EVENTS = [
-  { match: "Ivory Coast x Norway", date: "2026-06-30", time: "19:00", comp: "World Cup 2026", stage: "Round of 32", venue: "Arlington", pick: "Ivory Coast or Draw", tier: "Safe Builder" },
-  { match: "France x Sweden", date: "2026-06-30", time: "23:00", comp: "World Cup 2026", stage: "Round of 32", venue: "East Rutherford", pick: "France to win", tier: "Safe Builder" },
-  { match: "Mexico x Ecuador", date: "2026-07-01", time: "03:00", comp: "World Cup 2026", stage: "Round of 32", venue: "Mexico City", pick: "Mexico to win", tier: "Value Builder" }
+  { match: "England x DR Congo", date: "2026-07-01", time: "18:00", comp: "World Cup 2026", stage: "Round of 32", venue: "Atlanta", pick: "England to win", tier: "Safe Builder" },
+  { match: "Belgium x Senegal", date: "2026-07-01", time: "22:00", comp: "World Cup 2026", stage: "Round of 32", venue: "Seattle", pick: "Belgium to win", tier: "Value Builder" },
+  { match: "United States x Bosnia and Herzegovina", date: "2026-07-02", time: "02:00", comp: "World Cup 2026", stage: "Round of 32", venue: "San Francisco Bay Area", pick: "United States to win", tier: "Safe Builder" }
 ];
