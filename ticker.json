@@ -1,13 +1,9 @@
 [
+  {"s":"football","m":"USA x Bosnia-Herzegovina","k":"USA","o":1.34},
   {"s":"football","m":"Spain x Austria","k":"Spain","o":1.32},
   {"s":"football","m":"Portugal x Croatia","k":"Portugal","o":1.75},
   {"s":"football","m":"Switzerland x Algeria","k":"Switzerland","o":2.00},
-  {"s":"tennis","m":"Alex De Minaur x Adrian Mannarino","k":"De Minaur","o":1.20},
-  {"s":"tennis","m":"Karolina Pliskova x Iga Swiatek","k":"Swiatek","o":1.24},
-  {"s":"tennis","m":"Jakub Mensik x Grigor Dimitrov","k":"Mensik","o":1.53},
-  {"s":"tennis","m":"Karen Khachanov x Yannick Hanfmann","k":"Khachanov","o":1.72},
-  {"s":"tennis","m":"Jasmine Paolini x Viktorija Golubic","k":"Paolini","o":1.61},
-  {"s":"tennis","m":"Matteo Berrettini x Arthur Fils","k":"Fils","o":1.35},
-  {"s":"tennis","m":"Kamilla Rakhimova x Maria Sakkari","k":"Sakkari","o":1.50},
-  {"s":"tennis","m":"Sorana Cirstea x Kimberly Birrell","k":"Cirstea","o":1.37}
+  {"s":"football","m":"Australia x Egypt","k":"Egypt","o":2.50},
+  {"s":"football","m":"Argentina x Cape Verde","k":"Argentina","o":1.16},
+  {"s":"football","m":"Colombia x Ghana","k":"Colombia","o":1.52}
 ]
