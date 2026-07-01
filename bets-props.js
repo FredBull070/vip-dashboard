@@ -1,59 +1,112 @@
-/* BetLife365 daily PROP cards - written by the prop-cards-builder task, read by the dashboard.
-   Same structure as DAILY_CARDS (MATCH/MARKET/SELECTION/ODDS/STAKE/RISK/ANALYSIS, grouped by
-   risk: low=Core, medium=Value, high=Aggressive). Player props across every sport we offer.
-   Code stays separate from the dashboard. This is the seed slate; the builder replaces it daily. */
-window.DAILY_PROPS_VERSION = "2026-06-28";
-
-window.DAILY_PROPS = `SPORT: Football
-MATCH: Brazil x Japan
-MARKET: Shots on target
-SELECTION: Vinicius Jr 2+ shots on target
-ODDS: 1.90
-STAKE: 1u
+window.DAILY_PROPS_VERSION = "2026-07-02";
+window.DAILY_PROPS = `SPORT: Tennis
+MATCH: Wimbledon R2 - Iga Swiatek v Karolina Pliskova
+MARKET: Match Winner
+SELECTION: Iga Swiatek to win
+ODDS: 1.45*
+STAKE: 1.0
 RISK: low
-ANALYSIS: Brazil's main creative threat against a Japan side that has to chase; high shot volume expected from the left.
-===
-SPORT: Football
-MATCH: Germany x Paraguay
-MARKET: Anytime goalscorer
-SELECTION: Florian Wirtz anytime scorer
-ODDS: 2.40
-STAKE: 1u
-RISK: medium
-ANALYSIS: Germany should dominate territory; Wirtz arrives late into the box and takes set pieces.
-===
-SPORT: Football
-MATCH: South Africa x Canada
-MARKET: Player shots
-SELECTION: Jonathan David 3+ shots
-ODDS: 2.10
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Canada's focal point up front against a defensive South Africa; volume play on the striker.
+ANALYSIS: World number one caliber Swiatek is a clear favourite against 34-year-old former finalist Pliskova; even on grass the class and consistency gap is large.
 ===
 SPORT: Tennis
-MATCH: Eastbourne ATP Final
-MARKET: Player aces
-SELECTION: Ugo Humbert 8+ aces
-ODDS: 2.00
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Big lefty serve on grass in a best-of-three final; ace count projects high.
+MATCH: Wimbledon R2 - Elena Rybakina v Caty McNally
+MARKET: Set Betting
+SELECTION: Rybakina to win in straight sets (2-0)
+ODDS: 1.55*
+STAKE: 1.0
+RISK: low
+ANALYSIS: Former Wimbledon champion Rybakina has one of the best grass games in the draw; McNally lacks the firepower to take a set off her.
 ===
-SPORT: Football
-MATCH: Netherlands x Morocco
-MARKET: Player to be carded
-SELECTION: Sofyan Amrabat to be carded
-ODDS: 3.20
-STAKE: 0.25u
+SPORT: Voetbal
+MATCH: WK Round of 32 - Spain v Austria
+MARKET: Player Shots on Target
+SELECTION: Lamine Yamal Over 0.5 shots on target
+ODDS: 1.50*
+STAKE: 1.0
+RISK: low
+ANALYSIS: Yamal is Spain's primary attacking outlet and a nailed starter; Spain are heavy favourites (around -300) and will dominate territory, giving him steady shooting volume.
+===
+SPORT: Tennis
+MATCH: Wimbledon R2 - Matteo Berrettini v Arthur Fils
+MARKET: Player Aces
+SELECTION: Matteo Berrettini Over 10.5 aces
+ODDS: 1.85*
+STAKE: 0.5
+RISK: medium
+ANALYSIS: Berrettini is one of the biggest servers on grass and this looks like a long, competitive match, boosting his ace count across sets.
+===
+SPORT: Tennis
+MATCH: Wimbledon R2 - Alexander Zverev v Valentin Royer
+MARKET: Set Betting
+SELECTION: Zverev to win in straight sets (3-0)
+ODDS: 1.75*
+STAKE: 0.5
+RISK: medium
+ANALYSIS: Zverev holds a large ranking and quality edge over Royer; his serve travels well on grass and he should control the match in three sets.
+===
+SPORT: Tennis
+MATCH: Wimbledon R2 - Jakub Mensik v Grigor Dimitrov
+MARKET: Player Aces
+SELECTION: Jakub Mensik Over 9.5 aces
+ODDS: 1.90*
+STAKE: 0.5
+RISK: medium
+ANALYSIS: Mensik is a young, huge server built for grass; against veteran Dimitrov this should go the distance and produce a high ace tally.
+===
+SPORT: Voetbal
+MATCH: WK Round of 32 - Spain v Austria
+MARKET: Anytime Goalscorer
+SELECTION: Mikel Oyarzabal anytime goalscorer
+ODDS: 2.40*
+STAKE: 0.5
+RISK: medium
+ANALYSIS: Oyarzabal is a regular starter and Spain's penalty option; as heavy favourites Spain should create plenty of chances for their forwards.
+===
+SPORT: Voetbal
+MATCH: WK Round of 32 - Portugal v Croatia
+MARKET: Player Shots on Target
+SELECTION: Bruno Fernandes Over 0.5 shots on target
+ODDS: 1.65*
+STAKE: 0.5
+RISK: medium
+ANALYSIS: Fernandes is a guaranteed starter with heavy involvement on shots, set pieces and long-range efforts; a tight knockout tie will see Portugal test the keeper often.
+===
+SPORT: Voetbal
+MATCH: WK Round of 32 - Switzerland v Algeria
+MARKET: Anytime Goalscorer
+SELECTION: Breel Embolo anytime goalscorer
+ODDS: 3.20*
+STAKE: 0.25
 RISK: high
-ANALYSIS: Combative midfielder likely chasing the game in a tight knockout tie; card risk elevated.`;
-
-window.EMBEDDED_PROPS = { date: "2026-06-28" };
-
-/* Filled by the evening-settlement task once a prop is confirmed by verified player data.
-   Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
-   these into the Track Record. No result is ever written without verified player-level data. */
+ANALYSIS: Embolo is Switzerland's main central striker and focal point of their attack; in a tight, decisive match he is their most likely goal source.
+===
+SPORT: Voetbal
+MATCH: WK Round of 32 - Spain v Austria
+MARKET: Anytime Goalscorer
+SELECTION: Lamine Yamal anytime goalscorer
+ODDS: 3.00*
+STAKE: 0.25
+RISK: high
+ANALYSIS: As Spain's star creator against a defensive Austria side, Yamal cutting inside for shots gives real value on the anytime market at this price.
+===
+SPORT: Tennis
+MATCH: Wimbledon R2 - Matteo Berrettini v Arthur Fils
+MARKET: Match Winner
+SELECTION: Arthur Fils to win
+ODDS: 2.10*
+STAKE: 0.25
+RISK: high
+ANALYSIS: Fils is the No. 20 seed and the younger, more athletic player; if Berrettini's serve wobbles Fils has the return and legs to grind through this one.
+===
+SPORT: Tennis
+MATCH: Wimbledon R2 - Jaume Munar v Jacob Fearnley
+MARKET: Match Winner
+SELECTION: Jacob Fearnley to win
+ODDS: 2.30*
+STAKE: 0.25
+RISK: high
+ANALYSIS: Munar is a clay-oriented Spaniard while home favourite Fearnley suits grass and rides strong crowd support; a live underdog price with real edge.`;
+window.EMBEDDED_PROPS = { date: "2026-07-02" };
 window.DAILY_PROPS_SETTLED = [];
 
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
