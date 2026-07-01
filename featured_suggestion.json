@@ -1,15 +1,15 @@
 {
-  "type": "all",
-  "period": "today",
-  "label": "All bets · today",
-  "roi": 42.76,
-  "bets": 26,
-  "profit": 9.02,
+  "type": "parley",
+  "period": "week",
+  "label": "Parleys · this week",
+  "roi": 26.31,
+  "bets": 18,
+  "profit": 4.03,
   "total": {
     "roi": 4.93,
     "bets": 86,
     "profit": 3.98
   },
   "changed": true,
-  "computed_at": "2026-07-01 08:42"
+  "computed_at": "2026-07-02 00:54"
 }
