@@ -4538,5 +4538,110 @@ try{ renderEdu(); }catch(e){}
   }
 })();
 </script>
-</body>
-</html>
+
+<script id="bl-results-module">
+(function(){
+var _P=[],_S=new Set(),_M={};
+var _o=window.showPage;
+window.showPage=function(p){if(typeof _o==="function")_o(p);if(p==="results")rfLoad();};
+window.rfLoad=function(){
+  var fl=document.getElementById("rfFilter")?.value||"W";
+  var dy=parseInt(document.getElementById("rfDays")?.value||"30");
+  var cut=new Date(Date.now()-dy*86400000).toISOString().slice(0,10);
+  var src=(typeof EMBEDDED_RESULTS!=="undefined")?EMBEDDED_RESULTS:[];
+  var rows=src.filter(function(b){return b.date>=cut&&(fl==="all"||b.result===fl);}).sort(function(a,b){return b.date.localeCompare(a.date);});
+  var el=document.getElementById("rfList");if(!el)return;
+  var sE={Football:"⚽",Basketball:"🏀",Tennis:"🎾",Baseball:"⚾",Hockey:"🏒",NFL:"🏈",NBA:"🏀",MLB:"⚾",NHL:"🏒"};
+  var tC={LOW:"#3ba55d",MID:"#faa61a",HIGH:"#ed4245",VIP:"#9b59b6"};
+  if(!rows.length){el.innerHTML="<p style=color:var(--muted);font-size:13px;text-align:center;padding:20px>Geen bets gevonden.</p>";rfUpdateCount();return;}
+  el.innerHTML=rows.map(function(b,i){
+    var id="rfb_"+i;_M[id]=b;
+    var chk=_S.has(id)?"checked":"";
+    var ri=b.result==="W"?"✅":b.result==="L"?"❌":"⏳";
+    var pr=b.profit!=null?(b.profit>0?"+":"")+b.profit+"u":"";
+    var tc=tC[b.list]||"var(--accent)";
+    return "<label style=\"display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;border:1px solid var(--line2);background:var(--card2);margin-bottom:2px\" data-bid=\""+id+"\">"+
+      "<input type=checkbox "+chk+" style=\"margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0\" onchange=\"rfToggle('"+id+"',this.checked)\">"+
+      "<div style=flex:1><div style=\"display:flex;justify-content:space-between\"><span style=\"font-size:13px;font-weight:600\">"+(sE[b.sport]||"🎯")+" "+b.sport+(b.match?" · "+b.match:"")+"</span><span style=font-size:18px>"+ri+"</span></div>"+
+      "<div style=\"display:flex;gap:6px;margin-top:4px;flex-wrap:wrap\">"+
+        "<span style=\"font-size:11px;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:20px;color:"+tc+"\">" +b.list+"</span>"+
+        "<span style=\"font-size:11px;color:var(--muted)\">@"+b.odds+"</span>"+
+        "<span style=\"font-size:11px;color:var(--muted)\">"+b.date+"</span>"+
+        (pr?"<span style=\"font-size:11px;font-weight:700;color:"+(b.profit>0?"#3ba55d":"#ed4245")+"\">" +pr+"</span>":"")+
+      "</div></div></label>";
+  }).join("");
+  rfUpdateCount();
+};
+window.rfToggle=function(id,on){if(on)_S.add(id);else _S.delete(id);rfUpdateCount();};
+window.rfUpdateCount=function(){var e=document.getElementById("rfSelCount");if(e)e.textContent=_S.size+" bet"+(_S.size===1?"":"s")+" geselecteerd";};
+window.rfSelectAll=function(){document.querySelectorAll("#rfList input[type=checkbox]").forEach(function(cb){cb.checked=true;var l=cb.closest("label");if(l)_S.add(l.getAttribute("data-bid"));});rfUpdateCount();};
+window.rfDeselectAll=function(){document.querySelectorAll("#rfList input[type=checkbox]").forEach(function(cb){cb.checked=false;});_S.clear();rfUpdateCount();};
+window.rfHandleDrop=function(e){e.preventDefault();document.getElementById("rfDropZone").style.borderColor="var(--line2)";rfHandleFiles(e.dataTransfer.files);};
+window.rfHandleFiles=function(files){Array.from(files).forEach(function(f){if(!f.type.startsWith("image/"))return;var r=new FileReader();r.onload=function(ev){_P.push({name:f.name,dataUrl:ev.target.result});rfRP();};r.readAsDataURL(f);});};
+function rfRP(){var g=document.getElementById("rfPhotoGrid");if(!g)return;g.innerHTML=_P.map(function(p,i){return "<div style=\"position:relative;width:80px;height:80px\"><img src=\""+p.dataUrl+"\" style=\"width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--line2)\"><button onclick=\"rfRmPhoto("+i+")\" style=\"position:absolute;top:-6px;right:-6px;background:#ed4245;border:none;border-radius:50%;width:20px;height:20px;color:#fff;font-size:13px;cursor:pointer\">&times;</button></div>";}).join("");}
+window.rfRmPhoto=function(i){_P.splice(i,1);rfRP();};
+function rfBH(){
+  var title=document.getElementById("rfTitle")?.value||"🏆 VIP Resultaten";
+  var msg=document.getElementById("rfMsg")?.value||"";
+  var bets=[];_S.forEach(function(id){var b=_M[id];if(b)bets.push(b);});
+  var won=bets.filter(function(b){return b.result==="W";}).length;
+  var lost=bets.filter(function(b){return b.result==="L";}).length;
+  var wr=bets.length?Math.round(won/bets.length*100):0;
+  var tBg={LOW:"rgba(59,165,93,.2)",MID:"rgba(250,166,26,.2)",HIGH:"rgba(237,66,69,.2)",VIP:"rgba(155,89,182,.2)"};
+  var tFg={LOW:"#3ba55d",MID:"#faa61a",HIGH:"#ed4245",VIP:"#9b59b6"};
+  var rows=bets.map(function(b){
+    var pr=b.profit!=null?(b.profit>0?"+":"")+b.profit+"u":"—";
+    var ri=b.result==="W"?"✅":b.result==="L"?"❌":"⏳";
+    return "<tr><td style=\"padding:10px 12px;font-size:14px;font-weight:600;color:#e9eaee\">"+(b.sport||"")+(b.match?" · "+b.match:"")+"</td>"+
+      "<td style=\"padding:10px 12px;text-align:center\"><span style=\"background:"+(tBg[b.list]||"rgba(255,122,26,.2)")+";color:"+(tFg[b.list]||"#ff7a1a")+";padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700\">"+(b.list||"")+"</span></td>"+
+      "<td style=\"padding:10px 12px;text-align:center;color:#aaa;font-size:13px\">@"+(b.odds||"")+"</td>"+
+      "<td style=\"padding:10px 12px;text-align:center;font-size:20px\">"+ri+"</td>"+
+      "<td style=\"padding:10px 12px;text-align:right;font-weight:700;font-size:14px;color:"+(b.profit>0?"#3ba55d":"#ed4245")+"\">" +pr+"</td></tr>";
+  }).join("");
+  var photos=_P.map(function(p){return "<img src=\""+p.dataUrl+"\" style=\"max-width:100%;border-radius:12px;margin-top:12px;display:block\">";}).join("");
+  return "<!DOCTYPE html><html><body style=\"margin:0;padding:24px;background:#0c0d10;font-family:system-ui,sans-serif\">"+
+    "<div style=\"max-width:580px;margin:0 auto;background:#0c0d10;border-radius:20px;border:1px solid #23262e\">"+
+    "<div style=\"background:linear-gradient(135deg,#1a1200,#2d1a00);padding:28px;text-align:center;border-bottom:1px solid #2a2000\">"+
+    "<div style=font-size:36px;margin-bottom:8px>📊</div>"+
+    "<h1 style=\"margin:0;font-size:24px;font-weight:800;color:#fff\">"+title+"</h1>"+
+    "<div style=\"display:flex;justify-content:center;gap:28px;margin-top:16px\">"+
+    "<div><div style=\"font-size:28px;font-weight:800;color:#faa61a\">"+won+"</div><div style=\"font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:1px\">Gewonnen</div></div>"+
+    "<div><div style=\"font-size:28px;font-weight:800;color:#ed4245\">"+lost+"</div><div style=\"font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:1px\">Verloren</div></div>"+
+    "<div><div style=\"font-size:28px;font-weight:800;color:#3ba55d\">"+wr+"%</div><div style=\"font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:1px\">Trefkans</div></div>"+
+    "</div></div>"+
+    (msg?"<div style=\"padding:16px 24px;font-size:14px;color:#d0d2d8;border-bottom:1px solid #23262e\">"+msg+"</div>":"")+
+    "<div style=\"padding:0 16px 4px\"><table style=\"width:100%;border-collapse:collapse\">"+
+    "<thead><tr>"+
+    "<th style=\"padding:8px 12px;text-align:left;font-size:11px;color:#555;border-bottom:1px solid #23262e\">Match</th>"+
+    "<th style=\"padding:8px 12px;text-align:center;font-size:11px;color:#555;border-bottom:1px solid #23262e\">Tier</th>"+
+    "<th style=\"padding:8px 12px;text-align:center;font-size:11px;color:#555;border-bottom:1px solid #23262e\">Odds</th>"+
+    "<th style=\"padding:8px 12px;text-align:center;font-size:11px;color:#555;border-bottom:1px solid #23262e\">Result</th>"+
+    "<th style=\"padding:8px 12px;text-align:right;font-size:11px;color:#555;border-bottom:1px solid #23262e\">Winst</th>"+
+    "</tr></thead><tbody style=\"border-bottom:1px solid #23262e\">"+rows+"</tbody></table></div>"+
+    (photos?"<div style=\"padding:12px 24px\">"+photos+"</div>":"")+
+    "<div style=\"padding:24px;text-align:center;border-top:1px solid #23262e\">"+
+    "<p style=\"margin:0 0 16px;font-size:15px;color:#aaa\">Dit ontvangen onze VIP-leden elke dag.</p>"+
+    "<a href=https://betlife365.com/#pricing style=\"display:inline-block;background:linear-gradient(135deg,#ff7a1a,#ff5c00);color:#fff;font-weight:700;font-size:15px;padding:14px 32px;border-radius:30px;text-decoration:none\">👑 Word VIP-lid voor €80/maand →</a>"+
+    "<p style=\"margin:16px 0 0;font-size:11px;color:#444\"><a href=https://betlife365.com/member.html style=color:#555>Uitschrijven</a></p>"+
+    "</div></div></body></html>";
+}
+window.rfUpdatePreview=function(){var w=document.getElementById("rfPreviewWrap");if(!w)return;var h=rfBH();w.innerHTML="<iframe srcdoc=\""+h.replace(/"/g,"&quot;")+"\"></iframe>";};
+window.rfCopyHtml=function(){navigator.clipboard.writeText(rfBH()).then(function(){var s=document.getElementById("rfShareStatus");if(s){s.textContent="✓ HTML gekopieerd!";s.style.color="#3ba55d";setTimeout(function(){s.textContent="";},3000);}});};
+window.rfShareEmail=async function(){
+  var st=document.getElementById("rfShareStatus");if(st){st.textContent="Bezig…";st.style.color="var(--muted)";}
+  var title=document.getElementById("rfTitle")?.value||"🏆 VIP Resultaten";
+  var K="xkeysib-d26f1fbfb7288a105a73f748506ff05a1a6662e6d6f43385116c5e068b6cd124-xVZ3VMw";
+  var S1="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1he";
+  var S2="WN2dm5jd3lsbGJ4dHpqYmthIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5ODY1OCwiZXhwIjoyMDk4NTc0NjU4fQ.kG9d7UBlSpm49LiX97KVKSvExrWqvL_6oXKeSpuHN_k";
+  var SB="https://maycvvncwyllbxtzjbka.supabase.co";
+  var sr=await fetch(SB+"/rest/v1/profiles?plan=eq.vip&select=email,full_name",{headers:{"apikey":S1+S2,"Authorization":"Bearer "+(S1+S2)}});
+  var vips=await sr.json();
+  if(!Array.isArray(vips)||!vips.length){if(st){st.textContent="Geen VIP-leden.";st.style.color="#faa61a";}return;}
+  var to=vips.map(function(m){return{email:m.email,name:m.full_name||""};});
+  var r=await fetch("https://api.brevo.com/v3/smtp/email",{method:"POST",headers:{"api-key":K,"Content-Type":"application/json"},body:JSON.stringify({sender:{name:"BetLife365",email:"hello@betlife365.com"},to:to,subject:title,htmlContent:rfBH()})});
+  if(st){if(r.ok){st.textContent="✅ Verstuurd naar "+to.length+" VIP-lid"+(to.length===1?"":"en")+"!";st.style.color="#3ba55d";}else{st.textContent="❌ Fout ("+r.status+")";st.style.color="#ed4245";}}
+};
+document.addEventListener("change",function(e){if(e.target.id==="rfFilter"||e.target.id==="rfDays")rfLoad();});
+})();
+</script>
+</body></html>
