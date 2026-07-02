@@ -495,6 +495,8 @@
       <button class="nav-item" data-page="nurturing" onclick="showPage('nurturing')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 15-4v10L3 13z"/><path d="M18 8a3 3 0 0 1 0 6"/><path d="M7 13v3a2 2 0 0 0 4 0v-2"/></svg></span> Nurturing</button>
       <div class="side-section">Ledger</div>
       <button class="nav-item" data-page="trackrecord" onclick="showPage('trackrecord')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13l3 3 4-5 4 4"/></svg></span> Track Record</button>
+      <button class="nav-item" data-page="leden" onclick="showPage('leden')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Leden</button>
+      <button class="nav-item" data-page="email" onclick="showPage('email')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> E-mail</button>
       <button class="nav-item" data-page="archive" onclick="showPage('archive')"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg></span> Archive</button>
     </div>
     <div class="side-foot">
@@ -4289,6 +4291,252 @@ try{ mergeSettled(); }catch(e){}
 try{ applyChallengeResult(); }catch(e){}
 showPage((function(){ try{ var p=localStorage.getItem('ba_page'); return p||'today'; }catch(e){ return 'today'; } })());
 try{ renderEdu(); }catch(e){}
+</script>
+
+<div id="page-leden" style="display:none">
+<div class="page-header"><h1 class="page-title">👥 Leden</h1></div>
+<div class="content-wrap">
+<div class="stat-row" id="ledStats" style="margin-bottom:16px"></div>
+<div class="panel" style="padding:16px">
+  <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+    <input type="text" id="ledSearch" placeholder="Zoek naam of e-mail…" style="flex:1;min-width:180px;background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:9px 12px;font-size:13px;outline:none">
+    <select id="ledFilter" style="background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:9px 12px;font-size:13px">
+      <option value="all">Alle leden</option><option value="vip">Alleen VIP</option><option value="free">Alleen Free</option>
+    </select>
+    <button class="btn mini" onclick="loadLeden()" style="padding:9px 16px">↻ Vernieuwen</button>
+  </div>
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead><tr style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em">
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">Naam</th>
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">E-mail</th>
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">Plan</th>
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">Lid sinds</th>
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">Ref</th>
+        <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair)">Actie</th>
+      </tr></thead>
+      <tbody id="ledBody"><tr><td colspan="6" style="padding:18px;color:var(--muted);text-align:center">Laden…</td></tr></tbody>
+    </table>
+  </div>
+  <p id="ledCount" style="font-size:12px;color:var(--muted);margin-top:10px"></p>
+</div>
+</div>
+</div>
+
+<div id="page-email" style="display:none">
+<div class="page-header"><h1 class="page-title">📧 E-mail versturen</h1></div>
+<div class="content-wrap">
+<div class="panel" style="padding:16px;margin-bottom:16px">
+  <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:6px">Aan</label>
+  <select id="emTo" style="width:100%;background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:12px">
+    <option value="all">Alle leden (free + VIP)</option>
+    <option value="vip">Alleen VIP-leden</option>
+    <option value="free">Alleen free leden</option>
+    <option value="one">Eén e-mailadres</option>
+  </select>
+  <div id="emOneWrap" style="display:none;margin-bottom:12px">
+    <input type="email" id="emOneAddr" placeholder="naam@voorbeeld.com" style="width:100%;background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px">
+  </div>
+  <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:6px">Onderwerp</label>
+  <input type="text" id="emSubject" placeholder="bijv. Dagelijkse pick – 2 juli" style="width:100%;background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:12px">
+  <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:6px">Bericht (HTML toegestaan)</label>
+  <textarea id="emBody" rows="8" style="width:100%;background:var(--card);border:1px solid var(--hair);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px;font-family:inherit;resize:vertical;margin-bottom:12px" placeholder="Schrijf je bericht…"></textarea>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <button class="btn" onclick="sendEmail()" style="padding:10px 20px">📤 Versturen</button>
+    <button class="btn-secondary mini" onclick="previewEmail()" style="padding:10px 16px">👁 Preview</button>
+    <span id="emStatus" style="font-size:13px;color:var(--muted)"></span>
+  </div>
+  <div id="emPreview" style="display:none;margin-top:14px;border:1px solid var(--hair);border-radius:10px;overflow:hidden">
+    <div style="background:var(--card);padding:6px 12px;font-size:11px;color:var(--muted);text-transform:uppercase">Preview</div>
+    <iframe id="emFrame" style="width:100%;min-height:280px;border:none;background:#fff"></iframe>
+  </div>
+</div>
+<div class="panel" style="padding:16px">
+  <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Snelle templates</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn-secondary mini" onclick="useTemplate('pick')">📊 Dagelijkse pick</button>
+    <button class="btn-secondary mini" onclick="useTemplate('vip')">👑 VIP-aanbieding</button>
+    <button class="btn-secondary mini" onclick="useTemplate('update')">📣 Nieuws/update</button>
+  </div>
+</div>
+</div>
+</div>
+
+<script id="bl-leden-email">
+/* ══ Leden & E-mail module ══ */
+(function(){
+  var SB_URL = 'https://maycvvncwyllbxtzjbka.supabase.co';
+  var BREVO  = 'xkeysib-d26f1fbfb7288a105a73f748506ff05a1a6662e6d6f43385116c5e068b6cd124-xVZ3VMw';
+  var _sbSvc = null;
+  function getSb(){
+    if(!_sbSvc){
+      var k = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1he' + 'WN2dm5jd3lsbGJ4dHpqYmthIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5ODY1OCwiZXhwIjoyMDk4NTc0NjU4fQ.kG9d7UBlSpm49LiX97KVKSvExrWqvL_6oXKeSpuHN_k';
+      _sbSvc = (window.supabase || window.supabaseJs || (window.supabase = {})).createClient
+        ? window.supabase.createClient(SB_URL, k)
+        : null;
+      if(!_sbSvc){
+        // Load Supabase dynamically if not present
+        var sc = document.createElement('script');
+        sc.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+        sc.onload = function(){ _sbSvc = supabase.createClient(SB_URL, k); };
+        document.head.appendChild(sc);
+      }
+    }
+    return _sbSvc;
+  }
+
+  /* ── Hook into showPage ── */
+  var _origShowPage = window.showPage;
+  window.showPage = function(page){
+    if(typeof _origShowPage === 'function') _origShowPage(page);
+    // Handle our new pages
+    var el = document.getElementById('page-'+page);
+    if(el){
+      // Hide all other pages first if origShowPage didn't handle it
+      document.querySelectorAll('[id^="page-"]').forEach(function(d){ if(d.id!=='page-'+page) d.style.display='none'; });
+      el.style.display='block';
+    }
+    // Update nav active state
+    document.querySelectorAll('.nav-item').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-page')===page); });
+    if(page==='leden') loadLeden();
+  };
+
+  /* ── Leden ── */
+  var _cache = [];
+  window.loadLeden = async function(){
+    var body = document.getElementById('ledBody');
+    if(!body) return;
+    body.innerHTML = '<tr><td colspan="6" style="padding:18px;color:var(--muted);text-align:center">Laden…</td></tr>';
+    var sb = getSb();
+    if(!sb){ body.innerHTML='<tr><td colspan="6" style="color:var(--accent)">Supabase laden…</td></tr>'; return; }
+    var { data, error } = await sb.from('profiles').select('*').order('created_at',{ascending:false});
+    if(error){ body.innerHTML='<tr><td colspan="6" style="color:red;padding:12px">'+error.message+'</td></tr>'; return; }
+    _cache = data || [];
+    renderLeden();
+  };
+
+  function renderLeden(){
+    var q = (document.getElementById('ledSearch')?.value||'').toLowerCase();
+    var f = document.getElementById('ledFilter')?.value || 'all';
+    var rows = _cache.filter(function(m){
+      if(f==='vip' && m.plan!=='vip') return false;
+      if(f==='free' && m.plan==='vip') return false;
+      if(q && !(m.email||'').toLowerCase().includes(q) && !(m.full_name||'').toLowerCase().includes(q)) return false;
+      return true;
+    });
+    var vip = _cache.filter(function(m){ return m.plan==='vip'; }).length;
+    var week = _cache.filter(function(m){ return Date.now()-new Date(m.created_at).getTime()<7*86400000; }).length;
+    var stats = document.getElementById('ledStats');
+    if(stats) stats.innerHTML =
+      '<div class="stat-card"><div class="stat-value">'+_cache.length+'</div><div class="stat-label">Totaal</div></div>'+
+      '<div class="stat-card"><div class="stat-value" style="color:#faa61a">'+vip+'</div><div class="stat-label">VIP</div></div>'+
+      '<div class="stat-card"><div class="stat-value" style="color:#3ba55d">'+(_cache.length-vip)+'</div><div class="stat-label">Free</div></div>'+
+      '<div class="stat-card"><div class="stat-value">+'+week+'</div><div class="stat-label">Deze week</div></div>';
+    var cnt = document.getElementById('ledCount');
+    if(cnt) cnt.textContent = rows.length + ' van ' + _cache.length + ' leden';
+    var html = rows.map(function(m){
+      var since = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '-';
+      var badge = m.plan==='vip'
+        ? '<span style="background:rgba(250,166,26,.2);color:#faa61a;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700">VIP</span>'
+        : '<span style="background:rgba(255,255,255,.08);color:var(--muted);padding:2px 8px;border-radius:20px;font-size:11px">Free</span>';
+      var toggleLabel = m.plan==='vip'?'→ Free':'→ VIP';
+      return '<tr style="border-bottom:1px solid var(--hair)">'+
+        '<td style="padding:9px 10px">'+(m.full_name||'—')+'</td>'+
+        '<td style="padding:9px 10px"><a href="mailto:'+m.email+'" style="color:#5865F2">'+m.email+'</a></td>'+
+        '<td style="padding:9px 10px">'+badge+'</td>'+
+        '<td style="padding:9px 10px;color:var(--muted);font-size:12px">'+since+'</td>'+
+        '<td style="padding:9px 10px;color:var(--muted);font-size:12px">'+(m.ref_by||'—')+'</td>'+
+        '<td style="padding:6px 10px;display:flex;gap:6px">'+
+          '<button class="btn-secondary mini" onclick="togglePlan(''+m.id+'',''+m.plan+'')" style="padding:5px 10px;font-size:11px">'+toggleLabel+'</button>'+
+          '<button class="btn mini" onclick="emailTo(''+m.email+'',''+m.full_name+'')" style="padding:5px 10px;font-size:11px">📧</button>'+
+        '</td></tr>';
+    }).join('');
+    var body = document.getElementById('ledBody');
+    if(body) body.innerHTML = html || '<tr><td colspan="6" style="padding:18px;text-align:center;color:var(--muted)">Geen leden gevonden.</td></tr>';
+  }
+
+  window.togglePlan = async function(id, cur){
+    var np = cur==='vip'?'free':'vip';
+    var sb = getSb(); if(!sb) return;
+    var { error } = await sb.from('profiles').update({plan:np}).eq('id',id);
+    if(error){ alert('Fout: '+error.message); return; }
+    var m = _cache.find(function(x){ return x.id===id; });
+    if(m) m.plan = np;
+    renderLeden();
+  };
+
+  window.emailTo = function(email, name){
+    showPage('email');
+    var sel = document.getElementById('emTo');
+    if(sel){ sel.value='one'; document.getElementById('emOneWrap').style.display='block'; }
+    var addr = document.getElementById('emOneAddr');
+    if(addr) addr.value = email;
+  };
+
+  document.addEventListener('input', function(e){ if(e.target.id==='ledSearch') renderLeden(); });
+  document.addEventListener('change', function(e){
+    if(e.target.id==='ledFilter') renderLeden();
+    if(e.target.id==='emTo') document.getElementById('emOneWrap').style.display = e.target.value==='one'?'block':'none';
+  });
+
+  /* ── E-mail ── */
+  var TPLS = {
+    pick: { sub: 'Dagelijkse pick — '+new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'}),
+      body: '<h2 style="color:#ff7a1a">📊 Pick van vandaag</h2><p>Hier is de gratis pick:<br><br><strong>[WEDSTRIJD]</strong><br>[SELECTIE] @ [ODDS]</p><p style="color:#888;font-size:13px">Inzet: [UNITS]u</p><p><a href="https://betlife365.com/#pricing">Upgrade naar VIP</a> voor het volledige kaartje.</p>' },
+    vip: { sub: '👑 Word VIP-lid bij BetLife365',
+      body: '<h2 style="color:#ff7a1a">👑 VIP-toegang</h2><p>Als free lid mis je:</p><ul><li>Volledig dagelijks kaartje</li><li>Prop bets &amp; parleys</li><li>Discord VIP-kanaal</li></ul><a href="https://betlife365.com/#pricing" style="background:#ff7a1a;color:#1c0d00;padding:12px 24px;border-radius:20px;text-decoration:none;font-weight:700;display:inline-block;margin-top:12px">Upgrade voor €80/maand →</a>' },
+    update: { sub: '📣 Update van BetLife365',
+      body: '<h2 style="color:#ff7a1a">📣 Update</h2><p>Hallo,</p><p>[SCHRIJF JE BERICHT]</p><p>Groeten,<br><strong>Fred — BetLife365</strong></p>' }
+  };
+  window.useTemplate = function(t){ var tpl=TPLS[t]; if(!tpl) return; document.getElementById('emSubject').value=tpl.sub; document.getElementById('emBody').value=tpl.body; };
+  window.previewEmail = function(){
+    var body=document.getElementById('emBody').value;
+    var wrap=document.getElementById('emPreview'), frame=document.getElementById('emFrame');
+    if(!wrap||!frame) return;
+    wrap.style.display = wrap.style.display==='none'?'block':'none';
+    if(wrap.style.display==='block'){ var doc=frame.contentDocument||frame.contentWindow.document; doc.open(); doc.write('<body style="font-family:system-ui,sans-serif;padding:20px;color:#111">'+body+'</body>'); doc.close(); }
+  };
+  window.sendEmail = async function(){
+    var st=document.getElementById('emStatus');
+    var subj=document.getElementById('emSubject')?.value.trim();
+    var body=document.getElementById('emBody')?.value.trim();
+    var toType=document.getElementById('emTo')?.value;
+    if(!subj||!body){ if(st) st.textContent='Vul onderwerp en bericht in.'; return; }
+    if(st){ st.textContent='Bezig…'; st.style.color='var(--muted)'; }
+    var rcpts=[];
+    if(toType==='one'){
+      var addr=document.getElementById('emOneAddr')?.value.trim();
+      if(!addr){ if(st) st.textContent='Vul een e-mailadres in.'; return; }
+      rcpts=[{email:addr,name:''}];
+    } else {
+      if(!_cache.length) await loadLeden();
+      rcpts=_cache.filter(function(m){ return toType==='all'||m.plan===toType; }).map(function(m){ return {email:m.email,name:m.full_name||''}; });
+    }
+    if(!rcpts.length){ if(st){ st.textContent='Geen ontvangers.'; } return; }
+    var html=body.includes('<')?body:'<p>'+body.replace(/\n/g,'<br>')+'</p>';
+    var fullHtml='<!DOCTYPE html><html><body style="margin:0;padding:24px;background:#0c0d10;font-family:system-ui,sans-serif;color:#e9eaee"><div style="max-width:560px;margin:0 auto;background:#15171c;border:1px solid #23262e;border-radius:16px;padding:32px">'+html+'<p style="margin-top:32px;font-size:11px;color:#454a55">BetLife365 · <a href="https://betlife365.com/member.html" style="color:#ff7a1a">Uitschrijven</a></p></div></body></html>';
+    var errors=0;
+    for(var i=0;i<rcpts.length;i+=50){
+      var batch=rcpts.slice(i,i+50);
+      var res=await fetch('https://api.brevo.com/v3/smtp/email',{method:'POST',headers:{'api-key':BREVO,'Content-Type':'application/json'},body:JSON.stringify({sender:{name:'BetLife365',email:'hello@betlife365.com'},to:batch,subject:subj,htmlContent:fullHtml})});
+      if(!res.ok) errors++;
+    }
+    if(st){ st.textContent=errors===0?'✓ Verstuurd naar '+rcpts.length+' ontvanger'+(rcpts.length>1?'s':'')+'!':'Klaar – '+errors+' fouten bij '+rcpts.length+' pogingen.'; st.style.color=errors===0?'#3ba55d':'#ed4245'; }
+  };
+
+  // Init Supabase on load
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', getSb);
+  } else {
+    // Load supabase-js if not already present
+    if(typeof supabase==='undefined'){
+      var sc=document.createElement('script');
+      sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+      sc.onload=function(){ getSb(); };
+      document.head.appendChild(sc);
+    } else { getSb(); }
+  }
+})();
 </script>
 </body>
 </html>
