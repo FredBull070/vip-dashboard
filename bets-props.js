@@ -1,112 +1,59 @@
-window.DAILY_PROPS_VERSION = "2026-07-02";
-window.DAILY_PROPS = `SPORT: Soccer
-MATCH: Austria vs Spain (WK Round of 32)
-MARKET: Anytime Goalscorer
-SELECTION: Mikel Oyarzabal
-ODDS: 2.20*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Oyarzabal leads Spain in tournament goals (2). Spain dominates Austria (-310 ML) and creates chances in channels where Oyarzabal thrives; expect high volume attacking play.
-===
-SPORT: Soccer
-MATCH: Austria vs Spain (WK Round of 32)
-MARKET: Shots on Target - Spain
-SELECTION: Spain Over 3.5 Shots on Target
-ODDS: 1.75*
-STAKE: 2u
+/* BetLife365 daily PROP cards - written by the prop-cards-builder task, read by the dashboard.
+   Same structure as DAILY_CARDS (MATCH/MARKET/SELECTION/ODDS/STAKE/RISK/ANALYSIS, grouped by
+   risk: low=Core, medium=Value, high=Aggressive). Player props across every sport we offer.
+   Code stays separate from the dashboard. This is the seed slate; the builder replaces it daily. */
+window.DAILY_PROPS_VERSION = "2026-06-28";
+
+window.DAILY_PROPS = `SPORT: Football
+MATCH: Brazil x Japan
+MARKET: Shots on target
+SELECTION: Vinicius Jr 2+ shots on target
+ODDS: 1.90
+STAKE: 1u
 RISK: low
-ANALYSIS: Spain averages 5+ shots on target per game at this WC. Austria will defend deep but Spain's possession-based attack generates consistent quality chances throughout.
+ANALYSIS: Brazil's main creative threat against a Japan side that has to chase; high shot volume expected from the left.
 ===
-SPORT: Soccer
-MATCH: Austria vs Spain (WK Round of 32)
-MARKET: Anytime Goalscorer
-SELECTION: Lamine Yamal
-ODDS: 3.50*
+SPORT: Football
+MATCH: Germany x Paraguay
+MARKET: Anytime goalscorer
+SELECTION: Florian Wirtz anytime scorer
+ODDS: 2.40
+STAKE: 1u
+RISK: medium
+ANALYSIS: Germany should dominate territory; Wirtz arrives late into the box and takes set pieces.
+===
+SPORT: Football
+MATCH: South Africa x Canada
+MARKET: Player shots
+SELECTION: Jonathan David 3+ shots
+ODDS: 2.10
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Yamal has been Spain's most dangerous player; registered multiple assists but goals are coming. At 3.50 the price compensates for variance in a high-volume Spain attack.
+ANALYSIS: Canada's focal point up front against a defensive South Africa; volume play on the striker.
 ===
-SPORT: Soccer
-MATCH: Croatia vs Portugal (WK Round of 32)
-MARKET: Anytime Goalscorer
-SELECTION: Cristiano Ronaldo
-ODDS: 2.15*
+SPORT: Tennis
+MATCH: Eastbourne ATP Final
+MARKET: Player aces
+SELECTION: Ugo Humbert 8+ aces
+ODDS: 2.00
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Ronaldo is Portugal's tournament top scorer (2 goals). Portugal favored (-140 ML); Croatia concedes through the middle which suits Ronaldo's movement and set-piece presence.
+ANALYSIS: Big lefty serve on grass in a best-of-three final; ace count projects high.
 ===
-SPORT: Soccer
-MATCH: Croatia vs Portugal (WK Round of 32)
-MARKET: Team Goals
-SELECTION: Portugal Over 1.5 Goals
-ODDS: 1.85*
-STAKE: 2u
-RISK: low
-ANALYSIS: Portugal has scored 2+ goals in recent WC games and Croatia's defensive shape has been leaky in transition. Portugal's attacking depth makes 2 goals a strong baseline expectation.
-===
-SPORT: Soccer
-MATCH: Algeria vs Switzerland (WK Round of 32)
-MARKET: Anytime Goalscorer
-SELECTION: Johan Manzambi
-ODDS: 2.75*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Manzambi is Switzerland's top scorer with 3 tournament goals. Switzerland slight ML fave vs Algeria; Manzambi's movement in the box makes him the primary goal threat.
-===
-SPORT: Soccer
-MATCH: Algeria vs Switzerland (WK Round of 32)
-MARKET: Anytime Goalscorer
-SELECTION: Riyad Mahrez
-ODDS: 3.25*
+SPORT: Football
+MATCH: Netherlands x Morocco
+MARKET: Player to be carded
+SELECTION: Sofyan Amrabat to be carded
+ODDS: 3.20
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Mahrez leads Algeria in goals (2) and carries their attacking threat from wide areas. Algeria at +320 ML is a dog, but Mahrez at 3.25 offers real value if Algeria are competitive.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Alexander Zverev vs Valentin Royer
-MARKET: Total Games
-SELECTION: Under 21.5 Games
-ODDS: 1.78*
-STAKE: 2u
-RISK: low
-ANALYSIS: Zverev is the #2 seed dominating a qualifier on grass. Royer offers minimal resistance at this level; Zverev expected to win comfortably in 3 sets with few long games.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Matteo Berrettini vs Arthur Fils
-MARKET: Player Aces
-SELECTION: Berrettini Over 8.5 Aces
-ODDS: 1.85*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Berrettini is a former Wimbledon finalist and one of the tour's biggest servers on grass. He routinely hits 10+ aces at Wimbledon; 8.5 is a beatable line given his flat, fast delivery.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Iga Swiatek vs Karolina Pliskova
-MARKET: Set Handicap
-SELECTION: Swiatek -1.5 Sets
-ODDS: 1.95*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Swiatek is #3 seed and in dominant form. Pliskova's grass-court ceiling is limited; Swiatek's baseline consistency should produce a straight-sets win making -1.5 sets viable at this price.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Elena Rybakina vs Catherine McNally
-MARKET: Player Aces
-SELECTION: Rybakina Over 5.5 Aces
-ODDS: 1.80*
-STAKE: 2u
-RISK: low
-ANALYSIS: Rybakina is the defending Wimbledon champion and the tour's most prolific ace-server. She averages 6-8 aces on grass per match; 5.5 is well within her normal range vs a non-threatening opponent.
-===
-SPORT: Tennis
-MATCH: Wimbledon R2 - Jakub Mensik vs Grigor Dimitrov
-MARKET: Total Games
-SELECTION: Over 37.5 Games
-ODDS: 1.90*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Mensik is an experienced baseliner and Dimitrov a grass-court threat; this is a competitive R2 matchup between two quality players that should produce a full 4-5 set battle with long games.`;
-window.EMBEDDED_PROPS = { date: "2026-07-02" };
+ANALYSIS: Combative midfielder likely chasing the game in a tight knockout tie; card risk elevated.`;
+
+window.EMBEDDED_PROPS = { date: "2026-06-28" };
+
+/* Filled by the evening-settlement task once a prop is confirmed by verified player data.
+   Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
+   these into the Track Record. No result is ever written without verified player-level data. */
 window.DAILY_PROPS_SETTLED = [];
 
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
@@ -1067,4 +1014,74 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function boot(){ paint(); setInterval(paint,30000); document.addEventListener('click',function(){setTimeout(paint,350);},true); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(boot,700);}); else setTimeout(boot,700);
+})();
+
+
+/* ===========================================================================
+   PROP CARDS = DAILY BETTING CARDS parity  (added 03-07-2026)
+   Fred wants the Daily Prop Cards to look identical to the Daily Betting Cards
+   everywhere except the Discord channel/hook they land in. Two display-only
+   patches, no index.html edit needed:
+     1) buildPropChunks -> same disclaimer, same Safe/Value/Jackpot legend, same
+        per-card cardStr block, same footer, same spacing and 1900-char
+        chunking as the Daily Betting Cards. Only the title ("DAILY PROP CARDS")
+        and the section headers ("SAFE/VALUE/JACKPOT PROP CARDS") say "prop".
+        Still routed to the PROPS hook by the existing sendProps().
+     2) the prop page's risk sections (Core/Aggressive) are relabelled to
+        Safe/Jackpot so the dashboard page matches the betting-cards page.
+   Underlying risk values (low/medium/high) are never touched. */
+(function(){
+  function build(cards){
+    cards = cards || (typeof parseCards==='function'? parseCards(getPropsText()) : []);
+    if(!cards || !cards.length) return [];
+    var date=(window.EMBEDDED_PROPS && window.EMBEDDED_PROPS.date)? dmy(window.EMBEDDED_PROPS.date):'';
+    var header=':bar_chart: **DAILY PROP CARDS | '+date+'**\n'+
+      'BetLife365 does not provide fixed betting slips.\n'+
+      'Each Daily Card is a portfolio of selected positions, not a must-play list.\n'+
+      'You choose how to use it based on your own bankroll and risk preference.\n\n'+
+      '**:green_circle: Safe** → lowest risk positions\n'+
+      '**:yellow_circle: Value** → moderate risk positions\n'+
+      '**:red_circle: Jackpot** → high risk positions\n';
+    var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
+    var groups=[['low','**:green_circle: SAFE PROP CARDS**'],['medium','**:yellow_circle: VALUE PROP CARDS**'],['high','**:red_circle: JACKPOT PROP CARDS**']];
+    var msgs=[], cur=header, has=false;
+    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+      var gh='\n\n'+g[1]+'\n';
+      cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
+        if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=(idx===0? g[1]+'\n\n':'')+cardStr(c)+'\n'; }
+        else { cur+=piece; } has=true; });
+    });
+    if(has) msgs.push(cur);
+    if(msgs.length){ for(var i=0;i<msgs.length-1;i++){ msgs[i]=msgs[i]+'\n⠀'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
+    // Match the cards pipeline's rename() tail: trim trailing blank/braille lines, push one U+2800.
+    msgs=msgs.map(function(ch){ var TL=ch.split('\n'); while(TL.length && /^[\s⠀]*$/.test(TL[TL.length-1])) TL.pop(); TL.push('⠀'); return TL.join('\n'); });
+    return msgs;
+  }
+  build.__dedup=true; // already final: tells the shared chunk-wrapper to leave it alone
+  function install(){
+    if(typeof window.cardStr==='function' && typeof window.getPropsText==='function' && typeof window.dmy==='function'){ window.buildPropChunks=build; return true; }
+    return false;
+  }
+  if(!install()){ var n=0, t=setInterval(function(){ if(install()||++n>60) clearInterval(t); }, 250); }
+})();
+
+(function(){
+  /* Prop page parity: relabel the risk sections + filter pills from
+     Core / Aggressive to Safe / Jackpot (Value already matches). Display only,
+     scoped to #page-propcards and #subbar; exact-word match so analysis text
+     and match names are never touched. Idempotent. */
+  function fix(root){ if(!root) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, nodes=[];
+    while(n=w.nextNode()) nodes.push(n);
+    for(var i=0;i<nodes.length;i++){ var tn=nodes[i], t=tn.nodeValue; if(!t||!t.trim()) continue;
+      if(tn.parentNode && tn.parentNode.tagName==='OPTION') continue;
+      var core=t.replace(/[^A-Za-z]/g,'');
+      if(core==='Core'){ tn.nodeValue=t.replace('Core','Safe'); }
+      else if(core==='Aggressive'){ tn.nodeValue=t.replace('Aggressive','Jackpot'); }
+    }
+  }
+  function go(){ fix(document.getElementById('page-propcards')); fix(document.getElementById('subbar')); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(go,850); }); else setTimeout(go,850);
+  setInterval(go, 1500);
+  document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
