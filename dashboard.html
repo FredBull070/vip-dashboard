@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betting Advisory Dashboard</title>
+<style>
+  :root{--bg:#1e2128;--panel:#2b2f3a;--panel2:#222632;--text:#e6e8ee;--muted:#9aa0ad;--accent:#5865F2;--green:#3ba55d;--red:#ed4245;--yellow:#faa61a;--border:#3a3f4b;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+  header{background:linear-gradient(90deg,#5865F2,#7b5cff);padding:18px 24px;}
+  header h1{margin:0;font-size:20px;} header p{margin:4px 0 0;font-size:13px;opacity:.85;}
+  .wrap{max-width:980px;margin:0 auto;padding:20px;}
+  #status{margin:0 0 18px;padding:12px 14px;border-radius:8px;font-size:13px;border:1px solid var(--border);background:var(--panel2);}
+  #status.ok{border-color:#2c6b43;background:rgba(59,165,93,.12);} #status.err{border-color:#7a2a2c;background:rgba(237,66,69,.12);} #status.warn{border-color:#7a5a1a;background:rgba(250,166,26,.12);}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:18px;}
+  .panel h2{margin:0 0 12px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;}
+  input[type=text],textarea,select{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13px;font-family:inherit;}
+  textarea{min-height:160px;resize:vertical;line-height:1.45;font-family:Consolas,monospace;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px;}
+  button{cursor:pointer;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;color:#fff;}
+  .btn-accent{background:var(--accent);} .btn-green{background:var(--green);} .btn-yellow{background:var(--yellow);color:#1e2128;} .btn-gray{background:#454b59;}
+  button:hover{filter:brightness(1.1);} button:disabled{opacity:.5;cursor:not-allowed;}
+  .card{background:var(--panel2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 14px;margin-bottom:12px;}
+  .card .disc{white-space:pre-wrap;font-size:14px;line-height:1.5;} .card .disc strong{color:#fff;font-weight:700;}
+  .card .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .card .meta span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .small{font-size:12px;color:var(--muted);}
+  #log{background:#15171d;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:12px;max-height:200px;overflow:auto;white-space:pre-wrap;}
+  .ok{color:var(--green);} .err{color:var(--red);} .info{color:var(--yellow);}
+  .pill{display:inline-block;background:#454b59;border-radius:20px;padding:3px 10px;font-size:11px;margin-left:8px;}
+  .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;}
+  .stat{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;}
+  .stat .v{font-size:22px;font-weight:700;} .stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:4px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);}
+  th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;}
+  .badge{padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;}
+  .b-w{background:rgba(59,165,93,.2);color:#5fd17e;} .b-v{background:rgba(237,66,69,.2);color:#ff7679;} .b-p{background:rgba(250,166,26,.18);color:#f3bd5e;}
+  .pos{color:#5fd17e;} .neg{color:#ff7679;}
+  .hookgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:10px;}
+  .hookgrid input{margin-bottom:6px;}
+  button.mini{padding:5px 12px;font-size:12px;}
+  .chan{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#454b59;color:#cfd3db;}
+  .tabbar{display:flex;gap:8px;margin-bottom:18px;}
+  .tabbtn{background:var(--panel);border:1px solid var(--border);color:var(--muted);padding:10px 18px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;}
+  .tabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+</style>
+</head>
+<body>
+<!-- PASSWORD GATE -->
+<style>
+#bl-gate{position:fixed;inset:0;z-index:99999;background:#0e1014;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,sans-serif;}
+#bl-gate.hidden{display:none}
+.gate-box{background:#15171c;border:1px solid #2a2d36;border-radius:16px;padding:36px 40px;width:100%;max-width:380px;text-align:center}
+.gate-logo{font-size:22px;font-weight:800;color:#ff7a1a;margin-bottom:6px}
+.gate-sub{font-size:13px;color:#6f7480;margin-bottom:28px}
+.gate-box input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid #2a2d36;background:#0e1014;color:#e9eaee;font-size:14px;margin-bottom:12px;outline:none}
+.gate-box input:focus{border-color:#ff7a1a}
+.gate-btn{width:100%;padding:12px;background:#ff7a1a;color:#1c0d00;font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer}
+.gate-btn:hover{background:#ff9246}
+.gate-err{color:#ff5a5a;font-size:13px;margin-top:8px;min-height:18px}
+.gate-hint{font-size:12px;color:#454a55;margin-top:16px}
+</style>
+<div id="bl-gate">
+  <div class="gate-box">
+    <div class="gate-logo">BetLife365</div>
+    <div class="gate-sub">Dashboard · besloten toegang</div>
+    <input type="password" id="bl-gate-pw" placeholder="Wachtwoord" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button class="gate-btn" onclick="blGateSubmit()">Inloggen</button>
+    <div class="gate-err" id="bl-gate-err"></div>
+    <div class="gate-hint">Gebruik je sync-wachtwoord</div>
+  </div>
+</div>
+<script>
+(function(){
+  // Check session
+  if(sessionStorage.getItem('bl_gate_ok')==='1'){ document.getElementById('bl-gate').classList.add('hidden'); return; }
+  // Block body scrolling while gate is visible
+  document.body.style.overflow='hidden';
+  document.getElementById('bl-gate-pw').addEventListener('keydown',function(e){ if(e.key==='Enter') blGateSubmit(); });
+})();
+function blGateSubmit(){
+  var pw = document.getElementById('bl-gate-pw').value;
+  var stored = localStorage.getItem('ba_sync_skey') || '';
+  var err = document.getElementById('bl-gate-err');
+  if(!stored){ err.textContent='Geen sync-wachtwoord ingesteld. Stel het eerst in via het dashboard.'; return; }
+  if(!pw){ err.textContent='Voer een wachtwoord in.'; return; }
+  // Compare using SubtleCrypto hash (same as bl-dashboard.js)
+  async function sha256(str){ var b=new TextEncoder().encode(str); var h=await crypto.subtle.digest('SHA-256',b); return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
+  sha256(pw).then(function(hashed){
+    sha256(stored).then(function(storedHash){
+      if(hashed===storedHash){
+        sessionStorage.setItem('bl_gate_ok','1');
+        document.getElementById('bl-gate').classList.add('hidden');
+        document.body.style.overflow='';
+      } else {
+        document.getElementById('bl-gate-err').textContent='Verkeerd wachtwoord.';
+        document.getElementById('bl-gate-pw').value='';
+        document.getElementById('bl-gate-pw').focus();
+      }
+    });
+  });
+}
+</script>
+<!-- END GATE -->
+
+<header>
+  <h1>Betting Advisory Dashboard</h1>
+  <p>Test, preview en verstuur je lijsten rechtstreeks naar Discord, vanuit je browser.</p>
+</header>
+
+<div class="wrap">
+  <div id="status">Laden...</div>
+
+  <div class="tabbar">
+    <button class="tabbtn active" id="tb-bets" onclick="showTab('bets')">Bets &amp; versturen</button>
+    <button class="tabbtn" id="tb-bank" onclick="showTab('bank')">Bankroll</button>
+  </div>
+
+  <div id="tab-bets">
+
+  <div class="panel">
+    <h2>Kanalen (webhooks per bet-type)</h2>
+    <p class="small">Elk lijsttype gaat naar zijn eigen kanaal. Berichten worden automatisch gerouteerd op basis van de kop.</p>
+    <div class="hookgrid">
+      <div><label>LOW ODD kanaal</label><input type="text" id="hook_LOW" placeholder="https://discord.com/api/webhooks/..."><button class="btn-yellow mini" onclick="testHook('LOW')">Test</button></div>
+      <div><label>MID ODD kanaal</label><input type="text" id="hook_MID" placeholder="https://discord.com/api/webhooks/..."><button class="btn-yellow mini" onclick="testHook('MID')">Test</button></div>
+      <div><label>HIGH ODD kanaal</label><input type="text" id="hook_HIGH" placeholder="https://discord.com/api/webhooks/..."><button class="btn-yellow mini" onclick="testHook('HIGH')">Test</button></div>
+      <div><label>LUCKY SHOT kanaal</label><input type="text" id="hook_LUCKY" placeholder="https://discord.com/api/webhooks/..."><button class="btn-yellow mini" onclick="testHook('LUCKY')">Test</button></div>
+      <div><label>VIP RESULTS kanaal (uitslagen, publiek)</label><input type="text" id="hook_RESULTS" placeholder="https://discord.com/api/webhooks/..."><button class="btn-yellow mini" onclick="testHook('RESULTS')">Test</button></div>
+    </div>
+    <div class="hookgrid">
+      <div><label>VIP join-link (komt in de CTA onder elk resultaat)</label><input type="text" id="vip_link" placeholder="https://discord.gg/jouw-vip-invite"></div>
+    </div>
+    <div class="row"><button class="btn-gray" onclick="saveAll()">Bewaar instellingen</button><span class="small" id="saveState"></span></div>
+  </div>
+
+  <div class="panel">
+    <h2>Lijsten <span class="pill" id="count">0 berichten</span></h2>
+    <p class="small">Bewerk vrij. Scheid elk bericht met een regel <code>===NEXT MESSAGE===</code>. Klik daarna "Vernieuw preview".</p>
+    <textarea id="raw" spellcheck="false"></textarea>
+    <div class="row">
+      <button class="btn-accent" onclick="parseMessages()">Vernieuw preview</button>
+      <button class="btn-green" onclick="loadToday()">Laad lijsten van vandaag</button>
+      <button class="btn-gray" onclick="document.getElementById('fileInput').click()">Importeer uit bestand</button>
+      <input type="file" id="fileInput" accept=".txt,.js" style="display:none" onchange="importFile(this)">
+      <button class="btn-gray" onclick="resetDefault()">Herstel standaardlijsten</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Preview &amp; versturen</h2>
+    <div class="row" style="margin-top:0;margin-bottom:14px;">
+      <button class="btn-green" onclick="sendAll()" id="sendAllBtn">Verstuur ALLES</button>
+      <span class="small">Vraagt eerst bevestiging. Berichten gaan 1 voor 1 met 1,2s pauze.</span>
+    </div>
+    <div id="cards"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Mijn bets (odds &amp; resultaat aanpassen)</h2>
+    <p class="small">Vul per lijst de werkelijk geplaatste odd in en zet het resultaat. Werkt direct door in resultaten en bankroll-monitor.</p>
+    <div style="overflow:auto;"><table id="betEditor"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Geplaatste odd</th><th>Resultaat</th></tr></thead><tbody></tbody></table></div>
+    <div class="row"><button class="btn-gray" onclick="resetBetEdits()">Reset aanpassingen</button></div>
+  </div>
+
+  <div class="panel">
+    <h2>Resultaten &amp; historie</h2>
+    <div id="statsRow" class="statgrid"></div>
+    <div style="overflow:auto;margin-top:12px;"><table id="resultsTable"><thead><tr><th>Datum</th><th>Sport</th><th>Lijst</th><th>Odds</th><th>Resultaat</th><th>P/L</th></tr></thead><tbody></tbody></table></div>
+    <p class="small" id="noResults" style="display:none;">Nog geen resultaten geladen.</p>
+  </div>
+
+  <div class="panel">
+    <h2>VIP results delen</h2>
+    <p class="small">Afgeronde lijsten als publieke result-kaart voor je VIP-kanaal. Winst uitgelicht, verlies transparant, met lopend record en CTA.</p>
+    <div class="row" style="margin-top:0;margin-bottom:12px;">
+      <button class="btn-green" onclick="shareAllNew()">Deel alle nieuwe resultaten</button>
+      <label style="display:flex;align-items:center;gap:6px;margin:0;color:var(--text);font-size:13px;"><input type="checkbox" id="autoShare" style="width:auto;" onchange="saveAll()"> Automatisch delen zodra ik W/V zet</label>
+    </div>
+    <div id="shareList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Archief (oude lijsten terugkijken)</h2>
+    <div class="row" style="margin-top:0;"><label style="margin:0;">Kies een dag:</label><select id="archiveDate" style="width:auto;min-width:220px;" onchange="viewArchive()"></select></div>
+    <div id="archiveView" style="margin-top:12px;"></div>
+  </div>
+
+  <div class="panel"><h2>Logboek</h2><div id="log">Klaar.</div></div>
+
+  </div>
+
+  <div id="tab-bank" style="display:none">
+    <div class="panel">
+      <h2>Bankroll instellingen</h2>
+      <div class="hookgrid">
+        <div><label>Start bankroll (EUR)</label><input type="text" id="bk_start" value="1000"></div>
+        <div><label>Huidige bankroll (EUR), leeg = auto</label><input type="text" id="bk_current" placeholder="auto"></div>
+        <div><label>Max risico per dag (% bankroll)</label><input type="text" id="bk_maxday" value="6"></div>
+      </div>
+      <p class="small">Risk range per bet-type (% van bankroll per lijst), min en max. Nadruk op de doublers (~2.0 LOW-acca's) als kern-inzet.</p>
+      <div class="hookgrid">
+        <div><label>LOW range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LOW_min" value="1"><input type="text" id="bk_LOW_max" value="2"></div></div>
+        <div><label>MID range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_MID_min" value="0.5"><input type="text" id="bk_MID_max" value="1"></div></div>
+        <div><label>HIGH range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_HIGH_min" value="0.25"><input type="text" id="bk_HIGH_max" value="0.5"></div></div>
+        <div><label>LUCKY SHOT range % (min / max)</label><div style="display:flex;gap:8px;"><input type="text" id="bk_LUCKY_min" value="0.05"><input type="text" id="bk_LUCKY_max" value="0.1"></div></div>
+      </div>
+      <div class="row"><button class="btn-gray" onclick="saveBankroll()">Bewaar &amp; herbereken</button><span class="small" id="bkSave"></span></div>
+    </div>
+    <div class="panel">
+      <h2>Aanbevolen inzet (huidige bankroll)</h2>
+      <div style="overflow:auto;"><table id="stakeTable"><thead><tr><th>Bet-type</th><th>Risk range %</th><th>Inzet (EUR)</th><th>Gem. odd</th><th>Mogelijke winst (EUR)</th></tr></thead><tbody></tbody></table></div>
+      <p class="small" id="dayExposure"></p>
+    </div>
+    <div class="panel">
+      <h2>Bankroll monitor</h2>
+      <div id="bkStats" class="statgrid"></div>
+      <p class="small">Berekend uit afgeronde resultaten met vlakke inzet op het midden van je risk range per lijst (% van start-bankroll).</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===== INGEBAKKEN DATA (geen losse bestanden nodig) ===== */
+var EMBEDDED_VERSION = "2026-06-22";
+var EMBEDDED_MESSAGES = `**:crown: LOW ODD BET: 22-06-2026**
+
+:small_orange_diamond: Argentina x Austria: **Argentina to win @ 1.42**
+:small_orange_diamond: Jordan x Algeria: **Algeria to win @ 1.51**
+
+:moneybag: Total odds: **±2.14**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Both are clear favourites coming off convincing MD1 wins. Argentina beat Algeria 3-0 (Messi hat-trick) and play for top of Group J; Algeria are in must-win mode against a Jordan side that conceded three to Austria. One low-variance pick per match.
+
+:bank: **Bankroll:** risk range 1-2% of bankroll. This is a doubler (~2.0), your core lowest-variance play.
+===NEXT MESSAGE===
+**:crown: MID ODD BET: 22-06-2026**
+
+:small_orange_diamond: France x Iraq: **France to win @ 1.20***
+:small_orange_diamond: Norway x Senegal: **Norway to win @ 1.90***
+:small_orange_diamond: Argentina x Austria: **Over 2.5 goals @ 1.55***
+
+:moneybag: Total odds: **±3.53**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+France dismantled Senegal 3-1 (Mbappe 2) and Iraq shipped four to Norway. Norway carry momentum behind Haaland. The Argentina-Austria top-of-group clash projects open, both scored three in their openers, line set at 2.5.
+
+:bank: **Bankroll:** risk range 0.5-1% of bankroll. Past doubler odds, more variance than a doubler.
+===NEXT MESSAGE===
+**:crown: HIGH ODD BET: 22-06-2026**
+
+:small_orange_diamond: Argentina x Austria: **Argentina to win @ 1.42**
+:small_orange_diamond: France x Iraq: **France to win @ 1.20***
+:small_orange_diamond: Jordan x Algeria: **Algeria to win @ 1.51**
+:small_orange_diamond: Norway x Senegal: **Haaland anytime scorer @ 2.15**
+
+:moneybag: Total odds: **±5.53**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Full-card four-fold: three favourites who all won MD1, plus Haaland (2 goals vs Iraq) to find the net again versus a Senegal side that just lost to France. One selection per match.
+
+:bank: **Bankroll:** risk range 0.25-0.5% of bankroll. Well beyond a doubler, high variance.
+===NEXT MESSAGE===
+**:crown: LUCKY SHOT BET: 22-06-2026**
+
+:small_orange_diamond: Argentina x Austria: **Correct score 2-1 Argentina @ 8.50***
+:small_orange_diamond: France x Iraq: **Correct score 3-0 France @ 7.00***
+:small_orange_diamond: Jordan x Algeria: **Correct score 1-0 Algeria @ 7.50***
+
+:moneybag: Total odds: **±446.00**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Pure long shot. Three correct scores aligned with the favourites' expected margins. Treat as a fun flyer, not a value bet.
+
+:bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.
+===NEXT MESSAGE===
+**:crown: LOW ODD BET: 22-06-2026 (Tennis)**
+
+:small_orange_diamond: Popyrin x Choinski: **Popyrin to win @ 1.44**
+:small_orange_diamond: Quinn x Royer: **Quinn to win @ 1.44**
+
+:moneybag: Total odds: **±2.08**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Two of the shortest-priced favourites on Day 1. Popyrin (grass pedigree, ATP title-winner) faces lower-ranked Choinski; Quinn is heavily favoured over Royer. Big bookmaker-implied edges in opening rounds.
+
+:bank: **Bankroll:** risk range 1-2% of bankroll. This is a doubler (~2.0), your core lowest-variance play.
+===NEXT MESSAGE===
+**:crown: MID ODD BET: 22-06-2026 (Tennis)**
+
+:small_orange_diamond: Draper x Nakashima: **Draper to win @ 1.67**
+:small_orange_diamond: Moutet x Fucsovics: **Moutet to win @ 1.70**
+:small_orange_diamond: Struff x Landaluce: **Struff to win @ 1.62**
+
+:moneybag: Total odds: **±4.59**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Three favourites with grass-court form: Draper (home favourite at Eastbourne), Moutet over Fucsovics, and Struff, a strong grass server, against teenager Landaluce. Non-overlapping matches with the LOW list.
+
+:bank: **Bankroll:** risk range 0.5-1% of bankroll. Past doubler odds, more variance than a doubler.
+===NEXT MESSAGE===
+**:crown: HIGH ODD BET: 22-06-2026 (Tennis)**
+
+:small_orange_diamond: Draper x Nakashima: **Draper to win @ 1.67**
+:small_orange_diamond: Diallo x Atmane: **Diallo to win @ 1.73**
+:small_orange_diamond: Kyrgios x Walton: **Kyrgios to win @ 1.62**
+:small_orange_diamond: Moutet x Fucsovics: **Moutet to win @ 1.70**
+
+:moneybag: Total odds: **±7.93**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Four-fold of favourites. Diallo (big grass serve) over Atmane and Kyrgios over Walton add risk to the safer Draper/Moutet anchors. Higher variance, four legs must all land.
+
+:bank: **Bankroll:** risk range 0.25-0.5% of bankroll. Well beyond a doubler, high variance.
+===NEXT MESSAGE===
+**:crown: LUCKY SHOT BET: 22-06-2026 (Tennis)**
+
+:small_orange_diamond: Draper x Nakashima: **Nakashima to win @ 2.20**
+:small_orange_diamond: Diallo x Atmane: **Atmane to win @ 2.10**
+:small_orange_diamond: Popyrin x Choinski: **Choinski to win @ 2.78**
+
+:moneybag: Total odds: **±12.84**
+Odds may vary depending on the bookmaker or the time of placement.
+
+:mortar_board:**Justification:**
+Triple-underdog upset special. Grass rewards big servers and produces early shocks; Nakashima and Atmane are live dogs. Low probability, high payout, a flyer only.
+
+:bank: **Bankroll:** risk range 0.05-0.1% of bankroll. Extreme long shot, fun money only.`;
+
+var EMBEDDED_RESULTS = [
+  {date:"2026-06-22",sport:"Football",list:"LOW",odds:2.14,result:"pending"},
+  {date:"2026-06-22",sport:"Football",list:"MID",odds:3.53,result:"pending"},
+  {date:"2026-06-22",sport:"Football",list:"HIGH",odds:5.53,result:"pending"},
+  {date:"2026-06-22",sport:"Football",list:"LUCKY SHOT",odds:446.00,result:"pending"},
+  {date:"2026-06-22",sport:"Tennis",list:"LOW",odds:2.08,result:"pending"},
+  {date:"2026-06-22",sport:"Tennis",list:"MID",odds:4.59,result:"pending"},
+  {date:"2026-06-22",sport:"Tennis",list:"HIGH",odds:7.93,result:"pending"},
+  {date:"2026-06-22",sport:"Tennis",list:"LUCKY SHOT",odds:12.84,result:"pending"}
+];
+
+/* Externe feeds (optioneel): als messages.js / results.js naast dit bestand staan en laden,
+   gebruiken we die; anders vallen we terug op de ingebakken data hierboven. */
+var DAILY_MESSAGES = (typeof window.DAILY_MESSAGES==='string' && window.DAILY_MESSAGES.trim())? window.DAILY_MESSAGES : EMBEDDED_MESSAGES;
+var DAILY_VERSION  = window.DAILY_VERSION || EMBEDDED_VERSION;
+window.RESULTS  = (Array.isArray(window.RESULTS) && window.RESULTS.length)? window.RESULTS : EMBEDDED_RESULTS;
+window.SETTINGS = window.SETTINGS || {stake:1, currency:'u'};
+
+const DEFAULT_WEBHOOK = "https://discordapp.com/api/webhooks/1518710597565415596/JpMhLROcFLMltIb-V_4U34e2uCPjtkB0so3SRQbPkxj-F0UiKoC5JeQZXf4ILSd6Sc7j";
+const DEFAULT_VERSION = DAILY_VERSION;
+const DEFAULT_MESSAGES = DAILY_MESSAGES;
+
+const EMOJI = {
+  ':crown:':'\u{1F451}',':small_orange_diamond:':'\u{1F536}',':moneybag:':'\u{1F4B0}',':mortar_board:':'\u{1F393}',
+  ':white_check_mark:':'✅',':tennis:':'\u{1F3BE}',':soccer:':'⚽',':bank:':'\u{1F3E6}',':trophy:':'\u{1F3C6}',
+  ':x:':'❌',':chart_with_upwards_trend:':'\u{1F4C8}',':fire:':'\u{1F525}',':bulb:':'\u{1F4A1}',':warning:':'⚠️'
+};
+
+let messages = [];
+
+function setStatus(msg, cls){ const el=document.getElementById('status'); if(!el) return; el.className=cls||''; el.innerHTML=msg; }
+function log(msg, cls){ const el=document.getElementById('log'); if(!el) return; const t=new Date().toLocaleTimeString('nl-NL'); el.innerHTML += '\n<span class="'+(cls||'')+'">['+t+'] '+msg+'</span>'; el.scrollTop=el.scrollHeight; }
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderDiscord(text){ let s=esc(text); for(const k in EMOJI){ s=s.split(k).join(EMOJI[k]); } return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
+
+const CHANNELS = ['LOW','MID','HIGH','LUCKY'];
+function getHook(cat){ const el=document.getElementById('hook_'+cat); return el?el.value.trim():''; }
+function catLabel(cat){ return {LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHOT',RESULTS:'VIP RESULTS'}[cat]||cat; }
+function detectCategory(text){ const h=(text.split('\n')[0]||'').toUpperCase(); if(h.includes('LUCKY'))return'LUCKY'; if(h.includes('HIGH'))return'HIGH'; if(h.includes('MID'))return'MID'; return'LOW'; }
+
+function parseMessages(){
+  const raw=document.getElementById('raw').value;
+  messages=raw.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s);
+  document.getElementById('count').textContent=messages.length+' berichten';
+  const cards=document.getElementById('cards'); cards.innerHTML='';
+  if(!messages.length){ cards.innerHTML='<p class="small">Geen lijsten in het tekstvak. Klik "Laad lijsten van vandaag" of "Herstel standaardlijsten".</p>'; saveAll(true); return; }
+  messages.forEach((m,i)=>{
+    const cat=detectCategory(m); const div=document.createElement('div'); div.className='card';
+    div.innerHTML='<div class="meta"><span>Bericht '+(i+1)+' / '+messages.length+' &nbsp; <span class="chan">naar '+catLabel(cat)+' kanaal</span></span>'+
+      '<button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="sendOne('+i+')">Verstuur dit</button></div>'+
+      '<div class="disc">'+renderDiscord(m)+'</div>';
+    cards.appendChild(div);
+  });
+  saveAll(true);
+}
+
+async function postToDiscord(content, hook){
+  if(!hook){ throw new Error('geen webhook ingevuld voor dit kanaal'); }
+  const res=await fetch(hook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
+  if(!res.ok && res.status!==204){ const txt=await res.text().catch(()=> ''); throw new Error('HTTP '+res.status+' '+txt); }
+}
+async function testHook(cat){ try{ log('Testbericht naar '+catLabel(cat)+'-kanaal...', 'info'); await postToDiscord(':white_check_mark: **TEST** - '+catLabel(cat)+' kanaal werkt.', getHook(cat)); log('OK - test verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function sendOne(i){ const cat=detectCategory(messages[i]); try{ log('Bericht '+(i+1)+' naar '+catLabel(cat)+'...', 'info'); await postToDiscord(messages[i], getHook(cat)); log('OK - bericht '+(i+1)+' verstuurd naar '+catLabel(cat)+'.', 'ok'); }catch(e){ log('MISLUKT bericht '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } }
+async function sendAll(){
+  if(!messages.length){ log('Geen berichten geladen.', 'err'); return; }
+  if(!confirm('Alle '+messages.length+' berichten versturen naar hun eigen kanaal?')){ log('Geannuleerd.', 'info'); return; }
+  const btn=document.getElementById('sendAllBtn'); btn.disabled=true;
+  for(let i=0;i<messages.length;i++){ const cat=detectCategory(messages[i]); try{ await postToDiscord(messages[i], getHook(cat)); log('Verstuurd '+(i+1)+' / '+messages.length+' naar '+catLabel(cat), 'ok'); }catch(e){ log('MISLUKT '+(i+1)+' ('+catLabel(cat)+'): '+e.message, 'err'); } await new Promise(r=>setTimeout(r,1200)); }
+  log('Klaar met versturen.', 'info'); btn.disabled=false;
+}
+
+function saveAll(silent){
+  CHANNELS.forEach(c=>localStorage.setItem('ba_hook_'+c, getHook(c)));
+  localStorage.setItem('ba_hook_RESULTS', getHook('RESULTS'));
+  localStorage.setItem('ba_vip_link', vipLink());
+  const auto=document.getElementById('autoShare'); localStorage.setItem('ba_autoshare', auto&&auto.checked?'1':'0');
+  localStorage.setItem('ba_messages', document.getElementById('raw').value);
+  if(!silent){ const e=document.getElementById('saveState'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
+}
+function resetDefault(){ if(!confirm('Standaardlijsten terugzetten?')) return; document.getElementById('raw').value=DEFAULT_MESSAGES; parseMessages(); }
+
+let BET_EDITS={}; try{ BET_EDITS=JSON.parse(localStorage.getItem('ba_betedits')||'{}'); }catch(e){ BET_EDITS={}; }
+function betId(r){ return r.date+'|'+r.sport+'|'+r.list; }
+function eff(r){ const e=BET_EDITS[betId(r)]||{}; const odds=(e.odds!=null&&e.odds!==''&&!isNaN(parseFloat(e.odds)))?parseFloat(e.odds):r.odds; const result=e.result||r.result||'pending'; return {odds,result}; }
+function updateBet(id, field, val){
+  BET_EDITS[id]=BET_EDITS[id]||{};
+  if(field==='odds') BET_EDITS[id].odds=val.replace(',','.'); else BET_EDITS[id].result=val;
+  localStorage.setItem('ba_betedits', JSON.stringify(BET_EDITS));
+  renderResults(); renderBankroll(); renderShare();
+  const auto=document.getElementById('autoShare');
+  if(field==='result' && (val==='W'||val==='V') && auto && auto.checked && !SHARED[id]) shareOne(id);
+}
+function resetBetEdits(){ if(!confirm('Alle handmatige odds/resultaten terugzetten?')) return; BET_EDITS={}; localStorage.removeItem('ba_betedits'); renderBetEditor(); renderResults(); renderBankroll(); }
+function renderBetEditor(){
+  const data=window.RESULTS||[]; const tb=document.querySelector('#betEditor tbody'); if(!tb) return; tb.innerHTML='';
+  data.forEach(r=>{
+    const id=betId(r); const e=eff(r);
+    const opt=v=>'<option value="'+v+'"'+(e.result.toUpperCase()===v?' selected':'')+'>';
+    tb.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td>'+
+      '<td><input type="text" style="width:90px;padding:6px 8px;" value="'+e.odds.toFixed(2)+'" onchange="updateBet(\''+id+'\',\'odds\',this.value)"></td>'+
+      '<td><select style="width:140px;padding:6px 8px;" onchange="updateBet(\''+id+'\',\'result\',this.value)">'+opt('PENDING')+'Open</option>'+opt('W')+'Gewonnen</option>'+opt('V')+'Verloren</option>'+'</select></td></tr>';
+  });
+}
+
+let SHARED={}; try{ SHARED=JSON.parse(localStorage.getItem('ba_shared')||'{}'); }catch(e){ SHARED={}; }
+function vipLink(){ const el=document.getElementById('vip_link'); return el?el.value.trim():''; }
+function dmy(iso){ const p=(iso||'').split('-'); return p.length===3? p[2]+'-'+p[1]+'-'+p[0] : iso; }
+function tierLabelFromList(list){ return {LOW:'LOW ODD',MID:'MID ODD',HIGH:'HIGH ODD',LUCKY:'LUCKY SHOT'}[mapList(list)]; }
+function runningRecord(){ let w=0,l=0,u=0; (window.RESULTS||[]).forEach(r=>{ const e=eff(r); const res=e.result.toUpperCase(); if(res==='W'){ w++; u+=e.odds-1; } else if(res==='V'){ l++; u-=1; } }); return {w,l,u}; }
+function findMessageFor(r){ const wantTennis=(r.sport||'').toLowerCase().includes('tennis'); const cat=mapList(r.list); return messages.find(m=>{ const isTennis=/\(tennis\)/i.test(m.split('\n')[0]); return detectCategory(m)===cat && isTennis===wantTennis; }); }
+function selectionLines(m){ if(!m) return []; return m.split('\n').filter(x=>x.trim().startsWith(':small_orange_diamond:')); }
+function buildResultCard(r){
+  const e=eff(r); const res=e.result.toUpperCase(); const rec=runningRecord(); const recU=(rec.u>=0?'+':'')+rec.u.toFixed(2)+'u';
+  const tier=tierLabelFromList(r.list); const legs=selectionLines(findMessageFor(r)); const link=vipLink(); const cta=link?link:'(zet je VIP-link in de kanaal-instellingen)';
+  if(res==='W'){
+    return ':trophy: **WINNER | '+tier+' | '+dmy(r.date)+' | '+r.sport+'**\n'+(legs.length?legs.join('\n')+'\n':'')+
+      ':moneybag: Landed @ **'+e.odds.toFixed(2)+'** (+'+(e.odds-1).toFixed(2)+'u)\n'+
+      ':chart_with_upwards_trend: Record: **'+rec.w+'W-'+rec.l+'L, '+recU+'**\n'+
+      ':fire: Tomorrow\'s full slate drops first in VIP: '+cta+'\n:warning: 18+ | play responsibly';
+  }
+  return ':x: **No luck | '+tier+' | '+dmy(r.date)+' | '+r.sport+'**\n'+(legs.length?legs.join('\n')+'\n':':small_orange_diamond: acca @ '+e.odds.toFixed(2)+'\n')+
+    ':chart_with_upwards_trend: Still **'+recU+'** overall, every result shown\n'+
+    ':bulb: Full picks + bankroll plan in VIP: '+cta+'\n:warning: 18+ | play responsibly';
+}
+function renderShare(){
+  const wrap=document.getElementById('shareList'); if(!wrap) return;
+  const settled=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; });
+  if(!settled.length){ wrap.innerHTML='<p class="small">Nog geen afgeronde lijsten. Zet eerst een resultaat op W of V in "Mijn bets".</p>'; return; }
+  wrap.innerHTML='';
+  settled.forEach(r=>{ const id=betId(r); const done=!!SHARED[id]; const div=document.createElement('div'); div.className='card';
+    div.innerHTML='<div class="meta"><span>'+r.date+' '+r.sport+' '+r.list+(done?' &nbsp; <span class="chan">gedeeld</span>':'')+'</span>'+
+      '<button class="'+(done?'btn-gray':'btn-accent')+'" style="padding:5px 12px;font-size:12px;" onclick="shareOne(\''+id+'\')">'+(done?'Opnieuw delen':'Deel naar VIP')+'</button></div>'+
+      '<div class="disc">'+renderDiscord(buildResultCard(r))+'</div>';
+    wrap.appendChild(div); });
+}
+async function shareOne(id){ const r=(window.RESULTS||[]).find(x=>betId(x)===id); if(!r) return; try{ log('Resultaat delen naar VIP...', 'info'); await postToDiscord(buildResultCard(r), getHook('RESULTS')); SHARED[id]=true; localStorage.setItem('ba_shared', JSON.stringify(SHARED)); log('OK - resultaat gedeeld in VIP.', 'ok'); renderShare(); }catch(e){ log('MISLUKT VIP-deel: '+e.message, 'err'); } }
+async function shareAllNew(){ const s=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u==='W'||u==='V'; }).filter(r=>!SHARED[betId(r)]); if(!s.length){ log('Geen nieuwe afgeronde resultaten om te delen.', 'info'); return; } if(!confirm(s.length+' nieuwe resultaten naar het VIP-kanaal sturen?')) return; for(const r of s){ await shareOne(betId(r)); await new Promise(x=>setTimeout(x,1200)); } log('Klaar met delen.', 'info'); }
+
+function renderResults(){
+  const data=window.RESULTS||[]; const stake=(window.SETTINGS&&window.SETTINGS.stake)||1; const cur=(window.SETTINGS&&window.SETTINGS.currency)||'u';
+  const tbody=document.querySelector('#resultsTable tbody'); const noRes=document.getElementById('noResults'); const statsRow=document.getElementById('statsRow');
+  tbody.innerHTML='';
+  if(!data.length){ noRes.style.display='block'; statsRow.innerHTML=''; renderShare(); return; }
+  noRes.style.display='none';
+  let settled=0,wins=0,staked=0,ret=0;
+  [...data].reverse().forEach(r=>{
+    const e=eff(r); const res=e.result.toUpperCase(); const odds=e.odds; let badge,plTxt='',plCls='';
+    if(res==='W'){ const pl=(odds*stake)-stake; plTxt='+'+pl.toFixed(2)+cur; plCls='pos'; badge='<span class="badge b-w">GEWONNEN</span>'; }
+    else if(res==='V'){ plTxt=(-stake).toFixed(2)+cur; plCls='neg'; badge='<span class="badge b-v">VERLOREN</span>'; }
+    else { badge='<span class="badge b-p">OPEN</span>'; plTxt='.'; }
+    tbody.innerHTML+='<tr><td>'+r.date+'</td><td>'+r.sport+'</td><td>'+r.list+'</td><td>'+Number(odds).toFixed(2)+'</td><td>'+badge+'</td><td class="'+plCls+'">'+plTxt+'</td></tr>';
+    if(res==='W'||res==='V'){ settled++; staked+=stake; if(res==='W'){ wins++; ret+=odds*stake; } }
+  });
+  const pl=ret-staked, strike=settled?Math.round(wins/settled*100):0, roi=staked?(pl/staked*100):0, plC=pl>=0?'pos':'neg';
+  statsRow.innerHTML='<div class="stat"><div class="v">'+settled+'</div><div class="l">Afgerond</div></div>'+
+    '<div class="stat"><div class="v">'+wins+'-'+(settled-wins)+'</div><div class="l">W - V</div></div>'+
+    '<div class="stat"><div class="v">'+strike+'%</div><div class="l">Strike rate</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(pl>=0?'+':'')+pl.toFixed(2)+cur+'</div><div class="l">Winst/Verlies</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(roi>=0?'+':'')+roi.toFixed(0)+'%</div><div class="l">ROI</div></div>';
+  renderShare();
+}
+
+function showTab(name){
+  document.getElementById('tab-bets').style.display=name==='bets'?'block':'none';
+  document.getElementById('tab-bank').style.display=name==='bank'?'block':'none';
+  document.getElementById('tb-bets').classList.toggle('active', name==='bets');
+  document.getElementById('tb-bank').classList.toggle('active', name==='bank');
+  if(name==='bank') renderBankroll();
+}
+
+const BK_TIERS=['LOW','MID','HIGH','LUCKY'];
+const BK_DEF={LOW:[1,2],MID:[0.5,1],HIGH:[0.25,0.5],LUCKY:[0.05,0.1]};
+const BK_KEYS=['bk_start','bk_current','bk_maxday'].concat(BK_TIERS.flatMap(t=>['bk_'+t+'_min','bk_'+t+'_max']));
+function mapList(list){ const u=(list||'').toUpperCase(); if(u.includes('LUCKY'))return'LUCKY'; if(u.includes('HIGH'))return'HIGH'; if(u.includes('MID'))return'MID'; return'LOW'; }
+function num(id,def){ const el=document.getElementById(id); if(!el) return def; const v=parseFloat((el.value||'').replace(',','.')); return isNaN(v)?def:v; }
+function pctRange(t){ return [num('bk_'+t+'_min',BK_DEF[t][0]), num('bk_'+t+'_max',BK_DEF[t][1])]; }
+function pctMid(t){ const r=pctRange(t); return (r[0]+r[1])/2; }
+function saveBankroll(){ BK_KEYS.forEach(k=>{ const el=document.getElementById(k); if(el) localStorage.setItem('ba_'+k, el.value); }); renderBankroll(); const e=document.getElementById('bkSave'); e.textContent='opgeslagen'; setTimeout(()=>e.textContent='',1500); }
+function computeRealised(start){ const data=window.RESULTS||[]; let staked=0,ret=0,settled=0,wins=0; data.forEach(r=>{ const e=eff(r); const res=e.result.toUpperCase(); if(res!=='W'&&res!=='V') return; const stake=start*pctMid(mapList(r.list))/100; staked+=stake; settled++; if(res==='W'){ wins++; ret+=e.odds*stake; } }); return {staked,pl:ret-staked,settled,wins}; }
+function avgOdd(t){ const xs=(window.RESULTS||[]).filter(r=>mapList(r.list)===t).map(r=>eff(r).odds); return xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0; }
+function renderBankroll(){
+  const start=num('bk_start',1000); const real=computeRealised(start);
+  const ci=(document.getElementById('bk_current').value||'').trim(); const current=ci?num('bk_current',start):(start+real.pl);
+  const tb=document.querySelector('#stakeTable tbody'); tb.innerHTML=''; const labels={LOW:'LOW',MID:'MID',HIGH:'HIGH',LUCKY:'LUCKY SHOT'};
+  BK_TIERS.forEach(t=>{ const r=pctRange(t); const sMin=current*r[0]/100,sMax=current*r[1]/100,ao=avgOdd(t); const wMin=ao?sMin*(ao-1):0,wMax=ao?sMax*(ao-1):0;
+    tb.innerHTML+='<tr><td>'+labels[t]+'</td><td>'+r[0]+' - '+r[1]+'%</td><td>EUR '+sMin.toFixed(2)+' - '+sMax.toFixed(2)+'</td><td>'+(ao?ao.toFixed(2):'.')+'</td><td class="pos">'+(ao?'+EUR '+wMin.toFixed(2)+' - '+wMax.toFixed(2):'.')+'</td></tr>'; });
+  const pend=(window.RESULTS||[]).filter(r=>{ const u=eff(r).result.toUpperCase(); return u!=='W'&&u!=='V'; });
+  let dayMin=0,dayMax=0; pend.forEach(r=>{ const rr=pctRange(mapList(r.list)); dayMin+=current*rr[0]/100; dayMax+=current*rr[1]/100; });
+  const pMin=current?dayMin/current*100:0,pMax=current?dayMax/current*100:0,maxday=num('bk_maxday',6),warn=pMax>maxday;
+  document.getElementById('dayExposure').innerHTML='Openstaande lijsten vandaag: <b>'+pend.length+'</b>, totale inzet <b>EUR '+dayMin.toFixed(2)+' - '+dayMax.toFixed(2)+'</b> (<span class="'+(warn?'neg':'pos')+'">'+pMin.toFixed(1)+'% - '+pMax.toFixed(1)+'%</span> van bankroll, limiet '+maxday.toFixed(0)+'%). '+(warn?'<span class="neg">Bovengrens boven je daglimiet, blijf richting de onderkant.</span>':'Binnen je daglimiet.');
+  const roi=real.staked?real.pl/real.staked*100:0,plC=real.pl>=0?'pos':'neg';
+  document.getElementById('bkStats').innerHTML='<div class="stat"><div class="v">EUR '+start.toFixed(0)+'</div><div class="l">Start bankroll</div></div>'+
+    '<div class="stat"><div class="v '+(current>=start?'pos':'neg')+'">EUR '+current.toFixed(2)+'</div><div class="l">Huidige bankroll</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(real.pl>=0?'+':'')+'EUR '+real.pl.toFixed(2)+'</div><div class="l">Gerealiseerde P/L</div></div>'+
+    '<div class="stat"><div class="v '+plC+'">'+(roi>=0?'+':'')+roi.toFixed(0)+'%</div><div class="l">ROI (midden range)</div></div>'+
+    '<div class="stat"><div class="v">'+real.wins+'/'+real.settled+'</div><div class="l">Gewonnen/afgerond</div></div>';
+}
+
+function dateFromMessages(text){ const m=(text||'').match(/(\d{2}-\d{2}-\d{4})/); return m?m[1]:null; }
+function loadArchiveMap(){ try{ return JSON.parse(localStorage.getItem('ba_archive')||'{}'); }catch(e){ return {}; } }
+function archiveDay(text){ const d=dateFromMessages(text); if(!d) return; const map=loadArchiveMap(); map[d]=text; localStorage.setItem('ba_archive', JSON.stringify(map)); }
+function renderArchiveSelect(){ const sel=document.getElementById('archiveDate'); if(!sel) return; const map=loadArchiveMap(); const keys=Object.keys(map).sort((a,b)=>{ const pa=a.split('-').reverse().join(''),pb=b.split('-').reverse().join(''); return pb.localeCompare(pa); }); sel.innerHTML=keys.length?keys.map(k=>'<option value="'+k+'">'+k+'</option>').join(''):'<option value="">(nog geen archief)</option>'; viewArchive(); }
+function viewArchive(){ const sel=document.getElementById('archiveDate'); const view=document.getElementById('archiveView'); if(!sel||!view) return; const text=loadArchiveMap()[sel.value]; if(!text){ view.innerHTML='<p class="small">Geen lijsten voor deze dag.</p>'; return; } const blocks=text.split(/^\s*===NEXT MESSAGE===\s*$/m).map(s=>s.trim()).filter(s=>s); view.innerHTML=blocks.map(b=>'<div class="card"><div class="disc">'+renderDiscord(b)+'</div></div>').join(''); }
+function loadToday(){ document.getElementById('raw').value=DAILY_MESSAGES; localStorage.setItem('ba_messages',DAILY_MESSAGES); localStorage.setItem('ba_msg_version',DAILY_VERSION); archiveDay(DAILY_MESSAGES); parseMessages(); renderArchiveSelect(); log('Lijsten van vandaag geladen.', 'ok'); setStatus('Lijsten van vandaag opnieuw geladen ('+messages.length+' lijsten, '+DAILY_VERSION+').','ok'); }
+function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=function(){ let txt=reader.result||''; const m=txt.match(/DAILY_MESSAGES\s*=\s*`([\s\S]*?)`;/); if(m) txt=m[1]; document.getElementById('raw').value=txt; localStorage.setItem('ba_messages',txt); archiveDay(txt); parseMessages(); renderArchiveSelect(); log('Lijsten geimporteerd uit '+f.name+'.', 'ok'); setStatus('Lijsten geimporteerd uit '+f.name+' ('+messages.length+' lijsten).','ok'); }; reader.readAsText(f); input.value=''; }
+
+(function(){
+  try{
+    const legacy=localStorage.getItem('ba_webhook');
+    CHANNELS.forEach(c=>{ const saved=localStorage.getItem('ba_hook_'+c); let val=saved!==null?saved:''; if(saved===null&&c==='LOW') val=legacy||DEFAULT_WEBHOOK; document.getElementById('hook_'+c).value=val; });
+    const rHook=localStorage.getItem('ba_hook_RESULTS'); if(rHook!==null) document.getElementById('hook_RESULTS').value=rHook;
+    const vl=localStorage.getItem('ba_vip_link'); if(vl!==null) document.getElementById('vip_link').value=vl;
+    if(localStorage.getItem('ba_autoshare')==='1') document.getElementById('autoShare').checked=true;
+
+    const storedVer=localStorage.getItem('ba_msg_version');
+    let raw=localStorage.getItem('ba_messages');
+    let source='browsergeheugen';
+    if(storedVer!==DAILY_VERSION || !raw || !raw.trim()){
+      raw=DAILY_MESSAGES; localStorage.setItem('ba_messages',raw); localStorage.setItem('ba_msg_version',DAILY_VERSION); source='nieuwe lijsten ('+DAILY_VERSION+')';
+    }
+    document.getElementById('raw').value=raw; archiveDay(raw);
+    BK_KEYS.forEach(k=>{ const v=localStorage.getItem('ba_'+k); if(v!==null){ const el=document.getElementById(k); if(el) el.value=v; } });
+
+    parseMessages(); renderBetEditor(); renderResults(); renderBankroll(); renderShare(); renderArchiveSelect();
+
+    if(messages.length){ setStatus('<b>'+messages.length+' lijsten geladen</b> ('+source+'). Datum: '+(dateFromMessages(raw)||'onbekend')+'. Alles werkt.', 'ok'); }
+    else { setStatus('Geen lijsten beschikbaar. Klik "Laad lijsten van vandaag" of importeer een bestand.', 'warn'); }
+    log('Dashboard geladen.', 'info');
+  }catch(err){
+    setStatus('Er ging iets mis bij het laden: '+err.message+'. Probeer de pagina te herladen (Ctrl+F5).', 'err');
+    try{ log('INIT-FOUT: '+err.message, 'err'); }catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
