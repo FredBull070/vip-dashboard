@@ -47,6 +47,7 @@
   .tabbtn{background:var(--panel);border:1px solid var(--border);color:var(--muted);padding:10px 18px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;}
   .tabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <!-- PASSWORD GATE -->
@@ -117,6 +118,8 @@ function blGateSubmit(){
   <div class="tabbar">
     <button class="tabbtn active" id="tb-bets" onclick="showTab('bets')">Bets &amp; versturen</button>
     <button class="tabbtn" id="tb-bank" onclick="showTab('bank')">Bankroll</button>
+    <button class="tabbtn" id="tb-leden" onclick="showTab('leden')">👥 Leden</button>
+    <button class="tabbtn" id="tb-email" onclick="showTab('email')">📧 E-mail</button>
   </div>
 
   <div id="tab-bets">
@@ -219,6 +222,70 @@ function blGateSubmit(){
       <h2>Bankroll monitor</h2>
       <div id="bkStats" class="statgrid"></div>
       <p class="small">Berekend uit afgeronde resultaten met vlakke inzet op het midden van je risk range per lijst (% van start-bankroll).</p>
+    </div>
+  </div>
+
+
+  <!-- ═══ LEDEN TAB ═══ -->
+  <div id="tab-leden" style="display:none">
+    <div class="panel">
+      <h2>Overzicht leden</h2>
+      <div class="statgrid" id="ledStats" style="margin-bottom:16px"></div>
+      <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <input type="text" id="ledSearch" placeholder="Zoeken op naam of e-mail…" style="flex:1;min-width:200px;background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13px">
+        <select id="ledFilter" style="background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13px">
+          <option value="all">Alle leden</option>
+          <option value="vip">Alleen VIP</option>
+          <option value="free">Alleen free</option>
+        </select>
+        <button class="btn-accent mini" onclick="loadLeden()">↻ Vernieuwen</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table id="ledTable">
+          <thead><tr><th>Naam</th><th>E-mail</th><th>Plan</th><th>Lid sinds</th><th>Ref</th><th>Actie</th></tr></thead>
+          <tbody id="ledBody"><tr><td colspan="6" style="padding:18px;color:var(--muted)">Laden…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:10px" id="ledCount"></p>
+    </div>
+  </div>
+
+  <!-- ═══ EMAIL TAB ═══ -->
+  <div id="tab-email" style="display:none">
+    <div class="panel">
+      <h2>E-mail versturen via Brevo</h2>
+      <label>Aan</label>
+      <select id="emTo" style="width:100%;background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:12px">
+        <option value="all">Alle leden (free + VIP)</option>
+        <option value="vip">Alleen VIP-leden</option>
+        <option value="free">Alleen free leden</option>
+        <option value="one">Eén persoon (vul e-mail in)</option>
+      </select>
+      <div id="emOneWrap" style="display:none;margin-bottom:12px">
+        <label>E-mailadres</label>
+        <input type="email" id="emOneAddr" placeholder="naam@voorbeeld.com" style="width:100%;background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13px">
+      </div>
+      <label>Onderwerp</label>
+      <input type="text" id="emSubject" placeholder="bijv. Dagelijkse pick — 2 juli" style="width:100%;background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:12px">
+      <label>Inhoud (HTML of platte tekst)</label>
+      <textarea id="emBody" placeholder="Schrijf hier je bericht…" style="width:100%;min-height:200px;background:#1a1d26;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-size:13px;font-family:inherit;resize:vertical;margin-bottom:12px"></textarea>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn-accent" onclick="sendEmail()">📤 Versturen</button>
+        <button class="btn-gray mini" onclick="previewEmail()">👁 Preview</button>
+        <span id="emStatus" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+      <div id="emPreview" style="display:none;margin-top:16px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <div style="background:#222632;padding:8px 12px;font-size:11px;color:var(--muted)">PREVIEW</div>
+        <iframe id="emFrame" style="width:100%;min-height:300px;border:none;background:#fff"></iframe>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Snelle templates</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-gray mini" onclick="useTemplate('pick')">📊 Dagelijkse pick</button>
+        <button class="btn-gray mini" onclick="useTemplate('vip')">👑 VIP-aanbieding</button>
+        <button class="btn-gray mini" onclick="useTemplate('update')">📣 Update/nieuws</button>
+      </div>
     </div>
   </div>
 
@@ -572,6 +639,184 @@ function importFile(input){ const f=input.files&&input.files[0]; if(!f) return; 
     try{ log('INIT-FOUT: '+err.message, 'err'); }catch(e){}
   }
 })();
+
+/* ══════════════════════════════════════════════════════
+   LEDEN & E-MAIL  —  BetLife365 Dashboard
+══════════════════════════════════════════════════════ */
+var _sbSvc = null;
+function getSb(){
+  if(!_sbSvc) _sbSvc = supabase.createClient('https://maycvvncwyllbxtzjbka.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1heWN2dm5jd3lsbGJ4dHpqYmthIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5ODY1OCwiZXhwIjoyMDk4NTc0NjU4fQ.kG9d7UBlSpm49LiX97KVKSvExrWqvL_6oXKeSpuHN_k');
+  return _sbSvc;
+}
+
+/* ── Show tab (extend existing showTab) ── */
+var _origShowTab = showTab;
+showTab = function(name){
+  _origShowTab(name);
+  document.getElementById('tab-leden').style.display = name==='leden'?'block':'none';
+  document.getElementById('tab-email').style.display = name==='email'?'block':'none';
+  document.getElementById('tb-leden').classList.toggle('active', name==='leden');
+  document.getElementById('tb-email').classList.toggle('active', name==='email');
+  if(name==='leden') loadLeden();
+};
+
+/* ── Leden ── */
+var _ledenCache = [];
+async function loadLeden(){
+  var body = document.getElementById('ledBody');
+  body.innerHTML = '<tr><td colspan="6" style="padding:18px;color:#9aa0ad">Laden…</td></tr>';
+  var { data, error } = await getSb().from('profiles').select('*').order('created_at', {ascending:false});
+  if(error){ body.innerHTML='<tr><td colspan="6" style="color:#ed4245;padding:12px">'+error.message+'</td></tr>'; return; }
+  _ledenCache = data || [];
+  renderLeden();
+}
+
+function renderLeden(){
+  var q = (document.getElementById('ledSearch').value||'').toLowerCase();
+  var f = document.getElementById('ledFilter').value;
+  var rows = _ledenCache.filter(function(m){
+    if(f==='vip' && m.plan!=='vip') return false;
+    if(f==='free' && m.plan==='vip') return false;
+    if(q && !(m.email||'').toLowerCase().includes(q) && !(m.full_name||'').toLowerCase().includes(q)) return false;
+    return true;
+  });
+  var vipCount = _ledenCache.filter(m=>m.plan==='vip').length;
+  var thisWeek = _ledenCache.filter(function(m){ var d=new Date(m.created_at); return Date.now()-d.getTime()<7*86400000; }).length;
+  document.getElementById('ledStats').innerHTML =
+    '<div class="stat"><div class="v">'+_ledenCache.length+'</div><div class="l">Totaal</div></div>'+
+    '<div class="stat"><div class="v" style="color:#faa61a">'+vipCount+'</div><div class="l">VIP</div></div>'+
+    '<div class="stat"><div class="v" style="color:#3ba55d">'+(_ledenCache.length-vipCount)+'</div><div class="l">Free</div></div>'+
+    '<div class="stat"><div class="v">+'+thisWeek+'</div><div class="l">Deze week</div></div>';
+  document.getElementById('ledCount').textContent = rows.length + ' van ' + _ledenCache.length + ' leden';
+  var html = rows.map(function(m){
+    var since = m.created_at ? new Date(m.created_at).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}) : '-';
+    var planBadge = m.plan==='vip'
+      ? '<span class="badge b-w">VIP</span>'
+      : '<span class="badge" style="background:rgba(154,160,173,.18);color:#9aa0ad">Free</span>';
+    var toggleLabel = m.plan==='vip' ? 'Zet naar Free' : 'Upgrade naar VIP';
+    var toggleStyle = m.plan==='vip' ? 'btn-gray' : 'btn-yellow';
+    return '<tr>'+
+      '<td>'+(m.full_name||'—')+'</td>'+
+      '<td><a href="mailto:'+m.email+'" style="color:#5865F2">'+m.email+'</a></td>'+
+      '<td>'+planBadge+'</td>'+
+      '<td>'+since+'</td>'+
+      '<td style="color:#9aa0ad;font-size:12px">'+(m.ref_by||'-')+'</td>'+
+      '<td style="display:flex;gap:6px;flex-wrap:wrap;padding:6px 10px">'+
+        '<button class="'+toggleStyle+' mini" onclick="togglePlan(''+m.id+'',''+m.plan+'')">'+toggleLabel+'</button>'+
+        '<button class="btn-accent mini" onclick="emailLid(''+m.email+'',''+m.full_name+'')">📧</button>'+
+      '</td>'+
+    '</tr>';
+  }).join('');
+  document.getElementById('ledBody').innerHTML = html || '<tr><td colspan="6" style="padding:18px;color:#9aa0ad">Geen leden gevonden.</td></tr>';
+}
+
+async function togglePlan(id, currentPlan){
+  var newPlan = currentPlan === 'vip' ? 'free' : 'vip';
+  var { error } = await getSb().from('profiles').update({plan: newPlan}).eq('id', id);
+  if(error){ alert('Fout: '+error.message); return; }
+  var m = _ledenCache.find(x=>x.id===id);
+  if(m) m.plan = newPlan;
+  renderLeden();
+}
+
+document.getElementById('ledSearch').addEventListener('input', renderLeden);
+document.getElementById('ledFilter').addEventListener('change', renderLeden);
+
+function emailLid(email, name){
+  showTab('email');
+  document.getElementById('emTo').value = 'one';
+  document.getElementById('emOneWrap').style.display = 'block';
+  document.getElementById('emOneAddr').value = email;
+  document.getElementById('emSubject').focus();
+}
+
+/* ── Email ── */
+document.getElementById('emTo').addEventListener('change', function(){
+  document.getElementById('emOneWrap').style.display = this.value==='one'?'block':'none';
+});
+
+var TEMPLATES = {
+  pick: {
+    subject: 'Dagelijkse pick — ' + new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'}),
+    body: '<h2 style="color:#ff7a1a">📊 Pick van vandaag</h2><p>Hier is de gratis pick van vandaag:</p><p><strong>[WEDSTRIJD]</strong><br>[SELECTIE] @ [ODDS]</p><p style="color:#9aa0ad;font-size:13px">Inzet: [UNITS]u · Analysestatus: [REDEN]</p><p>Volledig VIP-card: <a href="https://betlife365.com/#pricing">upgrade hier</a>.</p>'
+  },
+  vip: {
+    subject: '👑 Exclusief VIP-aanbod — beperkte tijd',
+    body: '<h2 style="color:#ff7a1a">👑 Word VIP-lid</h2><p>Als free lid heb je toegang tot onze gratis dagelijkse pick. Maar VIP-leden krijgen:</p><ul><li>Volledig dagelijks kaartje met analyse</li><li>Alle prop bets &amp; parleys</li><li>Direct Discord-toegang</li></ul><p><a href="https://betlife365.com/#pricing" style="background:#ff7a1a;color:#1c0d00;padding:12px 24px;border-radius:20px;text-decoration:none;font-weight:700;display:inline-block">Upgrade voor €80/maand →</a></p>'
+  },
+  update: {
+    subject: '📣 Update van BetLife365',
+    body: '<h2 style="color:#ff7a1a">📣 Nieuws &amp; update</h2><p>Hallo,</p><p>[SCHRIJF JE BERICHT HIER]</p><p>Groeten,<br><strong>Fred — BetLife365</strong></p>'
+  }
+};
+function useTemplate(t){
+  var tpl = TEMPLATES[t];
+  if(!tpl) return;
+  document.getElementById('emSubject').value = tpl.subject;
+  document.getElementById('emBody').value = tpl.body;
+}
+
+function previewEmail(){
+  var body = document.getElementById('emBody').value;
+  var wrap = document.getElementById('emPreview');
+  var frame = document.getElementById('emFrame');
+  wrap.style.display = wrap.style.display==='none'?'block':'none';
+  if(wrap.style.display==='block'){
+    var doc = frame.contentDocument || frame.contentWindow.document;
+    doc.open(); doc.write('<body style="font-family:system-ui,sans-serif;padding:20px;color:#111">'+body+'</body>'); doc.close();
+  }
+}
+
+async function sendEmail(){
+  var st = document.getElementById('emStatus');
+  var subject = document.getElementById('emSubject').value.trim();
+  var body = document.getElementById('emBody').value.trim();
+  var toType = document.getElementById('emTo').value;
+  if(!subject || !body){ st.textContent='Vul onderwerp en inhoud in.'; return; }
+  st.textContent = 'Bezig…';
+
+  // Build recipient list
+  var recipients = [];
+  if(toType === 'one'){
+    var addr = document.getElementById('emOneAddr').value.trim();
+    if(!addr){ st.textContent='Vul een e-mailadres in.'; return; }
+    recipients = [{email:addr,name:''}];
+  } else {
+    if(!_ledenCache.length) await loadLeden();
+    recipients = _ledenCache
+      .filter(function(m){ return toType==='all' || m.plan===toType; })
+      .map(function(m){ return {email:m.email, name:m.full_name||''}; });
+  }
+  if(!recipients.length){ st.textContent='Geen ontvangers gevonden.'; return; }
+
+  // Wrap plain text in basic HTML if no tags present
+  var html = body.includes('<') ? body : '<p>'+body.replace(/\n/g,'<br>')+'</p>';
+  var fullHtml = '<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0c0d10;color:#e9eaee;padding:32px 20px"><div style="max-width:560px;margin:0 auto;background:#15171c;border:1px solid #23262e;border-radius:16px;padding:32px">'+html+'<p style="margin-top:32px;font-size:11px;color:#454a55">BetLife365 · <a href="https://betlife365.com/member.html" style="color:#ff7a1a">Uitschrijven/voorkeuren</a> · 18+ speel verantwoord</p></div></body></html>';
+
+  // Send via Brevo transactional (batch max 50 per call)
+  var BREVO_KEY = 'xkeysib-d26f1fbfb7288a105a73f748506ff05a1a6662e6d6f43385116c5e068b6cd124-xVZ3VMw';
+  var errors = 0;
+  for(var i=0; i<recipients.length; i+=50){
+    var batch = recipients.slice(i, i+50);
+    var res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method:'POST',
+      headers:{'api-key':BREVO_KEY,'Content-Type':'application/json'},
+      body: JSON.stringify({
+        sender:{name:'BetLife365',email:'hello@betlife365.com'},
+        to: batch,
+        subject: subject,
+        htmlContent: fullHtml
+      })
+    });
+    if(!res.ok) errors++;
+  }
+  var total = recipients.length;
+  st.textContent = errors===0
+    ? '✓ Verstuurd naar '+total+' ontvanger'+(total>1?'s':'')+' via Brevo!'
+    : 'Klaar met '+errors+' fouten. '+total+' ontvangers geprobeerd.';
+  st.style.color = errors===0 ? '#3ba55d' : '#ed4245';
+}
+
 </script>
 </body>
 </html>
