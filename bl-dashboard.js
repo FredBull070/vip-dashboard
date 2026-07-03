@@ -935,15 +935,25 @@
   function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
   function timeStr(e){ if(!e.time) return ''; var ep=koEpoch(e); if(ep==null) return '🕒 '+e.time; var now=Date.now(); if(now>=ep&&now<ep+3.5*3600000) return '🔴 Live'; if(now>=ep) return '✅ done'; var m=Math.round((ep-now)/60000); if(m<60) return '⏱ '+e.time+' (in '+m+'m)'; if(m<1440) return '🕒 '+e.time+' (in '+Math.round(m/60)+'h)'; return '🕒 '+e.time; }
   function implied(card){ var o=card.querySelector('.rc-odds'); if(!o)return ''; var m=(o.textContent||'').match(/(\d+\.\d+)/); if(!m)return ''; var v=parseFloat(m[1]); if(!(v>1))return ''; return Math.round(100/v)+'% implied'; }
+  function createdFor(card){
+    var iso = (card.closest && card.closest('#page-propcards'))
+      ? (window.DAILY_PROPS_VERSION || (window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date) || '')
+      : (window.DAILY_VERSION || (window.EMBEDDED_CARDS&&window.EMBEDDED_CARDS.date) || '');
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(iso||'')) return '';
+    var p=(''+iso).split('-'); return '🆕 Created '+p[2]+'-'+p[1]+'-'+p[0];
+  }
   function metaFor(card){
-    var f=evFor(card.textContent||''); if(!f) return null;
-    var e=f.ev,parts=[];
-    if(e.date) parts.push('🗓 '+wd(e.date));
-    parts.push(f.sp[0]+' '+f.sp[1]);
-    var ts=timeStr(e); if(ts) parts.push(ts);
-    var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
-    var ip=implied(card); if(ip) parts.push(ip);
-    return parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+    var parts=[];
+    var f=evFor(card.textContent||'');
+    if(f){ var e=f.ev;
+      if(e.date) parts.push('🗓 '+wd(e.date));
+      parts.push(f.sp[0]+' '+f.sp[1]);
+      var ts=timeStr(e); if(ts) parts.push(ts);
+      var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
+      var ip=implied(card); if(ip) parts.push(ip);
+    }
+    var cr=createdFor(card); if(cr) parts.push(cr);
+    return parts.length? parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;') : null;
   }
   function paint(){
     [].slice.call(document.querySelectorAll('#page-betcards .rcard, #page-propcards .rcard')).forEach(function(card){
