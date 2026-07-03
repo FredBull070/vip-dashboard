@@ -1,7 +1,7 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
 window.DAILY_VERSION = "2026-07-03";
 
-window.DAILY_MESSAGES = `**🟢 #10 Safe Builder Parley (⚽ Football): 03-07-2026**
+window.DAILY_MESSAGES = `**🟢 #13 Safe Builder Parley (⚽ Football): 03-07-2026**
 
 **:small_orange_diamond: Colombia x Ghana**
 Colombia to win (match result) @ 1.50
@@ -19,7 +19,7 @@ Colombia were composed and defensively solid in the group stage and have the edg
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 #11 Value Builder Parley (⚽ Football): 03-07-2026**
+**🟡 #14 Value Builder Parley (⚽ Football): 03-07-2026**
 
 **:small_orange_diamond: Australia x Egypt**
 Egypt to win (match result) @ 2.45
@@ -37,7 +37,7 @@ Egypt were the more efficient side through the group stage and are narrow favour
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 #12 Jackpot Builder Parley (⚽ Football): 03-07-2026**
+**🔴 #15 Jackpot Builder Parley (⚽ Football): 03-07-2026**
 
 **:small_orange_diamond: Australia x Egypt**
 Australia to win (match result) @ 3.25
