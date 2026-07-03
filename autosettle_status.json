@@ -1,10 +1,40 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-03T20:54:37.326Z",
+  "ran_at": "2026-07-03T20:57:37.325Z",
   "enabled": true,
+  "dryRun": false,
   "checked": 22,
-  "settled": 0,
-  "results": [],
+  "settled": 1,
+  "would_settle": 1,
+  "paused": false,
+  "results": [
+    {
+      "betid": "card|03-07-2026|Australia x Egypt|egypt to win",
+      "match": "Australia x Egypt",
+      "selection": "Egypt to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "L",
+      "settled_at": "2026-07-03T20:57:37.871Z",
+      "settled_by": "auto",
+      "settle_note": "draw 1-1",
+      "score": "1-1",
+      "source": "espn"
+    },
+    {
+      "betid": "card|03-07-2026|Australia x Egypt|australia to win",
+      "match": "Australia x Egypt",
+      "selection": "Australia to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "L",
+      "settled_at": "2026-07-03T20:57:37.933Z",
+      "settled_by": "auto",
+      "settle_note": "draw 1-1",
+      "score": "1-1",
+      "source": "espn"
+    }
+  ],
   "errors": [],
   "aborted": null
 }
