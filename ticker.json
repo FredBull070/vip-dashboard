@@ -1,13 +1,12 @@
 [
-  { "s": "football", "m": "Spain x Austria", "k": "Spain", "o": 1.32 },
-  { "s": "football", "m": "Portugal x Croatia", "k": "Portugal", "o": 1.74 },
-  { "s": "football", "m": "Switzerland x Algeria", "k": "Switzerland", "o": 2.02 },
-  { "s": "tennis", "m": "Taylor Fritz x Patrick Kypson", "k": "Fritz", "o": 1.05 },
-  { "s": "tennis", "m": "Alexander Zverev x Valentin Royer", "k": "Zverev", "o": 1.04 },
-  { "s": "tennis", "m": "Frances Tiafoe x Jan Choinski", "k": "Tiafoe", "o": 1.14 },
-  { "s": "tennis", "m": "Flavio Cobolli x James Duckworth", "k": "Cobolli", "o": 1.35 },
-  { "s": "tennis", "m": "Jiri Lehecka x Alex Molcan", "k": "Lehecka", "o": 1.20 },
-  { "s": "tennis", "m": "Karen Khachanov x Yannick Hanfmann", "k": "Khachanov", "o": 1.57 },
-  { "s": "tennis", "m": "Jaume Munar x Jacob Fearnley", "k": "Munar", "o": 1.70 },
-  { "s": "tennis", "m": "Marcos Giron x Quentin Halys", "k": "Giron", "o": 1.82 }
+  { "s": "football", "m": "Australia x Egypt", "k": "Egypt", "o": 2.45 },
+  { "s": "football", "m": "Argentina x Cape Verde", "k": "Over 2.5", "o": 1.62 },
+  { "s": "football", "m": "Colombia x Ghana", "k": "Colombia", "o": 1.50 },
+  { "s": "tennis", "m": "Sinner x Brooksby", "k": "Sinner", "o": 1.04 },
+  { "s": "tennis", "m": "Djokovic x Rinderknech", "k": "Djokovic", "o": 1.18 },
+  { "s": "tennis", "m": "Sabalenka x Ostapenko", "k": "Sabalenka", "o": 1.33 },
+  { "s": "tennis", "m": "Auger-Aliassime x Zheng", "k": "Auger-Aliassime", "o": 1.30 },
+  { "s": "tennis", "m": "Osaka x Kasatkina", "k": "Osaka", "o": 1.90 },
+  { "s": "tennis", "m": "Jodar x Mochizuki", "k": "Jodar", "o": 1.55 },
+  { "s": "tennis", "m": "Davidovich x Fucsovics", "k": "Davidovich", "o": 1.60 }
 ]
