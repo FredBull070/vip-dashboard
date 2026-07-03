@@ -1,10 +1,10 @@
 {
   "type": "all",
-  "period": "week",
-  "label": "All · this week",
+  "period": "year",
+  "label": "All · this year",
   "roi": null,
   "bets": null,
   "approved_by": "fred",
-  "updated_at": "2026-07-02T10:51:22.921Z",
+  "updated_at": "2026-07-03T18:45:09.223Z",
   "via": "worker"
 }
