@@ -1,60 +1,114 @@
-/* BetLife365 daily PROP cards - written by the prop-cards-builder task, read by the dashboard.
-   Same structure as DAILY_CARDS (MATCH/MARKET/SELECTION/ODDS/STAKE/RISK/ANALYSIS, grouped by
-   risk: low=Core, medium=Value, high=Aggressive). Player props across every sport we offer.
-   Code stays separate from the dashboard. This is the seed slate; the builder replaces it daily. */
-window.DAILY_PROPS_VERSION = "2026-06-28";
-
-window.DAILY_PROPS = `SPORT: Football
-MATCH: Brazil x Japan
+window.DAILY_PROPS_VERSION = "2026-07-03";
+window.DAILY_PROPS = `SPORT: Voetbal
+MATCH: Argentina x Cape Verde (WK R32)
 MARKET: Shots on target
-SELECTION: Vinicius Jr 2+ shots on target
-ODDS: 1.90
+SELECTION: Lionel Messi 1+ on target
+ODDS: 1.40*
 STAKE: 1u
 RISK: low
-ANALYSIS: Brazil's main creative threat against a Japan side that has to chase; high shot volume expected from the left.
-===
-SPORT: Football
-MATCH: Germany x Paraguay
-MARKET: Anytime goalscorer
-SELECTION: Florian Wirtz anytime scorer
-ODDS: 2.40
-STAKE: 1u
-RISK: medium
-ANALYSIS: Germany should dominate territory; Wirtz arrives late into the box and takes set pieces.
-===
-SPORT: Football
-MATCH: South Africa x Canada
-MARKET: Player shots
-SELECTION: Jonathan David 3+ shots
-ODDS: 2.10
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Canada's focal point up front against a defensive South Africa; volume play on the striker.
+ANALYSIS: Messi speelt zijn beste WK, Argentina 3 uit 3 met 8 goals. Tegen een defensief Cape Verde schiet hij vrijwel gegarandeerd minstens een keer op doel.
 ===
 SPORT: Tennis
-MATCH: Eastbourne ATP Final
-MARKET: Player aces
-SELECTION: Ugo Humbert 8+ aces
-ODDS: 2.00
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Big lefty serve on grass in a best-of-three final; ace count projects high.
+MATCH: Wimbledon R3 - Jannik Sinner x Jenson Brooksby
+MARKET: Match winner
+SELECTION: Jannik Sinner to win
+ODDS: 1.10*
+STAKE: 1u
+RISK: low
+ANALYSIS: Titelverdediger op gras tegen een lager gerankte tegenstander. Klasseverschil groot; degelijke ankerpick.
 ===
-SPORT: Football
-MATCH: Netherlands x Morocco
-MARKET: Player to be carded
-SELECTION: Sofyan Amrabat to be carded
-ODDS: 3.20
+SPORT: Tennis
+MATCH: Wimbledon R3 - Coco Gauff x Claire Liu
+MARKET: Match winner
+SELECTION: Coco Gauff to win
+ODDS: 1.16*
+STAKE: 1u
+RISK: low
+ANALYSIS: Zevende reekshoofd tegen ongeplaatste landgenote. Gauff duidelijke favoriet; lage maar solide odds.
+===
+SPORT: Voetbal
+MATCH: Argentina x Cape Verde (WK R32)
+MARKET: Anytime goalscorer
+SELECTION: Lionel Messi
+ODDS: 1.95*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Zware favoriet tegen debutant Cape Verde. Messi is Argentina's primaire dreiging en penaltynemer; reele kans op een doelpunt.
+===
+SPORT: Voetbal
+MATCH: Colombia x Ghana (WK R32)
+MARKET: Anytime goalscorer
+SELECTION: Luis Diaz
+ODDS: 2.70*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Colombia favoriet en Diaz hun scherpste aanvaller vanaf links. Tegen een low block van Ghana krijgt hij kansen; waarde bij deze odds.
+===
+SPORT: Voetbal
+MATCH: Colombia x Ghana (WK R32)
+MARKET: Shots on target
+SELECTION: James Rodriguez 1+ on target
+ODDS: 1.90*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: James is Colombia's spelmaker en set-piece specialist met 31 interlandgoals. Tegen een compact Ghana zoekt hij het van afstand; minstens een schot op doel is waarschijnlijk.
+===
+SPORT: Voetbal
+MATCH: Australia x Egypt (WK R32)
+MARKET: Anytime goalscorer
+SELECTION: Omar Marmoush
+ODDS: 2.75*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Met Salah een twijfelgeval (hamstring) leunt Egypte extra op Marmoush als aanvallende dreiging. Vaste basisspeler; goede prijs op anytime.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3 - Novak Djokovic x Arthur Rinderknech
+MARKET: Games handicap
+SELECTION: Novak Djokovic -4.5 games
+ODDS: 1.75*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Djokovic opent Centre Court als duidelijke favoriet. Meer waarde dan de kale matchwinnaar; hij wint doorgaans comfortabel met marge op gras.
+===
+SPORT: Voetbal
+MATCH: Colombia x Ghana (WK R32)
+MARKET: Player to be booked
+SELECTION: Thomas Partey carded
+ODDS: 3.00*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Combative midfielder likely chasing the game in a tight knockout tie; card risk elevated.`;
-
-window.EMBEDDED_PROPS = { date: "2026-06-28" };
-
-/* Filled by the evening-settlement task once a prop is confirmed by verified player data.
-   Append-only, dedupe by betid "prop|DD-MM-YYYY|<Match>|<Selection>". The dashboard merges
-   these into the Track Record. No result is ever written without verified player-level data. */
+ANALYSIS: Partey schermt de Ghanese defensie af in een knock-out en pakt vaak tactische overtredingen op. In een strak, fysiek duel reele kaartkans.
+===
+SPORT: Voetbal
+MATCH: Argentina x Cape Verde (WK R32)
+MARKET: Anytime goalscorer
+SELECTION: Lautaro Martinez
+ODDS: 2.20*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Spits van de titelhouder tegen zwak Cape Verde. Als hij start of invalt bij ruime voorsprong krijgt hij kansen; nette prijs voor een anytime.
+===
+SPORT: Voetbal
+MATCH: Colombia x Ghana (WK R32)
+MARKET: Anytime assist
+SELECTION: James Rodriguez
+ODDS: 3.25*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: James levert het gros van Colombia's aangevers via open spel en corners. Tegen een low block zijn set-pieces zijn beste kans op een assist.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3 - Aryna Sabalenka x Jelena Ostapenko
+MARKET: Player aces
+SELECTION: Jelena Ostapenko 4+ aces
+ODDS: 2.10*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Ostapenko is een agressieve, hard servende speelster op gras. Tegen Sabalenka gaat ze vol door op de opslag; 4+ aces is haalbaar.`;
+window.EMBEDDED_PROPS = { date: "2026-07-03" };
 window.DAILY_PROPS_SETTLED = [];
+
 
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
 /* ---------------------------------------------------------------------------
@@ -993,25 +1047,15 @@ window.DAILY_PROPS_SETTLED = [];
   function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
   function timeStr(e){ if(!e.time) return ''; var ep=koEpoch(e); if(ep==null) return '🕒 '+e.time; var now=Date.now(); if(now>=ep&&now<ep+3.5*3600000) return '🔴 Live'; if(now>=ep) return '✅ done'; var m=Math.round((ep-now)/60000); if(m<60) return '⏱ '+e.time+' (in '+m+'m)'; if(m<1440) return '🕒 '+e.time+' (in '+Math.round(m/60)+'h)'; return '🕒 '+e.time; }
   function implied(card){ var o=card.querySelector('.rc-odds'); if(!o)return ''; var m=(o.textContent||'').match(/(\d+\.\d+)/); if(!m)return ''; var v=parseFloat(m[1]); if(!(v>1))return ''; return Math.round(100/v)+'% implied'; }
-  function createdFor(card){
-    var iso = (card.closest && card.closest('#page-propcards'))
-      ? (window.DAILY_PROPS_VERSION || (window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date) || '')
-      : (window.DAILY_VERSION || (window.EMBEDDED_CARDS&&window.EMBEDDED_CARDS.date) || '');
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(iso||'')) return '';
-    var p=(''+iso).split('-'); return '🆕 Created '+p[2]+'-'+p[1]+'-'+p[0];
-  }
   function metaFor(card){
-    var parts=[];
-    var f=evFor(card.textContent||'');
-    if(f){ var e=f.ev;
-      if(e.date) parts.push('🗓 '+wd(e.date));
-      parts.push(f.sp[0]+' '+f.sp[1]);
-      var ts=timeStr(e); if(ts) parts.push(ts);
-      var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
-      var ip=implied(card); if(ip) parts.push(ip);
-    }
-    var cr=createdFor(card); if(cr) parts.push(cr);
-    return parts.length? parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;') : null;
+    var f=evFor(card.textContent||''); if(!f) return null;
+    var e=f.ev,parts=[];
+    if(e.date) parts.push('🗓 '+wd(e.date));
+    parts.push(f.sp[0]+' '+f.sp[1]);
+    var ts=timeStr(e); if(ts) parts.push(ts);
+    var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
+    var ip=implied(card); if(ip) parts.push(ip);
+    return parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
   }
   function paint(){
     [].slice.call(document.querySelectorAll('#page-betcards .rcard, #page-propcards .rcard')).forEach(function(card){
@@ -1024,74 +1068,4 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function boot(){ paint(); setInterval(paint,30000); document.addEventListener('click',function(){setTimeout(paint,350);},true); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(boot,700);}); else setTimeout(boot,700);
-})();
-
-
-/* ===========================================================================
-   PROP CARDS = DAILY BETTING CARDS parity  (added 03-07-2026)
-   Fred wants the Daily Prop Cards to look identical to the Daily Betting Cards
-   everywhere except the Discord channel/hook they land in. Two display-only
-   patches, no index.html edit needed:
-     1) buildPropChunks -> same disclaimer, same Safe/Value/Jackpot legend, same
-        per-card cardStr block, same footer, same spacing and 1900-char
-        chunking as the Daily Betting Cards. Only the title ("DAILY PROP CARDS")
-        and the section headers ("SAFE/VALUE/JACKPOT PROP CARDS") say "prop".
-        Still routed to the PROPS hook by the existing sendProps().
-     2) the prop page's risk sections (Core/Aggressive) are relabelled to
-        Safe/Jackpot so the dashboard page matches the betting-cards page.
-   Underlying risk values (low/medium/high) are never touched. */
-(function(){
-  function build(cards){
-    cards = cards || (typeof parseCards==='function'? parseCards(getPropsText()) : []);
-    if(!cards || !cards.length) return [];
-    var date=(window.EMBEDDED_PROPS && window.EMBEDDED_PROPS.date)? dmy(window.EMBEDDED_PROPS.date):'';
-    var header=':bar_chart: **DAILY PROP CARDS | '+date+'**\n'+
-      'BetLife365 does not provide fixed betting slips.\n'+
-      'Each Daily Card is a portfolio of selected positions, not a must-play list.\n'+
-      'You choose how to use it based on your own bankroll and risk preference.\n\n'+
-      '**:green_circle: Safe** → lowest risk positions\n'+
-      '**:yellow_circle: Value** → moderate risk positions\n'+
-      '**:red_circle: Jackpot** → high risk positions\n';
-    var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
-    var groups=[['low','**:green_circle: SAFE PROP CARDS**'],['medium','**:yellow_circle: VALUE PROP CARDS**'],['high','**:red_circle: JACKPOT PROP CARDS**']];
-    var msgs=[], cur=header, has=false;
-    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
-      var gh='\n\n'+g[1]+'\n';
-      cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
-        if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=(idx===0? g[1]+'\n\n':'')+cardStr(c)+'\n'; }
-        else { cur+=piece; } has=true; });
-    });
-    if(has) msgs.push(cur);
-    if(msgs.length){ for(var i=0;i<msgs.length-1;i++){ msgs[i]=msgs[i]+'\n⠀'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
-    // Match the cards pipeline's rename() tail: trim trailing blank/braille lines, push one U+2800.
-    msgs=msgs.map(function(ch){ var TL=ch.split('\n'); while(TL.length && /^[\s⠀]*$/.test(TL[TL.length-1])) TL.pop(); TL.push('⠀'); return TL.join('\n'); });
-    return msgs;
-  }
-  build.__dedup=true; // already final: tells the shared chunk-wrapper to leave it alone
-  function install(){
-    if(typeof window.cardStr==='function' && typeof window.getPropsText==='function' && typeof window.dmy==='function'){ window.buildPropChunks=build; return true; }
-    return false;
-  }
-  if(!install()){ var n=0, t=setInterval(function(){ if(install()||++n>60) clearInterval(t); }, 250); }
-})();
-
-(function(){
-  /* Prop page parity: relabel the risk sections + filter pills from
-     Core / Aggressive to Safe / Jackpot (Value already matches). Display only,
-     scoped to #page-propcards and #subbar; exact-word match so analysis text
-     and match names are never touched. Idempotent. */
-  function fix(root){ if(!root) return;
-    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, nodes=[];
-    while(n=w.nextNode()) nodes.push(n);
-    for(var i=0;i<nodes.length;i++){ var tn=nodes[i], t=tn.nodeValue; if(!t||!t.trim()) continue;
-      if(tn.parentNode && tn.parentNode.tagName==='OPTION') continue;
-      var core=t.replace(/[^A-Za-z]/g,'');
-      if(core==='Core'){ tn.nodeValue=t.replace('Core','Safe'); }
-      else if(core==='Aggressive'){ tn.nodeValue=t.replace('Aggressive','Jackpot'); }
-    }
-  }
-  function go(){ fix(document.getElementById('page-propcards')); fix(document.getElementById('subbar')); }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(go,850); }); else setTimeout(go,850);
-  setInterval(go, 1500);
-  document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
