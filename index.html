@@ -3,7 +3,7 @@
 <head>
   <script defer src="/vip-results-composer.js?v=1"></script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BetLife365 · Dashboard</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAgMTAwIj48dGV4dCB4PSI3NSIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtc2l6ZT0iNjYiIGZpbGw9IiNmNjg3MWYiPjM2NTwvdGV4dD48L3N2Zz4=">
 <style>
@@ -403,6 +403,36 @@
   .rcard:not(.collapsed) .rc-chev{transform:rotate(180deg);}
   .risk-head{display:flex;align-items:center;gap:9px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:var(--text);}
   .risk-head:first-child{margin-top:2px;}
+
+  /* ===== login logo + mobile polish (added 2026-07-04) ===== */
+  #gate .gate-logo{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 14px;}
+  #gate .gate-crown{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#ff7a1a,#ffa04d);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(255,122,26,.4);flex:0 0 auto;}
+  #gate .gate-crown svg{width:20px;height:20px;color:#1a0e02;}
+  #gate .gate-wm{font-size:22px;font-weight:800;letter-spacing:-.02em;color:#fff;}
+  #gate .gate-wm b{color:var(--accent);font-weight:800;}
+  #gate h2{font-size:15px !important;font-weight:600;color:var(--muted);margin:0 0 16px !important;}
+  #gate form{display:block;margin:0;}
+  #gate #g_err{color:var(--red);font-size:12.5px;min-height:16px;margin-top:8px;}
+
+  @supports(padding:max(0px)){
+    .topbar{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));}
+  }
+  @media(max-width:820px){
+    @supports(padding:max(0px)){
+      .main .app{padding-bottom:max(64px,calc(56px + env(safe-area-inset-bottom)));}
+      .sidebar{padding-bottom:calc(16px + env(safe-area-inset-bottom));}
+    }
+    html,body{overflow-x:hidden;}
+    .btn,.btn-secondary,.btn-ghost{min-height:44px;}
+    .icon-btn{width:38px;height:38px;}
+    .nav-item{padding-top:11px;padding-bottom:11px;}
+    .modal-box{width:94%;max-width:430px;}
+    .modal-actions{flex-wrap:wrap;} .modal-actions button{flex:1 1 140px;min-height:44px;}
+    .auto-row{flex-wrap:wrap;gap:11px;}
+    .gap-ctrl{flex-wrap:wrap;}
+    .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .rc-top{flex-wrap:wrap;}
+  }
 </style>
 </head>
 <body>
@@ -413,12 +443,15 @@
 </svg></div>
 <div id="gate">
   <div class="gate-box">
-    <h2>BetLife365 login</h2>
-    <input type="text" id="g_user" placeholder="Username" autocomplete="off">
-    <input type="password" id="g_pass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="btn" onclick="doLogin()">Log in</button>
+    <div class="gate-logo"><span class="gate-crown"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 7.4l4.3 3.4L12 3.8l5.2 7 4.3-3.4-1.9 10.4H4.4L2.5 7.4z"/></svg></span><span class="gate-wm">BetLife<b>365</b></span></div>
+    <h2>Log in to your dashboard</h2>
+    <form id="loginForm" autocomplete="on" onsubmit="doLogin();return false;">
+      <input type="text" id="g_user" name="username" placeholder="Username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+      <input type="password" id="g_pass" name="password" placeholder="Password" autocomplete="current-password">
+      <button class="btn" type="submit">Log in</button>
+    </form>
     <div id="g_err"></div>
-    <p class="muted-sm" style="margin:14px 0 0;">Client-side protection. Share the password with VIP members only.</p>
+    <p class="muted-sm" style="margin:14px 0 0;">Client-side protection. Share the password with VIP members only. You stay logged in on this device until you press Log out.</p>
   </div>
 </div>
 
@@ -1133,7 +1166,7 @@ async function doLogin(){
     const p=await sha(document.getElementById('g_pass').value||'');
     const cu=localStorage.getItem('ba_cred_user')||AUTH.user;
     const cp=localStorage.getItem('ba_cred_pass')||AUTH.pass;
-    if(u===cu && p===cp){ sessionStorage.setItem('ba_auth','1'); document.getElementById('gate').style.display='none'; try{ if(typeof syncAfterLogin==='function') setTimeout(syncAfterLogin, 350); }catch(e){} }
+    if(u===cu && p===cp){ localStorage.setItem('ba_auth','1'); document.getElementById('gate').style.display='none'; try{ if(typeof syncAfterLogin==='function') setTimeout(syncAfterLogin, 350); }catch(e){} }
     else document.getElementById('g_err').textContent='Incorrect login details.';
   }catch(e){ document.getElementById('g_err').textContent='Login requires https (secure context).'; }
 }
@@ -1149,7 +1182,7 @@ async function saveProfile(){
     if(typeof showToast==='function') showToast('Login updated'); setTimeout(closeProfile,1300);
   }catch(e){ msg.style.color='var(--red)'; msg.textContent='Could not save: '+e.message; }
 }
-if(sessionStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gate'); if(_g) _g.style.display='none'; }
+if(localStorage.getItem('ba_auth')==='1'){ var _g=document.getElementById('gate'); if(_g) _g.style.display='none'; }
 
 var _sportSel=(typeof _sportSel!=="undefined"&&_sportSel)?_sportSel:{bets:"all",results:"all",share:"all"};
 var LEG_RESULTS=(typeof LEG_RESULTS!=="undefined"&&LEG_RESULTS)?LEG_RESULTS:(function(){try{return JSON.parse(localStorage.getItem("ba_legresults")||"{}")}catch(e){return {}}})();
@@ -3928,7 +3961,7 @@ function _syncInjectUI(){ var host=document.getElementById('set-channels'); if(!
   host.appendChild(d);
 }
 (function(){ try{ var _set=localStorage.setItem.bind(localStorage); localStorage.setItem=function(k,v){ _set(k,v); try{ if(!_syncing && _syncEnabled() && (''+k).indexOf('ba_')===0 && (''+k).indexOf('ba_sync_')!==0){ clearTimeout(_syncTimer); _syncTimer=setTimeout(syncPush, 2000); } }catch(e){} }; }catch(e){} })();
-(function(){ try{ setTimeout(_syncInjectUI, 1200); if(sessionStorage.getItem('ba_auth')==='1'){ if(_syncEnabled()){ syncBoot(); } else { setTimeout(function(){ if(!sessionStorage.getItem('ba_sync_skip') && !_syncEnabled()) syncShowUnlock(); }, 1600); } } }catch(e){} })();
+(function(){ try{ setTimeout(_syncInjectUI, 1200); if(localStorage.getItem('ba_auth')==='1'){ if(_syncEnabled()){ syncBoot(); } else { setTimeout(function(){ if(!sessionStorage.getItem('ba_sync_skip') && !_syncEnabled()) syncShowUnlock(); }, 1600); } } }catch(e){} })();
 var _undoT, _undoFn=null;
 function showUndo(msg, fn){ var t=document.getElementById('undoToast'); if(!t){ return; } var m=document.getElementById('undoMsg'); if(m) m.textContent=msg; _undoFn=fn; t.classList.add('show'); clearTimeout(_undoT); _undoT=setTimeout(function(){ t.classList.remove('show'); _undoFn=null; }, 6000); }
 function doUndo(){ var t=document.getElementById('undoToast'); if(t) t.classList.remove('show'); clearTimeout(_undoT); if(_undoFn){ var f=_undoFn; _undoFn=null; f(); } }
@@ -4284,7 +4317,7 @@ applyChallengeResult=function(){
     try{ renderNotifs(); }catch(e){}
   }catch(e){}
 };
-function logoutDash(){ try{ sessionStorage.removeItem('ba_auth'); }catch(e){} location.reload(); }
+function logoutDash(){ try{ localStorage.removeItem('ba_auth'); }catch(e){} location.reload(); }
 
 try{ autoSeedTrack(); }catch(e){}
 try{ seedHistory(); }catch(e){}
