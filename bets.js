@@ -1,76 +1,76 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
-window.DAILY_VERSION = "2026-07-03";
+window.DAILY_VERSION = "2026-07-04";
 
-window.DAILY_MESSAGES = `**🟢 #13 Safe Builder Parley (⚽ Football): 03-07-2026**
+window.DAILY_MESSAGES = `**🟢 #16 Safe Builder Parley (⚽ Football): 04-07-2026**
 
-**:small_orange_diamond: Colombia x Ghana**
-Colombia to win (match result) @ 1.50
-↳ Colombia win the match in normal time.
+**:small_orange_diamond: Paraguay x France**
+France to win (match result) @ 1.17
+↳ France win the match in normal time.
 
-**:small_orange_diamond: Argentina x Cape Verde**
-Over 2.5 goals (total goals) @ 1.62
-↳ 3 or more goals in the match in total.
+**:small_orange_diamond: Canada x Morocco**
+Morocco to win (match result) @ 1.76
+↳ Morocco win the match in normal time.
 
-**:moneybag: Total odds: ±2.43**
+**:moneybag: Total odds: ±2.06**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Colombia were composed and defensively solid in the group stage and have the edge in quality over Ghana. Argentina should overrun Cape Verde and force the game open, so goals look likely in Miami. Two legs from different matches.
+France have won five straight and sit a clear level above a Paraguay side that only scraped through the group. Morocco arrive unbeaten in 33 and beat Brazil in the group stage, so they are strong favourites against a game but limited Canada. Two short favourites from different matches.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ===NEXT MESSAGE===
-**🟡 #14 Value Builder Parley (⚽ Football): 03-07-2026**
+**🟡 #17 Value Builder Parley (⚽ Football): 04-07-2026**
 
-**:small_orange_diamond: Australia x Egypt**
-Egypt to win (match result) @ 2.45
-↳ Egypt win the match in normal time.
+**:small_orange_diamond: Paraguay x France**
+France -2 (Asian handicap) @ 1.90
+↳ France win by three or more goals.
 
-**:small_orange_diamond: Argentina x Cape Verde**
-Argentina -2.5 (Asian handicap) @ 2.40
-↳ Argentina win by 3 or more goals.
+**:small_orange_diamond: Canada x Morocco**
+Morocco -0.75 (Asian handicap) @ 1.96
+↳ Morocco win the match, half stake refunded on a one goal win.
 
-**:moneybag: Total odds: ±5.88**
+**:moneybag: Total odds: ±3.72**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Egypt were the more efficient side through the group stage and are narrow favourites against a physical but limited Australia. Argentina have the quality to win comfortably against Cape Verde, and a three goal cushion is realistic given the gap in level. Two different matches.
+France have the firepower to pull clear of a defensive Paraguay, and a three goal margin is realistic given the gap in quality. Morocco should carry enough to see off Canada on the handicap. Handicap markets, a different angle from the Safe ticket, across two separate matches.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ===NEXT MESSAGE===
-**🔴 #15 Jackpot Builder Parley (⚽ Football): 03-07-2026**
+**🔴 #18 Jackpot Builder Parley (⚽ Football): 04-07-2026**
 
-**:small_orange_diamond: Australia x Egypt**
-Australia to win (match result) @ 3.25
-↳ Australia win the match in normal time.
+**:small_orange_diamond: Canada x Morocco**
+Over 2.25 goals (total goals) @ 1.90
+↳ Three or more goals in the match, half stake refunded on exactly two.
 
-**:small_orange_diamond: Colombia x Ghana**
-Over 2.5 goals (total goals) @ 2.08
-↳ 3 or more goals in the match in total.
+**:small_orange_diamond: Paraguay x France**
+Over 2.75 goals (total goals) @ 1.80
+↳ Three or more goals in the match.
 
-**:moneybag: Total odds: ±6.76**
+**:moneybag: Total odds: ±3.42**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A higher variance ticket across two different games. Australia are disciplined and physical and can spring the upset against a beatable Egypt, while a Colombia side chasing the game against an attacking Ghana points to goals in Kansas City. Built on different market types than the Safe and Value tickets.
+Only two Round of 16 matches are on today, so a realistic 6.00+ Jackpot from genuine favourites is not on the board. This is an honest, higher variance two fold on goals instead: Canada have been prolific and Morocco carry a threat, while France games keep producing goals. Total goals markets, decorrelated from the Safe and Value tickets. On a fuller slate the Jackpot returns to its usual range.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 03-07-2026**
+**:gift: FREE BET OF THE DAY | 04-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: Colombia x Ghana**
-Colombia to win (match result) @ 1.50
-↳ Colombia win the match in normal time.
+**:small_orange_diamond: Paraguay x France**
+France to win (match result) @ 1.17
+↳ France win the match in normal time.
 
-**:small_orange_diamond: Argentina x Cape Verde**
-Over 2.5 goals (total goals) @ 1.62
-↳ 3 or more goals in the match in total.
+**:small_orange_diamond: Canada x Morocco**
+Morocco to win (match result) @ 1.76
+↳ Morocco win the match in normal time.
 
-**:moneybag: Total odds: ±2.43**
+**:moneybag: Total odds: ±2.06**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Colombia have the edge in quality over Ghana and should control their game, while Argentina should overrun Cape Verde and force an open, high scoring match. Two legs from different matches.
+France are a clear level above Paraguay and Morocco arrive unbeaten in 33 against a limited Canada. Two short favourites from different matches, the safest route on the board.
 
 ━━━━━━━━━━━━
 :green_circle: This is our **Safe Builder** of the day, our lowest-risk play.
@@ -79,104 +79,111 @@ Colombia have the edge in quality over Ghana and should control their game, whil
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (⚽ Football): 03-07-2026**
+**👑 Lucky Shot Parley (Multi-Sport): 04-07-2026** ⚽🎾
 
-**:small_orange_diamond: Australia x Egypt**
-Australia to win (match result) @ 3.25
-↳ Australia win the match in normal time.
+**:small_orange_diamond: Paraguay x France**
+France to win @ 1.17
 
-**:small_orange_diamond: Argentina x Cape Verde**
-Draw (match result) @ 7.50
-↳ The match is level after normal time.
+**:small_orange_diamond: Canada x Morocco**
+Morocco to win @ 1.76
 
-**:small_orange_diamond: Colombia x Ghana**
-Ghana to win (match result) @ 6.50
-↳ Ghana win the match in normal time.
+**:small_orange_diamond: Mertens x Rybakina**
+Elena Rybakina to win @ 1.22
 
-**:moneybag: Total odds: ±158.44**
+**:small_orange_diamond: Eala x Swiatek**
+Iga Swiatek to win @ 1.27
+
+**:small_orange_diamond: Lehecka x Munar**
+Jiri Lehecka to win @ 1.28
+
+**:small_orange_diamond: Cirstea x Noskova**
+Linda Noskova to win @ 1.45
+
+**:small_orange_diamond: Anisimova x Keys**
+Madison Keys to win @ 1.60
+
+**:small_orange_diamond: Khachanov x Cobolli**
+Karen Khachanov to win @ 1.65
+
+**:small_orange_diamond: Samsonova x Bouzkova**
+Marie Bouzkova to win @ 1.66
+
+**:small_orange_diamond: Navarro x Kostyuk**
+Marta Kostyuk to win @ 1.68
+
+**:small_orange_diamond: Paolini x Sakkari**
+Jasmine Paolini to win @ 1.73
+
+**:small_orange_diamond: Tiafoe x Bublik**
+Frances Tiafoe to win @ 1.81
+
+**:moneybag: Total odds: ±136.52**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-One selection per match, so it places as a normal accumulator. It backs three underdogs on the same night: Australia to grind out a result against Egypt, Cape Verde to hold Argentina, and Ghana to upset Colombia. A genuine long shot, but the realistic best case where the outsiders all come through.
+Twelve genuine favourites stacked across two sports, one selection per match: today's two World Cup favourites plus ten Wimbledon Round 3 favourites. No longshots, every single leg is a side we rate as the likely winner. It is the stacking that makes it a 100x plus shot, not the price of any one leg.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
-window.DAILY_CARDS = `MATCH: Colombia x Ghana
+window.DAILY_CARDS = `MATCH: Paraguay x France
 MARKET: Match result
-SELECTION: Colombia to win
-ODDS: 1.50
+SELECTION: France to win
+ODDS: 1.17
 STAKE: 2u
 RISK: low
-ANALYSIS: Colombia were composed and defensively solid in the group stage and hold the edge in quality over Ghana.
+ANALYSIS: France have won five straight and sit a clear level above a Paraguay side that scraped through the group.
 ===
-MATCH: Argentina x Cape Verde
-MARKET: Total goals
-SELECTION: Over 2.5 goals
-ODDS: 1.62
+MATCH: Canada x Morocco
+MARKET: Match result
+SELECTION: Morocco to win
+ODDS: 1.76
 STAKE: 2u
 RISK: low
-ANALYSIS: Argentina should dominate and force the game open, pointing to three or more goals in Miami.
+ANALYSIS: Morocco arrive unbeaten in 33 and beat Brazil in the group stage, strong favourites against a limited Canada.
 ===
-MATCH: Australia x Egypt
-MARKET: Match result
-SELECTION: Egypt to win
-ODDS: 2.45
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Egypt were the more efficient side in the group stage and are narrow favourites against a limited Australia.
-===
-MATCH: Argentina x Cape Verde
+MATCH: Paraguay x France
 MARKET: Asian handicap
-SELECTION: Argentina -2.5
-ODDS: 2.40
+SELECTION: France -2
+ODDS: 1.90
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Argentina have the quality to win comfortably; a three goal cushion is realistic given the gap in level.
+ANALYSIS: France have the firepower to pull clear of a defensive Paraguay, and a three goal margin is realistic.
 ===
-MATCH: Australia x Egypt
-MARKET: Match result
-SELECTION: Australia to win
-ODDS: 3.25
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Australia are disciplined and physical and can spring the upset against a beatable Egypt.
+MATCH: Canada x Morocco
+MARKET: Asian handicap
+SELECTION: Morocco -0.75
+ODDS: 1.96
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Morocco should carry enough to win outright, with half the stake refunded on a one goal margin.
 ===
-MATCH: Colombia x Ghana
+MATCH: Canada x Morocco
 MARKET: Total goals
-SELECTION: Over 2.5 goals
-ODDS: 2.08
+SELECTION: Over 2.25 goals
+ODDS: 1.90
 STAKE: 0.25u
 RISK: high
-ANALYSIS: A Ghana side chasing the game against a Colombia that can counter points to an open, higher scoring match.
+ANALYSIS: Canada have been prolific at home and Morocco carry a threat, pointing to an open game.
 ===
-MATCH: Argentina x Cape Verde
-MARKET: Match result
-SELECTION: Draw
-ODDS: 7.50
-STAKE: 0.1u
+MATCH: Paraguay x France
+MARKET: Total goals
+SELECTION: Over 2.75 goals
+ODDS: 1.80
+STAKE: 0.25u
 RISK: high
-ANALYSIS: A long shot on the Lucky ticket; Cape Verde would need to frustrate Argentina for the full ninety.
-===
-MATCH: Colombia x Ghana
-MARKET: Match result
-SELECTION: Ghana to win
-ODDS: 6.50
-STAKE: 0.1u
-RISK: high
-ANALYSIS: A long shot on the Lucky ticket; Ghana have the attacking talent to cause an upset on their night.`;
+ANALYSIS: France matches keep producing goals and they should score freely against Paraguay.`;
 
 window.DAILY_CHALLENGE = {
-  date: "2026-07-03",
-  legs: ["Colombia x Ghana: Colombia to win @ 1.50", "Argentina x Cape Verde: Over 2.5 goals @ 1.62"],
-  oddLow: 2.40, oddHigh: 2.43,
-  justification: "Two safe legs from different matches: Colombia to beat Ghana and goals in a one sided Argentina game. The safest route to just over x2."
+date: "2026-07-04",
+legs: ["Paraguay x France: France to win @ 1.17", "Canada x Morocco: Morocco to win @ 1.76"],
+oddLow: 2.05, oddHigh: 2.06,
+justification: "The two shortest favourites on the board from different matches: France to beat Paraguay and Morocco to beat Canada. The safest route to just over x2."
 };
 
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 
 window.FOOTBALL_EVENTS = [
-  { match: "Australia x Egypt", date: "2026-07-03", time: "20:00", comp: "FIFA World Cup 2026", stage: "Round of 32", venue: "Arlington", pick: "Egypt to win", tier: "Value Builder" },
-  { match: "Argentina x Cape Verde", date: "2026-07-04", time: "00:00", comp: "FIFA World Cup 2026", stage: "Round of 32", venue: "Miami Gardens", pick: "Over 2.5 goals", tier: "Safe Builder" },
-  { match: "Colombia x Ghana", date: "2026-07-04", time: "03:30", comp: "FIFA World Cup 2026", stage: "Round of 32", venue: "Kansas City", pick: "Colombia to win", tier: "Safe Builder" }
+{ match: "Canada x Morocco", date: "2026-07-04", time: "19:00", comp: "FIFA World Cup 2026", stage: "Round of 16", venue: "Houston", pick: "Morocco to win", tier: "Safe Builder" },
+{ match: "Paraguay x France", date: "2026-07-04", time: "23:00", comp: "FIFA World Cup 2026", stage: "Round of 16", venue: "Philadelphia", pick: "France to win", tier: "Safe Builder" }
 ];

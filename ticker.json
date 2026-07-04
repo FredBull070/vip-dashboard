@@ -1,12 +1,14 @@
 [
-  { "s": "football", "m": "Australia x Egypt", "k": "Egypt", "o": 2.45 },
-  { "s": "football", "m": "Argentina x Cape Verde", "k": "Over 2.5", "o": 1.62 },
-  { "s": "football", "m": "Colombia x Ghana", "k": "Colombia", "o": 1.50 },
-  { "s": "tennis", "m": "Sinner x Brooksby", "k": "Sinner", "o": 1.04 },
-  { "s": "tennis", "m": "Djokovic x Rinderknech", "k": "Djokovic", "o": 1.18 },
-  { "s": "tennis", "m": "Sabalenka x Ostapenko", "k": "Sabalenka", "o": 1.33 },
-  { "s": "tennis", "m": "Auger-Aliassime x Zheng", "k": "Auger-Aliassime", "o": 1.30 },
-  { "s": "tennis", "m": "Osaka x Kasatkina", "k": "Osaka", "o": 1.90 },
-  { "s": "tennis", "m": "Jodar x Mochizuki", "k": "Jodar", "o": 1.55 },
-  { "s": "tennis", "m": "Davidovich x Fucsovics", "k": "Davidovich", "o": 1.60 }
+{"s":"football","m":"Paraguay x France","k":"France","o":1.17},
+{"s":"football","m":"Canada x Morocco","k":"Morocco","o":1.76},
+{"s":"tennis","m":"Mertens x Rybakina","k":"Rybakina","o":1.22},
+{"s":"tennis","m":"Eala x Swiatek","k":"Swiatek","o":1.27},
+{"s":"tennis","m":"Lehecka x Munar","k":"Lehecka","o":1.28},
+{"s":"tennis","m":"Cirstea x Noskova","k":"Noskova","o":1.45},
+{"s":"tennis","m":"Anisimova x Keys","k":"Keys","o":1.60},
+{"s":"tennis","m":"Khachanov x Cobolli","k":"Khachanov","o":1.65},
+{"s":"tennis","m":"Samsonova x Bouzkova","k":"Bouzkova","o":1.66},
+{"s":"tennis","m":"Navarro x Kostyuk","k":"Kostyuk","o":1.68},
+{"s":"tennis","m":"Paolini x Sakkari","k":"Paolini","o":1.73},
+{"s":"tennis","m":"Tiafoe x Bublik","k":"Tiafoe","o":1.81}
 ]
