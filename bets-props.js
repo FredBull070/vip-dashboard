@@ -1,114 +1,113 @@
-window.DAILY_PROPS_VERSION = "2026-07-03";
-window.DAILY_PROPS = `SPORT: Voetbal
-MATCH: Argentina x Cape Verde (WK R32)
-MARKET: Shots on target
-SELECTION: Lionel Messi 1+ on target
-ODDS: 1.40*
-STAKE: 1u
+window.DAILY_PROPS_VERSION = "2026-07-04";
+window.DAILY_PROPS = `SPORT: Soccer
+MATCH: France x Paraguay (WC Round of 16)
+MARKET: Shots on Target
+SELECTION: Kylian Mbappe 1+ shots on target
+ODDS: 1.28*
+STAKE: 1.5u
 RISK: low
-ANALYSIS: Messi speelt zijn beste WK, Argentina 3 uit 3 met 8 goals. Tegen een defensief Cape Verde schiet hij vrijwel gegarandeerd minstens een keer op doel.
+ANALYSIS: Frankrijk is zware favoriet en zet Paraguay diep vast. Mbappe is de vaste basisspeler en neemt structureel de meeste schoten van Les Bleus, dus 1+ op doel is een van de veiligste props van de dag.
 ===
 SPORT: Tennis
-MATCH: Wimbledon R3 - Jannik Sinner x Jenson Brooksby
-MARKET: Match winner
-SELECTION: Jannik Sinner to win
-ODDS: 1.10*
-STAKE: 1u
+MATCH: Wimbledon R3: Iga Swiatek x Alexandra Eala
+MARKET: Match Winner
+SELECTION: Iga Swiatek to win
+ODDS: 1.30*
+STAKE: 1.5u
 RISK: low
-ANALYSIS: Titelverdediger op gras tegen een lager gerankte tegenstander. Klasseverschil groot; degelijke ankerpick.
+ANALYSIS: Swiatek is meervoudig Grand Slam-kampioene en klassenverschil met Eala. Ook al is gras niet haar beste ondergrond, de kwaliteitskloof maakt de overwinning het stabiele anker.
 ===
-SPORT: Tennis
-MATCH: Wimbledon R3 - Coco Gauff x Claire Liu
-MARKET: Match winner
-SELECTION: Coco Gauff to win
-ODDS: 1.16*
-STAKE: 1u
+SPORT: Soccer
+MATCH: France x Paraguay (WC Round of 16)
+MARKET: Shots on Target
+SELECTION: Ousmane Dembele 1+ shots on target
+ODDS: 1.55*
+STAKE: 1.0u
 RISK: low
-ANALYSIS: Zevende reekshoofd tegen ongeplaatste landgenote. Gauff duidelijke favoriet; lage maar solide odds.
+ANALYSIS: Dembele start op de flank in de voorspelde XI en zoekt veel de afronding. Tegen een verdedigend Paraguay krijgt Frankrijk volume, dus 1+ schot op doel heeft duidelijke waarde.
 ===
-SPORT: Voetbal
-MATCH: Argentina x Cape Verde (WK R32)
-MARKET: Anytime goalscorer
-SELECTION: Lionel Messi
-ODDS: 1.95*
-STAKE: 0.5u
+SPORT: Soccer
+MATCH: France x Paraguay (WC Round of 16)
+MARKET: Anytime Goalscorer
+SELECTION: Kylian Mbappe anytime goalscorer
+ODDS: 1.80*
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Zware favoriet tegen debutant Cape Verde. Messi is Argentina's primaire dreiging en penaltynemer; reele kans op een doelpunt.
+ANALYSIS: Mbappe is topscorer van het toernooi en scoort aan de lopende band in de knock-out. Tegen Paraguay is Frankrijk dominant; anytime scorer op de sterspeler is pure waarde.
 ===
-SPORT: Voetbal
-MATCH: Colombia x Ghana (WK R32)
-MARKET: Anytime goalscorer
-SELECTION: Luis Diaz
+SPORT: Soccer
+MATCH: Canada x Morocco (WC Round of 16)
+MARKET: Anytime Goalscorer
+SELECTION: Jonathan David anytime goalscorer
 ODDS: 2.70*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Colombia favoriet en Diaz hun scherpste aanvaller vanaf links. Tegen een low block van Ghana krijgt hij kansen; waarde bij deze odds.
+ANALYSIS: David is de vaste spits van Canada in het 4-4-2 en hun grootste dreiging. Marokko speelt zonder klassieke nummer 9 en laat ruimte; de aanvoerder-spits kan die benutten.
 ===
-SPORT: Voetbal
-MATCH: Colombia x Ghana (WK R32)
-MARKET: Shots on target
-SELECTION: James Rodriguez 1+ on target
+SPORT: Tennis
+MATCH: Wimbledon R3: Grigor Dimitrov x Matteo Berrettini
+MARKET: Player Aces
+SELECTION: Matteo Berrettini over 11.5 aces
+ODDS: 1.90*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Berrettini heeft een van de zwaarste opslagen op gras en slaat op deze ondergrond consistent hoge aces-aantallen. Tegen een lange partij met Dimitrov is de lijn goed te halen.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3: Taylor Fritz x Lorenzo Sonego
+MARKET: Player Aces
+SELECTION: Taylor Fritz over 11.5 aces
+ODDS: 1.95*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Fritz is een first-strike server die op gras standaard veel aces produceert. Sonego breekt weinig, dus veel opslaggames voor Fritz en waarde op de over.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3: Alexander Zverev x Marcos Giron
+MARKET: Player Aces
+SELECTION: Alexander Zverev over 8.5 aces
+ODDS: 2.00*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Zverev haalt met zijn lengte en vlakke opslag makkelijk aces op gras. Giron neemt zelf risico op return, wat Zverev vrije opslagpunten oplevert.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3: Elena Rybakina x Elise Mertens
+MARKET: Player Aces
+SELECTION: Elena Rybakina over 5.5 aces
 ODDS: 1.90*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: James is Colombia's spelmaker en set-piece specialist met 31 interlandgoals. Tegen een compact Ghana zoekt hij het van afstand; minstens een schot op doel is waarschijnlijk.
+ANALYSIS: Rybakina is bij de vrouwen een van de beste servers en slaat op gras bovengemiddeld veel aces. Tegen de niet-agressief servende Mertens is 6+ aces realistisch.
 ===
-SPORT: Voetbal
-MATCH: Australia x Egypt (WK R32)
-MARKET: Anytime goalscorer
-SELECTION: Omar Marmoush
-ODDS: 2.75*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Met Salah een twijfelgeval (hamstring) leunt Egypte extra op Marmoush als aanvallende dreiging. Vaste basisspeler; goede prijs op anytime.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3 - Novak Djokovic x Arthur Rinderknech
-MARKET: Games handicap
-SELECTION: Novak Djokovic -4.5 games
-ODDS: 1.75*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Djokovic opent Centre Court als duidelijke favoriet. Meer waarde dan de kale matchwinnaar; hij wint doorgaans comfortabel met marge op gras.
-===
-SPORT: Voetbal
-MATCH: Colombia x Ghana (WK R32)
-MARKET: Player to be booked
-SELECTION: Thomas Partey carded
-ODDS: 3.00*
+SPORT: Soccer
+MATCH: France x Paraguay (WC Round of 16)
+MARKET: Player Goals
+SELECTION: Kylian Mbappe 2+ goals
+ODDS: 4.50*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Partey schermt de Ghanese defensie af in een knock-out en pakt vaak tactische overtredingen op. In een strak, fysiek duel reele kaartkans.
+ANALYSIS: Agressieve pick maar met basis: Mbappe maakte al meermaals meer dan een goal in de knock-out. Bij een verwachte ruime Franse zege is een brace geen uitzondering.
 ===
-SPORT: Voetbal
-MATCH: Argentina x Cape Verde (WK R32)
-MARKET: Anytime goalscorer
-SELECTION: Lautaro Martinez
+SPORT: Soccer
+MATCH: Canada x Morocco (WC Round of 16)
+MARKET: Anytime Goalscorer
+SELECTION: Brahim Diaz anytime goalscorer
+ODDS: 3.10*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Diaz start in de Marokkaanse voorhoede en komt vanuit de tien vaak in de zone. Als creatieve dreiging zonder vaste spits neemt hij zelf afwerkkansen; waarde als anytime scorer.
+===
+SPORT: Tennis
+MATCH: Wimbledon R3: Grigor Dimitrov x Matteo Berrettini
+MARKET: Player Aces
+SELECTION: Grigor Dimitrov over 9.5 aces
 ODDS: 2.20*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Spits van de titelhouder tegen zwak Cape Verde. Als hij start of invalt bij ruime voorsprong krijgt hij kansen; nette prijs voor een anytime.
-===
-SPORT: Voetbal
-MATCH: Colombia x Ghana (WK R32)
-MARKET: Anytime assist
-SELECTION: James Rodriguez
-ODDS: 3.25*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: James levert het gros van Colombia's aangevers via open spel en corners. Tegen een low block zijn set-pieces zijn beste kans op een assist.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3 - Aryna Sabalenka x Jelena Ostapenko
-MARKET: Player aces
-SELECTION: Jelena Ostapenko 4+ aces
-ODDS: 2.10*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Ostapenko is een agressieve, hard servende speelster op gras. Tegen Sabalenka gaat ze vol door op de opslag; 4+ aces is haalbaar.`;
-window.EMBEDDED_PROPS = { date: "2026-07-03" };
+ANALYSIS: Ook Dimitrov serveert uitstekend op gras en heeft in eerdere rondes hoge aces-aantallen genoteerd. In een pittige partij tegen Berrettini kan hij de lijn overschrijden.`;
+window.EMBEDDED_PROPS = { date: "2026-07-04" };
 window.DAILY_PROPS_SETTLED = [];
-
 
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
 /* ---------------------------------------------------------------------------
