@@ -1,13 +1,53 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-04T03:30:33.073Z",
+  "ran_at": "2026-07-04T03:33:32.896Z",
   "enabled": true,
   "dryRun": false,
   "checked": 12,
-  "settled": 0,
-  "would_settle": 0,
+  "settled": 3,
+  "would_settle": 3,
   "paused": false,
-  "results": [],
+  "results": [
+    {
+      "betid": "card|03-07-2026|Colombia x Ghana|colombia to win",
+      "match": "Colombia x Ghana",
+      "selection": "Colombia to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "W",
+      "settled_at": "2026-07-04T03:33:33.580Z",
+      "settled_by": "auto",
+      "settle_note": "Colombia won 1-0",
+      "score": "1-0",
+      "source": "espn"
+    },
+    {
+      "betid": "card|03-07-2026|Colombia x Ghana|over 2.5 goals",
+      "match": "Colombia x Ghana",
+      "selection": "Over 2.5 goals",
+      "sport": "Football",
+      "market": "Total goals",
+      "result": "L",
+      "settled_at": "2026-07-04T03:33:33.604Z",
+      "settled_by": "auto",
+      "settle_note": "1 < 2.5",
+      "score": "1-0",
+      "source": "espn"
+    },
+    {
+      "betid": "card|03-07-2026|Colombia x Ghana|ghana to win",
+      "match": "Colombia x Ghana",
+      "selection": "Ghana to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "L",
+      "settled_at": "2026-07-04T03:33:33.647Z",
+      "settled_by": "auto",
+      "settle_note": "draw 1-0",
+      "score": "1-0",
+      "source": "espn"
+    }
+  ],
   "errors": [],
   "aborted": null
 }
