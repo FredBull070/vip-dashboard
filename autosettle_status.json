@@ -1,96 +1,13 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-04T23:06:32.906Z",
+  "ran_at": "2026-07-04T23:09:32.910Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 11,
-  "settled": 4,
-  "would_settle": 4,
+  "checked": 7,
+  "settled": 0,
+  "would_settle": 0,
   "paused": false,
-  "results": [
-    {
-      "betid": "parley|04-07-2026|football|safe",
-      "match": "Paraguay x France + Canada x Morocco",
-      "selection": "#16 Safe Builder Parley ( Football): 04-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "W",
-      "settled_at": "2026-07-04T23:06:33.450Z",
-      "settled_by": "auto",
-      "settle_note": "parley gewonnen: alle 2 leg(s) correct",
-      "legs": [
-        {
-          "match": "Paraguay x France",
-          "selection": "France to win",
-          "result": "W",
-          "score": "0-1",
-          "settle_note": "France won 1-0"
-        },
-        {
-          "match": "Canada x Morocco",
-          "selection": "Morocco to win",
-          "result": "W",
-          "score": "0-3",
-          "settle_note": "Morocco won 3-0"
-        }
-      ],
-      "source": "espn"
-    },
-    {
-      "betid": "parley|04-07-2026|football|jackpot",
-      "match": "Canada x Morocco + Paraguay x France",
-      "selection": "#18 Jackpot Builder Parley ( Football): 04-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "L",
-      "settled_at": "2026-07-04T23:06:33.555Z",
-      "settled_by": "auto",
-      "settle_note": "parley verloren: 1 leg(s) fout — één foute leg maakt de hele parley LOST",
-      "legs": [
-        {
-          "match": "Canada x Morocco",
-          "selection": "Over 2.25 goals",
-          "result": "W",
-          "score": "0-3",
-          "settle_note": "3 > 2"
-        },
-        {
-          "match": "Paraguay x France",
-          "selection": "Over 2.75 goals",
-          "result": "L",
-          "score": "0-1",
-          "settle_note": "1 < 2"
-        }
-      ],
-      "source": "espn"
-    },
-    {
-      "betid": "card|04-07-2026|Paraguay x France|france to win",
-      "match": "Paraguay x France",
-      "selection": "France to win",
-      "sport": "Football",
-      "market": "Match result",
-      "result": "W",
-      "settled_at": "2026-07-04T23:06:33.583Z",
-      "settled_by": "auto",
-      "settle_note": "France won 1-0",
-      "score": "0-1",
-      "source": "espn"
-    },
-    {
-      "betid": "card|04-07-2026|Paraguay x France|over 2.75 goals",
-      "match": "Paraguay x France",
-      "selection": "Over 2.75 goals",
-      "sport": "Football",
-      "market": "Total goals",
-      "result": "L",
-      "settled_at": "2026-07-04T23:06:33.621Z",
-      "settled_by": "auto",
-      "settle_note": "1 < 2",
-      "score": "0-1",
-      "source": "espn"
-    }
-  ],
+  "results": [],
   "errors": [],
   "aborted": null
 }
