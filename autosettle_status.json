@@ -1,40 +1,13 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-04T00:45:32.985Z",
+  "ran_at": "2026-07-04T00:48:32.897Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 14,
-  "settled": 2,
-  "would_settle": 2,
+  "checked": 12,
+  "settled": 0,
+  "would_settle": 0,
   "paused": false,
-  "results": [
-    {
-      "betid": "card|03-07-2026|Argentina x Cape Verde|over 2.5 goals",
-      "match": "Argentina x Cape Verde",
-      "selection": "Over 2.5 goals",
-      "sport": "Football",
-      "market": "Total goals",
-      "result": "W",
-      "settled_at": "2026-07-04T00:45:33.707Z",
-      "settled_by": "auto",
-      "settle_note": "5 > 2.5",
-      "score": "3-2",
-      "source": "espn"
-    },
-    {
-      "betid": "card|03-07-2026|Argentina x Cape Verde|argentina -2.5",
-      "match": "Argentina x Cape Verde",
-      "selection": "Argentina -2.5",
-      "sport": "Football",
-      "market": "Asian handicap",
-      "result": "L",
-      "settled_at": "2026-07-04T00:45:33.733Z",
-      "settled_by": "auto",
-      "settle_note": "Argentina +1 vs -2.5",
-      "score": "3-2",
-      "source": "espn"
-    }
-  ],
+  "results": [],
   "errors": [],
   "aborted": null
 }
