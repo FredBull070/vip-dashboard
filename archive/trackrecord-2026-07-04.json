@@ -4053,9 +4053,9 @@
         "https://www.fotmob.com/en/matches/ghana-vs-colombia/1uqlxk",
         "https://www.101greatgoals.com/football/world-cup-news/colombia-ghana-report-result-goals-james-rodriguez/"
       ],
-      "fetched_at": "2026-07-04T18:28:15.964Z"
+      "fetched_at": "2026-07-04T18:23:17.963Z"
     },
-    "settled_at": "2026-07-04T18:28:15.964Z"
+    "settled_at": "2026-07-04T18:23:17.963Z"
   },
   {
     "kind": "card",
@@ -4430,22 +4430,52 @@
     "risk": "medium",
     "tier": "value",
     "public": true,
-    "result": "P",
+    "result": "W",
     "betid": "parley|04-07-2026|tennis|value",
     "legs": [
       {
         "match": "Amanda Anisimova x Madison Keys",
-        "selection": "Madison Keys to win"
+        "selection": "Madison Keys to win",
+        "result": "W"
       },
       {
         "match": "Jasmine Paolini x Maria Sakkari",
-        "selection": "Jasmine Paolini to win"
+        "selection": "Jasmine Paolini to win",
+        "result": "W"
       },
       {
         "match": "Jiri Lehecka x Jaume Munar",
-        "selection": "Jiri Lehecka to win"
+        "selection": "Jiri Lehecka to win",
+        "result": "W"
       }
-    ]
+    ],
+    "evidence": {
+      "legs": [
+        {
+          "match": "Amanda Anisimova x Madison Keys",
+          "selection": "Madison Keys to win",
+          "score": "Keys 3-6 6-2 6-3",
+          "result": "W"
+        },
+        {
+          "match": "Jasmine Paolini x Maria Sakkari",
+          "selection": "Jasmine Paolini to win",
+          "score": "Paolini 6-1 6-2",
+          "result": "W"
+        },
+        {
+          "match": "Jiri Lehecka x Jaume Munar",
+          "selection": "Jiri Lehecka to win",
+          "score": "Lehecka 6-4 6-4 4-6 6-4",
+          "result": "W"
+        }
+      ],
+      "sources": [
+        "ESPN tennis API scoreboard event 188-2026 comps 177694/177691/177487 (post/completed)",
+        "olympics.com + cbssports.com (Keys, Paolini) and tennis.com match page (Lehecka, Completed)"
+      ],
+      "fetched_at": "2026-07-04T18:44:51.044Z"
+    }
   },
   {
     "kind": "parley",
@@ -4818,9 +4848,9 @@
         "https://www.atptour.com/en/news/zverev-giron-wimbledon-2026-saturday",
         "https://www.sofascore.com/tennis/match/alexander-zverev-marcos-giron/EXqsnTx"
       ],
-      "fetched_at": "2026-07-04T18:28:15.964Z"
+      "fetched_at": "2026-07-04T18:23:17.963Z"
     },
-    "settled_at": "2026-07-04T18:28:15.964Z"
+    "settled_at": "2026-07-04T18:23:17.963Z"
   },
   {
     "kind": "card",
@@ -4843,9 +4873,9 @@
         "https://www.sofascore.com/tennis/match/elena-rybakina-elise-mertens/bwGsmBzb",
         "https://www.wtatennis.com/news/4530612/mertens-stuns-former-champion-rybakina-to-reach-wimbledon-fourth-round"
       ],
-      "fetched_at": "2026-07-04T18:28:15.964Z"
+      "fetched_at": "2026-07-04T18:23:17.963Z"
     },
-    "settled_at": "2026-07-04T18:28:15.964Z"
+    "settled_at": "2026-07-04T18:23:17.963Z"
   },
   {
     "kind": "card",
