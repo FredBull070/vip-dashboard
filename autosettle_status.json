@@ -1,13 +1,40 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-04T19:03:32.918Z",
+  "ran_at": "2026-07-04T19:06:32.913Z",
   "enabled": true,
   "dryRun": false,
   "checked": 20,
-  "settled": 0,
-  "would_settle": 0,
+  "settled": 2,
+  "would_settle": 2,
   "paused": false,
-  "results": [],
+  "results": [
+    {
+      "betid": "card|04-07-2026|Canada x Morocco|morocco to win",
+      "match": "Canada x Morocco",
+      "selection": "Morocco to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "W",
+      "settled_at": "2026-07-04T19:06:34.008Z",
+      "settled_by": "auto",
+      "settle_note": "Morocco won 3-0",
+      "score": "0-3",
+      "source": "espn"
+    },
+    {
+      "betid": "card|04-07-2026|Canada x Morocco|over 2.25 goals",
+      "match": "Canada x Morocco",
+      "selection": "Over 2.25 goals",
+      "sport": "Football",
+      "market": "Total goals",
+      "result": "W",
+      "settled_at": "2026-07-04T19:06:34.118Z",
+      "settled_by": "auto",
+      "settle_note": "3 > 2",
+      "score": "0-3",
+      "source": "espn"
+    }
+  ],
   "errors": [],
   "aborted": null
 }
