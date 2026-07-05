@@ -20,7 +20,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 The three shortest favourites on the board, one per match. Lowest-variance ticket of the day.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
+
 ===NEXT MESSAGE===
+
 **🟡 #T11 Value Builder Parley (🎾 Tennis): 05-07-2026**
 
 **:small_orange_diamond: Hubert Hurkacz x Jan-Lennard Struff**
@@ -42,7 +44,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 Three mid-priced favourites from different matches, none shared with the Safe ticket.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
+
 ===NEXT MESSAGE===
+
 **🔴 #T12 Jackpot Builder Parley (🎾 Tennis): 05-07-2026**
 
 **:small_orange_diamond: Felix Auger-Aliassime x Alejandro Davidovich Fokina**
