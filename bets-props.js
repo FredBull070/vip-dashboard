@@ -47,12 +47,12 @@ ANALYSIS: Spain's creative spark gets shots away regularly; high hit rate on 1+ 
 ===
 SPORT: Football
 MATCH: USA x Belgium
-MARKET: Anytime Goalscorer
-SELECTION: Romelu Lukaku to score
-ODDS: 2.30*
+MARKET: Shots on Target
+SELECTION: Kevin De Bruyne 1+ shots on target
+ODDS: 1.65*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Belgium's focal point in attack; value on him finding the net in an open tie.
+ANALYSIS: De Bruyne is a guaranteed starter and Belgium's main shot-taker; Lukaku's fitness is in doubt (De Ketelaere the likely CF), so we avoid the striker.
 ===
 SPORT: Tennis
 MATCH: Fritz x Bublik
