@@ -1046,15 +1046,25 @@ window.DAILY_PROPS_SETTLED = [];
   function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
   function timeStr(e){ if(!e.time) return ''; var ep=koEpoch(e); if(ep==null) return '🕒 '+e.time; var now=Date.now(); if(now>=ep&&now<ep+3.5*3600000) return '🔴 Live'; if(now>=ep) return '✅ done'; var m=Math.round((ep-now)/60000); if(m<60) return '⏱ '+e.time+' (in '+m+'m)'; if(m<1440) return '🕒 '+e.time+' (in '+Math.round(m/60)+'h)'; return '🕒 '+e.time; }
   function implied(card){ var o=card.querySelector('.rc-odds'); if(!o)return ''; var m=(o.textContent||'').match(/(\d+\.\d+)/); if(!m)return ''; var v=parseFloat(m[1]); if(!(v>1))return ''; return Math.round(100/v)+'% implied'; }
+  function createdFor(card){
+    var iso = (card.closest && card.closest('#page-propcards'))
+      ? (window.DAILY_PROPS_VERSION || (window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date) || '')
+      : (window.DAILY_VERSION || (window.EMBEDDED_CARDS&&window.EMBEDDED_CARDS.date) || '');
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(iso||'')) return '';
+    var p=(''+iso).split('-'); return '🆕 Created '+p[2]+'-'+p[1]+'-'+p[0];
+  }
   function metaFor(card){
-    var f=evFor(card.textContent||''); if(!f) return null;
-    var e=f.ev,parts=[];
-    if(e.date) parts.push('🗓 '+wd(e.date));
-    parts.push(f.sp[0]+' '+f.sp[1]);
-    var ts=timeStr(e); if(ts) parts.push(ts);
-    var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
-    var ip=implied(card); if(ip) parts.push(ip);
-    return parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+    var parts=[];
+    var f=evFor(card.textContent||'');
+    if(f){ var e=f.ev;
+      if(e.date) parts.push('🗓 '+wd(e.date));
+      parts.push(f.sp[0]+' '+f.sp[1]);
+      var ts=timeStr(e); if(ts) parts.push(ts);
+      var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
+      var ip=implied(card); if(ip) parts.push(ip);
+    }
+    var cr=createdFor(card); if(cr) parts.push(cr);
+    return parts.length? parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;') : null;
   }
   function paint(){
     [].slice.call(document.querySelectorAll('#page-betcards .rcard, #page-propcards .rcard')).forEach(function(card){
@@ -1067,4 +1077,74 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function boot(){ paint(); setInterval(paint,30000); document.addEventListener('click',function(){setTimeout(paint,350);},true); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(boot,700);}); else setTimeout(boot,700);
+})();
+
+
+/* ===========================================================================
+   PROP CARDS = DAILY BETTING CARDS parity  (added 03-07-2026)
+   Fred wants the Daily Prop Cards to look identical to the Daily Betting Cards
+   everywhere except the Discord channel/hook they land in. Two display-only
+   patches, no index.html edit needed:
+     1) buildPropChunks -> same disclaimer, same Safe/Value/Jackpot legend, same
+        per-card cardStr block, same footer, same spacing and 1900-char
+        chunking as the Daily Betting Cards. Only the title ("DAILY PROP CARDS")
+        and the section headers ("SAFE/VALUE/JACKPOT PROP CARDS") say "prop".
+        Still routed to the PROPS hook by the existing sendProps().
+     2) the prop page's risk sections (Core/Aggressive) are relabelled to
+        Safe/Jackpot so the dashboard page matches the betting-cards page.
+   Underlying risk values (low/medium/high) are never touched. */
+(function(){
+  function build(cards){
+    cards = cards || (typeof parseCards==='function'? parseCards(getPropsText()) : []);
+    if(!cards || !cards.length) return [];
+    var date=(window.EMBEDDED_PROPS && window.EMBEDDED_PROPS.date)? dmy(window.EMBEDDED_PROPS.date):'';
+    var header=':bar_chart: **DAILY PROP CARDS | '+date+'**\n'+
+      'BetLife365 does not provide fixed betting slips.\n'+
+      'Each Daily Card is a portfolio of selected positions, not a must-play list.\n'+
+      'You choose how to use it based on your own bankroll and risk preference.\n\n'+
+      '**:green_circle: Safe** → lowest risk positions\n'+
+      '**:yellow_circle: Value** → moderate risk positions\n'+
+      '**:red_circle: Jackpot** → high risk positions\n';
+    var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
+    var groups=[['low','**:green_circle: SAFE PROP CARDS**'],['medium','**:yellow_circle: VALUE PROP CARDS**'],['high','**:red_circle: JACKPOT PROP CARDS**']];
+    var msgs=[], cur=header, has=false;
+    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
+      var gh='\n\n'+g[1]+'\n';
+      cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
+        if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=(idx===0? g[1]+'\n\n':'')+cardStr(c)+'\n'; }
+        else { cur+=piece; } has=true; });
+    });
+    if(has) msgs.push(cur);
+    if(msgs.length){ for(var i=0;i<msgs.length-1;i++){ msgs[i]=msgs[i]+'\n⠀'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
+    // Match the cards pipeline's rename() tail: trim trailing blank/braille lines, push one U+2800.
+    msgs=msgs.map(function(ch){ var TL=ch.split('\n'); while(TL.length && /^[\s⠀]*$/.test(TL[TL.length-1])) TL.pop(); TL.push('⠀'); return TL.join('\n'); });
+    return msgs;
+  }
+  build.__dedup=true; // already final: tells the shared chunk-wrapper to leave it alone
+  function install(){
+    if(typeof window.cardStr==='function' && typeof window.getPropsText==='function' && typeof window.dmy==='function'){ window.buildPropChunks=build; return true; }
+    return false;
+  }
+  if(!install()){ var n=0, t=setInterval(function(){ if(install()||++n>60) clearInterval(t); }, 250); }
+})();
+
+(function(){
+  /* Prop page parity: relabel the risk sections + filter pills from
+     Core / Aggressive to Safe / Jackpot (Value already matches). Display only,
+     scoped to #page-propcards and #subbar; exact-word match so analysis text
+     and match names are never touched. Idempotent. */
+  function fix(root){ if(!root) return;
+    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, nodes=[];
+    while(n=w.nextNode()) nodes.push(n);
+    for(var i=0;i<nodes.length;i++){ var tn=nodes[i], t=tn.nodeValue; if(!t||!t.trim()) continue;
+      if(tn.parentNode && tn.parentNode.tagName==='OPTION') continue;
+      var core=t.replace(/[^A-Za-z]/g,'');
+      if(core==='Core'){ tn.nodeValue=t.replace('Core','Safe'); }
+      else if(core==='Aggressive'){ tn.nodeValue=t.replace('Aggressive','Jackpot'); }
+    }
+  }
+  function go(){ fix(document.getElementById('page-propcards')); fix(document.getElementById('subbar')); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(go,850); }); else setTimeout(go,850);
+  setInterval(go, 1500);
+  document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
