@@ -1034,13 +1034,19 @@ window.DAILY_PROPS_SETTLED = [];
 (function(){
   var SP={FOOTBALL_EVENTS:['⚽','Football'],TENNIS_EVENTS:['🎾','Tennis'],NBA_EVENTS:['🏀','NBA'],NFL_EVENTS:['🏈','NFL'],NHL_EVENTS:['🏒','NHL']};
   function norm(s){return (''+s).toLowerCase().replace(/\s+/g,' ').trim();}
+  function ptcpts(m){ return norm(m).split(/\s+x\s+|\s+vs?\s+/).map(function(s){return s.trim();}).filter(function(s){return s.length>=4;}); }
   function evFor(text){
-    var t=norm(text),found=null,fk=null,fs='';
+    var t=norm(text),full=null,fs1='',fk1='',part=null,fs2='',fk2='';
     Object.keys(SP).forEach(function(k){
       var a=window[k]; if(!Array.isArray(a)) return;
-      a.forEach(function(e){ if(e&&e.match&&t.indexOf(norm(e.match))>=0){ var s=(e.date||'')+(e.time||''); if(!found||s<fs){found=e;fs=s;fk=k;} } });
+      a.forEach(function(e){ if(!e||!e.match) return; var s=(e.date||'')+(e.time||'');
+        if(t.indexOf(norm(e.match))>=0){ if(!full||s<fs1){full=e;fs1=s;fk1=k;} return; }
+        var ps=ptcpts(e.match); for(var i=0;i<ps.length;i++){ if(ps[i] && t.indexOf(ps[i])>=0){ if(!part||s<fs2){part=e;fs2=s;fk2=k;} break; } }
+      });
     });
-    return found?{ev:found,sp:SP[fk]}:null;
+    if(full) return {ev:full,sp:SP[fk1]};
+    if(part) return {ev:part,sp:SP[fk2]};
+    return null;
   }
   function wd(d){ try{var x=new Date(d+'T12:00:00');var w=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][x.getDay()];var p=d.split('-');return w+' '+p[2]+'-'+p[1];}catch(e){return d;} }
   function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
@@ -1061,8 +1067,8 @@ window.DAILY_PROPS_SETTLED = [];
       parts.push(f.sp[0]+' '+f.sp[1]);
       var ts=timeStr(e); if(ts) parts.push(ts);
       var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
-      var ip=implied(card); if(ip) parts.push(ip);
     }
+    var ip=implied(card); if(ip) parts.push(ip);
     var cr=createdFor(card); if(cr) parts.push(cr);
     return parts.length? parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;') : null;
   }
