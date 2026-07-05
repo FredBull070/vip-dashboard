@@ -17,9 +17,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 One clear side per tie: Brazil straight up, England to go through. In a knockout we take England's quality over the full route instead of fighting the altitude on the 90-min line.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
-
+​
+​
 ===NEXT MESSAGE===
-
 **🟡 #20 Value Builder Parley (⚽ Football): 05-07-2026**
 
 **:small_orange_diamond: Brazil x Norway**
@@ -37,9 +37,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 A pure goals ticket across both ties, different market from the Safe. Thin 2-match day so a touch below the usual value range.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
-
+​
+​
 ===NEXT MESSAGE===
-
 **🔴 #21 Jackpot Builder Parley (⚽ Football): 05-07-2026**
 
 **:small_orange_diamond: Brazil x Norway**
@@ -57,9 +57,9 @@ Odds may vary depending on the bookmaker or the time of placement.
 A BTTS-and-upset blend, completely different picks and markets from the Safe and Value. Higher variance by design. Today's true longshot is the cross-sport Lucky Shot below.
 
 **:bank: Bankroll:** 0.25u stake
-
+​
+​
 ===NEXT MESSAGE===
-
 **:gift: FREE BET OF THE DAY | 05-07-2026**
 ⚽ Sport of the day: Football
 
@@ -83,9 +83,9 @@ Brazil are a level above Norway, and England's depth should tell over the full r
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
 :warning: 18+ | play responsibly
-
+​
+​
 ===NEXT MESSAGE===
-
 **👑 Lucky Shot Parley (Multi-Sport): 05-07-2026** ⚽🎾
 
 **:small_orange_diamond: Brazil x Norway**
