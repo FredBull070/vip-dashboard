@@ -1,13 +1,67 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-05T22:03:32.913Z",
+  "ran_at": "2026-07-05T22:06:32.908Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 17,
-  "settled": 0,
-  "would_settle": 0,
+  "checked": 16,
+  "settled": 3,
+  "would_settle": 3,
   "paused": false,
-  "results": [],
+  "results": [
+    {
+      "betid": "card|05-07-2026|Brazil x Norway|Brazil to win",
+      "match": "Brazil x Norway",
+      "selection": "Brazil to win",
+      "sport": "Football",
+      "market": "Match Result",
+      "result": "L",
+      "settled_at": "2026-07-05T22:06:33.493Z",
+      "settled_by": "auto",
+      "settle_note": "Brazil lost 1-2",
+      "score": "1-2",
+      "source": "espn"
+    },
+    {
+      "betid": "card|05-07-2026|Brazil x Norway|Over 2.5",
+      "match": "Brazil x Norway",
+      "selection": "Over 2.5",
+      "sport": "Football",
+      "market": "Total Goals",
+      "result": "W",
+      "settled_at": "2026-07-05T22:06:33.576Z",
+      "settled_by": "auto",
+      "settle_note": "3 > 2.5",
+      "score": "1-2",
+      "source": "espn"
+    },
+    {
+      "betid": "parley|05-07-2026|football|safe",
+      "match": "Brazil x Norway + Mexico x England",
+      "selection": "#19 Safe Builder Parley ( Football): 05-07-2026",
+      "sport": "Football",
+      "market": "Accumulator",
+      "result": "L",
+      "settled_at": "2026-07-05T22:06:33.647Z",
+      "settled_by": "auto",
+      "settle_note": "parley verloren: 1 leg(s) fout — één foute leg maakt de hele parley LOST",
+      "legs": [
+        {
+          "match": "Brazil x Norway",
+          "selection": "Brazil to win",
+          "result": "L",
+          "score": "1-2",
+          "settle_note": "Brazil lost 1-2"
+        },
+        {
+          "match": "Mexico x England",
+          "selection": "England to advance",
+          "result": "P",
+          "score": null
+        }
+      ],
+      "source": "espn"
+    }
+  ],
   "errors": [],
   "aborted": null
 }
