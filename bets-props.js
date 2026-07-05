@@ -1,114 +1,114 @@
-/* BetLife365 Daily Prop Cards - 05-07-2026. Player props on confirmed WC R16 + Wimbledon R16 fixtures. Odds are realistic bet365 NL-style estimates (marked *). */
 window.DAILY_PROPS_VERSION = "2026-07-05";
-window.DAILY_PROPS = `SPORT: Football
-MATCH: Brazil x Norway
-MARKET: Team Total Goals
-SELECTION: Brazil Over 1.5 team goals
-ODDS: 1.55*
-STAKE: 1u
+window.DAILY_PROPS = `SPORT: Soccer
+MATCH: Brazil x Norway (WC Round of 16)
+MARKET: Shots on Target
+SELECTION: Vinicius Junior 1+ shots on target
+ODDS: 1.44*
+STAKE: 1.5u
 RISK: low
-ANALYSIS: Brazil's attacking depth against a leaky Norway defence; the safest goals angle on the board.
+ANALYSIS: Brazil is zware favoriet en domineert het balbezit tegen Noorwegen. Vinicius is vaste basisspeler en de eerste afwerker op links, dus 1+ schot op doel is een van de veiligste props van de dag.
 ===
-SPORT: Football
-MATCH: Mexico x England
+SPORT: Soccer
+MATCH: Mexico x England (WC Round of 16)
 MARKET: Shots on Target
 SELECTION: Harry Kane 1+ shots on target
 ODDS: 1.40*
-STAKE: 1u
+STAKE: 1.5u
 RISK: low
-ANALYSIS: England's focal point almost always registers at least one shot on target; very high hit rate.
+ANALYSIS: Kane is het vaste aanvalsbrandpunt van Engeland en verzamelt structureel schoten op doel. Tegen een Mexico dat diep verdedigt komt England aan volume; 1+ op doel is stabiel.
 ===
 SPORT: Tennis
-MATCH: Sinner x Mochizuki
-MARKET: Match Winner
-SELECTION: Jannik Sinner to win
-ODDS: 1.02*
-STAKE: 1u
+MATCH: Wimbledon: Jannik Sinner x Shintaro Mochizuki
+MARKET: Set Handicap
+SELECTION: Jannik Sinner -1.5 sets (straight sets)
+ODDS: 1.30*
+STAKE: 1.5u
 RISK: low
-ANALYSIS: World number one against a qualifier; about as safe as a single gets.
+ANALYSIS: Sinner is de nummer 1 en het klassenverschil met qualifier Mochizuki is enorm. Op gras verliest hij zelden een set tegen dit niveau, dus de straight-sets handicap is het anker.
 ===
 SPORT: Tennis
-MATCH: Bencic x Gauff
-MARKET: Match Winner
-SELECTION: Coco Gauff to win
-ODDS: 1.55*
-STAKE: 1u
+MATCH: Wimbledon: Novak Djokovic x Roman Safiullin
+MARKET: Set Handicap
+SELECTION: Novak Djokovic -1.5 sets
+ODDS: 1.50*
+STAKE: 1.0u
 RISK: low
-ANALYSIS: Gauff's power and return edge on grass over a returning Bencic.
+ANALYSIS: Djokovic is een klasse te sterk voor Safiullin en beheerst zijn matchen op gras uiterst efficient. De set-handicap geeft betere waarde dan de kale winst zonder veel extra risico.
 ===
-SPORT: Football
-MATCH: Brazil x Norway
+SPORT: Soccer
+MATCH: Brazil x Norway (WC Round of 16)
 MARKET: Anytime Goalscorer
-SELECTION: Erling Haaland to score
+SELECTION: Raphinha anytime goalscorer
 ODDS: 2.20*
-STAKE: 0.5u
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Norway's talisman carries their whole goal threat; value on him finding the net once.
+ANALYSIS: Raphinha was Brazils topscorer in de kwalificatie en staat op strafschoppen en hoekschoppen. Als vaste basisspeler in een dominant elftal is anytime scorer duidelijke waarde.
 ===
-SPORT: Football
-MATCH: Mexico x England
+SPORT: Soccer
+MATCH: Brazil x Norway (WC Round of 16)
 MARKET: Anytime Goalscorer
-SELECTION: Harry Kane to score
+SELECTION: Erling Haaland anytime goalscorer
+ODDS: 2.50*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Haaland is de complete afhankelijkheid van Noorwegen voorin en pakt ook tegen sterke tegenstanders zijn kansen. Zelfs als underdog blijft de talisman een scoredreiging met waarde.
+===
+SPORT: Soccer
+MATCH: Mexico x England (WC Round of 16)
+MARKET: Anytime Goalscorer
+SELECTION: Harry Kane anytime goalscorer
 ODDS: 2.10*
-STAKE: 0.5u
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: England's penalty-taker and main striker in an open knockout at altitude.
+ANALYSIS: Kane is de vaste spits en penaltynemer van Engeland en topscorer aller tijden. In een wedstrijd waar England favoriet is, is anytime scorer op het brandpunt pure waarde.
 ===
 SPORT: Tennis
-MATCH: Djokovic x Safiullin
-MARKET: Game Handicap
-SELECTION: Novak Djokovic -4.5 games
-ODDS: 1.75*
-STAKE: 0.5u
+MATCH: Wimbledon: Felix Auger-Aliassime x Alejandro Davidovich Fokina
+MARKET: Player Aces
+SELECTION: Felix Auger-Aliassime over 11.5 aces
+ODDS: 1.85*
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Djokovic should win comfortably against a drained Safiullin; the handicap adds value over the moneyline.
+ANALYSIS: Auger-Aliassime heeft een van de zwaarste opslagen op de tour en slaat op gras consistent hoge aces-aantallen. Tegen de tegenstand van Davidovich Fokina wordt het een langere partij; de lijn is goed haalbaar.
 ===
 SPORT: Tennis
-MATCH: Hurkacz x Struff
-MARKET: Total Aces
-SELECTION: Hubert Hurkacz Over 9.5 aces
-ODDS: 1.80*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: One of the biggest serves on tour on a fast grass court; ace volume is his repeatable edge.
-===
-SPORT: Tennis
-MATCH: Sabalenka x Osaka
+MATCH: Wimbledon: Aryna Sabalenka x Naomi Osaka
 MARKET: Total Games
 SELECTION: Over 20.5 total games
 ODDS: 1.90*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Two big hitters who both hold serve well; a tight, high-games contest is likely.
-===
-SPORT: Football
-MATCH: Brazil x Norway
-MARKET: Shots on Target
-SELECTION: Erling Haaland 2+ shots on target
-ODDS: 2.60*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Higher-variance version of the Haaland angle; needs him to test the keeper twice.
-===
-SPORT: Football
-MATCH: Mexico x England
-MARKET: Anytime Goalscorer
-SELECTION: Jude Bellingham to score
-ODDS: 3.20*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Late-arriving midfielder who gets into the box; plus-money on him grabbing a goal.
+ANALYSIS: Twee zware slaagsters met sterke opslag zorgen voor veel service-games. Osaka is gevaarlijk genoeg om Sabalenka te rekken, dus over 20.5 games heeft waarde in een competitief duel.
 ===
 SPORT: Tennis
-MATCH: Sabalenka x Osaka
-MARKET: Match Winner
-SELECTION: Naomi Osaka to win
-ODDS: 2.60*
+MATCH: Wimbledon: Jannik Sinner x Shintaro Mochizuki
+MARKET: Player Aces
+SELECTION: Jannik Sinner over 8.5 aces
+ODDS: 1.90*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Sinners eerste opslag is scherp op gras en hij domineert de service-games. Tegen een lager geklasseerde tegenstander speelt hij vrijuit; over 8.5 aces is realistisch haalbaar.
+===
+SPORT: Soccer
+MATCH: Mexico x England (WC Round of 16)
+MARKET: Anytime Goalscorer
+SELECTION: Jude Bellingham anytime goalscorer
+ODDS: 3.50*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Osaka's ceiling on a quick surface makes her a live underdog against Sabalenka; the upset play of the day.`;
+ANALYSIS: Bellingham komt uit de tweede lijn ingelopen en pakt geregeld doelpunten in belangrijke duels. Hogere odds omdat hij geen spits is, maar zijn loopacties maken de high-risk pick waardevol.
+===
+SPORT: Tennis
+MATCH: Wimbledon: Coco Gauff x Belinda Bencic
+MARKET: Player Aces
+SELECTION: Coco Gauff over 5.5 aces
+ODDS: 2.10*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Gauff kan met haar opslag uitschieten naar hoge aces-aantallen op gras, maar het is grillig. Tegen de degelijke returns van Bencic is over 5.5 een aggressieve maar te verantwoorden gok.`;
 window.EMBEDDED_PROPS = { date: "2026-07-05" };
 window.DAILY_PROPS_SETTLED = [];
+
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
 /* ---------------------------------------------------------------------------
    Universal webhook-field loader (deployed via this file so it is independent
@@ -1034,43 +1034,27 @@ window.DAILY_PROPS_SETTLED = [];
 (function(){
   var SP={FOOTBALL_EVENTS:['⚽','Football'],TENNIS_EVENTS:['🎾','Tennis'],NBA_EVENTS:['🏀','NBA'],NFL_EVENTS:['🏈','NFL'],NHL_EVENTS:['🏒','NHL']};
   function norm(s){return (''+s).toLowerCase().replace(/\s+/g,' ').trim();}
-  function ptcpts(m){ return norm(m).split(/\s+x\s+|\s+vs?\s+/).map(function(s){return s.trim();}).filter(function(s){return s.length>=4;}); }
   function evFor(text){
-    var t=norm(text),full=null,fs1='',fk1='',part=null,fs2='',fk2='';
+    var t=norm(text),found=null,fk=null,fs='';
     Object.keys(SP).forEach(function(k){
       var a=window[k]; if(!Array.isArray(a)) return;
-      a.forEach(function(e){ if(!e||!e.match) return; var s=(e.date||'')+(e.time||'');
-        if(t.indexOf(norm(e.match))>=0){ if(!full||s<fs1){full=e;fs1=s;fk1=k;} return; }
-        var ps=ptcpts(e.match); for(var i=0;i<ps.length;i++){ if(ps[i] && t.indexOf(ps[i])>=0){ if(!part||s<fs2){part=e;fs2=s;fk2=k;} break; } }
-      });
+      a.forEach(function(e){ if(e&&e.match&&t.indexOf(norm(e.match))>=0){ var s=(e.date||'')+(e.time||''); if(!found||s<fs){found=e;fs=s;fk=k;} } });
     });
-    if(full) return {ev:full,sp:SP[fk1]};
-    if(part) return {ev:part,sp:SP[fk2]};
-    return null;
+    return found?{ev:found,sp:SP[fk]}:null;
   }
   function wd(d){ try{var x=new Date(d+'T12:00:00');var w=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][x.getDay()];var p=d.split('-');return w+' '+p[2]+'-'+p[1];}catch(e){return d;} }
   function koEpoch(e){ if(!e.time)return null; try{return new Date(e.date+'T'+e.time+':00+02:00').getTime();}catch(x){return null;} }
   function timeStr(e){ if(!e.time) return ''; var ep=koEpoch(e); if(ep==null) return '🕒 '+e.time; var now=Date.now(); if(now>=ep&&now<ep+3.5*3600000) return '🔴 Live'; if(now>=ep) return '✅ done'; var m=Math.round((ep-now)/60000); if(m<60) return '⏱ '+e.time+' (in '+m+'m)'; if(m<1440) return '🕒 '+e.time+' (in '+Math.round(m/60)+'h)'; return '🕒 '+e.time; }
   function implied(card){ var o=card.querySelector('.rc-odds'); if(!o)return ''; var m=(o.textContent||'').match(/(\d+\.\d+)/); if(!m)return ''; var v=parseFloat(m[1]); if(!(v>1))return ''; return Math.round(100/v)+'% implied'; }
-  function createdFor(card){
-    var iso = (card.closest && card.closest('#page-propcards'))
-      ? (window.DAILY_PROPS_VERSION || (window.EMBEDDED_PROPS&&window.EMBEDDED_PROPS.date) || '')
-      : (window.DAILY_VERSION || (window.EMBEDDED_CARDS&&window.EMBEDDED_CARDS.date) || '');
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(iso||'')) return '';
-    var p=(''+iso).split('-'); return '🆕 Created '+p[2]+'-'+p[1]+'-'+p[0];
-  }
   function metaFor(card){
-    var parts=[];
-    var f=evFor(card.textContent||'');
-    if(f){ var e=f.ev;
-      if(e.date) parts.push('🗓 '+wd(e.date));
-      parts.push(f.sp[0]+' '+f.sp[1]);
-      var ts=timeStr(e); if(ts) parts.push(ts);
-      var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
-    }
+    var f=evFor(card.textContent||''); if(!f) return null;
+    var e=f.ev,parts=[];
+    if(e.date) parts.push('🗓 '+wd(e.date));
+    parts.push(f.sp[0]+' '+f.sp[1]);
+    var ts=timeStr(e); if(ts) parts.push(ts);
+    var comp=[e.comp,e.stage].filter(Boolean).join(' · '); if(comp) parts.push('🏆 '+comp);
     var ip=implied(card); if(ip) parts.push(ip);
-    var cr=createdFor(card); if(cr) parts.push(cr);
-    return parts.length? parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;') : null;
+    return parts.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
   }
   function paint(){
     [].slice.call(document.querySelectorAll('#page-betcards .rcard, #page-propcards .rcard')).forEach(function(card){
@@ -1083,74 +1067,4 @@ window.DAILY_PROPS_SETTLED = [];
   }
   function boot(){ paint(); setInterval(paint,30000); document.addEventListener('click',function(){setTimeout(paint,350);},true); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(boot,700);}); else setTimeout(boot,700);
-})();
-
-
-/* ===========================================================================
-   PROP CARDS = DAILY BETTING CARDS parity  (added 03-07-2026)
-   Fred wants the Daily Prop Cards to look identical to the Daily Betting Cards
-   everywhere except the Discord channel/hook they land in. Two display-only
-   patches, no index.html edit needed:
-     1) buildPropChunks -> same disclaimer, same Safe/Value/Jackpot legend, same
-        per-card cardStr block, same footer, same spacing and 1900-char
-        chunking as the Daily Betting Cards. Only the title ("DAILY PROP CARDS")
-        and the section headers ("SAFE/VALUE/JACKPOT PROP CARDS") say "prop".
-        Still routed to the PROPS hook by the existing sendProps().
-     2) the prop page's risk sections (Core/Aggressive) are relabelled to
-        Safe/Jackpot so the dashboard page matches the betting-cards page.
-   Underlying risk values (low/medium/high) are never touched. */
-(function(){
-  function build(cards){
-    cards = cards || (typeof parseCards==='function'? parseCards(getPropsText()) : []);
-    if(!cards || !cards.length) return [];
-    var date=(window.EMBEDDED_PROPS && window.EMBEDDED_PROPS.date)? dmy(window.EMBEDDED_PROPS.date):'';
-    var header=':bar_chart: **DAILY PROP CARDS | '+date+'**\n'+
-      'BetLife365 does not provide fixed betting slips.\n'+
-      'Each Daily Card is a portfolio of selected positions, not a must-play list.\n'+
-      'You choose how to use it based on your own bankroll and risk preference.\n\n'+
-      '**:green_circle: Safe** → lowest risk positions\n'+
-      '**:yellow_circle: Value** → moderate risk positions\n'+
-      '**:red_circle: Jackpot** → high risk positions\n';
-    var footer='\n**:chart_with_upwards_trend: Build your slip to your own risk and bankroll. Discipline over excitement. 18+ | play responsibly**';
-    var groups=[['low','**:green_circle: SAFE PROP CARDS**'],['medium','**:yellow_circle: VALUE PROP CARDS**'],['high','**:red_circle: JACKPOT PROP CARDS**']];
-    var msgs=[], cur=header, has=false;
-    groups.forEach(function(g){ var cs=cards.filter(function(c){return c.risk===g[0];}); if(!cs.length) return;
-      var gh='\n\n'+g[1]+'\n';
-      cs.forEach(function(c, idx){ var piece=(idx===0?gh:'')+'\n'+cardStr(c)+'\n';
-        if((cur+piece+footer).length>1900 && has){ msgs.push(cur); cur=(idx===0? g[1]+'\n\n':'')+cardStr(c)+'\n'; }
-        else { cur+=piece; } has=true; });
-    });
-    if(has) msgs.push(cur);
-    if(msgs.length){ for(var i=0;i<msgs.length-1;i++){ msgs[i]=msgs[i]+'\n⠀'; } msgs[msgs.length-1]=msgs[msgs.length-1]+footer; }
-    // Match the cards pipeline's rename() tail: trim trailing blank/braille lines, push one U+2800.
-    msgs=msgs.map(function(ch){ var TL=ch.split('\n'); while(TL.length && /^[\s⠀]*$/.test(TL[TL.length-1])) TL.pop(); TL.push('⠀'); return TL.join('\n'); });
-    return msgs;
-  }
-  build.__dedup=true; // already final: tells the shared chunk-wrapper to leave it alone
-  function install(){
-    if(typeof window.cardStr==='function' && typeof window.getPropsText==='function' && typeof window.dmy==='function'){ window.buildPropChunks=build; return true; }
-    return false;
-  }
-  if(!install()){ var n=0, t=setInterval(function(){ if(install()||++n>60) clearInterval(t); }, 250); }
-})();
-
-(function(){
-  /* Prop page parity: relabel the risk sections + filter pills from
-     Core / Aggressive to Safe / Jackpot (Value already matches). Display only,
-     scoped to #page-propcards and #subbar; exact-word match so analysis text
-     and match names are never touched. Idempotent. */
-  function fix(root){ if(!root) return;
-    var w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, nodes=[];
-    while(n=w.nextNode()) nodes.push(n);
-    for(var i=0;i<nodes.length;i++){ var tn=nodes[i], t=tn.nodeValue; if(!t||!t.trim()) continue;
-      if(tn.parentNode && tn.parentNode.tagName==='OPTION') continue;
-      var core=t.replace(/[^A-Za-z]/g,'');
-      if(core==='Core'){ tn.nodeValue=t.replace('Core','Safe'); }
-      else if(core==='Aggressive'){ tn.nodeValue=t.replace('Aggressive','Jackpot'); }
-    }
-  }
-  function go(){ fix(document.getElementById('page-propcards')); fix(document.getElementById('subbar')); }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(go,850); }); else setTimeout(go,850);
-  setInterval(go, 1500);
-  document.addEventListener('click', function(){ setTimeout(go,200); }, true);
 })();
