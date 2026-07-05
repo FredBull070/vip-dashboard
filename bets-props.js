@@ -1,114 +1,114 @@
-window.DAILY_PROPS_VERSION = "2026-07-04";
-window.DAILY_PROPS = `SPORT: Soccer
-MATCH: France x Paraguay (WC Round of 16)
-MARKET: Shots on Target
-SELECTION: Kylian Mbappe 1+ shots on target
-ODDS: 1.28*
-STAKE: 1.5u
-RISK: low
-ANALYSIS: Frankrijk is zware favoriet en zet Paraguay diep vast. Mbappe is de vaste basisspeler en neemt structureel de meeste schoten van Les Bleus, dus 1+ op doel is een van de veiligste props van de dag.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Iga Swiatek x Alexandra Eala
-MARKET: Match Winner
-SELECTION: Iga Swiatek to win
-ODDS: 1.30*
-STAKE: 1.5u
-RISK: low
-ANALYSIS: Swiatek is meervoudig Grand Slam-kampioene en klassenverschil met Eala. Ook al is gras niet haar beste ondergrond, de kwaliteitskloof maakt de overwinning het stabiele anker.
-===
-SPORT: Soccer
-MATCH: France x Paraguay (WC Round of 16)
-MARKET: Shots on Target
-SELECTION: Ousmane Dembele 1+ shots on target
+/* BetLife365 Daily Prop Cards - 05-07-2026. Player props on confirmed WC R16 + Wimbledon R16 fixtures. Odds are realistic bet365 NL-style estimates (marked *). */
+window.DAILY_PROPS_VERSION = "2026-07-05";
+window.DAILY_PROPS = `SPORT: Football
+MATCH: Brazil x Norway
+MARKET: Team Total Goals
+SELECTION: Brazil Over 1.5 team goals
 ODDS: 1.55*
-STAKE: 1.0u
+STAKE: 1u
 RISK: low
-ANALYSIS: Dembele start op de flank in de voorspelde XI en zoekt veel de afronding. Tegen een verdedigend Paraguay krijgt Frankrijk volume, dus 1+ schot op doel heeft duidelijke waarde.
+ANALYSIS: Brazil's attacking depth against a leaky Norway defence; the safest goals angle on the board.
 ===
-SPORT: Soccer
-MATCH: France x Paraguay (WC Round of 16)
+SPORT: Football
+MATCH: Mexico x England
+MARKET: Shots on Target
+SELECTION: Harry Kane 1+ shots on target
+ODDS: 1.40*
+STAKE: 1u
+RISK: low
+ANALYSIS: England's focal point almost always registers at least one shot on target; very high hit rate.
+===
+SPORT: Tennis
+MATCH: Sinner x Mochizuki
+MARKET: Match Winner
+SELECTION: Jannik Sinner to win
+ODDS: 1.02*
+STAKE: 1u
+RISK: low
+ANALYSIS: World number one against a qualifier; about as safe as a single gets.
+===
+SPORT: Tennis
+MATCH: Bencic x Gauff
+MARKET: Match Winner
+SELECTION: Coco Gauff to win
+ODDS: 1.55*
+STAKE: 1u
+RISK: low
+ANALYSIS: Gauff's power and return edge on grass over a returning Bencic.
+===
+SPORT: Football
+MATCH: Brazil x Norway
 MARKET: Anytime Goalscorer
-SELECTION: Kylian Mbappe anytime goalscorer
-ODDS: 1.80*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Mbappe is topscorer van het toernooi en scoort aan de lopende band in de knock-out. Tegen Paraguay is Frankrijk dominant; anytime scorer op de sterspeler is pure waarde.
-===
-SPORT: Soccer
-MATCH: Canada x Morocco (WC Round of 16)
-MARKET: Anytime Goalscorer
-SELECTION: Jonathan David anytime goalscorer
-ODDS: 2.70*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: David is de vaste spits van Canada in het 4-4-2 en hun grootste dreiging. Marokko speelt zonder klassieke nummer 9 en laat ruimte; de aanvoerder-spits kan die benutten.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Grigor Dimitrov x Matteo Berrettini
-MARKET: Player Aces
-SELECTION: Matteo Berrettini over 11.5 aces
-ODDS: 1.90*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Berrettini heeft een van de zwaarste opslagen op gras en slaat op deze ondergrond consistent hoge aces-aantallen. Tegen een lange partij met Dimitrov is de lijn goed te halen.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Taylor Fritz x Lorenzo Sonego
-MARKET: Player Aces
-SELECTION: Taylor Fritz over 11.5 aces
-ODDS: 1.95*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Fritz is een first-strike server die op gras standaard veel aces produceert. Sonego breekt weinig, dus veel opslaggames voor Fritz en waarde op de over.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Alexander Zverev x Marcos Giron
-MARKET: Player Aces
-SELECTION: Alexander Zverev over 8.5 aces
-ODDS: 2.00*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Zverev haalt met zijn lengte en vlakke opslag makkelijk aces op gras. Giron neemt zelf risico op return, wat Zverev vrije opslagpunten oplevert.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Elena Rybakina x Elise Mertens
-MARKET: Player Aces
-SELECTION: Elena Rybakina over 5.5 aces
-ODDS: 1.90*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Rybakina is bij de vrouwen een van de beste servers en slaat op gras bovengemiddeld veel aces. Tegen de niet-agressief servende Mertens is 6+ aces realistisch.
-===
-SPORT: Soccer
-MATCH: France x Paraguay (WC Round of 16)
-MARKET: Player Goals
-SELECTION: Kylian Mbappe 2+ goals
-ODDS: 4.50*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Agressieve pick maar met basis: Mbappe maakte al meermaals meer dan een goal in de knock-out. Bij een verwachte ruime Franse zege is een brace geen uitzondering.
-===
-SPORT: Soccer
-MATCH: Canada x Morocco (WC Round of 16)
-MARKET: Anytime Goalscorer
-SELECTION: Brahim Diaz anytime goalscorer
-ODDS: 3.10*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Diaz start in de Marokkaanse voorhoede en komt vanuit de tien vaak in de zone. Als creatieve dreiging zonder vaste spits neemt hij zelf afwerkkansen; waarde als anytime scorer.
-===
-SPORT: Tennis
-MATCH: Wimbledon R3: Grigor Dimitrov x Matteo Berrettini
-MARKET: Player Aces
-SELECTION: Grigor Dimitrov over 9.5 aces
+SELECTION: Erling Haaland to score
 ODDS: 2.20*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Norway's talisman carries their whole goal threat; value on him finding the net once.
+===
+SPORT: Football
+MATCH: Mexico x England
+MARKET: Anytime Goalscorer
+SELECTION: Harry Kane to score
+ODDS: 2.10*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: England's penalty-taker and main striker in an open knockout at altitude.
+===
+SPORT: Tennis
+MATCH: Djokovic x Safiullin
+MARKET: Game Handicap
+SELECTION: Novak Djokovic -4.5 games
+ODDS: 1.75*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Djokovic should win comfortably against a drained Safiullin; the handicap adds value over the moneyline.
+===
+SPORT: Tennis
+MATCH: Hurkacz x Struff
+MARKET: Total Aces
+SELECTION: Hubert Hurkacz Over 9.5 aces
+ODDS: 1.80*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: One of the biggest serves on tour on a fast grass court; ace volume is his repeatable edge.
+===
+SPORT: Tennis
+MATCH: Sabalenka x Osaka
+MARKET: Total Games
+SELECTION: Over 20.5 total games
+ODDS: 1.90*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Two big hitters who both hold serve well; a tight, high-games contest is likely.
+===
+SPORT: Football
+MATCH: Brazil x Norway
+MARKET: Shots on Target
+SELECTION: Erling Haaland 2+ shots on target
+ODDS: 2.60*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Ook Dimitrov serveert uitstekend op gras en heeft in eerdere rondes hoge aces-aantallen genoteerd. In een pittige partij tegen Berrettini kan hij de lijn overschrijden.`;
-window.EMBEDDED_PROPS = { date: "2026-07-04" };
+ANALYSIS: Higher-variance version of the Haaland angle; needs him to test the keeper twice.
+===
+SPORT: Football
+MATCH: Mexico x England
+MARKET: Anytime Goalscorer
+SELECTION: Jude Bellingham to score
+ODDS: 3.20*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Late-arriving midfielder who gets into the box; plus-money on him grabbing a goal.
+===
+SPORT: Tennis
+MATCH: Sabalenka x Osaka
+MARKET: Match Winner
+SELECTION: Naomi Osaka to win
+ODDS: 2.60*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Osaka's ceiling on a quick surface makes her a live underdog against Sabalenka; the upset play of the day.`;
+window.EMBEDDED_PROPS = { date: "2026-07-05" };
 window.DAILY_PROPS_SETTLED = [];
-
 /* BetLife365 dashboard UI patch (ledger, badges, time chips, notifications, publish bar, card-sweep). SEPARATE from bets-props.js so the daily prop-cards-builder can never overwrite it. Loaded by the dashboard index.html AFTER bets*.js. */
 /* ---------------------------------------------------------------------------
    Universal webhook-field loader (deployed via this file so it is independent
