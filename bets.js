@@ -1,81 +1,81 @@
-/* BetLife365 daily bets - written by the bets-desk task, read by the dashboard. Slate: World Cup R16, 05-07-2026. Real market odds pulled 04-07 (indicative). CHECK confirmed line-ups ~1h before each kickoff before locking. */
-window.DAILY_VERSION = "2026-07-05";
-window.DAILY_MESSAGES = `**🟢 #19 Safe Builder Parley (⚽ Football): 05-07-2026**
+/* BetLife365 daily bets - written by the bets-desk task, read by the dashboard. Slate: World Cup R16, 06-07-2026. Real market odds pulled 05-07 (indicative). CHECK confirmed line-ups ~1h before each kickoff. Category spacing: 1 blank line within a builder, 2 (zero-width-space) blank lines between builders. */
+window.DAILY_VERSION = "2026-07-06";
+window.DAILY_MESSAGES = `**🟢 #22 Safe Builder Parley (⚽ Football): 06-07-2026**
 
-**:small_orange_diamond: Brazil x Norway**
-Brazil to win (Match Result) @ 1.85
-↳ Ranking, depth and Norway's leaky defence all point one way.
+**:small_orange_diamond: Portugal x Spain**
+Spain to advance @ 1.45
+↳ Spain's control and depth should tell over the full route in an Iberian derby.
 
-**:small_orange_diamond: Mexico x England**
-England to advance @ 1.74
-↳ Altitude and a home crowd make Mexico live in 90 mins, so we back England over 120 + pens rather than the match line.
+**:small_orange_diamond: USA x Belgium**
+USA to advance @ 1.85
+↳ Home crowd and slight edge; USA are marginal favourites to go through.
 
-**:moneybag: Total odds: 3.22**
+**:moneybag: Total odds: 2.68**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-One clear side per tie: Brazil straight up, England to go through. In a knockout we take England's quality over the full route instead of fighting the altitude on the 90-min line.
+One side per tie, both backed to advance over 120 + pens. Lowest-variance core of the day.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #20 Value Builder Parley (⚽ Football): 05-07-2026**
+**🟡 #23 Value Builder Parley (⚽ Football): 06-07-2026**
 
-**:small_orange_diamond: Brazil x Norway**
-Over 2.5 goals (Total Goals) @ 1.70
-↳ Brazil's firepower plus Haaland's threat; Over is the market favourite.
+**:small_orange_diamond: Portugal x Spain**
+Over 2.5 goals (Total Goals) @ 1.88
+↳ Two attacking sides who both want the ball; the derby should open up.
 
-**:small_orange_diamond: Mexico x England**
-Over 2.5 goals (Total Goals) @ 2.00
-↳ Open, end-to-end knockout at altitude where legs tire and space opens late.
+**:small_orange_diamond: USA x Belgium**
+USA or Draw & Both Teams To Score @ 2.17
+↳ Home USA stay unbeaten in 90 while both sides find the net.
 
-**:moneybag: Total odds: 3.40**
+**:moneybag: Total odds: 4.08**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A pure goals ticket across both ties, different market from the Safe. Thin 2-match day so a touch below the usual value range.
+A goals-and-cover blend across both ties, different markets from the Safe. Thin 2-match day so a touch below the usual value range.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #21 Jackpot Builder Parley (⚽ Football): 05-07-2026**
+**🔴 #24 Jackpot Builder Parley (⚽ Football): 06-07-2026**
 
-**:small_orange_diamond: Brazil x Norway**
-Both Teams To Score - Yes @ 1.58
-↳ Norway carry a real threat through Haaland even if Brazil control it.
+**:small_orange_diamond: Portugal x Spain**
+Both Teams To Score - Yes @ 1.74
+↳ Portugal carry enough threat to answer Spain at least once.
 
-**:small_orange_diamond: Mexico x England**
-England to win (Match Result) @ 2.45
-↳ Plus-money on the better team in 90 minutes if they weather the early home push.
+**:small_orange_diamond: USA x Belgium**
+Belgium to win (Match Result) @ 2.80
+↳ The higher-variance angle: Belgium's individual quality edges a tight tie.
 
-**:moneybag: Total odds: 3.87**
+**:moneybag: Total odds: 4.87**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A BTTS-and-upset blend, completely different picks and markets from the Safe and Value. Higher variance by design. Today's true longshot is the cross-sport Lucky Shot below.
+A BTTS-and-upset blend, completely different picks and markets from Safe and Value. Higher variance by design. Today's true longshot is the cross-sport Lucky Shot below.
 
 **:bank: Bankroll:** 0.25u stake
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 05-07-2026**
+**:gift: FREE BET OF THE DAY | 06-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: Brazil x Norway**
-Brazil to win (match result) @ 1.85
-↳ Brazil win the match in normal time.
+**:small_orange_diamond: Portugal x Spain**
+Spain to advance @ 1.45
+↳ Spain to reach the quarter-finals.
 
-**:small_orange_diamond: Mexico x England**
-England to advance @ 1.74
-↳ England to reach the quarter-finals.
+**:small_orange_diamond: USA x Belgium**
+USA to advance @ 1.85
+↳ USA to reach the quarter-finals.
 
-**:moneybag: Total odds: ±3.22**
+**:moneybag: Total odds: ±2.68**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Brazil are a level above Norway, and England's depth should tell over the full route even if Mexico's altitude and crowd bite early. Two clear sides from the day's only two ties.
+Spain's quality over the full route and a home USA edged as slight favourites. Two sides to advance from the day's only two ties.
 
 ━━━━━━━━━━━━
 :green_circle: This is our **Safe Builder** of the day, our lowest-risk play.
@@ -86,77 +86,77 @@ Brazil are a level above Norway, and England's depth should tell over the full r
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 05-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 06-07-2026** ⚽🎾
 
-**:small_orange_diamond: Brazil x Norway**
-Brazil to win @ 1.85
+**:small_orange_diamond: Portugal x Spain**
+Spain to advance @ 1.45
 
-**:small_orange_diamond: Mexico x England**
-England to advance @ 1.74
+**:small_orange_diamond: USA x Belgium**
+USA to advance @ 1.85
 
-**:small_orange_diamond: Sinner x Mochizuki**
-Jannik Sinner to win @ 1.02
+**:small_orange_diamond: de Minaur x Cobolli**
+Alex de Minaur to win @ 1.25
 
-**:small_orange_diamond: Djokovic x Safiullin**
-Novak Djokovic to win @ 1.20
+**:small_orange_diamond: Kostyuk x Krueger**
+Marta Kostyuk to win @ 1.43
 
-**:small_orange_diamond: Hurkacz x Struff**
-Hubert Hurkacz to win @ 1.285
+**:small_orange_diamond: Lehecka x Zverev**
+Alexander Zverev to win @ 1.285
 
-**:small_orange_diamond: Auger-Aliassime x Davidovich Fokina**
-Felix Auger-Aliassime to win @ 1.44
+**:small_orange_diamond: Fritz x Bublik**
+Taylor Fritz to win @ 1.44
 
-**:small_orange_diamond: Sabalenka x Osaka**
-Aryna Sabalenka to win @ 1.47
+**:small_orange_diamond: Dimitrov x Fery**
+Grigor Dimitrov to win @ 1.44
 
-**:small_orange_diamond: Pegula x Jovic**
-Jessica Pegula to win @ 1.52
+**:small_orange_diamond: Paolini x Eala**
+Alexandra Eala to win @ 1.62
 
-**:small_orange_diamond: Bencic x Gauff**
-Coco Gauff to win @ 1.71
+**:small_orange_diamond: Noskova x Keys**
+Madison Keys to win @ 1.65
 
-**:small_orange_diamond: Muchova x Krejcikova**
-Karolina Muchova to win @ 1.61
+**:small_orange_diamond: Bouzkova x Mertens**
+Elise Mertens to win @ 1.80
 
-**:moneybag: Total odds: ±44.85**
+**:moneybag: Total odds: ±61.50**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Ten genuine favourites stacked across two sports, one selection per match: two World Cup sides plus eight Wimbledon R16 favourites. No longshots individually; it is the stacking that makes it a 40x-plus play.
+Ten genuine favourites stacked across two sports, one selection per match: two World Cup sides to advance plus eight Wimbledon R16 favourites. No longshots individually; it is the stacking that makes it a 60x-plus play.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: Brazil x Norway
-MARKET: Match Result
-SELECTION: Brazil to win
+window.DAILY_CARDS = `MATCH: Portugal x Spain
+MARKET: To Advance
+SELECTION: Spain to advance
+ODDS: 1.45
+STAKE: 1u
+RISK: low
+ANALYSIS: Spain's control and depth should carry the Iberian derby over the full route.
+===
+MATCH: USA x Belgium
+MARKET: To Advance
+SELECTION: USA to advance
 ODDS: 1.85
 STAKE: 1u
-RISK: low
-ANALYSIS: Ranking, depth and Norway's leaky defence favour Brazil in normal time.
+RISK: medium
+ANALYSIS: Home crowd and a marginal edge make the USA slight favourites to go through.
 ===
-MATCH: Mexico x England
-MARKET: To Advance
-SELECTION: England to advance
+MATCH: Portugal x Spain
+MARKET: Total Goals
+SELECTION: Over 2.5
+ODDS: 1.88
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Two attacking sides who both want the ball; the derby should open up.
+===
+MATCH: Portugal x Spain
+MARKET: Both Teams To Score
+SELECTION: Yes
 ODDS: 1.74
-STAKE: 1u
-RISK: low
-ANALYSIS: Mexico City altitude and home crowd make Mexico live on the 90-min line, so back England over the full 120 + pens instead.
-===
-MATCH: Brazil x Norway
-MARKET: Total Goals
-SELECTION: Over 2.5
-ODDS: 1.70
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Brazil's attack plus Haaland's threat; Over is the market favourite.
-===
-MATCH: Mexico x England
-MARKET: Total Goals
-SELECTION: Over 2.5
-ODDS: 2.00
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Open, end-to-end knockout at altitude where space opens late; plus-money on the Over.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-05","legs":["Mexico x England: England to advance @ 1.74","Wimbledon: Novak Djokovic to win @ 1.20"],"oddLow":2.08,"oddHigh":2.09,"justification":"Two of the shortest, most reliable outcomes on the board from different sports - England to reach the quarters and Djokovic to beat a drained Safiullin - for a clean route to just over x2."};
+ANALYSIS: Portugal carry enough threat to answer Spain at least once.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-06","legs":["Wimbledon: Marta Kostyuk to win @ 1.43","Portugal x Spain: Spain to advance @ 1.45"],"oddLow":2.07,"oddHigh":2.08,"justification":"Two of the shortest, most reliable outcomes from different sports - Kostyuk to win and Spain to reach the quarters - for a clean route to just over x2."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
-window.FOOTBALL_EVENTS = [{"match":"Brazil x Norway","date":"2026-07-05","time":"16:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"East Rutherford","pick":"Brazil to win","tier":"Safe Builder"},{"match":"Mexico x England","date":"2026-07-05","time":"20:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Mexico City","pick":"England to advance","tier":"Safe Builder"}];
+window.FOOTBALL_EVENTS = [{"match":"Portugal x Spain","date":"2026-07-06","time":"15:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Arlington","pick":"Spain to advance","tier":"Safe Builder"},{"match":"USA x Belgium","date":"2026-07-06","time":"20:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Seattle","pick":"USA to advance","tier":"Safe Builder"}];
