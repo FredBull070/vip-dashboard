@@ -194,10 +194,12 @@
     injectCSS();
     if (!box || !box.isConnected) {
       box = document.createElement("div"); box.id = "blBooks";
-      // mount at the very top of the track-record page, above the ledger
-      host.insertBefore(box, host.firstChild);
-    } else if (host.firstChild !== box) {
-      host.insertBefore(box, host.firstChild);
+      // mount ONCE, just below #blCr and above #blPub/#blLedger. No re-forcing to
+      // firstChild on the timer - that fought the other panels and flickered.
+      var _ord=["blCr","blBooks","blPub","blLedger"], _an=null;
+      for(var _i=2;_i<_ord.length;_i++){ var _s=document.getElementById(_ord[_i]); if(_s&&_s.parentNode===host){ _an=_s; break; } }
+      if(!_an) _an=document.getElementById("tr-log")||host.firstChild;
+      host.insertBefore(box, _an);
     }
     try { box.innerHTML = buildPanel(load()); } catch (e) { /* never break the page */ }
   }

@@ -213,9 +213,15 @@
         '<div class="cr-pv"></div>';
       b.addEventListener("click", onClick);
     }
-    // Bovenaan de tab: boven de publieke-headline-balk (#blPub) en het ledger (#blLedger).
-    var first=host.firstChild;
-    if(b.parentNode!==host || host.firstChild!==b){ host.insertBefore(b, first); }
+    // Mount ONCE at the top (above #blBooks/#blPub/#blLedger). Do NOT re-force
+    // position on every tick - that fought the other top panels and caused the
+    // flicker/glitch. Placed by a fixed order so it stays put after mounting.
+    if(b.parentNode!==host){
+      var _ord=['blCr','blBooks','blPub','blLedger'], _an=null;
+      for(var _i=1;_i<_ord.length;_i++){ var _s=document.getElementById(_ord[_i]); if(_s&&_s.parentNode===host){ _an=_s; break; } }
+      if(!_an) _an=document.getElementById('tr-log')||host.firstChild;
+      host.insertBefore(b, _an);
+    }
     return b;
   }
 
