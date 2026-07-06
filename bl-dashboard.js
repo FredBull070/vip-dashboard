@@ -618,9 +618,12 @@
     var base=rows.filter(function(r){return r.public!==false && !isLuckyLeg(r);});
     var tabRows=base.filter(function(r){ return st.tab==='all'?true:typeTab(r)===st.tab; }).filter(inPeriod);
     var f=tabRows.filter(pass); f.sort(function(a,b){ var da=ep(a.date),db=ep(b.date); return db-da||(b.id||0)-(a.id||0); });
-    var s=compute(tabRows);
-    var dec=tabRows.filter(function(r){return r.result==='W'||r.result==='L';});
-    var settled=tabRows.filter(function(r){return DEC[r.result];}).length;
+    // chart + hero stats follow the sport and Safe/Value/Jackpot (tier) filters too,
+    // not just the list. Outcome/search stay list-only so the cumulative curve keeps its shape.
+    var scoped=tabRows.filter(function(r){ return (st.sport==='all'||(r.sport||'').toLowerCase()===st.sport) && (st.tier==='all'||tierOf(r)===st.tier); });
+    var s=compute(scoped);
+    var dec=scoped.filter(function(r){return r.result==='W'||r.result==='L';});
+    var settled=scoped.filter(function(r){return DEC[r.result];}).length;
     var avg=dec.length? dec.reduce(function(a,r){return a+num(r.odds);},0)/dec.length : 0;
     var ser=dec.slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return da-db||(a.id||0)-(b.id||0);});
     var cum=0,peak=0,maxdd=0,pts=[],dts=[];
@@ -628,8 +631,8 @@
     var sp={}; ser.forEach(function(r){ var k=r.sport||'?'; sp[k]=(sp[k]||0)+(r.result==='W'?num(r.stake)*(num(r.odds)-1):-num(r.stake)); });
     var sportArr=Object.keys(sp).map(function(k){return [k,sp[k]];}).sort(function(a,b){return b[1]-a[1];});
     var maxAbs=sportArr.reduce(function(m,x){return Math.max(m,Math.abs(x[1]));},1);
-    var recent=tabRows.filter(function(r){return DEC[r.result];}).slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return db-da||(b.id||0)-(a.id||0);}).slice(0,6);
-    var dsall=tabRows.map(function(r){return ep(r.date);}).filter(Boolean).sort(function(a,b){return a-b;});
+    var recent=scoped.filter(function(r){return DEC[r.result];}).slice().sort(function(a,b){var da=ep(a.date),db=ep(b.date);return db-da||(b.id||0)-(a.id||0);}).slice(0,6);
+    var dsall=scoped.map(function(r){return ep(r.date);}).filter(Boolean).sort(function(a,b){return a-b;});
     var per=dsall.length?(fmtDate(dsall[0])+' – '+fmtDate(dsall[dsall.length-1])):'Alle tijd';
     var pc=s.profit>=0?'pos':'neg', rc=s.roi>=0?'pos':'neg';
     var labs=''; if(dts.length){ var seen={}; labs=[0,.25,.5,.75,1].map(function(t){var k=fmtDate(dts[Math.round(t*(dts.length-1))]); if(seen[k])return '<span></span>'; seen[k]=1; return '<span>'+k+'</span>';}).join(''); }
@@ -796,7 +799,7 @@
   function onChange(e){
     var sel=e.target.closest('.bl-sel'); if(!sel) return;
     var k=sel.getAttribute('data-k'); st[k]=sel.value;
-    if(k==='period') render(); else renderResults();
+    if(k==='period'||k==='sport'||k==='tier') render(); else renderResults();
   }
   var qt;
   function onInput(e){ if(e.target.id==='blq'){ clearTimeout(qt); st.q=e.target.value; qt=setTimeout(renderResults, 200); } }
