@@ -1,81 +1,81 @@
-/* BetLife365 daily bets - written by the bets-desk task, read by the dashboard. Slate: World Cup R16, 06-07-2026. Real market odds pulled 05-07 (indicative). CHECK confirmed line-ups ~1h before each kickoff. Category spacing: 1 blank line within a builder, 2 (zero-width-space) blank lines between builders. */
-window.DAILY_VERSION = "2026-07-06";
-window.DAILY_MESSAGES = `**🟢 #22 Safe Builder Parley (⚽ Football): 06-07-2026**
+/* BetLife365 daily bets - written by the bets-desk task, read by the dashboard. Slate: World Cup R16, 07-07-2026. Real market odds pulled 06-07 (indicative; * = estimate). CHECK line-ups ~1h before kickoff. Tiers escalate by market/leg, not by chasing odds. Spacing: 1 blank line within a builder, 2 (ZWSP) blank lines between builders. */
+window.DAILY_VERSION = "2026-07-07";
+window.DAILY_MESSAGES = `**🟢 #25 Safe Builder Parley (⚽ Football): 07-07-2026**
 
-**:small_orange_diamond: Portugal x Spain**
-Spain to advance @ 1.45
-↳ Spain's control and depth should tell over the full route in an Iberian derby.
+**:small_orange_diamond: Argentina x Egypt**
+Argentina to advance @ 1.13
+↳ One of the heaviest favourites of the whole round; Egypt are a big step below.
 
-**:small_orange_diamond: USA x Belgium**
-USA to advance @ 1.85
-↳ Home crowd and slight edge; USA are marginal favourites to go through.
+**:small_orange_diamond: Switzerland x Colombia**
+Colombia to advance @ 1.61
+↳ The sharper attacking talent and market favourite to go through.
 
-**:moneybag: Total odds: 2.68**
+**:moneybag: Total odds: 1.81**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-One side per tie, both backed to advance over 120 + pens. Lowest-variance core of the day.
+Both ties' favourites backed to advance over 120 + pens. Lowest-variance core of the day.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #23 Value Builder Parley (⚽ Football): 06-07-2026**
+**🟡 #26 Value Builder Parley (⚽ Football): 07-07-2026**
 
-**:small_orange_diamond: Portugal x Spain**
-Over 2.5 goals (Total Goals) @ 1.88
-↳ Two attacking sides who both want the ball; the derby should open up.
+**:small_orange_diamond: Argentina x Egypt**
+Argentina to win (Match Result) @ 1.36
+↳ Argentina should win comfortably in normal time.
 
-**:small_orange_diamond: USA x Belgium**
-USA or Draw & Both Teams To Score @ 2.17
-↳ Home USA stay unbeaten in 90 while both sides find the net.
+**:small_orange_diamond: Switzerland x Colombia**
+Colombia to win (Match Result) @ 2.25
+↳ Colombia's edge in quality on the ball in a tight but winnable tie.
 
-**:moneybag: Total odds: 4.08**
+**:moneybag: Total odds: 3.06**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A goals-and-cover blend across both ties, different markets from the Safe. Thin 2-match day so a touch below the usual value range.
+The same two favourites on the 90-minute match line instead of to-advance; different market from the Safe, one step up in price.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #24 Jackpot Builder Parley (⚽ Football): 06-07-2026**
+**🔴 #27 Jackpot Builder Parley (⚽ Football): 07-07-2026**
 
-**:small_orange_diamond: Portugal x Spain**
-Both Teams To Score - Yes @ 1.74
-↳ Portugal carry enough threat to answer Spain at least once.
+**:small_orange_diamond: Argentina x Egypt**
+Argentina to win by 2+ goals (Handicap -1.5) @ 1.90
+↳ A heavy favourite expected to pull clear against a limited Egypt.
 
-**:small_orange_diamond: USA x Belgium**
-Belgium to win (Match Result) @ 2.80
-↳ The higher-variance angle: Belgium's individual quality edges a tight tie.
+**:small_orange_diamond: Switzerland x Colombia**
+Colombia to win (Match Result) @ 2.25
+↳ Colombia to take the tie in normal time.
 
-**:moneybag: Total odds: 4.87**
+**:moneybag: Total odds: 4.28**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A BTTS-and-upset blend, completely different picks and markets from Safe and Value. Higher variance by design. Today's true longshot is the cross-sport Lucky Shot below.
+A margin on the day's biggest favourite paired with Colombia straight up. Higher price built from two genuine reads, not a longshot.
 
 **:bank: Bankroll:** 0.25u stake
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 06-07-2026**
+**:gift: FREE BET OF THE DAY | 07-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: Portugal x Spain**
-Spain to advance @ 1.45
-↳ Spain to reach the quarter-finals.
+**:small_orange_diamond: Argentina x Egypt**
+Argentina to advance @ 1.13
+↳ Argentina to reach the quarter-finals.
 
-**:small_orange_diamond: USA x Belgium**
-USA to advance @ 1.85
-↳ USA to reach the quarter-finals.
+**:small_orange_diamond: Switzerland x Colombia**
+Colombia to advance @ 1.61
+↳ Colombia to reach the quarter-finals.
 
-**:moneybag: Total odds: ±2.68**
+**:moneybag: Total odds: ±1.81**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Spain's quality over the full route and a home USA edged as slight favourites. Two sides to advance from the day's only two ties.
+The two clearest sides to advance on the board. Our lowest-risk play of the day.
 
 ━━━━━━━━━━━━
 :green_circle: This is our **Safe Builder** of the day, our lowest-risk play.
@@ -86,77 +86,65 @@ Spain's quality over the full route and a home USA edged as slight favourites. T
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 06-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 07-07-2026** ⚽🎾
 
-**:small_orange_diamond: Portugal x Spain**
-Spain to advance @ 1.45
+**:small_orange_diamond: Sinner x Struff**
+Jannik Sinner to win @ 1.03
 
-**:small_orange_diamond: USA x Belgium**
-USA to advance @ 1.85
+**:small_orange_diamond: Auger-Aliassime x Djokovic**
+Novak Djokovic to win @ 1.59
 
-**:small_orange_diamond: de Minaur x Cobolli**
-Alex de Minaur to win @ 1.25
+**:small_orange_diamond: Pegula x Gauff**
+Jessica Pegula to win @ 1.70
 
-**:small_orange_diamond: Kostyuk x Krueger**
-Marta Kostyuk to win @ 1.43
+**:small_orange_diamond: Osaka x Muchova**
+Naomi Osaka to win @ 1.83
 
-**:small_orange_diamond: Lehecka x Zverev**
-Alexander Zverev to win @ 1.285
+**:small_orange_diamond: Argentina x Egypt**
+Argentina to win @ 1.36
 
-**:small_orange_diamond: Fritz x Bublik**
-Taylor Fritz to win @ 1.44
+**:small_orange_diamond: Switzerland x Colombia**
+Colombia to win @ 2.25
 
-**:small_orange_diamond: Dimitrov x Fery**
-Grigor Dimitrov to win @ 1.44
-
-**:small_orange_diamond: Paolini x Eala**
-Alexandra Eala to win @ 1.62
-
-**:small_orange_diamond: Noskova x Keys**
-Madison Keys to win @ 1.65
-
-**:small_orange_diamond: Bouzkova x Mertens**
-Elise Mertens to win @ 1.80
-
-**:moneybag: Total odds: ±61.50**
+**:moneybag: Total odds: ±15.58**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Ten genuine favourites stacked across two sports, one selection per match: two World Cup sides to advance plus eight Wimbledon R16 favourites. No longshots individually; it is the stacking that makes it a 60x-plus play.
+Six genuine favourites across two sports, one per match: the four Wimbledon quarter-final favourites plus Argentina and Colombia. A thinner QF day, so a shorter Lucky Shot than usual, but every leg is a side we rate.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: Portugal x Spain
+window.DAILY_CARDS = `MATCH: Argentina x Egypt
 MARKET: To Advance
-SELECTION: Spain to advance
-ODDS: 1.45
+SELECTION: Argentina to advance
+ODDS: 1.13
 STAKE: 1u
 RISK: low
-ANALYSIS: Spain's control and depth should carry the Iberian derby over the full route.
+ANALYSIS: One of the heaviest favourites of the round; Egypt are a clear level below.
 ===
-MATCH: USA x Belgium
+MATCH: Switzerland x Colombia
 MARKET: To Advance
-SELECTION: USA to advance
-ODDS: 1.85
+SELECTION: Colombia to advance
+ODDS: 1.61
 STAKE: 1u
-RISK: medium
-ANALYSIS: Home crowd and a marginal edge make the USA slight favourites to go through.
+RISK: low
+ANALYSIS: The sharper attacking side and market favourite to go through.
 ===
-MATCH: Portugal x Spain
+MATCH: Argentina x Egypt
+MARKET: Match Result
+SELECTION: Argentina to win
+ODDS: 1.36
+STAKE: 0.5u
+RISK: low
+ANALYSIS: Argentina expected to win comfortably in normal time.
+===
+MATCH: Switzerland x Colombia
 MARKET: Total Goals
-SELECTION: Over 2.5
-ODDS: 1.88
+SELECTION: Under 2.5
+ODDS: 1.65*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Two attacking sides who both want the ball; the derby should open up.
-===
-MATCH: Portugal x Spain
-MARKET: Both Teams To Score
-SELECTION: Yes
-ODDS: 1.74
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Portugal carry enough threat to answer Spain at least once.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-06","legs":["Wimbledon: Marta Kostyuk to win @ 1.43","Portugal x Spain: Spain to advance @ 1.45"],"oddLow":2.07,"oddHigh":2.08,"justification":"Two of the shortest, most reliable outcomes from different sports - Kostyuk to win and Spain to reach the quarters - for a clean route to just over x2."};
+ANALYSIS: Two miserly defences in a cagey knockout; the market leans to a low-scoring tie.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-07","legs":["Wimbledon: Naomi Osaka to win @ 1.83","Argentina x Egypt: Argentina to advance @ 1.13"],"oddLow":2.06,"oddHigh":2.07,"justification":"Two short, reliable outcomes from different sports - Osaka to win her QF and Argentina to reach the quarters - for a clean route to just over x2."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
-window.FOOTBALL_EVENTS = [{"match":"Portugal x Spain","date":"2026-07-06","time":"15:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Arlington","pick":"Spain to advance","tier":"Safe Builder"},{"match":"USA x Belgium","date":"2026-07-06","time":"20:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Seattle","pick":"USA to advance","tier":"Safe Builder"}];
+window.FOOTBALL_EVENTS = [{"match":"Argentina x Egypt","date":"2026-07-07","time":"12:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Atlanta","pick":"Argentina to advance","tier":"Safe Builder"},{"match":"Switzerland x Colombia","date":"2026-07-07","time":"16:00","comp":"FIFA World Cup 2026","stage":"Round of 16","venue":"Vancouver","pick":"Colombia to advance","tier":"Safe Builder"}];

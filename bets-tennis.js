@@ -1,107 +1,99 @@
-/* BetLife365 tennis bets - written by the bets-desk task, read by the dashboard. Slate: Wimbledon Round of 16 (bottom half), 06-07-2026. Real market odds pulled 05-07 (indicative, confirm exact taken price for CLV). Category spacing: 1 blank line within a builder, 2 (zero-width-space) blank lines between builders. */
-window.DAILY_TENNIS = `**🟢 #T13 Safe Builder Parley (🎾 Tennis): 06-07-2026**
+/* BetLife365 tennis bets - written by the bets-desk task, read by the dashboard. Slate: Wimbledon Quarter-finals, 07-07-2026. Real market odds pulled 06-07 (indicative). Thin 4-match QF day: tiers escalate by stacking more genuine favourites (Safe 2 legs, Value 2 other legs, Jackpot all 4), not by chasing longer odds. Spacing: 1 blank line within a builder, 2 (ZWSP) blank lines between builders. */
+window.DAILY_TENNIS = `**🟢 #T16 Safe Builder Parley (🎾 Tennis): 07-07-2026**
 
-**:small_orange_diamond: Alex de Minaur x Flavio Cobolli**
-Alex de Minaur to win @ 1.25
-↳ Elite grass mover; Cobolli survived a draining route incl. a five-setter from 0-6 down.
+**:small_orange_diamond: Jannik Sinner x Jan-Lennard Struff**
+Jannik Sinner to win @ 1.03
+↳ Reigning champion and world No.1; about as close to a lock as the QFs offer.
 
-**:small_orange_diamond: Marta Kostyuk x Ashlyn Krueger**
-Marta Kostyuk to win @ 1.43
-↳ The steadier, more proven baseliner.
+**:small_orange_diamond: Felix Auger-Aliassime x Novak Djokovic**
+Novak Djokovic to win @ 1.59
+↳ Experience and return edge over a dangerous but beatable Auger-Aliassime.
 
-**:small_orange_diamond: Jiri Lehecka x Alexander Zverev**
-Alexander Zverev to win @ 1.285
-↳ The more complete player; favoured despite a patchy grass history.
-
-**:moneybag: Total odds: 2.30**
+**:moneybag: Total odds: 1.64**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three of the shortest favourites on the board, one per match. Lowest-variance ticket of the day.
+The two shortest, most reliable favourites of the quarter-final day. A low-variance banker pair.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T14 Value Builder Parley (🎾 Tennis): 06-07-2026**
+**🟡 #T17 Value Builder Parley (🎾 Tennis): 07-07-2026**
 
-**:small_orange_diamond: Taylor Fritz x Alexander Bublik**
-Taylor Fritz to win @ 1.44
-↳ Steadier baseline; beat Bublik in Stuttgart and Bublik carries two five-setters.
+**:small_orange_diamond: Jessica Pegula x Coco Gauff**
+Jessica Pegula to win @ 1.70
+↳ In superior form and the better grass-court player in an all-American QF.
 
-**:small_orange_diamond: Jasmine Paolini x Alexandra Eala**
-Alexandra Eala to win @ 1.62
-↳ Red-hot lefty after ousting Swiatek; variety travels on grass. Market makes her favourite.
+**:small_orange_diamond: Naomi Osaka x Karolina Muchova**
+Naomi Osaka to win @ 1.83
+↳ Riding momentum after beating Sabalenka; her power tells on the quick surface.
 
-**:small_orange_diamond: Grigor Dimitrov x Arthur Fery**
-Grigor Dimitrov to win @ 1.44
-↳ Class and the classic grass game against a home wild card.
-
-**:moneybag: Total odds: 3.36**
+**:moneybag: Total odds: 3.11**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three mid-priced favourites from different matches, none shared with the Safe ticket.
+The two women's favourites, different matches from the Safe ticket. Genuine picks, just a bigger price.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #T15 Jackpot Builder Parley (🎾 Tennis): 06-07-2026**
+**🔴 #T18 Jackpot Builder Parley (🎾 Tennis): 07-07-2026**
 
-**:small_orange_diamond: Linda Noskova x Madison Keys**
-Madison Keys to win @ 1.65
-↳ Bigger weapons translate on grass.
+**:small_orange_diamond: Jannik Sinner x Jan-Lennard Struff**
+Jannik Sinner to win @ 1.03
 
-**:small_orange_diamond: Marie Bouzkova x Elise Mertens**
-Elise Mertens to win @ 1.80
-↳ In-form after a strong week; the sharper closer here.
+**:small_orange_diamond: Felix Auger-Aliassime x Novak Djokovic**
+Novak Djokovic to win @ 1.59
 
-**:moneybag: Total odds: 2.97**
+**:small_orange_diamond: Jessica Pegula x Coco Gauff**
+Jessica Pegula to win @ 1.70
+
+**:small_orange_diamond: Naomi Osaka x Karolina Muchova**
+Naomi Osaka to win @ 1.83
+
+**:moneybag: Total odds: 5.09**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Thin 8-match R16 day of short favourites, so the Jackpot is a compact two-leg ticket rather than a stacked longshot. Different matches from Safe and Value.
+All four quarter-final favourites stacked into one ticket. The bigger price comes from combining genuine picks, not from chasing longer odds on any single leg.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Alex de Minaur x Flavio Cobolli
-MARKET: Game Handicap
-SELECTION: Alex de Minaur -5.5 games
-ODDS: 1.96
+window.DAILY_TENNIS_CARDS = `MATCH: Felix Auger-Aliassime x Novak Djokovic
+MARKET: Match Result
+SELECTION: Novak Djokovic to win
+ODDS: 1.59
 STAKE: 1u
 RISK: medium
-ANALYSIS: EDGE PICK. Model ~78% win; grass Elo edge plus Cobolli's draining route make the margin cleaner than the -400 moneyline.
+ANALYSIS: EDGE PICK. Auger-Aliassime is only a slight underdog, but Djokovic's return and big-match experience over best-of-five is underpriced at 1.59.
 ===
-MATCH: Taylor Fritz x Alexander Bublik
+MATCH: Jessica Pegula x Coco Gauff
 MARKET: Match Result
-SELECTION: Taylor Fritz to win
-ODDS: 1.44
-STAKE: 1u
-RISK: low
-ANALYSIS: 10-2 on grass, beat Bublik 6-4 6-4 in Stuttgart; Bublik carried two five-setters and loose-point patches.
-===
-MATCH: Jasmine Paolini x Alexandra Eala
-MARKET: Match Result
-SELECTION: Alexandra Eala to win
-ODDS: 1.62
+SELECTION: Jessica Pegula to win
+ODDS: 1.70
 STAKE: 1u
 RISK: medium
-ANALYSIS: Momentum after beating Swiatek; lefty variety and serve travel on grass. Market flipped her to favourite.
+ANALYSIS: Pegula is in superior form and the cleaner grass-court player; Gauff's serve remains the swing factor.
 ===
-MATCH: Jiri Lehecka x Alexander Zverev
-MARKET: Total Games
-SELECTION: Over 40.5 games
+MATCH: Naomi Osaka x Karolina Muchova
+MARKET: Match Result
+SELECTION: Naomi Osaka to win
 ODDS: 1.83
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Zverev's grass matches rarely cruise; Lehecka's first-strike power should force tiebreak-style sets. Length is the value, not the -351 side.`;
+ANALYSIS: Osaka's flat power suits the quick grass and she carries momentum from beating Sabalenka.
+===
+MATCH: Jannik Sinner x Jan-Lennard Struff
+MARKET: Match Result
+SELECTION: Jannik Sinner to win
+ODDS: 1.03
+STAKE: 1u
+RISK: low
+ANALYSIS: Reigning champion and world No.1 against a big server outmatched over five sets; the banker of the day.`;
 window.TENNIS_EVENTS = [
-  { match: "de Minaur x Cobolli", date: "2026-07-06", time: "14:00", comp: "Wimbledon", stage: "Round of 16", venue: "Court 1", pick: "de Minaur to win", tier: "Safe Builder" },
-  { match: "Kostyuk x Krueger", date: "2026-07-06", time: "14:00", comp: "Wimbledon", stage: "Round of 16", venue: "Court 2", pick: "Kostyuk to win", tier: "Safe Builder" },
-  { match: "Paolini x Eala", date: "2026-07-06", time: "14:30", comp: "Wimbledon", stage: "Round of 16", venue: "Centre Court", pick: "Eala to win", tier: "Value Builder" },
-  { match: "Bouzkova x Mertens", date: "2026-07-06", time: "15:30", comp: "Wimbledon", stage: "Round of 16", venue: "Court 3", pick: "Mertens to win", tier: "Jackpot Builder" },
-  { match: "Noskova x Keys", date: "2026-07-06", time: "16:00", comp: "Wimbledon", stage: "Round of 16", venue: "Court 1", pick: "Keys to win", tier: "Jackpot Builder" },
-  { match: "Dimitrov x Fery", date: "2026-07-06", time: "16:30", comp: "Wimbledon", stage: "Round of 16", venue: "Centre Court", pick: "Dimitrov to win", tier: "Value Builder" },
-  { match: "Fritz x Bublik", date: "2026-07-06", time: "18:00", comp: "Wimbledon", stage: "Round of 16", venue: "Court 1", pick: "Fritz to win", tier: "Value Builder" },
-  { match: "Lehecka x Zverev", date: "2026-07-06", time: "19:00", comp: "Wimbledon", stage: "Round of 16", venue: "Centre Court", pick: "Zverev to win", tier: "Safe Builder" }
+  { match: "Pegula x Gauff", date: "2026-07-07", time: "14:30", comp: "Wimbledon", stage: "Quarter-final", venue: "Centre Court", pick: "Pegula to win", tier: "Value Builder" },
+  { match: "Sinner x Struff", date: "2026-07-07", time: "15:00", comp: "Wimbledon", stage: "Quarter-final", venue: "No.1 Court", pick: "Sinner to win", tier: "Safe Builder" },
+  { match: "Auger-Aliassime x Djokovic", date: "2026-07-07", time: "16:00", comp: "Wimbledon", stage: "Quarter-final", venue: "Centre Court", pick: "Djokovic to win", tier: "Safe Builder" },
+  { match: "Osaka x Muchova", date: "2026-07-07", time: "16:30", comp: "Wimbledon", stage: "Quarter-final", venue: "No.1 Court", pick: "Osaka to win", tier: "Value Builder" }
 ];
