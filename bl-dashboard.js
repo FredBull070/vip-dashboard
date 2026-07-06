@@ -648,7 +648,9 @@
 
     var TF=[['all','All'],['today','Daily'],['week','Weekly'],['month','Monthly'],['quarter','Quarterly'],['year','Yearly']];
     var tfChips='<span class="bl-tfs">'+TF.map(function(o){return '<button class="bl-tf'+(st.period===o[0]?' on':'')+'" data-tf="'+o[0]+'">'+o[1]+'</button>';}).join('')+'</span>';
-    var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span>'+tfChips+'<span class="bl-per">'+esc(per)+'</span></div>'+
+    var TC=[['all','All'],['safe','\uD83D\uDFE2 Safe'],['value','\uD83D\uDFE1 Value'],['jackpot','\uD83D\uDD34 Jackpot']];
+    var tierChips='<div class="bl-hrow bl-hrow2"><span class="bl-tclbl">Risk</span><span class="bl-tcs">'+TC.map(function(o){return '<button class="bl-tc'+(st.tier===o[0]?' on':'')+'" data-tc="'+o[0]+'">'+o[1]+'</button>';}).join('')+'</span></div>';
+    var hero='<div class="bl-hero"><div class="bl-hrow"><span class="bl-brand"><span class="bl-dot"></span> BetLife365 · Track record</span>'+tfChips+'<span class="bl-per">'+esc(per)+'</span></div>'+tierChips+
       '<div class="bl-hgrid"><div class="bl-hleft">'+
         '<div class="bl-big '+pc+'">'+fmtSigned(s.profit)+'</div><div class="bl-bigsub">Net profit · '+sub+' · tracked in units</div>'+
         '<div class="bl-h4">'+
@@ -696,9 +698,11 @@
       '.bl-hrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}',
       '.bl-brand{font-weight:600;font-size:14px;margin-right:auto}.bl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#f0782a;margin-right:7px;vertical-align:middle}',
       '.bl-per{color:#7d828d;font-size:12px}',
-      '.bl-tfs{display:inline-flex;gap:3px;background:#0e0f13;border:1px solid #232631;border-radius:9px;padding:3px}',
-      '.bl-tf{background:transparent;border:0;color:#9aa0ab;font-size:12px;font-weight:600;padding:5px 10px;border-radius:7px;cursor:pointer}',
-      '.bl-tf.on{background:#f0782a;color:#1a1206}',
+      '.bl-tfs,.bl-tcs{display:inline-flex;gap:3px;background:#0e0f13;border:1px solid #232631;border-radius:9px;padding:3px;flex-wrap:wrap}',
+      '.bl-tf,.bl-tc{background:transparent;border:0;color:#9aa0ab;font-size:12px;font-weight:600;padding:5px 10px;border-radius:7px;cursor:pointer}',
+      '.bl-hrow2{margin-top:-6px}',
+      '.bl-tclbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7d828d}',
+      '.bl-tf.on,.bl-tc.on{background:#f0782a;color:#1a1206}',
       '.bl-hgrid{display:grid;grid-template-columns:minmax(210px,1fr) 1.45fr;gap:26px;align-items:center}',
       '.bl-big{font-size:46px;font-weight:800;line-height:1;color:#f0782a;letter-spacing:-1px}.bl-big.neg{color:#ff6a4d}',
       '.bl-bigsub{color:#9aa0ab;font-size:13px;margin:9px 0 20px}',
@@ -789,6 +793,8 @@
   function onClick(e){
     var tf=e.target.closest('.bl-tf');
     if(tf){ st.period=tf.getAttribute('data-tf'); render(); return; }
+    var tc=e.target.closest('.bl-tc');
+    if(tc){ st.tier=tc.getAttribute('data-tc'); render(); return; }
     var t=e.target.closest('.bl-tab');
     if(t){ st.tab=t.getAttribute('data-tab'); render(); return; }
     var rs=e.target.closest('.bl-reset');
