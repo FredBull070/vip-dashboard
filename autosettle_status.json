@@ -1,94 +1,13 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-06T21:03:32.911Z",
+  "ran_at": "2026-07-06T21:06:32.911Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 17,
-  "settled": 4,
-  "would_settle": 4,
+  "checked": 13,
+  "settled": 0,
+  "would_settle": 0,
   "paused": false,
-  "results": [
-    {
-      "betid": "card|06-07-2026|Portugal x Spain|Over 2.5",
-      "match": "Portugal x Spain",
-      "selection": "Over 2.5",
-      "sport": "Football",
-      "market": "Total Goals",
-      "result": "L",
-      "settled_at": "2026-07-06T21:03:33.789Z",
-      "settled_by": "auto",
-      "settle_note": "1 < 2.5",
-      "score": "0-1",
-      "source": "espn"
-    },
-    {
-      "betid": "card|06-07-2026|Portugal x Spain|Yes",
-      "match": "Portugal x Spain",
-      "selection": "Yes",
-      "sport": "Football",
-      "market": "Both Teams To Score",
-      "result": "L",
-      "settled_at": "2026-07-06T21:03:33.819Z",
-      "settled_by": "auto",
-      "settle_note": "not both scored (0-1)",
-      "score": "0-1",
-      "source": "espn"
-    },
-    {
-      "betid": "parley|06-07-2026|football|value",
-      "match": "Portugal x Spain + USA x Belgium",
-      "selection": "#23 Value Builder Parley ( Football): 06-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "L",
-      "settled_at": "2026-07-06T21:03:34.428Z",
-      "settled_by": "auto",
-      "settle_note": "parley verloren: 1 leg(s) fout — één foute leg maakt de hele parley LOST",
-      "legs": [
-        {
-          "match": "Portugal x Spain",
-          "selection": "Over 2.5 goals",
-          "result": "L",
-          "score": "0-1",
-          "settle_note": "1 < 2.5"
-        },
-        {
-          "match": "USA x Belgium",
-          "selection": "USA or Draw & Both Teams To Score",
-          "result": "P",
-          "score": null
-        }
-      ],
-      "source": "espn"
-    },
-    {
-      "betid": "parley|06-07-2026|football|jackpot",
-      "match": "Portugal x Spain + USA x Belgium",
-      "selection": "#24 Jackpot Builder Parley ( Football): 06-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "L",
-      "settled_at": "2026-07-06T21:03:34.497Z",
-      "settled_by": "auto",
-      "settle_note": "parley verloren: 1 leg(s) fout — één foute leg maakt de hele parley LOST",
-      "legs": [
-        {
-          "match": "Portugal x Spain",
-          "selection": "Both Teams To Score - Yes",
-          "result": "L",
-          "score": "0-1",
-          "settle_note": "not both scored (0-1)"
-        },
-        {
-          "match": "USA x Belgium",
-          "selection": "Belgium to win",
-          "result": "P",
-          "score": null
-        }
-      ],
-      "source": "espn"
-    }
-  ],
+  "results": [],
   "errors": [],
   "aborted": null
 }
