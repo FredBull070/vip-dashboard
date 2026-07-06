@@ -1,15 +1,15 @@
 {
-  "type": "parley",
-  "period": "month",
-  "label": "Parleys · this month",
-  "roi": 22.02,
-  "bets": 39,
-  "profit": 6.98,
+  "type": "prop",
+  "period": "week",
+  "label": "Props · this week",
+  "roi": 17.25,
+  "bets": 45,
+  "profit": 5.39,
   "total": {
-    "roi": 5.21,
-    "bets": 178,
-    "profit": 7.93
+    "roi": 4.2,
+    "bets": 200,
+    "profit": 7.15
   },
   "changed": true,
-  "computed_at": "2026-07-05 08:40"
+  "computed_at": "2026-07-06 08:41"
 }
