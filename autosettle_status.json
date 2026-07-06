@@ -1,83 +1,13 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-06T03:06:32.906Z",
+  "ran_at": "2026-07-06T03:09:32.905Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 8,
-  "settled": 3,
-  "would_settle": 3,
+  "checked": 5,
+  "settled": 0,
+  "would_settle": 0,
   "paused": false,
-  "results": [
-    {
-      "betid": "card|05-07-2026|Mexico x England|Over 2.5",
-      "match": "Mexico x England",
-      "selection": "Over 2.5",
-      "sport": "Football",
-      "market": "Total Goals",
-      "result": "W",
-      "settled_at": "2026-07-06T03:06:33.668Z",
-      "settled_by": "auto",
-      "settle_note": "5 > 2.5",
-      "score": "2-3",
-      "source": "espn"
-    },
-    {
-      "betid": "parley|05-07-2026|football|value",
-      "match": "Brazil x Norway + Mexico x England",
-      "selection": "#20 Value Builder Parley ( Football): 05-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "W",
-      "settled_at": "2026-07-06T03:06:33.708Z",
-      "settled_by": "auto",
-      "settle_note": "parley gewonnen: alle 2 leg(s) correct",
-      "legs": [
-        {
-          "match": "Brazil x Norway",
-          "selection": "Over 2.5 goals",
-          "result": "W",
-          "score": "1-2",
-          "settle_note": "3 > 2.5"
-        },
-        {
-          "match": "Mexico x England",
-          "selection": "Over 2.5 goals",
-          "result": "W",
-          "score": "2-3",
-          "settle_note": "5 > 2.5"
-        }
-      ],
-      "source": "espn"
-    },
-    {
-      "betid": "parley|05-07-2026|football|jackpot",
-      "match": "Brazil x Norway + Mexico x England",
-      "selection": "#21 Jackpot Builder Parley ( Football): 05-07-2026",
-      "sport": "Football",
-      "market": "Accumulator",
-      "result": "W",
-      "settled_at": "2026-07-06T03:06:33.749Z",
-      "settled_by": "auto",
-      "settle_note": "parley gewonnen: alle 2 leg(s) correct",
-      "legs": [
-        {
-          "match": "Brazil x Norway",
-          "selection": "Both Teams To Score - Yes",
-          "result": "W",
-          "score": "1-2",
-          "settle_note": "both scored (1-2)"
-        },
-        {
-          "match": "Mexico x England",
-          "selection": "England to win",
-          "result": "W",
-          "score": "2-3",
-          "settle_note": "England won 3-2"
-        }
-      ],
-      "source": "espn"
-    }
-  ],
+  "results": [],
   "errors": [],
   "aborted": null
 }
