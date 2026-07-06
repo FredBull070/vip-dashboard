@@ -1,10 +1,10 @@
 {
-  "type": "parley",
-  "period": "month",
-  "label": "Parleys · this month",
+  "type": "prop",
+  "period": "week",
+  "label": "Daily Props · this week",
   "roi": null,
   "bets": null,
   "approved_by": "fred",
-  "updated_at": "2026-07-05T09:18:17.005Z",
+  "updated_at": "2026-07-06T20:23:22.941Z",
   "via": "worker"
 }
