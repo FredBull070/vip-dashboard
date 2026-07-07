@@ -1,14 +1,8 @@
 [
-{"s":"football","m":"Paraguay x France","k":"France","o":1.17},
-{"s":"football","m":"Canada x Morocco","k":"Morocco","o":1.76},
-{"s":"tennis","m":"Mertens x Rybakina","k":"Rybakina","o":1.22},
-{"s":"tennis","m":"Eala x Swiatek","k":"Swiatek","o":1.27},
-{"s":"tennis","m":"Lehecka x Munar","k":"Lehecka","o":1.28},
-{"s":"tennis","m":"Cirstea x Noskova","k":"Noskova","o":1.45},
-{"s":"tennis","m":"Anisimova x Keys","k":"Keys","o":1.60},
-{"s":"tennis","m":"Khachanov x Cobolli","k":"Khachanov","o":1.65},
-{"s":"tennis","m":"Samsonova x Bouzkova","k":"Bouzkova","o":1.66},
-{"s":"tennis","m":"Navarro x Kostyuk","k":"Kostyuk","o":1.68},
-{"s":"tennis","m":"Paolini x Sakkari","k":"Paolini","o":1.73},
-{"s":"tennis","m":"Tiafoe x Bublik","k":"Tiafoe","o":1.81}
+{"s":"football","m":"Argentina x Egypt","k":"Argentina","o":1.32},
+{"s":"football","m":"Switzerland x Colombia","k":"Colombia","o":2.25},
+{"s":"tennis","m":"Sinner x Struff","k":"Sinner","o":1.03},
+{"s":"tennis","m":"Auger-Aliassime x Djokovic","k":"Djokovic","o":1.59},
+{"s":"tennis","m":"Pegula x Gauff","k":"Pegula","o":1.70},
+{"s":"tennis","m":"Osaka x Muchova","k":"Osaka","o":1.83}
 ]
