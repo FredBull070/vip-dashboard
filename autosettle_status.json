@@ -1,13 +1,42 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-07T22:54:32.915Z",
+  "ran_at": "2026-07-07T22:57:32.910Z",
   "enabled": true,
   "dryRun": false,
   "checked": 9,
-  "settled": 0,
-  "would_settle": 0,
+  "settled": 2,
+  "would_settle": 2,
   "paused": false,
-  "results": [],
+  "results": [
+    {
+      "betid": "card|07-07-2026|Switzerland x Colombia|Under 2.5 goals",
+      "id": 1783425721085,
+      "match": "Switzerland x Colombia",
+      "selection": "Under 2.5 goals",
+      "sport": "Football",
+      "market": "Total goals",
+      "result": "W",
+      "settled_at": "2026-07-07T22:57:33.485Z",
+      "settled_by": "auto",
+      "settle_note": "0 < 2.5",
+      "score": "0-0",
+      "source": "espn"
+    },
+    {
+      "betid": "card|07-07-2026|Switzerland x Colombia|Colombia to win",
+      "id": 1783425721087,
+      "match": "Switzerland x Colombia",
+      "selection": "Colombia to win",
+      "sport": "Football",
+      "market": "Match result",
+      "result": "L",
+      "settled_at": "2026-07-07T22:57:33.513Z",
+      "settled_by": "auto",
+      "settle_note": "draw 0-0",
+      "score": "0-0",
+      "source": "espn"
+    }
+  ],
   "errors": [],
   "aborted": null
 }
