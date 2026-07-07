@@ -1,120 +1,111 @@
-/* BetLife365 Daily Prop Cards - 06-07-2026. DATA ONLY. UI-patch staat los en wordt eenmalig door index.html geladen. */
-window.DAILY_PROPS_VERSION = "2026-07-06";
-window.DAILY_PROPS = `SPORT: Soccer
-MATCH: Portugal x Spain
-MARKET: Shots on Target
-SELECTION: Lamine Yamal 1+ shots on target
-ODDS: 1.50*
-STAKE: 1.5u
+/* BetLife365 Daily Prop Cards - 07-07-2026. DATA ONLY. The dashboard UI patch (ledger, badges, prop<->betting-card parity + rich meta) is loaded ONCE by index.html via bl-dashboard.js, so it can never be overwritten by a daily build. Player props on Wimbledon QFs + WC R16 (Argentina-Egypt, Switzerland-Colombia). Odds are realistic bet365 NL-style estimates (marked *); line-ups finalise ~1h before kickoff. */
+window.DAILY_PROPS_VERSION = "2026-07-07";
+window.DAILY_PROPS = `SPORT: Tennis
+MATCH: Sinner x Struff
+MARKET: Match Winner
+SELECTION: Jannik Sinner to win
+ODDS: 1.03
+STAKE: 1u
 RISK: low
-ANALYSIS: Yamal is Spain's fixed right winger and their most frequent shooter, and Spain have controlled every game while conceding zero. With Nico Williams unlikely to feature, even more of the wide threat runs through Yamal, so 1+ on target is one of the steadier props of the day.
+ANALYSIS: Reigning champion and world No.1 against a big server outmatched over five sets; the banker of the day.
 ===
-SPORT: Soccer
-MATCH: USA x Belgium
+SPORT: Football
+MATCH: Argentina x Egypt
+MARKET: Match Result
+SELECTION: Argentina to win
+ODDS: 1.36
+STAKE: 1u
+RISK: low
+ANALYSIS: Argentina are one of the heaviest favourites of the round and should win in normal time.
+===
+SPORT: Tennis
+MATCH: Auger-Aliassime x Djokovic
+MARKET: Match Winner
+SELECTION: Novak Djokovic to win
+ODDS: 1.59
+STAKE: 1u
+RISK: low
+ANALYSIS: Djokovic's return and big-match experience over best-of-five against a beatable Auger-Aliassime.
+===
+SPORT: Tennis
+MATCH: Pegula x Gauff
+MARKET: Match Winner
+SELECTION: Jessica Pegula to win
+ODDS: 1.70
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: In superior form and the cleaner grass-court player in an all-American quarter-final.
+===
+SPORT: Tennis
+MATCH: Osaka x Muchova
+MARKET: Match Winner
+SELECTION: Naomi Osaka to win
+ODDS: 1.83
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Osaka's flat power suits the quick grass and she carries momentum from beating Sabalenka.
+===
+SPORT: Football
+MATCH: Argentina x Egypt
 MARKET: Shots on Target
-SELECTION: Christian Pulisic 1+ shots on target
+SELECTION: Lionel Messi 1+ shots on target
+ODDS: 1.35*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Starting and Argentina's main creative outlet; he almost always registers a shot on target.
+===
+SPORT: Football
+MATCH: Argentina x Egypt
+MARKET: Shots on Target
+SELECTION: Mohamed Salah 1+ shots on target
 ODDS: 1.70*
-STAKE: 1.5u
-RISK: low
-ANALYSIS: Pulisic is the USA's focal attacker, set-piece taker and highest-volume shooter, guaranteed to start on home soil in Seattle. Even in a tight game he reliably works the keeper at least once.
-===
-SPORT: Tennis
-MATCH: Fritz x Bublik
-MARKET: Player Aces
-SELECTION: Taylor Fritz 10+ aces
-ODDS: 1.75*
-STAKE: 1.5u
-RISK: low
-ANALYSIS: Fritz owns one of the biggest serves on tour and grass rewards it. Against Bublik, who also holds easily, service games stay on serve for long stretches, giving Fritz plenty of ace volume.
-===
-SPORT: Tennis
-MATCH: Dimitrov x Fery
-MARKET: Player Aces
-SELECTION: Grigor Dimitrov 8+ aces
-ODDS: 1.80*
-STAKE: 1.5u
-RISK: low
-ANALYSIS: Dimitrov is a class above home wildcard Fery and serves big on grass. In a match he should control on serve, he racks up free points, so 8+ aces is comfortable value.
-===
-SPORT: Soccer
-MATCH: Portugal x Spain
-MARKET: Shots on Target
-SELECTION: Bruno Fernandes 1+ shots on target
-ODDS: 1.66*
-STAKE: 1.0u
+STAKE: 0.5u
 RISK: medium
-ANALYSIS: Fernandes is Portugal's shot and set-piece hub and hits the target even in difficult games. Against a dominant Spain, Portugal's chances funnel through him from range and dead balls.
+ANALYSIS: Egypt's talisman will carry their attack and shoot on sight in a game they must chase.
 ===
-SPORT: Soccer
-MATCH: USA x Belgium
-MARKET: Shots on Target
-SELECTION: Kevin De Bruyne 1+ shots on target
-ODDS: 1.80*
-STAKE: 1.0u
+SPORT: Football
+MATCH: Switzerland x Colombia
+MARKET: Total Goals
+SELECTION: Under 2.5 goals
+ODDS: 1.65*
+STAKE: 0.5u
 RISK: medium
-ANALYSIS: De Bruyne is Belgium's creative engine and takes free kicks plus shots from the edge of the box. His volume keeps 1+ on target well within reach in a game Belgium will need to break down.
+ANALYSIS: Two miserly defences in a cagey knockout; the market leans to a low-scoring tie.
 ===
-SPORT: Soccer
-MATCH: USA x Belgium
-MARKET: Shots on Target
-SELECTION: Folarin Balogun 1+ shots on target
-ODDS: 1.85*
-STAKE: 1.0u
-RISK: medium
-ANALYSIS: Balogun's one-match ban was deferred, so the USA's leading scorer starts as the central striker. As the focal point of the home attack he gets the looks to test Courtois at least once.
-===
-SPORT: Tennis
-MATCH: Lehecka x Zverev
-MARKET: Player Aces
-SELECTION: Alexander Zverev 10+ aces
-ODDS: 1.90*
-STAKE: 1.0u
-RISK: medium
-ANALYSIS: Zverev has one of the tallest, heaviest serves in the game and grass shortens rallies in his favour. Even against a solid returner in Lehecka, his serve numbers hold up over a best-of-five.
-===
-SPORT: Tennis
-MATCH: Fritz x Bublik
-MARKET: Player Aces
-SELECTION: Alexander Bublik 10+ aces
-ODDS: 1.85*
-STAKE: 1.0u
-RISK: medium
-ANALYSIS: Bublik is a perennial aces leader with an unpredictable, huge serve that thrives on grass. Against a fellow big server in Fritz the match stays on serve, feeding his ace count.
-===
-SPORT: Tennis
-MATCH: de Minaur x Cobolli
-MARKET: Total Games
-SELECTION: Over 22.5 total games
-ODDS: 1.85*
-STAKE: 1.0u
-RISK: medium
-ANALYSIS: Two sharp baseliners who both hold serve well and rarely blow each other off the court. A competitive, tight contest points to sets going deep and the total climbing past 22.5.
-===
-SPORT: Soccer
-MATCH: Portugal x Spain
+SPORT: Football
+MATCH: Argentina x Egypt
 MARKET: Anytime Goalscorer
-SELECTION: Mikel Oyarzabal anytime goalscorer
+SELECTION: Julian Alvarez to score
+ODDS: 2.00*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Leading the line for a dominant favourite; value on the striker finding the net.
+===
+SPORT: Football
+MATCH: Argentina x Egypt
+MARKET: Anytime Goalscorer
+SELECTION: Lionel Messi to score
+ODDS: 2.30*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: The captain in a game Argentina should control; a live scorer price against a limited Egypt.
+===
+SPORT: Football
+MATCH: Switzerland x Colombia
+MARKET: Anytime Goalscorer
+SELECTION: Luis Diaz to score
 ODDS: 2.80*
-STAKE: 0.5u
+STAKE: 0.25u
 RISK: high
-ANALYSIS: Oyarzabal leads the line for a Spain side dominating the tournament and is a clinical finisher on the shots that come his way. With Spain the clear 64% favourite, their striker is a live scoring threat.
-===
-SPORT: Soccer
-MATCH: Portugal x Spain
-MARKET: Anytime Goalscorer
-SELECTION: Cristiano Ronaldo anytime goalscorer
-ODDS: 3.40*
-STAKE: 0.5u
-RISK: high
-ANALYSIS: Ronaldo still starts and never stops shooting, but Spain have not conceded all tournament, which makes this a genuine longshot. Priced as aggressive value on Portugal needing a moment from their talisman.
+ANALYSIS: Colombia's main attacking threat and a guaranteed starter; the aggressive scorer angle.
 ===
 SPORT: Tennis
-MATCH: Noskova x Keys
-MARKET: Set Betting
-SELECTION: Madison Keys to win in straight sets
-ODDS: 2.10*
-STAKE: 0.5u
+MATCH: Auger-Aliassime x Djokovic
+MARKET: Total Games
+SELECTION: Over 38.5 games
+ODDS: 1.90*
+STAKE: 0.25u
 RISK: high
-ANALYSIS: Keys arrives in form after upsetting Anisimova and her power serve and flat groundstrokes suit grass. If she starts fast she can close out Noskova in two, though the danger of a lost set keeps this aggressive.`;
-window.EMBEDDED_PROPS = { date: "2026-07-06" };
+ANALYSIS: Auger-Aliassime is only a slight underdog and can push Djokovic; the match projects long.`;
+window.EMBEDDED_PROPS = { date: "2026-07-07" };
 window.DAILY_PROPS_SETTLED = [];
