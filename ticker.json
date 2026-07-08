@@ -1,8 +1,11 @@
 [
-{"s":"football","m":"Argentina x Egypt","k":"Argentina","o":1.32},
-{"s":"football","m":"Switzerland x Colombia","k":"Colombia","o":2.25},
-{"s":"tennis","m":"Sinner x Struff","k":"Sinner","o":1.03},
-{"s":"tennis","m":"Auger-Aliassime x Djokovic","k":"Djokovic","o":1.59},
-{"s":"tennis","m":"Pegula x Gauff","k":"Pegula","o":1.70},
-{"s":"tennis","m":"Osaka x Muchova","k":"Osaka","o":1.83}
+{"s":"football","m":"Kairat Almaty x FK Sutjeska","k":"Kairat Almaty","o":1.25},
+{"s":"football","m":"Zira FK x Torpedo Kutaisi","k":"Zira FK","o":1.70},
+{"s":"football","m":"Petrocub Hincesti x Egnatia","k":"Petrocub Hincesti","o":2.08},
+{"s":"football","m":"Connah's Quay x Ballkani","k":"Ballkani","o":1.33},
+{"s":"football","m":"Flora Tallinn x FC Iberia 1999","k":"Flora Tallinn","o":3.00},
+{"s":"tennis","m":"Noskova x Mertens","k":"Noskova","o":1.62},
+{"s":"tennis","m":"Kostyuk x Paolini","k":"Kostyuk","o":1.38},
+{"s":"tennis","m":"Fritz x Zverev","k":"Fritz","o":1.74},
+{"s":"tennis","m":"Cobolli x Fery","k":"Cobolli","o":1.35}
 ]
