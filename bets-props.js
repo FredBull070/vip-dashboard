@@ -1,40 +1,31 @@
-/* BetLife365 Daily Prop Cards - 10-07-2026. DATA ONLY. UI patch loaded once by index.html via bl-dashboard.js. Thin day: Wimbledon gentlemen semis + WC QF Spain-Belgium. Odds are realistic bet365 NL-style estimates (marked *); line-ups finalise ~1h before kickoff. */
+/* BetLife365 Daily Prop Cards - 10-07-2026. DATA ONLY. UI patch loaded once by index.html via bl-dashboard.js. PROP MARKETS ONLY (shots on target, goalscorer, totals, aces, set handicaps) - NO plain match-winner picks, those live in the Daily Cards. Wimbledon gentlemen semis + WC QF Spain-Belgium. Odds are realistic bet365 NL-style estimates (marked *); line-ups finalise ~1h before kickoff. */
 window.DAILY_PROPS_VERSION = "2026-07-10";
-window.DAILY_PROPS = `SPORT: Tennis
-MATCH: Sinner x Djokovic
-MARKET: Match Winner
-SELECTION: Jannik Sinner to win
-ODDS: 1.22
+window.DAILY_PROPS = `SPORT: Football
+MATCH: Spain x Belgium
+MARKET: Team Total Goals
+SELECTION: Spain Over 0.5 team goals
+ODDS: 1.22*
 STAKE: 1u
 RISK: low
-ANALYSIS: World No.1 and defending champion; favoured even against Djokovic over five sets.
+ANALYSIS: Spain to score is near-certain against Belgium; the safest prop on the board.
 ===
 SPORT: Tennis
-MATCH: Zverev x Fery
-MARKET: Match Winner
-SELECTION: Alexander Zverev to win
-ODDS: 1.14
+MATCH: Sinner x Djokovic
+MARKET: Total Games
+SELECTION: Over 20.5 games
+ODDS: 1.35*
 STAKE: 1u
 RISK: low
-ANALYSIS: A clear level above a home wildcard whose run should end in the last four.
-===
-SPORT: Football
-MATCH: Spain x Belgium
-MARKET: Match Result
-SELECTION: Spain to win
-ODDS: 1.63
-STAKE: 1u
-RISK: low
-ANALYSIS: Spain's control and quality should see off an ageing Belgium in normal time.
+ANALYSIS: A best-of-five semi between two elite players comfortably clears this games line.
 ===
 SPORT: Football
 MATCH: Spain x Belgium
 MARKET: Shots on Target
 SELECTION: Lamine Yamal 1+ shots on target
 ODDS: 1.45*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Spain's main creative threat and a guaranteed starter; he shoots regularly.
+STAKE: 1u
+RISK: low
+ANALYSIS: Spain's main creative outlet and a guaranteed starter; he shoots regularly.
 ===
 SPORT: Tennis
 MATCH: Sinner x Djokovic
@@ -54,6 +45,15 @@ STAKE: 0.5u
 RISK: medium
 ANALYSIS: Belgium's creative hub who will shoot and create in a game they must chase.
 ===
+SPORT: Tennis
+MATCH: Sinner x Djokovic
+MARKET: Total Aces
+SELECTION: Jannik Sinner Over 9.5 aces
+ODDS: 1.75*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: Sinner's serve is a weapon on grass and this projects as a long semi-final.
+===
 SPORT: Football
 MATCH: Spain x Belgium
 MARKET: Anytime Goalscorer
@@ -72,13 +72,13 @@ STAKE: 0.25u
 RISK: high
 ANALYSIS: Two attacking sides who commit players forward; the goals line leans over.
 ===
-SPORT: Tennis
-MATCH: Zverev x Fery
-MARKET: Set Handicap
-SELECTION: Alexander Zverev to win 2-0
-ODDS: 1.40*
+SPORT: Football
+MATCH: Spain x Belgium
+MARKET: Anytime Goalscorer
+SELECTION: Jeremy Doku to score
+ODDS: 3.50*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: The aggressive angle: Zverev to end the fairy tale in straight sets.`;
+ANALYSIS: Belgium's most direct dribbler and a starter; the aggressive scorer angle.`;
 window.EMBEDDED_PROPS = { date: "2026-07-10" };
 window.DAILY_PROPS_SETTLED = [];
