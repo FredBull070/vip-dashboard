@@ -1,17 +1,17 @@
-/* BetLife365 daily bets - bets-desk task. Slate: 09-07-2026. Only ONE World Cup match today (QF France-Morocco), so this file carries the football Free Bet, the cross-sport Lucky Shot and the Challenge; the Wimbledon semi-final Builders and cards are in bets-tennis.js. Spacing: 1 blank line within, 2 (ZWSP) between. */
-window.DAILY_VERSION = "2026-07-09";
-window.DAILY_MESSAGES = `**:gift: FREE BET OF THE DAY | 09-07-2026**
+/* BetLife365 daily bets - bets-desk task. Slate: 10-07-2026. Only ONE World Cup match today (QF Spain-Belgium), so this file carries the football Free Bet, the cross-sport Lucky Shot and the Challenge; the Wimbledon semi-final Builders and cards are in bets-tennis.js. Spacing: 1 blank line within, 2 (ZWSP) between. */
+window.DAILY_VERSION = "2026-07-10";
+window.DAILY_MESSAGES = `**:gift: FREE BET OF THE DAY | 10-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: France x Morocco**
-France to win (Match Result) @ 1.56
-↳ France's firepower led by Mbappe should see off a resilient Morocco in normal time.
+**:small_orange_diamond: Spain x Belgium**
+Spain to win (Match Result) @ 1.63
+↳ Spain's control and quality should see off an ageing Belgium in normal time.
 
-**:moneybag: Total odds: ±1.56**
+**:moneybag: Total odds: ±1.63**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-The single World Cup quarter-final of the day. France are clear favourites; Morocco are dangerous but a level below over 90 minutes. Only one football match on the board today.
+The single World Cup quarter-final of the day. Spain are clear favourites; Belgium carry a threat but are a level below over 90 minutes. Only one football match on the board.
 
 ━━━━━━━━━━━━
 :green_circle: Our lowest-risk single of the day.
@@ -22,40 +22,40 @@ The single World Cup quarter-final of the day. France are clear favourites; Moro
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 09-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 10-07-2026** ⚽🎾
 
-**:small_orange_diamond: France x Morocco**
-France to win @ 1.56
+**:small_orange_diamond: Jannik Sinner x Novak Djokovic**
+Jannik Sinner to win 2-0 @ 1.55
 
-**:small_orange_diamond: Gauff x Muchova**
-Karolina Muchova to win @ 1.83
+**:small_orange_diamond: Alexander Zverev x Arthur Fery**
+Alexander Zverev to win 2-0 @ 1.40
 
-**:small_orange_diamond: Kostyuk x Noskova**
-Marta Kostyuk to win @ 1.78
+**:small_orange_diamond: Spain x Belgium**
+Spain to win @ 1.63
 
-**:moneybag: Total odds: ±5.08**
+**:moneybag: Total odds: ±3.54**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three genuine favourites across two sports on a thin quarter-final and semi-final day: France plus both Wimbledon women's semi-final favourites. Shorter than a usual Lucky Shot, but every leg is a side we rate.
+Three heavy favourites pushed a notch: both Wimbledon semi-final favourites in straight sets plus Spain to beat Belgium. A short, high-confidence Lucky Shot on a thin semi-final day.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: France x Morocco
+window.DAILY_CARDS = `MATCH: Spain x Belgium
 MARKET: Match Result
-SELECTION: France to win
-ODDS: 1.56
+SELECTION: Spain to win
+ODDS: 1.63
 STAKE: 1u
 RISK: low
-ANALYSIS: France's attacking quality led by Mbappe should tell over 90 minutes.
+ANALYSIS: Spain's control and quality should tell over 90 minutes.
 ===
-MATCH: France x Morocco
+MATCH: Spain x Belgium
 MARKET: To Advance
-SELECTION: France to advance
-ODDS: 1.24
+SELECTION: Spain to advance
+ODDS: 1.29
 STAKE: 1u
 RISK: low
-ANALYSIS: Over the full route France's depth is a clear step above Morocco.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-09","legs":["France x Morocco: France to advance @ 1.24","Gauff x Muchova: Muchova to win @ 1.83"],"oddLow":2.27,"oddHigh":2.28,"justification":"Two short, reliable outcomes from different sports - France to reach the semi-finals and Muchova to win her Wimbledon semi - for a clean route to just over x2 on a thin day."};
+ANALYSIS: Over the full route Spain are a clear step above an ageing Belgium.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-10","legs":["Jannik Sinner x Novak Djokovic: Sinner to win @ 1.22","Spain x Belgium: Spain to win @ 1.63"],"oddLow":1.99,"oddHigh":2.00,"justification":"Two short, reliable favourites from different sports - Sinner to reach the final and Spain to beat Belgium - for a clean route to almost exactly x2 on a thin day."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
-window.FOOTBALL_EVENTS = [{"match":"France x Morocco","date":"2026-07-09","time":"16:00","comp":"FIFA World Cup 2026","stage":"Quarter-final","venue":"Foxborough","pick":"France to win","tier":"Free Bet"}];
+window.FOOTBALL_EVENTS = [{"match":"Spain x Belgium","date":"2026-07-10","time":"15:00","comp":"FIFA World Cup 2026","stage":"Quarter-final","venue":"Inglewood","pick":"Spain to win","tier":"Free Bet"}];
