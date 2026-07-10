@@ -1,63 +1,32 @@
-/* BetLife365 tennis bets - bets-desk task. Slate: Wimbledon Gentlemen's Semi-finals, 10-07-2026. Real market odds pulled 09-07 (indicative; * = estimate). Only 2 matches (semis) with heavy favourites: Safe (both to win) + higher-variance Jackpot (both in straight sets); no Value ticket today. Spacing: 1 blank line within, 2 (ZWSP) between. */
-window.DAILY_TENNIS = `**🟢 #T24 Safe Builder Parley (🎾 Tennis): 10-07-2026**
+/* BetLife365 tennis bets - bets-desk task. Slate: Wimbledon Ladies' Final, 11-07-2026. Real market odds pulled 10-07 (indicative; * = estimate). Only 1 match (the final) so this is a single headline pick, no Builder ladder. Spacing rule not needed (single message). */
+window.DAILY_TENNIS = `**🟢 #T26 Wimbledon Ladies' Final (🎾 Tennis): 11-07-2026**
 
-**:small_orange_diamond: Jannik Sinner x Novak Djokovic**
-Jannik Sinner to win @ 1.22
-↳ World No.1 and reigning champion; the market makes him a clear favourite even against Djokovic.
+**:small_orange_diamond: Karolina Muchova x Linda Noskova**
+Karolina Muchova to win @ 1.80
+↳ The higher-ranked player with the bigger all-court game in an all-Czech final; the marginal favourite.
 
-**:small_orange_diamond: Alexander Zverev x Arthur Fery**
-Alexander Zverev to win @ 1.14
-↳ A gulf in level over the fairy-tale wildcard; a heavy favourite over best-of-five.
-
-**:moneybag: Total odds: 1.39**
+**:moneybag: Total odds: 1.80**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two heavy semi-final favourites in one low-variance ticket. Short odds, but the two most likely outcomes on the board.
+A single headline pick - the Wimbledon women's final. Only one tennis match today, so no Builder ladder; the cross-sport Lucky Shot and Free Bet carry the rest.
 
-**:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
-​
-​
-===NEXT MESSAGE===
-**🔴 #T25 Jackpot Builder Parley (🎾 Tennis): 10-07-2026**
-
-**:small_orange_diamond: Jannik Sinner x Novak Djokovic**
-Jannik Sinner to win 2-0 (in straight sets) @ 1.55
-
-**:small_orange_diamond: Alexander Zverev x Arthur Fery**
-Alexander Zverev to win 2-0 (in straight sets) @ 1.40
-
-**:moneybag: Total odds: 2.17**
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-The higher-variance version of the Safe: the same two favourites, but to close it out in straight sets. Only two matches on a semi-final day, so no separate Value ticket.
-
-**:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Jannik Sinner x Novak Djokovic
+**:bank: Bankroll:** 1u stake (1% of bankroll)`;
+window.DAILY_TENNIS_CARDS = `MATCH: Karolina Muchova x Linda Noskova
 MARKET: Match Result
-SELECTION: Jannik Sinner to win
-ODDS: 1.22
+SELECTION: Karolina Muchova to win
+ODDS: 1.80
 STAKE: 1u
-RISK: low
-ANALYSIS: The world No.1 and defending champion; even against Djokovic the market and the form both point his way over five sets.
+RISK: medium
+ANALYSIS: The higher-ranked player with more Grand Slam-level experience and the bigger all-court game in an all-Czech final.
 ===
-MATCH: Alexander Zverev x Arthur Fery
-MARKET: Match Result
-SELECTION: Alexander Zverev to win
-ODDS: 1.14
-STAKE: 1u
-RISK: low
-ANALYSIS: A clear level above a home wildcard whose run should end here; the banker of the day.
-===
-MATCH: Jannik Sinner x Novak Djokovic
+MATCH: Karolina Muchova x Linda Noskova
 MARKET: Total Games
-SELECTION: Over 31.5 games
-ODDS: 1.85*
+SELECTION: Over 16.5 games
+ODDS: 1.45*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Djokovic has the return game to make Sinner work; the games total leans over in a marquee semi.`;
+ANALYSIS: Two close-level players in a final should produce a competitive games count.`;
 window.TENNIS_EVENTS = [
-  { match: "Zverev x Fery", date: "2026-07-10", time: "14:30", comp: "Wimbledon", stage: "Semi-final", venue: "Centre Court", pick: "Zverev to win", tier: "Safe Builder" },
-  { match: "Sinner x Djokovic", date: "2026-07-10", time: "16:00", comp: "Wimbledon", stage: "Semi-final", venue: "Centre Court", pick: "Sinner to win", tier: "Safe Builder" }
+  { match: "Muchova x Noskova", date: "2026-07-11", time: "15:00", comp: "Wimbledon", stage: "Final", venue: "Centre Court", pick: "Muchova to win", tier: "Final Pick" }
 ];
