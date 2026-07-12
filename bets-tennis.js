@@ -1,32 +1,32 @@
-/* BetLife365 tennis bets - bets-desk task. Slate: Wimbledon Ladies' Final, 11-07-2026. Real market odds pulled 10-07 (indicative; * = estimate). Only 1 match (the final) so this is a single headline pick, no Builder ladder. Spacing rule not needed (single message). */
-window.DAILY_TENNIS = `**🟢 #T26 Wimbledon Ladies' Final (🎾 Tennis): 11-07-2026**
+/* BetLife365 tennis bets - bets-desk task. Slate: Wimbledon Gentlemen's Final, 12-07-2026. Real market odds pulled 11-07 (indicative; * = estimate). Only 1 match (the final) so a single headline pick, no Builder ladder. */
+window.DAILY_TENNIS = `**🟢 #T27 Wimbledon Gentlemen's Final (🎾 Tennis): 12-07-2026**
 
-**:small_orange_diamond: Karolina Muchova x Linda Noskova**
-Karolina Muchova to win @ 1.80
-↳ The higher-ranked player with the bigger all-court game in an all-Czech final; the marginal favourite.
+**:small_orange_diamond: Jannik Sinner x Alexander Zverev**
+Jannik Sinner to win @ 1.20
+↳ Defending champion and world No.1; leads the head-to-head 10-4 and is a heavy favourite in their first grass meeting.
 
-**:moneybag: Total odds: 1.80**
+**:moneybag: Total odds: 1.20**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-A single headline pick - the Wimbledon women's final. Only one tennis match today, so no Builder ladder; the cross-sport Lucky Shot and Free Bet carry the rest.
+The Wimbledon men's final and the only match on the board today. Sinner is a short but strong favourite; a single headline pick, no Builder ladder.
 
 **:bank: Bankroll:** 1u stake (1% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Karolina Muchova x Linda Noskova
+window.DAILY_TENNIS_CARDS = `MATCH: Jannik Sinner x Alexander Zverev
 MARKET: Match Result
-SELECTION: Karolina Muchova to win
-ODDS: 1.80
+SELECTION: Jannik Sinner to win
+ODDS: 1.20
 STAKE: 1u
-RISK: medium
-ANALYSIS: The higher-ranked player with more Grand Slam-level experience and the bigger all-court game in an all-Czech final.
+RISK: low
+ANALYSIS: Defending champion and world No.1, 10-4 up in the head-to-head; a short but clear favourite in the final.
 ===
-MATCH: Karolina Muchova x Linda Noskova
+MATCH: Jannik Sinner x Alexander Zverev
 MARKET: Total Games
-SELECTION: Over 16.5 games
+SELECTION: Over 20.5 games
 ODDS: 1.45*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Two close-level players in a final should produce a competitive games count.`;
+ANALYSIS: Zverev's serve should keep sets competitive; a best-of-five final leans to a healthy games count.`;
 window.TENNIS_EVENTS = [
-  { match: "Muchova x Noskova", date: "2026-07-11", time: "15:00", comp: "Wimbledon", stage: "Final", venue: "Centre Court", pick: "Muchova to win", tier: "Final Pick" }
+  { match: "Sinner x Zverev", date: "2026-07-12", time: "16:00", comp: "Wimbledon", stage: "Final", venue: "Centre Court", pick: "Sinner to win", tier: "Final Pick" }
 ];

@@ -1,75 +1,57 @@
-/* BetLife365 Daily Prop Cards - 11-07-2026. DATA ONLY. UI-patch staat los en wordt eenmalig door index.html geladen. Alleen bet365 NL-markten; geen match-winners, geen verboden speler-stat markten. */
-window.DAILY_PROPS_VERSION = "2026-07-11";
-window.DAILY_PROPS = `SPORT: Football
-MATCH: Norway x England
-MARKET: Anytime Goalscorer
-SELECTION: Erling Haaland to score anytime
-ODDS: 1.80*
+/* BetLife365 Daily Prop Cards - 12-07-2026. DATA ONLY. UI patch loaded once by index.html via bl-dashboard.js. Only the Wimbledon mens final today. bet365 NL-safe markets only (total games, set betting, game handicap, total sets); NO aces, NO plain match-winner. Odds are realistic bet365 NL-style estimates (marked *). */
+window.DAILY_PROPS_VERSION = "2026-07-12";
+window.DAILY_PROPS = `SPORT: Tennis
+MATCH: Sinner x Zverev
+MARKET: Total Games
+SELECTION: Over 20.5 games
+ODDS: 1.45*
 STAKE: 1u
 RISK: low
-ANALYSIS: Haaland has 7 goals in 4 World Cup matches and has now scored in 14 straight Norway appearances. England have kept only 2 clean sheets in 5 games, so their leaky back line should give him at least one clear look.
-===
-SPORT: Football
-MATCH: Norway x England
-MARKET: Anytime Goalscorer
-SELECTION: Harry Kane to score anytime
-ODDS: 1.85*
-STAKE: 1u
-RISK: low
-ANALYSIS: Kane has 6 goals in 5 games at this tournament and arrives on red-hot Bayern form. He is on penalties and gets central volume, a reliable anytime source in a game England should attack.
-===
-SPORT: Football
-MATCH: Norway x England
-MARKET: Both Teams To Score
-SELECTION: Both Teams To Score - Yes
-ODDS: 1.53*
-STAKE: 1u
-RISK: low
-ANALYSIS: Two of the tournament's most prolific strikers on the pitch and an England defence that has kept just 2 clean sheets in 5. With Haaland scoring in every Norway outing, both sides finding the net is the likeliest shape.
-===
-SPORT: Football
-MATCH: Norway x England
-MARKET: Over/Under Total Goals
-SELECTION: Over 2.5 total goals
-ODDS: 1.85*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Both attacks are elite and England's defence has leaked throughout the knockouts. A high tempo quarter final between two direct sides points to three or more goals.
-===
-SPORT: Football
-MATCH: Argentina x Switzerland
-MARKET: Anytime Goalscorer
-SELECTION: Lionel Messi to score anytime
-ODDS: 2.00*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Messi leads the Golden Boot race with 8 goals and takes the free kicks and penalties. Even after two missed spot kicks he keeps generating high value chances against a Swiss side he has historically dominated.
-===
-SPORT: Football
-MATCH: Argentina x Switzerland
-MARKET: Team Total Goals
-SELECTION: Argentina Over 1.5 team goals
-ODDS: 1.60*
-STAKE: 1u
-RISK: low
-ANALYSIS: Argentina scored 3 in each of their last two knockout ties and have outscored Switzerland 15-3 historically. With Swiss danger man Manzambi a knee injury doubt, the champions should clear two goals themselves.
-===
-SPORT: Football
-MATCH: Argentina x Switzerland
-MARKET: Handicap
-SELECTION: Argentina -1.5 handicap
-ODDS: 1.95*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: The class gap is enormous and Switzerland may be without their in form scorer. The risk is the disciplined Swiss block that shut out Colombia, hence the reduced stake on the two goal margin.
+ANALYSIS: Zverev's serve should keep sets competitive; a best-of-five final leans to a healthy games count.
 ===
 SPORT: Tennis
-MATCH: Muchova x Noskova
-MARKET: Total Games
-SELECTION: Over 19.5 total games in the match
-ODDS: 1.80*
+MATCH: Sinner x Zverev
+MARKET: Game Handicap
+SELECTION: Jannik Sinner -4.5 games
+ODDS: 1.55*
+STAKE: 1u
+RISK: low
+ANALYSIS: Sinner is the clear favourite and should win with a comfortable games margin.
+===
+SPORT: Tennis
+MATCH: Sinner x Zverev
+MARKET: Set Betting
+SELECTION: Jannik Sinner to win 3-0
+ODDS: 1.65*
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: A first ever all-Czech Wimbledon final between two players who have never been this deep. Nerves and a close level on serve between similar aggressive baseliners point to a competitive, game-heavy final.`;
-window.EMBEDDED_PROPS = { date: "2026-07-11" };
+ANALYSIS: Sinner has the level to close out a straight-sets win if he serves well.
+===
+SPORT: Tennis
+MATCH: Sinner x Zverev
+MARKET: Total Games
+SELECTION: Over 30.5 games
+ODDS: 1.95*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: If Zverev holds serve and forces tiebreaks, a four-set final clears this line.
+===
+SPORT: Tennis
+MATCH: Sinner x Zverev
+MARKET: Total Sets
+SELECTION: Over 3.5 sets
+ODDS: 2.20*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: The aggressive angle: Zverev takes at least one set and the match reaches a fourth.
+===
+SPORT: Tennis
+MATCH: Sinner x Zverev
+MARKET: Set Betting
+SELECTION: Jannik Sinner to win 3-1
+ODDS: 3.20*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: A live correct-set-score price if Zverev grabs a set but Sinner wins the final.`;
+window.EMBEDDED_PROPS = { date: "2026-07-12" };
 window.DAILY_PROPS_SETTLED = [];
