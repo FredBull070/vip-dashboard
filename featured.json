@@ -1,10 +1,10 @@
 {
   "type": "prop",
-  "period": "week",
-  "label": "Daily Props · this week",
+  "period": "all",
+  "label": "Daily Props · all-time",
   "roi": null,
   "bets": null,
   "approved_by": "fred",
-  "updated_at": "2026-07-08T07:43:14.940Z",
+  "updated_at": "2026-07-13T08:28:40.294Z",
   "via": "worker"
 }
