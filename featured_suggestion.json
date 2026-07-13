@@ -2,14 +2,14 @@
   "type": "prop",
   "period": "week",
   "label": "Props · this week",
-  "roi": 37.81,
-  "bets": 59,
-  "profit": 14.24,
+  "roi": 28.74,
+  "bets": 52,
+  "profit": 8.16,
   "total": {
     "roi": 3.74,
-    "bets": 320,
+    "bets": 327,
     "profit": 9.21
   },
   "changed": false,
-  "computed_at": "2026-07-12 08:40"
+  "computed_at": "2026-07-13 08:40"
 }
