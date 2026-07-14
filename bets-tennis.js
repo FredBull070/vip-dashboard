@@ -1,23 +1,23 @@
-/* BetLife365 tennis bets - bets-desk task. Slate: 13-07-2026, first-round day of the post-Wimbledon clay swing (ATP Gstaad, ATP Umag, ATP Bastad, WTA 125K Rome). Odds verified via Oddspedia rendered order of play (Unibet feed). Safe/Value/Jackpot ladder. */
-window.DAILY_TENNIS = `**🟢 #T28 Safe Builder Parley (🎾 Tennis): 13-07-2026**
+/* BetLife365 tennis bets - bets-desk task. Slate: 14-07-2026, post-Wimbledon clay swing (ATP Gstaad, ATP Bastad, ATP Umag). Odds verified via Oddspedia rendered order of play (Unibet feed), cross-checked against Flashscore/FanDuel/SportyTrader, conservative value used where sources diverged. Safe/Value/Jackpot ladder. */
+window.DAILY_TENNIS = `**🟢 #T31 Safe Builder Parley (🎾 Tennis): 14-07-2026**
 
-**:small_orange_diamond: Raphael Collignon x Timofey Skatov**
-Raphael Collignon to win @ 1.16
-↳ Clear favourite at home level on clay against a lower-ranked opponent.
+**:small_orange_diamond: Adolfo Daniel Vallejo x Miguel Damas**
+Adolfo Daniel Vallejo to win @ 1.18
+↳ Heavy home-level favourite on clay against a much lower-ranked opponent.
 
-**:small_orange_diamond: Dominic Stephan Stricker x Jaume Munar**
-Jaume Munar to win @ 1.28
-↳ Munar is the far steadier clay-courter; Stricker is short of match sharpness.
+**:small_orange_diamond: Facundo Diaz Acosta x Lautaro Midon**
+Facundo Diaz Acosta to win @ 1.28
+↳ Diaz Acosta is the far more experienced clay-courter and clear favourite.
 
-**:small_orange_diamond: Alice Rame x Noma Akugue Noha**
-Noma Akugue Noha to win @ 1.26
-↳ Akugue is the stronger, higher-ranked player and heavy favourite here.
+**:small_orange_diamond: Nuno Borges x Moise Kouame**
+Nuno Borges to win @ 1.27
+↳ Borges has the ranking and clay pedigree edge over Kouame.
 
-**:small_orange_diamond: Vit Kopriva x Dino Prizmic**
-Dino Prizmic to win @ 1.35
-↳ Prizmic is the rising talent and clear favourite on this surface.
+**:small_orange_diamond: Jaime Faria x Stanislas Wawrinka**
+Jaime Faria to win @ 1.48
+↳ Faria is the market favourite in-form against an ageing Wawrinka.
 
-**:moneybag: Total odds: ±2.53**
+**:moneybag: Total odds: ±2.84**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -27,25 +27,25 @@ Four short but solid favourites from four different matches, stacked for a safe 
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T29 Value Builder Parley (🎾 Tennis): 13-07-2026**
+**🟡 #T32 Value Builder Parley (🎾 Tennis): 14-07-2026**
 
-**:small_orange_diamond: Kilian Feldbausch x Miomir Kecmanovic**
-Miomir Kecmanovic to win @ 1.33
-↳ Tour-level experience and ranking edge over the young home wildcard.
+**:small_orange_diamond: Juan Manuel Cerundolo x Zdenek Kolar**
+Juan Manuel Cerundolo to win @ 1.27
+↳ Cerundolo is the clear ranking favourite; conservative cross-checked quote used.
 
-**:small_orange_diamond: Dusan Lajovic x Luca Van Assche**
-Luca Van Assche to win @ 1.67
-↳ Van Assche is the better clay mover and slight favourite against a fading Lajovic.
+**:small_orange_diamond: Marko Topo x Camilo Ugo Carabelli**
+Camilo Ugo Carabelli to win @ 1.40
+↳ Ugo Carabelli is the more seasoned tour player and market favourite.
 
-**:small_orange_diamond: Lorenzo Sonego x Joel Schwaerzler**
-Lorenzo Sonego to win @ 1.42
-↳ Sonego has the power and pedigree edge over the teenage qualifier.
+**:small_orange_diamond: Botic Van De Zandschulp x Taro Daniel**
+Botic Van De Zandschulp to win @ 1.56
+↳ Van De Zandschulp is the higher-ranked, steadier clay mover.
 
-**:small_orange_diamond: Jesper De Jong x Vilius Gaubas**
-Jesper De Jong to win @ 1.44
-↳ De Jong is in solid form and favoured against Gaubas on clay.
+**:small_orange_diamond: Alexandre Muller x Alexander Shevchenko**
+Alexander Shevchenko to win @ 1.54
+↳ Shevchenko is in stronger form and the clear market favourite.
 
-**:moneybag: Total odds: ±4.54**
+**:moneybag: Total odds: ±4.27**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
@@ -55,137 +55,150 @@ Four favourites with a bit more variance stacked into a mid-range return. All ar
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #T30 Jackpot Builder Parley (🎾 Tennis): 13-07-2026**
+**🔴 #T33 Jackpot Builder Parley (🎾 Tennis): 14-07-2026**
 
-**:small_orange_diamond: Clement Tabur x Jurij Rodionov**
-Clement Tabur to win @ 1.63
-↳ Tabur is the favourite on clay against a serve-reliant Rodionov.
+**:small_orange_diamond: Pedro Martinez Portero x Yannick Hanfmann**
+Yannick Hanfmann to win @ 1.26
+↳ Hanfmann is the clear market favourite on current clay form.
 
-**:small_orange_diamond: Damir Dzumhur x Henrique Rocha**
-Henrique Rocha to win @ 1.73
-↳ Rocha is the fresher, in-form player and favourite despite Dzumhur's name.
+**:small_orange_diamond: Dalibor Svrcina x Grigor Dimitrov**
+Grigor Dimitrov to win @ 1.52
+↳ Dimitrov's experience and quality make him the clear favourite.
 
-**:small_orange_diamond: Oksana Selekhmeteva x Elizara Yaneva**
-Oksana Selekhmeteva to win @ 1.60
-↳ Selekhmeteva has the experience and ranking edge over a young qualifier.
+**:small_orange_diamond: Matej Dodig x Pablo Carreno Busta**
+Pablo Carreno Busta to win @ 1.38
+↳ Carreno Busta is the far more experienced clay favourite here.
 
-**:small_orange_diamond: Sofya Lansere x Elena Malygina**
-Sofya Lansere to win @ 1.68
-↳ Lansere is the higher-ranked clay-courter and clear favourite.
+**:small_orange_diamond: Alex Molcan x Valentin Royer**
+Alex Molcan to win @ 1.61
+↳ Molcan is the higher-ranked, steadier favourite on this surface.
 
-**:moneybag: Total odds: ±7.58**
+**:small_orange_diamond: Stefanos Tsitsipas x Ignacio Buse**
+Ignacio Buse to win @ 1.61
+↳ Buse is the market favourite after a recent win over Tsitsipas; cross-checked and confirmed by multiple books.
+
+**:moneybag: Total odds: ±6.85**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Realistic accumulator built by stacking four genuine favourites from four different matches, not by chasing longshots. Higher total comes from more good picks, not riskier odds.
+Realistic accumulator built by stacking five genuine favourites from five different matches, not by chasing longshots. Higher total comes from more good picks, not riskier odds.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Raphael Collignon x Timofey Skatov
+window.DAILY_TENNIS_CARDS = `MATCH: Adolfo Daniel Vallejo x Miguel Damas
 MARKET: Match Result
-SELECTION: Raphael Collignon to win
-ODDS: 1.16
+SELECTION: Adolfo Daniel Vallejo to win
+ODDS: 1.18
 STAKE: 2u
 RISK: low
-ANALYSIS: Clear favourite on clay against a lower-ranked opponent.
+ANALYSIS: Heavy home-level favourite on clay against a much lower-ranked opponent.
 ===
-MATCH: Dominic Stephan Stricker x Jaume Munar
+MATCH: Facundo Diaz Acosta x Lautaro Midon
 MARKET: Match Result
-SELECTION: Jaume Munar to win
+SELECTION: Facundo Diaz Acosta to win
 ODDS: 1.28
 STAKE: 2u
 RISK: low
-ANALYSIS: Munar is the steadier clay-courter; Stricker short of sharpness.
+ANALYSIS: Far more experienced clay-courter and clear favourite.
 ===
-MATCH: Alice Rame x Noma Akugue Noha
+MATCH: Nuno Borges x Moise Kouame
 MARKET: Match Result
-SELECTION: Noma Akugue Noha to win
+SELECTION: Nuno Borges to win
+ODDS: 1.27
+STAKE: 2u
+RISK: low
+ANALYSIS: Ranking and clay pedigree edge over Kouame.
+===
+MATCH: Jaime Faria x Stanislas Wawrinka
+MARKET: Match Result
+SELECTION: Jaime Faria to win
+ODDS: 1.48
+STAKE: 2u
+RISK: low
+ANALYSIS: Market favourite in-form against an ageing Wawrinka.
+===
+MATCH: Juan Manuel Cerundolo x Zdenek Kolar
+MARKET: Match Result
+SELECTION: Juan Manuel Cerundolo to win
+ODDS: 1.27
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Clear ranking favourite; conservative cross-checked quote used.
+===
+MATCH: Marko Topo x Camilo Ugo Carabelli
+MARKET: Match Result
+SELECTION: Camilo Ugo Carabelli to win
+ODDS: 1.40
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: More seasoned tour player and market favourite.
+===
+MATCH: Botic Van De Zandschulp x Taro Daniel
+MARKET: Match Result
+SELECTION: Botic Van De Zandschulp to win
+ODDS: 1.56
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Higher-ranked, steadier clay mover.
+===
+MATCH: Alexandre Muller x Alexander Shevchenko
+MARKET: Match Result
+SELECTION: Alexander Shevchenko to win
+ODDS: 1.54
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Stronger form and the clear market favourite.
+===
+MATCH: Pedro Martinez Portero x Yannick Hanfmann
+MARKET: Match Result
+SELECTION: Yannick Hanfmann to win
 ODDS: 1.26
-STAKE: 2u
-RISK: low
-ANALYSIS: Higher-ranked and stronger player, heavy favourite.
-===
-MATCH: Vit Kopriva x Dino Prizmic
-MARKET: Match Result
-SELECTION: Dino Prizmic to win
-ODDS: 1.35
-STAKE: 2u
-RISK: low
-ANALYSIS: Rising talent and clear favourite on clay.
-===
-MATCH: Kilian Feldbausch x Miomir Kecmanovic
-MARKET: Match Result
-SELECTION: Miomir Kecmanovic to win
-ODDS: 1.33
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Tour-level experience and ranking edge over a home wildcard.
-===
-MATCH: Dusan Lajovic x Luca Van Assche
-MARKET: Match Result
-SELECTION: Luca Van Assche to win
-ODDS: 1.67
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Better clay mover, slight favourite against a fading Lajovic.
-===
-MATCH: Lorenzo Sonego x Joel Schwaerzler
-MARKET: Match Result
-SELECTION: Lorenzo Sonego to win
-ODDS: 1.42
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Power and pedigree edge over a teenage qualifier.
-===
-MATCH: Jesper De Jong x Vilius Gaubas
-MARKET: Match Result
-SELECTION: Jesper De Jong to win
-ODDS: 1.44
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Solid form and favoured against Gaubas on clay.
-===
-MATCH: Clement Tabur x Jurij Rodionov
-MARKET: Match Result
-SELECTION: Clement Tabur to win
-ODDS: 1.63
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Favourite on clay against a serve-reliant opponent.
+ANALYSIS: Clear market favourite on current clay form.
 ===
-MATCH: Damir Dzumhur x Henrique Rocha
+MATCH: Dalibor Svrcina x Grigor Dimitrov
 MARKET: Match Result
-SELECTION: Henrique Rocha to win
-ODDS: 1.73
+SELECTION: Grigor Dimitrov to win
+ODDS: 1.52
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Fresher, in-form player and favourite despite the name value.
+ANALYSIS: Experience and quality make him the clear favourite.
 ===
-MATCH: Oksana Selekhmeteva x Elizara Yaneva
+MATCH: Matej Dodig x Pablo Carreno Busta
 MARKET: Match Result
-SELECTION: Oksana Selekhmeteva to win
-ODDS: 1.60
+SELECTION: Pablo Carreno Busta to win
+ODDS: 1.38
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Experience and ranking edge over a young qualifier.
+ANALYSIS: Far more experienced clay favourite here.
 ===
-MATCH: Sofya Lansere x Elena Malygina
+MATCH: Alex Molcan x Valentin Royer
 MARKET: Match Result
-SELECTION: Sofya Lansere to win
-ODDS: 1.68
+SELECTION: Alex Molcan to win
+ODDS: 1.61
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Higher-ranked clay-courter and clear favourite.`;
+ANALYSIS: Higher-ranked, steadier favourite on this surface.
+===
+MATCH: Stefanos Tsitsipas x Ignacio Buse
+MARKET: Match Result
+SELECTION: Ignacio Buse to win
+ODDS: 1.61
+STAKE: 0.25u
+RISK: medium
+ANALYSIS: Market favourite after a recent win over Tsitsipas; cross-checked and confirmed by multiple books.`;
 window.TENNIS_EVENTS = [
-{ match: "Raphael Collignon x Timofey Skatov", date: "2026-07-13", time: "13:20", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Collignon to win", tier: "Safe Builder" },
-{ match: "Dominic Stephan Stricker x Jaume Munar", date: "2026-07-13", time: "17:30", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Munar to win", tier: "Safe Builder" },
-{ match: "Alice Rame x Noma Akugue Noha", date: "2026-07-13", time: "17:10", comp: "WTA 125K Rome", stage: "Round of 32", venue: "Rome", pick: "Akugue Noha to win", tier: "Safe Builder" },
-{ match: "Vit Kopriva x Dino Prizmic", date: "2026-07-13", time: "21:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Prizmic to win", tier: "Safe Builder" },
-{ match: "Kilian Feldbausch x Miomir Kecmanovic", date: "2026-07-13", time: "11:40", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Kecmanovic to win", tier: "Value Builder" },
-{ match: "Dusan Lajovic x Luca Van Assche", date: "2026-07-13", time: "18:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Van Assche to win", tier: "Value Builder" },
-{ match: "Lorenzo Sonego x Joel Schwaerzler", date: "2026-07-13", time: "10:30", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Sonego to win", tier: "Value Builder" },
-{ match: "Jesper De Jong x Vilius Gaubas", date: "2026-07-13", time: "14:40", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "De Jong to win", tier: "Value Builder" },
-{ match: "Clement Tabur x Jurij Rodionov", date: "2026-07-13", time: "12:10", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Tabur to win", tier: "Jackpot Builder" },
-{ match: "Damir Dzumhur x Henrique Rocha", date: "2026-07-13", time: "16:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Rocha to win", tier: "Jackpot Builder" },
-{ match: "Oksana Selekhmeteva x Elizara Yaneva", date: "2026-07-13", time: "17:10", comp: "WTA 125K Rome", stage: "Round of 32", venue: "Rome", pick: "Selekhmeteva to win", tier: "Jackpot Builder" },
-{ match: "Sofya Lansere x Elena Malygina", date: "2026-07-13", time: "18:30", comp: "WTA 125K Rome", stage: "Round of 32", venue: "Rome", pick: "Lansere to win", tier: "Jackpot Builder" }
+{ match: "Adolfo Daniel Vallejo x Miguel Damas", date: "2026-07-14", time: "12:00", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "Vallejo to win", tier: "Safe Builder" },
+{ match: "Facundo Diaz Acosta x Lautaro Midon", date: "2026-07-14", time: "12:00", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "Diaz Acosta to win", tier: "Safe Builder" },
+{ match: "Nuno Borges x Moise Kouame", date: "2026-07-14", time: "13:20", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "Borges to win", tier: "Safe Builder" },
+{ match: "Jaime Faria x Stanislas Wawrinka", date: "2026-07-14", time: "17:30", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Faria to win", tier: "Safe Builder" },
+{ match: "Juan Manuel Cerundolo x Zdenek Kolar", date: "2026-07-14", time: "10:30", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Cerundolo to win", tier: "Value Builder" },
+{ match: "Marko Topo x Camilo Ugo Carabelli", date: "2026-07-14", time: "16:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Ugo Carabelli to win", tier: "Value Builder" },
+{ match: "Botic Van De Zandschulp x Taro Daniel", date: "2026-07-14", time: "12:10", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "Van De Zandschulp to win", tier: "Value Builder" },
+{ match: "Alexandre Muller x Alexander Shevchenko", date: "2026-07-14", time: "14:00", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Shevchenko to win", tier: "Value Builder" },
+{ match: "Pedro Martinez Portero x Yannick Hanfmann", date: "2026-07-14", time: "10:30", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Hanfmann to win", tier: "Jackpot Builder" },
+{ match: "Dalibor Svrcina x Grigor Dimitrov", date: "2026-07-14", time: "12:10", comp: "ATP Bastad", stage: "Round of 32", venue: "Bastad", pick: "Dimitrov to win", tier: "Jackpot Builder" },
+{ match: "Matej Dodig x Pablo Carreno Busta", date: "2026-07-14", time: "16:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Carreno Busta to win", tier: "Jackpot Builder" },
+{ match: "Alex Molcan x Valentin Royer", date: "2026-07-14", time: "16:00", comp: "ATP Umag", stage: "Round of 32", venue: "Umag", pick: "Molcan to win", tier: "Jackpot Builder" },
+{ match: "Stefanos Tsitsipas x Ignacio Buse", date: "2026-07-14", time: "15:00", comp: "ATP Gstaad", stage: "Round of 32", venue: "Gstaad", pick: "Buse to win", tier: "Jackpot Builder" }
 ];
