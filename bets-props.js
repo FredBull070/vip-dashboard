@@ -1,75 +1,84 @@
-/* BetLife365 Daily Prop Cards - 14-07-2026. DATA ONLY. UI patch loaded once by index.html via bl-dashboard.js. WC semi-final France-Spain. bet365 NL-safe markets only (anytime goalscorer, total goals, team totals, BTTS); NO shots-on-target, NO aces, NO plain match-winner. Odds are realistic bet365 NL-style estimates (marked *). */
-window.DAILY_PROPS_VERSION = "2026-07-14";
+/* BetLife365 Daily Prop Cards - 15-07-2026. DATA ONLY. Geen UI-patch in dit bestand. Alleen bet365 NL-markten; geen kale winnaars, geen individuele speler-schotstatistieken. */
+window.DAILY_PROPS_VERSION = "2026-07-15";
 window.DAILY_PROPS = `SPORT: Football
-MATCH: France x Spain
-MARKET: Team Total Goals
-SELECTION: France Over 0.5 team goals
-ODDS: 1.25*
-STAKE: 1u
+MATCH: England x Argentina
+MARKET: Anytime Goalscorer
+SELECTION: Harry Kane
+ODDS: 2.75*
+STAKE: 0.75u
 RISK: low
-ANALYSIS: France to score is near-certain in a high-quality semi-final.
+ANALYSIS: WK-halve finale, Kane is de vaste aanspeelpunt en penaltynemer van England in een duel waar England kansen moet forceren tegen een compacte Argentijnse defensie.
 ===
 SPORT: Football
-MATCH: France x Spain
-MARKET: Total Goals
-SELECTION: Over 1.5 goals
-ODDS: 1.30*
-STAKE: 1u
-RISK: low
-ANALYSIS: A low bar that their recent meetings have comfortably cleared.
+MATCH: England x Argentina
+MARKET: Anytime Goalscorer
+SELECTION: Lionel Messi
+ODDS: 3.00*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Messi blijft de creatieve spil en vaste afmaker van Argentina; in een halve finale met dit gewicht is hij de logische eerste optie voor een doelpunt.
 ===
 SPORT: Football
-MATCH: France x Spain
+MATCH: England x Argentina
+MARKET: Over/Under Total Goals
+SELECTION: Over 2.5 Goals
+ODDS: 1.90*
+STAKE: 0.75u
+RISK: low
+ANALYSIS: Twee aanvallend sterke halve finalisten met Kane, Bellingham, Saka tegenover Messi en Alvarez; eerdere knock-outduels van beide teams dit toernooi leverden regelmatig meerdere goals op.
+===
+SPORT: Football
+MATCH: England x Argentina
 MARKET: Both Teams To Score
 SELECTION: Yes
-ODDS: 1.60*
-STAKE: 1u
+ODDS: 1.70*
+STAKE: 0.75u
 RISK: low
-ANALYSIS: Two elite attacks; the last several head-to-heads have been goal-filled.
+ANALYSIS: Beide ploegen beschikken over uitgesproken diepgang voorin en hebben dit toernooi vaker wel dan niet gescoord tegen sterke tegenstanders.
 ===
 SPORT: Football
-MATCH: France x Spain
-MARKET: Anytime Goalscorer
-SELECTION: Kylian Mbappe to score
-ODDS: 2.10*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: France's captain and top scorer of the tournament; short scorer price for a reason.
-===
-SPORT: Football
-MATCH: France x Spain
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.90*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Their last three meetings all went over 2.5, averaging 3.3 goals.
-===
-SPORT: Football
-MATCH: France x Spain
-MARKET: Anytime Goalscorer
-SELECTION: Lamine Yamal to score
-ODDS: 3.00*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Spain's spark; value on him finding the net in an open semi.
-===
-SPORT: Football
-MATCH: France x Spain
-MARKET: Total Goals
-SELECTION: Over 3.5 goals
+MATCH: England x Argentina
+MARKET: Team Total Goals (England)
+SELECTION: England Over 1.5 Goals
 ODDS: 2.60*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Their recent meetings include a nine-goal thriller; the aggressive goals angle.
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: England speelt thuisvoordeel in Atlanta met een offensieve kern (Saka, Bellingham, Gordon, Kane) die op dreef is; twee treffers is realistisch tegen een Argentijnse defensie die kansen weggeeft in de omschakeling.
 ===
 SPORT: Football
-MATCH: France x Spain
+MATCH: England x Argentina
 MARKET: Anytime Goalscorer
-SELECTION: Ousmane Dembele to score
-ODDS: 3.20*
-STAKE: 0.25u
+SELECTION: Jude Bellingham
+ODDS: 3.50*
+STAKE: 0.75u
 RISK: high
-ANALYSIS: Starting alongside Mbappe and in form; a live scorer price.`;
-window.EMBEDDED_PROPS = { date: "2026-07-14" };
+ANALYSIS: Bellingham opereert centraal achter de spits en schuift graag de zestien in; in een cruciaal duel is hij vaak besluitvaardig, al is de concurrentie voor doelpunten binnen het elftal groot.
+===
+SPORT: Football
+MATCH: England x Argentina
+MARKET: Anytime Goalscorer
+SELECTION: Julian Alvarez
+ODDS: 3.25*
+STAKE: 0.75u
+RISK: high
+ANALYSIS: Alvarez vormt de aanvalspartner van Messi en profiteert van de ruimte die de sterspeler creeert; een prima outsider-optie voor een treffer in een open halve finale.
+===
+SPORT: Football
+MATCH: England x Argentina
+MARKET: Handicap
+SELECTION: England +1
+ODDS: 1.55*
+STAKE: 0.75u
+RISK: low
+ANALYSIS: Met een volledig doel achterstand ingebouwd is dit een veilige manier om op England te spelen in een duel dat op basis van vorm en thuisvoordeel licht in hun voordeel ligt.
+===
+SPORT: Football
+MATCH: England x Argentina
+MARKET: Half-Time/Full-Time
+SELECTION: Draw/England
+ODDS: 4.50*
+STAKE: 0.75u
+RISK: high
+ANALYSIS: England begint dit toernooi vaker rustig en groeit fysiek in de tweede helft; een gelijke ruststand gevolgd door een Engelse eindzege past bij dat patroon tegen een Argentinie dat het tempo in de slotfase soms laat zakken.`;
+window.EMBEDDED_PROPS = { date: "2026-07-15" };
 window.DAILY_PROPS_SETTLED = [];
