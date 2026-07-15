@@ -1,17 +1,17 @@
-/* BetLife365 daily bets - bets-desk task. Slate: 14-07-2026. World Cup semi-final France-Spain (the only football today; other semi England-Argentina is 15 July). Football is a single (no parley) + cross-sport Lucky pulling today's ATP 250 favourites from bets-tennis.js. Real market odds pulled 14-07 (indicative; * = estimate). Spacing: 1 blank line within, 2 (ZWSP) between. */
-window.DAILY_VERSION = "2026-07-14";
-window.DAILY_MESSAGES = `**:gift: FREE BET OF THE DAY | 14-07-2026**
+/* BetLife365 daily bets - bets-desk task. Slate: 15-07-2026. World Cup semi-final England-Argentina (the only football today). Football is a single (no parley) + cross-sport Lucky pulling today's ATP 250 favourites from bets-tennis.js. Real market odds pulled 15-07 (indicative; * = estimate). Spacing: 1 blank line within, 2 (ZWSP) between. */
+window.DAILY_VERSION = "2026-07-15";
+window.DAILY_MESSAGES = `**:gift: FREE BET OF THE DAY | 15-07-2026**
 ⚽ Sport of the day: Football
 
-**:small_orange_diamond: France x Spain**
-France to advance @ 1.65
-↳ A heavyweight World Cup semi-final; France's depth and Mbappe edge them to the final over 120 + pens.
+**:small_orange_diamond: England x Argentina**
+England to advance @ 1.79
+↳ The second World Cup semi-final; England are the marginal favourites to reach the final over 120 + pens.
 
-**:moneybag: Total odds: ±1.65**
+**:moneybag: Total odds: ±1.79**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-The World Cup semi-final headlines the day. France are the marginal favourites over Spain in a game their recent meetings have all gone over 2.5 goals. Our featured single; the other semi (England vs Argentina) is tomorrow.
+Kane against Messi for a place in the final. The market makes England slight favourites to go through, but this projects as a cautious, low-scoring tie (Under 2.5 is the favourite on the total). Our featured single; France await the winner.
 
 ━━━━━━━━━━━━
 :green_circle: Our featured single of the day.
@@ -22,74 +22,74 @@ The World Cup semi-final headlines the day. France are the marginal favourites o
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 14-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 15-07-2026** ⚽🎾
 
-**:small_orange_diamond: France x Spain**
-France to advance @ 1.65
+**:small_orange_diamond: England x Argentina**
+England to advance @ 1.79
 
-**:small_orange_diamond: Vallejo x Damas**
-Adolfo Daniel Vallejo to win @ 1.18
+**:small_orange_diamond: Collignon x Sonego**
+Raphael Collignon to win @ 1.46
 
-**:small_orange_diamond: Diaz Acosta x Midon**
-Facundo Diaz Acosta to win @ 1.28
+**:small_orange_diamond: Rinderknech x Tabur**
+Arthur Rinderknech to win @ 1.47
 
-**:small_orange_diamond: Nuno Borges x Kouame**
-Nuno Borges to win @ 1.27
+**:small_orange_diamond: Cobolli x Burruchaga**
+Flavio Cobolli to win @ 1.36
 
-**:small_orange_diamond: Faria x Wawrinka**
-Jaime Faria to win @ 1.48
+**:small_orange_diamond: Hanfmann x Vacherot**
+Yannick Hanfmann to win @ 1.52
 
-**:small_orange_diamond: Cerundolo x Kolar**
-Juan Manuel Cerundolo to win @ 1.27
+**:small_orange_diamond: Altmaier x Darderi**
+Luciano Darderi to win @ 1.54
 
-**:small_orange_diamond: Topo x Ugo Carabelli**
-Camilo Ugo Carabelli to win @ 1.40
+**:small_orange_diamond: Carreno Busta x Ugo Carabelli**
+Pablo Carreno Busta to win @ 1.60
 
-**:small_orange_diamond: Van De Zandschulp x Taro Daniel**
-Botic Van De Zandschulp to win @ 1.56
+**:small_orange_diamond: Nuno Borges x Dimitrov**
+Nuno Borges to win @ 1.49
 
-**:small_orange_diamond: Muller x Shevchenko**
-Alexander Shevchenko to win @ 1.54
+**:small_orange_diamond: Gomez x Arnaldi**
+Matteo Arnaldi to win @ 1.28
 
-**:moneybag: Total odds: ±20.01**
+**:moneybag: Total odds: ±37.32**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-France to reach the World Cup final stacked with eight short clay-court favourites from today's ATP 250s (pulled from our tennis card). No longshots; a shorter Lucky than usual because clay favourites are short-priced, but every leg is a side we rate.
+England to reach the World Cup final stacked with eight clear clay-court favourites from today's ATP 250 round of 16 (pulled from our tennis card). One selection per match, no longshots; every leg is a side we rate.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: France x Spain
+window.DAILY_CARDS = `MATCH: England x Argentina
 MARKET: To Advance
-SELECTION: France to advance
-ODDS: 1.65
+SELECTION: England to advance
+ODDS: 1.79
 STAKE: 1u
-RISK: low
-ANALYSIS: France's depth and Mbappe edge them past Spain over the full route.
-===
-MATCH: France x Spain
-MARKET: Match Result
-SELECTION: France to win
-ODDS: 2.35
-STAKE: 0.5u
 RISK: medium
-ANALYSIS: France are the marginal favourites in 90 minutes in a tight semi-final.
+ANALYSIS: Marginal favourites to reach the final over the full route in a tight semi.
 ===
-MATCH: France x Spain
+MATCH: England x Argentina
 MARKET: Total Goals
-SELECTION: Over 2.5
-ODDS: 1.90*
-STAKE: 0.5u
+SELECTION: Under 2.5
+ODDS: 1.75*
+STAKE: 1u
 RISK: medium
-ANALYSIS: Their last three meetings all cleared 2.5 goals, averaging 3.3.
+ANALYSIS: A cautious, low-event semi-final; the market makes Under 2.5 the favourite.
 ===
-MATCH: France x Spain
-MARKET: Both Teams To Score
-SELECTION: Yes
-ODDS: 1.60*
+MATCH: England x Argentina
+MARKET: Match Result
+SELECTION: England to win
+ODDS: 2.60
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Two elite attacks; recent head-to-heads have been goal-filled.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-14","legs":["France x Spain: France to advance @ 1.65","Vallejo x Damas: Vallejo to win @ 1.18"],"oddLow":1.95,"oddHigh":1.95,"justification":"France to reach the final plus a short home clay favourite (Vallejo) - two reliable outcomes from different sports for a clean route to roughly x2."};
+ANALYSIS: All three 90-minute outcomes are plus-money; England edge it on the market read.
+===
+MATCH: England x Argentina
+MARKET: Both Teams To Score
+SELECTION: No
+ODDS: 1.65*
+STAKE: 0.5u
+RISK: medium
+ANALYSIS: In a cagey knockout the likeliest shape is one side edged out with the other kept quiet.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-15","legs":["Cobolli x Burruchaga: Cobolli to win @ 1.36","Collignon x Sonego: Collignon to win @ 1.46"],"oddLow":1.99,"oddHigh":1.99,"justification":"Two short, clear clay favourites from different ATP 250 matches for a clean route to roughly x2; the football semi-final is a cagey tie and too close for the challenge."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
-window.FOOTBALL_EVENTS = [{"match":"France x Spain","date":"2026-07-14","time":"15:00","comp":"FIFA World Cup 2026","stage":"Semi-final","venue":"Arlington","pick":"France to advance","tier":"Free Bet"}];
+window.FOOTBALL_EVENTS = [{"match":"England x Argentina","date":"2026-07-15","time":"15:00","comp":"FIFA World Cup 2026","stage":"Semi-final","venue":"Atlanta","pick":"England to advance","tier":"Free Bet"}];
