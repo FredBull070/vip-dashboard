@@ -1,111 +1,111 @@
-/* BetLife365 Daily Prop Cards - 16-07-2026. DATA ONLY, no UI patch appended (that loads separately via index.html). Only bet365 NL markets; no straight win/lose picks, no player shot/serve stat props. No football today (between WK semis and third place match, 18-07). Only ATP 250 clay swing: Gstaad R16, Bastad R16, Umag QF (order of play ATP Tour 16-07-2026). */
-window.DAILY_PROPS_VERSION = "2026-07-16";
+/* BetLife365 Daily Prop Cards - 17-07-2026. DATA ONLY, no UI patch appended (that loads separately via index.html). Only bet365 NL markets; no straight win/lose picks, no player shot/serve stat props. No football today (World Cup third place 18-07, final 19-07); NBA/NFL/NHL out of season. Tennis only: ATP Bastad QF, ATP Gstaad R2+QF, ATP Umag SF, WTA Athens QF, WTA Iasi QF (ESPN scoreboard 17-07-2026). */
+window.DAILY_PROPS_VERSION = "2026-07-17";
 window.DAILY_PROPS = `SPORT: Tennis
-MATCH: Andrey Rublev x Andrea Pellegrino
+MATCH: Casper Ruud x Juan Manuel Cerundolo
 MARKET: Set Betting
-SELECTION: Andrey Rublev to win 2-0 (straight sets)
-ODDS: 1.45*
+SELECTION: Casper Ruud to win 2-0 (straight sets)
+ODDS: 1.80*
 STAKE: 2u
 RISK: low
-ANALYSIS: Top seed Rublev against a clear ranking underdog in the Bastad R16; a clean straight-sets passage is the expected script.
+ANALYSIS: Second seed Ruud is one of the most reliable clay operators in this Gstaad field and meets the sixth seed in the quarter-final. The class gap is wide enough that a clean two-set close-out is the expected script rather than a coin flip.
+===
+SPORT: Tennis
+MATCH: Sebastian Baez x Andrey Rublev
+MARKET: Total Games (Match)
+SELECTION: Over 21.5 games
+ODDS: 1.80*
+STAKE: 2u
+RISK: low
+ANALYSIS: Top seed Rublev meets eighth seed Baez, a dedicated clay grinder who extends rallies and forces long service games. The market prices Rublev short, but the matchup style points to a stretched, high-game quarter-final in Bastad.
 ===
 SPORT: Tennis
 MATCH: Alexander Bublik x Quentin Halys
-MARKET: Set Betting
-SELECTION: Alexander Bublik to win 2-0 (straight sets)
-ODDS: 1.55*
-STAKE: 2u
-RISK: low
-ANALYSIS: Top seed Bublik at home conditions on clay against Halys; the seeding gap and current form favour a two-set finish.
-===
-SPORT: Tennis
-MATCH: Damir Dzumhur x Matteo Arnaldi
-MARKET: Set Betting
-SELECTION: Matteo Arnaldi to win 2-0 (straight sets)
-ODDS: 1.65*
-STAKE: 2u
-RISK: low
-ANALYSIS: Fourth seed Arnaldi is the far higher-ranked, in-form clay mover; Dzumhur can extend games but rarely takes a set off top-40 quality here.
-===
-SPORT: Tennis
-MATCH: Roman Andres Burruchaga x Camilo Ugo Carabelli
 MARKET: Total Games (Match)
-SELECTION: Under 21.5 games
+SELECTION: Over 20.5 games
+ODDS: 1.70*
+STAKE: 2u
+RISK: low
+ANALYSIS: Two of the biggest servers in the Gstaad draw meet in a rescheduled second round, and both hold at a high clip even on clay. Serve-dominant matchups routinely run deep into both sets before a break arrives.
+===
+SPORT: Tennis
+MATCH: Zheng Qinwen x Barbora Krejcikova
+MARKET: Total Games (Match)
+SELECTION: Over 20.5 games
 ODDS: 1.75*
 STAKE: 2u
 RISK: low
-ANALYSIS: Seventh seed Ugo Carabelli has the clearer clay pedigree; expect him to close this out efficiently without needing a long third set.
+ANALYSIS: The standout Athens quarter-final pits two former top-ten players against each other, with third seed Krejcikova only a narrow favourite on paper. Evenly matched quality at this level rarely produces a short match.
 ===
 SPORT: Tennis
-MATCH: Joao Faria x Casper Ruud
-MARKET: Total Games (Match)
-SELECTION: Under 20.5 games
-ODDS: 1.80*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Second seed Ruud is a class above a qualifier-level Faria on clay; this profiles as a quick, low-game two-setter.
-===
-SPORT: Tennis
-MATCH: Alejandro Tabilo x Lautaro Midon
-MARKET: Set Betting
-SELECTION: Alejandro Tabilo to win 2-0 (straight sets)
-ODDS: 1.60*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Third seed Tabilo against a qualifier in Bastad; the seeding and clay-form gap points to a straightforward two sets.
-===
-SPORT: Tennis
-MATCH: Alex Molcan x Alejandro Davidovich Fokina
+MATCH: Valentin Vacherot x Raphael Collignon
 MARKET: Total Sets
 SELECTION: Over 2.5 sets
 ODDS: 2.05*
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Davidovich Fokina is talented but streaky and Molcan is a durable clay grinder; this Umag quarter-final has the shape of a three-setter.
+ANALYSIS: Third seed Vacherot against seventh seed Collignon is the tightest seeding gap of the Gstaad quarter-finals. A close ranking profile in the opening match of the day favours a deciding third set.
 ===
 SPORT: Tennis
-MATCH: Jerome Kym x Stefanos Tsitsipas
+MATCH: Stefanos Tsitsipas x Arthur Rinderknech
+MARKET: Set Betting
+SELECTION: Stefanos Tsitsipas to win 2-0 (straight sets)
+ODDS: 2.05*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Tsitsipas remains the pedigree pick on clay in this Gstaad quarter-final despite entering unseeded. Set betting offers a materially better price than backing him straight, and Rinderknech has struggled to take sets off this level on the surface.
+===
+SPORT: Tennis
+MATCH: Luciano Darderi x Nuno Borges
 MARKET: Set Handicap
-SELECTION: Stefanos Tsitsipas -3.5 games
+SELECTION: Luciano Darderi -1.5 sets
+ODDS: 2.00*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Second seed Darderi is the more natural clay-courter in this Bastad quarter-final against fifth seed Borges. The handicap prices a two-set win near even money, which understates the surface edge.
+===
+SPORT: Tennis
+MATCH: Thiago Agustin Tirante x Alejandro Tabilo
+MARKET: Total Games (Match)
+SELECTION: Over 21.5 games
+ODDS: 1.85*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Seventh seed Tirante is a stubborn Argentinian clay baseliner who makes third seed Tabilo work for every hold. Neither has the free points to close this out quickly on a slow Bastad court.
+===
+SPORT: Tennis
+MATCH: Sara Bejlek x Clara Tauson
+MARKET: Set Betting
+SELECTION: Clara Tauson to win 2-0 (straight sets)
 ODDS: 1.90*
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Tsitsipas is the clear market favourite in Gstaad, but Kym gave him a scare in their last meeting, so the games handicap offers better value than laying him outright.
+ANALYSIS: Top seed Tauson has the clearest power advantage in the Athens draw and meets fifth seed Bejlek in the quarter-final. The seeding gap supports a straight-sets passage at a fair price.
 ===
 SPORT: Tennis
-MATCH: Sebastian Baez x Jesper de Jong
-MARKET: Total Games (Match)
-SELECTION: Over 21.5 games
-ODDS: 1.90*
+MATCH: Daniel Merida x Roman Andres Burruchaga
+MARKET: Total Sets
+SELECTION: Over 2.5 sets
+ODDS: 2.05*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Eighth seed Baez is favoured but de Jong is a tricky, high-effort clay counterpuncher who tends to stretch matches deep into sets.
+ANALYSIS: An all-unseeded Umag semi-final between two players who both came through tight routes to get here. With no ranking separation to lean on, a deciding set is the most likely shape.
 ===
 SPORT: Tennis
-MATCH: Daniel Merida Aguilar x Titouan Droguet
+MATCH: Alex Molcan x Damir Dzumhur
+MARKET: Total Sets
+SELECTION: Over 2.5 sets
+ODDS: 2.10*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Two durable, defensive clay grinders meet in the second Umag semi-final, and neither profiles as a quick closer. Matches between counterpunchers of this type tend to go the distance.
+===
+SPORT: Tennis
+MATCH: Stefano Travaglia x Adolfo Daniel Vallejo
 MARKET: Total Sets
 SELECTION: Over 2.5 sets
 ODDS: 2.15*
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Two evenly matched fringe-tour players in this Umag quarter-final; neither has a clear edge, favouring a deciding third set.
-===
-SPORT: Tennis
-MATCH: Nikoloz Basilashvili x Thiago Tirante
-MARKET: Total Games (Match)
-SELECTION: Over 22.5 games
-ODDS: 2.00*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Basilashvili's power-hitting game against a seeded, disciplined baseliner tends to produce long, high-variance service-hold sets rather than quick breaks.
-===
-SPORT: Tennis
-MATCH: Alexander Shevchenko x Dominic Stricker
-MARKET: Total Games (Match)
-SELECTION: Under 20.5 games
-ODDS: 1.85*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Stricker is carrying fitness question marks after recent injury issues, favouring an efficient, shorter match for Shevchenko.`;
-window.EMBEDDED_PROPS = { date: "2026-07-16" };
+ANALYSIS: The only all-unseeded quarter-final in Bastad, with an experienced campaigner against a young riser and no market consensus. Genuine coin-flip matchups are where the three-set price carries the most value.`;
+window.EMBEDDED_PROPS = { date: "2026-07-17" };
 window.DAILY_PROPS_SETTLED = [];
