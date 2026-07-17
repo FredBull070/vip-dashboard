@@ -1,9 +1,14 @@
-{
-  "date": "2026-07-16",
-  "items": [
-    "🎾 FREE BET: Casper Ruud to win @ 1.23 (ATP Gstaad R16)",
-    "👑 LUCKY SHOT (Tennis): 8-leg parley ±20.71",
-    "🏆 $10-$1K CHALLENGE: 3-leg tennis route ±2.15-2.16",
-    "⚽ No football today — World Cup rest day (3rd place 18-07, final 19-07)"
-  ]
-}
+[
+{"s":"football","m":"Bodo/Glimt x Fredrikstad","k":"Bodo/Glimt","o":1.16},
+{"s":"football","m":"Beijing Guoan x Liaoning Tieren","k":"Beijing Guoan","o":1.38},
+{"s":"football","m":"Qingdao Kangtine x Chengdu Qianbao","k":"Chengdu Qianbao","o":1.74},
+{"s":"football","m":"Yunnan Yukun x Shanghai Port","k":"Yunnan Yukun","o":2.38},
+{"s":"football","m":"IFK Goteborg x Brommapojkarna","k":"IFK Goteborg","o":1.93},
+{"s":"football","m":"Mjallby x Vasteras SK","k":"Mjallby","o":1.68},
+{"s":"tennis","m":"Alycia Parks x Maria Sakkari","k":"Maria Sakkari","o":1.24},
+{"s":"tennis","m":"Juan Manuel Cerundolo x Casper Ruud","k":"Casper Ruud","o":1.34},
+{"s":"tennis","m":"Adolfo Daniel Vallejo x Stefano Travaglia","k":"Adolfo Daniel Vallejo","o":1.37},
+{"s":"tennis","m":"Damir Dzumhur x Alex Molcan","k":"Alex Molcan","o":1.45},
+{"s":"tennis","m":"Andrey Rublev x Sebastian Baez","k":"Andrey Rublev","o":1.58},
+{"s":"tennis","m":"Arthur Rinderknech x Stefanos Tsitsipas","k":"Stefanos Tsitsipas","o":1.58}
+]

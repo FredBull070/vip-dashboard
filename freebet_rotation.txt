@@ -1,1 +1,2 @@
-2026-07-16: n=0 -> type=Safe (sport=Tennis, football unavailable - World Cup rest day)
+2
+2026-07-17: n=1 -> type=Value (sport=Tennis; available sports today [Football, Tennis], 1 % 2 = 1). Next run reads n=2 -> type=Jackpot.
