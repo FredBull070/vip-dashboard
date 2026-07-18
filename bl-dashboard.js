@@ -1088,9 +1088,14 @@
         w.__blWrapped=true; try{ window[s.fn]=w; }catch(e){}
       }
     });
+    if(typeof window.askConfirm==='function' && !window.askConfirm.__blAC){
+      var _ac=window.askConfirm;
+      var nw=function(){ if(autoActive) return Promise.resolve(true); return _ac.apply(this, arguments); };
+      nw.__blAC=true; try{ window.askConfirm=nw; }catch(e){}
+    }
   }
 
-  var busy={};
+  var busy={}, autoActive=false;
   function tryAuto(s){
     if(!on(s.k) || !authed()) return;
     var v=s.ver(); if(!v || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
@@ -1101,8 +1106,10 @@
     if(typeof window[s.fn]!=='function') return;
     busy[s.k]=true; markSent(s.k, v);    // mark first to prevent any re-entry/double send
     toast('Auto-sending '+s.label+' to Discord…');
+    autoActive=true;                     // suppress the manual send confirm for this run
     try{ Promise.resolve(window[s.fn]()).catch(function(){}).then(function(){ busy[s.k]=false; }); }
     catch(e){ busy[s.k]=false; }
+    setTimeout(function(){ autoActive=false; }, 3000);
   }
 
   function css(){ if(document.getElementById('blAutoCss'))return; var s=document.createElement('style'); s.id='blAutoCss';
