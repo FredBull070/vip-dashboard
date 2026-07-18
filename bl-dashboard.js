@@ -1144,3 +1144,74 @@
   else setTimeout(tick, 1300);
   setInterval(tick, 20000);
 })();
+
+/* ===========================================================================
+   AUTO-PUBLISH the track-record headline to the public site  — added 15-07-2026
+   A switch on the Track Record page (next to the publish bar). When ON and a
+   fresh, better track-record slice has been computed (featured_suggestion.json)
+   that differs from what the public site currently shows (featured.json), it
+   auto-publishes it via the publish worker — so betlife365.com always headlines
+   the latest slice without a manual click. The full record data already syncs
+   automatically; this automates the "which slice to feature" step. Off by
+   default. Fred flips it on.
+   =========================================================================== */
+(function(){
+  function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function on(){return ls('ba_autopublish')==='1';}
+  function authed(){return ls('ba_auth')==='1';}
+  function toast(m,ok){ try{ if(typeof window.showToast==='function') window.showToast(m, ok!==false); }catch(e){} }
+  function sig(o){ return o? ((o.type||'')+'|'+(o.period||'')+'|'+(o.label||'')) : ''; }
+  var busy=false, lastCheck=0;
+
+  function doPublish(sugg){
+    var url=window.BL_PUBLISH_URL||'https://betlife365-publish.wfsirvania.workers.dev';
+    var cfg={type:sugg.type,period:sugg.period,label:sugg.label,roi:(sugg.roi==null?null:sugg.roi),bets:(sugg.bets==null?null:sugg.bets),approved_by:'fred',updated_at:new Date().toISOString(),via:'auto'};
+    busy=true;
+    fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)})
+      .then(function(r){ if(r.ok){ lsSet('ba_autopub_sig', sig(sugg)); toast('Site headline auto-updated ✓'); } else { toast('Auto-publish failed ('+r.status+')', false); } busy=false; })
+      .catch(function(){ busy=false; });
+  }
+  function check(){
+    if(!on()||!authed()||busy) return;
+    var t=Date.now(); if(t-lastCheck<30000) return; lastCheck=t;
+    Promise.all([
+      fetch('/featured_suggestion.json?t='+t).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch('/featured.json?t='+t).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    ]).then(function(a){
+      var sugg=a[0], pub=a[1];
+      if(!sugg||!sugg.type) return;
+      var ssig=sig(sugg);
+      if(ssig===sig(pub)) return;              // site already headlines this slice
+      if(ssig===ls('ba_autopub_sig')) return;  // already auto-published this one
+      doPublish(sugg);
+    });
+  }
+
+  function css(){ if(document.getElementById('blAutoPubCss'))return; var s=document.createElement('style'); s.id='blAutoPubCss';
+    s.textContent='#blAutoPub{display:flex;align-items:center;gap:11px;flex-wrap:wrap;background:linear-gradient(180deg,#161a20,#12141a);border:1px solid #263042;border-radius:14px;padding:11px 15px;margin-bottom:14px}'
+      +'#blAutoPub .apx{font-size:12px;color:#9aa0ab;font-weight:600}';
+    document.head.appendChild(s);
+  }
+  function mount(){
+    var host=document.getElementById('page-trackrecord'); if(!host) return;
+    var pub=document.getElementById('blPub');
+    var el=document.getElementById('blAutoPub');
+    if(!el){ el=document.createElement('div'); el.id='blAutoPub';
+      var lab=document.createElement('label'); lab.className='bl-auto'+(on()?' on':''); lab.setAttribute('data-k','autopub');
+      lab.setAttribute('title','Automatically publish the best track-record slice to betlife365.com');
+      var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=on(); lab.appendChild(cb);
+      var sw=document.createElement('span'); sw.className='bl-sw'; lab.appendChild(sw);
+      var tx=document.createElement('span'); tx.className='bl-atxt'; tx.textContent='🌐 Auto-update site'; lab.appendChild(tx);
+      lab.addEventListener('click', function(ev){ ev.preventDefault(); var nv=!on(); lsSet('ba_autopublish', nv?'1':'0'); lab.classList.toggle('on', nv); cb.checked=nv;
+        if(nv){ toast('Auto-update ON — the site headline follows your best slice'); lastCheck=0; check(); } else toast('Auto-update off'); });
+      el.appendChild(lab);
+      var note=document.createElement('span'); note.className='apx'; note.textContent='Keeps betlife365.com headlining your latest best track-record slice automatically.'; el.appendChild(note);
+    }
+    if(pub){ if(pub.nextSibling!==el) host.insertBefore(el, pub.nextSibling); }
+    else if(el.parentNode!==host){ host.insertBefore(el, host.firstChild); }
+  }
+  function tick(){ var p=document.getElementById('page-trackrecord'); if(p && getComputedStyle(p).display!=='none'){ css(); mount(); } check(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(tick,1400); }); else setTimeout(tick,1400);
+  setInterval(tick, 15000);
+})();
