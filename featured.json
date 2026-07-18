@@ -1,10 +1,10 @@
 {
-  "type": "prop",
-  "period": "all",
-  "label": "Daily Props · all-time",
-  "roi": null,
-  "bets": null,
+  "type": "card",
+  "period": "week",
+  "label": "Cards · this week",
+  "roi": 19.06,
+  "bets": 13,
   "approved_by": "fred",
-  "updated_at": "2026-07-13T08:28:40.294Z",
+  "updated_at": "2026-07-18T20:32:43.668Z",
   "via": "worker"
 }
