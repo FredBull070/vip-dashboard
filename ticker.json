@@ -1,14 +1,14 @@
 [
-{"s":"football","m":"Bodo/Glimt x Fredrikstad","k":"Bodo/Glimt","o":1.16},
-{"s":"football","m":"Beijing Guoan x Liaoning Tieren","k":"Beijing Guoan","o":1.38},
-{"s":"football","m":"Qingdao Kangtine x Chengdu Qianbao","k":"Chengdu Qianbao","o":1.74},
-{"s":"football","m":"Yunnan Yukun x Shanghai Port","k":"Yunnan Yukun","o":2.38},
-{"s":"football","m":"IFK Goteborg x Brommapojkarna","k":"IFK Goteborg","o":1.93},
-{"s":"football","m":"Mjallby x Vasteras SK","k":"Mjallby","o":1.68},
-{"s":"tennis","m":"Alycia Parks x Maria Sakkari","k":"Maria Sakkari","o":1.24},
-{"s":"tennis","m":"Juan Manuel Cerundolo x Casper Ruud","k":"Casper Ruud","o":1.34},
-{"s":"tennis","m":"Adolfo Daniel Vallejo x Stefano Travaglia","k":"Adolfo Daniel Vallejo","o":1.37},
-{"s":"tennis","m":"Damir Dzumhur x Alex Molcan","k":"Alex Molcan","o":1.45},
-{"s":"tennis","m":"Andrey Rublev x Sebastian Baez","k":"Andrey Rublev","o":1.58},
-{"s":"tennis","m":"Arthur Rinderknech x Stefanos Tsitsipas","k":"Stefanos Tsitsipas","o":1.58}
+{"s":"football","m":"Shanghai Shenhua x Tianjin Teda","k":"Shanghai Shenhua","o":1.42},
+{"s":"football","m":"Chongqing Tonglianglong x Zhejiang","k":"Chongqing or draw","o":1.48},
+{"s":"football","m":"Dalian Young Boy x Shandong Taishan","k":"BTTS Yes","o":1.40},
+{"s":"football","m":"AIK x GAIS","k":"Over 1.5","o":1.22},
+{"s":"football","m":"France x England","k":"France","o":1.87},
+{"s":"tennis","m":"Shevchenko x Tsitsipas","k":"Tsitsipas","o":1.28},
+{"s":"tennis","m":"Merida Aguilar x Dzumhur","k":"Merida Aguilar","o":1.40},
+{"s":"tennis","m":"Rublev x Tabilo","k":"Rublev","o":1.41},
+{"s":"tennis","m":"Vallejo x Darderi","k":"Darderi","o":1.44},
+{"s":"tennis","m":"Sakkari x Korneeva","k":"Sakkari","o":1.63},
+{"s":"tennis","m":"Tauson x Krejcikova","k":"Krejcikova","o":1.66},
+{"s":"tennis","m":"Collignon x Cerundolo","k":"Collignon","o":1.68}
 ]
