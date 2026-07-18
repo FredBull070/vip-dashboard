@@ -1208,7 +1208,7 @@
       el.appendChild(lab);
       var note=document.createElement('span'); note.className='apx'; note.textContent='Keeps betlife365.com headlining your latest best track-record slice automatically.'; el.appendChild(note);
     }
-    if(pub){ if(pub.nextSibling!==el) host.insertBefore(el, pub.nextSibling); }
+    if(pub){ if(pub.previousSibling!==el) host.insertBefore(el, pub); }   // sit just ABOVE the publish bar (blPub insists on being right before the ledger, so never between them)
     else if(el.parentNode!==host){ host.insertBefore(el, host.firstChild); }
   }
   function tick(){ var p=document.getElementById('page-trackrecord'); if(p && getComputedStyle(p).display!=='none'){ css(); mount(); } check(); }
