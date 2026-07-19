@@ -1,108 +1,128 @@
-/* BetLife365 daily bets - bets-desk task. Slate: 18-07-2026. Marquee: World Cup third-place play-off France x England (Miami, 23:00 NL), confirmed on multiple sources and Oddspedia bracket (semis: France 0-2 Spain, England 1-2 Argentina; final Spain x Argentina 19-07). Club slate: Chinese Super League round 19 (Shanghai Shenhua x Tianjin Teda, Dalian Young Boy x Shandong Taishan, Chongqing Tonglianglong x Zhejiang) and Allsvenskan round 13 (AIK x GAIS). Odds pulled from Oddspedia rendered match pages (Unibet), kick-off times cross-checked. THIN-QUALITY NOTE: only one clear favourite on the whole football board (Shanghai Shenhua 1.42); France is a mild bronze-final favourite at 1.87 and the rest are near coin-flips, so the three Builders cannot be fully decorrelated. Safe uses match result and double chance, Value and Jackpot re-use some fixtures with DIFFERENT market types (BTTS, total goals). No leg under 1.15 and no quarter lines anywhere. Free Bet rotation: previous run logged n=1, so today n=2 -> type = Jackpot; available sports today are [Football, Tennis], so sport = index 0 = Football; Free Bet is a 1-on-1 copy of the Jackpot Football Builder (#33). Next rotation n=3. Football Builder counter continued from #30 (17-07-2026) -> #31/#32/#33. */
-window.DAILY_VERSION = "2026-07-18";
-window.DAILY_MESSAGES = `**🟢 #31 Safe Builder Parley (⚽ Football): 18-07-2026**
+/* BetLife365 daily bets - bets-desk task. Slate: 19-07-2026, World Cup FINAL day. Marquee: World Cup final Spain x Argentina (MetLife, East Rutherford, 21:00 NL), verified on Oddspedia rendered match page (Unibet): Spain 2.28, Draw 2.95, Argentina 3.60; O1.5 1.38, U2.5 1.63, O2.5 2.25, BTTS Yes 1.85. Club slate verified from Oddspedia odds boards: Allsvenskan round 13 (Hammarby IF 1.20 v Degerfors, Hacken 1.50 at Halmstad, IK Sirius 1.89 at Elfsborg) and Veikkausliiga (Inter Turku 1.52 at FF Jaro). CSL round 19 finished on 18 Jul, no China games today; Liga MX/Iceland/Korea boards not live or off. Tennis legs for the Lucky pulled from bets-tennis.js (four ATP/WTA finals: Tsitsipas 1.69, Rublev 1.72, Badosa 1.54, Krejcikova 1.73). THIN-QUALITY NOTE: only five priced football matches and the final itself is a mild favourite, so the three Builders cannot be fully decorrelated; Safe and Value use entirely different fixtures, Jackpot stacks the same genuine favourites with the World Cup leg switched to a goals market and the overlap flagged. No leg under 1.15 and no quarter lines anywhere. Free Bet rotation: previous run logged n=2, so today n=3 -> type = Lucky; Free Bet is a 1-on-1 copy of the cross-sport Lucky Shot. Next rotation n=4. Football Builder counter continued from #33 (18-07-2026) -> #34/#35/#36. Lucky tops out at 91.30 (no NBA/NFL/NHL in season, only five football matches), reported honestly rather than padded. */
+window.DAILY_VERSION = "2026-07-19";
+window.DAILY_MESSAGES = `**🟢 #34 Safe Builder Parley (⚽ Football): 19-07-2026**
 
-**:small_orange_diamond: Shanghai Shenhua x Tianjin Teda**
-Shanghai Shenhua to win (match result) @ 1.42
-↳ Shenhua are at home on a three-win run with a 9-4-3 head to head over Tianjin, the shortest genuine price on the board today.
+**:small_orange_diamond: Hammarby IF x Degerfors IF**
+Hammarby IF to win (match result) @ 1.20
+↳ Second in the table at home against a Degerfors side near the bottom, the shortest genuine price on the whole board today.
 
-**:small_orange_diamond: Chongqing Tonglianglong x Zhejiang**
-Chongqing Tonglianglong to win or draw (double chance) @ 1.48
-↳ Chongqing sit second in the table at home while Zhejiang arrive on three straight defeats, so the draw cover keeps this leg conservative.
+**:small_orange_diamond: FF Jaro x Inter Turku**
+Inter Turku to win (match result) @ 1.52
+↳ Veikkausliiga runners-up away at eleventh-placed Jaro, a clear class and form gap.
 
-**:small_orange_diamond: AIK x GAIS**
-Over 1.5 goals (total goals) @ 1.22
-↳ A tight Stockholm derby where the bookmaker's main line sits at 2.5, so clearing a single goal is the cautious call.
+**:small_orange_diamond: Halmstad x Hacken**
+Hacken to win (match result) @ 1.50
+↳ Fourth-placed Hacken travel to bottom-of-the-table Halmstad as firm favourites.
 
-**:moneybag: Total odds: ±2.56**
+**:moneybag: Total odds: ±2.74**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Thin football day with only a handful of priced games, so the Safe tier leans on the one clear favourite, a second-placed side at home, and a low goals line. Three different matches, three of the most conservative calls available.
+On World Cup final day the club board is short, so the Safe tier leans on three of the clearest favourites available, each a straight match result from a different match across Sweden and Finland. Nothing speculative, three separate fixtures.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #32 Value Builder Parley (⚽ Football): 18-07-2026**
+**🟡 #35 Value Builder Parley (⚽ Football): 19-07-2026**
 
-**:small_orange_diamond: France x England**
-Over 2.5 goals (total goals) @ 1.44
-↳ Two attacking sides in a bronze final with nothing to defend; the bookmaker's main line is set at 3.25.
+**:small_orange_diamond: Elfsborg x IK Sirius**
+IK Sirius to win (match result) @ 1.89
+↳ League leaders on the road at mid-table Elfsborg; the away price carries the value on the division's form side.
 
-**:small_orange_diamond: Dalian Young Boy x Shandong Taishan**
-Both teams to score - Yes (BTTS) @ 1.40
-↳ Two mid-table sides that both score and concede freely; recent league meetings finished 2-0 and 4-1.
+**:small_orange_diamond: Spain x Argentina**
+Spain to win (match result) @ 2.28
+↳ Spain reach the World Cup final on a long unbeaten run and are the bookmaker's favourite over Argentina in the showpiece.
 
-**:small_orange_diamond: Shanghai Shenhua x Tianjin Teda**
-Both teams to score - Yes (BTTS) @ 1.62
-↳ Shenhua are expected to win, but Tianjin have scored in most recent meetings, so the goals-both-ends market adds value on the same fixture.
-
-**:moneybag: Total odds: ±3.27**
+**:moneybag: Total odds: ±4.31**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-On a short slate the Value tier reaches its range through goals markets rather than riskier teams. Each leg is backed by concrete scoring records; the Shenhua goals line re-uses the Safe fixture with a different market type, which the thin day makes unavoidable.
+Two clean picks from two different matches, fully separate from the Safe ticket. The step up in return comes from pairing the league leaders with the World Cup favourite, not from reaching for longer prices; on a short day a tight two-leg build is the honest way to reach the Value band.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #33 Jackpot Builder Parley (⚽ Football): 18-07-2026**
+**🔴 #36 Jackpot Builder Parley (⚽ Football): 19-07-2026**
 
-**:small_orange_diamond: Shanghai Shenhua x Tianjin Teda**
-Shanghai Shenhua to win (match result) @ 1.42
-↳ The clearest favourite of the day, at home on a three-win run.
+**:small_orange_diamond: Hammarby IF x Degerfors IF**
+Hammarby IF to win (match result) @ 1.20
+↳ The clearest favourite of the day, second in the table at home.
 
-**:small_orange_diamond: France x England**
-France to win (match result) @ 1.87
-↳ France beat Morocco in the quarter final and are the bookmaker's favourite for the bronze final against an England side that also lost its semi.
+**:small_orange_diamond: Halmstad x Hacken**
+Hacken to win (match result) @ 1.50
+↳ Fourth-placed side away at the bottom club.
 
-**:small_orange_diamond: Dalian Young Boy x Shandong Taishan**
-Over 2.5 goals (total goals) @ 1.89
-↳ Both sides average high-scoring games and the main line here is set at 3.25, so 2.5 is on the right side of the market.
+**:small_orange_diamond: FF Jaro x Inter Turku**
+Inter Turku to win (match result) @ 1.52
+↳ Veikkausliiga runners-up away at eleventh, a clear step up in quality.
 
-**:small_orange_diamond: AIK x GAIS**
-Over 2.5 goals (total goals) @ 1.73
-↳ An open Allsvenskan derby with both teams scoring regularly and a main line at 2.5.
+**:small_orange_diamond: Elfsborg x IK Sirius**
+IK Sirius to win (match result) @ 1.89
+↳ League leaders on the road, the division's form team.
 
-**:moneybag: Total odds: ±8.68**
+**:small_orange_diamond: Spain x Argentina**
+Over 1.5 goals (total goals) @ 1.38
+↳ Two attacking sides in a World Cup final; the bookmaker's main line sits well above 1.5, so at least two goals across the match is the conservative call on this fixture.
+
+**:moneybag: Total odds: ±7.14**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four picks worth playing on their own: the day's clearest favourite, the World Cup bronze-final favourite, and two goals lines with the market on our side. The 8.68 comes from stacking solid calls, not from adding an underdog to inflate the price. On a thin day the goals legs share fixtures used elsewhere, which we flag openly.
+Five genuine favourites stacked to a realistic jackpot number: four short-priced match-result picks plus a low goals line in the final. The 7.14 comes from the depth of the stack, never from adding an underdog to inflate the price. On a thin final-day board these favourites unavoidably overlap the Safe and Value tickets, so the World Cup leg is switched to a different market type and we flag the overlap openly.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 18-07-2026**
-⚽ Sport of the day: Football
+**:gift: FREE BET OF THE DAY | 19-07-2026**
+🎾⚽ Sport of the day: Multi-Sport
 
-**:small_orange_diamond: Shanghai Shenhua x Tianjin Teda**
-Shanghai Shenhua to win (match result) @ 1.42
-↳ The clearest favourite of the day, at home on a three-win run.
+**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
+Stefanos Tsitsipas to win @ 1.69
+↳ Class edge in the ATP Gstaad final against a first-time finalist.
 
-**:small_orange_diamond: France x England**
-France to win (match result) @ 1.87
-↳ France beat Morocco in the quarter final and are the bronze-final favourite against an England side that also lost its semi.
+**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
+Andrey Rublev to win @ 1.72
+↳ Top seed and market favourite in the ATP Bastad final.
 
-**:small_orange_diamond: Dalian Young Boy x Shandong Taishan**
-Over 2.5 goals (total goals) @ 1.89
-↳ Both sides average high-scoring games and the main line here is set at 3.25.
+**:small_orange_diamond: Paula Badosa x Mayar Sherif**
+Paula Badosa to win @ 1.54
+↳ Higher-ranked player and clear favourite in the WTA Iasi final.
 
-**:small_orange_diamond: AIK x GAIS**
-Over 2.5 goals (total goals) @ 1.73
-↳ An open Allsvenskan derby with both teams scoring regularly and a main line at 2.5.
+**:small_orange_diamond: Hammarby IF x Degerfors IF**
+Hammarby IF to win @ 1.20
+↳ Clearest football favourite of the day, second in the table at home.
 
-**:moneybag: Total odds: ±8.68**
+**:small_orange_diamond: Halmstad x Hacken**
+Hacken to win @ 1.50
+↳ Fourth-placed side away at the bottom club.
+
+**:small_orange_diamond: Elfsborg x IK Sirius**
+IK Sirius to win @ 1.89
+↳ League leaders on the road, the division's form team.
+
+**:small_orange_diamond: FF Jaro x Inter Turku**
+Inter Turku to win @ 1.52
+↳ Veikkausliiga runners-up away at eleventh-placed Jaro.
+
+**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
+Barbora Krejcikova to win @ 1.73
+↳ Leads the head to head and is the market favourite in the WTA Athens final.
+
+**:small_orange_diamond: Spain x Argentina**
+Spain to win @ 2.28
+↳ World Cup final favourite over Argentina after a long unbeaten run.
+
+**:moneybag: Total odds: ±91.30**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four solid calls stacked to a realistic jackpot number: the day's clearest favourite, the World Cup bronze-final favourite, and two well-backed goals lines. The return comes from the depth of the stack, not from chasing longer prices.
+Nine market favourites stacked across two sports: five from today's football (the World Cup final plus the clearest Swedish and Finnish league favourites) and four from the ATP and WTA finals. One selection per match, every leg a different fixture, no longshots anywhere. With no NBA, NFL or NHL in season and only five priced football matches, the stack tops out around 91 rather than the usual 100-plus; we take the biggest realistic stack of genuine favourites rather than padding it with a longshot.
 
 ━━━━━━━━━━━━
-:green_circle: This is our **Jackpot Builder** of the day; a realistic accumulator of genuine favourites, never longshots stacked for a big number.
+:green_circle: This is our **Lucky Shot** of the day; a deep stack of genuine cross-sport favourites, never longshots piled up for a big number.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -110,137 +130,121 @@ Four solid calls stacked to a realistic jackpot number: the day's clearest favou
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 18-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 19-07-2026** ⚽🎾
 
-**:small_orange_diamond: Shanghai Shenhua x Tianjin Teda**
-Shanghai Shenhua to win @ 1.42
-↳ Clearest football favourite of the day, at home.
+**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
+Stefanos Tsitsipas to win @ 1.69
+↳ Class edge in the ATP Gstaad final against a first-time finalist.
 
-**:small_orange_diamond: Chongqing Tonglianglong x Zhejiang**
-Chongqing Tonglianglong to win or draw @ 1.48
-↳ Second-placed side at home, taken with the draw cover.
+**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
+Andrey Rublev to win @ 1.72
+↳ Top seed and market favourite in the ATP Bastad final.
 
-**:small_orange_diamond: France x England**
-France to win @ 1.87
-↳ Bronze-final favourite after beating Morocco in the quarter final.
+**:small_orange_diamond: Paula Badosa x Mayar Sherif**
+Paula Badosa to win @ 1.54
+↳ Higher-ranked player and clear favourite in the WTA Iasi final.
 
-**:small_orange_diamond: Dalian Young Boy x Shandong Taishan**
-Dalian Young Boy to win @ 2.15
-↳ Home side and the marginal market favourite in a mid-table meeting.
+**:small_orange_diamond: Hammarby IF x Degerfors IF**
+Hammarby IF to win @ 1.20
+↳ Clearest football favourite of the day, second in the table at home.
 
-**:small_orange_diamond: Alexander Shevchenko x Stefanos Tsitsipas**
-Stefanos Tsitsipas to win @ 1.28
-↳ Far higher-ranked player and clear favourite in the Gstaad semifinal.
+**:small_orange_diamond: Halmstad x Hacken**
+Hacken to win @ 1.50
+↳ Fourth-placed side away at the bottom club.
 
-**:small_orange_diamond: Daniel Merida Aguilar x Damir Dzumhur**
-Daniel Merida Aguilar to win @ 1.40
-↳ Market favourite in the Umag final on current clay form.
+**:small_orange_diamond: Elfsborg x IK Sirius**
+IK Sirius to win @ 1.89
+↳ League leaders on the road, the division's form team.
 
-**:small_orange_diamond: Andrey Rublev x Alejandro Tabilo**
-Andrey Rublev to win @ 1.41
-↳ Top seed and clear favourite in the Bastad semifinal.
+**:small_orange_diamond: FF Jaro x Inter Turku**
+Inter Turku to win @ 1.52
+↳ Veikkausliiga runners-up away at eleventh-placed Jaro.
 
-**:small_orange_diamond: Adolfo Daniel Vallejo x Luciano Darderi**
-Luciano Darderi to win @ 1.44
-↳ Defending champion and market favourite in the other Bastad semifinal.
+**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
+Barbora Krejcikova to win @ 1.73
+↳ Leads the head to head and is the market favourite in the WTA Athens final.
 
-**:small_orange_diamond: Maria Sakkari x Alina Korneeva**
-Maria Sakkari to win @ 1.63
-↳ Market favourite at home in the Athens semifinal.
+**:small_orange_diamond: Spain x Argentina**
+Spain to win @ 2.28
+↳ World Cup final favourite over Argentina after a long unbeaten run.
 
-**:small_orange_diamond: Clara Tauson x Barbora Krejcikova**
-Barbora Krejcikova to win @ 1.66
-↳ Two-time major champion and market favourite in the other Athens semifinal.
-
-**:small_orange_diamond: Raphael Collignon x Juan Manuel Cerundolo**
-Raphael Collignon to win @ 1.68
-↳ Market favourite in this Gstaad semifinal.
-
-**:moneybag: Total odds: ±139.75**
+**:moneybag: Total odds: ±91.30**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Eleven market favourites stacked across two sports: four from today's football and seven from the ATP and WTA clay semifinals and finals. One selection per match, every leg a different fixture, no longshots anywhere. The football favourites are shallow today, so France and Dalian sit a little above the usual band; the big number still comes purely from the depth of the stack, not from reaching for long prices.
+Nine market favourites stacked across two sports: five from today's football (the World Cup final plus the clearest Swedish and Finnish league favourites) and four from the ATP and WTA finals. One selection per match, every leg a different fixture, no longshots anywhere. With no NBA, NFL or NHL in season and only five priced football matches, the stack tops out around 91 rather than the usual 100-plus; we take the biggest realistic stack of genuine favourites rather than padding it with a longshot.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: Shanghai Shenhua x Tianjin Teda
+window.DAILY_CARDS = `MATCH: Hammarby IF x Degerfors IF
 MARKET: Match Result
-SELECTION: Shanghai Shenhua to win
-ODDS: 1.42
+SELECTION: Hammarby IF to win
+ODDS: 1.20
 STAKE: 2u
 RISK: low
-ANALYSIS: Shenhua at home on a three-win run with a 9-4-3 head to head over Tianjin, the shortest genuine price on the board today.
+ANALYSIS: Second in the table at home against a near-bottom Degerfors, the shortest genuine price on the board today.
 ===
-MATCH: Chongqing Tonglianglong x Zhejiang
-MARKET: Double Chance
-SELECTION: Chongqing Tonglianglong to win or draw
-ODDS: 1.48
+MATCH: FF Jaro x Inter Turku
+MARKET: Match Result
+SELECTION: Inter Turku to win
+ODDS: 1.52
 STAKE: 2u
 RISK: low
-ANALYSIS: Chongqing sit second in the table at home while Zhejiang arrive on three straight defeats.
+ANALYSIS: Veikkausliiga runners-up away at eleventh-placed Jaro, a clear class and form gap.
 ===
-MATCH: AIK x GAIS
+MATCH: Halmstad x Hacken
+MARKET: Match Result
+SELECTION: Hacken to win
+ODDS: 1.50
+STAKE: 2u
+RISK: low
+ANALYSIS: Fourth-placed Hacken away at bottom club Halmstad as firm favourites.
+===
+MATCH: Elfsborg x IK Sirius
+MARKET: Match Result
+SELECTION: IK Sirius to win
+ODDS: 1.89
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: League leaders on the road at mid-table Elfsborg; the away price carries the value.
+===
+MATCH: Spain x Argentina
+MARKET: Match Result
+SELECTION: Spain to win
+ODDS: 2.28
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Spain reach the World Cup final on a long unbeaten run and are the bookmaker's favourite over Argentina.
+===
+MATCH: Spain x Argentina
 MARKET: Total Goals
 SELECTION: Over 1.5 goals
-ODDS: 1.22
-STAKE: 2u
+ODDS: 1.38
+STAKE: 0.25u
 RISK: low
-ANALYSIS: Tight Stockholm derby with the bookmaker's main line at 2.5, so a single goal is the conservative call.
+ANALYSIS: Two attacking sides in a World Cup final; the main line sits well above 1.5, so at least two goals is the conservative call.
 ===
-MATCH: France x England
+MATCH: Spain x Argentina
 MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.44
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Two attacking sides in a bronze final with nothing to defend; the main line is set at 3.25.
-===
-MATCH: Dalian Young Boy x Shandong Taishan
-MARKET: Both Teams to Score
-SELECTION: Yes
-ODDS: 1.40
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Two mid-table sides that both score and concede freely; recent meetings finished 2-0 and 4-1.
-===
-MATCH: Shanghai Shenhua x Tianjin Teda
-MARKET: Both Teams to Score
-SELECTION: Yes
-ODDS: 1.62
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Shenhua expected to win but Tianjin have scored in most recent meetings, adding value on the goals-both-ends market.
-===
-MATCH: France x England
-MARKET: Match Result
-SELECTION: France to win
-ODDS: 1.87
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: France beat Morocco in the quarter final and are the bookmaker's favourite for the bronze final.
-===
-MATCH: Dalian Young Boy x Shandong Taishan
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.89
+SELECTION: Under 2.5 goals
+ODDS: 1.63
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Both sides average high-scoring games and the main line here is set at 3.25.
+ANALYSIS: Finals often tighten up; with the main line at 2.25 the under on 2.5 is on the right side of a cagey showpiece.
 ===
-MATCH: AIK x GAIS
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.73
+MATCH: Spain x Argentina
+MARKET: Both Teams to Score
+SELECTION: Yes
+ODDS: 1.85
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Open Allsvenskan derby with both teams scoring regularly and a main line at 2.5.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-18","legs":["Shanghai Shenhua x Tianjin Teda: Shanghai Shenhua to win @ 1.42","Chongqing Tonglianglong x Zhejiang: Chongqing Tonglianglong to win or draw @ 1.48"],"oddLow":2.09,"oddHigh":2.12,"justification":"The two safest calls on the board from two different Chinese Super League matches, stacked to a low-risk x2 at about 2.10. Shanghai Shenhua are the clearest home favourite of the day on a three-win run, and second-placed Chongqing Tonglianglong take a draw cover at home against a Zhejiang side on three straight defeats. Both kick off inside the same hour, comfortably within 24 hours."};
+ANALYSIS: Two sides that both carry a goal threat; a final with attacking talent on each side leans towards both scoring.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-19","legs":["Halmstad x Hacken: Hacken to win @ 1.50","FF Jaro x Inter Turku: Inter Turku to win @ 1.52"],"oddLow":2.26,"oddHigh":2.30,"justification":"Two clear away favourites from two different matches, both kicking off inside the same hour. Fourth-placed Hacken visit bottom club Halmstad and Veikkausliiga runners-up Inter Turku visit eleventh-placed FF Jaro. The x2 lands just above the usual band because every short price today still multiplies past 2.2; we keep it to the two safest calls rather than reaching lower."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 window.FOOTBALL_EVENTS = [
-{ match: "Chongqing Tonglianglong x Zhejiang", date: "2026-07-18", time: "13:00", comp: "Chinese Super League", stage: "Round 19", venue: "Chongqing", pick: "Chongqing Tonglianglong to win or draw", tier: "Safe Builder" },
-{ match: "Shanghai Shenhua x Tianjin Teda", date: "2026-07-18", time: "13:35", comp: "Chinese Super League", stage: "Round 19", venue: "Shanghai", pick: "Shanghai Shenhua to win", tier: "Safe Builder" },
-{ match: "Dalian Young Boy x Shandong Taishan", date: "2026-07-18", time: "13:35", comp: "Chinese Super League", stage: "Round 19", venue: "Dalian", pick: "Both teams to score - Yes", tier: "Value Builder" },
-{ match: "AIK x GAIS", date: "2026-07-18", time: "15:00", comp: "Allsvenskan", stage: "Round 13", venue: "Solna", pick: "Over 1.5 goals", tier: "Safe Builder" },
-{ match: "France x England", date: "2026-07-18", time: "23:00", comp: "World Cup", stage: "Third-place play-off", venue: "Miami", pick: "France to win", tier: "Jackpot Builder" }
+{ match: "Hammarby IF x Degerfors IF", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Stockholm", pick: "Hammarby IF to win", tier: "Safe Builder" },
+{ match: "Halmstad x Hacken", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Halmstad", pick: "Hacken to win", tier: "Safe Builder" },
+{ match: "Elfsborg x IK Sirius", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Boras", pick: "IK Sirius to win", tier: "Value Builder" },
+{ match: "FF Jaro x Inter Turku", date: "2026-07-19", time: "17:30", comp: "Veikkausliiga", stage: "Round 15", venue: "Jakobstad", pick: "Inter Turku to win", tier: "Safe Builder" },
+{ match: "Spain x Argentina", date: "2026-07-19", time: "21:00", comp: "World Cup", stage: "Final", venue: "East Rutherford", pick: "Spain to win", tier: "Value Builder" }
 ];

@@ -1,14 +1,11 @@
 [
-{"s":"football","m":"Shanghai Shenhua x Tianjin Teda","k":"Shanghai Shenhua","o":1.42},
-{"s":"football","m":"Chongqing Tonglianglong x Zhejiang","k":"Chongqing or draw","o":1.48},
-{"s":"football","m":"Dalian Young Boy x Shandong Taishan","k":"BTTS Yes","o":1.40},
-{"s":"football","m":"AIK x GAIS","k":"Over 1.5","o":1.22},
-{"s":"football","m":"France x England","k":"France","o":1.87},
-{"s":"tennis","m":"Shevchenko x Tsitsipas","k":"Tsitsipas","o":1.28},
-{"s":"tennis","m":"Merida Aguilar x Dzumhur","k":"Merida Aguilar","o":1.40},
-{"s":"tennis","m":"Rublev x Tabilo","k":"Rublev","o":1.41},
-{"s":"tennis","m":"Vallejo x Darderi","k":"Darderi","o":1.44},
-{"s":"tennis","m":"Sakkari x Korneeva","k":"Sakkari","o":1.63},
-{"s":"tennis","m":"Tauson x Krejcikova","k":"Krejcikova","o":1.66},
-{"s":"tennis","m":"Collignon x Cerundolo","k":"Collignon","o":1.68}
+{"s":"football","m":"Spain x Argentina","k":"Spain","o":2.28},
+{"s":"football","m":"Hammarby IF x Degerfors IF","k":"Hammarby IF","o":1.20},
+{"s":"football","m":"Halmstad x Hacken","k":"Hacken","o":1.50},
+{"s":"football","m":"Elfsborg x IK Sirius","k":"IK Sirius","o":1.89},
+{"s":"football","m":"FF Jaro x Inter Turku","k":"Inter Turku","o":1.52},
+{"s":"tennis","m":"Stefanos Tsitsipas x Raphael Collignon","k":"Tsitsipas","o":1.69},
+{"s":"tennis","m":"Andrey Rublev x Luciano Darderi","k":"Rublev","o":1.72},
+{"s":"tennis","m":"Paula Badosa x Mayar Sherif","k":"Badosa","o":1.54},
+{"s":"tennis","m":"Barbora Krejcikova x Maria Sakkari","k":"Krejcikova","o":1.73}
 ]
