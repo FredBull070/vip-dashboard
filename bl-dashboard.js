@@ -1054,20 +1054,12 @@
 })();
 
 /* ===========================================================================
-   AUTO-SEND TO DISCORD (per-section switch)  — added 15-07-2026
-   A toggle next to each "Send all" button on Daily Parleys, Daily Betting
-   Cards and Daily Prop Cards. When ON and today's fresh build is detected
-   (and its webhook is set), the existing send function fires automatically,
-   once per build. Manual sends also mark the build as sent so nothing double
-   posts. Client-side: fires when the dashboard is open/opened after a build.
-   For fully hands-off (nothing open) use the Cloudflare Worker (separate).
+   AUTO-SEND TO DISCORD (per-section switch)  — rebuilt 19-07-2026
+   Self-contained: posts straight from the data (no dependency on any page
+   being rendered), and marks a build as "sent" ONLY after a confirmed post.
+   Off by default. A toggle sits next to each "Send all" button.
    =========================================================================== */
 (function(){
-  var SECS=[
-    {k:'parley', label:'Daily Parleys',      btn:'#sendAllBtn',                  fn:'sendAll',   hook:'PARLEY', ver:function(){return window.DAILY_VERSION;}},
-    {k:'cards',  label:'Daily Betting Cards', btn:'button[onclick*="sendCards"]', fn:'sendCards', hook:'CARDS',  ver:function(){return window.DAILY_VERSION;}},
-    {k:'props',  label:'Daily Prop Cards',    btn:'button[onclick*="sendProps"]', fn:'sendProps', hook:'PROPS',  ver:function(){return window.DAILY_PROPS_VERSION;}}
-  ];
   function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
   function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
   function on(k){return ls('ba_autosend_'+k)==='1';}
@@ -1076,40 +1068,62 @@
   function today(){var d=new Date();function p(n){return(n<10?'0':'')+n;}return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
   function hookSet(h){var v=ls('ba_hook_'+h);return !!(v&&/discord(app)?\.com\/api\/webhooks\//i.test(v));}
   function authed(){return ls('ba_auth')==='1';}
-  function toast(m,ok){ try{ if(typeof window.showToast==='function'){ window.showToast(m, ok!==false); } }catch(e){} }
+  function toast(m,ok){ try{ if(typeof window.showToast==='function') window.showToast(m, ok!==false); }catch(e){} }
+  function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+  function hookFor(cat){ return (typeof window.getHook==='function')? window.getHook(cat) : ''; }
 
-  // Wrap the manual send fns (idempotent) so a manual send also records the
-  // version -> auto-send never double-posts the same build.
-  function wrapSends(){
-    SECS.forEach(function(s){
-      var o=window[s.fn];
-      if(typeof o==='function' && !o.__blWrapped){
-        var w=function(){ try{ markSent(s.k, s.ver()); }catch(e){} return o.apply(this, arguments); };
-        w.__blWrapped=true; try{ window[s.fn]=w; }catch(e){}
-      }
-    });
-    if(typeof window.askConfirm==='function' && !window.askConfirm.__blAC){
-      var _ac=window.askConfirm;
-      var nw=function(){ if(autoActive) return Promise.resolve(true); return _ac.apply(this, arguments); };
-      nw.__blAC=true; try{ window.askConfirm=nw; }catch(e){}
-    }
+  function doParleys(){
+    var raw=window.DAILY_MESSAGES; if(!raw||typeof window.postToDiscord!=='function') return Promise.resolve(0);
+    var blocks=raw.split(/^\s*===NEXT MESSAGE===\s*$/m).map(function(s){return s.trim();}).filter(Boolean);
+    if(!blocks.length) return Promise.resolve(0);
+    var groups={};
+    blocks.forEach(function(b){ var cat=(typeof window.detectCategory==='function')?window.detectCategory(b):'PARLEY'; var h=hookFor(cat)||hookFor('PARLEY'); if(h){(groups[h]=groups[h]||[]).push(b);} });
+    var posted=0;
+    return Promise.all(Object.keys(groups).map(function(h){
+      return groups[h].reduce(function(p,b,idx,arr){ return p.then(function(){
+        var content=(typeof window.applyTokens==='function')?window.applyTokens(b):b;
+        return window.postToDiscord(content,h).then(function(){ posted++; if(idx<arr.length-1) return sleep(9000); });
+      }); }, Promise.resolve());
+    })).then(function(){ return posted; });
+  }
+  function doChunks(chunks, hook){
+    if(!chunks||!chunks.length||!hook||typeof window.postToDiscord!=='function') return Promise.resolve(0);
+    var posted=0;
+    return chunks.reduce(function(p,c,idx){ return p.then(function(){ return window.postToDiscord(c,hook).then(function(){ posted++; if(idx<chunks.length-1) return sleep(9000); }); }); }, Promise.resolve()).then(function(){ return posted; });
+  }
+  function doCards(){
+    var txt=(typeof window.getCardsText==='function')?window.getCardsText():window.DAILY_CARDS; if(!txt) return Promise.resolve(0);
+    var cards=(typeof window.parseCards==='function')?window.parseCards(txt):[];
+    var chunks=(typeof window.buildCardsChunks==='function')?window.buildCardsChunks(cards):null;
+    return doChunks(chunks, hookFor('CARDS'));
+  }
+  function doProps(){
+    var chunks=(typeof window.buildPropChunks==='function')?window.buildPropChunks():null;
+    return doChunks(chunks, hookFor('PROPS'));
   }
 
-  var busy={}, autoActive=false;
+  var SECS=[
+    {k:'parley', label:'Daily Parleys',      btn:'#sendAllBtn',                  hook:'PARLEY', ver:function(){return window.DAILY_VERSION;},       send:doParleys},
+    {k:'cards',  label:'Daily Betting Cards', btn:'button[onclick*="sendCards"]', hook:'CARDS',  ver:function(){return window.DAILY_VERSION;},       send:doCards},
+    {k:'props',  label:'Daily Prop Cards',    btn:'button[onclick*="sendProps"]', hook:'PROPS',  ver:function(){return window.DAILY_PROPS_VERSION;}, send:doProps}
+  ];
+
+  var busy={}, coolUntil={};
   function tryAuto(s){
-    if(!on(s.k) || !authed()) return;
-    var v=s.ver(); if(!v || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
-    if(v!==today()) return;              // today only: never auto-post a stale/old build
-    if(v===sentVer(s.k)) return;         // this build already went out (manual or auto)
-    if(!hookSet(s.hook)) return;         // no webhook set -> skip silently
+    if(!on(s.k)||!authed()) return;
+    var v=s.ver(); if(!v||!/^\d{4}-\d{2}-\d{2}$/.test(v)) return;
+    if(v!==today()) return;                 // today only
+    if(v===sentVer(s.k)) return;            // already posted this build
+    if(!hookSet(s.hook)) return;            // no webhook set
     if(busy[s.k]) return;
-    if(typeof window[s.fn]!=='function') return;
-    busy[s.k]=true; markSent(s.k, v);    // mark first to prevent any re-entry/double send
+    if(coolUntil[s.k] && Date.now()<coolUntil[s.k]) return;
+    busy[s.k]=true;
     toast('Auto-sending '+s.label+' to Discord…');
-    autoActive=true;                     // suppress the manual send confirm for this run
-    try{ Promise.resolve(window[s.fn]()).catch(function(){}).then(function(){ busy[s.k]=false; }); }
-    catch(e){ busy[s.k]=false; }
-    setTimeout(function(){ autoActive=false; }, 3000);
+    s.send().then(function(posted){
+      busy[s.k]=false;
+      if(posted>0){ markSent(s.k, v); toast(s.label+': '+posted+' posted ✓'); }
+      else { coolUntil[s.k]=Date.now()+300000; toast(s.label+': nothing to post', false); }   // do NOT mark; retry after 5 min
+    }).catch(function(){ busy[s.k]=false; coolUntil[s.k]=Date.now()+300000; toast(s.label+' auto-send failed', false); });
   }
 
   function css(){ if(document.getElementById('blAutoCss'))return; var s=document.createElement('style'); s.id='blAutoCss';
@@ -1127,19 +1141,18 @@
     if(host.querySelector('.bl-auto[data-k="'+s.k+'"]')) return;
     var lab=document.createElement('label'); lab.className='bl-auto'+(on(s.k)?' on':''); lab.setAttribute('data-k',s.k);
     lab.setAttribute('title','Automatically post today’s '+s.label+' to Discord when a fresh build is detected');
-    var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=on(s.k);
-    lab.appendChild(cb);
+    var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=on(s.k); lab.appendChild(cb);
     var sw=document.createElement('span'); sw.className='bl-sw'; lab.appendChild(sw);
     var tx=document.createElement('span'); tx.className='bl-atxt'; tx.textContent='🤖 Auto-send'; lab.appendChild(tx);
     lab.addEventListener('click', function(ev){ ev.preventDefault();
       var nv=!on(s.k); lsSet('ba_autosend_'+s.k, nv?'1':'0'); lab.classList.toggle('on', nv); cb.checked=nv;
       if(nv){ if(!hookSet(s.hook)){ toast('Set the '+s.hook+' channel webhook in Settings › Channels first', false); }
-              else { toast('Auto-send ON — '+s.label+' will post automatically'); tryAuto(s); } }
+              else { toast('Auto-send ON — '+s.label+' will post automatically'); coolUntil[s.k]=0; tryAuto(s); } }
       else { toast('Auto-send off for '+s.label); }
     });
     host.insertBefore(lab, btn);
   }
-  function tick(){ css(); wrapSends(); SECS.forEach(mount); SECS.forEach(tryAuto); }
+  function tick(){ css(); SECS.forEach(mount); SECS.forEach(tryAuto); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(tick, 1300); });
   else setTimeout(tick, 1300);
   setInterval(tick, 20000);
