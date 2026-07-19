@@ -1,126 +1,75 @@
-/* BetLife365 tennis bets - bets-desk task. Slate: 18-07-2026, ATP 250 semifinal Saturday (ATP Gstaad SF, ATP Bastad SF, ATP Umag Final) plus WTA Athens SF. Odds pulled from Oddspedia rendered order of play (18 Jul by-time board, Show odds) and cross-checked against LastWordOnTennis / TennisTonic previews; the conservative quote of the two is used throughout. Every leg is a genuine market favourite. Note: the day's main-draw favourites are all heavily odds-on and only seven main-draw matches are on the board (no WTA Iasi singles; Kitzbuhel / Estoril / Prague / Palermo are qualifying rounds), so a full 6.00-12.00 Jackpot was not reachable by honest stacking - the tiers ascend by leg count and all three totals sit below their usual bands. No underdog padding. No player carries a leg in more than one builder. */
-window.DAILY_TENNIS = `**🟢 #T43 Safe Builder Parley (🎾 Tennis): 18-07-2026**
+/* BetLife365 tennis bets - bets-desk task. Slate: 19-07-2026, finals Sunday. Four ATP/WTA main-draw finals on the board: ATP Gstaad (Tsitsipas x Collignon), ATP Bastad (Rublev x Darderi), WTA Iasi (Badosa x Sherif) and WTA Athens (Krejcikova x Sakkari). Kitzbuhel, Estoril and Prague are qualification finals (skipped). Odds pulled from the Oddspedia rendered order-of-play / odds board (19 Jul, moneyline column) and cross-checked against LastWordOnTennis / TennisTonic previews and the tournament outrights; the conservative quote is used. Every leg is a genuine finalist favourite taken as a straight match-result win. IMPORTANT HONESTY NOTE: only four short-priced main-draw finals exist today. After building a fully decorrelated Safe and Value (each player used in only one builder), no separate matches remain to build a realistic, decorrelated Jackpot (a 6.00-12.00 accumulator would need four-plus extra favourite legs that are not already in Safe or Value). Per house rules we never pad with underdog stunts and never reuse a player across builders, so there is NO Jackpot today. The two tiers ascend by leg quality; both totals sit at the lower end of their bands because every final today is short-priced. No underdog padding. */
+window.DAILY_TENNIS = `**🟢 #T46 Safe Builder Parley (🎾 Tennis): 19-07-2026**
 
-**:small_orange_diamond: Alexander Shevchenko x Stefanos Tsitsipas**
-Stefanos Tsitsipas to win (match result) @ 1.28
-↳ Tsitsipas is the far higher-ranked player and clear market favourite in this Gstaad semifinal.
+**:small_orange_diamond: Paula Badosa x Mayar Sherif**
+Paula Badosa to win (match result) @ 1.54
+↳ Badosa is comfortably the higher-ranked player and clear market favourite in the Iasi final.
 
-**:small_orange_diamond: Daniel Merida Aguilar x Damir Dzumhur**
-Daniel Merida Aguilar to win (match result) @ 1.40
-↳ Merida Aguilar is the market favourite in the Umag final on current clay form.
+**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
+Stefanos Tsitsipas to win (match result) @ 1.69
+↳ Tsitsipas is the class edge in the Gstaad final against a first-time finalist.
 
-**:moneybag: Total odds: ±1.79**
+**:moneybag: Total odds: ±2.60**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-The two shortest, most reliable favourites on the board, taken from two different tournaments (Gstaad and Umag). Tsitsipas is the standout class edge of the day. Compact but genuinely safe core; the total sits just under the usual 2.00 floor because every main-draw favourite today is heavily odds-on.
+The two shortest-priced favourites on the board, taken from two different finals (Iasi and Gstaad). Badosa outranks Sherif clearly, and Tsitsipas is the standout class in his first final in over a year against debut finalist Collignon. A compact, straight-win core; the total sits at the lower end of the band because every final today is short-priced.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T44 Value Builder Parley (🎾 Tennis): 18-07-2026**
+**🟡 #T47 Value Builder Parley (🎾 Tennis): 19-07-2026**
 
-**:small_orange_diamond: Andrey Rublev x Alejandro Tabilo**
-Andrey Rublev to win (match result) @ 1.41
-↳ Rublev is the top seed and clear favourite in this Bastad semifinal.
+**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
+Andrey Rublev to win (match result) @ 1.72
+↳ Rublev is the top seed and market favourite in the Bastad final.
 
-**:small_orange_diamond: Adolfo Daniel Vallejo x Luciano Darderi**
-Luciano Darderi to win (match result) @ 1.44
-↳ Darderi is the defending champion and market favourite in the other Bastad semifinal.
+**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
+Barbora Krejcikova to win (match result) @ 1.73
+↳ Krejcikova leads the head to head 3-0 and is the market favourite in the Athens final.
 
-**:moneybag: Total odds: ±2.03**
+**:moneybag: Total odds: ±2.98**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Both Bastad semifinal favourites stacked into one ticket from two separate matches. Rublev carries the ranking edge, Darderi the title-defence form on clay. The mid return comes from combining two solid picks, not from reaching for longer prices; the total lands under the usual Value band because the slate is short-priced.
+Two more genuine finalist favourites from two separate matches (Bastad and Athens). Rublev carries the ranking edge as top seed, while Krejcikova owns a 3-0 head to head over Sakkari. The step up in return over the Safe ticket comes from combining two solid picks, not from reaching for longer prices; the total lands just under the usual Value band because the slate is short-priced.
 
-**:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
-​
-​
-===NEXT MESSAGE===
-**🔴 #T45 Jackpot Builder Parley (🎾 Tennis): 18-07-2026**
-
-**:small_orange_diamond: Maria Sakkari x Alina Korneeva**
-Maria Sakkari to win (match result) @ 1.63
-↳ Sakkari is the market favourite at home in the Athens semifinal.
-
-**:small_orange_diamond: Clara Tauson x Barbora Krejcikova**
-Barbora Krejcikova to win (match result) @ 1.66
-↳ Krejcikova is the two-time major champion and market favourite in the other Athens semifinal.
-
-**:small_orange_diamond: Raphael Collignon x Juan Manuel Cerundolo**
-Raphael Collignon to win (match result) @ 1.68
-↳ Collignon is the market favourite in this Gstaad semifinal.
-
-**:moneybag: Total odds: ±4.55**
-Odds may vary depending on the bookmaker or the time of placement.
-
-**:mortar_board: Strategy Breakdown:**
-Three genuine market favourites from three separate matches across Athens and Gstaad, none of them an underdog stunt. The higher total comes purely from stacking one extra good pick, not from chasing longer prices. A realistic 6.00-plus jackpot was not available today without padding, so this is the honest ceiling built from the day's favourites.
-
-**:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Alexander Shevchenko x Stefanos Tsitsipas
+**:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)`;
+window.DAILY_TENNIS_CARDS = `MATCH: Paula Badosa x Mayar Sherif
+MARKET: Match Result
+SELECTION: Paula Badosa to win
+ODDS: 1.54
+STAKE: 2u
+RISK: low
+ANALYSIS: Higher-ranked player and clear market favourite in the Iasi final against Sherif.
+===
+MATCH: Stefanos Tsitsipas x Raphael Collignon
 MARKET: Match Result
 SELECTION: Stefanos Tsitsipas to win
-ODDS: 1.28
+ODDS: 1.69
 STAKE: 2u
 RISK: low
-ANALYSIS: Far higher-ranked player and clear market favourite in this Gstaad semifinal.
+ANALYSIS: Class edge in the Gstaad final in his first final in over a year, against a debut finalist.
 ===
-MATCH: Daniel Merida Aguilar x Damir Dzumhur
-MARKET: Match Result
-SELECTION: Daniel Merida Aguilar to win
-ODDS: 1.40
-STAKE: 2u
-RISK: low
-ANALYSIS: Market favourite in the Umag final on current clay form.
-===
-MATCH: Andrey Rublev x Alejandro Tabilo
+MATCH: Andrey Rublev x Luciano Darderi
 MARKET: Match Result
 SELECTION: Andrey Rublev to win
-ODDS: 1.41
+ODDS: 1.72
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Top seed and clear favourite in this Bastad semifinal.
+ANALYSIS: Top seed and market favourite in the Bastad final.
 ===
-MATCH: Adolfo Daniel Vallejo x Luciano Darderi
-MARKET: Match Result
-SELECTION: Luciano Darderi to win
-ODDS: 1.44
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Defending champion and market favourite in the other Bastad semifinal.
-===
-MATCH: Maria Sakkari x Alina Korneeva
-MARKET: Match Result
-SELECTION: Maria Sakkari to win
-ODDS: 1.63
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Market favourite at home in the Athens semifinal.
-===
-MATCH: Clara Tauson x Barbora Krejcikova
+MATCH: Barbora Krejcikova x Maria Sakkari
 MARKET: Match Result
 SELECTION: Barbora Krejcikova to win
-ODDS: 1.66
-STAKE: 0.25u
+ODDS: 1.73
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Two-time major champion and market favourite in the other Athens semifinal.
-===
-MATCH: Raphael Collignon x Juan Manuel Cerundolo
-MARKET: Match Result
-SELECTION: Raphael Collignon to win
-ODDS: 1.68
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Market favourite in this Gstaad semifinal.`;
+ANALYSIS: Leads the head to head 3-0 and is the market favourite in the Athens final.`;
 window.TENNIS_EVENTS = [
-{ match: "Raphael Collignon x Juan Manuel Cerundolo", date: "2026-07-18", time: "11:00", comp: "ATP Gstaad", stage: "Semifinal", venue: "Gstaad", pick: "Collignon to win", tier: "Jackpot Builder" },
-{ match: "Adolfo Daniel Vallejo x Luciano Darderi", date: "2026-07-18", time: "13:00", comp: "ATP Bastad", stage: "Semifinal", venue: "Bastad", pick: "Darderi to win", tier: "Value Builder" },
-{ match: "Alexander Shevchenko x Stefanos Tsitsipas", date: "2026-07-18", time: "13:30", comp: "ATP Gstaad", stage: "Semifinal", venue: "Gstaad", pick: "Tsitsipas to win", tier: "Safe Builder" },
-{ match: "Andrey Rublev x Alejandro Tabilo", date: "2026-07-18", time: "14:30", comp: "ATP Bastad", stage: "Semifinal", venue: "Bastad", pick: "Rublev to win", tier: "Value Builder" },
-{ match: "Maria Sakkari x Alina Korneeva", date: "2026-07-18", time: "18:30", comp: "WTA Athens", stage: "Semifinal", venue: "Athens", pick: "Sakkari to win", tier: "Jackpot Builder" },
-{ match: "Daniel Merida Aguilar x Damir Dzumhur", date: "2026-07-18", time: "19:00", comp: "ATP Umag", stage: "Final", venue: "Umag", pick: "Merida Aguilar to win", tier: "Safe Builder" },
-{ match: "Clara Tauson x Barbora Krejcikova", date: "2026-07-18", time: "19:40", comp: "WTA Athens", stage: "Semifinal", venue: "Athens", pick: "Krejcikova to win", tier: "Jackpot Builder" }
+{ match: "Stefanos Tsitsipas x Raphael Collignon", date: "2026-07-19", time: "11:30", comp: "ATP Gstaad", stage: "Final", venue: "Gstaad", pick: "Tsitsipas to win", tier: "Safe Builder" },
+{ match: "Andrey Rublev x Luciano Darderi", date: "2026-07-19", time: "14:00", comp: "ATP Bastad", stage: "Final", venue: "Bastad", pick: "Rublev to win", tier: "Value Builder" },
+{ match: "Paula Badosa x Mayar Sherif", date: "2026-07-19", time: "16:30", comp: "WTA Iasi", stage: "Final", venue: "Iasi", pick: "Badosa to win", tier: "Safe Builder" },
+{ match: "Barbora Krejcikova x Maria Sakkari", date: "2026-07-19", time: "19:00", comp: "WTA Athens", stage: "Final", venue: "Athens", pick: "Krejcikova to win", tier: "Value Builder" }
 ];
