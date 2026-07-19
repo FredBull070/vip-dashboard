@@ -1,11 +1,15 @@
 {
-  "type": "card",
-  "period": "week",
-  "label": "Cards · this week",
-  "roi": 19.06,
-  "bets": 13,
-  "profit": 2.43,
-  "total": { "roi": 4.14, "bets": 350, "profit": 12.51 },
-  "changed": true,
-  "computed_at": "2026-07-18 08:43"
+ "type": "card",
+ "period": "week",
+ "label": "Cards · this week",
+ "roi": 19.06,
+ "bets": 13,
+ "profit": 2.43,
+ "total": {
+  "roi": 3.45,
+  "bets": 351,
+  "profit": 10.51
+ },
+ "changed": false,
+ "computed_at": "2026-07-19 08:43"
 }
