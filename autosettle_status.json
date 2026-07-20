@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "ran_at": "2026-07-20T13:24:33.257Z",
+  "ran_at": "2026-07-20T23:48:33.232Z",
   "enabled": true,
   "dryRun": false,
-  "checked": 22,
+  "checked": 2,
   "settled": 0,
   "would_settle": 0,
   "paused": false,
