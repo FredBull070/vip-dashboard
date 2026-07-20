@@ -1,11 +1,18 @@
 [
-{"s":"football","m":"Spain x Argentina","k":"Spain","o":2.28},
-{"s":"football","m":"Hammarby IF x Degerfors IF","k":"Hammarby IF","o":1.20},
-{"s":"football","m":"Halmstad x Hacken","k":"Hacken","o":1.50},
-{"s":"football","m":"Elfsborg x IK Sirius","k":"IK Sirius","o":1.89},
-{"s":"football","m":"FF Jaro x Inter Turku","k":"Inter Turku","o":1.52},
-{"s":"tennis","m":"Stefanos Tsitsipas x Raphael Collignon","k":"Tsitsipas","o":1.69},
-{"s":"tennis","m":"Andrey Rublev x Luciano Darderi","k":"Rublev","o":1.72},
-{"s":"tennis","m":"Paula Badosa x Mayar Sherif","k":"Badosa","o":1.54},
-{"s":"tennis","m":"Barbora Krejcikova x Maria Sakkari","k":"Krejcikova","o":1.73}
+  {"s":"football","m":"Jelgava x Rigas Futbola Skola","k":"Rigas Futbola Skola","o":1.23},
+  {"s":"football","m":"Orgryte IS x Djurgardens IF","k":"Djurgardens IF","o":1.27},
+  {"s":"football","m":"Coritiba PR Women x Internacional RS Women","k":"Internacional RS Women","o":1.28},
+  {"s":"football","m":"KPV Kokkola x Rovaniemi PS","k":"Rovaniemi PS","o":1.30},
+  {"s":"football","m":"Tartu JK Tammeka II x JK Tallinna Kalev II","k":"Tartu JK Tammeka II","o":1.35},
+  {"s":"football","m":"Slavia x CSKA","k":"CSKA","o":1.42},
+  {"s":"football","m":"IFK Mariehamn x FC Lahti","k":"FC Lahti","o":1.53},
+  {"s":"football","m":"FK Suduva Marijampole x Hegelmann Litauen","k":"FK Suduva Marijampole","o":1.54},
+  {"s":"football","m":"Kopavogs x IF Vestri","k":"Kopavogs","o":1.57},
+  {"s":"football","m":"Sao Caetano SP x Sao Jose Esporte Clube","k":"Sao Jose Esporte Clube","o":1.62},
+  {"s":"football","m":"Rapid Bucuresti x Sepsi OSK","k":"Rapid Bucuresti","o":1.68},
+  {"s":"tennis","m":"Frederico Ferreira Silva x Luca Van Assche","k":"Luca Van Assche","o":1.21},
+  {"s":"tennis","m":"Nadia Podoroska x Julia Stusek","k":"Nadia Podoroska","o":1.26},
+  {"s":"tennis","m":"Vit Kopriva x Ignacio Buse","k":"Ignacio Buse","o":1.52},
+  {"s":"tennis","m":"Antonia Ruzic x Dominika Salkova","k":"Antonia Ruzic","o":1.76},
+  {"s":"tennis","m":"Henrique Rocha x Pedro Martinez Portero","k":"Henrique Rocha","o":1.78}
 ]

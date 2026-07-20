@@ -1,128 +1,111 @@
-/* BetLife365 daily bets - bets-desk task. Slate: 19-07-2026, World Cup FINAL day. Marquee: World Cup final Spain x Argentina (MetLife, East Rutherford, 21:00 NL), verified on Oddspedia rendered match page (Unibet): Spain 2.28, Draw 2.95, Argentina 3.60; O1.5 1.38, U2.5 1.63, O2.5 2.25, BTTS Yes 1.85. Club slate verified from Oddspedia odds boards: Allsvenskan round 13 (Hammarby IF 1.20 v Degerfors, Hacken 1.50 at Halmstad, IK Sirius 1.89 at Elfsborg) and Veikkausliiga (Inter Turku 1.52 at FF Jaro). CSL round 19 finished on 18 Jul, no China games today; Liga MX/Iceland/Korea boards not live or off. Tennis legs for the Lucky pulled from bets-tennis.js (four ATP/WTA finals: Tsitsipas 1.69, Rublev 1.72, Badosa 1.54, Krejcikova 1.73). THIN-QUALITY NOTE: only five priced football matches and the final itself is a mild favourite, so the three Builders cannot be fully decorrelated; Safe and Value use entirely different fixtures, Jackpot stacks the same genuine favourites with the World Cup leg switched to a goals market and the overlap flagged. No leg under 1.15 and no quarter lines anywhere. Free Bet rotation: previous run logged n=2, so today n=3 -> type = Lucky; Free Bet is a 1-on-1 copy of the cross-sport Lucky Shot. Next rotation n=4. Football Builder counter continued from #33 (18-07-2026) -> #34/#35/#36. Lucky tops out at 91.30 (no NBA/NFL/NHL in season, only five football matches), reported honestly rather than padded. */
-window.DAILY_VERSION = "2026-07-19";
-window.DAILY_MESSAGES = `**🟢 #34 Safe Builder Parley (⚽ Football): 19-07-2026**
+/* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
+window.DAILY_VERSION = "2026-07-20";
 
-**:small_orange_diamond: Hammarby IF x Degerfors IF**
-Hammarby IF to win (match result) @ 1.20
-↳ Second in the table at home against a Degerfors side near the bottom, the shortest genuine price on the whole board today.
+window.DAILY_MESSAGES = `**🟢 #10 Safe Builder Parley (⚽ Football): 20-07-2026**
 
-**:small_orange_diamond: FF Jaro x Inter Turku**
-Inter Turku to win (match result) @ 1.52
-↳ Veikkausliiga runners-up away at eleventh-placed Jaro, a clear class and form gap.
+**:small_orange_diamond: Orgryte IS x Djurgardens IF**
+Djurgardens IF to win (match result) @ 1.27
+↳ Djurgardens IF win the match in normal time.
 
-**:small_orange_diamond: Halmstad x Hacken**
-Hacken to win (match result) @ 1.50
-↳ Fourth-placed Hacken travel to bottom-of-the-table Halmstad as firm favourites.
+**:small_orange_diamond: Jelgava x Rigas Futbola Skola**
+Rigas Futbola Skola to win (match result) @ 1.23
+↳ Rigas Futbola Skola win the match in normal time.
 
-**:moneybag: Total odds: ±2.74**
+**:small_orange_diamond: KPV Kokkola x Rovaniemi PS**
+Rovaniemi PS to win (match result) @ 1.30
+↳ Rovaniemi PS win the match in normal time.
+
+**:moneybag: Total odds: ±2.03**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-On World Cup final day the club board is short, so the Safe tier leans on three of the clearest favourites available, each a straight match result from a different match across Sweden and Finland. Nothing speculative, three separate fixtures.
+Three clear favourites from three different leagues. Djurgardens are far stronger than a struggling Orgryte, RFS are the dominant side in Latvia against mid-table Jelgava, and Rovaniemi PS open the Ykkonen season away at a weaker KPV. Nothing here depends on the same result twice.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #35 Value Builder Parley (⚽ Football): 19-07-2026**
+**🟡 #11 Value Builder Parley (⚽ Football): 20-07-2026**
 
-**:small_orange_diamond: Elfsborg x IK Sirius**
-IK Sirius to win (match result) @ 1.89
-↳ League leaders on the road at mid-table Elfsborg; the away price carries the value on the division's form side.
+**:small_orange_diamond: Slavia x CSKA**
+CSKA to win (match result) @ 1.42
+↳ CSKA win the match in normal time.
 
-**:small_orange_diamond: Spain x Argentina**
-Spain to win (match result) @ 2.28
-↳ Spain reach the World Cup final on a long unbeaten run and are the bookmaker's favourite over Argentina in the showpiece.
+**:small_orange_diamond: IFK Mariehamn x FC Lahti**
+FC Lahti to win (match result) @ 1.53
+↳ FC Lahti win the match in normal time.
 
-**:moneybag: Total odds: ±4.31**
+**:small_orange_diamond: FK Suduva Marijampole x Hegelmann Litauen**
+FK Suduva Marijampole to win (match result) @ 1.54
+↳ FK Suduva Marijampole win the match in normal time.
+
+**:moneybag: Total odds: ±3.35**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two clean picks from two different matches, fully separate from the Safe ticket. The step up in return comes from pairing the league leaders with the World Cup favourite, not from reaching for longer prices; on a short day a tight two-leg build is the honest way to reach the Value band.
+CSKA travel to Slavia as the better squad on the opening weekend, Lahti have the stronger side against a bottom half Mariehamn, and Suduva are at home against a Hegelmann team that has been leaking goals. Three solid favourites priced a touch generously.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #36 Jackpot Builder Parley (⚽ Football): 19-07-2026**
+**🔴 #12 Jackpot Builder Parley (⚽ Football): 20-07-2026**
 
-**:small_orange_diamond: Hammarby IF x Degerfors IF**
-Hammarby IF to win (match result) @ 1.20
-↳ The clearest favourite of the day, second in the table at home.
+**:small_orange_diamond: Coritiba PR Women x Internacional RS Women**
+Internacional RS Women to win (match result) @ 1.28
+↳ Internacional RS Women win the match in normal time.
 
-**:small_orange_diamond: Halmstad x Hacken**
-Hacken to win (match result) @ 1.50
-↳ Fourth-placed side away at the bottom club.
+**:small_orange_diamond: Tartu JK Tammeka II x JK Tallinna Kalev II**
+Tartu JK Tammeka II to win (match result) @ 1.35
+↳ Tartu JK Tammeka II win the match in normal time.
 
-**:small_orange_diamond: FF Jaro x Inter Turku**
-Inter Turku to win (match result) @ 1.52
-↳ Veikkausliiga runners-up away at eleventh, a clear step up in quality.
+**:small_orange_diamond: Sao Caetano SP x Sao Jose Esporte Clube**
+Sao Jose Esporte Clube to win (match result) @ 1.62
+↳ Sao Jose Esporte Clube win the match in normal time.
 
-**:small_orange_diamond: Elfsborg x IK Sirius**
-IK Sirius to win (match result) @ 1.89
-↳ League leaders on the road, the division's form team.
+**:small_orange_diamond: Kopavogs x IF Vestri**
+Kopavogs to win (match result) @ 1.57
+↳ Kopavogs win the match in normal time.
 
-**:small_orange_diamond: Spain x Argentina**
-Over 1.5 goals (total goals) @ 1.38
-↳ Two attacking sides in a World Cup final; the bookmaker's main line sits well above 1.5, so at least two goals across the match is the conservative call on this fixture.
+**:small_orange_diamond: Rapid Bucuresti x Sepsi OSK**
+Rapid Bucuresti to win (match result) @ 1.68
+↳ Rapid Bucuresti win the match in normal time.
 
-**:moneybag: Total odds: ±7.14**
+**:moneybag: Total odds: ±7.38**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Five genuine favourites stacked to a realistic jackpot number: four short-priced match-result picks plus a low goals line in the final. The 7.14 comes from the depth of the stack, never from adding an underdog to inflate the price. On a thin final-day board these favourites unavoidably overlap the Safe and Value tickets, so the World Cup leg is switched to a different market type and we flag the overlap openly.
+Five genuine favourites stacked rather than five long shots. Internacional are a level above Coritiba in the Copa do Brazil, Tammeka II are at home to a weaker reserve side, Sao Jose and Kopavogs are both the stronger team on paper, and Rapid open at home with a much deeper squad than Sepsi. The higher total comes from the number of legs, not from chasing prices.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 19-07-2026**
-🎾⚽ Sport of the day: Multi-Sport
+**:gift: FREE BET OF THE DAY | 20-07-2026**
+⚽ Sport of the day: Football
 
-**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
-Stefanos Tsitsipas to win @ 1.69
-↳ Class edge in the ATP Gstaad final against a first-time finalist.
+Today's free pick, straight from the VIP slate. Exactly what we are on and why:
 
-**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
-Andrey Rublev to win @ 1.72
-↳ Top seed and market favourite in the ATP Bastad final.
+**:small_orange_diamond: Orgryte IS x Djurgardens IF**
+Djurgardens IF to win (match result) @ 1.27
+↳ Djurgardens IF win the match in normal time.
 
-**:small_orange_diamond: Paula Badosa x Mayar Sherif**
-Paula Badosa to win @ 1.54
-↳ Higher-ranked player and clear favourite in the WTA Iasi final.
+**:small_orange_diamond: Jelgava x Rigas Futbola Skola**
+Rigas Futbola Skola to win (match result) @ 1.23
+↳ Rigas Futbola Skola win the match in normal time.
 
-**:small_orange_diamond: Hammarby IF x Degerfors IF**
-Hammarby IF to win @ 1.20
-↳ Clearest football favourite of the day, second in the table at home.
+**:small_orange_diamond: KPV Kokkola x Rovaniemi PS**
+Rovaniemi PS to win (match result) @ 1.30
+↳ Rovaniemi PS win the match in normal time.
 
-**:small_orange_diamond: Halmstad x Hacken**
-Hacken to win @ 1.50
-↳ Fourth-placed side away at the bottom club.
-
-**:small_orange_diamond: Elfsborg x IK Sirius**
-IK Sirius to win @ 1.89
-↳ League leaders on the road, the division's form team.
-
-**:small_orange_diamond: FF Jaro x Inter Turku**
-Inter Turku to win @ 1.52
-↳ Veikkausliiga runners-up away at eleventh-placed Jaro.
-
-**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
-Barbora Krejcikova to win @ 1.73
-↳ Leads the head to head and is the market favourite in the WTA Athens final.
-
-**:small_orange_diamond: Spain x Argentina**
-Spain to win @ 2.28
-↳ World Cup final favourite over Argentina after a long unbeaten run.
-
-**:moneybag: Total odds: ±91.30**
+**:moneybag: Total odds: ±2.03**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Nine market favourites stacked across two sports: five from today's football (the World Cup final plus the clearest Swedish and Finnish league favourites) and four from the ATP and WTA finals. One selection per match, every leg a different fixture, no longshots anywhere. With no NBA, NFL or NHL in season and only five priced football matches, the stack tops out around 91 rather than the usual 100-plus; we take the biggest realistic stack of genuine favourites rather than padding it with a longshot.
+Three of the clearest favourites on today's board, each from a different league, so one upset cannot sink the whole ticket for the same reason twice.
 
 ━━━━━━━━━━━━
-:green_circle: This is our **Lucky Shot** of the day; a deep stack of genuine cross-sport favourites, never longshots piled up for a big number.
+:green_circle: This is our **Safe Builder** of the day, the lowest risk play on the slate.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -130,121 +113,170 @@ Nine market favourites stacked across two sports: five from today's football (th
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 19-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 20-07-2026**
+⚽🎾 Sports: Football + Tennis
 
-**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
-Stefanos Tsitsipas to win @ 1.69
-↳ Class edge in the ATP Gstaad final against a first-time finalist.
+**:small_orange_diamond: Jelgava x Rigas Futbola Skola**
+Rigas Futbola Skola to win (match result) @ 1.23
+↳ Rigas Futbola Skola win this one.
 
-**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
-Andrey Rublev to win @ 1.72
-↳ Top seed and market favourite in the ATP Bastad final.
+**:small_orange_diamond: Orgryte IS x Djurgardens IF**
+Djurgardens IF to win (match result) @ 1.27
+↳ Djurgardens IF win this one.
 
-**:small_orange_diamond: Paula Badosa x Mayar Sherif**
-Paula Badosa to win @ 1.54
-↳ Higher-ranked player and clear favourite in the WTA Iasi final.
+**:small_orange_diamond: Coritiba PR Women x Internacional RS Women**
+Internacional RS Women to win (match result) @ 1.28
+↳ Internacional RS Women win this one.
 
-**:small_orange_diamond: Hammarby IF x Degerfors IF**
-Hammarby IF to win @ 1.20
-↳ Clearest football favourite of the day, second in the table at home.
+**:small_orange_diamond: KPV Kokkola x Rovaniemi PS**
+Rovaniemi PS to win (match result) @ 1.30
+↳ Rovaniemi PS win this one.
 
-**:small_orange_diamond: Halmstad x Hacken**
-Hacken to win @ 1.50
-↳ Fourth-placed side away at the bottom club.
+**:small_orange_diamond: Tartu JK Tammeka II x JK Tallinna Kalev II**
+Tartu JK Tammeka II to win (match result) @ 1.35
+↳ Tartu JK Tammeka II win this one.
 
-**:small_orange_diamond: Elfsborg x IK Sirius**
-IK Sirius to win @ 1.89
-↳ League leaders on the road, the division's form team.
+**:small_orange_diamond: Slavia x CSKA**
+CSKA to win (match result) @ 1.42
+↳ CSKA win this one.
 
-**:small_orange_diamond: FF Jaro x Inter Turku**
-Inter Turku to win @ 1.52
-↳ Veikkausliiga runners-up away at eleventh-placed Jaro.
+**:small_orange_diamond: IFK Mariehamn x FC Lahti**
+FC Lahti to win (match result) @ 1.53
+↳ FC Lahti win this one.
 
-**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
-Barbora Krejcikova to win @ 1.73
-↳ Leads the head to head and is the market favourite in the WTA Athens final.
+**:small_orange_diamond: FK Suduva Marijampole x Hegelmann Litauen**
+FK Suduva Marijampole to win (match result) @ 1.54
+↳ FK Suduva Marijampole win this one.
 
-**:small_orange_diamond: Spain x Argentina**
-Spain to win @ 2.28
-↳ World Cup final favourite over Argentina after a long unbeaten run.
+**:small_orange_diamond: Kopavogs x IF Vestri**
+Kopavogs to win (match result) @ 1.57
+↳ Kopavogs win this one.
 
-**:moneybag: Total odds: ±91.30**
+**:small_orange_diamond: Sao Caetano SP x Sao Jose Esporte Clube**
+Sao Jose Esporte Clube to win (match result) @ 1.62
+↳ Sao Jose Esporte Clube win this one.
+
+**:small_orange_diamond: Frederico Ferreira Silva x Luca Van Assche**
+Luca Van Assche to win (match winner) @ 1.21
+↳ Luca Van Assche win this one.
+
+**:small_orange_diamond: Nadia Podoroska x Julia Stusek**
+Nadia Podoroska to win (match winner) @ 1.26
+↳ Nadia Podoroska win this one.
+
+**:small_orange_diamond: Vit Kopriva x Ignacio Buse**
+Ignacio Buse to win (match winner) @ 1.52
+↳ Ignacio Buse win this one.
+
+**:moneybag: Total odds: ±69.20**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Nine market favourites stacked across two sports: five from today's football (the World Cup final plus the clearest Swedish and Finnish league favourites) and four from the ATP and WTA finals. One selection per match, every leg a different fixture, no longshots anywhere. With no NBA, NFL or NHL in season and only five priced football matches, the stack tops out around 91 rather than the usual 100-plus; we take the biggest realistic stack of genuine favourites rather than padding it with a longshot.
+Thirteen solid favourites stacked across ten football matches and three tennis matches, one selection per match. No underdogs and no exotic markets: every leg is a side or a player we would back on its own. Today's board is thin, with the World Cup finished and most big leagues still in preseason, so there were not enough genuine favourites to reach the usual 100+ without reaching for prices we do not rate. We would rather post a smaller honest stack than pad it out.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: Hammarby IF x Degerfors IF
-MARKET: Match Result
-SELECTION: Hammarby IF to win
-ODDS: 1.20
+
+window.DAILY_CARDS = `MATCH: Orgryte IS x Djurgardens IF
+MARKET: Match result
+SELECTION: Djurgardens IF to win
+ODDS: 1.27
 STAKE: 2u
 RISK: low
-ANALYSIS: Second in the table at home against a near-bottom Degerfors, the shortest genuine price on the board today.
+ANALYSIS: Djurgardens are one of the strongest sides in the Allsvenskan and travel to a struggling Orgryte.
 ===
-MATCH: FF Jaro x Inter Turku
-MARKET: Match Result
-SELECTION: Inter Turku to win
-ODDS: 1.52
+MATCH: Jelgava x Rigas Futbola Skola
+MARKET: Match result
+SELECTION: Rigas Futbola Skola to win
+ODDS: 1.23
 STAKE: 2u
 RISK: low
-ANALYSIS: Veikkausliiga runners-up away at eleventh-placed Jaro, a clear class and form gap.
+ANALYSIS: RFS are the dominant club in Latvia and have far more quality than a mid-table Jelgava.
 ===
-MATCH: Halmstad x Hacken
-MARKET: Match Result
-SELECTION: Hacken to win
-ODDS: 1.50
-STAKE: 2u
+MATCH: KPV Kokkola x Rovaniemi PS
+MARKET: Match result
+SELECTION: Rovaniemi PS to win
+ODDS: 1.30
+STAKE: 1.5u
 RISK: low
-ANALYSIS: Fourth-placed Hacken away at bottom club Halmstad as firm favourites.
+ANALYSIS: Rovaniemi PS open the Ykkonen season as clear favourites against a weaker KPV side.
 ===
-MATCH: Elfsborg x IK Sirius
-MARKET: Match Result
-SELECTION: IK Sirius to win
-ODDS: 1.89
+MATCH: Slavia x CSKA
+MARKET: Match result
+SELECTION: CSKA to win
+ODDS: 1.42
+STAKE: 1u
+RISK: medium
+ANALYSIS: CSKA have the deeper squad and start the Parva Liga season as the better team on the road.
+===
+MATCH: IFK Mariehamn x FC Lahti
+MARKET: Match result
+SELECTION: FC Lahti to win
+ODDS: 1.53
+STAKE: 1u
+RISK: medium
+ANALYSIS: Lahti are the stronger side against a bottom half Mariehamn that has struggled at home.
+===
+MATCH: FK Suduva Marijampole x Hegelmann Litauen
+MARKET: Match result
+SELECTION: FK Suduva Marijampole to win
+ODDS: 1.54
+STAKE: 1u
+RISK: medium
+ANALYSIS: Suduva at home against a Hegelmann side that has been conceding freely all season.
+===
+MATCH: Kopavogs x IF Vestri
+MARKET: Match result
+SELECTION: Kopavogs to win
+ODDS: 1.57
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: League leaders on the road at mid-table Elfsborg; the away price carries the value.
+ANALYSIS: Kopavogs are the stronger team on paper and have home advantage in the Icelandic First Division.
 ===
-MATCH: Spain x Argentina
-MARKET: Match Result
-SELECTION: Spain to win
-ODDS: 2.28
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Spain reach the World Cup final on a long unbeaten run and are the bookmaker's favourite over Argentina.
+MATCH: Rapid Bucuresti x Sepsi OSK
+MARKET: Match result
+SELECTION: Rapid Bucuresti to win
+ODDS: 1.68
+STAKE: 0.5u
+RISK: high
+ANALYSIS: Rapid open the Liga 1 season at home with a much deeper squad than Sepsi.
 ===
-MATCH: Spain x Argentina
-MARKET: Total Goals
-SELECTION: Over 1.5 goals
-ODDS: 1.38
-STAKE: 0.25u
-RISK: low
-ANALYSIS: Two attacking sides in a World Cup final; the main line sits well above 1.5, so at least two goals is the conservative call.
-===
-MATCH: Spain x Argentina
-MARKET: Total Goals
-SELECTION: Under 2.5 goals
-ODDS: 1.63
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Finals often tighten up; with the main line at 2.25 the under on 2.5 is on the right side of a cagey showpiece.
-===
-MATCH: Spain x Argentina
-MARKET: Both Teams to Score
-SELECTION: Yes
-ODDS: 1.85
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Two sides that both carry a goal threat; a final with attacking talent on each side leans towards both scoring.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-19","legs":["Halmstad x Hacken: Hacken to win @ 1.50","FF Jaro x Inter Turku: Inter Turku to win @ 1.52"],"oddLow":2.26,"oddHigh":2.30,"justification":"Two clear away favourites from two different matches, both kicking off inside the same hour. Fourth-placed Hacken visit bottom club Halmstad and Veikkausliiga runners-up Inter Turku visit eleventh-placed FF Jaro. The x2 lands just above the usual band because every short price today still multiplies past 2.2; we keep it to the two safest calls rather than reaching lower."};
+MATCH: Sao Caetano SP x Sao Jose Esporte Clube
+MARKET: Match result
+SELECTION: Sao Jose Esporte Clube to win
+ODDS: 1.62
+STAKE: 0.5u
+RISK: high
+ANALYSIS: Sao Jose are the stronger side in this Paulista Cup opener despite playing away from home.`;
+
+window.DAILY_CHALLENGE = {
+  date: "2026-07-20",
+  legs: ["Orgryte IS x Djurgardens IF: Djurgardens IF to win @ 1.27", "Jelgava x Rigas Futbola Skola: Rigas Futbola Skola to win @ 1.23", "Coritiba PR Women x Internacional RS Women: Internacional RS Women to win @ 1.28"],
+  oddLow: 2.00, oddHigh: 2.00,
+  justification: "Three of the shortest priced favourites on the board, each from a different match, for the safest route to just over x2."
+};
+
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
+
 window.FOOTBALL_EVENTS = [
-{ match: "Hammarby IF x Degerfors IF", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Stockholm", pick: "Hammarby IF to win", tier: "Safe Builder" },
-{ match: "Halmstad x Hacken", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Halmstad", pick: "Hacken to win", tier: "Safe Builder" },
-{ match: "Elfsborg x IK Sirius", date: "2026-07-19", time: "16:30", comp: "Allsvenskan", stage: "Round 13", venue: "Boras", pick: "IK Sirius to win", tier: "Value Builder" },
-{ match: "FF Jaro x Inter Turku", date: "2026-07-19", time: "17:30", comp: "Veikkausliiga", stage: "Round 15", venue: "Jakobstad", pick: "Inter Turku to win", tier: "Safe Builder" },
-{ match: "Spain x Argentina", date: "2026-07-19", time: "21:00", comp: "World Cup", stage: "Final", venue: "East Rutherford", pick: "Spain to win", tier: "Value Builder" }
+  {match:"Tartu JK Tammeka II x JK Tallinna Kalev II", date:"2026-07-20", time:"16:00", comp:"Esiliiga B", stage:"Round 20", venue:"Tartu", pick:"Tartu JK Tammeka II", tier:"Jackpot Builder"},
+  {match:"Turku PS x Ilves", date:"2026-07-20", time:"17:00", comp:"Veikkausliiga", stage:"Regular season", venue:"Turku", pick:"Ilves", tier:"-"},
+  {match:"Jelgava x Rigas Futbola Skola", date:"2026-07-20", time:"17:00", comp:"Higher League", stage:"Round 23", venue:"Jelgava", pick:"Rigas Futbola Skola", tier:"Safe Builder"},
+  {match:"KPV Kokkola x Rovaniemi PS", date:"2026-07-20", time:"17:30", comp:"Ykkonen", stage:"Round 1", venue:"Kokkola", pick:"Rovaniemi PS", tier:"Safe Builder"},
+  {match:"Hunedoara x Csikszereda Miercurea Ciuc", date:"2026-07-20", time:"17:30", comp:"Liga 1", stage:"Round 1", venue:"Hunedoara", pick:"Hunedoara", tier:"-"},
+  {match:"FK Suduva Marijampole x Hegelmann Litauen", date:"2026-07-20", time:"17:45", comp:"A Liga", stage:"Round 23", venue:"Marijampole", pick:"FK Suduva Marijampole", tier:"Value Builder"},
+  {match:"IFK Mariehamn x FC Lahti", date:"2026-07-20", time:"18:00", comp:"Veikkausliiga", stage:"Regular season", venue:"Mariehamn", pick:"FC Lahti", tier:"Value Builder"},
+  {match:"SK Super Nova x SC Grobinas", date:"2026-07-20", time:"18:00", comp:"Higher League", stage:"Round 23", venue:"Riga", pick:"SC Grobinas", tier:"-"},
+  {match:"Slavia x CSKA", date:"2026-07-20", time:"18:15", comp:"Parva Liga", stage:"Round 1", venue:"Sofia", pick:"CSKA", tier:"Value Builder"},
+  {match:"Kalmar x Malmo", date:"2026-07-20", time:"19:00", comp:"Allsvenskan", stage:"Round 13", venue:"Kalmar", pick:"Malmo", tier:"-"},
+  {match:"Orgryte IS x Djurgardens IF", date:"2026-07-20", time:"19:00", comp:"Allsvenskan", stage:"Round 13", venue:"Gothenburg", pick:"Djurgardens IF", tier:"Safe Builder"},
+  {match:"Norrby x Sundsvall", date:"2026-07-20", time:"19:00", comp:"Superettan", stage:"Round 15", venue:"Boras", pick:"Over 2.5 goals", tier:"-"},
+  {match:"Sao Caetano SP x Sao Jose Esporte Clube", date:"2026-07-20", time:"20:00", comp:"Paulista Cup", stage:"Round 1", venue:"Sao Caetano", pick:"Sao Jose Esporte Clube", tier:"Jackpot Builder"},
+  {match:"Rapid Bucuresti x Sepsi OSK", date:"2026-07-20", time:"20:30", comp:"Liga 1", stage:"Round 1", venue:"Bucharest", pick:"Rapid Bucuresti", tier:"Jackpot Builder"},
+  {match:"Coritiba PR Women x Internacional RS Women", date:"2026-07-20", time:"21:00", comp:"Copa do Brazil Women", stage:"Round of 16", venue:"Curitiba", pick:"Internacional RS Women", tier:"Jackpot Builder"},
+  {match:"Mushuc Runa x Orense SC", date:"2026-07-20", time:"21:00", comp:"Primera A", stage:"Round 20", venue:"Ambato", pick:"Under 3.5 goals", tier:"-"},
+  {match:"Hafnarfjordur x Breidablik", date:"2026-07-20", time:"21:15", comp:"Premier League", stage:"Round 15", venue:"Hafnarfjordur", pick:"Breidablik", tier:"-"},
+  {match:"Keflavik x IA Akranes", date:"2026-07-20", time:"21:15", comp:"Premier League", stage:"Round 15", venue:"Keflavik", pick:"Keflavik", tier:"-"},
+  {match:"Kopavogs x IF Vestri", date:"2026-07-20", time:"21:15", comp:"First Division", stage:"Round 14", venue:"Kopavogur", pick:"Kopavogs", tier:"Jackpot Builder"},
+  {match:"Grindavik Women x Throttur Women", date:"2026-07-20", time:"21:15", comp:"Premier League Women", stage:"Round 13", venue:"Grindavik", pick:"Over 2.5 goals", tier:"-"}
 ];
