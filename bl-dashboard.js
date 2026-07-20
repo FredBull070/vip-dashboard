@@ -1071,6 +1071,12 @@
   function toast(m,ok){ try{ if(typeof window.showToast==='function') window.showToast(m, ok!==false); }catch(e){} }
   function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
   function hookFor(cat){ return (typeof window.getHook==='function')? window.getHook(cat) : ''; }
+  // Discord hard-limits a message to 2000 chars; split long ones on line breaks so nothing is rejected.
+  function splitMsg(str,max){ var out=[],cur=''; String(str).split('\n').forEach(function(l){ if((cur+'\n'+l).length>max){ if(cur)out.push(cur); cur=l; } else cur=cur?cur+'\n'+l:l; }); if(cur)out.push(cur); return out; }
+  function postSafe(content, hook){
+    var parts=(content && content.length>1900)? splitMsg(content,1900) : [content];
+    return parts.reduce(function(p,c,idx){ return p.then(function(){ return window.postToDiscord(c,hook).then(function(){ if(idx<parts.length-1) return sleep(2500); }); }); }, Promise.resolve());
+  }
 
   function doParleys(){
     var raw=window.DAILY_MESSAGES; if(!raw||typeof window.postToDiscord!=='function') return Promise.resolve(0);
@@ -1082,14 +1088,14 @@
     return Promise.all(Object.keys(groups).map(function(h){
       return groups[h].reduce(function(p,b,idx,arr){ return p.then(function(){
         var content=(typeof window.applyTokens==='function')?window.applyTokens(b):b;
-        return window.postToDiscord(content,h).then(function(){ posted++; if(idx<arr.length-1) return sleep(9000); });
+        return postSafe(content,h).then(function(){ posted++; if(idx<arr.length-1) return sleep(9000); });
       }); }, Promise.resolve());
     })).then(function(){ return posted; });
   }
   function doChunks(chunks, hook){
     if(!chunks||!chunks.length||!hook||typeof window.postToDiscord!=='function') return Promise.resolve(0);
     var posted=0;
-    return chunks.reduce(function(p,c,idx){ return p.then(function(){ return window.postToDiscord(c,hook).then(function(){ posted++; if(idx<chunks.length-1) return sleep(9000); }); }); }, Promise.resolve()).then(function(){ return posted; });
+    return chunks.reduce(function(p,c,idx){ return p.then(function(){ return postSafe(c,hook).then(function(){ posted++; if(idx<chunks.length-1) return sleep(9000); }); }); }, Promise.resolve()).then(function(){ return posted; });
   }
   function doCards(){
     var txt=(typeof window.getCardsText==='function')?window.getCardsText():window.DAILY_CARDS; if(!txt) return Promise.resolve(0);
