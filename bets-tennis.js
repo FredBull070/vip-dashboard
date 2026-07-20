@@ -1,75 +1,89 @@
-/* BetLife365 tennis bets - bets-desk task. Slate: 19-07-2026, finals Sunday. Four ATP/WTA main-draw finals on the board: ATP Gstaad (Tsitsipas x Collignon), ATP Bastad (Rublev x Darderi), WTA Iasi (Badosa x Sherif) and WTA Athens (Krejcikova x Sakkari). Kitzbuhel, Estoril and Prague are qualification finals (skipped). Odds pulled from the Oddspedia rendered order-of-play / odds board (19 Jul, moneyline column) and cross-checked against LastWordOnTennis / TennisTonic previews and the tournament outrights; the conservative quote is used. Every leg is a genuine finalist favourite taken as a straight match-result win. IMPORTANT HONESTY NOTE: only four short-priced main-draw finals exist today. After building a fully decorrelated Safe and Value (each player used in only one builder), no separate matches remain to build a realistic, decorrelated Jackpot (a 6.00-12.00 accumulator would need four-plus extra favourite legs that are not already in Safe or Value). Per house rules we never pad with underdog stunts and never reuse a player across builders, so there is NO Jackpot today. The two tiers ascend by leg quality; both totals sit at the lower end of their bands because every final today is short-priced. No underdog padding. */
-window.DAILY_TENNIS = `**🟢 #T46 Safe Builder Parley (🎾 Tennis): 19-07-2026**
+/* BetLife365 tennis bets - bets-desk task. Slate: 20-07-2026, Monday first round. Four tour events on the board: ATP Kitzbuhel, ATP Estoril, WTA Prague and WTA Hamburg. TIMING NOTE: this build ran at 15:03 CEST, not 09:30, so most of the day's first-round card had already been played or was in progress. Only five main-draw matches with verified pre-match prices were still to start. Odds pulled from the Oddspedia rendered odds board (20 Jul, Full Time Result column) and cross-checked against TennisTonic / LastWordOnTennis previews; the conservative quote is used. Every leg is a straight match-result win on the market favourite. HONESTY NOTE: with only five unstarted matches and the no-reuse rule (a player carries at most one builder), Safe takes three legs and Value takes two, so Value ends up with FEWER legs than Safe. That is the opposite of the usual stack-more-good-picks shape, and it is forced by the thin remaining slate, not by chasing prices. For the same reason there is NO Jackpot today: a realistic 6.00-12.00 accumulator would need four-plus additional favourite legs from matches that do not exist. We never pad with underdog stunts. */
+window.DAILY_TENNIS = `**🟢 #T48 Safe Builder Parley (🎾 Tennis): 20-07-2026**
 
-**:small_orange_diamond: Paula Badosa x Mayar Sherif**
-Paula Badosa to win (match result) @ 1.54
-↳ Badosa is comfortably the higher-ranked player and clear market favourite in the Iasi final.
+**:small_orange_diamond: Frederico Ferreira Silva x Luca Van Assche**
+Luca Van Assche to win (match result) @ 1.21
+↳ Van Assche is ranked around no.78 against a no.235 wildcard and is the clear market favourite.
 
-**:small_orange_diamond: Stefanos Tsitsipas x Raphael Collignon**
-Stefanos Tsitsipas to win (match result) @ 1.69
-↳ Tsitsipas is the class edge in the Gstaad final against a first-time finalist.
+**:small_orange_diamond: Nadia Podoroska x Julia Stusek**
+Nadia Podoroska to win (match result) @ 1.26
+↳ Podoroska is a former Roland Garros semi-finalist with a 22-5 record in 2026 and is the short price here.
 
-**:moneybag: Total odds: ±2.60**
+**:small_orange_diamond: Vit Kopriva x Ignacio Buse**
+Ignacio Buse to win (match result) @ 1.52
+↳ Buse is the stronger clay-courter of the two and the market backs him clearly over Kopriva.
+
+**:moneybag: Total odds: ±2.32**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-The two shortest-priced favourites on the board, taken from two different finals (Iasi and Gstaad). Badosa outranks Sherif clearly, and Tsitsipas is the standout class in his first final in over a year against debut finalist Collignon. A compact, straight-win core; the total sits at the lower end of the band because every final today is short-priced.
+The three shortest-priced favourites still to start, each from a different tournament (Estoril, Hamburg and Kitzbuhel). Van Assche and Podoroska both hold a big class and form edge over lower-ranked opponents, and Buse is the better clay player against Kopriva. Three straight wins, no handicaps, no reaching for price.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T47 Value Builder Parley (🎾 Tennis): 19-07-2026**
+**🟡 #T49 Value Builder Parley (🎾 Tennis): 20-07-2026**
 
-**:small_orange_diamond: Andrey Rublev x Luciano Darderi**
-Andrey Rublev to win (match result) @ 1.72
-↳ Rublev is the top seed and market favourite in the Bastad final.
+**:small_orange_diamond: Antonia Ruzic x Dominika Salkova**
+Antonia Ruzic to win (match result) @ 1.76
+↳ Ruzic is the higher-ranked player and narrow market favourite against the Czech home player.
 
-**:small_orange_diamond: Barbora Krejcikova x Maria Sakkari**
-Barbora Krejcikova to win (match result) @ 1.73
-↳ Krejcikova leads the head to head 3-0 and is the market favourite in the Athens final.
+**:small_orange_diamond: Henrique Rocha x Pedro Martinez Portero**
+Henrique Rocha to win (match result) @ 1.78
+↳ Rocha has home support in Estoril and the market makes him the favourite over an out-of-form Martinez.
 
-**:moneybag: Total odds: ±2.98**
+**:moneybag: Total odds: ±3.13**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two more genuine finalist favourites from two separate matches (Bastad and Athens). Rublev carries the ranking edge as top seed, while Krejcikova owns a 3-0 head to head over Sakkari. The step up in return over the Safe ticket comes from combining two solid picks, not from reaching for longer prices; the total lands just under the usual Value band because the slate is short-priced.
+The two remaining matches where we still side with the favourite, but where the market is genuinely tight. Ruzic carries the ranking edge in Prague and Rocha has the home crowd plus better recent clay form in Estoril. These are two separate matches from the Safe ticket with no shared players. The higher total is a consequence of tighter matchups, not of us reaching for longer prices, which is why the stake is smaller.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Paula Badosa x Mayar Sherif
+window.DAILY_TENNIS_CARDS = `MATCH: Frederico Ferreira Silva x Luca Van Assche
 MARKET: Match Result
-SELECTION: Paula Badosa to win
-ODDS: 1.54
+SELECTION: Luca Van Assche to win
+ODDS: 1.21
 STAKE: 2u
 RISK: low
-ANALYSIS: Higher-ranked player and clear market favourite in the Iasi final against Sherif.
+ANALYSIS: World no.78 against world no.235, no head to head, and Van Assche has three Challenger titles in 2026.
 ===
-MATCH: Stefanos Tsitsipas x Raphael Collignon
+MATCH: Nadia Podoroska x Julia Stusek
 MARKET: Match Result
-SELECTION: Stefanos Tsitsipas to win
-ODDS: 1.69
+SELECTION: Nadia Podoroska to win
+ODDS: 1.26
 STAKE: 2u
 RISK: low
-ANALYSIS: Class edge in the Gstaad final in his first final in over a year, against a debut finalist.
+ANALYSIS: Former Roland Garros semi-finalist with a 22-5 record in 2026 against a no.435 opponent.
 ===
-MATCH: Andrey Rublev x Luciano Darderi
+MATCH: Vit Kopriva x Ignacio Buse
 MARKET: Match Result
-SELECTION: Andrey Rublev to win
-ODDS: 1.72
+SELECTION: Ignacio Buse to win
+ODDS: 1.52
+STAKE: 2u
+RISK: low
+ANALYSIS: Buse is the stronger clay-courter and the clear market favourite in Kitzbuhel.
+===
+MATCH: Antonia Ruzic x Dominika Salkova
+MARKET: Match Result
+SELECTION: Antonia Ruzic to win
+ODDS: 1.76
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Top seed and market favourite in the Bastad final.
+ANALYSIS: Ranking edge for Ruzic, but a tight matchup against a Czech player with home support.
 ===
-MATCH: Barbora Krejcikova x Maria Sakkari
+MATCH: Henrique Rocha x Pedro Martinez Portero
 MARKET: Match Result
-SELECTION: Barbora Krejcikova to win
-ODDS: 1.73
+SELECTION: Henrique Rocha to win
+ODDS: 1.78
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Leads the head to head 3-0 and is the market favourite in the Athens final.`;
+ANALYSIS: Home favourite in Estoril and narrow market pick over an out-of-form Martinez.`;
 window.TENNIS_EVENTS = [
-{ match: "Stefanos Tsitsipas x Raphael Collignon", date: "2026-07-19", time: "11:30", comp: "ATP Gstaad", stage: "Final", venue: "Gstaad", pick: "Tsitsipas to win", tier: "Safe Builder" },
-{ match: "Andrey Rublev x Luciano Darderi", date: "2026-07-19", time: "14:00", comp: "ATP Bastad", stage: "Final", venue: "Bastad", pick: "Rublev to win", tier: "Value Builder" },
-{ match: "Paula Badosa x Mayar Sherif", date: "2026-07-19", time: "16:30", comp: "WTA Iasi", stage: "Final", venue: "Iasi", pick: "Badosa to win", tier: "Safe Builder" },
-{ match: "Barbora Krejcikova x Maria Sakkari", date: "2026-07-19", time: "19:00", comp: "WTA Athens", stage: "Final", venue: "Athens", pick: "Krejcikova to win", tier: "Value Builder" }
+{ match: "Frederico Ferreira Silva x Luca Van Assche", date: "2026-07-20", time: "15:40", comp: "ATP Estoril", stage: "Round of 32", venue: "Estoril", pick: "Van Assche to win", tier: "Safe Builder" },
+{ match: "Antonia Ruzic x Dominika Salkova", date: "2026-07-20", time: "15:50", comp: "WTA Prague", stage: "Round of 32", venue: "Prague", pick: "Ruzic to win", tier: "Value Builder" },
+{ match: "Nadia Podoroska x Julia Stusek", date: "2026-07-20", time: "15:50", comp: "WTA Hamburg", stage: "Round of 32", venue: "Hamburg", pick: "Podoroska to win", tier: "Safe Builder" },
+{ match: "Vit Kopriva x Ignacio Buse", date: "2026-07-20", time: "16:00", comp: "ATP Kitzbuhel", stage: "Round of 32", venue: "Kitzbuhel", pick: "Buse to win", tier: "Safe Builder" },
+{ match: "Henrique Rocha x Pedro Martinez Portero", date: "2026-07-20", time: "16:50", comp: "ATP Estoril", stage: "Round of 32", venue: "Estoril", pick: "Rocha to win", tier: "Value Builder" },
+{ match: "Anna Bondar x Moyuka Uchijima", date: "2026-07-20", time: "17:00", comp: "WTA Hamburg", stage: "Round of 32", venue: "Hamburg", pick: "No verified price, no bet", tier: "No Bet" }
 ];
