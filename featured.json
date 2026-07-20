@@ -1,10 +1,10 @@
 {
   "type": "card",
-  "period": "week",
-  "label": "Cards · this week",
-  "roi": 19.06,
-  "bets": 13,
+  "period": "today",
+  "label": "Cards · today",
+  "roi": 26.83,
+  "bets": 11,
   "approved_by": "fred",
-  "updated_at": "2026-07-18T20:32:43.668Z",
+  "updated_at": "2026-07-20T13:23:09.849Z",
   "via": "worker"
 }
