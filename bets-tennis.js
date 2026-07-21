@@ -1,5 +1,5 @@
 /* BetLife365 daily TENNIS bets - written by the tennis task, read by the dashboard. Code stays separate. */
-window.DAILY_TENNIS = `**🟢 #T50 Safe Builder Parley (🎾 Tennis): 21-07-2026**
+window.DAILY_TENNIS = `**🟢 #T53 Safe Builder Parley (🎾 Tennis): 21-07-2026**
 
 **:small_orange_diamond: Tamara Korpatsch x Victoria Jimenez Kasintseva**
 Korpatsch to win match (Match Winner) @ 1.42
@@ -23,7 +23,7 @@ Drie duidelijke favorieten verspreid over ATP Kitzbuhel en WTA Prague, elk met e
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T51 Value Builder Parley (🎾 Tennis): 21-07-2026**
+**🟡 #T54 Value Builder Parley (🎾 Tennis): 21-07-2026**
 
 **:small_orange_diamond: Sebastian Baez x Miomir Kecmanovic**
 Kecmanovic to win match (Match Winner) @ 1.70
@@ -47,7 +47,7 @@ Drie favorieten uit ATP Kitzbuhel met iets meer risico dan de Safe Builder, maar
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #T52 Jackpot Builder Parley (🎾 Tennis): 21-07-2026**
+**🔴 #T55 Jackpot Builder Parley (🎾 Tennis): 21-07-2026**
 
 **:small_orange_diamond: Valentina Steiner x Noma Akugue Noha**
 Akugue Noha to win match (Match Winner) @ 1.23
