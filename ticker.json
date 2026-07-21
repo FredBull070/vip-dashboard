@@ -1,13 +1,14 @@
 [
-{"s":"football","m":"Jelgava x Rigas Futbola Skola","k":"Rigas Futbola Skola","o":1.23},
-{"s":"football","m":"Orgryte IS x Djurgardens IF","k":"Djurgardens IF","o":1.27},
-{"s":"football","m":"IFK Mariehamn x FC Lahti","k":"FC Lahti","o":1.53},
-{"s":"football","m":"Hafnarfjordur x Breidablik","k":"Breidablik","o":1.98},
-{"s":"football","m":"Turku PS x Ilves","k":"Ilves draw or win","o":1.43},
-{"s":"football","m":"Kalmar x Malmo","k":"Malmo","o":2.30},
-{"s":"football","m":"Keflavik x IA Akranes","k":"Keflavik draw or win","o":1.41},
-{"s":"football","m":"Norrby x Sundsvall","k":"Norrby","o":1.91},
-{"s":"football","m":"Mushuc Runa x Orense SC","k":"Mushuc Runa","o":2.00},
-{"s":"football","m":"SK Super Nova x SC Grobinas","k":"SK Super Nova","o":2.48},
-{"s":"football","m":"Falkenberg x Helsingborg","k":"Falkenberg","o":1.89}
+{"s":"football","m":"Fenerbahce x Gornik Zabrze","k":"Fenerbahce","o":1.18},
+{"s":"football","m":"Sturm Graz x Hearts","k":"Sturm Graz","o":1.67},
+{"s":"football","m":"IFK Goteborg x Levadia Tallinn","k":"IFK Goteborg","o":1.45},
+{"s":"football","m":"Iberia 1999 x Slovan Bratislava","k":"Slovan Bratislava","o":1.88},
+{"s":"football","m":"FC Thun x Dinamo Zagreb","k":"Dinamo Zagreb","o":1.93},
+{"s":"football","m":"Atert Bissen x Gyori ETO","k":"Gyori ETO","o":1.57},
+{"s":"football","m":"Sabah Baku x Kuopio PS","k":"Sabah Baku","o":1.63},
+{"s":"football","m":"AGF Aarhus x Lech Poznan","k":"AGF Aarhus","o":2.07},
+{"s":"football","m":"Floriana x KF Drita","k":"KF Drita","o":1.97},
+{"s":"football","m":"Mjallby x Lincoln Red Imps","k":"Mjallby","o":1.15},
+{"s":"tennis","m":"Marco Trungelliti x Juan Manuel Cerundolo","k":"Juan Manuel Cerundolo","o":1.34},
+{"s":"tennis","m":"Tiago Pereira x Gonzalo Bueno","k":"Gonzalo Bueno","o":1.30}
 ]

@@ -1,100 +1,104 @@
-/* BetLife365 daily bets - bets-desk task. Slate: 20-07-2026, first Monday after the World Cup final. Thin post-tournament club board. All odds read from Oddspedia's rendered ODDS boards (Unibet column) on 20 Jul: Allsvenskan R13 (Kalmar x Malmo 2.65/3.65/2.30, DC X2 1.40, BTTS Yes 1.48; Orgryte x Djurgardens 8.50/5.40/1.27, DC X2 1.05, BTTS Yes 1.63), Veikkausliiga (Turku PS x Ilves 2.55/3.55/2.43, DC X2 1.43, BTTS Yes 1.52; IFK Mariehamn x FC Lahti 5.40/3.95/1.53, DC X2 1.11), Iceland Premier R15 (Hafnarfjordur x Breidablik 2.88/3.80/1.98, DC X2 1.29; Keflavik x IA Akranes 2.35/3.55/2.43, DC 1X 1.41), Latvia Higher League R23 (Jelgava x Rigas Futbola Skola 9.00/5.25/1.23), Superettan R15 (Norrby x Sundsvall 1.91/3.45/3.65) and Ecuador Primera A R20 (Mushuc Runa x Orense 2.00/3.35/3.40). Legs under 1.15 excluded (Djurgardens DC 1.05, Lahti DC 1.11). No quarter lines anywhere. DECORRELATION: today's Jackpot shares no team and no fixture with Safe or Value, so all three builders are fully decorrelated. Counter continued from #36 (19-07-2026) -> #37/#38/#39. Free Bet rotation: previous run logged n=3, so today n=4 -> type = Safe; available sports today = [Football, Tennis], 4 % 2 = 0 -> Football; the Free Bet is a 1-on-1 copy of today's football Safe Builder. Next rotation n=5. LUCKY SHOT: cross-sport, 14 legs, 241.36. Football legs priced from the Oddspedia boards above; tennis legs taken from today's tennis desk card as logged in the Notion Track Record for 20-07-2026 (Van Assche 1.21, Podoroska 1.26, Buse 1.52, Ruzic 1.76, Rocha 1.78), because the deployed bets-tennis.js on main still carried the 19-07 card at build time. NBA, NFL and NHL are out of season, so the spread is football plus tennis. No leg above 2.00, one selection per match, no padding. */
-window.DAILY_VERSION = "2026-07-20";
-window.DAILY_MESSAGES = `**🟢 #37 Safe Builder Parley (⚽ Football): 20-07-2026**
+/* BetLife365 daily bets - bets-desk task. Slate: 21-07-2026, a packed Champions League + Europa Conference League second qualifying round Tuesday. All odds read live from Oddspedia's rendered ODDS boards (Unibet column, Europe/Amsterdam timezone) on 21 Jul: Champions League Q2 (Ararat Armenia x Shamrock Rovers 2.18/3.30/3.05, Mjallby x Lincoln Red Imps 1.15/7.50/15.00, Sabah Baku x Kuopio PS 1.63/3.95/4.60, Iberia 1999 x Slovan Bratislava 3.75/3.55/1.88, AGF Aarhus x Lech Poznan 2.07/3.10/3.60, FC Thun x Dinamo Zagreb 3.55/3.60/1.93, Fenerbahce x Gornik Zabrze 1.18/6.75/12.50, Sturm Graz x Hearts 1.67/3.80/4.60, KI Klaksvik x Kauno Zalgiris 2.28/3.10/3.10, Larne FC x Red Star Belgrade 16.00/8.00/1.12, Vikingur Reykjavik x Hapoel Beer Sheva 2.45/3.35/2.65) and Europa Conference League Q2 (IFK Goteborg x Levadia Tallinn 1.45/4.50/6.00, Floriana x KF Drita 3.45/3.55/1.97, Atert Bissen x Gyori ETO 5.25/3.95/1.57). Sabah Baku x FK Vardar Skopje was cancelled, no odds. Cross-checked Mjallby (1.15) and Fenerbahce (1.18) against Oddspedia's multi-bookmaker odds-movement panel: both sit inside a tight 1.13-1.24 consensus band across three tracked books, confirming the Unibet price isn't an outlier. Larne x Red Star (away 1.12) and KI Klaksvik x Kauno Zalgiris (no clean favourite, 2.28/3.10/3.10) excluded: the former breaches the 1.15 minimum-odds floor, the latter isn't a genuine favourite. No quarter lines anywhere. DECORRELATION: Safe (Fenerbahce, Sturm Graz, IFK Goteborg), Value (Slovan Bratislava, Dinamo Zagreb, Gyori ETO) and Jackpot (Sabah Baku, AGF Aarhus, KF Drita, Mjallby) share no team and no fixture across all three builders. Counter: live bets.js was last built 20-07-2026 ending at #39 (betcounter.txt was stale at 36, so the live file's high-water mark wins per the numbering rule); today continues #40/#41/#42. Free Bet rotation: freebet_rotation.txt held n=5, so today n=5 -> type = ['Safe','Value','Jackpot','Lucky'][5%4] = Value; sports with a slate today = [Football, Tennis] (NBA/NFL/NHL confirmed out of season, empty arrays on main), sport = [Football,Tennis][5%2] = Tennis -> the Free Bet is a 1-on-1 copy of today's TENNIS Value Builder (#T51, read live from bets-tennis.js). Next rotation n=6. LUCKY SHOT: cross-sport, 14 legs (9 football + 5 tennis), all favourites 1.15-1.97, one selection per match, total 273.01. Tennis legs taken directly from today's live bets-tennis.js card (Bueno 1.30, Cerundolo 1.34, Bartunkova 1.34, Carreno Busta 1.38, Korpatsch 1.41), which already carries today's 21-07-2026 date, so no staleness issue. NBA, NFL and NHL stay out of season, so the cross-sport spread is football plus tennis only. */
+window.DAILY_VERSION = "2026-07-21";
+window.DAILY_MESSAGES = `**🟢 #40 Safe Builder Parley (⚽ Football): 21-07-2026**
 
-**:small_orange_diamond: Orgryte IS x Djurgardens IF**
-Djurgardens IF to win (match result) @ 1.27
-↳ Djurgardens are a top-half Allsvenskan side away at newly promoted Orgryte, and at 1.27 they are the shortest genuine price on the whole European board today.
+**:small_orange_diamond: Fenerbahce x Gornik Zabrze**
+Fenerbahce to win (match result) @ 1.18
+↳ Fenerbahce host a mid-table Polish side in the second qualifying round, and the market rates the Turkish giants as the shortest-priced favourite on today's entire board.
 
-**:small_orange_diamond: IFK Mariehamn x FC Lahti**
-FC Lahti to win (match result) @ 1.53
-↳ Lahti travel to the Aland islands as clear favourites against an IFK Mariehamn side priced at 5.40 to win at home.
+**:small_orange_diamond: Sturm Graz x Hearts**
+Sturm Graz to win (match result) @ 1.67
+↳ The reigning Austrian champions are at home in the second qualifying round against a Hearts side still building match fitness this early in the summer.
 
-**:small_orange_diamond: Hafnarfjordur x Breidablik**
-Breidablik draw or win (double chance) @ 1.29
-↳ Breidablik are the away favourite at 1.98 in the Icelandic top flight; taking the double chance removes the draw risk on a ground where results are often tight.
+**:small_orange_diamond: IFK Goteborg x Levadia Tallinn**
+IFK Goteborg to win (match result) @ 1.45
+↳ Goteborg are the clear home favourites in the Conference League qualifier, priced well clear of an Estonian visitor with a much smaller European pedigree.
 
-**:moneybag: Total odds: ±2.51**
+**:moneybag: Total odds: ±2.86**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-The first Monday after the World Cup final leaves a short club board, so the Safe tier takes the three clearest favourites available, each from a different match across Sweden, Finland and Iceland. Two straight match results plus one double chance to soften the only fixture where the price is not short. Nothing speculative.
+A packed Champions League and Conference League qualifying round gives us a full continental board today, so the Safe tier sticks to the three shortest genuine home favourites, each from a different match and a different competition. Straight match results only, nothing built on a protected draw.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #38 Value Builder Parley (⚽ Football): 20-07-2026**
+**🟡 #41 Value Builder Parley (⚽ Football): 21-07-2026**
 
-**:small_orange_diamond: Kalmar x Malmo**
-Malmo to win (match result) @ 2.30
-↳ Malmo are the away favourite at Kalmar and the strongest squad in the division; the price reflects the venue rather than the gap in quality.
+**:small_orange_diamond: Iberia 1999 x Slovan Bratislava**
+Slovan Bratislava to win (match result) @ 1.88
+↳ The Slovak champions travel to Georgia as clear favourites over a home side with far less continental experience.
 
-**:small_orange_diamond: Turku PS x Ilves**
-Ilves draw or win (double chance) @ 1.43
-↳ Ilves are marginally favoured on the road in a tight Veikkausliiga fixture, so the double chance is the disciplined way to back them.
+**:small_orange_diamond: FC Thun x Dinamo Zagreb**
+Dinamo Zagreb to win (match result) @ 1.93
+↳ Dinamo arrive in Switzerland as the away favourites, the price built around their squad depth against a solid but considerably smaller Thun side.
 
-**:moneybag: Total odds: ±3.29**
+**:small_orange_diamond: Atert Bissen x Gyori ETO**
+Gyori ETO to win (match result) @ 1.57
+↳ The Hungarian side travel to Luxembourg as clear favourites against a part-time Bissen team making a rare European appearance.
+
+**:moneybag: Total odds: ±5.70**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Two clean picks from two matches that appear nowhere in the Safe ticket. The step up in return comes from pairing Malmo's away price with a protected Ilves position, not from reaching for longer odds. On a short board a tight two-leg build is the honest way to land in the Value band.
+Three away favourites from three matches that appear nowhere in the Safe ticket, each individually priced in the 1.5-2.0 range. Stacking three of those rather than reaching for one longer price is the disciplined way to land in the Value band today.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #39 Jackpot Builder Parley (⚽ Football): 20-07-2026**
+**🔴 #42 Jackpot Builder Parley (⚽ Football): 21-07-2026**
 
-**:small_orange_diamond: Jelgava x Rigas Futbola Skola**
-Rigas Futbola Skola to win (match result) @ 1.23
-↳ The Latvian champions away at Jelgava, who are priced at 9.00 to win at home. The clearest mismatch on the board today.
+**:small_orange_diamond: Sabah Baku x Kuopio PS**
+Sabah Baku to win (match result) @ 1.63
+↳ Sabah are the home favourites in Baku against a Finnish side with no deep run in European qualifying to point to.
 
-**:small_orange_diamond: Keflavik x IA Akranes**
-Keflavik draw or win (double chance) @ 1.41
-↳ Keflavik are the narrow home favourite in a close Icelandic fixture, so the double chance keeps a genuinely likely outcome in the ticket.
+**:small_orange_diamond: AGF Aarhus x Lech Poznan**
+AGF Aarhus to win (match result) @ 2.07
+↳ AGF are the home favourites in the first qualifying leg, the price built around home advantage in Denmark.
 
-**:small_orange_diamond: Norrby x Sundsvall**
-Norrby to win (match result) @ 1.91
-↳ Norrby are a clear home favourite in the Superettan, with Sundsvall out at 3.65 on the road.
+**:small_orange_diamond: Floriana x KF Drita**
+KF Drita to win (match result) @ 1.97
+↳ Drita travel to Malta as the market's pick, priced as clear away favourites in this Conference League qualifier.
 
-**:small_orange_diamond: Mushuc Runa x Orense SC**
-Mushuc Runa to win (match result) @ 2.00
-↳ Mushuc Runa are the market favourite at home in Ecuador's Primera A against an Orense side priced at 3.40.
+**:small_orange_diamond: Mjallby x Lincoln Red Imps**
+Mjallby to win (match result) @ 1.15
+↳ Mjallby host a Gibraltarian part-time side, and at 1.15 this is the single shortest genuine price anywhere on today's board.
 
-**:moneybag: Total odds: ±6.63**
+**:moneybag: Total odds: ±7.64**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four market favourites from four fixtures that appear in neither the Safe nor the Value ticket, so today's Jackpot is fully decorrelated: no team and no match is shared with the other builders. The 6.63 comes from stacking four genuinely likely outcomes, never from adding a longshot to inflate the price. We do not chase odds; we stack good picks.
+Four market favourites from four fixtures that appear in neither the Safe nor the Value ticket, so today's Jackpot is fully decorrelated from the other two builders. The 7.64 comes purely from stacking four genuinely likely outcomes, including the shortest price on the board, never from reaching for a longshot to inflate the number.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 20-07-2026**
-⚽ Sport of the day: Football
+**:gift: FREE BET OF THE DAY | 21-07-2026**
+🎾 Sport of the day: Tennis
 
-**:small_orange_diamond: Orgryte IS x Djurgardens IF**
-Djurgardens IF to win (match result) @ 1.27
-↳ Djurgardens are a top-half Allsvenskan side away at newly promoted Orgryte, and at 1.27 they are the shortest genuine price on the whole European board today.
+**:small_orange_diamond: Quentin Halys x Laslo Djere**
+Laslo Djere to win (match winner) @ 1.64
+↳ Djere has more clay court pedigree and a higher ranking than Halys in Kitzbuhel.
 
-**:small_orange_diamond: IFK Mariehamn x FC Lahti**
-FC Lahti to win (match result) @ 1.53
-↳ Lahti travel to the Aland islands as clear favourites against an IFK Mariehamn side priced at 5.40 to win at home.
+**:small_orange_diamond: Jesper De Jong x Jan Choinski**
+Jesper De Jong to win (match winner) @ 1.73
+↳ De Jong is the market favourite over Choinski in Estoril.
 
-**:small_orange_diamond: Hafnarfjordur x Breidablik**
-Breidablik draw or win (double chance) @ 1.29
-↳ Breidablik are the away favourite at 1.98 in the Icelandic top flight; taking the double chance removes the draw risk on a ground where results are often tight.
+**:small_orange_diamond: Maya Joint x Laura Samson**
+Maya Joint to win (match winner) @ 1.61
+↳ Joint is the in-form, higher ranked player against Samson in Prague.
 
-**:moneybag: Total odds: ±2.51**
+**:moneybag: Total odds: ±4.57**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three of the clearest favourites on a short post World Cup Monday board, each from a different match across Sweden, Finland and Iceland. Two straight match results plus one double chance on the only fixture where the price is not short.
+Three narrow favourites from three separate matches on today's tennis card. Djere, De Jong and Joint are each the shorter-priced side in their match, without reaching into a single speculative underdog price.
 
 ━━━━━━━━━━━━
-:green_circle: This is our **Safe Builder** of the day; the shortest genuine favourites on the board, built for consistency rather than for a big number.
+:green_circle: This is our **Value Builder** of the day; a step up in return built from protected favourites, not from chasing longer odds.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -102,153 +106,164 @@ Three of the clearest favourites on a short post World Cup Monday board, each fr
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 20-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 21-07-2026** ⚽🎾
 
-**:small_orange_diamond: Jelgava x Rigas Futbola Skola**
-Rigas Futbola Skola to win @ 1.23
-↳ The Latvian champions away at a side priced 9.00 at home.
+**:small_orange_diamond: Mjallby x Lincoln Red Imps**
+Mjallby to win @ 1.15
+↳ The shortest genuine price on the whole board today.
 
-**:small_orange_diamond: Orgryte IS x Djurgardens IF**
-Djurgardens IF to win @ 1.27
-↳ The shortest genuine price on the European football board today.
+**:small_orange_diamond: Fenerbahce x Gornik Zabrze**
+Fenerbahce to win @ 1.18
+↳ Turkish giants at home to a mid-table Polish visitor.
 
-**:small_orange_diamond: Hafnarfjordur x Breidablik**
-Breidablik draw or win @ 1.29
-↳ The away favourite, protected against the draw.
+**:small_orange_diamond: IFK Goteborg x Levadia Tallinn**
+IFK Goteborg to win @ 1.45
+↳ Clear home favourites against a much smaller Estonian side.
 
-**:small_orange_diamond: Kalmar x Malmo**
-Malmo draw or win @ 1.40
-↳ The division's strongest squad, protected on the road.
+**:small_orange_diamond: Atert Bissen x Gyori ETO**
+Gyori ETO to win @ 1.57
+↳ The Hungarian visitors are clear favourites in Luxembourg.
 
-**:small_orange_diamond: Keflavik x IA Akranes**
-Keflavik draw or win @ 1.41
-↳ The narrow home favourite in a tight Icelandic fixture.
+**:small_orange_diamond: Sabah Baku x Kuopio PS**
+Sabah Baku to win @ 1.63
+↳ Home favourites in Baku against a Finnish side.
 
-**:small_orange_diamond: Turku PS x Ilves**
-Ilves draw or win @ 1.43
-↳ Marginally favoured on the road, taken with the draw covered.
+**:small_orange_diamond: Sturm Graz x Hearts**
+Sturm Graz to win @ 1.67
+↳ The reigning Austrian champions at home in round two.
 
-**:small_orange_diamond: IFK Mariehamn x FC Lahti**
-FC Lahti to win @ 1.53
-↳ Clear away favourites against a 5.40 home side.
+**:small_orange_diamond: Iberia 1999 x Slovan Bratislava**
+Slovan Bratislava to win @ 1.88
+↳ The Slovak champions, clear favourites on the road.
 
-**:small_orange_diamond: Norrby x Sundsvall**
-Norrby to win @ 1.91
-↳ Clear home favourite in the Superettan.
+**:small_orange_diamond: FC Thun x Dinamo Zagreb**
+Dinamo Zagreb to win @ 1.93
+↳ Away favourites on squad depth alone.
 
-**:small_orange_diamond: Mushuc Runa x Orense SC**
-Mushuc Runa to win @ 2.00
-↳ Market favourite at home in Ecuador's Primera A.
+**:small_orange_diamond: Floriana x KF Drita**
+KF Drita to win @ 1.97
+↳ The market's pick as away favourites in Malta.
 
-**:small_orange_diamond: Frederico Ferreira Silva x Luca Van Assche**
-Luca Van Assche to win @ 1.21
-↳ The shortest tennis price on today's card, in Estoril.
+**:small_orange_diamond: Tiago Pereira x Gonzalo Bueno**
+Gonzalo Bueno to win @ 1.30
+↳ The clear market favourite over wildcard Pereira in Estoril.
 
-**:small_orange_diamond: Nadia Podoroska x Julia Stusek**
-Nadia Podoroska to win @ 1.26
-↳ Clear ranking edge and a short market price.
+**:small_orange_diamond: Marco Trungelliti x Juan Manuel Cerundolo**
+Juan Manuel Cerundolo to win @ 1.34
+↳ Well clear of Trungelliti in the rankings, in Kitzbuhel.
 
-**:small_orange_diamond: Vit Kopriva x Ignacio Buse**
-Ignacio Buse to win @ 1.52
-↳ Market favourite in the Kitzbuhel first round.
+**:small_orange_diamond: Yue Yuan x Nikola Bartunkova**
+Nikola Bartunkova to win @ 1.34
+↳ The higher ranked, more experienced player in Prague.
 
-**:small_orange_diamond: Antonia Ruzic x Dominika Salkova**
-Antonia Ruzic to win @ 1.76
-↳ Favoured on the WTA board in a close but one-way matchup.
+**:small_orange_diamond: Vilius Gaubas x Pablo Carreno Busta**
+Pablo Carreno Busta to win @ 1.38
+↳ A former top-10 player and a big class favourite in Estoril.
 
-**:small_orange_diamond: Henrique Rocha x Pedro Martinez Portero**
-Henrique Rocha to win @ 1.78
-↳ Home favourite in Estoril and the market's side.
+**:small_orange_diamond: Victoria Jimenez Kasintseva x Tamara Korpatsch**
+Tamara Korpatsch to win @ 1.41
+↳ Clearly the stronger, more experienced player in Hamburg.
 
-**:moneybag: Total odds: ±241.36**
+**:moneybag: Total odds: ±273.01**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Fourteen market favourites stacked across two sports: nine from today's football across Latvia, Sweden, Finland, Iceland and Ecuador, and five from today's ATP and WTA cards in Estoril and Kitzbuhel. One selection per match, every leg a different fixture, no longshot anywhere and no price above 2.00. NBA, NFL and NHL are out of season, so the cross-sport spread is football plus tennis today. The tennis quotes are the ones our own tennis desk verified for today's card. The 241.36 comes purely from the depth of the stack of genuine favourites, never from padding with a longshot to manufacture the number.
+Fourteen market favourites stacked across two sports: nine from today's packed Champions League and Conference League qualifying round, and five from today's ATP and WTA cards in Kitzbuhel, Estoril, Prague and Hamburg. One selection per match, every leg a different fixture, no leg below 1.15 and nothing above 1.97. NBA, NFL and NHL are out of season, so the cross-sport spread is football plus tennis today. The 273.01 comes purely from the depth of the stack of genuine favourites, never from padding with a longshot to manufacture the number.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
-window.DAILY_CARDS = `MATCH: Orgryte IS x Djurgardens IF
+window.DAILY_CARDS = `MATCH: Fenerbahce x Gornik Zabrze
 MARKET: Match Result
-SELECTION: Djurgardens IF to win
-ODDS: 1.27
+SELECTION: Fenerbahce to win
+ODDS: 1.18
 STAKE: 2u
 RISK: low
-ANALYSIS: Top-half Allsvenskan side away at newly promoted Orgryte; the shortest genuine price on the European board today.
+ANALYSIS: Turkish giants hosting a mid-table Polish side; the shortest-priced favourite on today's board.
 ===
-MATCH: IFK Mariehamn x FC Lahti
+MATCH: Sturm Graz x Hearts
 MARKET: Match Result
-SELECTION: FC Lahti to win
-ODDS: 1.53
+SELECTION: Sturm Graz to win
+ODDS: 1.67
 STAKE: 2u
 RISK: low
-ANALYSIS: Lahti are clear favourites on the Aland islands against a home side priced 5.40.
+ANALYSIS: Reigning Austrian champions at home in the second qualifying round.
 ===
-MATCH: Hafnarfjordur x Breidablik
-MARKET: Double Chance
-SELECTION: Breidablik draw or win
-ODDS: 1.29
+MATCH: IFK Goteborg x Levadia Tallinn
+MARKET: Match Result
+SELECTION: IFK Goteborg to win
+ODDS: 1.45
 STAKE: 2u
 RISK: low
-ANALYSIS: Breidablik are the 1.98 away favourite; the double chance removes the draw risk.
+ANALYSIS: Clear home favourites against a much smaller Estonian visitor.
 ===
-MATCH: Kalmar x Malmo
+MATCH: Iberia 1999 x Slovan Bratislava
 MARKET: Match Result
-SELECTION: Malmo to win
-ODDS: 2.30
+SELECTION: Slovan Bratislava to win
+ODDS: 1.88
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: The strongest squad in the division away at Kalmar; the price reflects the venue rather than the gap in quality.
+ANALYSIS: Slovak champions travelling to Georgia as clear favourites.
 ===
-MATCH: Turku PS x Ilves
-MARKET: Double Chance
-SELECTION: Ilves draw or win
-ODDS: 1.43
+MATCH: FC Thun x Dinamo Zagreb
+MARKET: Match Result
+SELECTION: Dinamo Zagreb to win
+ODDS: 1.93
 STAKE: 0.75u
-RISK: low
-ANALYSIS: Marginally favoured on the road in a tight Veikkausliiga fixture; the draw is covered.
+RISK: medium
+ANALYSIS: Away favourites in Switzerland on squad depth.
 ===
-MATCH: Jelgava x Rigas Futbola Skola
+MATCH: Atert Bissen x Gyori ETO
 MARKET: Match Result
-SELECTION: Rigas Futbola Skola to win
-ODDS: 1.23
-STAKE: 0.25u
-RISK: low
-ANALYSIS: The Latvian champions away at a Jelgava side priced 9.00 to win at home.
+SELECTION: Gyori ETO to win
+ODDS: 1.57
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Hungarian side clear favourites away at part-time Bissen.
 ===
-MATCH: Keflavik x IA Akranes
-MARKET: Double Chance
-SELECTION: Keflavik draw or win
-ODDS: 1.41
-STAKE: 0.25u
-RISK: low
-ANALYSIS: Narrow home favourite in a close Icelandic fixture, taken with the draw covered.
-===
-MATCH: Norrby x Sundsvall
+MATCH: Sabah Baku x Kuopio PS
 MARKET: Match Result
-SELECTION: Norrby to win
-ODDS: 1.91
+SELECTION: Sabah Baku to win
+ODDS: 1.63
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Clear home favourite in the Superettan with Sundsvall out at 3.65 on the road.
+ANALYSIS: Home favourites in Baku against a Finnish side.
 ===
-MATCH: Mushuc Runa x Orense SC
+MATCH: AGF Aarhus x Lech Poznan
 MARKET: Match Result
-SELECTION: Mushuc Runa to win
-ODDS: 2.00
+SELECTION: AGF Aarhus to win
+ODDS: 2.07
 STAKE: 0.25u
 RISK: medium
-ANALYSIS: Market favourite at home in Ecuador's Primera A against an Orense side priced 3.40.`;
-window.DAILY_CHALLENGE = {"date":"2026-07-20","legs":["Kalmar x Malmo: Malmo draw or win (double chance) @ 1.40","IFK Mariehamn x FC Lahti: FC Lahti to win @ 1.53"],"oddLow":2.10,"oddHigh":2.18,"justification":"The two safest positions on the board from two different matches, both kicking off within an hour of each other tonight. Malmo are the strongest squad in the Allsvenskan and are taken with the draw covered, while Lahti are clear away favourites against a home side priced 5.40. The x2 lands at 2.14, right inside the target band, without touching a single speculative market."};
+ANALYSIS: Home favourites in the first qualifying leg in Denmark.
+===
+MATCH: Floriana x KF Drita
+MARKET: Match Result
+SELECTION: KF Drita to win
+ODDS: 1.97
+STAKE: 0.25u
+RISK: medium
+ANALYSIS: Market's pick as away favourites in Malta.
+===
+MATCH: Mjallby x Lincoln Red Imps
+MARKET: Match Result
+SELECTION: Mjallby to win
+ODDS: 1.15
+STAKE: 0.25u
+RISK: low
+ANALYSIS: Hosting a Gibraltarian part-time side; the shortest genuine price on the board.`;
+window.DAILY_CHALLENGE = {"date":"2026-07-21","legs":["Fenerbahce x Gornik Zabrze: Fenerbahce to win @ 1.18","Iberia 1999 x Slovan Bratislava: Slovan Bratislava to win @ 1.88"],"oddLow":2.15,"oddHigh":2.25,"justification":"The two shortest genuine favourites on the board from two different matches, both kicking off within two hours of each other tonight. Fenerbahce are the shortest price anywhere today, while Slovan Bratislava travel to Georgia as clear favourites over Iberia 1999. The combination lands at 2.22, right inside the target band, without touching a single speculative market."};
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 window.FOOTBALL_EVENTS = [
-{ match: "Jelgava x Rigas Futbola Skola", date: "2026-07-20", time: "17:00", comp: "Higher League", stage: "Round 23", venue: "Jelgava", pick: "Rigas Futbola Skola to win", tier: "Jackpot Builder" },
-{ match: "Turku PS x Ilves", date: "2026-07-20", time: "17:00", comp: "Veikkausliiga", stage: "Round 16", venue: "Turku", pick: "Ilves draw or win", tier: "Value Builder" },
-{ match: "IFK Mariehamn x FC Lahti", date: "2026-07-20", time: "18:00", comp: "Veikkausliiga", stage: "Round 16", venue: "Mariehamn", pick: "FC Lahti to win", tier: "Safe Builder" },
-{ match: "Kalmar x Malmo", date: "2026-07-20", time: "19:00", comp: "Allsvenskan", stage: "Round 13", venue: "Kalmar", pick: "Malmo to win", tier: "Value Builder" },
-{ match: "Orgryte IS x Djurgardens IF", date: "2026-07-20", time: "19:00", comp: "Allsvenskan", stage: "Round 13", venue: "Gothenburg", pick: "Djurgardens IF to win", tier: "Safe Builder" },
-{ match: "Norrby x Sundsvall", date: "2026-07-20", time: "19:00", comp: "Superettan", stage: "Round 15", venue: "Boras", pick: "Norrby to win", tier: "Jackpot Builder" },
-{ match: "Mushuc Runa x Orense SC", date: "2026-07-20", time: "21:00", comp: "Primera A", stage: "Round 20", venue: "Ambato", pick: "Mushuc Runa to win", tier: "Jackpot Builder" },
-{ match: "Hafnarfjordur x Breidablik", date: "2026-07-20", time: "21:15", comp: "Premier League", stage: "Round 15", venue: "Hafnarfjordur", pick: "Breidablik draw or win", tier: "Safe Builder" },
-{ match: "Keflavik x IA Akranes", date: "2026-07-20", time: "21:15", comp: "Premier League", stage: "Round 15", venue: "Keflavik", pick: "Keflavik draw or win", tier: "Jackpot Builder" }
+{ match: "Fenerbahce x Gornik Zabrze", date: "2026-07-21", time: "20:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Istanbul", pick: "Fenerbahce to win", tier: "Safe Builder" },
+{ match: "Sturm Graz x Hearts", date: "2026-07-21", time: "20:30", comp: "Champions League", stage: "Qualification Round 2", venue: "Graz", pick: "Sturm Graz to win", tier: "Safe Builder" },
+{ match: "IFK Goteborg x Levadia Tallinn", date: "2026-07-21", time: "19:00", comp: "Europa Conference League", stage: "Qualification Round 2", venue: "Gothenburg", pick: "IFK Goteborg to win", tier: "Safe Builder" },
+{ match: "Iberia 1999 x Slovan Bratislava", date: "2026-07-21", time: "18:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Tbilisi", pick: "Slovan Bratislava to win", tier: "Value Builder" },
+{ match: "FC Thun x Dinamo Zagreb", date: "2026-07-21", time: "20:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Thun", pick: "Dinamo Zagreb to win", tier: "Value Builder" },
+{ match: "Atert Bissen x Gyori ETO", date: "2026-07-21", time: "20:15", comp: "Europa Conference League", stage: "Qualification Round 2", venue: "Bissen", pick: "Gyori ETO to win", tier: "Value Builder" },
+{ match: "Sabah Baku x Kuopio PS", date: "2026-07-21", time: "18:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Baku", pick: "Sabah Baku to win", tier: "Jackpot Builder" },
+{ match: "AGF Aarhus x Lech Poznan", date: "2026-07-21", time: "19:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Aarhus", pick: "AGF Aarhus to win", tier: "Jackpot Builder" },
+{ match: "Floriana x KF Drita", date: "2026-07-21", time: "19:30", comp: "Europa Conference League", stage: "Qualification Round 2", venue: "Floriana", pick: "KF Drita to win", tier: "Jackpot Builder" },
+{ match: "Mjallby x Lincoln Red Imps", date: "2026-07-21", time: "18:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Solvesborg", pick: "Mjallby to win", tier: "Jackpot Builder" },
+{ match: "Ararat Armenia x Shamrock Rovers", date: "2026-07-21", time: "18:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Yerevan", pick: "-", tier: "-" },
+{ match: "Vikingur Reykjavik x Hapoel Beer Sheva", date: "2026-07-21", time: "21:00", comp: "Champions League", stage: "Qualification Round 2", venue: "Reykjavik", pick: "-", tier: "-" }
 ];
