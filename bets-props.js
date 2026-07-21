@@ -1,113 +1,120 @@
-/* BetLife365 Daily Prop Cards - 20-07-2026. DATA ONLY: geen UI-patch in dit bestand, die wordt apart door index.html geladen. Uitsluitend bet365 NL-markten. */
-window.DAILY_PROPS_VERSION = "2026-07-20";
-
+/* BetLife365 Daily Prop Cards - 21-07-2026. DATA ONLY, geen UI-patch aangeplakt (de dashboard UI-patch laadt apart via index.html). Alleen bet365 NL-markten; geen match-winners, geen player serve- of shot-statistiek-props. Drukke Europese midweek: UEFA Champions League en Conference League 1e kwalificatierondes plus ATP Kitzbuhel/Estoril en WTA Prague/Hamburg eerste ronde. Allsvenskan/Veikkausliiga/Superettan spelen vandaag niet. NBA/NFL/NHL buiten seizoen. */
+window.DAILY_PROPS_VERSION = "2026-07-21";
 window.DAILY_PROPS = `SPORT: Football
-MATCH: Mushuc Runa x Orense SC
-MARKET: Total goals
-SELECTION: Under 3.5 goals
-ODDS: 1.30
-STAKE: 1u
+MATCH: Mjallby AIF x Lincoln Red Imps
+MARKET: Team Total Goals
+SELECTION: Mjallby AIF Over 2.5 team goals
+ODDS: 1.45*
+STAKE: 2u
 RISK: low
-ANALYSIS: Two cautious mid-table sides in the Ecuadorian Primera A; this fixture has repeatedly landed under the total.
+ANALYSIS: Champions League kwalificatie 1e leg, Mjallby thuis geprijsd als enorme favoriet tegen het semi-prof Lincoln Red Imps uit Gibraltar. Het klasseverschil is groot genoeg voor een ruime thuisscore.
 ===
 SPORT: Football
-MATCH: Grindavik Women x Throttur Women
-MARKET: Total goals
+MATCH: Fenerbahce x Gornik Zabrze
+MARKET: Team Total Goals
+SELECTION: Fenerbahce Over 1.5 team goals
+ODDS: 1.35*
+STAKE: 2u
+RISK: low
+ANALYSIS: Champions League kwalificatie in Istanboel, Fenerbahce staat fors favoriet thuis tegen het Poolse Gornik Zabrze. Klasse plus thuispubliek moeten voor een vroege voorsprong zorgen.
+===
+SPORT: Football
+MATCH: Larne x Red Star Belgrade
+MARKET: Team Total Goals
+SELECTION: Red Star Belgrade Over 1.5 team goals
+ODDS: 1.40*
+STAKE: 2u
+RISK: low
+ANALYSIS: Red Star is torenhoog favoriet als uitploeg bij het Noord-Ierse amateurteam Larne in de Champions League kwalificatie. De Servische kampioen zou het spel moeten controleren en vrij te scoren staan.
+===
+SPORT: Football
+MATCH: Sabah FK x KuPS Kuopio
+MARKET: Total Goals
 SELECTION: Over 2.5 goals
-ODDS: 1.53
-STAKE: 1u
-RISK: low
-ANALYSIS: The Icelandic women's Premier League is one of the highest scoring leagues in Europe and both defences are leaky.
-===
-SPORT: Football
-MATCH: FK Suduva Marijampole x Hegelmann Litauen
-MARKET: Total goals
-SELECTION: Under 2.5 goals
-ODDS: 1.80
-STAKE: 1u
-RISK: medium
-ANALYSIS: Suduva control games rather than blow teams away, and Hegelmann sit deep on the road.
-===
-SPORT: Football
-MATCH: Norrby x Sundsvall
-MARKET: Total goals
-SELECTION: Over 2.5 goals
-ODDS: 1.81
-STAKE: 1u
-RISK: medium
-ANALYSIS: Two open Superettan sides who both need points; neither keeps many clean sheets.
-===
-SPORT: Football
-MATCH: IFK Mariehamn x FC Lahti
-MARKET: Total goals
-SELECTION: Under 2.5 goals
-ODDS: 2.00
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Mariehamn are one of the lowest scoring teams in the Veikkausliiga and Lahti are happy to win narrowly.
-===
-SPORT: Football
-MATCH: KPV Kokkola x Rovaniemi PS
-MARKET: Total goals
-SELECTION: Under 3.5 goals
-ODDS: 1.97
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: An opening round Ykkonen fixture where both sides tend to start conservatively.
-===
-SPORT: Football
-MATCH: Slavia x CSKA
-MARKET: Total goals
-SELECTION: Under 1.5 goals
-ODDS: 3.75
-STAKE: 0.25u
-RISK: high
-ANALYSIS: A tight opening day Sofia derby between two defensively organised sides; a genuine low scoring candidate at a big price.
-===
-SPORT: Tennis
-MATCH: Frederico Ferreira Silva x Luca Van Assche
-MARKET: Set betting
-SELECTION: Luca Van Assche 2-0 in straight sets
-ODDS: 1.70*
-STAKE: 1u
-RISK: low
-ANALYSIS: Van Assche is a clear level above a home wildcard on clay and should not need a third set.
-===
-SPORT: Tennis
-MATCH: Nadia Podoroska x Julia Stusek
-MARKET: Set betting
-SELECTION: Nadia Podoroska 2-0 in straight sets
-ODDS: 1.95*
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Podoroska's tour experience against a young Stusek points to a straight sets win rather than a long battle.
-===
-SPORT: Tennis
-MATCH: Vit Kopriva x Ignacio Buse
-MARKET: Total games
-SELECTION: Over 21.5 total games
 ODDS: 1.85*
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Two grinders on slow Kitzbuhel clay; long service games and few quick breaks point to a high game count.
+ANALYSIS: Champions League kwalificatie tussen twee aanvallend ingestelde ploegen; Sabah is een gematigde thuisfavoriet en geen van beide teams zal zich in een knock-outduel diep terugtrekken.
 ===
-SPORT: Tennis
-MATCH: Henrique Rocha x Pedro Martinez Portero
-MARKET: Total games
-SELECTION: Over 21.5 total games
-ODDS: 1.80*
-STAKE: 0.5u
+SPORT: Football
+MATCH: IFK Goteborg x FC Levadia Tallinn
+MARKET: Handicap
+SELECTION: IFK Goteborg -1 handicap
+ODDS: 2.05*
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: The market rates this close to a coin flip, and close clay matches between counterpunchers run long.
+ANALYSIS: Conference League kwalificatie, Goteborg is fors favoriet thuis tegen Estisch kampioen Levadia. Een overwinning met twee doelpunten verschil ligt binnen bereik van de Zweedse ploeg.
+===
+SPORT: Football
+MATCH: FC Thun x Dinamo Zagreb
+MARKET: Both Teams To Score
+SELECTION: Yes
+ODDS: 1.70*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Champions League kwalificatie tussen twee aanvallend sterke ploegen met een vrijwel gelijke markt; zowel Thun als Zagreb scoren doorgaans regelmatig in binnenlandse competitie.
+===
+SPORT: Football
+MATCH: Vikingur Reykjavik x Hapoel Beer Sheva
+MARKET: Total Goals
+SELECTION: Under 2.5 goals
+ODDS: 1.80*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Champions League kwalificatie 1e leg tussen een IJslandse thuisploeg en een minder goed gedocumenteerde Israelische tegenstander; eerste leggen in onbekende kwalificatieduels starten vaak behoedzaam, maar de beperkte data over de actuele vorm van Hapoel maakt dit een speculatievere pick.
 ===
 SPORT: Tennis
-MATCH: Antonia Ruzic x Dominika Salkova
-MARKET: Total games
-SELECTION: Over 20.5 total games
-ODDS: 1.83*
-STAKE: 0.5u
+MATCH: Vilius Gaubas x Pablo Carreno Busta
+MARKET: Set Betting
+SELECTION: Pablo Carreno Busta to win 2-0
+ODDS: 1.60*
+STAKE: 2u
+RISK: low
+ANALYSIS: ATP Kitzbuhel eerste ronde, Carreno Busta is het 8e reekshoofd en een uitgesproken gravelspecialist tegen de ongeplaatste Gaubas. Ranking en ondergrond wijzen op een rechtstreekse zege.
+===
+SPORT: Tennis
+MATCH: Nuno Borges x Orlando Luz
+MARKET: Set Betting
+SELECTION: Nuno Borges to win 2-0
+ODDS: 1.55*
+STAKE: 2u
+RISK: low
+ANALYSIS: Estoril eerste ronde, Borges is het 5e reekshoofd en de hoogst geplaatste Portugees op zijn thuistoernooi tegen de ongeplaatste Orlando Luz.
+===
+SPORT: Tennis
+MATCH: Botic van de Zandschulp x Jaime Faria
+MARKET: Set Betting
+SELECTION: Botic van de Zandschulp to win 2-0
+ODDS: 1.75*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Estoril eerste ronde, Van de Zandschulp is het 6e reekshoofd maar Faria is een veelbelovende Portugese thuisspeler die op eigen gravel een set lastig kan maken, vandaar medium risk.
+===
+SPORT: Tennis
+MATCH: Linda Fruhvirtova x Barbora Krejcikova
+MARKET: Total Games (Match)
+SELECTION: Over 19.5 games
+ODDS: 1.90*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Prague eerste ronde, oud-nummer 2 en Roland Garros kampioene Krejcikova (2e reekshoofd) tegen de getalenteerde Fruhvirtova; Krejcikova is nog bezig met haar terugkeer naar topvorm, wat de kans op een langere, gelijkopgaande wedstrijd vergroot.
+===
+SPORT: Tennis
+MATCH: Priscilla Hon x Tereza Valentova
+MARKET: Set Betting
+SELECTION: Tereza Valentova to win 2-0
+ODDS: 1.75*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Prague eerste ronde, Valentova is het 5e reekshoofd en een opkomend Tsjechisch talent dat thuis speelt tegen de ongeplaatste Hon.
+===
+SPORT: Tennis
+MATCH: Oleksandra Oliynykova x Nastasja Schunk
+MARKET: Total Games (Match)
+SELECTION: Under 18.5 games
+ODDS: 1.95*
+STAKE: 0.25u
 RISK: high
-ANALYSIS: A near even matchup in Prague with home support for Salkova; expect a competitive, lengthy match.`;
-
-window.EMBEDDED_PROPS = { date: "2026-07-20" };
+ANALYSIS: Hamburg eerste ronde, top reekshoofd Oliynykova is duidelijk favoriet tegen Schunk; een dominant reekshoofd kan een eersterondepartij in korte, games-arme sets afsluiten, al blijft dit de meer speculatieve lage-games lezing. High risk.`;
+window.EMBEDDED_PROPS = { date: "2026-07-21" };
 window.DAILY_PROPS_SETTLED = [];
