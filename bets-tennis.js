@@ -1,196 +1,195 @@
-/* BetLife365 daily TENNIS bets - written by the tennis task, read by the dashboard. Code stays separate. */
-window.DAILY_TENNIS = `**🟢 #T50 Safe Builder Parley (🎾 Tennis): 21-07-2026**
+window.DAILY_TENNIS = `**🟢 #T1 Safe Builder Parley (🎾 Tennis): 21-07-2026**
 
-**:small_orange_diamond: Marco Trungelliti x Juan Manuel Cerundolo**
-Juan Manuel Cerundolo to win (match winner) @ 1.34
-↳ Cerundolo wins the match.
+**:small_orange_diamond: Tamara Korpatsch x Victoria Jimenez Kasintseva**
+Korpatsch to win match (Match Winner) @ 1.42
+↳ Korpatsch (WTA 81) is duidelijk beter geplaatst dan Jimenez Kasintseva (WTA 119) en favoriet bij de bookmaker.
 
-**:small_orange_diamond: Tiago Pereira x Gonzalo Bueno**
-Gonzalo Bueno to win (match winner) @ 1.30
-↳ Bueno wins the match.
+**:small_orange_diamond: Adolfo Daniel Vallejo x Kilian Feldbausch**
+Vallejo to win match (Match Winner) @ 1.56
+↳ Vallejo (ATP 63) is een duidelijke favoriet tegenover Feldbausch (ATP 284).
 
-**:small_orange_diamond: Yue Yuan x Nikola Bartunkova**
-Nikola Bartunkova to win (match winner) @ 1.34
-↳ Bartunkova wins the match.
+**:small_orange_diamond: Linda Fruhvirtova x Barbora Krejcikova**
+Krejcikova to win match (Match Winner) @ 1.16
+↳ Voormalig Grand Slam kampioene Krejcikova is een dikke favoriet tegen de veel lager geklasseerde Fruhvirtova.
 
-**:moneybag: Total odds: ±2.33**
+**:moneybag: Total odds: ±2.57**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three short priced favourites from three different matches. Cerundolo (ATP 50) is well clear of Trungelliti (ATP 95) in Kitzbuhel, Bueno is the clear market pick over wildcard Pereira in Estoril, and Bartunkova is the higher ranked, more experienced player against Yuan in Prague.
+Drie duidelijke favorieten verspreid over ATP Kitzbuhel en WTA Prague, elk met een stevige ranking of vormbasis. Puur op klasse en actuele status gebaseerd, geen risico's opgezocht.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T51 Value Builder Parley (🎾 Tennis): 21-07-2026**
+**🟡 #T2 Value Builder Parley (🎾 Tennis): 21-07-2026**
 
-**:small_orange_diamond: Quentin Halys x Laslo Djere**
-Laslo Djere to win (match winner) @ 1.64
-↳ Djere wins the match.
+**:small_orange_diamond: Sebastian Baez x Miomir Kecmanovic**
+Kecmanovic to win match (Match Winner) @ 1.70
+↳ Kecmanovic staat als favoriet genoteerd en is dit seizoen in betere vorm.
 
-**:small_orange_diamond: Jesper De Jong x Jan Choinski**
-Jesper De Jong to win (match winner) @ 1.73
-↳ De Jong wins the match.
+**:small_orange_diamond: Alex Molcan x Sebastian Ofner**
+Molcan to win match (Match Winner) @ 1.73
+↳ Molcan (ATP 81) is lichte favoriet tegenover Ofner (ATP 124).
 
-**:small_orange_diamond: Maya Joint x Laura Samson**
-Maya Joint to win (match winner) @ 1.61
-↳ Joint wins the match.
+**:small_orange_diamond: Daniel Altmaier x Raphael Collignon**
+Collignon to win match (Match Winner) @ 1.62
+↳ Collignon (ATP 37) is beter geklasseerd dan Altmaier (ATP 61) en favoriet bij de bookmaker.
 
-**:moneybag: Total odds: ±4.57**
+**:moneybag: Total odds: ±4.76**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three narrow favourites from three separate matches. Djere has more clay court pedigree and a higher ranking than Halys in Kitzbuhel, De Jong is the market favourite over Choinski in Estoril, and Joint is the in-form, higher ranked player against Samson in Prague.
+Drie favorieten uit ATP Kitzbuhel met iets meer risico dan de Safe Builder, maar nog altijd stevig onderbouwd door ranking en actuele vorm.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #T52 Jackpot Builder Parley (🎾 Tennis): 21-07-2026**
+**🔴 #T3 Jackpot Builder Parley (🎾 Tennis): 21-07-2026**
 
-**:small_orange_diamond: Vilius Gaubas x Pablo Carreno Busta**
-Pablo Carreno Busta to win (match winner) @ 1.38
-↳ Carreno Busta wins the match.
+**:small_orange_diamond: Valentina Steiner x Noma Akugue Noha**
+Akugue Noha to win match (Match Winner) @ 1.23
+↳ Akugue Noha is een duidelijke favoriet bij de bookmaker.
 
-**:small_orange_diamond: Miomir Kecmanovic x Sebastian Baez**
-Miomir Kecmanovic to win (match winner) @ 1.71
-↳ Kecmanovic wins the match.
+**:small_orange_diamond: Laura Samson x Maya Joint**
+Joint to win match (Match Winner) @ 1.54
+↳ Joint (WTA 77) is duidelijk favoriet tegenover Samson (WTA 150).
 
-**:small_orange_diamond: Alexander Shevchenko x Jan-Lennard Struff**
-Jan-Lennard Struff to win (match winner) @ 1.73
-↳ Struff wins the match.
+**:small_orange_diamond: Xinyu Gao x Lilli Tagger**
+Tagger to win match (Match Winner) @ 1.57
+↳ Tagger (WTA 74) is de duidelijke favoriet tegenover Gao (WTA 244).
 
-**:small_orange_diamond: Maria Timofeeva x Aliaksandra Sasnovich**
-Aliaksandra Sasnovich to win (match winner) @ 1.78
-↳ Sasnovich wins the match.
+**:small_orange_diamond: Laslo Djere x Quentin Halys**
+Djere to win match (Match Winner) @ 1.60
+↳ Djere staat als favoriet genoteerd bij de bookmaker.
 
-**:small_orange_diamond: Victoria Jimenez Kasintseva x Tamara Korpatsch**
-Tamara Korpatsch to win (match winner) @ 1.41
-↳ Korpatsch wins the match.
+**:small_orange_diamond: Sara Sorribes Tormo x Alina Charaeva**
+Charaeva to win match (Match Winner) @ 1.81
+↳ Charaeva (WTA 117) is beter geklasseerd dan Sorribes Tormo (WTA 212) en favoriet bij de bookmaker.
 
-**:moneybag: Total odds: ±10.25**
+**:moneybag: Total odds: ±8.61**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Five genuine favourites stacked from five different matches, not a single underdog stunt in sight. Carreno Busta is a former top-10 player and a big class favourite over Gaubas in Estoril. Kecmanovic is the higher ranked player in better recent form than Baez, and Struff's experience and ranking make him the clear favourite over Shevchenko, both in Kitzbuhel. Sasnovich leads her head-to-head with Timofeeva 2-0 and is the higher ranked player in Prague, while Korpatsch is clearly the stronger, more experienced player against Jimenez Kasintseva in Hamburg. We reach the total by combining more solid picks, not by chasing longer odds.
+Realistische Jackpot opgebouwd uit vijf oprechte favorieten verspreid over WTA Hamburg, WTA Prague en ATP Kitzbuhel. Geen underdog-stunts: elke leg is een speler die de bookmaker duidelijk favoriet maakt. Door meer favorieten te stapelen komen we op een stevige maar realistische totaalquote.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
 
-window.DAILY_TENNIS_CARDS = `MATCH: Marco Trungelliti x Juan Manuel Cerundolo
-MARKET: Match winner
-SELECTION: Juan Manuel Cerundolo to win
-ODDS: 1.34
-STAKE: 2u
-RISK: low
-ANALYSIS: Cerundolo (ATP 50) is well clear of Trungelliti (ATP 95) in the rankings and models give him a 60-67% win chance.
+window.DAILY_TENNIS_CARDS = `MATCH: Tamara Korpatsch x Victoria Jimenez Kasintseva
+MARKET: Match Winner
+SELECTION: Korpatsch to win
+ODDS: 1.42
+STAKE: 2u stake (2 - 3% of bankroll)
+RISK: Low
+ANALYSIS: Korpatsch (WTA 81) is duidelijk beter geplaatst dan Jimenez Kasintseva (WTA 119) en favoriet bij de bookmaker.
 ===
-MATCH: Tiago Pereira x Gonzalo Bueno
-MARKET: Match winner
-SELECTION: Gonzalo Bueno to win
-ODDS: 1.30
-STAKE: 2u
-RISK: low
-ANALYSIS: Bueno is the clear market favourite over wildcard Pereira in Estoril.
+MATCH: Adolfo Daniel Vallejo x Kilian Feldbausch
+MARKET: Match Winner
+SELECTION: Vallejo to win
+ODDS: 1.56
+STAKE: 2u stake (2 - 3% of bankroll)
+RISK: Low
+ANALYSIS: Vallejo (ATP 63) is een duidelijke favoriet tegenover Feldbausch (ATP 284).
 ===
-MATCH: Yue Yuan x Nikola Bartunkova
-MARKET: Match winner
-SELECTION: Nikola Bartunkova to win
-ODDS: 1.34
-STAKE: 2u
-RISK: low
-ANALYSIS: Bartunkova is the higher ranked and more experienced player against Yuan in Prague.
+MATCH: Linda Fruhvirtova x Barbora Krejcikova
+MARKET: Match Winner
+SELECTION: Krejcikova to win
+ODDS: 1.16
+STAKE: 2u stake (2 - 3% of bankroll)
+RISK: Low
+ANALYSIS: Voormalig Grand Slam kampioene Krejcikova is een dikke favoriet tegen de veel lager geklasseerde Fruhvirtova.
 ===
-MATCH: Quentin Halys x Laslo Djere
-MARKET: Match winner
-SELECTION: Laslo Djere to win
-ODDS: 1.64
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Djere has more clay court pedigree and a higher ranking than Halys in Kitzbuhel.
+MATCH: Sebastian Baez x Miomir Kecmanovic
+MARKET: Match Winner
+SELECTION: Kecmanovic to win
+ODDS: 1.70
+STAKE: 0.75u stake (0.5 - 1% of bankroll)
+RISK: Medium
+ANALYSIS: Kecmanovic staat als favoriet genoteerd en is dit seizoen in betere vorm.
 ===
-MATCH: Jesper De Jong x Jan Choinski
-MARKET: Match winner
-SELECTION: Jesper De Jong to win
+MATCH: Alex Molcan x Sebastian Ofner
+MARKET: Match Winner
+SELECTION: Molcan to win
 ODDS: 1.73
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: De Jong is the market favourite over Choinski in Estoril.
+STAKE: 0.75u stake (0.5 - 1% of bankroll)
+RISK: Medium
+ANALYSIS: Molcan (ATP 81) is lichte favoriet tegenover Ofner (ATP 124).
 ===
-MATCH: Maya Joint x Laura Samson
-MARKET: Match winner
-SELECTION: Maya Joint to win
-ODDS: 1.61
-STAKE: 0.75u
-RISK: medium
-ANALYSIS: Joint is the in-form, higher ranked player against Samson in Prague.
+MATCH: Daniel Altmaier x Raphael Collignon
+MARKET: Match Winner
+SELECTION: Collignon to win
+ODDS: 1.62
+STAKE: 0.75u stake (0.5 - 1% of bankroll)
+RISK: Medium
+ANALYSIS: Collignon (ATP 37) is beter geklasseerd dan Altmaier (ATP 61) en favoriet bij de bookmaker.
 ===
-MATCH: Vilius Gaubas x Pablo Carreno Busta
-MARKET: Match winner
-SELECTION: Pablo Carreno Busta to win
-ODDS: 1.38
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Former top-10 player Carreno Busta is a clear class favourite over Gaubas.
+MATCH: Valentina Steiner x Noma Akugue Noha
+MARKET: Match Winner
+SELECTION: Akugue Noha to win
+ODDS: 1.23
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Akugue Noha is een duidelijke favoriet bij de bookmaker.
 ===
-MATCH: Miomir Kecmanovic x Sebastian Baez
-MARKET: Match winner
-SELECTION: Miomir Kecmanovic to win
-ODDS: 1.71
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Kecmanovic is the higher ranked player and has been in better recent form than Baez.
+MATCH: Laura Samson x Maya Joint
+MARKET: Match Winner
+SELECTION: Joint to win
+ODDS: 1.54
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Joint (WTA 77) is duidelijk favoriet tegenover Samson (WTA 150).
 ===
-MATCH: Alexander Shevchenko x Jan-Lennard Struff
-MARKET: Match winner
-SELECTION: Jan-Lennard Struff to win
-ODDS: 1.73
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Struff's experience and ranking make him the clear market favourite over Shevchenko.
+MATCH: Xinyu Gao x Lilli Tagger
+MARKET: Match Winner
+SELECTION: Tagger to win
+ODDS: 1.57
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Tagger (WTA 74) is de duidelijke favoriet tegenover Gao (WTA 244).
 ===
-MATCH: Maria Timofeeva x Aliaksandra Sasnovich
-MARKET: Match winner
-SELECTION: Aliaksandra Sasnovich to win
-ODDS: 1.78
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Sasnovich leads the head to head 2-0 and is the higher ranked, more experienced player.
+MATCH: Laslo Djere x Quentin Halys
+MARKET: Match Winner
+SELECTION: Djere to win
+ODDS: 1.60
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Djere staat als favoriet genoteerd bij de bookmaker.
 ===
-MATCH: Victoria Jimenez Kasintseva x Tamara Korpatsch
-MARKET: Match winner
-SELECTION: Tamara Korpatsch to win
-ODDS: 1.41
-STAKE: 0.25u
-RISK: medium
-ANALYSIS: Korpatsch is clearly the higher ranked, more experienced player in Hamburg.`;
+MATCH: Sara Sorribes Tormo x Alina Charaeva
+MARKET: Match Winner
+SELECTION: Charaeva to win
+ODDS: 1.81
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Charaeva (WTA 117) is beter geklasseerd dan Sorribes Tormo (WTA 212) en favoriet bij de bookmaker.`;
 
 window.TENNIS_EVENTS = [
-{match:"Alexander Shevchenko x Jan-Lennard Struff", date:"2026-07-21", time:"11:00", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Jan-Lennard Struff", tier:"Jackpot Builder"},
-{match:"Marco Trungelliti x Juan Manuel Cerundolo", date:"2026-07-21", time:"11:00", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Juan Manuel Cerundolo", tier:"Safe Builder"},
-{match:"Quentin Halys x Laslo Djere", date:"2026-07-21", time:"12:10", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Laslo Djere", tier:"Value Builder"},
-{match:"Miomir Kecmanovic x Sebastian Baez", date:"2026-07-21", time:"12:10", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Miomir Kecmanovic", tier:"Jackpot Builder"},
-{match:"Kilian Feldbausch x Adolfo Daniel Vallejo", date:"2026-07-21", time:"13:20", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Adolfo Daniel Vallejo", tier:"-"},
-{match:"Sebastian Ofner x Alex Molcan", date:"2026-07-21", time:"13:20", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Alex Molcan", tier:"-"},
-{match:"Raphael Collignon x Daniel Altmaier", date:"2026-07-21", time:"14:30", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Raphael Collignon", tier:"-"},
-{match:"Tiago Pereira x Gonzalo Bueno", date:"2026-07-21", time:"13:00", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Gonzalo Bueno", tier:"Safe Builder"},
-{match:"Jesper De Jong x Jan Choinski", date:"2026-07-21", time:"13:00", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Jesper De Jong", tier:"Value Builder"},
-{match:"Vilius Gaubas x Pablo Carreno Busta", date:"2026-07-21", time:"13:00", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Pablo Carreno Busta", tier:"Jackpot Builder"},
-{match:"Kyrian Jacquet x Daniel Merida Aguilar", date:"2026-07-21", time:"14:10", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Daniel Merida Aguilar", tier:"-"},
-{match:"Damir Dzumhur x Hugo Gaston", date:"2026-07-21", time:"14:10", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Damir Dzumhur", tier:"-"},
-{match:"Orlando Luz x Nuno Borges", date:"2026-07-21", time:"14:10", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Nuno Borges", tier:"-"},
-{match:"Roman Andres Burruchaga x Stanislas Wawrinka", date:"2026-07-21", time:"15:20", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Roman Andres Burruchaga", tier:"-"},
-{match:"Jaime Faria x Botic Van De Zandschulp", date:"2026-07-21", time:"16:30", comp:"ATP Estoril", stage:"Round of 32", venue:"Estoril", pick:"Jaime Faria", tier:"-"},
-{match:"Panna Udvardy x Elena Pridankina", date:"2026-07-21", time:"10:00", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Panna Udvardy", tier:"-"},
-{match:"Sinja Kraus x Darja Semenistaja", date:"2026-07-21", time:"11:00", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Sinja Kraus", tier:"-"},
-{match:"Veronika Erjavec x Leyre Romero Gormaz", date:"2026-07-21", time:"11:10", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Veronika Erjavec", tier:"-"},
-{match:"Yulia Putintseva x Mona Barthel", date:"2026-07-21", time:"11:10", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Yulia Putintseva", tier:"-"},
-{match:"Noma Akugue x Valentina Steiner", date:"2026-07-21", time:"12:10", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Noma Akugue", tier:"-"},
-{match:"Jule Niemeier x Maria Lourdes Carle", date:"2026-07-21", time:"12:20", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Maria Lourdes Carle", tier:"-"},
-{match:"Victoria Jimenez Kasintseva x Tamara Korpatsch", date:"2026-07-21", time:"13:20", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Tamara Korpatsch", tier:"Jackpot Builder"},
-{match:"Mai Hontama x Diane Parry", date:"2026-07-21", time:"11:00", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Diane Parry", tier:"-"},
-{match:"Aliaksandra Sasnovich x Maria Timofeeva", date:"2026-07-21", time:"11:00", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Aliaksandra Sasnovich", tier:"Jackpot Builder"},
-{match:"Yue Yuan x Nikola Bartunkova", date:"2026-07-21", time:"11:00", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Nikola Bartunkova", tier:"Safe Builder"},
-{match:"Maya Joint x Laura Samson", date:"2026-07-21", time:"12:10", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Maya Joint", tier:"Value Builder"},
-{match:"Lilli Tagger x Xinyu Gao", date:"2026-07-21", time:"12:10", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Lilli Tagger", tier:"-"}
+  {match:"Jan-Lennard Struff x Alexander Shevchenko", date:"2026-07-21", time:"", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"-", tier:"-"},
+  {match:"Juan Manuel Cerundolo x Marco Trungelliti", date:"2026-07-21", time:"", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"-", tier:"-"},
+  {match:"Laslo Djere x Quentin Halys", date:"2026-07-21", time:"12:10", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Djere", tier:"Jackpot Builder"},
+  {match:"Sebastian Baez x Miomir Kecmanovic", date:"2026-07-21", time:"12:10", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Kecmanovic", tier:"Value Builder"},
+  {match:"Adolfo Daniel Vallejo x Kilian Feldbausch", date:"2026-07-21", time:"13:20", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Vallejo", tier:"Safe Builder"},
+  {match:"Alex Molcan x Sebastian Ofner", date:"2026-07-21", time:"13:20", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Molcan", tier:"Value Builder"},
+  {match:"Daniel Altmaier x Raphael Collignon", date:"2026-07-21", time:"14:30", comp:"ATP Kitzbuhel", stage:"Round of 32", venue:"Kitzbuhel", pick:"Collignon", tier:"Value Builder"},
+  {match:"Elena Pridankina x Panna Udvardy", date:"2026-07-21", time:"", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Darja Semenistaja x Sinja Kraus", date:"2026-07-21", time:"", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Mona Barthel x Yulia Putintseva", date:"2026-07-21", time:"11:40", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Leyre Romero Gormaz x Veronika Erjavec", date:"2026-07-21", time:"", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Valentina Steiner x Noma Akugue Noha", date:"2026-07-21", time:"12:10", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Akugue Noha", tier:"Jackpot Builder"},
+  {match:"Maria Lourdes Carle x Jule Niemeier", date:"2026-07-21", time:"12:30", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Lourdes Carle", tier:"-"},
+  {match:"Tamara Korpatsch x Victoria Jimenez Kasintseva", date:"2026-07-21", time:"13:20", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Korpatsch", tier:"Safe Builder"},
+  {match:"Sara Sorribes Tormo x Alina Charaeva", date:"2026-07-21", time:"14:00", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"Charaeva", tier:"Jackpot Builder"},
+  {match:"Arantxa Rus x Elina Avanesyan", date:"2026-07-21", time:"15:00", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Oleksandra Oliynykova x Nastasja Mariana Schunk", date:"2026-07-21", time:"16:00", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Tessa Johanna Brockmann x Elsa Jacquemot", date:"2026-07-21", time:"17:10", comp:"WTA Hamburg", stage:"Round of 32", venue:"Hamburg", pick:"-", tier:"-"},
+  {match:"Diane Parry x Mai Hontama", date:"2026-07-21", time:"", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"-", tier:"-"},
+  {match:"Maria Timofeeva x Aliaksandra Sasnovich", date:"2026-07-21", time:"", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"-", tier:"-"},
+  {match:"Nikola Bartunkova x Yue Yuan", date:"2026-07-21", time:"", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"-", tier:"-"},
+  {match:"Laura Samson x Maya Joint", date:"2026-07-21", time:"12:10", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Joint", tier:"Jackpot Builder"},
+  {match:"Priscilla Hon x Tereza Valentova", date:"2026-07-21", time:"12:10", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Valentova", tier:"-"},
+  {match:"Xinyu Gao x Lilli Tagger", date:"2026-07-21", time:"12:10", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Tagger", tier:"Jackpot Builder"},
+  {match:"Anna Blinkova x Sara Bejlek", date:"2026-07-21", time:"13:20", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"-", tier:"-"},
+  {match:"Jana Kovackova x Lanlana Tararudee", date:"2026-07-21", time:"13:20", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"-", tier:"-"},
+  {match:"Linda Fruhvirtova x Barbora Krejcikova", date:"2026-07-21", time:"14:30", comp:"WTA Prague", stage:"Round of 32", venue:"Prague", pick:"Krejcikova", tier:"Safe Builder"}
 ];
