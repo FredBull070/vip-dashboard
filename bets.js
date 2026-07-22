@@ -1,103 +1,135 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
-window.DAILY_VERSION = "2026-07-21";
+window.DAILY_VERSION = "2026-07-22";
 
-window.DAILY_MESSAGES = `**🟢 #43 Safe Builder Parley (⚽ Football): 21-07-2026**
+window.DAILY_MESSAGES = `**🟢 #46 Safe Builder Parley (⚽ Football): 22-07-2026**
 
-**:small_orange_diamond: Fenerbahçe x Gornik Zabrze**
-Fenerbahçe to win (match result) @ 1.18
-↳ Fenerbahçe win the match in normal time.
+**:small_orange_diamond: Istanbul BB x Inter Turku**
+Istanbul BB to win (match result) @ 1.19
+↳ Istanbul Basaksehir have won 3 home matches in a row and are unbeaten in their last 5 at home, a huge class gap over Finnish side Inter Turku.
 
-**:small_orange_diamond: FC Iberia 1999 x Slovan Bratislava**
-Slovan Bratislava to win (match result) @ 1.88
-↳ Slovan Bratislava win the match in normal time.
+**:small_orange_diamond: FK Egnatia x NK Celje**
+NK Celje to win (match result) @ 1.85
+↳ NK Celje arrive on a 5-match winning streak away from home and are clearly the stronger side against Albanian outfit FK Egnatia.
 
-**:moneybag: Total odds: ±2.22**
+**:moneybag: Total odds: ±2.20**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Fenerbahçe are a heavy class favourite at home in this Champions League qualifying tie against Gornik Zabrze, and Slovan Bratislava carry far more European pedigree than Georgian side FC Iberia 1999. Two clear favourites from separate ties, so one upset cannot sink the whole slate.
+Istanbul Basaksehir are a monster favourite at home in Turkey off three straight home wins, and Celje bring a five-match away winning streak into Albania. Two clear favourites from separate qualifying ties, so one slip cannot sink the whole slate.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #44 Value Builder Parley (⚽ Football): 21-07-2026**
+**🟡 #47 Value Builder Parley (⚽ Football): 22-07-2026**
 
-**:small_orange_diamond: AGF Aarhus x Lech Poznan**
-AGF Aarhus to win (match result) @ 2.07
-↳ AGF Aarhus win the match in normal time.
+**:small_orange_diamond: FK Zeleznicar Pancevo x Braga**
+Braga to win (match result) @ 1.30
+↳ SC Braga are unbeaten in their last 6 games with a 3-match winning streak, a big step up in class for Serbian side Zeleznicar Pancevo.
 
-**:small_orange_diamond: Ararat Armenia x Shamrock Rovers**
-Ararat Armenia to win (match result) @ 2.18
-↳ Ararat Armenia win the match in normal time.
+**:small_orange_diamond: AC Omonia x Kairat**
+AC Omonia to win (match result) @ 1.62
+↳ AC Omonia are unbeaten in their last 9 home matches and unbeaten in 16 games overall, backing them at home in Cyprus.
 
-**:moneybag: Total odds: ±4.51**
+**:small_orange_diamond: FK Neftchi Baku x Dinamo Minsk**
+Draw or Dinamo Minsk (double chance) @ 1.72
+↳ Dinamo Minsk go in on a 5-match winning streak away from home and are unbeaten in their last 11 on the road, so we take the insurance of the double chance in Baku.
+
+**:moneybag: Total odds: ±3.62**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-AGF are the stronger side at home against a Lech Poznan team still finding its rhythm this early in the season, while Ararat Armenia have home advantage and the more settled squad against League of Ireland side Shamrock Rovers. Two solid home favourites from different ties.
+Three separate favourites from three different Champions League and Conference League qualifying ties. Braga's European pedigree and current form should be too much for Zeleznicar Pancevo, Omonia are unbeaten at home in Cyprus, and Dinamo Minsk's outstanding away record makes them fancied even on the road in Azerbaijan.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #45 Jackpot Builder Parley (⚽ Football): 21-07-2026**
+**🔴 #48 Jackpot Builder Parley (⚽ Football): 22-07-2026**
 
-**:small_orange_diamond: Sabah Baku x Kuopio PS**
-Sabah Baku to win (match result) @ 1.58
-↳ Sabah Baku win the match in normal time.
+**:small_orange_diamond: Bohemian x KF Ballkani**
+Bohemian to win (match result) @ 1.78
+↳ Bohemian are unbeaten in 5 with 4 clean sheets in a row at home in Dublin, a strong platform against Kosovan side Ballkani.
 
-**:small_orange_diamond: Sturm Graz x Hearts**
-Sturm Graz to win (match result) @ 1.67
-↳ Sturm Graz win the match in normal time.
+**:small_orange_diamond: Levski x CS Universitatea Craiova**
+Levski to win (match result) @ 1.98
+↳ Levski Sofia are unbeaten in 10 games with 5 straight home wins, giving them the edge at home over Craiova.
 
-**:small_orange_diamond: FC Thun x Dinamo Zagreb**
-Dinamo Zagreb to win (match result) @ 1.93
-↳ Dinamo Zagreb win the match in normal time.
+**:small_orange_diamond: FK Vardar Skopje x Riga FC**
+Riga FC to win (match result) @ 2.08
+↳ Riga FC come from the stronger Latvian league and are fancied to see off North Macedonian side Vardar Skopje on the road.
 
-**:small_orange_diamond: KI Klaksvik x Kauno Zalgiris**
-KI Klaksvik to win (match result) @ 2.28
-↳ KI Klaksvik win the match in normal time.
-
-**:moneybag: Total odds: ±11.61**
+**:moneybag: Total odds: ±7.33**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four genuine favourites stacked from four separate Champions League qualifying ties, not a single underdog play among them. Azerbaijani champions Sabah are clearly fancied at home over Kuopio PS, reigning Austrian champions Sturm Graz should have too much for Scottish side Hearts, multiple-time Croatian champions Dinamo Zagreb are the class side away at FC Thun, and KI Klaksvik carry the stronger European qualifying pedigree at home over Kauno Zalgiris. We reach the total by stacking more solid picks together, never by chasing longer odds.
+Three genuine favourites stacked from three separate qualifying ties, not a single underdog play among them. Bohemian's unbeaten home run in Dublin, Levski's five straight home wins in Sofia, and Riga FC's stronger league pedigree away at Vardar Skopje combine for a realistic top-end accumulator. We reach the total by stacking more solid picks together, never by chasing longer odds.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 21-07-2026**
-:soccer: Sport of the day: Football
+**:gift: FREE BET OF THE DAY | 22-07-2026**
+🎾⚽ Sport of the day: Multi-Sport
 
 Today's free pick, straight from the VIP slate. Exactly what we are on and why:
 
-**:small_orange_diamond: Sabah Baku x Kuopio PS**
-Sabah Baku to win (match result) @ 1.58
-↳ Sabah Baku win the match in normal time.
+**:small_orange_diamond: ⚽ Istanbul BB x Inter Turku**
+Istanbul BB to win (match result) @ 1.19
+↳ Istanbul Basaksehir have won 3 home matches in a row and are unbeaten in their last 5 at home.
 
-**:small_orange_diamond: Sturm Graz x Hearts**
-Sturm Graz to win (match result) @ 1.67
-↳ Sturm Graz win the match in normal time.
+**:small_orange_diamond: ⚽ FK Zeleznicar Pancevo x Braga**
+Braga to win (match result) @ 1.30
+↳ SC Braga are unbeaten in 6 with a 3-match winning streak, a big step up for Zeleznicar Pancevo.
 
-**:small_orange_diamond: FC Thun x Dinamo Zagreb**
-Dinamo Zagreb to win (match result) @ 1.93
-↳ Dinamo Zagreb win the match in normal time.
+**:small_orange_diamond: ⚽ AC Omonia x Kairat**
+AC Omonia to win (match result) @ 1.62
+↳ AC Omonia are unbeaten in their last 9 home matches and 16 games overall.
 
-**:small_orange_diamond: KI Klaksvik x Kauno Zalgiris**
-KI Klaksvik to win (match result) @ 2.28
-↳ KI Klaksvik win the match in normal time.
+**:small_orange_diamond: ⚽ FK Neftchi Baku x Dinamo Minsk**
+Draw or Dinamo Minsk (double chance) @ 1.72
+↳ Dinamo Minsk are unbeaten in their last 11 away matches, a 5-game winning streak on the road.
 
-**:moneybag: Total odds: ±11.61**
+**:small_orange_diamond: ⚽ Bohemian x KF Ballkani**
+Bohemian to win (match result) @ 1.78
+↳ Bohemian are unbeaten in 5 with 4 clean sheets in a row at home in Dublin.
+
+**:small_orange_diamond: ⚽ FK Egnatia x NK Celje**
+NK Celje to win (match result) @ 1.85
+↳ NK Celje carry a 5-match away winning streak into Albania.
+
+**:small_orange_diamond: 🎾 Nuno Borges x Roman Andres Burruchaga**
+Borges to win match (Match Winner) @ 1.37
+↳ Borges (seed 5) is a clear favourite at home in Estoril against Burruchaga.
+
+**:small_orange_diamond: 🎾 Dominika Salkova x Oceane Dodin**
+Salkova to win match (Match Winner) @ 1.38
+↳ Salkova is in strong form this week in Prague and is the clear favourite over Dodin.
+
+**:small_orange_diamond: 🎾 Alexander Bublik x Facundo Diaz Acosta**
+Bublik to win match (Match Winner) @ 1.45
+↳ Bublik (top seed in Kitzbuhel) is the big favourite over unseeded Diaz Acosta.
+
+**:small_orange_diamond: 🎾 Marco Trungelliti x Yannick Hanfmann**
+Hanfmann to win match (Match Winner) @ 1.47
+↳ Hanfmann is the clear favourite with the bookmaker over Trungelliti.
+
+**:small_orange_diamond: 🎾 Kyrian Jacquet x Alexander Blockx**
+Blockx to win match (Match Winner) @ 1.49
+↳ Blockx (seed 4 in Estoril) is favoured over lucky loser Jacquet.
+
+**:small_orange_diamond: 🎾 Katarzyna Kawa x Paula Badosa**
+Badosa to win match (Match Winner) @ 1.46
+↳ Former top-10 player Badosa is a heavy favourite over Kawa in Hamburg.
+
+**:moneybag: Total odds: ±124.44**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Four genuine favourites stacked from four separate Champions League qualifying ties. Sabah are clearly fancied at home over Kuopio PS, Sturm Graz should have too much for Hearts, Dinamo Zagreb are the class side away at FC Thun, and KI Klaksvik carry the stronger pedigree at home over Kauno Zalgiris.
+Twelve genuine favourites stacked across two sports, one selection per match, no longshots anywhere in the ticket. Six Champions League and Conference League qualifying favourites combine with six ATP/WTA clay and hard-court favourites from Kitzbuhel, Estoril, Prague and Hamburg.
 
 ━━━━━━━━━━━━
-:green_circle: This is our **Jackpot Builder** of the day, our biggest realistic accumulator, built entirely from genuine favourites stacked together rather than chasing long odds.
+:green_circle: This is our **Lucky Shot Builder** of the day, our cross-sport accumulator built entirely from genuine favourites across football and tennis.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -105,148 +137,146 @@ Four genuine favourites stacked from four separate Champions League qualifying t
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 21-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 22-07-2026** ⚽🎾
 
-**:small_orange_diamond: ⚽ Mjallby x Lincoln Red Imps**
-Mjallby to win (match result) @ 1.15
-↳ Mjallby win the match in normal time.
+**:small_orange_diamond: ⚽ Istanbul BB x Inter Turku**
+Istanbul BB to win (match result) @ 1.19
+↳ Istanbul Basaksehir have won 3 home matches in a row and are unbeaten in their last 5 at home.
 
-**:small_orange_diamond: ⚽ Fenerbahçe x Gornik Zabrze**
-Fenerbahçe to win (match result) @ 1.18
-↳ Fenerbahçe win the match in normal time.
+**:small_orange_diamond: ⚽ FK Zeleznicar Pancevo x Braga**
+Braga to win (match result) @ 1.30
+↳ SC Braga are unbeaten in 6 with a 3-match winning streak, a big step up for Zeleznicar Pancevo.
 
-**:small_orange_diamond: ⚽ Sabah Baku x Kuopio PS**
-Sabah Baku to win (match result) @ 1.58
-↳ Sabah Baku win the match in normal time.
+**:small_orange_diamond: ⚽ AC Omonia x Kairat**
+AC Omonia to win (match result) @ 1.62
+↳ AC Omonia are unbeaten in their last 9 home matches and 16 games overall.
 
-**:small_orange_diamond: ⚽ Sturm Graz x Hearts**
-Sturm Graz to win (match result) @ 1.67
-↳ Sturm Graz win the match in normal time.
+**:small_orange_diamond: ⚽ FK Neftchi Baku x Dinamo Minsk**
+Draw or Dinamo Minsk (double chance) @ 1.72
+↳ Dinamo Minsk are unbeaten in their last 11 away matches, a 5-game winning streak on the road.
 
-**:small_orange_diamond: ⚽ FC Iberia 1999 x Slovan Bratislava**
-Slovan Bratislava to win (match result) @ 1.88
-↳ Slovan Bratislava win the match in normal time.
+**:small_orange_diamond: ⚽ Bohemian x KF Ballkani**
+Bohemian to win (match result) @ 1.78
+↳ Bohemian are unbeaten in 5 with 4 clean sheets in a row at home in Dublin.
 
-**:small_orange_diamond: ⚽ FC Thun x Dinamo Zagreb**
-Dinamo Zagreb to win (match result) @ 1.93
-↳ Dinamo Zagreb win the match in normal time.
+**:small_orange_diamond: ⚽ FK Egnatia x NK Celje**
+NK Celje to win (match result) @ 1.85
+↳ NK Celje carry a 5-match away winning streak into Albania.
 
-**:small_orange_diamond: 🎾 Marco Trungelliti x Juan Manuel Cerundolo**
-Juan Manuel Cerundolo to win (match winner) @ 1.34
-↳ Cerundolo wins the match.
+**:small_orange_diamond: 🎾 Nuno Borges x Roman Andres Burruchaga**
+Borges to win match (Match Winner) @ 1.37
+↳ Borges (seed 5) is a clear favourite at home in Estoril against Burruchaga.
 
-**:small_orange_diamond: 🎾 Tiago Pereira x Gonzalo Bueno**
-Gonzalo Bueno to win (match winner) @ 1.30
-↳ Bueno wins the match.
+**:small_orange_diamond: 🎾 Dominika Salkova x Oceane Dodin**
+Salkova to win match (Match Winner) @ 1.38
+↳ Salkova is in strong form this week in Prague and is the clear favourite over Dodin.
 
-**:small_orange_diamond: 🎾 Yue Yuan x Nikola Bartunkova**
-Nikola Bartunkova to win (match winner) @ 1.34
-↳ Bartunkova wins the match.
+**:small_orange_diamond: 🎾 Alexander Bublik x Facundo Diaz Acosta**
+Bublik to win match (Match Winner) @ 1.45
+↳ Bublik (top seed in Kitzbuhel) is the big favourite over unseeded Diaz Acosta.
 
-**:small_orange_diamond: 🎾 Vilius Gaubas x Pablo Carreno Busta**
-Pablo Carreno Busta to win (match winner) @ 1.38
-↳ Carreno Busta wins the match.
+**:small_orange_diamond: 🎾 Marco Trungelliti x Yannick Hanfmann**
+Hanfmann to win match (Match Winner) @ 1.47
+↳ Hanfmann is the clear favourite with the bookmaker over Trungelliti.
 
-**:small_orange_diamond: 🎾 Victoria Jimenez Kasintseva x Tamara Korpatsch**
-Tamara Korpatsch to win (match winner) @ 1.41
-↳ Korpatsch wins the match.
+**:small_orange_diamond: 🎾 Kyrian Jacquet x Alexander Blockx**
+Blockx to win match (Match Winner) @ 1.49
+↳ Blockx (seed 4 in Estoril) is favoured over lucky loser Jacquet.
 
-**:small_orange_diamond: 🎾 Miomir Kecmanovic x Sebastian Baez**
-Miomir Kecmanovic to win (match winner) @ 1.71
-↳ Kecmanovic wins the match.
+**:small_orange_diamond: 🎾 Katarzyna Kawa x Paula Badosa**
+Badosa to win match (Match Winner) @ 1.46
+↳ Former top-10 player Badosa is a heavy favourite over Kawa in Hamburg.
 
-**:moneybag: Total odds: ±100.91**
+**:moneybag: Total odds: ±124.44**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Twelve genuine favourites stacked across two sports, one selection per match, no longshots anywhere in the ticket. Six Champions League qualifying favourites (Mjallby, Fenerbahçe, Sabah Baku, Sturm Graz, Slovan Bratislava, Dinamo Zagreb) combine with six ATP/WTA clay-court favourites from Kitzbuhel, Estoril, Prague and Hamburg. A genuine long shot on paper, but every leg is a side we believe is more likely than not to win.
+Twelve genuine favourites stacked across two sports, one selection per match, no longshots anywhere in the ticket. Six Champions League and Conference League qualifying favourites (Istanbul Basaksehir, Braga, AC Omonia, Dinamo Minsk, Bohemian, NK Celje) combine with six ATP/WTA clay and hard-court favourites from Kitzbuhel, Estoril, Prague and Hamburg. A genuine long shot on paper, but every leg is a side we believe is more likely than not to win.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
-window.DAILY_CARDS = `MATCH: Fenerbahçe x Gornik Zabrze
+window.DAILY_CARDS = `MATCH: Istanbul BB x Inter Turku
 MARKET: Match result
-SELECTION: Fenerbahçe to win
-ODDS: 1.18
+SELECTION: Istanbul BB to win
+ODDS: 1.19
 STAKE: 2u
 RISK: low
-ANALYSIS: Fenerbahçe are a huge class favourite at home in this Champions League qualifying first leg against Polish side Gornik Zabrze.
+ANALYSIS: Istanbul Basaksehir have won 3 home matches in a row and are unbeaten in their last 5 at home against Finnish side Inter Turku.
 ===
-MATCH: Mjallby x Lincoln Red Imps
+MATCH: FK Zeleznicar Pancevo x Braga
 MARKET: Match result
-SELECTION: Mjallby to win
-ODDS: 1.15
-STAKE: 2u
-RISK: low
-ANALYSIS: Mjallby are top-flight Swedish opposition at home against Gibraltar champions Lincoln Red Imps, a huge gap in level.
-===
-MATCH: Sabah Baku x Kuopio PS
-MARKET: Match result
-SELECTION: Sabah Baku to win
-ODDS: 1.58
+SELECTION: Braga to win
+ODDS: 1.30
 STAKE: 1.5u
-RISK: medium
-ANALYSIS: Azerbaijani champions Sabah have the squad depth and home advantage over Finnish side Kuopio PS.
+RISK: low
+ANALYSIS: SC Braga are unbeaten in their last 6 games with a 3-match winning streak, a big step up in class for Zeleznicar Pancevo.
 ===
-MATCH: Sturm Graz x Hearts
+MATCH: AC Omonia x Kairat
 MARKET: Match result
-SELECTION: Sturm Graz to win
-ODDS: 1.67
+SELECTION: AC Omonia to win
+ODDS: 1.62
 STAKE: 1u
 RISK: medium
-ANALYSIS: Reigning Austrian champions Sturm Graz should have too much quality for Scottish side Hearts at home.
+ANALYSIS: AC Omonia are unbeaten in their last 9 home matches and unbeaten in 16 games overall, backing them at home in Cyprus.
 ===
-MATCH: FC Iberia 1999 x Slovan Bratislava
+MATCH: FK Neftchi Baku x Dinamo Minsk
+MARKET: Double chance
+SELECTION: Draw or Dinamo Minsk
+ODDS: 1.72
+STAKE: 1u
+RISK: medium
+ANALYSIS: Dinamo Minsk go in on a 5-match winning streak away from home and are unbeaten in their last 11 on the road.
+===
+MATCH: Bohemian x KF Ballkani
 MARKET: Match result
-SELECTION: Slovan Bratislava to win
-ODDS: 1.88
+SELECTION: Bohemian to win
+ODDS: 1.78
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Slovan Bratislava carry far more European qualifying pedigree than Georgian side FC Iberia 1999.
+ANALYSIS: Bohemian are unbeaten in 5 with 4 clean sheets in a row at home in Dublin against Kosovan side Ballkani.
 ===
-MATCH: FC Thun x Dinamo Zagreb
+MATCH: FK Egnatia x NK Celje
 MARKET: Match result
-SELECTION: Dinamo Zagreb to win
-ODDS: 1.93
+SELECTION: NK Celje to win
+ODDS: 1.85
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Multiple-time Croatian champions Dinamo Zagreb are the clearly stronger side away at Swiss mid-table team FC Thun.
+ANALYSIS: NK Celje arrive on a 5-match winning streak away from home and are clearly the stronger side against FK Egnatia.
 ===
-MATCH: AGF Aarhus x Lech Poznan
+MATCH: Levski x CS Universitatea Craiova
 MARKET: Match result
-SELECTION: AGF Aarhus to win
-ODDS: 2.07
+SELECTION: Levski to win
+ODDS: 1.98
 STAKE: 0.5u
 RISK: high
-ANALYSIS: AGF have home advantage and are further into their season rhythm than a Lech Poznan side still building form.
+ANALYSIS: Levski Sofia are unbeaten in 10 games with 5 straight home wins, giving them the edge at home over Craiova.
 ===
-MATCH: Ararat Armenia x Shamrock Rovers
+MATCH: FK Vardar Skopje x Riga FC
 MARKET: Match result
-SELECTION: Ararat Armenia to win
-ODDS: 2.18
+SELECTION: Riga FC to win
+ODDS: 2.08
 STAKE: 0.5u
 RISK: high
-ANALYSIS: Ararat Armenia have home advantage and the more settled domestic form against League of Ireland side Shamrock Rovers.`;
+ANALYSIS: Riga FC come from the stronger Latvian league and are fancied to see off North Macedonian side Vardar Skopje on the road.`;
 
 window.DAILY_CHALLENGE = {
-  date: "2026-07-21",
-  legs: ["Mjallby x Lincoln Red Imps: Mjallby to win @ 1.15", "Fenerbahçe x Gornik Zabrze: Fenerbahçe to win @ 1.18", "Sabah Baku x Kuopio PS: Sabah Baku to win @ 1.58"],
-  oddLow: 2.14, oddHigh: 2.14,
-  justification: "Three short-priced favourites from three different Champions League qualifying ties, all with kickoff at 18:00. The safest realistic route to just over x2."
+date: "2026-07-22",
+legs: ["Istanbul BB x Inter Turku: Istanbul BB to win @ 1.19", "FK Egnatia x NK Celje: NK Celje to win @ 1.85"],
+oddLow: 2.20, oddHigh: 2.20,
+justification: "Two short-priced favourites from two different qualifying ties, both kicking off within a few hours of each other. The safest realistic route to just over x2 today."
 };
 
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 
 window.FOOTBALL_EVENTS = [
-{match:"Ararat Armenia x Shamrock Rovers", date:"2026-07-21", time:"18:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Yerevan", pick:"Ararat Armenia", tier:"Value Builder"},
-{match:"Mjallby x Lincoln Red Imps", date:"2026-07-21", time:"18:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Karlskrona", pick:"Mjallby", tier:"-"},
-{match:"Sabah Baku x Kuopio PS", date:"2026-07-21", time:"18:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Baku", pick:"Sabah Baku", tier:"Jackpot Builder"},
-{match:"FC Iberia 1999 x Slovan Bratislava", date:"2026-07-21", time:"18:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Georgia", pick:"Slovan Bratislava", tier:"Safe Builder"},
-{match:"AGF Aarhus x Lech Poznan", date:"2026-07-21", time:"19:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Aarhus", pick:"AGF Aarhus", tier:"Value Builder"},
-{match:"FC Thun x Dinamo Zagreb", date:"2026-07-21", time:"20:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Thun", pick:"Dinamo Zagreb", tier:"Jackpot Builder"},
-{match:"Fenerbahçe x Gornik Zabrze", date:"2026-07-21", time:"20:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Istanbul", pick:"Fenerbahçe", tier:"Safe Builder"},
-{match:"Sturm Graz x Hearts", date:"2026-07-21", time:"20:30", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Graz", pick:"Sturm Graz", tier:"Jackpot Builder"},
-{match:"KI Klaksvik x Kauno Zalgiris", date:"2026-07-21", time:"20:45", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Klaksvik", pick:"KI Klaksvik", tier:"Jackpot Builder"},
-{match:"Vikingur Reykjavik x Hapoel Beer Sheva", date:"2026-07-21", time:"21:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Reykjavik", pick:"Vikingur Reykjavik", tier:"-"},
-{match:"Larne FC x Red Star Belgrade", date:"2026-07-21", time:"21:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Larne", pick:"Red Star Belgrade", tier:"-"}
+{match:"FK Neftchi Baku x Dinamo Minsk", date:"2026-07-22", time:"18:00", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Baku", pick:"Dinamo Minsk (DC)", tier:"Value Builder"},
+{match:"AC Omonia x Kairat", date:"2026-07-22", time:"19:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Nicosia", pick:"AC Omonia", tier:"Value Builder"},
+{match:"Bohemian x KF Ballkani", date:"2026-07-22", time:"19:00", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Dublin", pick:"Bohemian", tier:"Jackpot Builder"},
+{match:"Levski x CS Universitatea Craiova", date:"2026-07-22", time:"19:30", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Sofia", pick:"Levski", tier:"Jackpot Builder"},
+{match:"Istanbul BB x Inter Turku", date:"2026-07-22", time:"19:45", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Istanbul", pick:"Istanbul BB", tier:"Safe Builder"},
+{match:"FK Vardar Skopje x Riga FC", date:"2026-07-22", time:"20:00", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Skopje", pick:"Riga FC", tier:"Jackpot Builder"},
+{match:"Spartak Trnava x CSKA 1948", date:"2026-07-22", time:"20:30", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Trnava", pick:"-", tier:"-"},
+{match:"FK Egnatia x NK Celje", date:"2026-07-22", time:"21:00", comp:"UEFA Champions League", stage:"Qualification Round 2", venue:"Rrogozhine", pick:"NK Celje", tier:"Safe Builder"},
+{match:"FK Zeleznicar Pancevo x Braga", date:"2026-07-22", time:"21:00", comp:"UEFA Europa Conference League", stage:"Qualification Round 2", venue:"Pancevo", pick:"Braga", tier:"Value Builder"}
 ];
