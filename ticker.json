@@ -1,13 +1,14 @@
 [
-{"s":"football","m":"Istanbul BB x Inter Turku","k":"Istanbul BB","o":1.19},
-{"s":"football","m":"FK Zeleznicar Pancevo x Braga","k":"Braga","o":1.30},
-{"s":"football","m":"AC Omonia x Kairat","k":"AC Omonia","o":1.62},
-{"s":"football","m":"FK Neftchi Baku x Dinamo Minsk","k":"Dinamo Minsk","o":1.72},
-{"s":"football","m":"Bohemian x KF Ballkani","k":"Bohemian","o":1.78},
-{"s":"football","m":"FK Egnatia x NK Celje","k":"NK Celje","o":1.85},
-{"s":"football","m":"Levski x CS Universitatea Craiova","k":"Levski","o":1.98},
-{"s":"football","m":"FK Vardar Skopje x Riga FC","k":"Riga FC","o":2.08},
-{"s":"tennis","m":"Nuno Borges x Roman Andres Burruchaga","k":"Borges","o":1.37},
-{"s":"tennis","m":"Dominika Salkova x Oceane Dodin","k":"Salkova","o":1.38},
-{"s":"tennis","m":"Alexander Bublik x Facundo Diaz Acosta","k":"Bublik","o":1.45}
+{"s":"football","m":"Malisheva x Hibernian","k":"Hibernian","o":1.50},
+{"s":"football","m":"Alashkert x CFR Cluj","k":"CFR Cluj","o":2.02},
+{"s":"football","m":"Qarabag FK x CSKA","k":"Qarabag FK","o":1.46},
+{"s":"football","m":"Debreceni VSC x Pyunik Yerevan","k":"Debreceni VSC","o":1.78},
+{"s":"football","m":"HJK Helsinki x Coleraine","k":"HJK Helsinki","o":1.37},
+{"s":"football","m":"Dila Gori x Apollon Limassol","k":"Apollon Limassol","o":1.87},
+{"s":"football","m":"AEK Larnaca x Beitar Jerusalem","k":"AEK Larnaca","o":1.92},
+{"s":"football","m":"Twente x Ferencvarosi TC","k":"Twente","o":1.55},
+{"s":"football","m":"Besiktas x FC Midtjylland","k":"Besiktas","o":2.04},
+{"s":"football","m":"St Gallen x Benfica","k":"Benfica","o":1.34},
+{"s":"tennis","m":"Pedro Martinez Portero x Luciano Darderi","k":"Darderi","o":1.32},
+{"s":"tennis","m":"Alexander Bublik x Alex Molcan","k":"Bublik","o":1.55}
 ]
