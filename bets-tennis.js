@@ -1,190 +1,183 @@
 /* BetLife365 daily TENNIS bets - written by the tennis task, read by the dashboard. Code stays separate from bets.js and index.html. */
-window.DAILY_TENNIS = `**🟢 #T56 Safe Builder Parley (🎾 Tennis): 22-07-2026**
+window.DAILY_TENNIS = `**🟢 #T59 Safe Builder Parley (🎾 Tennis): 23-07-2026**
 
-**:small_orange_diamond: Nuno Borges x Roman Andres Burruchaga**
-Borges to win match (Match Winner) @ 1.37
-↳ Borges (reekshoofd 5) is thuis in Estoril duidelijk favoriet bij de bookmaker tegenover Burruchaga.
+**:small_orange_diamond: Pedro Martinez Portero x Luciano Darderi**
+Darderi to win match (Match Winner) @ 1.32
+↳ Darderi (reekshoofd 2 in Estoril) komt van de Bastad-finale en is duidelijk favoriet tegenover qualifier Martinez Portero.
 
-**:small_orange_diamond: Dominika Salkova x Oceane Dodin**
-Salkova to win match (Match Winner) @ 1.38
-↳ Salkova zit in goede vorm deze week in Prague en staat duidelijk als favoriet genoteerd tegenover Dodin.
+**:small_orange_diamond: Mai Hontama x Lilli Tagger**
+Tagger to win match (Match Winner) @ 1.38
+↳ Tagger staat bij de bookmaker duidelijk als favoriet genoteerd tegenover Hontama in de achtste finale in Prague.
 
-**:small_orange_diamond: Alexander Bublik x Facundo Diaz Acosta**
-Bublik to win match (Match Winner) @ 1.45
-↳ Bublik (reekshoofd 1 in Kitzbuhel) is de grote favoriet tegenover de ongeplaatste Diaz Acosta.
+**:small_orange_diamond: Mayar Sherif x Elsa Jacquemot**
+Sherif to win match (Match Winner) @ 1.44
+↳ Sherif is met haar ervaring en hogere ranking duidelijk favoriet tegenover Jacquemot in de achtste finale in Hamburg.
 
-**:moneybag: Total odds: ±2.74**
+**:moneybag: Total odds: ±2.62**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Drie duidelijke favorieten verspreid over ATP Estoril, WTA Prague en ATP Kitzbuhel, elk met een stevig ranking- of vormvoordeel op hun tegenstander.
+Drie duidelijke favorieten verspreid over ATP Estoril, WTA Prague en WTA Hamburg, elk met een stevige ranking- of vormvoordeel op hun tegenstander.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T57 Value Builder Parley (🎾 Tennis): 22-07-2026**
+**🟡 #T60 Value Builder Parley (🎾 Tennis): 23-07-2026**
 
-**:small_orange_diamond: Marco Trungelliti x Yannick Hanfmann**
-Hanfmann to win match (Match Winner) @ 1.47
-↳ Hanfmann staat als duidelijke favoriet genoteerd bij de bookmaker tegenover Trungelliti.
+**:small_orange_diamond: Mariano Navone x Quentin Halys**
+Navone to win match (Match Winner) @ 1.47
+↳ Navone is bij de bookmaker duidelijk favoriet tegenover Halys, die in de vorige ronde reekshoofd Vacherot verraste maar nu zelf als underdog geldt.
 
-**:small_orange_diamond: Kyrian Jacquet x Alexander Blockx**
-Blockx to win match (Match Winner) @ 1.49
-↳ Blockx (reekshoofd 4 in Estoril) is favoriet tegenover lucky loser Jacquet.
+**:small_orange_diamond: Luca Van Assche x Pablo Carreno Busta**
+Carreno Busta to win match (Match Winner) @ 1.50
+↳ De ervaren Carreno Busta is op gravel duidelijk favoriet tegenover de jonge Van Assche in Estoril.
 
-**:small_orange_diamond: Tomas Martin Etcheverry x Jurij Rodionov**
-Etcheverry to win match (Match Winner) @ 1.60
-↳ Etcheverry (reekshoofd 4 in Kitzbuhel) is favoriet tegenover qualifier Rodionov.
+**:small_orange_diamond: Elina Avanesyan x Yulia Putintseva**
+Putintseva to win match (Match Winner) @ 1.52
+↳ Putintseva staat als duidelijke favoriet genoteerd tegenover Avanesyan in de achtste finale in Hamburg.
 
-**:moneybag: Total odds: ±3.50**
+**:moneybag: Total odds: ±3.35**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Drie favorieten uit ATP Kitzbuhel en ATP Estoril met iets meer risico dan de Safe Builder, maar nog altijd gebaseerd op een duidelijk sterkere positie in de wedstrijd.
+Favorieten uit ATP Kitzbuhel, ATP Estoril en WTA Hamburg met iets meer risico dan de Safe Builder, maar nog altijd gebaseerd op een duidelijk sterkere positie in de wedstrijd.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #T58 Jackpot Builder Parley (🎾 Tennis): 22-07-2026**
+**🔴 #T61 Jackpot Builder Parley (🎾 Tennis): 23-07-2026**
 
-**:small_orange_diamond: Quentin Halys x Valentin Vacherot**
-Vacherot to win match (Match Winner) @ 1.55
-↳ Vacherot (reekshoofd 2, ATP 19) is duidelijk beter geplaatst dan Halys (ATP 83) en favoriet bij de bookmaker.
+**:small_orange_diamond: Nikola Bartunkova x Lanlana Tararudee**
+Bartunkova to win match (Match Winner) @ 1.53
+↳ Bartunkova is duidelijk favoriet tegenover Tararudee in de achtste finale in Prague.
 
-**:small_orange_diamond: Kilian Feldbausch x Ignacio Buse**
-Buse to win match (Match Winner) @ 1.52
-↳ Buse (reekshoofd 5 in Kitzbuhel) is duidelijke favoriet tegenover qualifier Feldbausch.
+**:small_orange_diamond: Alexander Bublik x Alex Molcan**
+Bublik to win match (Match Winner) @ 1.55
+↳ Titelverdediger en reekshoofd 1 Bublik is favoriet in de kwartfinale tegenover Molcan, ondanks hun eerdere onderlinge duel dat Molcan won.
 
-**:small_orange_diamond: Katarzyna Kawa x Paula Badosa**
-Badosa to win match (Match Winner) @ 1.46
-↳ Voormalig top-10 speelster Badosa is dikke favoriet tegenover Kawa in Hamburg.
+**:small_orange_diamond: Paula Badosa x Panna Udvardy**
+Badosa to win match (Match Winner) @ 1.57
+↳ Voormalig top-10 speelster Badosa is dikke favoriet tegenover Udvardy in Hamburg.
 
-**:small_orange_diamond: Alina Charaeva x Sinja Kraus**
-Kraus to win match (Match Winner) @ 1.54
-↳ Kraus (reekshoofd 8 in Hamburg) staat als favoriet genoteerd bij de bookmaker tegenover Charaeva.
+**:small_orange_diamond: Oleksandra Oliynykova x Leyre Romero Gormaz**
+Oliynykova to win match (Match Winner) @ 1.58
+↳ Oliynykova (WTA 45) won hun vorige onderlinge duel en is met haar sterke gravelreeks favoriet tegenover Romero Gormaz (WTA 153).
 
-**:small_orange_diamond: Hugo Gaston x Titouan Droguet**
-Droguet to win match (Match Winner) @ 1.55
-↳ Droguet is dit seizoen sterk op gravel en staat duidelijk als favoriet genoteerd tegenover Gaston in Estoril.
+**:small_orange_diamond: Maria Timofeeva x Sara Bejlek**
+Bejlek to win match (Match Winner) @ 1.61
+↳ Bejlek staat als favoriet genoteerd bij de bookmaker tegenover Timofeeva in de achtste finale in Prague.
 
-**:moneybag: Total odds: ±8.21**
+**:moneybag: Total odds: ±9.47**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Realistische Jackpot opgebouwd uit vijf oprechte favorieten verspreid over ATP Kitzbuhel, ATP Estoril en WTA Hamburg. Geen underdogs, enkel spelers die we zelf ook als favoriet zouden spelen, gestapeld voor een hoger totaal.
+Realistische Jackpot opgebouwd uit vijf oprechte favorieten verspreid over WTA Prague, ATP Kitzbuhel en WTA Hamburg. Geen underdogs, enkel spelers die we zelf ook als favoriet zouden spelen, gestapeld voor een hoger totaal.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Nuno Borges x Roman Andres Burruchaga
+window.DAILY_TENNIS_CARDS = `MATCH: Pedro Martinez Portero x Luciano Darderi
 MARKET: Match Winner
-SELECTION: Borges to win
-ODDS: 1.37
+SELECTION: Darderi to win
+ODDS: 1.32
 STAKE: 2u stake (2 - 3% of bankroll)
 RISK: Low
-ANALYSIS: Borges (reekshoofd 5) is thuis in Estoril duidelijk favoriet bij de bookmaker tegenover Burruchaga.
+ANALYSIS: Darderi (reekshoofd 2 in Estoril) komt van de Bastad-finale en is duidelijk favoriet tegenover qualifier Martinez Portero.
 ===
-MATCH: Dominika Salkova x Oceane Dodin
+MATCH: Mai Hontama x Lilli Tagger
 MARKET: Match Winner
-SELECTION: Salkova to win
+SELECTION: Tagger to win
 ODDS: 1.38
 STAKE: 2u stake (2 - 3% of bankroll)
 RISK: Low
-ANALYSIS: Salkova zit in goede vorm deze week in Prague en staat duidelijk als favoriet genoteerd tegenover Dodin.
+ANALYSIS: Tagger staat bij de bookmaker duidelijk als favoriet genoteerd tegenover Hontama in de achtste finale in Prague.
 ===
-MATCH: Alexander Bublik x Facundo Diaz Acosta
+MATCH: Mayar Sherif x Elsa Jacquemot
 MARKET: Match Winner
-SELECTION: Bublik to win
-ODDS: 1.45
+SELECTION: Sherif to win
+ODDS: 1.44
 STAKE: 2u stake (2 - 3% of bankroll)
 RISK: Low
-ANALYSIS: Bublik (reekshoofd 1 in Kitzbuhel) is de grote favoriet tegenover de ongeplaatste Diaz Acosta.
+ANALYSIS: Sherif is met haar ervaring en hogere ranking duidelijk favoriet tegenover Jacquemot in de achtste finale in Hamburg.
 ===
-MATCH: Marco Trungelliti x Yannick Hanfmann
+MATCH: Mariano Navone x Quentin Halys
 MARKET: Match Winner
-SELECTION: Hanfmann to win
+SELECTION: Navone to win
 ODDS: 1.47
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Hanfmann staat als duidelijke favoriet genoteerd bij de bookmaker tegenover Trungelliti.
+ANALYSIS: Navone is bij de bookmaker duidelijk favoriet tegenover Halys, die in de vorige ronde reekshoofd Vacherot verraste maar nu zelf als underdog geldt.
 ===
-MATCH: Kyrian Jacquet x Alexander Blockx
+MATCH: Luca Van Assche x Pablo Carreno Busta
 MARKET: Match Winner
-SELECTION: Blockx to win
-ODDS: 1.49
+SELECTION: Carreno Busta to win
+ODDS: 1.50
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Blockx (reekshoofd 4 in Estoril) is favoriet tegenover lucky loser Jacquet.
+ANALYSIS: De ervaren Carreno Busta is op gravel duidelijk favoriet tegenover de jonge Van Assche in Estoril.
 ===
-MATCH: Tomas Martin Etcheverry x Jurij Rodionov
+MATCH: Elina Avanesyan x Yulia Putintseva
 MARKET: Match Winner
-SELECTION: Etcheverry to win
-ODDS: 1.60
+SELECTION: Putintseva to win
+ODDS: 1.52
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Etcheverry (reekshoofd 4 in Kitzbuhel) is favoriet tegenover qualifier Rodionov.
+ANALYSIS: Putintseva staat als duidelijke favoriet genoteerd tegenover Avanesyan in de achtste finale in Hamburg.
 ===
-MATCH: Quentin Halys x Valentin Vacherot
+MATCH: Nikola Bartunkova x Lanlana Tararudee
 MARKET: Match Winner
-SELECTION: Vacherot to win
+SELECTION: Bartunkova to win
+ODDS: 1.53
+STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
+RISK: High
+ANALYSIS: Bartunkova is duidelijk favoriet tegenover Tararudee in de achtste finale in Prague.
+===
+MATCH: Alexander Bublik x Alex Molcan
+MARKET: Match Winner
+SELECTION: Bublik to win
 ODDS: 1.55
 STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
 RISK: High
-ANALYSIS: Vacherot (reekshoofd 2, ATP 19) is duidelijk beter geplaatst dan Halys (ATP 83) en favoriet bij de bookmaker.
+ANALYSIS: Titelverdediger en reekshoofd 1 Bublik is favoriet in de kwartfinale tegenover Molcan, ondanks hun eerdere onderlinge duel dat Molcan won.
 ===
-MATCH: Kilian Feldbausch x Ignacio Buse
-MARKET: Match Winner
-SELECTION: Buse to win
-ODDS: 1.52
-STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
-RISK: High
-ANALYSIS: Buse (reekshoofd 5 in Kitzbuhel) is duidelijke favoriet tegenover qualifier Feldbausch.
-===
-MATCH: Katarzyna Kawa x Paula Badosa
+MATCH: Paula Badosa x Panna Udvardy
 MARKET: Match Winner
 SELECTION: Badosa to win
-ODDS: 1.46
+ODDS: 1.57
 STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
 RISK: High
-ANALYSIS: Voormalig top-10 speelster Badosa is dikke favoriet tegenover Kawa in Hamburg.
+ANALYSIS: Voormalig top-10 speelster Badosa is dikke favoriet tegenover Udvardy in Hamburg.
 ===
-MATCH: Alina Charaeva x Sinja Kraus
+MATCH: Oleksandra Oliynykova x Leyre Romero Gormaz
 MARKET: Match Winner
-SELECTION: Kraus to win
-ODDS: 1.54
+SELECTION: Oliynykova to win
+ODDS: 1.58
 STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
 RISK: High
-ANALYSIS: Kraus (reekshoofd 8 in Hamburg) staat als favoriet genoteerd bij de bookmaker tegenover Charaeva.
+ANALYSIS: Oliynykova (WTA 45) won hun vorige onderlinge duel en is met haar sterke gravelreeks favoriet tegenover Romero Gormaz (WTA 153).
 ===
-MATCH: Hugo Gaston x Titouan Droguet
+MATCH: Maria Timofeeva x Sara Bejlek
 MARKET: Match Winner
-SELECTION: Droguet to win
-ODDS: 1.55
+SELECTION: Bejlek to win
+ODDS: 1.61
 STAKE: 0.25u stake (0.25 - 0.5% of bankroll)
 RISK: High
-ANALYSIS: Droguet is dit seizoen sterk op gravel en staat duidelijk als favoriet genoteerd tegenover Gaston in Estoril.`;
+ANALYSIS: Bejlek staat als favoriet genoteerd bij de bookmaker tegenover Timofeeva in de achtste finale in Prague.`;
 window.TENNIS_EVENTS = [
-{"match":"Quentin Halys x Valentin Vacherot","date":"2026-07-22","time":"11:00","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"Vacherot","tier":"Jackpot Builder"},
-{"match":"Sebastian Baez x Arthur Rinderknech","date":"2026-07-22","time":"11:00","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"-","tier":"-"},
-{"match":"Jan-Lennard Struff x Mariano Navone","date":"2026-07-22","time":"12:10","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"-","tier":"-"},
-{"match":"Kilian Feldbausch x Ignacio Buse","date":"2026-07-22","time":"12:10","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"Buse","tier":"Jackpot Builder"},
-{"match":"Marco Trungelliti x Yannick Hanfmann","date":"2026-07-22","time":"12:10","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"Hanfmann","tier":"Value Builder"},
-{"match":"Alex Molcan x Daniel Altmaier","date":"2026-07-22","time":"13:20","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"-","tier":"-"},
-{"match":"Tomas Martin Etcheverry x Jurij Rodionov","date":"2026-07-22","time":"13:20","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"Etcheverry","tier":"Value Builder"},
-{"match":"Alexander Bublik x Facundo Diaz Acosta","date":"2026-07-22","time":"14:30","comp":"ATP Kitzbuhel","stage":"Round of 16","venue":"Kitzbuhel","pick":"Bublik","tier":"Safe Builder"},
-{"match":"Hugo Gaston x Titouan Droguet","date":"2026-07-22","time":"13:00","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"Droguet","tier":"Jackpot Builder"},
-{"match":"Nuno Borges x Roman Andres Burruchaga","date":"2026-07-22","time":"15:30","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"Borges","tier":"Safe Builder"},
-{"match":"Alejandro Tabilo x Tiago Torres","date":"2026-07-22","time":"18:00","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"-","tier":"-"},
-{"match":"Kyrian Jacquet x Alexander Blockx","date":"2026-07-22","time":"19:10","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"Blockx","tier":"Value Builder"},
-{"match":"Ayla Aksu x Daria Snigur","date":"2026-07-22","time":"11:00","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"-","tier":"-"},
-{"match":"Marie Bouzkova x Carol Young Suh Lee","date":"2026-07-22","time":"12:10","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"-","tier":"-"},
-{"match":"Maya Joint x Tereza Valentova","date":"2026-07-22","time":"13:20","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"-","tier":"-"},
-{"match":"Dominika Salkova x Oceane Dodin","date":"2026-07-22","time":"14:30","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"Salkova","tier":"Safe Builder"},
-{"match":"Maria Lourdes Carle x Anhelina Kalinina","date":"2026-07-22","time":"10:00","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"-","tier":"-"},
-{"match":"Alina Charaeva x Sinja Kraus","date":"2026-07-22","time":"12:20","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"Kraus","tier":"Jackpot Builder"},
-{"match":"Tamara Korpatsch x Julia Stusek","date":"2026-07-22","time":"13:20","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"-","tier":"-"},
-{"match":"Anna Bondar x Noma Akugue Noha","date":"2026-07-22","time":"17:00","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"-","tier":"-"},
-{"match":"Simona Waltert x Mayar Sherif","date":"2026-07-22","time":"11:00","comp":"WTA Hamburg","stage":"Round of 32","venue":"Hamburg","pick":"-","tier":"-"},
-{"match":"Tessa Johanna Brockmann x Elsa Jacquemot","date":"2026-07-22","time":"11:10","comp":"WTA Hamburg","stage":"Round of 32","venue":"Hamburg","pick":"-","tier":"-"},
-{"match":"Katarzyna Kawa x Paula Badosa","date":"2026-07-22","time":"12:10","comp":"WTA Hamburg","stage":"Round of 32","venue":"Hamburg","pick":"Badosa","tier":"Jackpot Builder"}
+{"match":"Mariano Navone x Quentin Halys","date":"2026-07-23","time":"11:00","comp":"ATP Kitzbuhel","stage":"Quarterfinal","venue":"Kitzbuhel","pick":"Navone","tier":"Value Builder"},
+{"match":"Yannick Hanfmann x Sebastian Baez","date":"2026-07-23","time":"12:10","comp":"ATP Kitzbuhel","stage":"Quarterfinal","venue":"Kitzbuhel","pick":"-","tier":"-"},
+{"match":"Tomas Martin Etcheverry x Ignacio Buse","date":"2026-07-23","time":"13:20","comp":"ATP Kitzbuhel","stage":"Quarterfinal","venue":"Kitzbuhel","pick":"-","tier":"-"},
+{"match":"Alexander Bublik x Alex Molcan","date":"2026-07-23","time":"14:30","comp":"ATP Kitzbuhel","stage":"Quarterfinal","venue":"Kitzbuhel","pick":"Bublik","tier":"Jackpot Builder"},
+{"match":"Luca Van Assche x Pablo Carreno Busta","date":"2026-07-23","time":"13:00","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"Carreno Busta","tier":"Value Builder"},
+{"match":"Jaime Faria x Gonzalo Bueno","date":"2026-07-23","time":"15:00","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"-","tier":"-"},
+{"match":"Andrey Rublev x Timofey Skatov","date":"2026-07-23","time":"18:00","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"-","tier":"-"},
+{"match":"Pedro Martinez Portero x Luciano Darderi","date":"2026-07-23","time":"19:10","comp":"ATP Estoril","stage":"Round of 16","venue":"Estoril","pick":"Darderi","tier":"Safe Builder"},
+{"match":"Nikola Bartunkova x Lanlana Tararudee","date":"2026-07-23","time":"11:00","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"Bartunkova","tier":"Jackpot Builder"},
+{"match":"Mai Hontama x Lilli Tagger","date":"2026-07-23","time":"12:10","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"Tagger","tier":"Safe Builder"},
+{"match":"Maria Timofeeva x Sara Bejlek","date":"2026-07-23","time":"13:20","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"Bejlek","tier":"Jackpot Builder"},
+{"match":"Lucie Havlickova x Barbora Krejcikova","date":"2026-07-23","time":"14:30","comp":"WTA Prague","stage":"Round of 16","venue":"Prague","pick":"-","tier":"-"},
+{"match":"Mayar Sherif x Elsa Jacquemot","date":"2026-07-23","time":"11:00","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"Sherif","tier":"Safe Builder"},
+{"match":"Oleksandra Oliynykova x Leyre Romero Gormaz","date":"2026-07-23","time":"12:10","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"Oliynykova","tier":"Jackpot Builder"},
+{"match":"Paula Badosa x Panna Udvardy","date":"2026-07-23","time":"13:20","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"Badosa","tier":"Jackpot Builder"},
+{"match":"Elina Avanesyan x Yulia Putintseva","date":"2026-07-23","time":"17:00","comp":"WTA Hamburg","stage":"Round of 16","venue":"Hamburg","pick":"Putintseva","tier":"Value Builder"}
 ];
