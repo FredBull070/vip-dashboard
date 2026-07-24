@@ -1,14 +1,14 @@
 [
-{"s":"football","m":"Malisheva x Hibernian","k":"Hibernian","o":1.50},
-{"s":"football","m":"Alashkert x CFR Cluj","k":"CFR Cluj","o":2.02},
-{"s":"football","m":"Qarabag FK x CSKA","k":"Qarabag FK","o":1.46},
-{"s":"football","m":"Debreceni VSC x Pyunik Yerevan","k":"Debreceni VSC","o":1.78},
-{"s":"football","m":"HJK Helsinki x Coleraine","k":"HJK Helsinki","o":1.37},
-{"s":"football","m":"Dila Gori x Apollon Limassol","k":"Apollon Limassol","o":1.87},
-{"s":"football","m":"AEK Larnaca x Beitar Jerusalem","k":"AEK Larnaca","o":1.92},
-{"s":"football","m":"Twente x Ferencvarosi TC","k":"Twente","o":1.55},
-{"s":"football","m":"Besiktas x FC Midtjylland","k":"Besiktas","o":2.04},
-{"s":"football","m":"St Gallen x Benfica","k":"Benfica","o":1.34},
-{"s":"tennis","m":"Pedro Martinez Portero x Luciano Darderi","k":"Darderi","o":1.32},
-{"s":"tennis","m":"Alexander Bublik x Alex Molcan","k":"Bublik","o":1.55}
+{"s":"football","m":"Vikingur Reykjavik x Keflavik","k":"Vikingur Reykjavik","o":1.25},
+{"s":"football","m":"Vasteras SK x Orgryte IS","k":"Vasteras SK","o":1.46},
+{"s":"football","m":"Racing Avellaneda x Gimnasia La Plata","k":"Racing Avellaneda","o":1.76},
+{"s":"football","m":"Gimnasia Mendoza x Central Cordoba SDE","k":"Gimnasia Mendoza","o":1.82},
+{"s":"football","m":"Volsungur x Grindavik","k":"Grindavik","o":1.86},
+{"s":"football","m":"UMF Njardvik x Kopavogs","k":"UMF Njardvik","o":2.10},
+{"s":"football","m":"Velez Sarsfield x Instituto de Cordoba","k":"Velez Sarsfield","o":2.14},
+{"s":"football","m":"FF Jaro x Seinajoen JK","k":"Seinajoen JK","o":2.15},
+{"s":"tennis","m":"Andrey Rublev x Luca Van Assche","k":"Rublev","o":1.18},
+{"s":"tennis","m":"Tamara Korpatsch x Anhelina Kalinina","k":"Kalinina","o":1.29},
+{"s":"tennis","m":"Tiago Torres x Hugo Gaston","k":"Gaston","o":1.37},
+{"s":"tennis","m":"Jaime Faria x Luciano Darderi","k":"Darderi","o":1.46}
 ]
