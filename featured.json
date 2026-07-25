@@ -1,10 +1,10 @@
 {
   "type": "prop",
-  "period": "month",
-  "label": "Props · this month",
-  "roi": 1.06,
-  "bets": 196,
+  "period": "today",
+  "label": "Props · today",
+  "roi": 24.72,
+  "bets": 12,
   "approved_by": "fred",
-  "updated_at": "2026-07-24T07:34:34.821Z",
+  "updated_at": "2026-07-25T06:43:07.280Z",
   "via": "worker"
 }
