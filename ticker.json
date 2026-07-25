@@ -1,14 +1,14 @@
 [
-{"s":"football","m":"Vikingur Reykjavik x Keflavik","k":"Vikingur Reykjavik","o":1.25},
-{"s":"football","m":"Vasteras SK x Orgryte IS","k":"Vasteras SK","o":1.46},
-{"s":"football","m":"Racing Avellaneda x Gimnasia La Plata","k":"Racing Avellaneda","o":1.76},
-{"s":"football","m":"Gimnasia Mendoza x Central Cordoba SDE","k":"Gimnasia Mendoza","o":1.82},
-{"s":"football","m":"Volsungur x Grindavik","k":"Grindavik","o":1.86},
-{"s":"football","m":"UMF Njardvik x Kopavogs","k":"UMF Njardvik","o":2.10},
-{"s":"football","m":"Velez Sarsfield x Instituto de Cordoba","k":"Velez Sarsfield","o":2.14},
-{"s":"football","m":"FF Jaro x Seinajoen JK","k":"Seinajoen JK","o":2.15},
-{"s":"tennis","m":"Andrey Rublev x Luca Van Assche","k":"Rublev","o":1.18},
-{"s":"tennis","m":"Tamara Korpatsch x Anhelina Kalinina","k":"Kalinina","o":1.29},
-{"s":"tennis","m":"Tiago Torres x Hugo Gaston","k":"Gaston","o":1.37},
-{"s":"tennis","m":"Jaime Faria x Luciano Darderi","k":"Darderi","o":1.46}
+{"s":"football","m":"Santos x Chapecoense","k":"Santos","o":1.35},
+{"s":"football","m":"Lausanne Sport x Grasshoppers","k":"Lausanne Sport","o":1.79},
+{"s":"football","m":"Servette x Basel","k":"Servette","o":1.38},
+{"s":"football","m":"Luzern x FC Thun","k":"Luzern","o":1.92},
+{"s":"football","m":"Athletico Paranaense x Internacional","k":"Athletico Paranaense","o":1.97},
+{"s":"football","m":"AGF Aarhus x Brondby","k":"AGF Aarhus","o":2.28},
+{"s":"football","m":"Estudiantes Rio Cuarto x Club Atletico Tigre","k":"Club Atletico Tigre","o":2.28},
+{"s":"football","m":"Atletico de Rafaela x Nueva Chicago","k":"Atletico de Rafaela","o":2.23},
+{"s":"tennis","m":"Barbora Krejcikova x Lilli Tagger","k":"Krejcikova","o":1.15},
+{"s":"tennis","m":"Alexander Bublik x Quentin Halys","k":"Bublik","o":1.43},
+{"s":"tennis","m":"Alexander Blockx x Luciano Darderi","k":"Darderi","o":1.50},
+{"s":"tennis","m":"Elina Avanesyan x Anna Bondar","k":"Bondar","o":1.54}
 ]

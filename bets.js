@@ -1,95 +1,99 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
-window.DAILY_VERSION = "2026-07-24";
+window.DAILY_VERSION = "2026-07-25";
 
-window.DAILY_MESSAGES = `**🟢 #52 Safe Builder Parley (⚽ Football): 24-07-2026**
+window.DAILY_MESSAGES = `**🟢 #55 Safe Builder Parley (⚽ Football): 25-07-2026**
 
-**:small_orange_diamond: Vikingur Reykjavik x Keflavik**
-Vikingur Reykjavik to win (match result) @ 1.25
-↳ Vikingur are dominant at home in Reykjavik and huge favourites over a mid-table Keflavik side in Iceland's top flight.
+**:small_orange_diamond: Santos x Chapecoense**
+Santos to win (match result) @ 1.35
+↳ Santos are strong favourites at home in Vila Belmiro against a struggling Chapecoense side in Serie A.
 
-**:small_orange_diamond: Racing Avellaneda x Gimnasia La Plata**
-Racing Avellaneda to win (match result) @ 1.76
-↳ Racing are the clearly stronger side at home in Avellaneda against a struggling Gimnasia La Plata in the Primera Division opener.
+**:small_orange_diamond: Lausanne Sport x Grasshoppers**
+Lausanne Sport to win (match result) @ 1.79
+↳ Lausanne Sport are fancied at home in the Swiss Super League opener against Grasshoppers.
 
-**:moneybag: Total odds: ±2.20**
+**:moneybag: Total odds: ±2.42**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Today's global slate is unusually thin with no European qualifiers or top leagues in action, so we lean on the two clearest class gaps we could find, from Iceland's Premier League and Argentina's Primera Division.
+Two clear favourites from Brazil's Serie A and the Swiss Super League season opener, both strong at home against out-of-form opponents.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #53 Value Builder Parley (⚽ Football): 24-07-2026**
+**🟡 #56 Value Builder Parley (⚽ Football): 25-07-2026**
 
-**:small_orange_diamond: Vasteras SK x Orgryte IS**
-Vasteras SK to win (match result) @ 1.46
-↳ Vasteras, the reigning Superettan champions, are fancied at home in the Allsvenskan against an inconsistent Orgryte side.
+**:small_orange_diamond: Servette x Basel**
+Servette or Draw (double chance) @ 1.38
+↳ Servette have been in good recent form at home in Geneva and should at least avoid defeat against Basel.
 
-**:small_orange_diamond: Gimnasia Mendoza x Central Cordoba SDE**
-Gimnasia Mendoza to win (match result) @ 1.82
-↳ Gimnasia Mendoza have the better recent form and home advantage against Central Cordoba SDE in this Primera Division clash.
+**:small_orange_diamond: Luzern x FC Thun**
+Luzern to win (match result) @ 1.92
+↳ Luzern come into the Super League opener in fine form and are backed at home against Thun.
 
-**:small_orange_diamond: Velez Sarsfield x Instituto de Cordoba**
-Velez Sarsfield to win (match result) @ 2.14
-↳ Velez are the far bigger club and fancied at home in Buenos Aires against a modest Instituto de Cordoba side.
+**:small_orange_diamond: Athletico Paranaense x Internacional**
+Athletico Paranaense to win (match result) @ 1.97
+↳ Athletico Paranaense are fancied at home in Curitiba against Internacional in Serie A.
 
-**:moneybag: Total odds: ±5.69**
+**:moneybag: Total odds: ±5.22**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three separate favourites from Sweden and two Argentine Primera Division fixtures, stacked together rather than chasing long odds on any single leg given how thin today's football calendar is.
+A double chance in Geneva combined with two home favourites from Switzerland and Brazil, stacked together for a bigger total without leaning on longshots.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #54 Jackpot Builder Parley (⚽ Football): 24-07-2026**
+**🔴 #57 Jackpot Builder Parley (⚽ Football): 25-07-2026**
 
-**:small_orange_diamond: Volsungur x Grindavik**
-Grindavik to win (match result) @ 1.86
-↳ Grindavik are the in-form side and fancied away from home in Iceland's First Division against a Volsungur team lower in the table.
+**:small_orange_diamond: AGF Aarhus x Brondby**
+AGF Aarhus to win (match result) @ 2.28
+↳ AGF Aarhus are the narrow favourites at home in the Danish Superliga against Brondby.
 
-**:small_orange_diamond: UMF Njardvik x Kopavogs**
-UMF Njardvik to win (match result) @ 2.10
-↳ Njardvik have won three of their last five and are backed at home in this First Division clash with Kopavogs.
+**:small_orange_diamond: Estudiantes Rio Cuarto x Club Atletico Tigre**
+Club Atletico Tigre to win (match result) @ 2.28
+↳ Tigre are the away favourites against Estudiantes Rio Cuarto in the Argentine Primera Division.
 
-**:small_orange_diamond: FF Jaro x Seinajoen JK**
-Seinajoen JK to win (match result) @ 2.15
-↳ Seinajoen JK travel to Jakobstad as the bookmakers' clear favourites over FF Jaro in the Veikkausliiga.
+**:small_orange_diamond: Atletico de Rafaela x Nueva Chicago**
+Atletico de Rafaela to win (match result) @ 2.23
+↳ Atletico de Rafaela are backed at home against Nueva Chicago in the Primera B Nacional.
 
-**:moneybag: Total odds: ±8.40**
+**:moneybag: Total odds: ±11.59**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three genuine favourites stacked from Iceland's First Division and Finland's Veikkausliiga, not a single underdog play among them. We reach the total by stacking more solid picks together, never by chasing longer odds - today's slate is unusually thin so these are the best genuine favourites left on the board.
+Three genuine favourites from Denmark, Argentina's top flight and the second tier, stacked together to reach a realistic double-digit total without reaching for underdogs.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 24-07-2026**
-⚽ Sport of the day: Football
+**:gift: FREE BET OF THE DAY | 25-07-2026**
+🎾 Sport of the day: Tennis
 
 Today's free pick, straight from the VIP slate. Exactly what we are on and why:
 
-**:small_orange_diamond: Vikingur Reykjavik x Keflavik**
-Vikingur Reykjavik to win (match result) @ 1.25
-↳ Vikingur are dominant at home in Reykjavik and huge favourites over a mid-table Keflavik side in Iceland's top flight.
+**:small_orange_diamond: Elina Avanesyan x Anna Bondar**
+Bondar to win match (Match Winner) @ 1.54
+↳ Bondar staat als favoriet genoteerd tegenover Avanesyan in de halve finale in Hamburg.
 
-**:small_orange_diamond: Racing Avellaneda x Gimnasia La Plata**
-Racing Avellaneda to win (match result) @ 1.76
-↳ Racing are the clearly stronger side at home in Avellaneda against a struggling Gimnasia La Plata in the Primera Division opener.
+**:small_orange_diamond: Mayar Sherif x Tamara Korpatsch**
+Sherif to win match (Match Winner) @ 1.58
+↳ Sherif, die eerder deze week Badosa versloeg, is favoriet tegenover Korpatsch in de andere halve finale in Hamburg.
 
-**:moneybag: Total odds: ±2.20**
+**:small_orange_diamond: Tereza Valentova x Daria Snigur**
+Valentova to win match (Match Winner) @ 1.62
+↳ Valentova, die verrassend titelverdediger Bouzkova uitschakelde, staat als favoriet genoteerd tegenover Snigur in de halve finale in Prague.
+
+**:moneybag: Total odds: ±3.94**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Today's global slate is unusually thin with no European qualifiers or top leagues in action, so we lean on the two clearest class gaps we could find, from Iceland's Premier League and Argentina's Primera Division.
+Favorieten uit WTA Hamburg en WTA Prague met iets meer risico dan de Safe Builder, maar nog altijd gebaseerd op een duidelijk sterkere positie in de wedstrijd.
 
 ━━━━━━━━━━━━
-:green_circle: This is our **Safe Builder** of the day, our lowest-risk football parley built from two clear favourites.
+:yellow_circle: This is our **Value Builder** of the day, a step up in risk with three clear favourites from the WTA claycourt swing.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -97,138 +101,134 @@ Today's global slate is unusually thin with no European qualifiers or top league
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 24-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 25-07-2026** ⚽🎾
 
-**:small_orange_diamond: ⚽ Vikingur Reykjavik x Keflavik**
-Vikingur Reykjavik to win (match result) @ 1.25
-↳ Vikingur are dominant at home in Reykjavik over a mid-table Keflavik side.
+**:small_orange_diamond: ⚽ Santos x Chapecoense**
+Santos to win (match result) @ 1.35
+↳ Santos are dominant at home in Vila Belmiro over a struggling Chapecoense side.
 
-**:small_orange_diamond: ⚽ Vasteras SK x Orgryte IS**
-Vasteras SK to win (match result) @ 1.46
-↳ Vasteras are fancied at home in the Allsvenskan against an inconsistent Orgryte.
+**:small_orange_diamond: ⚽ Servette x Basel**
+Servette or Draw (double chance) @ 1.38
+↳ Servette are well fancied not to lose at home in Geneva against Basel.
 
-**:small_orange_diamond: ⚽ Racing Avellaneda x Gimnasia La Plata**
-Racing Avellaneda to win (match result) @ 1.76
-↳ Racing are the clearly stronger side at home in Avellaneda.
+**:small_orange_diamond: ⚽ Lausanne Sport x Grasshoppers**
+Lausanne Sport to win (match result) @ 1.79
+↳ Lausanne Sport are fancied at home in the Super League opener.
 
-**:small_orange_diamond: ⚽ Gimnasia Mendoza x Central Cordoba SDE**
-Gimnasia Mendoza to win (match result) @ 1.82
-↳ Gimnasia Mendoza have the better recent form and home advantage.
+**:small_orange_diamond: ⚽ Luzern x FC Thun**
+Luzern to win (match result) @ 1.92
+↳ Luzern are backed at home against Thun in the Super League opener.
 
-**:small_orange_diamond: ⚽ Volsungur x Grindavik**
-Grindavik to win (match result) @ 1.86
-↳ Grindavik are the in-form side away from home in Iceland's First Division.
+**:small_orange_diamond: ⚽ Athletico Paranaense x Internacional**
+Athletico Paranaense to win (match result) @ 1.97
+↳ Athletico Paranaense are fancied at home in Curitiba against Internacional.
 
-**:small_orange_diamond: ⚽ UMF Njardvik x Kopavogs**
-UMF Njardvik to win (match result) @ 2.10
-↳ Njardvik have won three of their last five and are backed at home.
+**:small_orange_diamond: 🎾 Barbora Krejcikova x Lilli Tagger**
+Krejcikova to win match (Match Winner) @ 1.15
+↳ Former Grand Slam champion Krejcikova is a heavy favourite over Tagger in the Prague semifinal.
 
-**:small_orange_diamond: 🎾 Andrey Rublev x Luca Van Assche**
-Rublev to win match (Match Winner) @ 1.18
-↳ Rublev (ATP 14) is a heavy favourite over the much lower-ranked Van Assche in the Estoril quarterfinal.
+**:small_orange_diamond: 🎾 Alexander Bublik x Quentin Halys**
+Bublik to win match (Match Winner) @ 1.43
+↳ Top seed Bublik is the clear favourite over Halys in the Kitzbuhel final.
 
-**:small_orange_diamond: 🎾 Tamara Korpatsch x Anhelina Kalinina**
-Kalinina to win match (Match Winner) @ 1.29
-↳ Kalinina is in strong clay-court form and the clear favourite over Korpatsch in the Hamburg quarterfinal.
+**:small_orange_diamond: 🎾 Alexander Blockx x Luciano Darderi**
+Darderi to win match (Match Winner) @ 1.50
+↳ Darderi (ATP 21) is the clear favourite over the lower-ranked Blockx in the Estoril semifinal.
 
-**:small_orange_diamond: 🎾 Tiago Torres x Hugo Gaston**
-Gaston to win match (Match Winner) @ 1.37
-↳ Gaston's experience and ranking make him the clear favourite over qualifier Torres in Estoril.
+**:small_orange_diamond: 🎾 Elina Avanesyan x Anna Bondar**
+Bondar to win match (Match Winner) @ 1.54
+↳ Bondar is favoured over Avanesyan in the Hamburg semifinal.
 
-**:small_orange_diamond: 🎾 Jaime Faria x Luciano Darderi**
-Darderi to win match (Match Winner) @ 1.46
-↳ Darderi is the clear bookmaker favourite over Portuguese wildcard Faria in the Estoril quarterfinal.
+**:small_orange_diamond: 🎾 Mayar Sherif x Tamara Korpatsch**
+Sherif to win match (Match Winner) @ 1.58
+↳ Sherif is favoured over Korpatsch in the other Hamburg semifinal.
 
-**:small_orange_diamond: 🎾 Lilli Tagger x Sara Bejlek**
-Bejlek to win match (Match Winner) @ 1.54
-↳ Bejlek is the clear favourite over Tagger in the Prague quarterfinal.
+**:small_orange_diamond: 🎾 Tereza Valentova x Daria Snigur**
+Valentova to win match (Match Winner) @ 1.62
+↳ Valentova is favoured over Snigur in the Prague semifinal.
 
-**:small_orange_diamond: 🎾 Alexander Bublik x Tomas Martin Etcheverry**
-Bublik to win match (Match Winner) @ 1.57
-↳ Top seed and defending champion Bublik is favoured over Etcheverry in the Kitzbuhel semifinal.
-
-**:moneybag: Total odds: ±168.09**
+**:moneybag: Total odds: ±122.65**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Twelve genuine favourites stacked across two sports, one selection per match, no longshots anywhere in the ticket. Six favourites from Iceland, Sweden, Argentina and Finland combine with six ATP/WTA favourites from Estoril, Kitzbuhel, Prague and Hamburg.
+Eleven genuine favourites stacked across two sports, one selection per match, no longshots anywhere in the ticket. Five football favourites from Brazil, Switzerland and Denmark combine with six ATP/WTA favourites from Prague, Kitzbuhel, Estoril and Hamburg.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
-window.DAILY_CARDS = `MATCH: Vikingur Reykjavik x Keflavik
+window.DAILY_CARDS = `MATCH: Santos x Chapecoense
 MARKET: Match result
-SELECTION: Vikingur Reykjavik to win
-ODDS: 1.25
+SELECTION: Santos to win
+ODDS: 1.35
 STAKE: 2u
 RISK: low
-ANALYSIS: Vikingur are dominant at home in Reykjavik and huge favourites over a mid-table Keflavik side in Iceland's top flight.
+ANALYSIS: Santos are strong favourites at home in Vila Belmiro against a struggling Chapecoense side in Serie A.
 ===
-MATCH: Vasteras SK x Orgryte IS
+MATCH: Lausanne Sport x Grasshoppers
 MARKET: Match result
-SELECTION: Vasteras SK to win
-ODDS: 1.46
+SELECTION: Lausanne Sport to win
+ODDS: 1.79
 STAKE: 1.5u
 RISK: low
-ANALYSIS: Vasteras, the reigning Superettan champions, are fancied at home in the Allsvenskan against an inconsistent Orgryte side.
+ANALYSIS: Lausanne Sport are fancied at home in the Swiss Super League opener against Grasshoppers.
 ===
-MATCH: Racing Avellaneda x Gimnasia La Plata
-MARKET: Match result
-SELECTION: Racing Avellaneda to win
-ODDS: 1.76
+MATCH: Servette x Basel
+MARKET: Double chance
+SELECTION: Servette or Draw
+ODDS: 1.38
 STAKE: 1u
 RISK: medium
-ANALYSIS: Racing are the clearly stronger side at home in Avellaneda against a struggling Gimnasia La Plata side.
+ANALYSIS: Servette have been in good recent form at home in Geneva and should at least avoid defeat against Basel.
 ===
-MATCH: Gimnasia Mendoza x Central Cordoba SDE
+MATCH: Luzern x FC Thun
 MARKET: Match result
-SELECTION: Gimnasia Mendoza to win
-ODDS: 1.82
+SELECTION: Luzern to win
+ODDS: 1.92
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Gimnasia Mendoza have the better recent form and home advantage against Central Cordoba SDE.
+ANALYSIS: Luzern come into the Super League opener in fine form and are backed at home against Thun.
 ===
-MATCH: Volsungur x Grindavik
+MATCH: Athletico Paranaense x Internacional
 MARKET: Match result
-SELECTION: Grindavik to win
-ODDS: 1.86
+SELECTION: Athletico Paranaense to win
+ODDS: 1.97
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Grindavik are the in-form side and fancied away from home in Iceland's First Division.
+ANALYSIS: Athletico Paranaense are fancied at home in Curitiba against Internacional in Serie A.
 ===
-MATCH: UMF Njardvik x Kopavogs
+MATCH: AGF Aarhus x Brondby
 MARKET: Match result
-SELECTION: UMF Njardvik to win
-ODDS: 2.10
+SELECTION: AGF Aarhus to win
+ODDS: 2.28
 STAKE: 0.5u
 RISK: high
-ANALYSIS: Njardvik have won three of their last five and are backed at home in this First Division clash.
+ANALYSIS: AGF Aarhus are the narrow favourites at home in the Danish Superliga against Brondby.
 ===
-MATCH: Velez Sarsfield x Instituto de Cordoba
+MATCH: Estudiantes Rio Cuarto x Club Atletico Tigre
 MARKET: Match result
-SELECTION: Velez Sarsfield to win
-ODDS: 2.14
+SELECTION: Club Atletico Tigre to win
+ODDS: 2.28
 STAKE: 0.5u
 RISK: high
-ANALYSIS: Velez are the far bigger club and fancied at home in Buenos Aires against a modest Instituto de Cordoba side.
+ANALYSIS: Tigre are the away favourites against Estudiantes Rio Cuarto in the Argentine Primera Division.
 ===
-MATCH: FF Jaro x Seinajoen JK
+MATCH: Atletico de Rafaela x Nueva Chicago
 MARKET: Match result
-SELECTION: Seinajoen JK to win
-ODDS: 2.15
+SELECTION: Atletico de Rafaela to win
+ODDS: 2.23
 STAKE: 0.25u
 RISK: high
-ANALYSIS: Seinajoen JK travel to Jakobstad as the bookmakers' clear favourites over FF Jaro in the Veikkausliiga.`;
+ANALYSIS: Atletico de Rafaela are backed at home against Nueva Chicago in the Primera B Nacional.`;
 
-window.DAILY_CHALLENGE = { date:"2026-07-24", legs:["Vikingur Reykjavik x Keflavik: Vikingur Reykjavik to win @ 1.25", "Racing Avellaneda x Gimnasia La Plata: Racing Avellaneda to win @ 1.76"], oddLow:2.20, oddHigh:2.20, justification:"Two short-priced favourites from Iceland's Premier League and Argentina's Primera Division, the safest realistic route to just over x2 on an unusually thin day for football." };
+window.DAILY_CHALLENGE = { date:"2026-07-25", legs:["Santos x Chapecoense: Santos to win @ 1.35", "Lausanne Sport x Grasshoppers: Lausanne Sport to win @ 1.79"], oddLow:2.42, oddHigh:2.42, justification:"Two short-priced favourites from Brazil's Serie A and the Swiss Super League opener, the safest realistic route to just over x2 today." };
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 window.FOOTBALL_EVENTS = [
-{match:"Vikingur Reykjavik x Keflavik", date:"2026-07-24", time:"22:00", comp:"Iceland Premier League", stage:"Round 16", venue:"Reykjavik", pick:"Vikingur Reykjavik", tier:"Safe Builder"},
-{match:"Racing Avellaneda x Gimnasia La Plata", date:"2026-07-25", time:"00:00", comp:"Argentina Primera Division", stage:"Round 1", venue:"Avellaneda", pick:"Racing Avellaneda", tier:"Safe Builder"},
-{match:"Vasteras SK x Orgryte IS", date:"2026-07-24", time:"19:00", comp:"Sweden Allsvenskan", stage:"Round 14", venue:"Vasteras", pick:"Vasteras SK", tier:"Value Builder"},
-{match:"Gimnasia Mendoza x Central Cordoba SDE", date:"2026-07-24", time:"21:45", comp:"Argentina Primera Division", stage:"Round 1", venue:"Mendoza", pick:"Gimnasia Mendoza", tier:"Value Builder"},
-{match:"Velez Sarsfield x Instituto de Cordoba", date:"2026-07-25", time:"00:00", comp:"Argentina Primera Division", stage:"Round 1", venue:"Buenos Aires", pick:"Velez Sarsfield", tier:"Value Builder"},
-{match:"Volsungur x Grindavik", date:"2026-07-24", time:"20:00", comp:"Iceland First Division", stage:"Round 15", venue:"Husavik", pick:"Grindavik", tier:"Jackpot Builder"},
-{match:"UMF Njardvik x Kopavogs", date:"2026-07-24", time:"21:15", comp:"Iceland First Division", stage:"Round 15", venue:"Njardvik", pick:"UMF Njardvik", tier:"Jackpot Builder"},
-{match:"FF Jaro x Seinajoen JK", date:"2026-07-24", time:"18:00", comp:"Finland Veikkausliiga", stage:"Regular Season", venue:"Jakobstad", pick:"Seinajoen JK", tier:"Jackpot Builder"}
+{match:"Santos x Chapecoense", date:"2026-07-25", time:"23:30", comp:"Brazil Serie A", stage:"Round 20", venue:"Santos", pick:"Santos", tier:"Safe Builder"},
+{match:"Lausanne Sport x Grasshoppers", date:"2026-07-25", time:"18:00", comp:"Switzerland Super League", stage:"Round 1", venue:"Lausanne", pick:"Lausanne Sport", tier:"Safe Builder"},
+{match:"Servette x Basel", date:"2026-07-25", time:"18:00", comp:"Switzerland Super League", stage:"Round 1", venue:"Geneva", pick:"Servette", tier:"Value Builder"},
+{match:"Luzern x FC Thun", date:"2026-07-25", time:"20:30", comp:"Switzerland Super League", stage:"Round 1", venue:"Luzern", pick:"Luzern", tier:"Value Builder"},
+{match:"Athletico Paranaense x Internacional", date:"2026-07-25", time:"23:30", comp:"Brazil Serie A", stage:"Round 20", venue:"Curitiba", pick:"Athletico Paranaense", tier:"Value Builder"},
+{match:"AGF Aarhus x Brondby", date:"2026-07-25", time:"18:00", comp:"Denmark Superliga", stage:"Round 1", venue:"Aarhus", pick:"AGF Aarhus", tier:"Jackpot Builder"},
+{match:"Estudiantes Rio Cuarto x Club Atletico Tigre", date:"2026-07-25", time:"19:45", comp:"Argentina Primera Division", stage:"Round 1", venue:"Rio Cuarto", pick:"Club Atletico Tigre", tier:"Jackpot Builder"},
+{match:"Atletico de Rafaela x Nueva Chicago", date:"2026-07-25", time:"21:00", comp:"Argentina Primera B Nacional", stage:"Round 22", venue:"Rafaela", pick:"Atletico de Rafaela", tier:"Jackpot Builder"}
 ];
