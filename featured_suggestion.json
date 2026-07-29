@@ -1,15 +1,15 @@
 {
-  "type": "prop",
-  "period": "today",
-  "label": "Props · today",
-  "roi": 24.72,
-  "bets": 12,
-  "profit": 3.34,
+  "type": "card",
+  "period": "month",
+  "label": "Bets · this month",
+  "roi": 0.71,
+  "bets": 294,
+  "profit": 1.98,
   "total": {
-    "roi": -1.32,
-    "bets": 666,
-    "profit": -8.15
+    "roi": -3.34,
+    "bets": 684,
+    "profit": -21.11
   },
   "changed": true,
-  "computed_at": "2026-07-25 08:41"
+  "computed_at": "2026-07-29 08:45"
 }
