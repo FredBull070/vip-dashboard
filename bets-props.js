@@ -1,131 +1,129 @@
-/* BetLife365 Daily Prop Cards - 29-07-2026. DATA ONLY. UI-patch wordt door index.html geladen via bl-dashboard.js. Alleen bet365 NL-markten; geen match-winners, geen player SOT/aces. */
-window.DAILY_PROPS_VERSION = "2026-07-29";
-
+/* BetLife365 Daily Prop Cards - 30-07-2026. DATA ONLY, geen UI-patch aangeplakt (de dashboard UI-patch laadt apart via index.html). Alleen bet365 NL-markten; geen match-winners, geen player serve- of shot-statistiek-props. Geen Champions League vandaag (2e voorronde daar was 28/29-07); wel een drukke avond Europa League + Conference League 2e voorronde terugwedstrijden, plus ATP/WTA Washington 1/16 finales. NBA/NFL/NHL buiten seizoen. */
+window.DAILY_PROPS_VERSION = "2026-07-30";
 window.DAILY_PROPS = `SPORT: Football
-MATCH: Gornik Zabrze x Fenerbahce
-MARKET: Anytime Goalscorer
-SELECTION: Anderson Talisca to score anytime
-ODDS: 2.10*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Talisca scored the only goal in the first leg and Fenerbahce, 1-0 up on aggregate in this Champions League Q2 tie, will lean on their talisman again away from home.
-===
-SPORT: Football
-MATCH: Gornik Zabrze x Fenerbahce
-MARKET: Both Teams To Score
-SELECTION: BTTS Yes
-ODDS: 1.85*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Gornik must attack at home to overturn the 1-0 deficit while Fenerbahce have scored in every leg of this campaign, pointing to goals at both ends.
-===
-SPORT: Football
-MATCH: Crvena Zvezda x Larne
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.45*
-STAKE: 1u
-RISK: low
-ANALYSIS: Red Star already lead 4-0 on aggregate after routing Larne away in the first leg; a similarly one-sided, goal-heavy second leg at home is the likely script.
-===
-SPORT: Football
-MATCH: Crvena Zvezda x Larne
+MATCH: Maccabi Tel-Aviv x Sheriff
 MARKET: Team Total Goals
-SELECTION: Crvena Zvezda Over 1.5 goals
+SELECTION: Maccabi Tel-Aviv Over 1.5 team goals
 ODDS: 1.40*
-STAKE: 1u
+STAKE: 2u
 RISK: low
-ANALYSIS: Red Star scored four goals in the first leg alone against a Larne defence that has struggled all tie, making another multi-goal home display likely.
+ANALYSIS: Europa League 2e voorronde terugwedstrijd, Maccabi won de heenwedstrijd met 5-0 bij Sheriff en speelt nu thuis in Tel Aviv; het klasseverschil is enorm.
 ===
 SPORT: Football
-MATCH: Slovan Bratislava x Iberia 1999
+MATCH: Ajax x Vojvodina
 MARKET: Team Total Goals
-SELECTION: Slovan Bratislava Over 1.5 goals
-ODDS: 1.55*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Slovan won the first leg 2-0 away and now get a strong home crowd for the return; the clear class gap points to another multi-goal outing.
+SELECTION: Ajax Over 1.5 team goals
+ODDS: 1.45*
+STAKE: 2u
+RISK: low
+ANALYSIS: Conference League 2e voorronde terugwedstrijd, Ajax is thuis in de Johan Cruijff ArenA torenhoog favoriet tegen het Servische Vojvodina.
 ===
 SPORT: Football
-MATCH: Lech Poznan x AGF
+MATCH: Braga x Zeleznicar Pancevo
 MARKET: Total Goals
 SELECTION: Over 2.5 goals
-ODDS: 1.50*
-STAKE: 1u
+ODDS: 1.55*
+STAKE: 2u
 RISK: low
-ANALYSIS: The first leg produced five goals and Lech, already 4-1 up on aggregate, have no reason to sit back at home against an AGF side that must chase the tie.
+ANALYSIS: Conference League 2e voorronde terugwedstrijd, Portugese vaste Europa-deelnemer Braga is thuis een enorme favoriet tegen het Servische amateurniveau van Zeleznicar Pancevo.
 ===
 SPORT: Football
-MATCH: CSU Craiova x Levski Sofia
-MARKET: Both Teams To Score
-SELECTION: BTTS Yes
+MATCH: PAOK x Dynamo Kyiv
+MARKET: Total Goals
+SELECTION: Over 2.5 goals
 ODDS: 1.75*
-STAKE: 0.5u
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Craiova must attack at home to overturn the 1-0 first-leg deficit, while Levski have already shown in this tie that they can find the net on the road.
+ANALYSIS: Europa League 2e voorronde terugwedstrijd, de heenwedstrijd eindigde doelpuntrijk (3-2) en PAOK is thuis in Toumba ongeslagen in de laatste 7 Europese kwalificatiewedstrijden.
 ===
 SPORT: Football
-MATCH: Rapid Wien x FC Santa Coloma
+MATCH: Ferencvaros x Twente
+MARKET: Both Teams To Score
+SELECTION: Yes
+ODDS: 1.65*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Europa League 2e voorronde terugwedstrijd, de heenwedstrijd eindigde 2-1 met doelpunten over en weer; beide ploegen speelden aanvallend en dat patroon lijkt zich in Boedapest te herhalen.
+===
+SPORT: Football
+MATCH: Ferencvaros x Twente
+MARKET: Anytime Goalscorer
+SELECTION: Lenny Joseph
+ODDS: 2.30*
+STAKE: 0.25u
+RISK: high
+ANALYSIS: Spits Lenny Joseph scoorde de winnende treffer in de 80e minuut van de heenwedstrijd en is de vaste aanvalsleider van Ferencvaros; schattingsodd, niet Oddspedia-geverifieerd.
+===
+SPORT: Football
+MATCH: Benfica x St. Gallen
 MARKET: Team Total Goals
-SELECTION: Rapid Wien Over 1.5 goals
-ODDS: 1.45*
-STAKE: 1u
+SELECTION: Benfica Over 1.5 team goals
+ODDS: 1.55*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Europa League 2e voorronde terugwedstrijd, Benfica staat verrassend achter op agg (1-2) na de zege van St. Gallen in de heenwedstrijd en moet thuis in Lissabon alles op alles zetten voor de goals.
+===
+SPORT: Football
+MATCH: Midtjylland x Besiktas
+MARKET: Total Goals
+SELECTION: Over 2.5 goals
+ODDS: 1.80*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Europa League 2e voorronde terugwedstrijd, Besiktas leidt nipt met 1-0 na de heenwedstrijd en beide ploegen spelen doorgaans aanvallend voetbal, wat een doelpuntrijke avond in Herning waarschijnlijk maakt.
+===
+SPORT: Football
+MATCH: Panathinaikos x Paks
+MARKET: Team Total Goals
+SELECTION: Panathinaikos Over 1.5 team goals
+ODDS: 1.50*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: Conference League 2e voorronde terugwedstrijd, Griekse topclub Panathinaikos is thuis duidelijk favoriet tegen het Hongaarse Paks.
+===
+SPORT: Tennis
+MATCH: Alex De Minaur x Cruz Hewitt
+MARKET: Total Games (Match)
+SELECTION: Under 18.5 games
+ODDS: 1.70*
+STAKE: 2u
 RISK: low
-ANALYSIS: Rapid already scored three away in the first leg and, with this Conference League tie all but settled, should keep creating and converting chances at home.
+ANALYSIS: ATP Washington 1/16 finale, titelverdediger en reekshoofd 1 De Minaur treft de 17-jarige wildcard Hewitt; het klasseverschil is groot genoeg voor een kort duel.
 ===
 SPORT: Tennis
-MATCH: Taylor Fritz x Kamil Majchrzak
-MARKET: Set Handicap
-SELECTION: Fritz -1.5 sets
-ODDS: 1.90*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Third seed Fritz is a clear class step up from Majchrzak on this hard court and should be fancied to close out the Round of 16 in straight sets.
-===
-SPORT: Tennis
-MATCH: Aleksandar Vukic x Lorenzo Musetti
-MARKET: Set Handicap
-SELECTION: Musetti -1.5 sets
-ODDS: 1.85*
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Fourth seed Musetti is the clear favourite against qualifier Vukic and should be backed to close it out in straight sets.
-===
-SPORT: Tennis
-MATCH: Ugo Humbert x Ben Shelton
-MARKET: Total Games (match)
+MATCH: Jakub Mensik x Brandon Nakashima
+MARKET: Total Games (Match)
 SELECTION: Over 21.5 games
-ODDS: 1.85*
-STAKE: 0.5u
+ODDS: 1.75*
+STAKE: 0.75u
 RISK: medium
-ANALYSIS: Both Humbert and second seed Shelton serve big and neither breaks routinely on this surface, pointing to a longer contest than a clean favourite scoreline suggests.
+ANALYSIS: ATP Washington 1/16 finale, reekshoofd 7 Mensik en de stevige Amerikaan Nakashima serveren allebei sterk, wat een langer, gelijkopgaand duel waarschijnlijk maakt.
+===
+SPORT: Tennis
+MATCH: Ben Shelton x Ugo Humbert
+MARKET: Total Games (Match)
+SELECTION: Over 21.5 games
+ODDS: 1.70*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: ATP Washington 1/16 finale, twee linkshandige grote opslagspelers tegen elkaar; met weinig breekkansen te verwachten ligt een langer duel voor de hand.
 ===
 SPORT: Tennis
 MATCH: Jessica Pegula x Magdalena Frech
-MARKET: Set Handicap
-SELECTION: Pegula -1.5 sets
-ODDS: 1.75*
-STAKE: 1u
+MARKET: Set Betting
+SELECTION: Pegula to win 2-0
+ODDS: 1.55*
+STAKE: 2u
 RISK: low
-ANALYSIS: Top seed Pegula is the clear class player in this Round of 16 tie against Frech and should be fancied to win in straight sets.
+ANALYSIS: WTA Washington 1/16 finale, top reekshoofd Pegula is duidelijk favoriet tegen de Poolse Frech op hardcourt.
 ===
 SPORT: Tennis
-MATCH: Ashlyn Krueger x Naomi Osaka
-MARKET: Set Handicap
-SELECTION: Osaka -1.5 sets
-ODDS: 1.80*
-STAKE: 1u
-RISK: low
-ANALYSIS: Third seed Osaka's power game should be too much for Krueger over the best of three, pointing to a straight-sets win.
-===
-SPORT: Tennis
-MATCH: Leylah Fernandez x Alexandra Eala
-MARKET: Total Games (match)
-SELECTION: Over 20.5 games
-ODDS: 1.80*
-STAKE: 0.25u
-RISK: high
-ANALYSIS: Defending champion Fernandez and in-form Eala are close in level and both compete deep into return games, suggesting a contest that goes past the standard games benchmark.`;
-
-window.EMBEDDED_PROPS = { date: "2026-07-29" };
+MATCH: Elina Svitolina x Polina Kudermetova
+MARKET: Set Betting
+SELECTION: Svitolina to win 2-0
+ODDS: 1.50*
+STAKE: 0.75u
+RISK: medium
+ANALYSIS: WTA Washington 1/16 finale, reekshoofd 2 en ervaren Svitolina is favoriet, al kan de onvoorspelbare Kudermetova voor verzet zorgen.`;
+window.EMBEDDED_PROPS = { date: "2026-07-30" };
 window.DAILY_PROPS_SETTLED = [];
