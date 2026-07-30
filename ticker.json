@@ -1,14 +1,14 @@
 [
-  {"s":"football","m":"Kairat x AC Omonia","k":"Kairat","o":2.06},
-  {"s":"football","m":"Kauno Zalgiris x KI Klaksvik","k":"Kauno Zalgiris","o":1.73},
-  {"s":"football","m":"Lech Poznan x AGF Aarhus","k":"Lech Poznan","o":1.65},
-  {"s":"football","m":"CS Universitatea Craiova x Levski","k":"CS Universitatea Craiova","o":1.87},
-  {"s":"football","m":"Hapoel Beer Sheva x Vikingur Reykjavik","k":"Hapoel Beer Sheva","o":1.56},
-  {"s":"football","m":"Gornik Zabrze x Fenerbahce","k":"Fenerbahce","o":1.41},
-  {"s":"football","m":"Slovan Bratislava x Iberia 1999","k":"Slovan Bratislava","o":1.29},
-  {"s":"football","m":"Dukagjini FK x Lugano","k":"Lugano","o":1.62},
-  {"s":"football","m":"Copenhagen x MFC Zhytomyr","k":"Copenhagen","o":1.55},
-  {"s":"tennis","m":"Aleksandar Vukic x Lorenzo Musetti","k":"Musetti","o":1.38},
-  {"s":"tennis","m":"Taylor Fritz x Kamil Majchrzak","k":"Fritz","o":1.29},
-  {"s":"tennis","m":"Emma Navarro x Elisabetta Cocciaretto","k":"Navarro","o":1.45}
+{"s":"football","m":"Maccabi Tel Aviv x FC Sheriff Tiraspol","k":"Maccabi Tel Aviv","o":1.34},
+{"s":"football","m":"Gent x LNZ Lebedyn","k":"Gent","o":1.43},
+{"s":"football","m":"Brann x Universitatea Cluj","k":"Brann","o":1.38},
+{"s":"football","m":"PAOK FC x Dynamo Kiev","k":"PAOK FC","o":1.68},
+{"s":"football","m":"CFR Cluj x Alashkert","k":"CFR Cluj","o":1.56},
+{"s":"football","m":"GKS Katowice x MSK Zilina","k":"GKS Katowice","o":1.68},
+{"s":"football","m":"Koper x NSI Runavik","k":"Koper","o":1.43},
+{"s":"football","m":"FK Shkendija x NK Bravo","k":"FK Shkendija","o":1.55},
+{"s":"football","m":"HB Torshavn x Motherwell","k":"Motherwell","o":1.49},
+{"s":"tennis","m":"Brandon Nakashima x Jakub Mensik","k":"Mensik","o":1.70},
+{"s":"tennis","m":"Alex De Minaur x Cruz Hewitt","k":"De Minaur","o":1.20},
+{"s":"tennis","m":"Jessica Pegula x Magdalena Frech","k":"Pegula","o":1.24}
 ]

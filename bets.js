@@ -1,111 +1,119 @@
 /* BetLife365 daily bets - written by the daily task, read by the dashboard. Code stays separate. */
-window.DAILY_VERSION = "2026-07-29";
+window.DAILY_VERSION = "2026-07-30";
 
-window.DAILY_MESSAGES = `**🟢 #13 Safe Builder Parley (⚽ Football): 29-07-2026**
+window.DAILY_MESSAGES = `**🟢 #52 Safe Builder Parley (⚽ Football): 30-07-2026**
 
-**:small_orange_diamond: Slovan Bratislava x Iberia 1999**
-Slovan Bratislava to win (Match Result) @ 1.29
-↳ Slovan lead 2-0 from the first leg away in Georgia and go into the second leg on a 4-match winning streak, unbeaten in 6; Iberia 1999 are big underdogs at Tehelne Pole.
+**:small_orange_diamond: Maccabi Tel Aviv x FC Sheriff Tiraspol**
+Maccabi Tel Aviv to win (Match Result) @ 1.34
+↳ Maccabi thrashed Sheriff 5-0 in the first leg and go into this second leg in Batumi with the tie already all but settled.
 
-**:small_orange_diamond: Gornik Zabrze x Fenerbahce**
-Fenerbahce to win (Match Result) @ 1.41
-↳ Fenerbahce already lead 1-0 from the first leg and arrive in Zabrze unbeaten in 7 with a 4-match winning streak.
+**:small_orange_diamond: Gent x LNZ Lebedyn**
+Gent to win (Match Result) @ 1.43
+↳ Gent host the second leg at the Ghelamco Arena as clear favourites against Ukrainian side LNZ Lebedyn in this Conference League qualifier.
 
-**:small_orange_diamond: Red Star Belgrade x Larne FC**
-Over 2.5 goals (Total Goals) @ 1.28
-↳ Red Star hammered Larne 4-0 in the first leg and have scored in 8 straight matches; with Larne needing to attack to have any hope of a comeback, goals look nailed on.
+**:small_orange_diamond: Brann x Universitatea Cluj**
+Brann to win (Match Result) @ 1.38
+↳ Brann are strong favourites on home turf in Bergen for this Conference League second leg against Universitatea Cluj.
 
-**:moneybag: Total odds: ±2.33**
+**:moneybag: Total odds: ±2.64**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three genuine favourites from three separate Champions League second qualifying round second legs today, each backed by a big first-leg cushion or a strong current run. Spread across different matches so one upset does not sink the ticket.
+Three genuine favourites from three separate European qualifying second legs today, each backed by a big first-leg cushion or clear home advantage. Spread across different matches so one upset does not sink the ticket.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #14 Value Builder Parley (⚽ Football): 29-07-2026**
+**🟡 #53 Value Builder Parley (⚽ Football): 30-07-2026**
 
-**:small_orange_diamond: Dukagjini FK x Lugano**
-Lugano to win (Match Result) @ 1.62
-↳ Lugano lead 1-0 from the first leg at home and have lost none of their last 6 away matches, scoring in 16 in a row.
+**:small_orange_diamond: PAOK FC x Dynamo Kiev**
+PAOK FC to win (Match Result) @ 1.68
+↳ PAOK are backed at home in Thessaloniki to see out their Europa League second leg against Dynamo Kiev.
 
-**:small_orange_diamond: Copenhagen x MFC Zhytomyr**
-Copenhagen to win (Match Result) @ 1.55
-↳ The first leg finished 3-3 away, but Copenhagen are unbeaten in 8 and have won 5 home matches in a row back at Parken.
+**:small_orange_diamond: CFR Cluj x Alashkert**
+CFR Cluj to win (Match Result) @ 1.56
+↳ CFR Cluj are clear favourites on home soil in Cluj-Napoca for this Conference League second leg against Alashkert.
 
-**:small_orange_diamond: CS Universitatea Craiova x Levski**
-CS Universitatea Craiova to win (Match Result) @ 1.87
-↳ Craiova trail 0-1 from the first leg but arrive on a 5-match winning streak, unbeaten in 15, with 4 home wins in a row.
+**:small_orange_diamond: GKS Katowice x MSK Zilina**
+GKS Katowice to win (Match Result) @ 1.68
+↳ GKS Katowice host MSK Zilina in the Conference League second leg and are favoured to advance at home.
 
-**:moneybag: Total odds: ±4.70**
+**:moneybag: Total odds: ±4.40**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Three favourites from three different qualifying second legs, backed by strong current form and either a first-leg lead or a big home run, stacked for a bigger total without touching underdog prices.
+Three solid favourites from three different qualifying second legs, all playing at home, stacked for a bigger total without touching underdog prices.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🔴 #15 Jackpot Builder Parley (⚽ Football): 29-07-2026**
+**🔴 #54 Jackpot Builder Parley (⚽ Football): 30-07-2026**
 
-**:small_orange_diamond: Lech Poznan x AGF Aarhus**
-Lech Poznan to win (Match Result) @ 1.65
-↳ Lech lead 4-1 from the first leg and are unbeaten in 14 games, with 7 home matches without defeat.
+**:small_orange_diamond: Koper x NSI Runavik**
+Koper to win (Match Result) @ 1.43
+↳ Koper are clear favourites at home in Slovenia for this Conference League second leg against NSI Runavik.
 
-**:small_orange_diamond: Kauno Zalgiris x KI Klaksvik**
-Kauno Zalgiris to win (Match Result) @ 1.73
-↳ Kauno are unbeaten in 8 games and get the second leg at home after a 0-0 draw away in the Faroe Islands.
+**:small_orange_diamond: FK Shkendija x NK Bravo**
+FK Shkendija to win (Match Result) @ 1.55
+↳ Shkendija are backed on home soil in Skopje to progress past NK Bravo in this Conference League second leg.
 
-**:small_orange_diamond: Hapoel Beer Sheva x Vikingur Reykjavik**
-Hapoel Beer Sheva to win (Match Result) @ 1.56
-↳ Despite trailing 1-2 on aggregate, Beer Sheva get the second leg at home in Beersheba, where they are backed as the clear favourites.
+**:small_orange_diamond: HB Torshavn x Motherwell**
+Motherwell to win (Match Result) @ 1.49
+↳ Motherwell travel to the Faroe Islands as clear favourites to see out their Conference League second leg against HB Torshavn.
 
-**:small_orange_diamond: Rapid Wien x FC Santa Coloma**
-Over 2.5 goals (Total Goals) @ 1.30
-↳ Rapid Wien already lead 3-1 and have won 5 straight games; Santa Coloma need to attack to have any hope of a comeback, which points to goals.
+**:small_orange_diamond: FK Velez Mostar x Dunajska Streda**
+Dunajska Streda to win (Match Result) @ 1.81
+↳ Dunajska Streda are favoured away from home in Zenica to close out their Conference League second leg against Velez Mostar.
 
-**:small_orange_diamond: Kairat x AC Omonia**
-Kairat to win (Match Result) @ 2.06
-↳ Kairat have won 4 home matches in a row and haven't lost at home in 10, and are the bookmaker's favourites to overturn the 0-1 first-leg deficit.
+**:small_orange_diamond: Valletta x Rakow Czestochowa**
+Rakow Czestochowa to win (Match Result) @ 1.48
+↳ Rakow Czestochowa are strong favourites away in Malta to see out their Conference League second leg against Valletta.
 
-**:moneybag: Total odds: ±11.93**
+**:moneybag: Total odds: ±8.85**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Five genuine favourites from five different Champions League second qualifying round second legs, each backed by strong current form or a first-leg cushion. We reach a realistic double-digit total purely by stacking more solid picks together, not by reaching for underdog prices.
+Five genuine favourites from five different Conference League and Europa League second legs, each backed by clear odds-implied favouritism. We reach a realistic double-digit total purely by stacking more solid picks together, not by reaching for underdog prices.
 
 **:bank: Bankroll:** 0.25u stake (0.25 - 0.5% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**:gift: FREE BET OF THE DAY | 29-07-2026**
-🎾 Sport of the day: Tennis
+**:gift: FREE BET OF THE DAY | 30-07-2026**
+⚽ Sport of the day: Football
 
 Today's free pick, straight from the VIP slate. Exactly what we are on and why:
 
-**:small_orange_diamond: Xin Yu Wang x Ludmilla Samsonova**
-Samsonova to win match (Match Winner) @ 1.55
-↳ Samsonova is hoger gerankt en slaat hard door op hardcourt, wat haar een reeel voordeel geeft op Wang.
+**:small_orange_diamond: Koper x NSI Runavik**
+Koper to win (Match Result) @ 1.43
+↳ Koper are clear favourites at home in Slovenia for this Conference League second leg against NSI Runavik.
 
-**:small_orange_diamond: Leylah Fernandez x Alexandra Eala**
-Eala to win match (Match Winner) @ 1.79
-↳ Eala zit in sterke vorm en begint als lichte favoriet tegenover thuisspeelster Fernandez.
+**:small_orange_diamond: FK Shkendija x NK Bravo**
+FK Shkendija to win (Match Result) @ 1.55
+↳ Shkendija are backed on home soil in Skopje to progress past NK Bravo in this Conference League second leg.
 
-**:small_orange_diamond: Alex De Minaur x Stefanos Tsitsipas**
-De Minaur to win match (Match Winner) @ 1.71
-↳ Titelverdediger De Minaur is favoriet op zijn sterke hardcourt, al maakt de kwaliteit van Tsitsipas dit een minder evidente partij dan de Safe-picks.
+**:small_orange_diamond: HB Torshavn x Motherwell**
+Motherwell to win (Match Result) @ 1.49
+↳ Motherwell travel to the Faroe Islands as clear favourites to see out their Conference League second leg against HB Torshavn.
 
-**:moneybag: Total odds: ±4.74**
+**:small_orange_diamond: FK Velez Mostar x Dunajska Streda**
+Dunajska Streda to win (Match Result) @ 1.81
+↳ Dunajska Streda are favoured away from home in Zenica to close out their Conference League second leg against Velez Mostar.
+
+**:small_orange_diamond: Valletta x Rakow Czestochowa**
+Rakow Czestochowa to win (Match Result) @ 1.48
+↳ Rakow Czestochowa are strong favourites away in Malta to see out their Conference League second leg against Valletta.
+
+**:moneybag: Total odds: ±8.85**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Drie favorieten met iets meer risico dan de Safe Builder, verspreid over drie losse partijen in Washington, elk met een reeel vorm- of rankingvoordeel.
+Five genuine favourites from five different Conference League and Europa League second legs today, each backed by clear odds-implied favouritism, no underdog stacking.
 
 ━━━━━━━━━━━━━━━━━━━━
-:green_circle: This is our **Value Builder** of the day, a step up in risk with three clear tennis favourites from Washington.
+:green_circle: This is our **Jackpot Builder** of the day, five stacked favourites for a realistic double-digit total.
 :trophy: VIP members get all the Builders (Safe, Value, Jackpot), the Lucky Shot and today's $10 to $1K challenge bet, each with the exact stake.
 :chart_with_upwards_trend: Every pick is logged in units with a fully transparent track record. No deleted bets, no cherry picking.
 :rocket: Want the full daily slate before kickoff? Join VIP: <#1087875037903724656>
@@ -113,280 +121,280 @@ Drie favorieten met iets meer risico dan de Safe Builder, verspreid over drie lo
 ​
 ​
 ===NEXT MESSAGE===
-**👑 Lucky Shot Parley (Multi-Sport): 29-07-2026** ⚽🎾
+**👑 Lucky Shot Parley (Multi-Sport): 30-07-2026** ⚽🎾
 
-**:small_orange_diamond: ⚽ Slovan Bratislava x Iberia 1999**
-Slovan Bratislava to win (Match Result) @ 1.29
-↳ Slovan lead 2-0 from the first leg and are unbeaten in 6, clear favourites at home in Bratislava.
+**:small_orange_diamond: ⚽ Maccabi Tel Aviv x FC Sheriff Tiraspol**
+Maccabi Tel Aviv to win (Match Result) @ 1.34
+↳ Maccabi thrashed Sheriff 5-0 in the first leg, all but settling this second leg in Batumi.
 
-**:small_orange_diamond: ⚽ Gornik Zabrze x Fenerbahce**
-Fenerbahce to win (Match Result) @ 1.41
-↳ Fenerbahce lead 1-0 from the first leg and are unbeaten in 7 heading into Zabrze.
+**:small_orange_diamond: ⚽ Gent x LNZ Lebedyn**
+Gent to win (Match Result) @ 1.43
+↳ Gent host LNZ Lebedyn at the Ghelamco Arena as clear favourites in this Conference League second leg.
 
-**:small_orange_diamond: ⚽ Red Star Belgrade x Larne FC**
-Over 2.5 goals (Total Goals) @ 1.28
-↳ Red Star won the first leg 4-0 and have scored in 8 straight matches.
+**:small_orange_diamond: ⚽ Brann x Universitatea Cluj**
+Brann to win (Match Result) @ 1.38
+↳ Brann are strong favourites on home turf in Bergen for this Conference League second leg.
 
-**:small_orange_diamond: ⚽ Dukagjini FK x Lugano**
-Lugano to win (Match Result) @ 1.62
-↳ Lugano lead 1-0 from the first leg and have lost none of their last 6 away matches.
+**:small_orange_diamond: ⚽ PAOK FC x Dynamo Kiev**
+PAOK FC to win (Match Result) @ 1.68
+↳ PAOK are backed at home in Thessaloniki in this Europa League second leg against Dynamo Kiev.
 
-**:small_orange_diamond: ⚽ Copenhagen x MFC Zhytomyr**
-Copenhagen to win (Match Result) @ 1.55
-↳ Copenhagen are unbeaten in 8 and have won 5 home matches in a row at Parken.
+**:small_orange_diamond: ⚽ CFR Cluj x Alashkert**
+CFR Cluj to win (Match Result) @ 1.56
+↳ CFR Cluj are clear favourites on home soil in Cluj-Napoca for this Conference League second leg.
 
-**:small_orange_diamond: ⚽ CS Universitatea Craiova x Levski**
-CS Universitatea Craiova to win (Match Result) @ 1.87
-↳ Craiova are on a 5-match winning streak and unbeaten in 15, with 4 home wins in a row.
+**:small_orange_diamond: ⚽ GKS Katowice x MSK Zilina**
+GKS Katowice to win (Match Result) @ 1.68
+↳ GKS Katowice host MSK Zilina in the Conference League second leg and are favoured at home.
 
-**:small_orange_diamond: ⚽ Lech Poznan x AGF Aarhus**
-Lech Poznan to win (Match Result) @ 1.65
-↳ Lech lead 4-1 from the first leg and are unbeaten in 14 games.
+**:small_orange_diamond: ⚽ Koper x NSI Runavik**
+Koper to win (Match Result) @ 1.43
+↳ Koper are clear favourites at home in Slovenia against NSI Runavik.
 
-**:small_orange_diamond: ⚽ Kauno Zalgiris x KI Klaksvik**
-Kauno Zalgiris to win (Match Result) @ 1.73
-↳ Kauno are unbeaten in 8 games and get the second leg at home after a 0-0 draw away.
+**:small_orange_diamond: ⚽ FK Shkendija x NK Bravo**
+FK Shkendija to win (Match Result) @ 1.55
+↳ Shkendija are backed on home soil in Skopje to progress past NK Bravo.
 
-**:small_orange_diamond: ⚽ Hapoel Beer Sheva x Vikingur Reykjavik**
-Hapoel Beer Sheva to win (Match Result) @ 1.56
-↳ Beer Sheva get the second leg at home in Beersheba, where they are backed as clear favourites despite trailing on aggregate.
+**:small_orange_diamond: ⚽ HB Torshavn x Motherwell**
+Motherwell to win (Match Result) @ 1.49
+↳ Motherwell travel to the Faroe Islands as clear favourites against HB Torshavn.
 
-**:small_orange_diamond: ⚽ Rapid Wien x FC Santa Coloma**
-Over 2.5 goals (Total Goals) @ 1.30
-↳ Rapid Wien lead 3-1 and have won 5 straight games; Santa Coloma must attack, which points to goals.
+**:small_orange_diamond: ⚽ FK Velez Mostar x Dunajska Streda**
+Dunajska Streda to win (Match Result) @ 1.81
+↳ Dunajska Streda are favoured away from home in Zenica against Velez Mostar.
 
-**:small_orange_diamond: 🎾 Aleksandar Vukic x Lorenzo Musetti**
-Musetti to win match (Match Winner) @ 1.38
-↳ Reekshoofd 4 Musetti is in prima vorm op hardcourt en heeft een duidelijk rankingvoordeel op Vukic.
+**:small_orange_diamond: ⚽ Valletta x Rakow Czestochowa**
+Rakow Czestochowa to win (Match Result) @ 1.48
+↳ Rakow Czestochowa are strong favourites away in Malta against Valletta.
 
-**:small_orange_diamond: 🎾 Taylor Fritz x Kamil Majchrzak**
-Fritz to win match (Match Winner) @ 1.29
-↳ Reekshoofd 3 Fritz speelt op zijn beste ondergrond thuis in de VS tegen de veel lager gerankte Majchrzak.
+**:small_orange_diamond: 🎾 Brandon Nakashima x Jakub Mensik**
+Mensik to win match (Match Winner) @ 1.70
+↳ Mensik heeft een sterker recent vormpeil en een 2-0 H2H-voorsprong op Nakashima op hardcourt.
 
-**:small_orange_diamond: 🎾 Emma Navarro x Elisabetta Cocciaretto**
-Navarro to win match (Match Winner) @ 1.45
-↳ Thuisspeelster Navarro (top 10) is duidelijk favoriet tegenover Cocciaretto op hardcourt.
+**:small_orange_diamond: 🎾 Alex De Minaur x Cruz Hewitt**
+Under 2.5 sets (De Minaur wint in twee sets) @ 1.20
+↳ Titelverdediger en reekshoofd De Minaur is een overduidelijke favoriet tegen de lager gerankte qualifier Hewitt op zijn beste ondergrond.
 
-**:small_orange_diamond: 🎾 Xin Yu Wang x Ludmilla Samsonova**
-Samsonova to win match (Match Winner) @ 1.55
-↳ Samsonova is hoger gerankt en slaat hard door op hardcourt, wat haar een reeel voordeel geeft op Wang.
+**:small_orange_diamond: 🎾 Janice Tjen x Anna Kalinskaya**
+Kalinskaya to win match (Match Winner) @ 1.36
+↳ Kalinskaya (WTA 20) is duidelijk hoger gerankt dan Tjen (WTA 37) en geldt als de logische favoriet op hardcourt.
 
-**:small_orange_diamond: 🎾 Leylah Fernandez x Alexandra Eala**
-Eala to win match (Match Winner) @ 1.79
-↳ Eala zit in sterke vorm en begint als lichte favoriet tegenover thuisspeelster Fernandez.
+**:small_orange_diamond: 🎾 Terence Atmane x Alejandro Tabilo**
+Tabilo to win match (Match Winner) @ 2.00
+↳ Tabilo (ATP 30) staat hoger dan Atmane (ATP 56) en won in drie sets van Griekspoor, wat hem een lichte voorkeur geeft.
 
-**:small_orange_diamond: 🎾 Alex De Minaur x Stefanos Tsitsipas**
-De Minaur to win match (Match Winner) @ 1.71
-↳ Titelverdediger De Minaur is favoriet op zijn sterke hardcourt tegenover Tsitsipas.
+**:small_orange_diamond: 🎾 Jessica Pegula x Magdalena Frech**
+Under 2.5 sets (Pegula wint in twee sets) @ 1.24
+↳ Reekshoofd 3 Pegula heeft Frech driemaal op rij verslagen (3-0 H2H) en is torenhoog favoriet op hardcourt in Washington.
 
-**:moneybag: Total odds: ±775.04**
+**:moneybag: Total odds: ±708.73**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Sixteen genuine favourites stacked across two sports, ten Champions League and Europa Conference League second-leg favourites combined with six ATP/WTA Washington favourites, one selection per match, no underdogs anywhere in the ticket.
+Sixteen genuine favourites stacked across two sports, eleven Europa League and Europa Conference League second-leg favourites combined with five ATP/WTA Washington favourites, one selection per match, no underdogs anywhere in the ticket.
 
 **:bank: Bankroll:** 0.1u stake (0.05 - 0.1% of bankroll)`;
 
-window.DAILY_CARDS = `MATCH: Slovan Bratislava x Iberia 1999
+window.DAILY_CARDS = `MATCH: Maccabi Tel Aviv x FC Sheriff Tiraspol
 MARKET: Match Result
-SELECTION: Slovan Bratislava to win
-ODDS: 1.29
+SELECTION: Maccabi Tel Aviv to win
+ODDS: 1.34
 STAKE: 2u
 RISK: low
-ANALYSIS: Slovan lead 2-0 from the first leg away in Georgia and are on a 4-match winning streak, unbeaten in 6.
+ANALYSIS: Maccabi thrashed Sheriff 5-0 in the first leg and the tie is already all but settled ahead of this second leg in Batumi.
 ===
-MATCH: Gornik Zabrze x Fenerbahce
+MATCH: Gent x LNZ Lebedyn
 MARKET: Match Result
-SELECTION: Fenerbahce to win
-ODDS: 1.41
+SELECTION: Gent to win
+ODDS: 1.43
 STAKE: 1.5u
 RISK: low
-ANALYSIS: Fenerbahce lead 1-0 from the first leg and are unbeaten in 7 games heading into Zabrze.
+ANALYSIS: Gent host the second leg at the Ghelamco Arena as clear favourites against Ukrainian side LNZ Lebedyn.
 ===
-MATCH: Red Star Belgrade x Larne FC
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.28
+MATCH: Brann x Universitatea Cluj
+MARKET: Match Result
+SELECTION: Brann to win
+ODDS: 1.38
 STAKE: 1.5u
 RISK: low
-ANALYSIS: Red Star won the first leg 4-0 and have scored in 8 straight matches; Larne must attack to have any hope.
+ANALYSIS: Brann are strong favourites on home turf in Bergen for this Conference League second leg.
 ===
-MATCH: Dukagjini FK x Lugano
+MATCH: PAOK FC x Dynamo Kiev
 MARKET: Match Result
-SELECTION: Lugano to win
-ODDS: 1.62
+SELECTION: PAOK FC to win
+ODDS: 1.68
 STAKE: 1u
 RISK: medium
-ANALYSIS: Lugano lead 1-0 from the first leg and have lost none of their last 6 away matches.
+ANALYSIS: PAOK are backed at home in Thessaloniki to see out their Europa League second leg against Dynamo Kiev.
 ===
-MATCH: Copenhagen x MFC Zhytomyr
+MATCH: CFR Cluj x Alashkert
 MARKET: Match Result
-SELECTION: Copenhagen to win
-ODDS: 1.55
+SELECTION: CFR Cluj to win
+ODDS: 1.56
 STAKE: 1u
 RISK: medium
-ANALYSIS: The first leg finished 3-3 away, but Copenhagen are unbeaten in 8 with 5 home wins in a row.
+ANALYSIS: CFR Cluj are clear favourites on home soil in Cluj-Napoca for this Conference League second leg.
 ===
-MATCH: CS Universitatea Craiova x Levski
+MATCH: GKS Katowice x MSK Zilina
 MARKET: Match Result
-SELECTION: CS Universitatea Craiova to win
-ODDS: 1.87
+SELECTION: GKS Katowice to win
+ODDS: 1.68
 STAKE: 0.75u
 RISK: medium
-ANALYSIS: Craiova trail 0-1 from the first leg but are on a 5-match winning streak, unbeaten in 15.
+ANALYSIS: GKS Katowice host MSK Zilina in the Conference League second leg and are favoured to advance at home.
 ===
-MATCH: Lech Poznan x AGF Aarhus
+MATCH: Koper x NSI Runavik
 MARKET: Match Result
-SELECTION: Lech Poznan to win
-ODDS: 1.65
+SELECTION: Koper to win
+ODDS: 1.43
+STAKE: 0.5u
+RISK: low
+ANALYSIS: Koper are clear favourites at home in Slovenia for this Conference League second leg against NSI Runavik.
+===
+MATCH: FK Shkendija x NK Bravo
+MARKET: Match Result
+SELECTION: FK Shkendija to win
+ODDS: 1.55
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Lech lead 4-1 from the first leg and are unbeaten in 14 games.
+ANALYSIS: Shkendija are backed on home soil in Skopje to progress past NK Bravo in this Conference League second leg.
 ===
-MATCH: Kauno Zalgiris x KI Klaksvik
+MATCH: HB Torshavn x Motherwell
 MARKET: Match Result
-SELECTION: Kauno Zalgiris to win
-ODDS: 1.73
+SELECTION: Motherwell to win
+ODDS: 1.49
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Kauno are unbeaten in 8 games and host the second leg after a 0-0 draw away.
+ANALYSIS: Motherwell travel to the Faroe Islands as clear favourites to see out their Conference League second leg against HB Torshavn.
 ===
-MATCH: Hapoel Beer Sheva x Vikingur Reykjavik
+MATCH: FK Velez Mostar x Dunajska Streda
 MARKET: Match Result
-SELECTION: Hapoel Beer Sheva to win
-ODDS: 1.56
+SELECTION: Dunajska Streda to win
+ODDS: 1.81
 STAKE: 0.5u
 RISK: medium
-ANALYSIS: Beer Sheva get the second leg at home in Beersheba, where they are the clear favourites despite trailing on aggregate.
+ANALYSIS: Dunajska Streda are favoured away from home in Zenica to close out their Conference League second leg against Velez Mostar.
 ===
-MATCH: Rapid Wien x FC Santa Coloma
-MARKET: Total Goals
-SELECTION: Over 2.5 goals
-ODDS: 1.30
-STAKE: 0.5u
-RISK: medium
-ANALYSIS: Rapid Wien lead 3-1 and have won 5 straight games; Santa Coloma must attack, which points to goals.
-===
-MATCH: Kairat x AC Omonia
+MATCH: Valletta x Rakow Czestochowa
 MARKET: Match Result
-SELECTION: Kairat to win
-ODDS: 2.06
+SELECTION: Rakow Czestochowa to win
+ODDS: 1.48
 STAKE: 0.25u
-RISK: high
-ANALYSIS: Kairat have won 4 home matches in a row and haven't lost at home in 10; the bookmaker's favourites to overturn a 0-1 deficit.`;
+RISK: medium
+ANALYSIS: Rakow Czestochowa are strong favourites away in Malta to see out their Conference League second leg against Valletta.`;
 
-window.DAILY_CHALLENGE = { date:"2026-07-29", legs:["Slovan Bratislava x Iberia 1999: Slovan Bratislava to win @ 1.29", "Dukagjini FK x Lugano: Lugano to win @ 1.62"], oddLow:2.09, oddHigh:2.09, justification:"Two clear favourites, Slovan Bratislava and Lugano, from two different Champions League and Europa Conference League second legs today, each backed by a first-leg lead. The safest realistic route to just over x2." };
+window.DAILY_CHALLENGE = { date:"2026-07-30", legs:["Maccabi Tel Aviv x FC Sheriff Tiraspol: Maccabi Tel Aviv to win @ 1.34", "FK Shkendija x NK Bravo: FK Shkendija to win @ 1.55"], oddLow:2.08, oddHigh:2.08, justification:"Two clear favourites, Maccabi Tel Aviv (already leading 5-0 on aggregate) and FK Shkendija (strong home favourites in Skopje), from two different Europa League and Conference League second legs today. The safest realistic route to just over x2." };
 window.DAILY_SETTLED = [];
 window.DAILY_CHALLENGE_RESULT = null;
 window.FOOTBALL_EVENTS = [
 {
-"match": "Dukagjini FK x Lugano",
-"date": "2026-07-29",
-"time": "16:30",
-"comp": "Europa Conference League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "18 June Stadium, Klina, Kosovo",
-"pick": "Lugano",
-"tier": "Value Builder"
-},
-{
-"match": "Kairat x AC Omonia",
-"date": "2026-07-29",
-"time": "17:00",
-"comp": "Champions League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Central Stadium, Almaty, Kazakhstan",
-"pick": "Kairat",
-"tier": "Jackpot Builder"
-},
-{
-"match": "Kauno Zalgiris x KI Klaksvik",
-"date": "2026-07-29",
+"match": "Maccabi Tel Aviv x FC Sheriff Tiraspol",
+"date": "2026-07-30",
 "time": "18:00",
-"comp": "Champions League",
+"comp": "Europa League",
 "stage": "Qualifying Round 2, 2nd Leg",
-"venue": "NFA stadionas, Kaunas, Lithuania",
-"pick": "Kauno Zalgiris",
-"tier": "Jackpot Builder"
+"venue": "Batumi Arena, Batumi, Georgia",
+"pick": "Maccabi Tel Aviv",
+"tier": "Safe Builder"
 },
 {
-"match": "Lech Poznan x AGF Aarhus",
-"date": "2026-07-29",
-"time": "19:00",
-"comp": "Champions League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Stadium Poznan, Poznan, Poland",
-"pick": "Lech Poznan",
-"tier": "Jackpot Builder"
-},
-{
-"match": "Copenhagen x MFC Zhytomyr",
-"date": "2026-07-29",
+"match": "Brann x Universitatea Cluj",
+"date": "2026-07-30",
 "time": "19:00",
 "comp": "Europa Conference League",
 "stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Parken Stadium, Copenhagen, Denmark",
-"pick": "Copenhagen",
-"tier": "Value Builder"
+"venue": "Brann Stadion, Bergen, Norway",
+"pick": "Brann",
+"tier": "Safe Builder"
 },
 {
-"match": "CS Universitatea Craiova x Levski",
-"date": "2026-07-29",
-"time": "19:30",
-"comp": "Champions League",
+"match": "HB Torshavn x Motherwell",
+"date": "2026-07-30",
+"time": "19:00",
+"comp": "Europa Conference League",
 "stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Stadionul Ion Oblemenco, Craiova, Romania",
-"pick": "CS Universitatea Craiova",
-"tier": "Value Builder"
-},
-{
-"match": "Hapoel Beer Sheva x Vikingur Reykjavik",
-"date": "2026-07-29",
-"time": "19:30",
-"comp": "Champions League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Toto Turner Stadium, Beersheba, Israel",
-"pick": "Hapoel Beer Sheva",
+"venue": "Torsvollur, Torshavn, Faroe Islands",
+"pick": "Motherwell",
 "tier": "Jackpot Builder"
 },
 {
-"match": "Gornik Zabrze x Fenerbahce",
-"date": "2026-07-29",
+"match": "FK Velez Mostar x Dunajska Streda",
+"date": "2026-07-30",
+"time": "19:00",
+"comp": "Europa Conference League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Bilino Polje, Zenica, Bosnia & Herzegovina",
+"pick": "Dunajska Streda",
+"tier": "Jackpot Builder"
+},
+{
+"match": "Valletta x Rakow Czestochowa",
+"date": "2026-07-30",
+"time": "19:30",
+"comp": "Europa Conference League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Centenary Stadium, Ta' Qali, Malta",
+"pick": "Rakow Czestochowa",
+"tier": "Jackpot Builder"
+},
+{
+"match": "PAOK FC x Dynamo Kiev",
+"date": "2026-07-30",
+"time": "19:45",
+"comp": "Europa League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Toumba Stadium, Thessaloniki, Greece",
+"pick": "PAOK FC",
+"tier": "Value Builder"
+},
+{
+"match": "FK Shkendija x NK Bravo",
+"date": "2026-07-30",
 "time": "20:00",
-"comp": "Champions League",
+"comp": "Europa Conference League",
 "stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Stadion im. Ernesta Pohla, Zabrze, Poland",
-"pick": "Fenerbahce",
-"tier": "Safe Builder"
+"venue": "Tose Proeski National Arena, Skopje, North Macedonia",
+"pick": "FK Shkendija",
+"tier": "Jackpot Builder"
 },
 {
-"match": "Red Star Belgrade x Larne FC",
-"date": "2026-07-29",
-"time": "20:00",
-"comp": "Champions League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Stadium Rajko Mitic, Belgrade, Serbia",
-"pick": "Red Star Belgrade (Over 2.5)",
-"tier": "Safe Builder"
-},
-{
-"match": "Slovan Bratislava x Iberia 1999",
-"date": "2026-07-29",
-"time": "20:15",
-"comp": "Champions League",
-"stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Tehelne Pole Stadion, Bratislava, Slovakia",
-"pick": "Slovan Bratislava",
-"tier": "Safe Builder"
-},
-{
-"match": "Rapid Wien x FC Santa Coloma",
-"date": "2026-07-29",
+"match": "Gent x LNZ Lebedyn",
+"date": "2026-07-30",
 "time": "20:30",
 "comp": "Europa Conference League",
 "stage": "Qualifying Round 2, 2nd Leg",
-"venue": "Allianz Stadion, Vienna, Austria",
-"pick": "Rapid Wien (Over 2.5)",
+"venue": "Ghelamco Arena, Ghent, Belgium",
+"pick": "Gent",
+"tier": "Safe Builder"
+},
+{
+"match": "CFR Cluj x Alashkert",
+"date": "2026-07-30",
+"time": "20:30",
+"comp": "Europa Conference League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Dr. Constantin Radulescu, Cluj-Napoca, Romania",
+"pick": "CFR Cluj",
+"tier": "Value Builder"
+},
+{
+"match": "GKS Katowice x MSK Zilina",
+"date": "2026-07-30",
+"time": "20:30",
+"comp": "Europa Conference League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Stadium Katowice, Katowice, Poland",
+"pick": "GKS Katowice",
+"tier": "Value Builder"
+},
+{
+"match": "Koper x NSI Runavik",
+"date": "2026-07-30",
+"time": "20:45",
+"comp": "Europa Conference League",
+"stage": "Qualifying Round 2, 2nd Leg",
+"venue": "Bonifika Stadium, Koper, Slovenia",
+"pick": "Koper",
 "tier": "Jackpot Builder"
 }
 ];
