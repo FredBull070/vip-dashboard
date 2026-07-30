@@ -1,94 +1,82 @@
 /* BetLife365 daily TENNIS bets - written by the tennis task, read by the dashboard. Code stays separate from bets.js and index.html. */
-window.DAILY_TENNIS = `**🟢 #T70 Safe Builder Parley (🎾 Tennis): 29-07-2026**
+window.DAILY_TENNIS = `**🟢 #T72 Safe Builder Parley (🎾 Tennis): 30-07-2026**
 
-**:small_orange_diamond: Aleksandar Vukic x Lorenzo Musetti**
-Musetti to win match (Match Winner) @ 1.38
-↳ Reekshoofd 4 Musetti is in prima vorm op hardcourt en heeft een duidelijk rankingvoordeel op Vukic in de Knockout Round of 16.
+**:small_orange_diamond: Brandon Nakashima x Jakub Mensik**
+Mensik to win match (Match Winner) @ 1.70
+↳ Mensik heeft een sterker recent vormpeil en een 2-0 H2H-voorsprong op Nakashima op hardcourt.
 
-**:small_orange_diamond: Taylor Fritz x Kamil Majchrzak**
-Fritz to win match (Match Winner) @ 1.29
-↳ Reekshoofd 3 Fritz speelt op zijn beste ondergrond thuis in de VS tegen de veel lager gerankte Majchrzak.
+**:small_orange_diamond: Alex De Minaur x Cruz Hewitt**
+Under 2.5 sets (De Minaur wint in twee sets) @ 1.20
+↳ Titelverdediger en reekshoofd De Minaur is een overduidelijke favoriet tegen de lager gerankte qualifier Hewitt op zijn beste ondergrond.
 
-**:small_orange_diamond: Emma Navarro x Elisabetta Cocciaretto**
-Navarro to win match (Match Winner) @ 1.45
-↳ Thuisspeelster Navarro (top 10) is duidelijk favoriet tegenover Cocciaretto op hardcourt.
-
-**:moneybag: Total odds: ±2.58**
+**:moneybag: Total odds: ±2.04**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Drie duidelijke favorieten op de knockoutdag van de Mubadala DC Open in Washington, elk met een reeel ranking- of vormvoordeel op hardcourt.
+Twee duidelijke favorieten in de Knockout Round of 16 van de Mubadala DC Open in Washington, elk met een reeel ranking- of vormvoordeel op hardcourt.
 
 **:bank: Bankroll:** 2u stake (2 - 3% of bankroll)
 ​
 ​
 ===NEXT MESSAGE===
-**🟡 #T71 Value Builder Parley (🎾 Tennis): 29-07-2026**
+**🟡 #T73 Value Builder Parley (🎾 Tennis): 30-07-2026**
 
-**:small_orange_diamond: Xin Yu Wang x Ludmilla Samsonova**
-Samsonova to win match (Match Winner) @ 1.55
-↳ Samsonova is hoger gerankt en slaat hard door op hardcourt, wat haar een reeel voordeel geeft op Wang.
+**:small_orange_diamond: Janice Tjen x Anna Kalinskaya**
+Kalinskaya to win match (Match Winner) @ 1.36
+↳ Kalinskaya (WTA 20) is duidelijk hoger gerankt dan Tjen (WTA 37) en geldt als de logische favoriet op hardcourt.
 
-**:small_orange_diamond: Leylah Fernandez x Alexandra Eala**
-Eala to win match (Match Winner) @ 1.79
-↳ Eala zit in sterke vorm en begint als lichte favoriet tegenover thuisspeelster Fernandez.
+**:small_orange_diamond: Terence Atmane x Alejandro Tabilo**
+Tabilo to win match (Match Winner) @ 2.00
+↳ Twee gelijkwaardige tegenstanders; Tabilo (ATP 30) staat hoger dan Atmane (ATP 56) en won in drie sets van Griekspoor, wat hem een lichte voorkeur geeft in een open partij.
 
-**:small_orange_diamond: Alex De Minaur x Stefanos Tsitsipas**
-De Minaur to win match (Match Winner) @ 1.71
-↳ Titelverdediger De Minaur is favoriet op zijn sterke hardcourt, al maakt de kwaliteit van Tsitsipas dit een minder evidente partij dan de Safe-picks.
+**:small_orange_diamond: Jessica Pegula x Magdalena Frech**
+Under 2.5 sets (Pegula wint in twee sets) @ 1.24
+↳ Reekshoofd 3 Pegula heeft Frech driemaal op rij verslagen (3-0 H2H) en is torenhoog favoriet op hardcourt in Washington.
 
-**:moneybag: Total odds: ±4.74**
+**:moneybag: Total odds: ±3.37**
 Odds may vary depending on the bookmaker or the time of placement.
 
 **:mortar_board: Strategy Breakdown:**
-Drie favorieten met iets meer risico dan de Safe Builder, verspreid over drie losse partijen in Washington, elk met een reeel vorm- of rankingvoordeel.
+Twee stevige favorieten gecombineerd met een net iets opener partij (Atmane-Tabilo), wat de Value Builder net wat meer risico en hogere odds geeft dan de Safe Builder.
 
 **:bank: Bankroll:** 0.75u stake (0.5 - 1% of bankroll)`;
-window.DAILY_TENNIS_CARDS = `MATCH: Aleksandar Vukic x Lorenzo Musetti
+window.DAILY_TENNIS_CARDS = `MATCH: Brandon Nakashima x Jakub Mensik
 MARKET: Match Winner
-SELECTION: Musetti to win
-ODDS: 1.38
+SELECTION: Mensik to win
+ODDS: 1.70
 STAKE: 2u stake (2 - 3% of bankroll)
 RISK: Low
-ANALYSIS: Reekshoofd 4 Musetti is in prima vorm op hardcourt en heeft een duidelijk rankingvoordeel op Vukic in de Knockout Round of 16.
+ANALYSIS: Mensik heeft een sterker recent vormpeil en een 2-0 H2H-voorsprong op Nakashima op hardcourt.
 ===
-MATCH: Taylor Fritz x Kamil Majchrzak
-MARKET: Match Winner
-SELECTION: Fritz to win
-ODDS: 1.29
+MATCH: Alex De Minaur x Cruz Hewitt
+MARKET: Total Sets
+SELECTION: Under 2.5 sets (De Minaur in 2 sets)
+ODDS: 1.20
 STAKE: 2u stake (2 - 3% of bankroll)
 RISK: Low
-ANALYSIS: Reekshoofd 3 Fritz speelt op zijn beste ondergrond thuis in de VS tegen de veel lager gerankte Majchrzak.
+ANALYSIS: Titelverdediger en reekshoofd De Minaur is een overduidelijke favoriet tegen de lager gerankte qualifier Hewitt op zijn beste ondergrond.
 ===
-MATCH: Emma Navarro x Elisabetta Cocciaretto
+MATCH: Janice Tjen x Anna Kalinskaya
 MARKET: Match Winner
-SELECTION: Navarro to win
-ODDS: 1.45
-STAKE: 2u stake (2 - 3% of bankroll)
-RISK: Low
-ANALYSIS: Thuisspeelster Navarro (top 10) is duidelijk favoriet tegenover Cocciaretto op hardcourt.
-===
-MATCH: Xin Yu Wang x Ludmilla Samsonova
-MARKET: Match Winner
-SELECTION: Samsonova to win
-ODDS: 1.55
+SELECTION: Kalinskaya to win
+ODDS: 1.36
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Samsonova is hoger gerankt en slaat hard door op hardcourt, wat haar een reeel voordeel geeft op Wang.
+ANALYSIS: Kalinskaya (WTA 20) is duidelijk hoger gerankt dan Tjen (WTA 37) en geldt als de logische favoriet op hardcourt.
 ===
-MATCH: Leylah Fernandez x Alexandra Eala
+MATCH: Terence Atmane x Alejandro Tabilo
 MARKET: Match Winner
-SELECTION: Eala to win
-ODDS: 1.79
+SELECTION: Tabilo to win
+ODDS: 2.00
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Eala zit in sterke vorm en begint als lichte favoriet tegenover thuisspeelster Fernandez.
+ANALYSIS: Twee gelijkwaardige tegenstanders; Tabilo (ATP 30) staat hoger dan Atmane (ATP 56) en won in drie sets van Griekspoor, wat hem een lichte voorkeur geeft in een open partij.
 ===
-MATCH: Alex De Minaur x Stefanos Tsitsipas
-MARKET: Match Winner
-SELECTION: De Minaur to win
-ODDS: 1.71
+MATCH: Jessica Pegula x Magdalena Frech
+MARKET: Total Sets
+SELECTION: Under 2.5 sets (Pegula in 2 sets)
+ODDS: 1.24
 STAKE: 0.75u stake (0.5 - 1% of bankroll)
 RISK: Medium
-ANALYSIS: Titelverdediger De Minaur is favoriet op zijn sterke hardcourt, al maakt de kwaliteit van Tsitsipas dit een minder evidente partij dan de Safe-picks.`;
-window.TENNIS_EVENTS = [{"match":"Aleksandar Vukic x Lorenzo Musetti","date":"2026-07-29","time":"19:00","comp":"ATP Washington","stage":"Knockout Round of 16","venue":"Rock Creek Park, Washington DC","pick":"Musetti","tier":"Safe Builder"},{"match":"Taylor Fritz x Kamil Majchrzak","date":"2026-07-29","time":"20:10","comp":"ATP Washington","stage":"Knockout Round of 16","venue":"Rock Creek Park, Washington DC","pick":"Fritz","tier":"Safe Builder"},{"match":"Emma Navarro x Elisabetta Cocciaretto","date":"2026-07-29","time":"20:10","comp":"WTA Washington","stage":"Knockout Round of 16","venue":"Rock Creek Park, Washington DC","pick":"Navarro","tier":"Safe Builder"},{"match":"Xin Yu Wang x Ludmilla Samsonova","date":"2026-07-29","time":"17:00","comp":"WTA Washington","stage":"Knockout Round of 16","venue":"Rock Creek Park, Washington DC","pick":"Samsonova","tier":"Value Builder"},{"match":"Leylah Fernandez x Alexandra Eala","date":"2026-07-29","time":"17:00","comp":"WTA Washington","stage":"Knockout Round of 16","venue":"Rock Creek Park, Washington DC","pick":"Eala","tier":"Value Builder"},{"match":"Alex De Minaur x Stefanos Tsitsipas","date":"2026-07-29","time":"19:00","comp":"ATP Washington","stage":"Knockout Round of 32","venue":"Rock Creek Park, Washington DC","pick":"De Minaur","tier":"Value Builder"}];
+ANALYSIS: Reekshoofd 3 Pegula heeft Frech driemaal op rij verslagen (3-0 H2H) en is torenhoog favoriet op hardcourt in Washington.`;
+window.TENNIS_EVENTS = [{"match": "Brandon Nakashima x Jakub Mensik", "date": "2026-07-30", "time": "17:00", "comp": "ATP Washington", "stage": "Knockout Round of 16", "venue": "Rock Creek Park, Washington DC", "pick": "Mensik", "tier": "Safe Builder"}, {"match": "Alex De Minaur x Cruz Hewitt", "date": "2026-07-30", "time": "19:00", "comp": "ATP Washington", "stage": "Knockout Round of 16", "venue": "Rock Creek Park, Washington DC", "pick": "De Minaur", "tier": "Safe Builder"}, {"match": "Janice Tjen x Anna Kalinskaya", "date": "2026-07-30", "time": "19:00", "comp": "WTA Washington", "stage": "Knockout Round of 16", "venue": "Rock Creek Park, Washington DC", "pick": "Kalinskaya", "tier": "Value Builder"}, {"match": "Terence Atmane x Alejandro Tabilo", "date": "2026-07-30", "time": "22:30", "comp": "ATP Washington", "stage": "Knockout Round of 16", "venue": "Rock Creek Park, Washington DC", "pick": "Tabilo", "tier": "Value Builder"}, {"match": "Jessica Pegula x Magdalena Frech", "date": "2026-07-30", "time": "21:00", "comp": "WTA Washington", "stage": "Knockout Round of 16", "venue": "Rock Creek Park, Washington DC", "pick": "Pegula", "tier": "Value Builder"}];
